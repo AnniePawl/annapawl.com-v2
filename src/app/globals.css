@@ -1,0 +1,22 @@
+@import "../styles/typography.css";
+@import "../styles/radius.css";
+@import "../styles/spacing.css";
+@import "../styles/elevation.css";
+@import "../styles/colors.css";
+@import "../styles/tokens.css";
+
+@import "tailwindcss";
+
+
+:root {
+  --ds-signature-gradient: linear-gradient(
+    135deg,
+    var(--pink-2),
+    var(--red-1),
+    var(--orange-2),
+    var(--yellow-2),
+    var(--mint-2),
+    var(--blue-2),
+    var(--purple-2)
+  );
+}

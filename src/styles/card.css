@@ -1,0 +1,26 @@
+
+.ds-card {
+  background: var(--surface, #ffffff);
+  color: var(--text, #18181b);
+
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border, rgba(24, 24, 27, 0.1));
+
+  box-shadow: var(--shadow-card);
+
+  padding: var(--space-6);
+}
+
+/* Optional variants */
+.ds-card--soft {
+  background: var(--surface-muted, #fafafa);
+}
+
+.ds-card--interactive {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.ds-card--interactive:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}

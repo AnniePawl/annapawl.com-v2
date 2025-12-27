@@ -1,0 +1,31 @@
+/* Colors (base) */
+:root {
+  /* --- Pink/Red --- */
+  --pink-1: #ffdbe0;
+  --pink-2:#ffc2ef;
+  --red-1:#ff9191;
+  --red-2:#f15151;
+  --orange-1: #ffb88c;
+  --orange-2: #fa9252;
+
+  /* --- MINT / GREEN --- */
+  --mint-1: #cafcd2;
+  --mint-2: #88ff96;
+  --green-1:#e5ffb5;
+  --green-2:#bcea67;
+
+  /* --- SKY / BLUE --- */
+  --blue-1: #ccf3ff;
+  --blue-2: #8fc1ff;
+  --blue-3: #4791ff;
+  --blue-4: #184095;
+
+  /* --- LEMON / YELLOW --- */
+  --yellow-1: #fffbab;
+  --yellow-2: #ffe46e;
+  --yellow-3: #ffcf11;
+
+  /* --- VIOLET / PURPLE --- */
+  --purple-1: #e7c9ff;
+  --purple-2: #9ea5ff;
+}
