@@ -1,4 +1,3 @@
-import '../../../../styles/components/button.css'
 
 export default function ButtonStates() {
   return (

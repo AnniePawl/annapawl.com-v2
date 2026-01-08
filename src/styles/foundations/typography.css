@@ -4,7 +4,6 @@
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-display: var(--font-space), var(--font-sans);
 
-  
     /* FONT WEIGHTS */
   --font-regular: 400;
   --font-medium: 500;
@@ -35,65 +34,125 @@
   --tracking-tight: -0.05em;
   --tracking-normal: 0em;
   --tracking-wide: 0.05em;
+
+  /* DISPLAY / HERO */
+  --type-display-family: var(--font-display);
+  --type-display-size: var(--text-heading);
+  --type-display-weight: var(--font-medium);
+  --type-display-leading: var(--leading-tight);
+  --type-display-tracking: var(--tracking-tight);
+  --type-display-transform: uppercase;
+
+  /* HEADINGS */
+  --type-h1-family: var(--font-display);
+  --type-h1-size: var(--text-6xl);
+  --type-h1-weight: var(--font-semibold);
+  --type-h1-leading: var(--leading-tight);
+  --type-h1-tracking: var(--tracking-tight);
+
+  --type-h2-family: var(--font-display);
+  --type-h2-size: var(--text-4xl);
+  --type-h2-weight: var(--font-semibold);
+  --type-h2-leading: var(--leading-tight);
+  --type-h2-tracking: var(--tracking-tight);
+
+  --type-h3-family: var(--font-sans);
+  --type-h3-size: var(--text-2xl);
+  --type-h3-weight: var(--font-semibold);
+  --type-h3-leading: var(--leading-snug);
+  --type-h3-tracking: var(--tracking-normal);
+
+  --type-h4-family: var(--font-sans);
+  --type-h4-size: var(--text-xl);
+  --type-h4-weight: var(--font-medium);
+  --type-h4-leading: var(--leading-snug);
+  --type-h4-tracking: var(--tracking-normal);
+
+  /* BODY */
+  --type-body-family: var(--font-sans);
+  --type-body-size: var(--text-base);
+  --type-body-weight: var(--font-regular);
+  --type-body-leading: var(--leading-relaxed);
+  --type-body-tracking: var(--tracking-normal);
+
+  /* BODY — DISPLAY VARIANT */
+  --type-body-display-family: var(--font-display);
+  --type-body-display-size: var(--text-base);
+  --type-body-display-weight: var(--font-regular);
+  --type-body-display-leading: var(--leading-relaxed);
+  --type-body-display-tracking: var(--tracking-normal);
 }
 
 /* ---- Global base typography ---- */
 
-/* HEADINGS */
+/* IMPLEMENTATION CLASESS */
+
+/* DISPLAY */
 .h-display {
   display: block;
-  font-family: var(--font-display);
-  font-weight: var(--font-medium);
-  font-size: var(--text-heading);
-  letter-spacing: var(--tracking-tight);
-  text-transform: uppercase;
+  font-family: var(--type-display-family);
+  font-size: var(--type-display-size);
+  font-weight: var(--type-display-weight);
+  line-height: var(--type-display-leading);
+  letter-spacing: var(--type-display-tracking);
+  text-transform: var(--type-display-transform);
 }
 
+/* HEADINGS */
 .h1 {
-  font-family: var(--font-display);
-  font-size: var(--text-6xl);
-  line-height: var(--leading-tight);
-  letter-spacing: var(--tracking-tight);
-  font-weight: var(--font-semibold);
+  font-family: var(--type-h1-family);
+  font-size: var(--type-h1-size);
+  font-weight: var(--type-h1-weight);
+  line-height: var(--type-h1-leading);
+  letter-spacing: var(--type-h1-tracking);
 }
 
 .h2 {
-  font-family: var(--font-display);
-  font-size: var(--text-4xl);
-  line-height: var(--leading-tight);
-  letter-spacing: var(--tracking-tight);
-  font-weight: var(--font-semibold);
+  font-family: var(--type-h2-family);
+  font-size: var(--type-h2-size);
+  font-weight: var(--type-h2-weight);
+  line-height: var(--type-h2-leading);
+  letter-spacing: var(--type-h2-tracking);
 }
 
 .h3 {
-  font-family: var(--font-sans);
-  font-size: var(--text-2xl);
-  line-height: var(--leading-snug);
-  font-weight: var(--font-semibold);
+  font-family: var(--type-h3-family);
+  font-size: var(--type-h3-size);
+  font-weight: var(--type-h3-weight);
+  line-height: var(--type-h3-leading);
+  letter-spacing: var(--type-h3-tracking);
 }
 
 .h4 {
-  font-family: var(--font-sans);
-  font-size: var(--text-xl);
-  line-height: var(--leading-snug);
-  font-weight: var(--font-medium);
+  font-family: var(--type-h4-family);
+  font-size: var(--type-h4-size);
+  font-weight: var(--type-h4-weight);
+  line-height: var(--type-h4-leading);
+  letter-spacing: var(--type-h4-tracking);
 }
-
 
 /* BODY */
 p {
-  font-family: var(--font-sans);
-  font-weight: var(--font-regular);
-  font-size: var(--text-base);
-  line-height: var(--leading-relaxed);
+  font-family: var(--type-body-family);
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-leading);
+  letter-spacing: var(--type-body-tracking);
 }
 
-/* Space Grotesk special use case */
+/* BODY — DISPLAY */
 .p-display {
-  font-family: var(--font-display);
-  font-size: var(--text-base);
-  line-height: var(--leading-relaxed);
-  letter-spacing: var(--tracking-normal);
-  font-weight: var(--font-regular);
+  font-family: var(--type-body-display-family);
+  font-size: var(--type-body-display-size);
+  font-weight: var(--type-body-display-weight);
+  line-height: var(--type-body-display-leading);
+  letter-spacing: var(--type-body-display-tracking);
 }
 
+/* NOTES */
+/* 
+Layer A: Typographic Scrale
+Layer B: Sematic Roles
+Layer C: Impelementation Classes
+
+*/

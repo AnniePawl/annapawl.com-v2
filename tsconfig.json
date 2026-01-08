@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-  ],
+, "src/app/vibe-system/_examples"  ],
   "exclude": ["node_modules"]
 }
