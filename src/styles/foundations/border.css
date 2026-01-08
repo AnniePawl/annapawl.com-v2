@@ -1,0 +1,13 @@
+:root {
+    --border-none: 0;
+    --border-thin: 1px;
+    --border-md: 2px;
+    --border-lg:4px;
+
+    /* Semantic aliases */
+    --border-default: var(--border-md);
+    --border-emphasis: var(--border-lg);
+}
+
+/* TBD */
+/* Border Colors? */

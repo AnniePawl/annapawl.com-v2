@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import ColorSwatchesGrid from "./components/ColorSwatchesGrid";
+import ColorSwatchesGrid from "./foundations/colors/ColorSwatchesGrid";
+import ButtonStates from "./components/button/buttonstates";
+import RadiusSection from "./foundations/radius/page";
 import TypographyPage from "./foundations/typography/page";
+
 import type { LucideIcon } from "lucide-react";
 import {
   LayoutGrid,
@@ -16,13 +19,14 @@ import {
   CreditCard,
   PanelsTopLeft,
   BadgeCheck,
-  MessageSquareText
-
+  MessageSquareText,
+  Brain
 } from "lucide-react";
 
 type NavSection = {
   id: string;
   title: string;
+  subheading?: string;
   description?: string;
   icon: LucideIcon;
 };
@@ -40,20 +44,37 @@ const SECTIONS: NavSection[] = [
   { id: "modals", title: "Modals", icon: PanelsTopLeft },
   { id: "badges", title: "Badges", icon: BadgeCheck },
   { id: "tooltips", title: "Tooltips", icon: MessageSquareText },
+  {id: "appraoch", title: "Approach", icon: Brain }
 ];
 
 function cx(...classes: Array<string | false | undefined | null>) {
   return classes.filter(Boolean).join(" ");
 }
 
+/**
+ * NOTE: Add this to globals.css (or equivalent) to hide the scrollbar:
+ *
+ * .no-scrollbar::-webkit-scrollbar { display: none; }
+ * .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+ */
+
 export default function DesignSystemOverview() {
   const [activeId, setActiveId] = useState(SECTIONS[0].id);
+
+  // Scroll container for the right side
+  const mainRef = useRef<HTMLElement | null>(null);
+
+  // Section elements by id
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
   useEffect(() => {
+    // Cache section nodes
     SECTIONS.forEach(({ id }) => {
       sectionRefs.current[id] = document.getElementById(id);
     });
+
+    const rootEl = mainRef.current;
+    if (!rootEl) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -63,7 +84,11 @@ export default function DesignSystemOverview() {
 
         if (visible[0]?.target?.id) setActiveId(visible[0].target.id);
       },
-      { rootMargin: "-20% 0px -70% 0px", threshold: [0.01, 0.1] }
+      {
+        root: rootEl,
+        rootMargin: "-20% 0px -70% 0px",
+        threshold: [0.01, 0.1],
+      }
     );
 
     Object.values(sectionRefs.current).forEach((el) => {
@@ -74,153 +99,258 @@ export default function DesignSystemOverview() {
   }, []);
 
   const scrollTo = (id: string) => {
-    sectionRefs.current[id]?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const el = sectionRefs.current[id];
+    const rootEl = mainRef.current;
+    if (!el || !rootEl) return;
+
+    // Scroll within the right pane (not the window)
+    rootEl.scrollTo({
+      top: el.offsetTop - 24, // tweak if you want more/less top padding
+      behavior: "smooth",
+    });
+
     setActiveId(id);
   };
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="mx-auto max-w-6xl px-6 py-12">
-        <header className="mb-16">
-          <h1 className="text-4xl font-semibold tracking-tight text-zinc-900">
-            AP Design System
-          </h1>
-          <p className="text-zinc-600 pt-1">Approachable, practical, and a little playful.</p>
-        </header>
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[260px_1fr]">
-          {/* Sidebar */}
-          <aside className="lg:sticky lg:top-8 lg:h-fit">
-            {/* Gradient border wrapper */}
-            <div
-              className="rounded-2xl p-[1.5px]"
-              style={{
-                background: "var(--ds-signature-gradient)",
-              }}
-            >
+      <div className="mx-auto max-w-7xl px-6 py-12">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[250px_1fr] h-[calc(100dvh-6rem)]">
+          {/* Sidebar Navigation (fixed-in-place pane) */}
+          <aside className="hidden lg:block h-full">
+            {/* Gradient border wrapper (keep your look) */}
+            <div className="h-full rounded-2xl p-[1.5px]">
               {/* Inner card */}
-              <nav className="rounded-2xl bg-white p-4 shadow-sm">
-                <ul className="space-y-1">
-                  {SECTIONS.map((section) => {
-                    const Icon = section.icon;
-
-                    return (
-                      <li key={section.id}>
-                        <button
-                          onClick={() => scrollTo(section.id)}
-                          className={cx(
-                            "flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-xs  md:text-sm transition",
-                            activeId === section.id
-                              ? "bg-zinc-100 font-medium text-zinc-900"
-                              : "text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900"
-                          )}
-                        >
-                          <Icon
-                            className={cx(
-                              "h-4 w-4",
-                              activeId === section.id ? "text-zinc-900" : "text-zinc-500"
-                            )}
-                          />
-                          <span>{section.title}</span>
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </nav>
+              <div className="h-full rounded-xl bg-lime-200 p-4  text-zinc-900">
+                <SidebarNav
+                  sections={SECTIONS}
+                  activeId={activeId}
+                  onSelect={scrollTo}
+                />
+              </div>
             </div>
           </aside>
 
-
-          {/* Content */}
-          <main className="space-y-20">
+          {/* Content (scrollable pane) */}
+          <main
+            ref={mainRef}
+            className="h-full overflow-y-auto space-y-20 pr-2 no-scrollbar"
+          >
             {SECTIONS.map((section) => (
               <Section
                 key={section.id}
                 id={section.id}
-                title={section.title}
+                heading={section.title}
+                subheading={section.subheading}
                 icon={section.icon}
               >
                 {section.id === "overview" && (
-                  <p>
-                    This design system documents the foundational visual decisions behind my portfolio UI and acts as a living expression of how I think about design.
+                  <>
+                    <p>
+                      Welcome to my design system documentation. It captures the foundational
+                      visual decisions behind my portfolio UI and serves as a living record
+                      of how I think, learn, and evolve as a designer and developer.
+                    </p>
+                    <p>
+                      I’m a minimalist–maximalist (somehow). I’m drawn to crisp, simple structure, punctuated with bold, playful, expressive moments. I’m motivated by color, texture, and visual delight—the result is a system that feels intentionally restrained yet vibrant, using joyful color to reflect energy, creativity, and emotion without overwhelming the experience.
 
-                    My style blends minimal structure with expressive moments. I’m drawn to calm, readable layouts and neutral foundations, but I’m equally motivated by color, texture, and visual delight. The result is a system that feels restrained yet vibrant—anchored in soft blacks and whites, punctuated by bold, joyful color.
-
-                    These choices are intentional. The colors are not subtle, but they’re personal—chosen to reflect energy, creativity, and emotion without overwhelming the experience. This balance between clarity and play is central to how I design: thoughtful, human-centered, and quietly expressive.
-                  </p>
+                    </p>
+                    <p>
+                      This balance between clarity and play is central to how I design. The system is imperfect and always in progress: a space for exploration, iteration, and learning. It reflects a belief that good design can be professional without being sterile, expressive without being loud, and human at every layer.
+                    </p>
+                  </>
                 )}
 
                 {section.id === "colors" && (
                   <>
-                    <p >
-                      The colors are not subtle, but they’re personal—chosen to reflect energy, creativity, and emotion in a way that feels joyful rather than loud. Paired with soft blacks, whites, and generous spacing, these brighter moments bring warmth and personality to the system. The goal is balance: expressive color that enhances the experience and makes the interface genuinely enjoyable to spend time in.
+                    <p>
+                      These are the colors that make me happy.
+
+                      The palette spans a wide range of hues— not because the interface needs them all at once, but because different moments across the site call for different emotional tones. Color here is used as a storytelling tool: to create warmth, guide attention, and make the experience feel alive.
+
+                      Each hue is intentionally softened and slightly muted, allowing it to be used generously without overwhelming the interface. There’s an element of playfulness throughout, but it’s grounded—meant to invite curiosity and delight rather than visual fatigue.
                     </p>
+
                     <ColorSwatchesGrid />
+                    {/* <section aria-labelledby="token-strategy" className="space-y-4">
+                      <h2
+                        id="token-strategy">
+                        Token Strategy
+                      </h2>
+                      <p className="text-sm leading-6 text-zinc-700">
+                        Instead of relying primarily on semantic labels like{" "}
+                        <span className="font-medium text-zinc-900">success</span>,{" "}
+                        <span className="font-medium text-zinc-900">warning</span>, or{" "}
+                        <span className="font-medium text-zinc-900">danger</span>, this system
+                        organizes color tokens by <span className="font-medium text-zinc-900">
+                          intensity
+                        </span>
+                        . This choice keeps color flexible and expressive, rather than prescriptive,
+                        and better supports a personal, exploratory site like this one.
+                      </p>
+
+                      <p className="text-sm leading-6 text-zinc-700">
+                        By separating <span className="font-medium text-zinc-900">how a color looks</span>{" "}
+                        from <span className="font-medium text-zinc-900">what it means</span>, the
+                        system is easier to remix creatively and adapt across different contexts and
+                        moods.
+                      </p>
+
+                      <dl className="grid gap-3 sm:grid-cols-2">
+                        <div className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
+                          <dt className="text-xs font-semibold uppercase tracking-wide text-zinc-900">
+                            soft-*
+                          </dt>
+                          <dd className="mt-2 text-sm leading-6 text-zinc-700">
+                            Lower contrast, ambient tones designed for backgrounds, surfaces, and
+                            subtle accents.
+                          </dd>
+                        </div>
+
+                        <div className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
+                          <dt className="text-xs font-semibold uppercase tracking-wide text-zinc-900">
+                            bold-*
+                          </dt>
+                          <dd className="mt-2 text-sm leading-6 text-zinc-700">
+                            Higher contrast, expressive tones intended for emphasis, interaction
+                            states, and moments that need energy.
+                          </dd>
+                        </div>
+                      </dl>
+
+                      <p className="text-sm leading-6 text-zinc-700">
+                        Semantic colors still exist where clarity is required, but they’re layered
+                        on top of this foundation rather than defining it. The result is a color
+                        system that prioritizes{" "}
+                        <span className="font-medium text-zinc-900">emotional warmth</span>,{" "}
+                        <span className="font-medium text-zinc-900">flexibility</span>, and{" "}
+                        <span className="font-medium text-zinc-900">joy</span>—without sacrificing
+                        structure or usability.
+                      </p>
+                    </section> */}
                   </>
                 )}
 
                 {section.id === "typography" && (
                   <>
-                    <p>
-                      Inter is used as the primary typeface across the system.
-                    </p>
+                    <p>Inter is used as the primary typeface across the system.</p>
                     <TypographyPage />
                   </>
                 )}
 
-                {["spacing", "radius", "elevation", "accessibility", "buttons", "cards", "modals", "badges", "tooltips"].includes(
-                  section.id
-                ) && (
-                    <p >
-                      Contrast, focus states, and readable typography are prioritized.
-                    </p>
+                {section.id === "radius" && (
+                  <>
+                    <RadiusSection />
+                  </>
+                )}
+                     {section.id === "buttons" && (
+                  <>
+                  <ButtonStates />
+                  </>
+                )}
+
+                {[
+                  "spacing",
+                  "elevation",
+                  "accessibility",
+                  "buttons",
+                  "cards",
+                  "modals",
+                  "badges",
+                  "tooltips",
+                ].includes(section.id) && (
+                    <p>Contrast, focus states, and readable typography are prioritized.</p>
                   )}
               </Section>
             ))}
           </main>
-
         </div>
       </div>
     </div>
   );
 }
 
+function SidebarNav({
+  sections,
+  activeId,
+  onSelect,
+}: {
+  sections: NavSection[];
+  activeId: string;
+  onSelect: (id: string) => void;
+}) {
+  return (
+    <nav className="h-full">
+      <ul className="space-y-1 md:space-y-2">
+        {sections.map((section) => {
+          const Icon = section.icon;
+
+          return (
+            <li key={section.id}>
+              <button
+                onClick={() => onSelect(section.id)}
+                className={cx(
+                  "flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-xs md:text-sm transition",
+                  activeId === section.id
+                    ? "bg-violet-200 font-medium text-zinc-900"
+                    : "text-zinc-900 hover:bg-violet-100 hover:text-zinc-900"
+                )}
+              >
+                <Icon
+                  className={cx(
+                    "h-4 w-4",
+                    activeId === section.id ? "text-violet-600" : "text-lime-600"
+                  )}
+                />
+                <span>{section.title}</span>
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  );
+}
+
 function Section({
   id,
-  title,
+  heading,
+  subheading,
   icon: Icon,
   description,
   children,
 }: {
   id: string;
-  title: string;
+  heading: string;
+  subheading?: string;
   icon: LucideIcon;
   description?: string;
   children: React.ReactNode;
 }) {
   return (
     <section id={id} className="scroll-mt-24">
-
       {/* Section header */}
-      <h2 className="flex items-center gap-3">
-        <Icon className="h-5 w-5 text-zinc-500" aria-hidden="true" />
-        <span>{title}</span>
-      </h2>
+      <div className="flex flex-col">
+        <h1 className="flex items-center gap-3">
+          <Icon className="h-8 w-8 text-zinc-900" aria-hidden="true" />
+          {heading}
+        </h1>
+        {subheading ? <h2 className="mb-5">{subheading}</h2> : null}
+      </div>
 
       {/* Section body */}
-      <div className="ml-3 border-l border-zinc-200 pl-6 ml-3 border-l border-zinc-200 pl-6
-          [&_p]:max-w-2xl
-          [&_p]:text-base
-          [&_p]:leading-relaxed
-          [&_p]:text-zinc-600
-          [&_p]:mb-6
-          [&_p:last-child]:mb-0">
-        {description && (
-          <p >
-            {description}
-          </p>
+      <div
+        className={cx(
+          "ml-3 border-l border-zinc-200 pl-6",
+          "[&_p]:max-w-3xl",
+          "[&_p]:text-base",
+          "[&_p]:leading-relaxed",
+          "[&_p]:text-zinc-600",
+          "[&_p]:mb-6",
+          "[&_p:last-child]:mb-0"
         )}
-
+      >
+        {description && <p>{description}</p>}
         {children}
       </div>
     </section>

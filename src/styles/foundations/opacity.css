@@ -1,0 +1,16 @@
+:root {
+  /* Raw opacity values */
+  --opacity-0: 0;
+  --opacity-10: 0.1;
+  --opacity-20: 0.2;
+  --opacity-40: 0.4;
+  --opacity-60: 0.6;
+  --opacity-80: 0.8;
+  --opacity-100: 1;
+
+  /* Semantic opacity tokens */
+  --opacity-disabled: var(--opacity-40);
+  --opacity-hover:var(--opacity-80);
+  --opacity-muted: var(--opacity-60);
+  --opacity-overlay: var(--opacity-80);
+}

@@ -6,7 +6,8 @@
   --shadow-lg: 0 16px 40px rgba(24, 24, 27, 0.12);
 
   /* Semantic aliases */
+  --shadow-pill: var(--shadow-xs);
   --shadow-card: var(--shadow-sm);
-  --shadow-popover: var(--shadow-md);
+  --shadow-button: var(--shadow-md);
   --shadow-modal: var(--shadow-lg);
 }

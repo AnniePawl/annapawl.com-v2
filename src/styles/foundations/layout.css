@@ -1,0 +1,13 @@
+:root {
+  /* Layout measures */
+  --measure-xs: 45ch;   /* captions, narrow columns */
+  --measure-sm: 60ch;   /* body text */
+  --measure-md: 65ch;   /* long-form reading */
+  --measure-lg: 75ch;   /* editorial layouts */
+
+  /* Container widths */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1200px;
+}

@@ -1,0 +1,58 @@
+:root {
+  --purple-500: #7c3aed;
+  --purple-600: #6d28d9;
+  --purple-700: #5b21b6;
+
+  --focus-ring: rgba(124, 58, 237, 0.45);
+}
+
+.button-state-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.state-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.state-label {
+  font-size: 12px;
+  color: #555;
+}
+
+/* Base button */
+.btn {
+  appearance: none;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  background: var(--purple-500);
+  cursor: default;
+  transition: background 120ms ease, transform 80ms ease;
+}
+
+/* Forced visual states */
+.btn-enabled {
+  background: var(--purple-500);
+}
+
+.btn-hover {
+  background: var(--purple-600);
+}
+
+.btn-focus {
+  background: var(--purple-500);
+  box-shadow: 0 0 0 4px var(--focus-ring);
+}
+
+.btn-pressed {
+  background: var(--purple-700);
+  transform: translateY(1px);
+}

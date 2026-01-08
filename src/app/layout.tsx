@@ -1,17 +1,25 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
 import type { Metadata } from "next";
+import { Inter, Space_Grotesk } from "next/font/google";
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["100","200","300","400","500","600","700","800","900"],
   display: "swap",
   variable: "--font-inter",
+  // Optional: Inter supports variable weights without listing all.
+  // If you prefer explicit, you can keep your weight array.
+});
+
+const space = Space_Grotesk({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-space",
+  // Space Grotesk supports variable weights too.
 });
 
 export const metadata: Metadata = {
   title: "Anna Pawl",
-  description: "Design system + portfolio",
+  description: "Anna Pawl Portfolio",
 };
 
 export default function RootLayout({
@@ -20,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${inter.variable} ${space.variable}`}>
       <body className="font-sans">{children}</body>
     </html>
   );

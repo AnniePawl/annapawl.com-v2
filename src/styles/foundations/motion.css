@@ -1,0 +1,33 @@
+:root {
+  /* Durations */
+  --motion-duration-instant: 0ms;
+  --motion-duration-fast: 150ms;
+  --motion-duration-base: 250ms;
+  --motion-duration-slow: 400ms;
+
+  /* Easings */
+  --motion-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --motion-ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --motion-ease-decelerate: cubic-bezier(0, 0, 0.2, 1);
+  --motion-ease-accelerate: cubic-bezier(0.4, 0, 1, 1);
+
+  /* Semantic aliases */
+  --motion-hover-duration: var(--motion-duration-fast);
+  --motion-hover-ease: var(--motion-ease-standard);
+
+  --motion-ui-duration: var(--motion-duration-base);
+  --motion-ui-ease: var(--motion-ease-standard);
+
+  --motion-modal-duration: var(--motion-duration-slow);
+  --motion-modal-ease: var(--motion-ease-emphasized);
+}
+
+/* Accessibilityreduced motion */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration-fast: 0ms;
+    --motion-duration-base: 0ms;
+    --motion-duration-slow: 0ms;
+    --motion-modal-duration: 0ms;
+  }
+}

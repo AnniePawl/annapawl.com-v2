@@ -1,22 +1,28 @@
-@import "../styles/typography.css";
-@import "../styles/radius.css";
-@import "../styles/spacing.css";
-@import "../styles/elevation.css";
-@import "../styles/colors.css";
-@import "../styles/tokens.css";
-
 @import "tailwindcss";
+@import "../styles/index.css";
 
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-:root {
-  --ds-signature-gradient: linear-gradient(
-    135deg,
-    var(--pink-2),
-    var(--red-1),
-    var(--orange-2),
-    var(--yellow-2),
-    var(--mint-2),
-    var(--blue-2),
-    var(--purple-2)
-  );
+body {
+  margin: 0;
+  background-color: var(--bg-default);
+  color: var(--text-primary);
+}
+
+/* Box sizing reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
