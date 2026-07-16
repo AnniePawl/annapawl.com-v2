@@ -89,7 +89,7 @@
 
 /* DISPLAY */
 .h-display {
-  display: block;
+  /* display: block; */
   font-family: var(--type-display-family);
   font-size: var(--type-display-size);
   font-weight: var(--type-display-weight);

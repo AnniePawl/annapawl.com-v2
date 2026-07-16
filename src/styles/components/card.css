@@ -1,26 +1,65 @@
+/* ---- Card component ----
+   Base surface for grouping content: cards, panels, list items.
+   Tokens come from foundations/color.css, radius.css, elevation.css. */
 
-.ds-card {
-  background: var(--surface, #ffffff);
-  color: var(--text, #18181b);
+.card {
+  background: var(--surface);
+  color: var(--text-primary);
 
   border-radius: var(--radius-card);
-  border: 1px solid var(--border, rgba(24, 24, 27, 0.1));
+  border: var(--border-default) solid var(--border-subtle);
 
   box-shadow: var(--shadow-card);
 
   padding: var(--space-6);
+
+  transition:
+    box-shadow var(--motion-hover-duration) var(--motion-hover-ease),
+    transform var(--motion-hover-duration) var(--motion-hover-ease);
 }
 
-/* Optional variants */
-.ds-card--soft {
-  background: var(--surface-muted, #fafafa);
+/* Soft variant — quieter surface, e.g. nested cards or secondary content */
+.card--soft {
+  background: var(--bg-subtle);
+  box-shadow: none;
 }
 
-.ds-card--interactive {
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+/* Interactive variant — card acts like a clickable target */
+.card--interactive {
+  cursor: pointer;
 }
 
-.ds-card--interactive:hover {
+.card--interactive:hover,
+.card--interactive[data-state="hover"] {
   box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+}
+
+.card--interactive:active,
+.card--interactive[data-state="pressed"] {
+  box-shadow: var(--shadow-sm);
+  transform: translateY(0);
+}
+
+/* ---- Card sub-components ---- */
+.card-heading {
+  font-family: var(--font-sans);
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-2);
+}
+
+.card-body {
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ---- Docs-only demo layout (vibe-system Cards section) ---- */
+.card-demo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
 }

@@ -1,3 +1,4 @@
+import type { LucideIcon } from "lucide-react";
 import Section from "../_components/Section";
 
 export default function PlaceholderSection({
@@ -8,7 +9,7 @@ export default function PlaceholderSection({
 }: {
   id: string;
   heading: string;
-  icon: any;
+  icon: LucideIcon;
   children?: React.ReactNode;
 }) {
   return (

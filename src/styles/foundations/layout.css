@@ -1,13 +1,12 @@
+/* Breakpoint/container-width tokens intentionally omitted — they nearly
+   duplicated Tailwind's own default breakpoint scale (640/768/1024/1280),
+   so page-level responsive layout uses Tailwind's breakpoints directly
+   instead of maintaining a parallel token set. */
+
 :root {
-  /* Layout measures */
+  /* Layout measures — reading widths, not covered by Tailwind by default */
   --measure-xs: 45ch;   /* captions, narrow columns */
   --measure-sm: 60ch;   /* body text */
   --measure-md: 65ch;   /* long-form reading */
   --measure-lg: 75ch;   /* editorial layouts */
-
-  /* Container widths */
-  --container-sm: 640px;
-  --container-md: 768px;
-  --container-lg: 1024px;
-  --container-xl: 1200px;
 }

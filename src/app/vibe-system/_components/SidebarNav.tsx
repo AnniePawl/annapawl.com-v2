@@ -1,5 +1,5 @@
 import type { NavSection } from "../_data/sections";
-import { cx } from "./cx";
+import { cx } from "../../../lib/cx";
 
 export default function SidebarNav({
   sections,
@@ -23,8 +23,8 @@ export default function SidebarNav({
                 className={cx(
                   "flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-xs md:text-sm transition",
                   activeId === section.id
-                    ? "bg-violet-200 font-medium text-zinc-900"
-                    : "text-zinc-900 hover:bg-violet-100 hover:text-zinc-900"
+                    ? "bg-indigo-soft font-medium text-zinc-900"
+                    : "text-zinc-900 hover:bg-violet-bold hover:text-zinc-900"
                 )}
               >
                 <Icon

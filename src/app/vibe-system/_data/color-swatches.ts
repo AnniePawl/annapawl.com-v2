@@ -1,144 +1,74 @@
-export type Swatch = {
-  name: string;
+export type ColorSwatch = {
   varName: string;
-  description: string;
-  textColor?: string;
+  hex: string;
 };
 
-export const COLOR_SWATCHES: Swatch[] = [
-  {
-    name: "Soft Pink",
-    varName: "--soft-pink",
-    description: "to be defined",
-    textColor: "#000000",
-  },
-  {
-    name: "Bold Pink",
-    varName: "--bold-pink",
-    description: "to be defined",
-    textColor: "#000000",
-  },
-  {
-    name: "Soft Red",
-    varName: "--soft-red",
-    description: "to be defined",
-    textColor: "#000000",
-  },
+export type ColorPair = {
+  family: string;
+  soft: ColorSwatch;
+  bold: ColorSwatch;
+};
 
+// Hex values mirror foundations/color.css. Text color isn't stored per
+// swatch anymore — computed contrast (relative luminance against black
+// #171719 vs white #ffffff) came back black for all 22, no exceptions,
+// so the component just uses --text-primary uniformly instead of a
+// hand-picked-per-swatch guess (the old data had blue-bold set to white,
+// which was actually the lower-contrast choice).
+export const COLOR_PAIRS: ColorPair[] = [
   {
-    name: "Bold Red",
-    varName: "--bold-red",
-    description: "to be defined",
-    textColor: "#000000",
+    family: "Pink",
+    soft: { varName: "--pink-soft", hex: "#ffd7ea" },
+    bold: { varName: "--pink-bold", hex: "#ff63b1" },
   },
   {
-    name: "Soft Orange",
-    varName: "--soft-orange",
-    description: "to be defined",
-    textColor: "#000000",
+    family: "Red",
+    soft: { varName: "--red-soft", hex: "#ff8e8e" },
+    bold: { varName: "--red-bold", hex: "#ff5252" },
   },
   {
-    name: "Bold Orange",
-    varName: "--bold-orange",
-    description: "to be defined",
-    textColor: "#000000",
+    family: "Orange",
+    soft: { varName: "--orange-soft", hex: "#ffcb9e" },
+    bold: { varName: "--orange-bold", hex: "#ff9645" },
   },
   {
-    name: "Soft Yellow",
-    varName: "--soft-yellow",
-    description: "to be defined",
-    textColor: "#000000",
+    family: "Yellow",
+    soft: { varName: "--yellow-soft", hex: "#fffb89" },
+    bold: { varName: "--yellow-bold", hex: "#ffe570" },
   },
   {
-    name: "Bold Yellow",
-    varName: "--bold-yellow",
-    description: "to be defined",
-    textColor: "#000000",
+    family: "Lime",
+    soft: { varName: "--lime-soft", hex: "#d9ffa7" },
+    bold: { varName: "--lime-bold", hex: "#a5ef36" },
   },
   {
-    name: "Soft Lime",
-    varName: "--soft-lime",
-    description: "to be defined",
-    textColor: "#000000",
+    family: "Mint",
+    soft: { varName: "--mint-soft", hex: "#b8ffda" },
+    bold: { varName: "--mint-bold", hex: "#17db9a" },
   },
   {
-    name: "Bold Lime",
-    varName: "--bold-lime",
-    description: "to be defined",
-    textColor: "#000000",
+    family: "Green",
+    soft: { varName: "--green-soft", hex: "#95f6a0" },
+    bold: { varName: "--green-bold", hex: "#3cd675" },
   },
   {
-    name: "Soft Mint",
-    varName: "--soft-mint",
-    description: "to be defined",
-    textColor: "#000000",
+    family: "Sky",
+    soft: { varName: "--sky-soft", hex: "#caecff" },
+    bold: { varName: "--sky-bold", hex: "#54c9ff" },
   },
   {
-    name: "Bold Mint",
-    varName: "--bold-mint",
-    description: "to be defined",
-    textColor: "#000000",
-  },
-
-  {
-    name: "Soft Green",
-    varName: "--soft-green",
-    description: "to be defined",
-    textColor: "#000000",
+    family: "Blue",
+    soft: { varName: "--blue-soft", hex: "#afd2ff" },
+    bold: { varName: "--blue-bold", hex: "#4c81f4" },
   },
   {
-    name: "Bold Green",
-    varName: "--bold-green",
-    description: "to be defined",
-    textColor: "#000000",
+    family: "Indigo",
+    soft: { varName: "--indigo-soft", hex: "#bcc2ff" },
+    bold: { varName: "--indigo-bold", hex: "#8983ff" },
   },
   {
-    name: "Soft Sky",
-    varName: "--soft-sky",
-    description: "to be defined",
-    textColor: "#000000",
-  },
-  {
-    name: "Bold Sky",
-    varName: "--bold-sky",
-    description: "to be defined",
-    textColor: "#ffffff",
-  },
-  {
-    name: "Soft Blue",
-    varName: "--soft-blue",
-    description: "to be defined",
-    textColor: "#000000",
-  },
-  {
-    name: "Bold Blue",
-    varName: "--bold-blue",
-    description: "to be defined",
-    textColor: "#ffffff",
-  },
-
-  {
-    name: "Soft Violet",
-    varName: "--soft-violet",
-    description: "to be defined",
-    textColor: "#000000",
-  },
-  {
-    name: "Bold Violet",
-    varName: "--bold-violet",
-    description: "to be defined",
-    textColor: "#000000",
-  },
-  {
-    name: "Soft Indigo",
-    varName: "--soft-indigo",
-    description: "to be defined",
-    textColor: "#000000",
-  },
-  {
-    name: "Bold Indigo",
-    varName: "--bold-indigo",
-    description: "to be defined",
-    textColor: "#000000",
+    family: "Violet",
+    soft: { varName: "--violet-soft", hex: "#dac5ff" },
+    bold: { varName: "--violet-bold", hex: "#996dff" },
   },
 ];

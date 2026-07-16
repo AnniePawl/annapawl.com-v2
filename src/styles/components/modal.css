@@ -1,0 +1,107 @@
+/* ---- Modal component ----
+   Built on native <dialog>. Browser handles centering, focus trap, and
+   the ::backdrop layer — we only style appearance and motion. */
+
+.modal {
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-modal);
+  box-shadow: var(--shadow-modal);
+  background: var(--bg-default);
+  color: var(--text-primary);
+  width: min(480px, calc(100vw - var(--space-6) * 2));
+  max-height: calc(100vh - var(--space-6) * 2);
+}
+
+.modal::backdrop {
+  background: color-mix(in srgb, var(--neutral-1000) 50%, transparent);
+}
+
+.modal[open] {
+  animation: modal-in var(--motion-modal-duration) var(--motion-modal-ease);
+}
+
+.modal[open]::backdrop {
+  animation: modal-backdrop-in var(--motion-modal-duration) var(--motion-modal-ease);
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes modal-backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal[open],
+  .modal[open]::backdrop {
+    animation: none;
+  }
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-6);
+  border-bottom: var(--border-thin) solid var(--border-subtle);
+}
+
+.modal-title {
+  font-family: var(--font-sans);
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.modal-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+.modal-close:hover {
+  background: var(--bg-subtle);
+  color: var(--text-primary);
+}
+
+.modal-body {
+  padding: var(--space-6);
+  overflow-y: auto;
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+}
+
+.modal-body p {
+  margin: 0 0 var(--space-4);
+}
+
+.modal-body p:last-child {
+  margin-bottom: 0;
+}

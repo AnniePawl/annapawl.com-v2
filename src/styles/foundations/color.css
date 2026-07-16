@@ -15,38 +15,50 @@
   /* =========================
     Brand Palette
   ========================== */
-  --pink-soft: #fbcfe8;
-  --pink-bold: #f4ade1;
+  /* Pink */
+  --pink-soft: #ffd7ea;
+  --pink-bold: #ff63b1;
 
-  --red-soft: #fecaca;
-  --red-bold: #f87171;
+  /* Red */
+  --red-soft: #ff8e8e;
+  --red-bold: #ff5252;
 
-  --orange-soft: #fdba74;
-  --orange-bold: #fa9252;
+  /* Orange */
+  --orange-soft: #ffcb9e;
+  --orange-bold: #ff9645;
 
-  --yellow-soft: #ffea98;
-  --yellow-bold: #ffec5d;
+  /* Yellow */
+  --yellow-soft: #fffb89;
+  --yellow-bold: #ffe570;
 
-  --mint-soft: #c3ffcd;
-  --mint-bold: #7affa6;
+  /* Lime */
+  --lime-soft: #d9ffa7;
+  --lime-bold: #a5ef36;
 
-  --lime-soft: #ecfccb;
-  --lime-bold: #bef264;
+  /* Mint */
+  --mint-soft: #b8ffda;
+  --mint-bold: #17db9a;
 
-  --green-soft: #82f4b7;
-  --green-bold: #60ce91;
+  /* Green */
+  --green-soft: #95f6a0;
+  --green-bold: #3cd675;
 
-  --sky-soft: #ccf3ff;
-  --sky-bold: #8fc1ff;
+  /* Sky */
+  --sky-soft: #caecff;
+  --sky-bold: #54c9ff;
 
-  --blue-soft: #dbeafe;
-  --blue-bold: #93c5fd;
+  /* Blue */
+  --blue-soft: #afd2ff;
+  --blue-bold: #4c81f4;
 
-  --violet-soft: #ddd6fe;
-  --violet-bold: #c4b5fd;
+  /* Indigo */
+  --indigo-soft: #bcc2ff;
+  --indigo-bold: #8983ff;
 
-  --indigo-soft: #e0e7ff;
-  --indigo-bold: #a5b4fc;
+  /* Violet */
+  --violet-soft: #dac5ff;
+  --violet-bold: #996dff;
+
 
   /* =========================
      Semantic tokens (UI usage)
@@ -68,15 +80,14 @@
   --border-subtle: var(--neutral-200);
   --border-strong: var(--neutral-700);
 
-  /* Hover Colors*/
-  /* TODO */
-  --accent-hover: var(--blue-bold);
-  --accent-active: var(--blue-bold);
-
   /* Default accent for interactive elements */
-  /* TODO */
   --accent: var(--blue-bold);
   --accent-soft: var(--blue-soft);
+
+  /* Hover / active are derived from --accent so they stay in sync
+     if the accent color ever changes. */
+  --accent-hover: color-mix(in srgb, var(--accent) 85%, black);
+  --accent-active: color-mix(in srgb, var(--accent) 70%, black);
 
   /* Focus ring */
   --focus-ring-color: var(--accent);

@@ -6,9 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check-contrast": "node scripts/check-contrast.mjs"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "lucide-react": "^0.562.0",
     "next": "16.1.1",
     "react": "19.2.3",

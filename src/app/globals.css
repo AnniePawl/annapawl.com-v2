@@ -1,5 +1,21 @@
+@config "../../tailwind.config.ts";
 @import "tailwindcss";
 @import "../styles/index.css";
+@import "../styles/foundations/color.css";
+
+/* `no-scrollbar` was already applied to <main> in vibe-system/page.tsx but
+   never actually defined anywhere — this is what makes it real. Using
+   Tailwind v4's @utility directive (rather than a plain class) so it's a
+   first-class utility: sits in the utilities layer, composes with variants
+   like lg:no-scrollbar if ever needed. */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
 
 html {
   text-rendering: optimizeLegibility;
@@ -26,3 +42,5 @@ body {
     scroll-behavior: auto;
   }
 }
+
+

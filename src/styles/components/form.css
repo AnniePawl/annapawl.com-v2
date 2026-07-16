@@ -1,0 +1,221 @@
+/* ---- Form field wrapper ---- */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.field-label {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--text-primary);
+}
+
+.field-hint {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.field-error {
+  font-size: var(--text-xs);
+  color: var(--red-bold);
+  margin: 0;
+}
+
+/* ---- Input / Textarea / Select shared surface ---- */
+.input {
+  display: block;
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  background: var(--bg-default);
+  border: var(--border-default) solid var(--border-subtle);
+  border-radius: var(--radius-input);
+  transition: border-color var(--motion-ui-duration) var(--motion-ui-ease);
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+.input:hover {
+  border-color: var(--border-strong);
+}
+
+.input:disabled {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+
+.input--error {
+  border-color: var(--red-bold);
+}
+
+textarea.input {
+  min-height: 6rem;
+  resize: vertical;
+}
+
+/* ---- Select ---- */
+.select-wrapper {
+  position: relative;
+  display: block;
+}
+
+.select {
+  appearance: none;
+  padding-right: var(--space-8);
+  cursor: pointer;
+}
+
+.select-chevron {
+  position: absolute;
+  top: 50%;
+  right: var(--space-4);
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+/* ---- Checkbox ----
+   Native input is visually hidden but still occupies the box (so it stays
+   clickable/focusable); the box and icon are separate elements so a hidden
+   (opacity: 0) input's own outline never needs to be visible — focus
+   styling instead targets the wrapping box via :focus-within. */
+.checkbox-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+}
+
+.checkbox-box {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: var(--radius-xs);
+  border: var(--border-default) solid var(--border-subtle);
+  background: var(--bg-default);
+  transition:
+    background-color var(--motion-ui-duration) var(--motion-ui-ease),
+    border-color var(--motion-ui-duration) var(--motion-ui-ease);
+}
+
+.checkbox-input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkbox-icon {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  color: var(--text-inverse);
+  opacity: 0;
+  transition: opacity var(--motion-hover-duration) var(--motion-hover-ease);
+  pointer-events: none;
+}
+
+.checkbox-input:checked ~ .checkbox-icon {
+  opacity: 1;
+}
+
+.checkbox-box:has(.checkbox-input:checked) {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.checkbox-box:focus-within {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+  box-shadow: var(--focus-ring-glow);
+}
+
+.checkbox-label {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+}
+
+/* ---- Radio ---- */
+.radio-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+}
+
+.radio-box {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: var(--radius-full);
+  border: var(--border-default) solid var(--border-subtle);
+  background: var(--bg-default);
+  transition:
+    background-color var(--motion-ui-duration) var(--motion-ui-ease),
+    border-color var(--motion-ui-duration) var(--motion-ui-ease);
+}
+
+.radio-input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.radio-dot {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--radius-full);
+  background: var(--text-inverse);
+  opacity: 0;
+  transition: opacity var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+.radio-input:checked ~ .radio-dot {
+  opacity: 1;
+}
+
+.radio-box:has(.radio-input:checked) {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.radio-box:focus-within {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+  box-shadow: var(--focus-ring-glow);
+}
+
+.radio-label {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+}
+
+/* ---- Docs-only demo layout (vibe-system Forms section) ---- */
+.form-demo-grid {
+  display: grid;
+  gap: var(--space-5);
+  max-width: 420px;
+}
+
+.form-demo-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+}
