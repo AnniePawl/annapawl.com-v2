@@ -44,7 +44,7 @@ export default function CodeBlock({
       </button>
       <pre className="overflow-x-auto p-4 pr-12 text-xs leading-relaxed">
         <code className="font-mono text-zinc-100"
-        style={{ color: "var(--blue-soft)" }}>{code.trim()}</code>
+        style={{ color: "var(--indigo-soft)" }}>{code.trim()}</code>
       </pre>
     </div>
   );

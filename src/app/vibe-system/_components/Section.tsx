@@ -8,16 +8,17 @@ import { SECTIONS } from "../_data/sections";
 // heading color, which would've clashed against some of these once a
 // background was involved.
 const SOFT_COLORS = [
-  "--pink-soft",
+ "--indigo-soft",
+  "--yellow-soft",
   "--mint-soft",
   "--orange-soft",
-  "--yellow-soft",
+  "--pink-soft",
   "--lime-soft",
   "--mint-soft",
   "--green-soft",
   "--sky-soft",
   "--blue-soft",
-  "--indigo-soft",
+ 
   "--violet-soft",
 ];
 
@@ -43,7 +44,6 @@ function colorForSection(id: string) {
 }
 
 
-
 export default function Section({
   id,
   heading,
@@ -64,7 +64,7 @@ export default function Section({
   return (
     <section
       id={id}
-      className="scroll-mt-24 rounded-2xl p-8"
+      className="scroll-mt-24 rounded-xl p-8"
       style={{ background: `var(${bgToken})` }}
     >
       <div className="flex flex-col">
@@ -81,12 +81,12 @@ export default function Section({
 
       <div
         className={cx(
-          "ml-3 border-l border-zinc-900/15 pl-6",
+          "ml-3 border-l border-zinc-900/30 pl-6",
           "[&_p]:max-w-4xl",
           "[&_p]:text-base",
           "[&_p]:leading-relaxed",
-          "[&_p]:text-zinc-700",
-          "[&_p]:mb-6",
+          "[&_p]:text-zinc-800",
+          "[&_p]:mb-4",
           "[&_p:last-child]:mb-0"
         )}
       >

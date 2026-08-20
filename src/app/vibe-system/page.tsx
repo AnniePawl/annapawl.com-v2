@@ -7,6 +7,7 @@ import { SECTIONS } from "./_data/sections";
 
 // Sections
 import OverviewSection from "./_sections/overview";
+import ApproachSection from "./_sections/approach";
 import ColorsSection from "./_sections/colors";
 import TypographySection from "./_sections/typography";
 import RadiusDocsSection from "./_sections/radius";
@@ -21,7 +22,6 @@ import LayoutSection from "./_sections/layout";
 import ElevationSection from "./_sections/elevation";
 import MotionSection from "./_sections/motion";
 import AccessibilitySection from "./_sections/accessibility";
-import PlaceholderSection from "./_sections/placeholder";
 
 export default function DesignSystemOverview() {
   const [activeId, setActiveId] = useState(SECTIONS[0].id);
@@ -73,16 +73,6 @@ export default function DesignSystemOverview() {
     setActiveId(id);
   };
 
-  // helper to find meta for placeholders
-  const meta = (id: string) => SECTIONS.find((s) => s.id === id)!;
-
-  // NavSection uses `title`; PlaceholderSection/Section expect `heading`.
-  const toPlaceholderProps = (section: ReturnType<typeof meta>) => ({
-    id: section.id,
-    heading: section.title,
-    icon: section.icon,
-  });
-
   return (
     <div className="min-h-screen bg-[#fffcf7]">
       <div className="mx-auto max-w-7xl px-6 py-12">
@@ -115,7 +105,7 @@ export default function DesignSystemOverview() {
 
           <main
             ref={mainRef}
-            className="h-full overflow-y-auto space-y-20 pr-2 no-scrollbar"
+            className="h-full overflow-y-auto space-y-12 pr-2 no-scrollbar"
           >
             <MobileNav
               sections={SECTIONS}
@@ -124,7 +114,7 @@ export default function DesignSystemOverview() {
             />
 
             <OverviewSection />
-            <PlaceholderSection {...toPlaceholderProps(meta("approach"))} />
+            <ApproachSection />
             <ColorsSection />
             <TypographySection />
             <ButtonsSection />

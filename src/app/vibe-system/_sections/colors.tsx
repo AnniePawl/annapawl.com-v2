@@ -7,7 +7,7 @@ const meta = SECTIONS.find((s) => s.id === "colors")!;
 export default function ColorsSection() {
   return (
     <Section id={meta.id} heading={meta.title} icon={meta.icon}>
-     <p>These are the colors that make me happy. My palette is intentionally wide-ranging and borderline maximalist, reflecting the playful aesthetic I want to capture in my creative portfolio. Not every hue appears at once, but each helps shape the mood of a moment. Every color has both a softer and bolder variation, giving the system flexibility while still keeping the palette cohesive.</p>
+     <p>These are the colors that make me happy — a collection that brings playfulness and personality to my portfolio. The palette is intentionally expansive, shifting to set the mood of a page, project, or moment. Each hue has a bold and soft variation, creating room to experiment while keeping everything connected within the same visual world.</p>
       <ColorSwatchesGrid />
     </Section>
   );
