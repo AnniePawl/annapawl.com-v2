@@ -35,6 +35,16 @@ export interface BookLookup {
    * whatever host this URL is on.
    */
   coverUrl?: string;
+  /** Marks a book as a favorite — shows a star accent on its cover. */
+  favorite?: boolean;
+  /**
+   * Your own short reactions/notes for a book — shown as badges on its
+   * tile. Purely personal, not pulled from Google. Keep them short
+   * ("couldn't put it down", "reread", "made me cry") so they fit next
+   * to a ~150px-wide cover.
+   */
+  tags?: string[];
+  genres?:string[];
 }
 
 export interface BookInfo {
@@ -46,6 +56,8 @@ export interface BookInfo {
   publishedDate: string | null;
   /** Link to the book's page on Google Books, for optional linking out. */
   infoLink: string | null;
+  /** Null if Google doesn't have a page count on file for this edition. */
+  pageCount: number | null;
 }
 
 const GOOGLE_BOOKS_API = "https://www.googleapis.com/books/v1/volumes";
@@ -141,6 +153,7 @@ export async function getBookInfo(
       description: info.description ?? null,
       publishedDate: info.publishedDate ?? null,
       infoLink: info.infoLink ?? null,
+      pageCount: typeof info.pageCount === "number" ? info.pageCount : null,
     };
   } catch (err) {
     console.warn(`[googleBooks] lookup errored for "${lookup.title}":`, err);

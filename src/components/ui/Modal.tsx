@@ -3,12 +3,17 @@
 import { MouseEvent, ReactNode, useEffect, useRef } from "react";
 import { cx } from "../../lib/cx";
 
+type ModalSize = "default" | "lg";
+
 export interface ModalProps {
   open: boolean;
   onClose: () => void;
   title?: string;
   children: ReactNode;
   className?: string;
+  /** "lg" for content-heavy modals (stats, tables) that need more room
+   *  than the default 480px cap. */
+  size?: ModalSize;
 }
 
 /**
@@ -22,6 +27,7 @@ export default function Modal({
   title,
   children,
   className,
+  size = "default",
 }: ModalProps) {
   const ref = useRef<HTMLDialogElement>(null);
 
@@ -49,7 +55,7 @@ export default function Modal({
   return (
     <dialog
       ref={ref}
-      className={cx("modal", className)}
+      className={cx("modal", size === "lg" && "modal--lg", className)}
       onClose={onClose}
       onCancel={onClose}
       onClick={handleBackdropClick}

@@ -1,6 +1,6 @@
 import { SVGAttributes } from "react";
 
-export type ShapeVariant = "blob" | "burst" | "scallop" | "clover";
+export type ShapeVariant = "blob" | "burst" | "scallop" | "clover" | "star";
 
 // Custom accent shapes, inspired by the idea behind Material's expressive
 // shape library (decorative, non-interactive accents — not buttons) but
@@ -15,6 +15,12 @@ const PATHS: Record<ShapeVariant, string> = {
     "M170,100 Q182.1,122 160.6,135 Q160.1,160.1 135,160.6 Q122,182.1 100,170 Q78,182.1 65,160.6 Q39.9,160.1 39.4,135 Q17.9,122 30,100 Q17.9,78 39.4,65 Q39.9,39.9 65,39.4 Q78,17.9 100,30 Q122,17.9 135,39.4 Q160.1,39.9 160.6,65 Q182.1,78 170,100 Z",
   clover:
     "M52,58 A48,48 0 1,0 148,58 A48,48 0 1,0 52,58 Z M94,100 A48,48 0 1,0 190,100 A48,48 0 1,0 94,100 Z M52,142 A48,48 0 1,0 148,142 A48,48 0 1,0 52,142 Z M10,100 A48,48 0 1,0 106,100 A48,48 0 1,0 10,100 Z",
+  // Five-point star, same hand-drawn-polygon approach as `burst` (straight
+  // segments alternating an outer and inner radius) rather than a
+  // perfectly regular icon-font star — for marking favorites on the
+  // Bookshelf page.
+  star:
+    "M100,15 L119.98,72.49 L180.84,73.73 L132.34,110.51 L149.96,168.77 L100,134 L50.04,168.77 L67.66,110.51 L19.16,73.73 L80.02,72.49 Z",
 };
 
 export interface ShapeProps

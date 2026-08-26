@@ -3,6 +3,14 @@
    the ::backdrop layer — we only style appearance and motion. */
 
 .modal {
+  /* Native <dialog> centers itself via `margin: auto` in the browser's
+     UA stylesheet (it's already `position: fixed; inset: 0` there) —
+     but Tailwind's Preflight resets margin to 0 on every element, which
+     silently wins over that UA default and left-aligns the dialog to
+     the top-left. Restating margin: auto here (this file is imported
+     into the `components` layer, which is ordered after Tailwind's
+     `base`/Preflight layer, so it wins back) is what actually centers it. */
+  margin: auto;
   padding: 0;
   border: none;
   border-radius: var(--radius-modal);
@@ -11,6 +19,12 @@
   color: var(--text-primary);
   width: min(480px, calc(100vw - var(--space-6) * 2));
   max-height: calc(100vh - var(--space-6) * 2);
+}
+
+/* size="lg" — content-heavy modals (stats, tables) that need more room
+   than the default width. Still responsive via the same min() pattern. */
+.modal--lg {
+  width: min(720px, calc(100vw - var(--space-6) * 2));
 }
 
 .modal::backdrop {

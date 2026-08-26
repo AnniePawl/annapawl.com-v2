@@ -1,5 +1,8 @@
 import Image from "next/image";
 import Badge from "../../components/ui/Badge";
+import Shape from "../../components/ui/Shape";
+import StatsButton from "./StatsButton";
+import { computeStats } from "./stats";
 import { booksByYear } from "./data";
 import { getBooksInfo, type BookInfo, type BookLookup } from "../../lib/googleBooks";
 
@@ -31,9 +34,17 @@ export default async function BooksPage() {
     })
   );
 
+  // Stats are computed across every year combined (an all-time total,
+  // not per-year) from the same fetched data the grid already renders —
+  // no extra API calls.
+  const stats = computeStats(yearSections.flatMap((section) => section.books));
+
   return (
     <div className="mx-auto max-w-5xl px-6 py-16">
-      <h1 className="h1">The Bookshelf</h1>
+      <div className="flex items-start justify-between gap-4">
+        <h1 className="h1">The Bookshelf</h1>
+        <StatsButton stats={stats} />
+      </div>
       <p className="p-display mt-4 max-w-[var(--measure-md)]">
         Ok I&rsquo;ve always loved looking through other people&rsquo;s
         bookshelves. They&rsquo;re a small window into someone&rsquo;s
@@ -91,6 +102,15 @@ function BookTile({ lookup, info }: ShelfEntry) {
           {title}
         </div>
       )}
+
+      {lookup.favorite && (
+        <div
+          className="absolute top-2 right-2 flex h-7 w-7 items-center justify-center rounded-[var(--radius-full)] bg-black shadow-[var(--shadow-sm)]"
+          title="Favorite"
+        >
+          <Shape variant="star" className="h-4 w-4 text-yellow-bold" />
+        </div>
+      )}
     </div>
   );
 
@@ -98,6 +118,15 @@ function BookTile({ lookup, info }: ShelfEntry) {
     <div className="mt-2">
       <p className="truncate text-sm font-medium text-[var(--text-primary)]">{title}</p>
       <p className="truncate text-xs text-[var(--text-muted)]">{author}</p>
+      {lookup.tags && lookup.tags.length > 0 && (
+        <div className="mt-1 flex flex-wrap gap-1">
+          {/* {lookup.tags.map((tag) => (
+            <Badge key={tag} variant="neutral">
+              {tag}
+            </Badge>
+          ))} */}
+        </div>
+      )}
     </div>
   );
 
