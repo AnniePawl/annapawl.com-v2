@@ -10,7 +10,7 @@ export default function CardsSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="Cards group related content on a raised surface. Use the default variant for most grouping, soft for nested/secondary content, and interactive when the whole card acts as a clickable target."
+      description="Cards are one of the most-used building blocks across my digital garden, so they’re designed to be consistent without feeling repetitive. A shared structure keeps them grounded, while flexible backgrounds, accents, and details give each one room to have its own vibe."
     >
       <CardExamples />
     </Section>

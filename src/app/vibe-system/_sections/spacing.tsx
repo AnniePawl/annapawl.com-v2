@@ -20,7 +20,7 @@ export default function SpacingSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="A single scale drives padding, gaps, and layout rhythm across the system. Semantic aliases (container-pad, section-gap, stack-gap, inline-gap) map onto it so spacing decisions stay consistent."
+      description="Spacing is one of those quiet things that make everything feel more intentional. A single scale keeps padding, gaps, and layout rhythm consistent, with a few semantic aliases — container-pad, section-gap, stack-gap, and inline-gap — to make the right spacing easier to reach for."
     >
       <div style={{ display: "flex", flexDirection: "column", gap: 12, maxWidth: 480 }}>
         {SCALE.map(({ token, label }) => (

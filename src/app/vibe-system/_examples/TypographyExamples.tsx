@@ -49,7 +49,7 @@ const USAGE = `
 export default function TypographyExamples() {
   return (
     <section style={{ maxWidth: 720 }}>
-      <CodeBlock code={USAGE} className="mb-8" />
+      
 
       {/* Scale */}
       <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
@@ -205,6 +205,7 @@ export default function TypographyExamples() {
             </div>
           ))}
         </div>
+        <CodeBlock code={USAGE} className="mb-8" />
       </div>
     </section>
   );

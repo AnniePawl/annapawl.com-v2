@@ -1,0 +1,95 @@
+/* ---- Embroidery page ----
+   Marquee rows of embroidery tiles. Tokens come from foundations/
+   (color, radius, spacing, typography, motion). */
+
+.embroidery-page {
+  background: var(--bg-subtle);
+}
+
+/* ---- Marquee rows ---- */
+
+.embroidery-row {
+  overflow: hidden;
+  width: 100%;
+}
+
+.embroidery-track {
+  display: flex;
+  width: max-content;
+  gap: var(--space-2);
+  animation-name: embroidery-scroll-left;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@media (min-width: 768px) {
+  .embroidery-track {
+    gap: var(--space-4);
+  }
+}
+
+.embroidery-track--reverse {
+  animation-name: embroidery-scroll-right;
+}
+
+/* Pause on hover so a piece can actually be looked at. */
+.embroidery-row:hover .embroidery-track {
+  animation-play-state: paused;
+}
+
+@keyframes embroidery-scroll-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes embroidery-scroll-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Motion-sensitive visitors get a plain scrollable row instead of an
+   auto-playing loop. */
+@media (prefers-reduced-motion: reduce) {
+  .embroidery-track {
+    animation: none;
+  }
+
+  .embroidery-row {
+    overflow-x: auto;
+  }
+}
+
+/* ---- Tiles ---- */
+
+.embroidery-tile {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  height: 11rem;
+  width: 11rem;
+  border-radius: var(--radius-card);
+  padding: var(--space-1);
+}
+
+@media (min-width: 768px) {
+  .embroidery-tile {
+    height: 16rem;
+    width: 16rem;
+    padding: var(--space-2);
+  }
+}
+
+.embroidery-tile-image {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}

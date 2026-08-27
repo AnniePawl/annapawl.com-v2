@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 
 // Nested layouts in the App Router must NOT render <html>/<body> — only the
-// root layout (src/app/layout.tsx) does that, and it already loads both
-// Inter (--font-inter) and Space Grotesk (--font-space) plus globals.css.
-// This file previously duplicated a second <html>/<body> shell with only
-// Inter loaded, which meant --font-display silently fell back to Inter
-// on every /vibe-system page instead of using Space Grotesk.
+// root layout (src/app/layout.tsx) does that, and it already loads Inter
+// (--font-inter) plus globals.css. Inter is the only typeface in the
+// system now — --font-display (used for h1/h2/display type) is just an
+// alias for --font-sans, not a separate face.
 export const metadata: Metadata = {
   title: "Vibe System — Anna Pawl",
   description:

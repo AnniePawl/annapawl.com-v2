@@ -10,7 +10,9 @@ export default function TypographySection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="Two families split the work: Space Grotesk for display type and headings, Inter for body copy and UI. Every size below is one of the implementation classes from foundations/typography.css, not a one-off style."
+      description="I agonize over fonts more than I’d like to admit. The right typeface can completely change the personality of a page, so choosing one somehow feels like a v big d. Right now I’m drawn to clean, modern sans serifs with just enough character to keep things interesting — but I’ll probably change my mind next week.
+
+I’m using Inter right now because of option paralysis. Please stand by."
     >
       <TypographyExamples />
     </Section>

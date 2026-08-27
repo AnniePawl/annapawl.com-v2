@@ -10,7 +10,7 @@ export default function RadiusDocsSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="Two tiers: a systematic corner-radius scale used everywhere (buttons, cards, modals, inputs), and a small set of custom accent shapes for decorative moments — inspired by the idea behind Material's expressive shape library, not copied from it."
+      description="Shape works in two layers: a consistent corner-radius scale for functional UI, and a small set of custom accent shapes for more expressive moments. Decorative shapes add a little character where structure matters less."
     >
       <ShapeExamples />
     </Section>

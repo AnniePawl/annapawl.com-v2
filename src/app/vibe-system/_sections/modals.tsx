@@ -10,7 +10,7 @@ export default function ModalsSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="Modals interrupt the page for a focused task or decision. Built on the native <dialog> element for built-in focus trapping, Escape-to-close, and backdrop dismissal — no extra JS library needed."
+      description="Modals create a focused little space within the page — useful for tasks, decisions, or moments that deserve a bit more attention. They’re built on the native <dialog> element, with room to make the experience more expressive over time."
     >
       <ModalExamples />
     </Section>

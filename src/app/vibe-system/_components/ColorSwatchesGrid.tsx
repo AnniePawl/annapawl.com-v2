@@ -22,7 +22,7 @@ function ColorTile({ varName, hex }: ColorSwatch) {
       type="button"
       onClick={handleCopy}
       aria-label={`Copy var(${varName})`}
-      className="focus-ring group relative flex h-28 w-full flex-col justify-end p-3 text-left"
+      className="focus-ring group relative flex h-28 w-full flex-col justify-end rounded-none border-0 p-3 text-left [appearance:none]"
       style={{ background: `var(${varName})`, color: "var(--text-primary)" }}
     >
       <span className="absolute top-2.5 right-2.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/50 opacity-70 backdrop-blur-sm transition-opacity group-hover:opacity-100">

@@ -11,6 +11,7 @@ const RADIUS_SCALE = [
   { token: "--radius-pill", label: "9999px" },
 ];
 
+
 const ACCENT_SHAPES: { variant: ShapeVariant; color: string }[] = [
   { variant: "blob", color: "var(--pink-bold)" },
   { variant: "burst", color: "var(--yellow-bold)" },
@@ -49,10 +50,7 @@ export default function ShapeExamples() {
 
       <h3 style={{ margin: "32px 0 16px" }}>Accent shapes</h3>
       <p style={{ marginBottom: 16, fontSize: 14, color: "var(--text-secondary)" }}>
-        Decorative only — image crops, avatar masks, background accents.
-        Never used for buttons or anything clickable: irregular shapes work
-        here specifically because they aren&rsquo;t trying to signal
-        interactivity.
+       Accent shapes are decorative by design — used for image crops, avatar masks, and background details rather than interactive controls. Their irregularity works best as a visual accent, where it can add personality without changing how something is expected to behave.
       </p>
       <CodeBlock code={USAGE} className="mb-6" />
       <div style={{ display: "flex", flexWrap: "wrap", gap: 28 }}>

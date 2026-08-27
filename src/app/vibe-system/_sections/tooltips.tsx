@@ -10,7 +10,7 @@ export default function TooltipsSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="Tooltips add a short hint on hover or keyboard focus. CSS-only for now — revisit with collision-aware positioning if a tooltip ever needs to avoid the viewport edge."
+      description="Tooltips provide a little extra context when it’s helpful, appearing on hover or keyboard focus without cluttering the interface."
     >
       <TooltipExamples />
     </Section>

@@ -16,7 +16,7 @@ export default function ElevationSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="Shadow depth signals stacking order — pills sit nearly flat, cards lift slightly, buttons and interactive surfaces lift more, modals sit highest above the page."
+      description="Elevation adds depth and helps establish hierarchy without making the interface feel overly layered. I keep shadows fairly subtle, using more lift as elements move from resting surfaces to interactive elements and overlays."
     >
       <div
         style={{

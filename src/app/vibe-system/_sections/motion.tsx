@@ -28,7 +28,7 @@ export default function MotionSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="Three durations (fast/base/slow) and four easings cover every transition in the system — hover states use fast + standard, UI transitions use base + standard, modals use slow + emphasized. All durations collapse to 0ms under prefers-reduced-motion."
+      description="Motion adds personality and helps make interactions feel responsive and intuitive. A small set of durations and easing curves keeps motion consistent across the system. Faster transitions handle lightweight interactions like hover states, while slower, more expressive motion is reserved for larger UI changes. Motion is reduced automatically when a user prefers less movement."
     >
       <div style={{ display: "flex", flexDirection: "column", gap: 32, maxWidth: 640 }}>
         <div>

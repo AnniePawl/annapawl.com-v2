@@ -11,7 +11,7 @@ const MEASURES = [
 ];
 
 const SAMPLE =
-  "Good design is structured enough to feel intuitive, expressive enough to feel alive, and human at every layer. Line length is one of the quietest levers in a layout — too wide and the eye loses its place jumping back to the start of the next line, too narrow and reading starts to feel choppy.";
+  "This paragraph has one job: be easy to read. Not too wide, not too cramped, and ideally no losing your place halfway through. Turns out even paragraphs like a little breathing room.";
 
 export default function LayoutSection() {
   return (
@@ -19,7 +19,8 @@ export default function LayoutSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="Reading-width tokens, not breakpoints — page-level responsive layout (grid, containers, breakpoints) uses Tailwind's scale directly rather than a parallel set of tokens. These measures only govern how wide a block of text is allowed to get."
+      description="Layout tokens here are focused on reading width rather than page structure. They keep text blocks comfortable to read across different contexts, while the larger responsive layout is handled directly with Tailwind.
+"
     >
       <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
         {MEASURES.map(({ token, label }) => (

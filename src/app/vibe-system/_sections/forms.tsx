@@ -10,7 +10,7 @@ export default function FormsSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="Form controls share one input surface (border, radius, focus ring) so text fields, selects, and validation states stay visually consistent. FormField/FieldLabel/FieldHint/FieldError compose around any control."
+      description="Forms should feel clear, familiar, and easy to move through. Shared styles for inputs, labels, focus, and feedback keep things consistent while leaving room for a little personality where it fits."
     >
       <FormExamples />
     </Section>
