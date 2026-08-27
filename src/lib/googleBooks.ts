@@ -10,6 +10,14 @@
  * Docs: https://developers.google.com/books/docs/v1/using#WorkingVolumes
  */
 
+/**
+ * The one special tag that also drives the star accent on a cover (see
+ * BookTile in app/books/page.tsx). Exported as a constant, rather than
+ * repeating the literal string "Favorites" in both data.ts and page.tsx,
+ * so a typo in one place can't silently desync the star from the tag.
+ */
+export const FAVORITE_TAG = "Favorites";
+
 export interface BookLookup {
   title: string;
   author?: string;
@@ -35,16 +43,18 @@ export interface BookLookup {
    * whatever host this URL is on.
    */
   coverUrl?: string;
-  /** Marks a book as a favorite — shows a star accent on its cover. */
-  favorite?: boolean;
   /**
-   * Your own short reactions/notes for a book — shown as badges on its
-   * tile. Purely personal, not pulled from Google. Keep them short
-   * ("couldn't put it down", "reread", "made me cry") so they fit next
-   * to a ~150px-wide cover.
+   * Your own categories for this book — genres (e.g. "Fantasy",
+   * "Literary Fiction"), and special ones like FAVORITE_TAG
+   * ("Favorites"), "Made me cry", "My Book Club". One flat list rather
+   * than separate genre/tag fields, since the eventual filter UI treats
+   * all of these the same way — pick whichever category chips a book
+   * belongs to. Keep spelling/capitalization consistent across books
+   * (e.g. always "Literary Fiction", never "literary fiction" on one
+   * book and "Lit Fiction" on another) since filtering will match on
+   * the exact string.
    */
   tags?: string[];
-  genres?:string[];
 }
 
 export interface BookInfo {

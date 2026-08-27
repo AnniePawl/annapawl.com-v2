@@ -1,20 +1,15 @@
-import Image from "next/image";
 import Badge from "../../components/ui/Badge";
-import Shape from "../../components/ui/Shape";
 import StatsButton from "./StatsButton";
+import TagFilterBar from "./TagFilterBar";
+import BookTile, { type ShelfEntry } from "./BookTile";
 import { computeStats } from "./stats";
 import { booksByYear } from "./data";
-import { getBooksInfo, type BookInfo, type BookLookup } from "../../lib/googleBooks";
+import { getBooksInfo } from "../../lib/googleBooks";
 
 export const metadata = {
   title: "The Bookshelf — Anna Pawl",
   description: "A running list of what I've read, by year.",
 };
-
-interface ShelfEntry {
-  lookup: BookLookup;
-  info: BookInfo | null;
-}
 
 // Newest year first.
 const years = Object.keys(booksByYear)
@@ -37,7 +32,15 @@ export default async function BooksPage() {
   // Stats are computed across every year combined (an all-time total,
   // not per-year) from the same fetched data the grid already renders —
   // no extra API calls.
-  const stats = computeStats(yearSections.flatMap((section) => section.books));
+  const allEntries = yearSections.flatMap((section) => section.books);
+  const stats = computeStats(allEntries);
+
+  // Every distinct tag in use across the whole shelf (genres + special
+  // ones like Favorites), alphabetized — the options TagFilterBar
+  // renders as clickable chips.
+  const allTags = Array.from(
+    new Set(allEntries.flatMap((entry) => entry.lookup.tags ?? []))
+  ).sort((a, b) => a.localeCompare(b));
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-16">
@@ -55,6 +58,8 @@ export default async function BooksPage() {
         to keep track of all of them.
       </p>
 
+      <TagFilterBar allTags={allTags} entries={allEntries} />
+
       {yearSections.map(({ year, books }) => (
         <section key={year} className="mt-16">
           <div className="flex items-center gap-3">
@@ -71,83 +76,6 @@ export default async function BooksPage() {
           </div>
         </section>
       ))}
-    </div>
-  );
-}
-
-function BookTile({ lookup, info }: ShelfEntry) {
-  const title = info?.title ?? lookup.title;
-  const author = info?.authors?.join(", ") || lookup.author || "Unknown author";
-  // A manual coverUrl in data.ts always wins over whatever Google Books
-  // returned — see the field's doc comment in lib/googleBooks.ts.
-  const thumbnail = lookup.coverUrl ?? info?.thumbnail ?? null;
-
-  const cover = (
-    <div className="relative aspect-[2/3] w-full overflow-hidden rounded-[var(--radius-lg)] bg-[var(--bg-subtle)] shadow-[var(--shadow-card)] transition-transform duration-[var(--motion-hover-duration)] ease-[var(--motion-hover-ease)] group-hover:-translate-y-1">
-      {thumbnail ? (
-        <Image
-          src={thumbnail}
-          alt={`Cover of ${title}`}
-          fill
-          sizes="(min-width: 1024px) 20vw, (min-width: 640px) 25vw, 33vw"
-          // object-contain (not object-cover) so covers are never
-          // cropped — Google's thumbnails don't all come back at a
-          // clean 2:3 ratio, and cover art (unlike a photo) reads badly
-          // with the top/bottom or a corner sliced off. Any mismatch
-          // just letterboxes against the container's --bg-subtle.
-          className="object-contain"
-        />
-      ) : (
-        <div className="flex h-full w-full items-center justify-center p-3 text-center text-sm text-[var(--text-muted)]">
-          {title}
-        </div>
-      )}
-
-      {lookup.favorite && (
-        <div
-          className="absolute top-2 right-2 flex h-7 w-7 items-center justify-center rounded-[var(--radius-full)] bg-black shadow-[var(--shadow-sm)]"
-          title="Favorite"
-        >
-          <Shape variant="star" className="h-4 w-4 text-yellow-bold" />
-        </div>
-      )}
-    </div>
-  );
-
-  const meta = (
-    <div className="mt-2">
-      <p className="truncate text-sm font-medium text-[var(--text-primary)]">{title}</p>
-      <p className="truncate text-xs text-[var(--text-muted)]">{author}</p>
-      {lookup.tags && lookup.tags.length > 0 && (
-        <div className="mt-1 flex flex-wrap gap-1">
-          {/* {lookup.tags.map((tag) => (
-            <Badge key={tag} variant="neutral">
-              {tag}
-            </Badge>
-          ))} */}
-        </div>
-      )}
-    </div>
-  );
-
-  if (info?.infoLink) {
-    return (
-      <a
-        href={info.infoLink}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group focus-ring block rounded-[var(--radius-md)]"
-      >
-        {cover}
-        {meta}
-      </a>
-    );
-  }
-
-  return (
-    <div className="group">
-      {cover}
-      {meta}
     </div>
   );
 }

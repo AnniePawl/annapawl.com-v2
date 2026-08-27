@@ -25,7 +25,7 @@ export default function StatsButton({ stats }: StatsButtonProps) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="focus-ring flex h-9 w-9 shrink-0 items-center justify-center rounded-[var(--radius-full)] bg-[var(--bg-subtle)] text-[var(--text-secondary)] transition-colors duration-[var(--motion-hover-duration)] ease-[var(--motion-hover-ease)] hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]"
+        className="focus-ring flex h-9 w-9 shrink-0 items-center justify-center rounded-[var(--radius-full)] bg-[var(--accent-soft)] text-[var(--text-secondary)] transition-colors duration-[var(--motion-hover-duration)] ease-[var(--motion-hover-ease)] hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]"
         aria-label="View reading stats"
       >
         <ChartColumn className="h-4 w-4" />
