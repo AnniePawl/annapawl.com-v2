@@ -1,44 +1,85 @@
 /* ---- Card component ----
    Base surface for grouping content: cards, panels, list items.
-   Tokens come from foundations/color.css, radius.css, elevation.css. */
+   Tokens come from foundations/color.css, radius.css.
+
+   Flat and soft on purpose: no border, no shadow, generous corner radius,
+   background is either the default surface, the quiet neutral "soft"
+   variant, or one of the brand palette's soft tones via the `tone` prop
+   (--card-bg, set inline by Card.tsx). Hover/press feedback comes from
+   darkening that same background slightly, not from elevation. */
 
 .card {
-  background: var(--surface);
+  background: var(--card-bg, var(--surface));
   color: var(--text-primary);
 
-  border-radius: var(--radius-card);
-  border: var(--border-default) solid var(--border-subtle);
+  position: relative;
+  overflow: hidden;
 
-  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-card);
+  border: none;
+  box-shadow: none;
 
   padding: var(--space-6);
 
   transition:
-    box-shadow var(--motion-hover-duration) var(--motion-hover-ease),
+    background var(--motion-hover-duration) var(--motion-hover-ease),
     transform var(--motion-hover-duration) var(--motion-hover-ease);
 }
 
-/* Soft variant — quieter surface, e.g. nested cards or secondary content */
+/* Soft variant — quieter neutral surface, e.g. nested cards or secondary
+   content. `tone`, if set, still wins over this default. */
 .card--soft {
-  background: var(--bg-subtle);
-  box-shadow: none;
+  background: var(--card-bg, var(--bg-subtle));
 }
 
-/* Interactive variant — card acts like a clickable target */
+/* Interactive variant — card acts like a clickable target. No shadow to
+   lean on, so the affordance is a gentle lift plus the background
+   deepening slightly, using whatever color is actually active. */
 .card--interactive {
   cursor: pointer;
 }
 
 .card--interactive:hover,
 .card--interactive[data-state="hover"] {
-  box-shadow: var(--shadow-md);
+  background: color-mix(in srgb, var(--card-bg, var(--surface)) 88%, black);
   transform: translateY(-2px);
 }
 
 .card--interactive:active,
 .card--interactive[data-state="pressed"] {
-  box-shadow: var(--shadow-sm);
+  background: color-mix(in srgb, var(--card-bg, var(--surface)) 78%, black);
   transform: translateY(0);
+}
+
+.card--soft.card--interactive:hover,
+.card--soft.card--interactive[data-state="hover"] {
+  background: color-mix(in srgb, var(--card-bg, var(--bg-subtle)) 94%, black);
+}
+
+.card--soft.card--interactive:active,
+.card--soft.card--interactive[data-state="pressed"] {
+  background: color-mix(in srgb, var(--card-bg, var(--bg-subtle)) 88%, black);
+}
+
+/* Content sits above the decorative accent regardless of DOM order. */
+.card-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- Decorative accent (Card's `accent` prop) ----
+   A Shape peeking out of the bottom-right corner, clipped by the card's
+   own rounded corner via overflow: hidden above. Muted and oversized
+   rather than a neat little icon — it's texture, not a logo. */
+.card-accent {
+  position: absolute;
+  bottom: -1.5rem;
+  right: -1.5rem;
+  width: 7rem;
+  height: 7rem;
+  color: var(--text-primary);
+  opacity: 0.15;
+  pointer-events: none;
 }
 
 /* ---- Card sub-components ---- */
@@ -62,4 +103,11 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-5);
+}
+
+/* Variants/Tones rows have 4 cards — their own column count rather than
+   reusing the 3-up grid above, so a row doesn't strand its 4th card alone
+   on its own line. */
+.card-demo-grid--variants {
+  grid-template-columns: repeat(4, 1fr);
 }

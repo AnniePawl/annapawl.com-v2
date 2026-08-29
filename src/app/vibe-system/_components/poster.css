@@ -1,0 +1,152 @@
+/* ---- Poster section chrome ----
+   Shared container + header for every "poster"-style vibe-system section
+   (Overview, Approach, Colors, Typography, and any future one). This is
+   the "systematic" half — every poster section gets the exact same
+   background-cycling, radius, padding, and icon+heading treatment, no
+   border or shadow on any of it. What each section does *inside* that
+   shell is where it gets to be custom — see the per-section files and
+   the shared doodle primitives in ./Doodle.tsx. */
+
+.poster-section {
+  position: relative;
+  border-radius: var(--radius-2xl);
+  padding: var(--space-7);
+  color: var(--text-primary);
+}
+
+.poster-heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: 0 0 var(--space-5);
+}
+
+.poster-heading-icon {
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+}
+
+.poster-body p {
+  /* max-width: 64ch; */
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-4);
+}
+
+.poster-body p:last-of-type {
+  margin-bottom: 0;
+}
+
+.poster-divider {
+  border: none;
+  border-top: 1px solid color-mix(in srgb, var(--text-primary) 20%, transparent);
+  margin: var(--space-6) 0;
+}
+
+.poster-label {
+  display: block;
+  margin-bottom: var(--space-4);
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ---- Doodle note: a rotated hand-drawn-feel annotation (Inter italic,
+   not a second typeface) with a small arrow pointing at whatever it's
+   commenting on. Position and rotation vary per use, set inline. ---- */
+.poster-note {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-style: italic;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.poster-note svg {
+  width: 30px;
+  height: 26px;
+}
+
+/* ---- Sticky note: a small "pinned" card, set apart from the section's
+   own background with a translucent white wash rather than a border. ---- */
+.poster-sticky {
+  display: inline-block;
+  padding: var(--space-4);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.55);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  line-height: var(--leading-snug);
+  color: var(--text-primary);
+}
+
+/* ---- Aside card: same translucent-wash idea, for a small supplementary
+   block like "at a glance" sitting next to the main body copy. ---- */
+.poster-aside-card {
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.poster-aside-card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.poster-aside-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.poster-aside-item svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+}
+
+.poster-aside-item-title {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+}
+
+.poster-aside-item-caption {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+/* ---- Numbered badge: small filled circle, colored per-item. ---- */
+.poster-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: var(--radius-pill);
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+}
+
+/* ---- Vertical rail label (e.g. "PRINCIPLES" running up the left edge
+   of a row of items). ---- */
+.poster-rail-label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}

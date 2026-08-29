@@ -1,8 +1,15 @@
-import Section from "../_components/Section";
+import PosterSection from "../_components/PosterSection";
+import { NumberBadge, PosterNote, Squiggle } from "../_components/Doodle";
 import { SECTIONS } from "../_data/sections";
-import { CardBody, CardHeading } from "../../../components/ui/Card";
 
 const meta = SECTIONS.find((s) => s.id === "approach")!;
+
+const UNDERLINE_COLORS = [
+  "var(--pink-bold)",
+  "var(--orange-bold)",
+  "var(--green-bold)",
+  "var(--blue-bold)",
+];
 
 const PRINCIPLES = [
   {
@@ -25,49 +32,67 @@ const PRINCIPLES = [
 
 export default function ApproachSection() {
   return (
-    <Section id={meta.id} heading={meta.title} icon={meta.icon}>
-      <p> I’m drawn to the balance between personality and precision — work that feels expressive and human, while still considered in every detail. I love playfulness, color, and unexpected moments that give an interface a sense of character and charm. </p>
+    <PosterSection id={meta.id} heading={meta.title} icon={meta.icon}>
+      <div style={{ position: "relative" }}>
+        <p>
+          I&rsquo;m drawn to the balance between personality and precision
+          — work that feels expressive and human, while still considered
+          in every detail. I love playfulness, color, and unexpected
+          moments that give an interface a sense of character and charm.
+        </p>
+        <p>
+          I don&rsquo;t think of a design system as a set of rules to
+          follow perfectly. I see it as a foundation: enough structure to
+          create consistency, but enough flexibility to experiment, try
+          something funky, or break a rule when it makes the experience
+          better. The goal isn&rsquo;t to smooth out every irregularity,
+          but to create a system where personality and precision can
+          coexist.
+        </p>
 
-<p> I don’t think of a design system as a set of rules to follow perfectly. I see it as a foundation: enough structure to create consistency, but enough flexibility to experiment, try something funky, or break a rule when it makes the experience better. The goal isn’t to smooth out every irregularity, but to create a system where personality and precision can coexist. </p>
-      <div style={{ marginTop: 8 }}>
-        <h4 style={{ marginBottom: 16, fontSize: 14, fontWeight: 600 }}>
+      </div>
+
+      <div style={{ display: "flex", gap: "var(--space-5)", marginTop: "var(--space-6)" }}>
+        <span
+          className="poster-rail-label"
+          style={{ alignSelf: "stretch", display: "flex", alignItems: "center", justifyContent: "center" }}
+        >
           Principles
-        </h4>
-        {/* Fixed 2-column grid instead of auto-fit — with exactly 4 items,
-            auto-fit was fitting 3 per row at common widths and stranding the
-            4th alone on its own line. This guarantees a clean 2x2 (desktop)
-            or single column (mobile). Trying the yellow-bold tile background
-            — text colors below (secondary/primary, not muted) are picked
-            deliberately for contrast against that yellow, not just to match
-            the rest of the system. */}
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+        </span>
+
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2" style={{ flex: 1 }}>
           {PRINCIPLES.map(({ title, body }, i) => (
-            <div
-              key={title}
-              style={{
-                boxShadow: "var(--shadow-card)",
-                borderRadius: "var(--radius-card)",
-                padding: "var(--space-5)",
-              }}
-            >
-              <span
+            <div key={title}>
+              <div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)", marginBottom: "var(--space-2)" }}>
+                <NumberBadge index={i} />
+                <span style={{ fontSize: "var(--text-lg)", fontWeight: "var(--font-bold)" }}>
+                  {title}
+                </span>
+              </div>
+              <Squiggle
                 style={{
-                  display: "block",
-                  marginBottom: 8,
-                  fontSize: 12,
-                  fontWeight: 700,
-                  letterSpacing: "0.08em",
+                  width: 64,
+                  height: 8,
+                  marginLeft: "calc(1.75rem + var(--space-3))",
+                  marginBottom: "var(--space-3)",
+                  color: UNDERLINE_COLORS[i % UNDERLINE_COLORS.length],
+                }}
+              />
+              <p
+                style={{
+                  margin: 0,
+                  marginLeft: "calc(1.75rem + var(--space-3))",
+                  fontSize: "var(--text-sm)",
+                  lineHeight: "var(--leading-relaxed)",
                   color: "var(--text-secondary)",
                 }}
               >
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <CardHeading>{title}</CardHeading>
-              <CardBody>{body}</CardBody>
+                {body}
+              </p>
             </div>
           ))}
         </div>
       </div>
-    </Section>
+    </PosterSection>
   );
 }

@@ -11,6 +11,8 @@ import Card, { CardHeading, CardBody } from "@/components/ui/Card";
 
 <Card variant="soft">...</Card>
 <Card interactive onClick={handleClick}>...</Card>
+<Card accent="blob">...</Card>
+<Card tone="pink">...</Card>
 `;
 
 export default function CardExamples() {
@@ -20,7 +22,7 @@ export default function CardExamples() {
 
       <h3 style={{ marginBottom: 16 }}>Variants</h3>
 
-      <div className="card-demo-grid">
+      <div className="card-demo-grid card-demo-grid--variants">
         <Card>
           <CardHeading>Default</CardHeading>
           <CardBody>
@@ -43,6 +45,43 @@ export default function CardExamples() {
             Lifts on hover and press — use when the whole card is a
             clickable target.
           </CardBody>
+        </Card>
+
+        <Card accent="blob">
+          <CardHeading>Accent</CardHeading>
+          <CardBody>
+            Optional decorative Shape in the corner — opt in per card, not
+            automatic.
+          </CardBody>
+        </Card>
+      </div>
+
+      <h3 style={{ margin: "32px 0 16px" }}>Tones</h3>
+      <p style={{ marginBottom: 16, fontSize: 14, color: "var(--text-secondary)" }}>
+        Any card — default or soft — can take a colored background via the{" "}
+        <code style={{ fontSize: 13 }}>tone</code> prop, pulled from the
+        brand palette&rsquo;s soft tones.
+      </p>
+
+      <div className="card-demo-grid card-demo-grid--variants">
+        <Card tone="pink">
+          <CardHeading>Pink</CardHeading>
+          <CardBody>tone=&quot;pink&quot;</CardBody>
+        </Card>
+
+        <Card tone="sky">
+          <CardHeading>Sky</CardHeading>
+          <CardBody>tone=&quot;sky&quot;</CardBody>
+        </Card>
+
+        <Card tone="mint">
+          <CardHeading>Mint</CardHeading>
+          <CardBody>tone=&quot;mint&quot;</CardBody>
+        </Card>
+
+        <Card tone="violet">
+          <CardHeading>Violet</CardHeading>
+          <CardBody>tone=&quot;violet&quot;</CardBody>
         </Card>
       </div>
 

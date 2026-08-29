@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 
 // Nested layouts in the App Router must NOT render <html>/<body> — only the
 // root layout (src/app/layout.tsx) does that, and it already loads Inter
-// (--font-inter) plus globals.css. Inter is the only typeface in the
-// system now — --font-display (used for h1/h2/display type) is just an
-// alias for --font-sans, not a separate face.
+// (--font-inter) and Roboto (--font-heading) plus globals.css.
+// Display/H1/H2 reference --font-heading; H3, H4, and body copy stay on
+// --font-sans (Inter).
 export const metadata: Metadata = {
   title: "Vibe System — Anna Pawl",
   description:

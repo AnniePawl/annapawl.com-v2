@@ -8,7 +8,7 @@
   --neutral-200: #e4e4e7;
   --neutral-500: #71717a;
   --neutral-700: #3f3f46;
-  --neutral-900: #171719;
+  --neutral-900: #2a2a2e; /* charcoal, not pure black — was #171719 */
   --neutral-1000: #09090b;
 
 
@@ -16,7 +16,7 @@
     Brand Palette
   ========================== */
   /* Pink */
-  --pink-soft: #ffd7ea;
+  --pink-soft: #ffd7e0;
   --pink-bold: #ff63b1;
 
   /* Red */
@@ -24,7 +24,7 @@
   --red-bold: #ff5252;
 
   /* Orange */
-  --orange-soft: #ffcb9e;
+  --orange-soft: #ffd190;
   --orange-bold: #ff9645;
 
   /* Yellow */
@@ -40,7 +40,7 @@
   --mint-bold: #17db9a;
 
   /* Green */
-  --green-soft: #95f6a0;
+  --green-soft: #b0ffba;
   --green-bold: #3cd675;
 
   /* Sky */

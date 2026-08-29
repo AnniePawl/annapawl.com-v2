@@ -2,9 +2,10 @@
   /* FONT FAMILIES */
   --font-sans: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  /* Heading/display now shares the same face as body text (Inter) —
-     no separate display font. */
-  --font-display: var(--font-sans);
+  /* Roboto is the heading typeface — Display, H1, and H2 only.
+     H3, H4, and body copy stay on Inter (--font-sans). --font-heading itself
+     comes from next/font in layout.tsx (already includes its own fallback
+     stack), so it's used directly below rather than redefined here. */
 
     /* FONT WEIGHTS */
   --font-regular: 400;
@@ -23,7 +24,7 @@
   --text-4xl: 2.25rem;  /* 36 */
   --text-5xl: 3rem;     /* 48 */
   --text-6xl: 3.75rem;  /* 60 */
-  --text-heading: 4rem ; /* 80 */
+  --text-heading: 4rem; /* 80 */
 
   /* LINE HEIGHTS */
   --leading-tight: 1.1;
@@ -37,26 +38,28 @@
   --tracking-normal: 0em;
   --tracking-wide: 0.05em;
 
-  /* DISPLAY / HERO */
-  --type-display-family: var(--font-display);
+  /* DISPLAY / HERO — same weight/tracking/case as H1 (matched on request),
+     just bigger. --text-heading (4rem) is what keeps it the largest level. */
+  --type-display-family: var(--font-heading);
   --type-display-size: var(--text-heading);
-  --type-display-weight: var(--font-medium);
-  --type-display-leading: var(--leading-tight);
-  --type-display-tracking: var(--tracking-tight);
-  --type-display-transform: uppercase;
+  --type-display-weight: var(--font-bold);
+  --type-display-leading: 0.95;
+  --type-display-tracking: -0.03em;
+  --type-display-transform: none;
 
-  /* HEADINGS */
-  --type-h1-family: var(--font-display);
+  /* HEADINGS — bold + tighter + more editorial than Display, so the two
+     levels contrast instead of H1 just reading as "smaller Display". */
+  --type-h1-family: var(--font-heading);
   --type-h1-size: var(--text-6xl);
-  --type-h1-weight: var(--font-semibold);
-  --type-h1-leading: var(--leading-tight);
-  --type-h1-tracking: var(--tracking-tight);
+  --type-h1-weight: var(--font-bold);
+  --type-h1-leading: 1;
+  --type-h1-tracking: -0.03em;
 
-  --type-h2-family: var(--font-display);
+  --type-h2-family: var(--font-heading);
   --type-h2-size: var(--text-4xl);
-  --type-h2-weight: var(--font-semibold);
+  --type-h2-weight: var(--font-bold);
   --type-h2-leading: var(--leading-tight);
-  --type-h2-tracking: var(--tracking-tight);
+  --type-h2-tracking: -0.02em;
 
   --type-h3-family: var(--font-sans);
   --type-h3-size: var(--text-2xl);
@@ -66,7 +69,7 @@
 
   --type-h4-family: var(--font-sans);
   --type-h4-size: var(--text-xl);
-  --type-h4-weight: var(--font-medium);
+  --type-h4-weight: var(--font-semibold);
   --type-h4-leading: var(--leading-snug);
   --type-h4-tracking: var(--tracking-normal);
 
@@ -76,13 +79,6 @@
   --type-body-weight: var(--font-regular);
   --type-body-leading: var(--leading-relaxed);
   --type-body-tracking: var(--tracking-normal);
-
-  /* BODY — DISPLAY VARIANT */
-  --type-body-display-family: var(--font-display);
-  --type-body-display-size: var(--text-base);
-  --type-body-display-weight: var(--font-regular);
-  --type-body-display-leading: var(--leading-relaxed);
-  --type-body-display-tracking: var(--tracking-normal);
 }
 
 /* ---- Global base typography ---- */
@@ -140,15 +136,6 @@ p {
   font-weight: var(--type-body-weight);
   line-height: var(--type-body-leading);
   letter-spacing: var(--type-body-tracking);
-}
-
-/* BODY — DISPLAY */
-.p-display {
-  font-family: var(--type-body-display-family);
-  font-size: var(--type-body-display-size);
-  font-weight: var(--type-body-display-weight);
-  line-height: var(--type-body-display-leading);
-  letter-spacing: var(--type-body-display-tracking);
 }
 
 /* NOTES */
