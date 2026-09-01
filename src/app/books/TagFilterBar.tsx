@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Modal from "../../components/ui/Modal";
 import TagChip from "../../components/ui/TagChip";
+import { hueForTag } from "../../lib/tagColor";
 import BookTile, { type ShelfEntry } from "./BookTile";
 
 interface TagFilterBarProps {
@@ -36,6 +37,7 @@ export default function TagFilterBar({ allTags, entries }: TagFilterBarProps) {
           <TagChip
             key={tag}
             active={tag === selected}
+            tone={hueForTag(tag)}
             onClick={() => setSelected((current) => (current === tag ? null : tag))}
           >
             {tag}
