@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import SidebarNav from "./_components/SidebarNav";
 import MobileNav from "./_components/MobileNav";
+import GroupHeading from "./_components/GroupHeading";
 import { SECTIONS } from "./_data/sections";
 
 // Sections
@@ -11,18 +12,18 @@ import OverviewSection from "./_sections/overview";
 import ApproachSection from "./_sections/approach";
 import ColorsSection from "./_sections/colors";
 import TypographySection from "./_sections/typography";
+import SpacingSection from "./_sections/spacing";
+import LayoutSection from "./_sections/layout";
 import RadiusDocsSection from "./_sections/radius";
+import ElevationSection from "./_sections/elevation";
+import MotionSection from "./_sections/motion";
+import AccessibilitySection from "./_sections/accessibility";
 import ButtonsSection from "./_sections/buttons";
 import CardsSection from "./_sections/cards";
 import ModalsSection from "./_sections/modals";
 import BadgesSection from "./_sections/badges";
 import TooltipsSection from "./_sections/tooltips";
 import FormsSection from "./_sections/forms";
-import SpacingSection from "./_sections/spacing";
-import LayoutSection from "./_sections/layout";
-import ElevationSection from "./_sections/elevation";
-import MotionSection from "./_sections/motion";
-import AccessibilitySection from "./_sections/accessibility";
 
 export default function DesignSystemOverview() {
   const [activeId, setActiveId] = useState(SECTIONS[0].id);
@@ -102,22 +103,27 @@ export default function DesignSystemOverview() {
               onSelect={scrollTo}
             />
 
+            <GroupHeading title="Intro" />
             <OverviewSection />
             <ApproachSection />
+
+            <GroupHeading title="Foundations" />
             <ColorsSection />
             <TypographySection />
-            <ButtonsSection />
-            <CardsSection />
-            <ModalsSection />
-            <BadgesSection />
-            <TooltipsSection />
-            <FormsSection />
             <SpacingSection />
             <LayoutSection />
             <RadiusDocsSection />
             <ElevationSection />
             <MotionSection />
             <AccessibilitySection />
+
+            <GroupHeading title="Components" />
+            <ButtonsSection />
+            <CardsSection />
+            <ModalsSection />
+            <BadgesSection />
+            <TooltipsSection />
+            <FormsSection />
           </main>
         </div>
       </div>

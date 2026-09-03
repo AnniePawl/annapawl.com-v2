@@ -27,7 +27,7 @@ export default function Section({
     >
       <div className="flex flex-col">
         <h1
-          className="h-display uppercase flex items-center gap-3 pb-5"
+          className="h-display text-[length:var(--type-h1-size)] tracking-[var(--type-h1-tracking)] flex items-center gap-3 pb-5"
         >
           {/* No color class — inherits currentColor from .h-display's own
               color: var(--text-primary), so the icon always matches the

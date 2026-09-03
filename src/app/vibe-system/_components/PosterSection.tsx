@@ -33,7 +33,7 @@ export default function PosterSection({
       className="poster-section scroll-mt-24"
       style={{ background: `var(${bgToken})` }}
     >
-      <h1 className="h-display uppercase poster-heading">
+      <h1 className="h-display text-[length:var(--type-h1-size)] tracking-[var(--type-h1-tracking)] poster-heading">
         <Icon className="poster-heading-icon" aria-hidden="true" />
         {heading}
       </h1>
