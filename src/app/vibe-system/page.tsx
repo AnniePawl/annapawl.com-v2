@@ -77,28 +77,6 @@ export default function DesignSystemOverview() {
   return (
     <div className="min-h-screen bg-[#fffcf7]">
       <div className="mx-auto flex h-[100dvh] max-w-7xl flex-col px-6 py-12">
-        {/* Page header — home link + title, sits above the sidebar/main
-            split rather than inside it, so it's visible on every
-            breakpoint. The grid below gets `flex-1 min-h-0` instead of a
-            hardcoded viewport-height calc, so it always fills whatever
-            space this header doesn't use. */}
-        <div className="mb-8 shrink-0">
-          <Link
-            href="/"
-            className="focus-ring inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-zinc-500 transition-colors hover:text-zinc-900"
-          >
-            <span aria-hidden="true">⌂</span> HOME
-          </Link>
-
-          <h1 className="h-display mt-4">
-            DESIGN SYSTEM <span aria-hidden="true">✳</span>
-          </h1>
-          <p className="mt-2 max-w-2xl text-sm text-zinc-600 md:text-base">
-            A living library of the building blocks, visual experiments, and
-            little details behind annapawl.com.
-          </p>
-        </div>
-
         <div className="grid min-h-0 flex-1 grid-cols-1 gap-12 lg:grid-cols-[250px_1fr]">
           <aside className="hidden lg:block h-full">
             <div className="h-full rounded-2xl p-[1.5px]">
@@ -116,7 +94,7 @@ export default function DesignSystemOverview() {
 
           <main
             ref={mainRef}
-            className="h-full overflow-y-auto space-y-12 pr-2 no-scrollbar"
+            className="h-full overflow-y-auto space-y-12 pb-12 pr-2 no-scrollbar"
           >
             <MobileNav
               sections={SECTIONS}

@@ -27,23 +27,25 @@ export default function Section({
     >
       <div className="flex flex-col">
         <h1
-          className="h-display flex items-center gap-3 pb-5 text-zinc-900"
+          className="h-display uppercase flex items-center gap-3 pb-5"
         >
-          <Icon className="h-8 w-8 text-zinc-900" aria-hidden="true" />
+          {/* No color class — inherits currentColor from .h-display's own
+              color: var(--text-primary), so the icon always matches the
+              heading text exactly instead of drifting to its own gray. */}
+          <Icon className="h-10 w-10" aria-hidden="true" />
           {heading}
         </h1>
         {subheading ? (
-          <h2 className="mb-5 text-zinc-800">{subheading}</h2>
+          <h2 className="mb-5">{subheading}</h2>
         ) : null}
       </div>
 
       <div
         className={cx(
-          "ml-3 border-l border-zinc-900/30 pl-6",
+          "pl-0",
           "[&_p]:max-w-4xl",
           "[&_p]:text-base",
           "[&_p]:leading-relaxed",
-          "[&_p]:text-zinc-800",
           "[&_p]:mb-4",
           "[&_p:last-child]:mb-0"
         )}

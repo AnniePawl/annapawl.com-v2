@@ -2,11 +2,10 @@ import { Asterisk } from "lucide-react";
 import CodeBlock from "../_components/CodeBlock";
 import { Squiggle } from "../_components/Doodle";
 
-// Reused from the Overview section's own copy rather than a generic
-// pangram — the specimens should sound like the site, not a font-testing
-// cliché.
-const VOICE_LINE =
-  "Structured enough to feel intuitive, expressive enough to feel alive.";
+// Same line at every size, rather than a different snippet per row — it's
+// what makes a type scale actually readable as a scale (compare the same
+// words getting bigger/smaller, not different sentences).
+const SAMPLE_LINE = "Good type, good vibes";
 
 const SCALE: {
   className: string;
@@ -15,28 +14,28 @@ const SCALE: {
 }[] = [
   {
     className: "h-display",
-    metaLines: ["Roboto", "64px", "700", "-0.03em tracking"],
-    sample: "Vibe System",
+    metaLines: ["Space Grotesk", "80px", "700", "-0.03em tracking"],
+    sample: SAMPLE_LINE,
   },
   {
     className: "h1",
-    metaLines: ["Roboto", "60px", "700", "-0.03em tracking"],
-    sample: VOICE_LINE,
+    metaLines: ["Space Grotesk", "60px", "700", "-0.03em tracking"],
+    sample: SAMPLE_LINE,
   },
   {
     className: "h2",
-    metaLines: ["Roboto", "36px", "700", "-0.02em tracking"],
-    sample: VOICE_LINE,
+    metaLines: ["Space Grotesk", "36px", "700", "-0.02em tracking"],
+    sample: SAMPLE_LINE,
   },
   {
     className: "h3",
     metaLines: ["Inter", "24px", "600", "normal tracking"],
-    sample: VOICE_LINE,
+    sample: SAMPLE_LINE,
   },
   {
     className: "h4",
     metaLines: ["Inter", "20px", "600", "normal tracking"],
-    sample: VOICE_LINE,
+    sample: SAMPLE_LINE,
   },
 ];
 
@@ -74,7 +73,7 @@ export default function TypographyExamples() {
         next week.
       </p>
       <p>
-        Right now that&rsquo;s Roboto for headings, paired with Inter for
+        Right now that&rsquo;s Space Grotesk for headings, paired with Inter for
         body copy, which stays quiet and does the reading work. Still
         testing — no promises this sticks.
       </p>
@@ -102,7 +101,7 @@ export default function TypographyExamples() {
             <div className="typo-scale-meta">16px / 400 / Inter</div>
           </div>
           <span className="typo-scale-dot" aria-hidden="true" />
-          <p className="typo-scale-sample">{VOICE_LINE}</p>
+          <p className="typo-scale-sample">{SAMPLE_LINE}</p>
         </div>
       </div>
 
@@ -112,7 +111,7 @@ export default function TypographyExamples() {
       <div className="typo-grid-2">
         <div>
           <span className="poster-label">Typeface</span>
-          <p className="typo-typeface-name">Roboto</p>
+          <p className="typo-typeface-name">Space Grotesk</p>
           <span className="typo-typeface-caption">
             — headings only (Display, H1, H2).
           </span>

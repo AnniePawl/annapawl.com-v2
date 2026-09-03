@@ -144,9 +144,26 @@
 .poster-rail-label {
   writing-mode: vertical-rl;
   transform: rotate(180deg);
-  font-size: var(--text-xs);
+  text-align: center;
+  font-size: var(--text-sm);
   font-weight: var(--font-bold);
-  letter-spacing: 0.08em;
+  /* A bit more open than the usual 0.08em poster-label tracking (letter-
+     spacing is what stretches a vertical-rl run of text along its
+     length), but modest — the trailing space letter-spacing adds after
+     the last character is what pulls the visible word off-center inside
+     the flex-centered rail, so this stays well short of the point where
+     that becomes noticeable. */
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--text-secondary);
+}
+
+/* ---- Principles list (Approach section) ----
+   One shared left border running the full height of the principles
+   grid — not one per item — so the rail label and the bulleted list it
+   labels read as a single unit. Neutral, matching .poster-divider's
+   subtle line rather than any one principle's own accent color. */
+.poster-principles-list {
+  border-left: var(--border-md) solid var(--border-subtle);
+  padding-left: var(--space-5);
 }

@@ -16,4 +16,5 @@
   --radius-button: var(--radius-lg);
   --radius-modal: var(--radius-lg);
   --radius-input: var(--radius-lg);
+  --radius-icon:var(--radius-full)
 }

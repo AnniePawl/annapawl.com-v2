@@ -29,7 +29,7 @@
 
   /* Yellow */
   --yellow-soft: #fffb89;
-  --yellow-bold: #ffe570;
+  --yellow-bold: #ffe46b;
 
   /* Lime */
   --lime-soft: #d9ffa7;
@@ -59,6 +59,13 @@
   --violet-soft: #dac5ff;
   --violet-bold: #996dff;
 
+  /* Neutral — not one of the 11 brand hues, but follows the same
+     -soft/-bold pairing so it works as a `tone` value anywhere a brand
+     hue does (e.g. Modal's `tone` prop) without special-casing. A quiet
+     default for general-purpose use rather than a color statement. */
+  --neutral-soft: var(--neutral-50);
+  --neutral-bold: var(--neutral-700);
+
 
   /* =========================
      Semantic tokens (UI usage)
@@ -70,11 +77,20 @@
   --surface: var(--lime-bold); 
   /* ^cards, modals, menus, etc */
 
-  /* Text Colors*/
+  /* Text Colors
+     Anna loved the charcoal (--text-primary) used by the typography
+     section's type-scale samples and asked for all text and headings
+     sitewide to match it — so --text-secondary and --text-muted now
+     point at --text-primary too instead of their own lighter neutrals.
+     There's no more light/dark hierarchy between primary/secondary/muted
+     text — every consumer of any of the three (Card, Badge, Modal, Form,
+     Button, and every vibe-system doc section) renders the same charcoal.
+     --text-inverse is untouched (that's for text on dark/accent
+     backgrounds, a different axis entirely). */
   --text-primary: var(--neutral-900);
-  --text-secondary: var(--neutral-700);
+  --text-secondary: var(--text-primary);
   --text-inverse: var(--neutral-0);
-  --text-muted: var(--neutral-500);
+  --text-muted: var(--text-primary);
 
   /* Border Colors */
   --border-subtle: var(--neutral-200);

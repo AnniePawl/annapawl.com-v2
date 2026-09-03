@@ -20,11 +20,6 @@ export default function ColorsSection() {
           of the same visual world.
         </p>
 
-        <PosterNote
-          style={{ top: "-1.75rem", left: "min(46ch, 100%)", transform: "rotate(-4deg)" }}
-        >
-          yes, I know there are a lot
-        </PosterNote>
       </div>
 
       <div style={{ marginTop: "var(--space-6)" }}>

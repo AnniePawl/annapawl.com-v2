@@ -2,7 +2,7 @@
   /* FONT FAMILIES */
   --font-sans: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  /* Roboto is the heading typeface — Display, H1, and H2 only.
+  /* Space Grotesk is the heading typeface — Display, H1, and H2 only.
      H3, H4, and body copy stay on Inter (--font-sans). --font-heading itself
      comes from next/font in layout.tsx (already includes its own fallback
      stack), so it's used directly below rather than redefined here. */
@@ -24,7 +24,12 @@
   --text-4xl: 2.25rem;  /* 36 */
   --text-5xl: 3rem;     /* 48 */
   --text-6xl: 3.75rem;  /* 60 */
-  --text-heading: 4rem; /* 80 */
+  /* Was 3.5rem (56px) — smaller than --text-6xl (60px) used by H1, so the
+     display style was quietly rendering *smaller* than H1 despite the
+     scale intending it as the largest level (see the comment on
+     --type-display-size below, and the label was still claiming "80"
+     the whole time). Fixed to actually be 80px. */
+  --text-heading: 5rem; /* 80 */
 
   /* LINE HEIGHTS */
   --leading-tight: 1.1;
@@ -37,14 +42,16 @@
   --tracking-tight: -0.05em;
   --tracking-normal: 0em;
   --tracking-wide: 0.05em;
+  --tracking-wider: 1em;
 
   /* DISPLAY / HERO — same weight/tracking/case as H1 (matched on request),
-     just bigger. --text-heading (4rem) is what keeps it the largest level. */
+     just bigger. --text-heading (5rem / 80px) is what keeps it the
+     largest level, comfortably above H1's 3.75rem / 60px. */
   --type-display-family: var(--font-heading);
   --type-display-size: var(--text-heading);
   --type-display-weight: var(--font-bold);
   --type-display-leading: 0.95;
-  --type-display-tracking: -0.03em;
+  --type-display-tracking: .05em;
   --type-display-transform: none;
 
   /* HEADINGS — bold + tighter + more editorial than Display, so the two
@@ -94,6 +101,11 @@
   line-height: var(--type-display-leading);
   letter-spacing: var(--type-display-tracking);
   text-transform: var(--type-display-transform);
+  /* Charcoal (--neutral-900), not pure black — matches body's default
+     text color. Explicit here rather than left to inherit, since at
+     least one usage (vibe-system's Section.tsx) was overriding it with
+     Tailwind's much darker `text-zinc-900`. */
+  color: var(--text-primary);
 }
 
 /* HEADINGS */

@@ -3,11 +3,21 @@
    the ::backdrop layer — we only style appearance and motion. */
 
 .modal {
+  /* Tailwind's preflight resets `margin` (and `::backdrop`) to 0 on every
+     element, which silently defeats the native <dialog> centering trick
+     (UA default is `inset: 0; margin: auto;`). Restate it explicitly here
+     so the modal always centers regardless of global resets. */
+  position: fixed;
+  inset: 0;
+  margin: auto;
   padding: 0;
   border: none;
   border-radius: var(--radius-modal);
   box-shadow: var(--shadow-modal);
-  background: var(--bg-default);
+  /* Whole modal fills with the tone's soft tint when `tone` is set —
+     falls back to the plain white surface when it isn't, so an un-toned
+     Modal is unchanged. */
+  background: var(--modal-accent-soft, var(--bg-default));
   color: var(--text-primary);
   width: min(480px, calc(100vw - var(--space-6) * 2));
   max-height: calc(100vh - var(--space-6) * 2);
@@ -53,12 +63,35 @@
 }
 
 .modal-header {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
-  padding: var(--space-5) var(--space-6);
-  border-bottom: var(--border-thin) solid var(--border-subtle);
+  padding: var(--space-4) var(--space-6);
+}
+
+/* Divider — inset to match the header's own horizontal padding rather
+   than running edge-to-edge (a plain border-bottom on .modal-header would
+   touch the modal's rounded corners, since .modal itself has no padding).
+   Always matches whatever is driving the primary button inside the modal
+   (--modal-accent, set inline by the `tone` prop, falling back to the
+   shared --accent token) — one knob for both. */
+.modal-header::after {
+  content: "";
+  position: absolute;
+  left: var(--space-6);
+  right: var(--space-6);
+  bottom: 0;
+  height: var(--border-thin);
+  background: var(--modal-accent, var(--accent));
+}
+
+.modal-header-content {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
 }
 
 .modal-title {
@@ -69,6 +102,32 @@
   margin: 0;
 }
 
+/* ---- Optional icon badge (Modal's `icon` prop) ----
+   White circle to the left of the title (see note below), icon colored
+   via the same --modal-accent the divider and primary button use. */
+.modal-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-icon);
+  /* Now that the modal's whole background is the soft tone, a
+     soft-on-soft badge would disappear — white instead, so the icon
+     still reads as a distinct badge against the tinted surface. */
+  background: var(--bg-default);
+  color: var(--modal-accent, var(--accent));
+}
+
+.modal-icon-svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Close button follows the same --modal-accent / --modal-accent-soft
+   pair as the divider, icon badge, and primary button — so the whole
+   header (line, icon, close, confirm) reads as one matched combo. */
 .modal-close {
   display: inline-flex;
   align-items: center;
@@ -78,16 +137,18 @@
   border-radius: var(--radius-sm);
   border: none;
   background: transparent;
-  color: var(--text-muted);
+  color: var(--modal-accent, var(--accent));
   font-size: var(--text-sm);
   line-height: 1;
   cursor: pointer;
-  transition: background-color var(--motion-hover-duration) var(--motion-hover-ease);
+  transition:
+    background-color var(--motion-hover-duration) var(--motion-hover-ease),
+    color var(--motion-hover-duration) var(--motion-hover-ease);
 }
 
 .modal-close:hover {
-  background: var(--bg-subtle);
-  color: var(--text-primary);
+  background: var(--modal-accent-soft, var(--accent-soft));
+  color: var(--modal-accent, var(--accent));
 }
 
 .modal-body {
@@ -96,6 +157,59 @@
   font-size: var(--text-sm);
   line-height: var(--leading-relaxed);
   color: var(--text-secondary);
+  background:var(--s)
+}
+
+/* ---- Primary button inside a modal follows --modal-accent ----
+   Same derivation Button.css uses for --accent-hover/--accent-active
+   (85% / 70% black mix), just against whatever accent this modal is
+   using, so a "Confirm" button always matches the tone/divider above. */
+.modal .btn--primary {
+  background: var(--modal-accent, var(--accent));
+}
+
+.modal .btn--primary:hover,
+.modal .btn--primary[data-state="hover"] {
+  background: color-mix(in srgb, var(--modal-accent, var(--accent)) 85%, black);
+}
+
+.modal .btn--primary:active,
+.modal .btn--primary[data-state="pressed"] {
+  background: color-mix(in srgb, var(--modal-accent, var(--accent)) 70%, black);
+}
+
+/* Cancel (secondary) button's outline matches the same accent as the
+   primary button's fill, so both actions read as one matched pair. */
+.modal .btn--secondary,
+.modal .btn--secondary:hover,
+.modal .btn--secondary[data-state="hover"],
+.modal .btn--secondary:active,
+.modal .btn--secondary[data-state="pressed"] {
+  border-color: var(--modal-accent, var(--accent));
+}
+
+/* ---- Docs-only demo trigger buttons (vibe-system Modals section) ----
+   The "open a toned modal" buttons live outside any <dialog>, so they
+   can't read --modal-accent. Tone-colored outline (same treatment as
+   .modal .btn--secondary, the Cancel button, above) plus a soft-tinted
+   fill, so each trigger reads as a little preview swatch of its own
+   modal's tone. Driven by --tone-accent / --tone-accent-soft (set inline
+   per button by ModalExamples.tsx). */
+.tone-trigger.btn--secondary {
+  background: var(--tone-accent-soft, var(--accent-soft));
+  border-color: var(--tone-accent, var(--accent));
+}
+
+.tone-trigger.btn--secondary:hover,
+.tone-trigger.btn--secondary[data-state="hover"] {
+  background: color-mix(in srgb, var(--tone-accent-soft, var(--accent-soft)) 85%, black);
+  border-color: var(--tone-accent, var(--accent));
+}
+
+.tone-trigger.btn--secondary:active,
+.tone-trigger.btn--secondary[data-state="pressed"] {
+  background: color-mix(in srgb, var(--tone-accent-soft, var(--accent-soft)) 70%, black);
+  border-color: var(--tone-accent, var(--accent));
 }
 
 .modal-body p {

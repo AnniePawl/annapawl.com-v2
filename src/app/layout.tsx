@@ -1,6 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Roboto, Inter } from "next/font/google";
+import { Space_Grotesk, Inter } from "next/font/google";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -11,9 +11,10 @@ const inter = Inter({
 });
 
 // Heading typeface — display/h1/h2 only. Body text, h3/h4, and everything
-// else stays on Inter (--font-sans). Roboto ships as a variable font (like
-// Inter), so no explicit weight list needed here.
-const heading = Roboto({
+// else stays on Inter (--font-sans). Space Grotesk is a variable font on
+// Google Fonts, so — like Inter — next/font pulls the whole weight range
+// without an explicit weight array.
+const heading = Space_Grotesk({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-heading",

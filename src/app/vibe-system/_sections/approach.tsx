@@ -60,7 +60,10 @@ export default function ApproachSection() {
           Principles
         </span>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2" style={{ flex: 1 }}>
+        <div
+          className="poster-principles-list grid grid-cols-1 gap-6 sm:grid-cols-2"
+          style={{ flex: 1 }}
+        >
           {PRINCIPLES.map(({ title, body }, i) => (
             <div key={title}>
               <div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)", marginBottom: "var(--space-2)" }}>

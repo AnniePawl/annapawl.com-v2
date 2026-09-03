@@ -1,4 +1,4 @@
-import { Heart, Palette, SlidersHorizontal, Target } from "lucide-react";
+import { Heart, Palette, SlidersHorizontal, Target, Wand2 } from "lucide-react";
 import PosterSection from "../_components/PosterSection";
 import { StickyNote } from "../_components/Doodle";
 import { SECTIONS } from "../_data/sections";
@@ -19,7 +19,12 @@ const AT_A_GLANCE = [
   {
     icon: SlidersHorizontal,
     title: "Flexible foundation",
-    caption: "built to adapt and evolve",
+    caption: "built to adapt + evolve",
+  },
+  {
+    icon: Wand2,
+    title: "Room to play",
+    caption: "experiment, noodle, learn",
   },
   {
     icon: Heart,
