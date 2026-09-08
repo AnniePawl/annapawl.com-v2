@@ -6,12 +6,12 @@ import type { Metadata } from "next";
 // Display/H1/H2 reference --font-heading; H3, H4, and body copy stay on
 // --font-sans (Inter).
 export const metadata: Metadata = {
-  title: "Vibe System — Anna Pawl",
+  title: "Sedge Design System — Anna Pawl",
   description:
     "Design tokens, components, and the reasoning behind annapawl.com.",
 };
 
-export default function VibeSystemLayout({
+export default function SedgeDesignSystemLayout({
   children,
 }: {
   children: React.ReactNode;

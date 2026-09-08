@@ -54,7 +54,7 @@ const TRACKING = [
 
 const USAGE = `
 /* implementation classes — foundations/typography.css */
-<h1 className="h-display">Vibe System</h1>
+<h1 className="h-display">Sedge Design System</h1>
 <h1 className="h1">Section heading</h1>
 <h2 className="h2">Subsection heading</h2>
 <p>Body copy — the base <p> style, no class needed.</p>
@@ -167,7 +167,7 @@ export default function TypographyExamples() {
                   className="typo-tracking-sample"
                   style={{ fontSize: "var(--text-lg)", letterSpacing: value }}
                 >
-                  VIBE SYSTEM
+                  SEDGE DESIGN SYSTEM
                 </p>
                 <span className="typo-tracking-label">{label}</span>
               </div>

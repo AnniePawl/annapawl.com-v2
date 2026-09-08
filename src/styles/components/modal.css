@@ -188,7 +188,7 @@
   border-color: var(--modal-accent, var(--accent));
 }
 
-/* ---- Docs-only demo trigger buttons (vibe-system Modals section) ----
+/* ---- Docs-only demo trigger buttons (sedge-design-system Modals section) ----
    The "open a toned modal" buttons live outside any <dialog>, so they
    can't read --modal-accent. Tone-colored outline (same treatment as
    .modal .btn--secondary, the Cancel button, above) plus a soft-tinted

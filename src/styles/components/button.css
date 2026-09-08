@@ -5,7 +5,7 @@
    redefined here.
 
    `[data-state="hover"|"pressed"]` selectors exist purely so the
-   vibe-system docs page can force-preview a state side by side —
+   sedge-design-system docs page can force-preview a state side by side —
    normal usage elsewhere never needs to set data-state. */
 
 .btn {
@@ -93,7 +93,7 @@
   transform: translateY(1px);
 }
 
-/* ---- Docs-only demo layout (vibe-system Buttons section) ---- */
+/* ---- Docs-only demo layout (sedge-design-system Buttons section) ---- */
 .button-state-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

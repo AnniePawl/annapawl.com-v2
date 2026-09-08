@@ -9,7 +9,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: ButtonSize;
   /**
    * Documentation/demo use only — forces a visual state (hover/focus/
-   * pressed) without real interaction, so the vibe-system docs page can
+   * pressed) without real interaction, so the sedge-design-system docs page can
    * show every state side by side. Never set this in real usage.
    */
   "data-state"?: "hover" | "focus" | "pressed";

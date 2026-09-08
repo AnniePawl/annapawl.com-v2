@@ -5,7 +5,7 @@ import { SECTIONS } from "./sections";
 // text stays readable on all of them. Shared by every section-container
 // component (Section, PosterSection) so they can never drift apart.
 export const SOFT_COLORS = [
-  "--indigo-soft",
+  // "--indigo-soft",
   "--yellow-soft",
   "--mint-soft",
   "--orange-soft",

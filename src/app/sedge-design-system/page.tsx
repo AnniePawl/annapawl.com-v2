@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import HeroNav from "./_components/HeroNav";
+import Hero from "./_components/Hero";
 import SidebarNav from "./_components/SidebarNav";
 import MobileNav from "./_components/MobileNav";
 import GroupHeading from "./_components/GroupHeading";
 import { SECTIONS } from "./_data/sections";
 
 // Sections
-import OverviewSection from "./_sections/overview";
 import ApproachSection from "./_sections/approach";
 import ColorsSection from "./_sections/colors";
 import TypographySection from "./_sections/typography";
@@ -28,7 +28,6 @@ import FormsSection from "./_sections/forms";
 export default function DesignSystemOverview() {
   const [activeId, setActiveId] = useState(SECTIONS[0].id);
 
-  const mainRef = useRef<HTMLElement | null>(null);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
   useEffect(() => {
@@ -36,9 +35,11 @@ export default function DesignSystemOverview() {
       sectionRefs.current[id] = document.getElementById(id);
     });
 
-    const rootEl = mainRef.current;
-    if (!rootEl) return;
-
+    // root: null (the browser viewport) — the page now scrolls normally
+    // instead of the old fixed-height, internally-scrolling <main>, now
+    // that the hero + its sticky nav sit above the docs app. The extra
+    // -120px of top margin accounts for that sticky nav's height so a
+    // section isn't marked "active" while it's still hidden underneath it.
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries
@@ -48,8 +49,7 @@ export default function DesignSystemOverview() {
         if (visible[0]?.target?.id) setActiveId(visible[0].target.id);
       },
       {
-        root: rootEl,
-        rootMargin: "-20% 0px -70% 0px",
+        rootMargin: "-120px 0px -70% 0px",
         threshold: [0.01, 0.1],
       }
     );
@@ -65,11 +65,9 @@ export default function DesignSystemOverview() {
     const el = sectionRefs.current[id];
     if (!el) return;
 
-    // scrollIntoView finds whichever scrollable ancestor needs to move
-    // (here, <main>) instead of us guessing an offset — offsetTop was
-    // measured relative to <body>, not the scroll container, since nothing
-    // between them has `position` set. The section's `scroll-mt-24` class
-    // already supplies the top breathing room, so no manual offset needed.
+    // scrollIntoView finds whichever scrollable ancestor needs to move —
+    // now that's the window itself. The section's `scroll-mt-24` class
+    // supplies the top breathing room past the sticky HeroNav.
     el.scrollIntoView({ behavior: "smooth", block: "start" });
 
     setActiveId(id);
@@ -77,34 +75,30 @@ export default function DesignSystemOverview() {
 
   return (
     <div className="min-h-screen bg-[#fffcf7]">
-      <div className="mx-auto flex h-[100dvh] max-w-7xl flex-col px-6 py-12">
-        <div className="grid min-h-0 flex-1 grid-cols-1 gap-12 lg:grid-cols-[250px_1fr]">
-          <aside className="hidden lg:block h-full">
-            <div className="h-full rounded-2xl p-[1.5px]">
-              <div className="flex h-full flex-col rounded-xl bg-lime-200 p-4 text-zinc-900">
-                <div className="min-h-0 flex-1 overflow-y-auto">
-                  <SidebarNav
-                    sections={SECTIONS}
-                    activeId={activeId}
-                    onSelect={scrollTo}
-                  />
-                </div>
+      <HeroNav sections={SECTIONS} activeId={activeId} onSelect={scrollTo} />
+      <Hero onExplore={() => scrollTo(SECTIONS[0].id)} />
+
+      <div className="mx-auto max-w-7xl px-6 pb-12">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[250px_1fr]">
+          <aside className="hidden lg:block">
+            <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto rounded-2xl p-[1.5px]">
+              <div className="rounded-xl bg-lime-200 p-4 text-zinc-900">
+                <SidebarNav
+                  sections={SECTIONS}
+                  activeId={activeId}
+                  onSelect={scrollTo}
+                />
               </div>
             </div>
           </aside>
 
-          <main
-            ref={mainRef}
-            className="h-full overflow-y-auto space-y-12 pb-12 pr-2 no-scrollbar"
-          >
+          <main className="space-y-12">
             <MobileNav
               sections={SECTIONS}
               activeId={activeId}
               onSelect={scrollTo}
             />
 
-            <GroupHeading title="Intro" />
-            <OverviewSection />
             <ApproachSection />
 
             <GroupHeading title="Foundations" />

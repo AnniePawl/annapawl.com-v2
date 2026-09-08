@@ -103,7 +103,7 @@
   text-transform: var(--type-display-transform);
   /* Charcoal (--neutral-900), not pure black — matches body's default
      text color. Explicit here rather than left to inherit, since at
-     least one usage (vibe-system's Section.tsx) was overriding it with
+     least one usage (sedge-design-system's Section.tsx) was overriding it with
      Tailwind's much darker `text-zinc-900`. */
   color: var(--text-primary);
 }

@@ -84,7 +84,7 @@
      point at --text-primary too instead of their own lighter neutrals.
      There's no more light/dark hierarchy between primary/secondary/muted
      text — every consumer of any of the three (Card, Badge, Modal, Form,
-     Button, and every vibe-system doc section) renders the same charcoal.
+     Button, and every sedge-design-system doc section) renders the same charcoal.
      --text-inverse is untouched (that's for text on dark/accent
      backgrounds, a different axis entirely). */
   --text-primary: var(--neutral-900);

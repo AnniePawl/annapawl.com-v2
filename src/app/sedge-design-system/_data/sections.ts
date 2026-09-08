@@ -1,6 +1,5 @@
 import type { LucideIcon } from "lucide-react";
 import {
-  LayoutGrid,
   Palette,
   CaseSensitive,
   Ruler,
@@ -43,8 +42,9 @@ export type NavSection = {
 // keep new sections declared inside the right block rather than appended
 // at the end.
 export const SECTIONS: NavSection[] = [
-  // Intro
-  { id: "overview", title: "Overview", icon: LayoutGrid, group: "Intro" },
+  // Intro — Overview used to live here as its own section; its copy and
+  // "At a glance" card now live in the Hero instead (see Hero.tsx), so
+  // Approach is the first real Intro section in the flow.
   { id: "approach", title: "Approach", icon: Brain, group: "Intro" },
 
   // Foundations

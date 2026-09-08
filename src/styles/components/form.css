@@ -207,7 +207,7 @@ textarea.input {
   color: var(--text-primary);
 }
 
-/* ---- Docs-only demo layout (vibe-system Forms section) ---- */
+/* ---- Docs-only demo layout (sedge-design-system Forms section) ---- */
 .form-demo-grid {
   display: grid;
   gap: var(--space-5);

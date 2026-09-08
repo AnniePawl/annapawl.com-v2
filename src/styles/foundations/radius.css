@@ -11,7 +11,6 @@
   --radius-pill:9999px;
 
   /* Semantic aliases */
-  --radius-pill: var(--radius-pill);
   --radius-card: var(--radius-2xl);
   --radius-button: var(--radius-lg);
   --radius-modal: var(--radius-lg);

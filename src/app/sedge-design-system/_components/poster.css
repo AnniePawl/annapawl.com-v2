@@ -1,5 +1,5 @@
 /* ---- Poster section chrome ----
-   Shared container + header for every "poster"-style vibe-system section
+   Shared container + header for every "poster"-style sedge-design-system section
    (Overview, Approach, Colors, Typography, and any future one). This is
    the "systematic" half — every poster section gets the exact same
    background-cycling, radius, padding, and icon+heading treatment, no
@@ -166,4 +166,57 @@
 .poster-principles-list {
   border-left: var(--border-md) solid var(--border-subtle);
   padding-left: var(--space-5);
+}
+
+/* ---- Hero decorative-shape float ----
+   Slow, gentle vertical drift for the hero's right-rail shape cluster —
+   ambient background movement, not something meant to be consciously
+   tracked. Three amplitude tiers (sm/md/lg) plus a rotated variant for
+   the one shape that also carries a static rotation (baking the rotation
+   into the keyframe itself, rather than combining it with a separate
+   inline `transform`, since a CSS animation on `transform` replaces the
+   whole property for its duration and would otherwise wipe out a static
+   inline rotate). Duration/delay are staggered per shape via inline
+   `animationDuration`/`animationDelay` in Hero.tsx (ordinary typed React
+   CSSProperties fields — no custom-property/TS-typing workaround
+   needed) so the cluster doesn't move as one rigid block. */
+@keyframes hero-float-sm {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes hero-float-md {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
+}
+@keyframes hero-float-lg {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-22px); }
+}
+@keyframes hero-float-rotated {
+  0%, 100% { transform: translateY(0) rotate(-18deg); }
+  50% { transform: translateY(-12px) rotate(-18deg); }
+}
+
+.hero-float-sm,
+.hero-float-md,
+.hero-float-lg,
+.hero-float-rotated {
+  animation-timing-function: var(--motion-ease-standard);
+  animation-iteration-count: infinite;
+}
+.hero-float-sm { animation-name: hero-float-sm; }
+.hero-float-md { animation-name: hero-float-md; }
+.hero-float-lg { animation-name: hero-float-lg; }
+.hero-float-rotated { animation-name: hero-float-rotated; }
+
+/* Anna's own reduced-motion convention (see the embroidery marquee) —
+   ambient decorative animation is exactly the kind of motion this is
+   meant to catch. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-float-sm,
+  .hero-float-md,
+  .hero-float-lg,
+  .hero-float-rotated {
+    animation: none;
+  }
 }

@@ -3,7 +3,7 @@
 @import "../styles/index.css";
 @import "../styles/foundations/color.css";
 
-/* `no-scrollbar` was already applied to <main> in vibe-system/page.tsx but
+/* `no-scrollbar` was already applied to <main> in sedge-design-system/page.tsx but
    never actually defined anywhere — this is what makes it real. Using
    Tailwind v4's @utility directive (rather than a plain class) so it's a
    first-class utility: sits in the utilities layer, composes with variants
