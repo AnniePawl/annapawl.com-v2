@@ -152,24 +152,24 @@ export default function Hero({ onExplore }: { onExplore: () => void }) {
           aria-hidden="true"
         >
           <span
-            className="hero-float-sm absolute top-16 -left-6 h-24 w-24 rounded-full bg-orange-bold"
+            className="hero-float-sm absolute top-16 -left-6 h-24 w-24 rounded-full bg-orange-soft"
             style={{ animationDuration: "6s", animationDelay: "0s" }}
           />
 
           <Shape
             variant="scallop"
-            className="hero-float-lg absolute -top-8 -right-10 h-80 w-80 text-lime-bold"
+            className="hero-float-lg absolute -top-8 -right-10 h-80 w-80 text-lime-soft"
             style={{ animationDuration: "7.5s", animationDelay: "0.4s" }}
           />
 
           <Shape
             variant="scallop"
-            className="hero-float-md absolute top-40 -left-8 h-72 w-72 text-pink-bold"
+            className="hero-float-md absolute top-40 -left-8 h-72 w-72 text-pink-soft"
             style={{ animationDuration: "6.5s", animationDelay: "1.1s" }}
           />
 
           <span
-            className="hero-float-sm absolute top-72 -right-10 h-36 w-36 bg-violet-bold"
+            className="hero-float-sm absolute top-72 -right-10 h-36 w-36 bg-violet-soft"
             style={{
               borderRadius: "100% 0 0 0",
               animationDuration: "5.5s",
@@ -179,18 +179,18 @@ export default function Hero({ onExplore }: { onExplore: () => void }) {
 
           <Shape
             variant="clover"
-            className="hero-float-md absolute right-0 bottom-20 h-52 w-52 text-blue-bold"
+            className="hero-float-md absolute right-0 bottom-20 h-52 w-52 text-blue-soft"
             style={{ animationDuration: "6.8s", animationDelay: "1.6s" }}
           />
 
           <span
-            className="hero-float-rotated absolute bottom-4 -left-4 h-56 w-20 rounded-2xl bg-yellow-bold"
+            className="hero-float-rotated absolute bottom-4 -left-4 h-56 w-20 rounded-2xl bg-yellow-soft"
             style={{ animationDuration: "5s", animationDelay: "0.3s" }}
           />
 
           <Shape
             variant="burst"
-            className="hero-float-sm absolute bottom-0 left-28 h-32 w-32 text-[var(--text-primary)]"
+            className="hero-float-sm absolute bottom-0 left-28 h-32 w-32 text-red-soft"
             style={{ animationDuration: "4.8s", animationDelay: "1.2s" }}
           />
         </div>

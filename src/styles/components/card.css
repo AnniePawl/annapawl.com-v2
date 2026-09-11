@@ -1,101 +1,224 @@
 /* ---- Card component ----
    Base surface for grouping content: cards, panels, list items.
-   Tokens come from foundations/color.css, radius.css.
+   Tokens come from foundations/color.css, radius.css, border.css.
 
-   Flat and soft on purpose: no border, no shadow, generous corner radius,
-   background is either the default surface, the quiet neutral "soft"
-   variant, or one of the brand palette's soft tones via the `tone` prop
-   (--card-bg, set inline by Card.tsx). Hover/press feedback comes from
-   darkening that same background slightly, not from elevation. */
+   Round 3, per Anna: "not happy with cards — bg white instead, soft
+   palette as border. special heading font for title, eyebrow thinner,
+   all CTAs consistent pill w/ soft border, smaller fonts." So:
+   - `.card` background is now always plain white (--bg-default),
+     regardless of tone — no more tone-tinted surface.
+   - The border is the tone's *soft* palette color directly (no more
+     color-mix-darkened border) — `--card-accent-soft`, set inline by
+     Card.tsx's `tone` prop. Without a tone, falls back to the same
+     neutral --border-subtle this component always used.
+   - CardAction is a single consistent pill style now (see further
+     down) — no more separate bare-text vs. outlined-pill variants.
+
+   Round 4, per Anna: "CTAs always bottom right, paragraph text smaller
+   still, line spacing even less" — .card/.card-content are now a flex
+   column so .card-action can pin to the bottom-right corner via
+   margin-top: auto + align-self: flex-end, and .card-body dropped one
+   more size/leading step (see its own comment below). */
 
 .card {
-  background: var(--card-bg, var(--surface));
+  background: var(--bg-default);
   color: var(--text-primary);
 
   position: relative;
   overflow: hidden;
 
   border-radius: var(--radius-card);
-  border: none;
+  /* Soft palette color as the border, not darkened — this is the ask,
+     a straightforward change from the previous color-mix'd-toward-black
+     version. */
+  border: var(--border-md) solid var(--card-accent-soft, var(--border-subtle));
   box-shadow: none;
 
   padding: var(--space-6);
 
+  /* Flex column so CardAction can be pinned to the bottom-right (see
+     .card-content/.card-action below) regardless of how much eyebrow/
+     heading/body content sits above it. Grid rows already stretch every
+     card in a row to the tallest one's height by default, which is what
+     gives this something to pin against. */
+  display: flex;
+  flex-direction: column;
+
   transition:
     background var(--motion-hover-duration) var(--motion-hover-ease),
+    border-color var(--motion-hover-duration) var(--motion-hover-ease),
     transform var(--motion-hover-duration) var(--motion-hover-ease);
 }
 
-/* Soft variant — quieter neutral surface, e.g. nested cards or secondary
-   content. `tone`, if set, still wins over this default. */
+/* Soft variant — a quiet tinted wash over the white base, for
+   nested/secondary cards. Self-contained (just tints toward white by a
+   fixed amount) so it still makes sense now that Default itself is
+   plain white rather than a full-strength pastel. */
 .card--soft {
-  background: var(--card-bg, var(--bg-subtle));
+  background: color-mix(
+    in srgb,
+    var(--card-accent-soft, var(--bg-subtle)) 20%,
+    var(--bg-default)
+  );
 }
 
-/* Interactive variant — card acts like a clickable target. No shadow to
-   lean on, so the affordance is a gentle lift plus the background
-   deepening slightly, using whatever color is actually active. */
+/* Interactive variant — card acts like a clickable target. Lifts on
+   hover; background picks up a light tint of the tone color (rather
+   than darkening toward black, which read muddy against a white base)
+   and the border deepens a touch for contrast. */
 .card--interactive {
   cursor: pointer;
 }
 
 .card--interactive:hover,
 .card--interactive[data-state="hover"] {
-  background: color-mix(in srgb, var(--card-bg, var(--surface)) 88%, black);
+  background: color-mix(in srgb, var(--card-accent-soft, var(--bg-subtle)) 12%, var(--bg-default));
+  border-color: color-mix(in srgb, var(--card-accent, var(--border-strong)) 85%, black 15%);
   transform: translateY(-2px);
 }
 
 .card--interactive:active,
 .card--interactive[data-state="pressed"] {
-  background: color-mix(in srgb, var(--card-bg, var(--surface)) 78%, black);
+  background: color-mix(in srgb, var(--card-accent-soft, var(--bg-subtle)) 18%, var(--bg-default));
+  border-color: color-mix(in srgb, var(--card-accent, var(--border-strong)) 75%, black 25%);
   transform: translateY(0);
 }
 
 .card--soft.card--interactive:hover,
 .card--soft.card--interactive[data-state="hover"] {
-  background: color-mix(in srgb, var(--card-bg, var(--bg-subtle)) 94%, black);
+  background: color-mix(
+    in srgb,
+    var(--card-accent-soft, var(--bg-subtle)) 32%,
+    var(--bg-default)
+  );
 }
 
 .card--soft.card--interactive:active,
 .card--soft.card--interactive[data-state="pressed"] {
-  background: color-mix(in srgb, var(--card-bg, var(--bg-subtle)) 88%, black);
+  background: color-mix(
+    in srgb,
+    var(--card-accent-soft, var(--bg-subtle)) 42%,
+    var(--bg-default)
+  );
 }
 
-/* Content sits above the decorative accent regardless of DOM order. */
+@media (prefers-reduced-motion: reduce) {
+  .card--interactive:hover,
+  .card--interactive[data-state="hover"],
+  .card--interactive:active,
+  .card--interactive[data-state="pressed"] {
+    transform: none;
+  }
+}
+
 .card-content {
   position: relative;
   z-index: 1;
-}
-
-/* ---- Decorative accent (Card's `accent` prop) ----
-   A Shape peeking out of the bottom-right corner, clipped by the card's
-   own rounded corner via overflow: hidden above. Muted and oversized
-   rather than a neat little icon — it's texture, not a logo. */
-.card-accent {
-  position: absolute;
-  bottom: -1.5rem;
-  right: -1.5rem;
-  width: 7rem;
-  height: 7rem;
-  color: var(--text-primary);
-  opacity: 0.15;
-  pointer-events: none;
+  /* Fills .card's full (grid-stretched) height and is itself a column,
+     so CardAction's margin-top: auto below has somewhere to push into. */
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
 }
 
 /* ---- Card sub-components ---- */
+.card-eyebrow {
+  display: block;
+  margin-bottom: var(--space-3);
+  font-size: var(--text-xs);
+  /* Thinner per Anna's ask — was --font-bold (700). */
+  font-weight: var(--font-medium);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
 .card-heading {
-  font-family: var(--font-sans);
-  font-size: var(--text-lg);
-  font-weight: var(--font-semibold);
+  /* The site's special heading typeface (Space Grotesk, set in
+     layout.tsx), not the body sans — was --font-sans, which was never
+     actually right for a "title" font here. */
+  font-family: var(--font-heading);
+  /* Smaller per Anna's ask — was --text-2xl (24px). */
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  line-height: 1.15;
   color: var(--text-primary);
   margin: 0 0 var(--space-2);
 }
 
 .card-body {
-  font-size: var(--text-sm);
-  line-height: var(--leading-relaxed);
+  /* Smaller + tighter again per Anna's second follow-up. --text-xs
+     (12px) is already the smallest size in the type scale, so this
+     steps just below it with an explicit value rather than a token —
+     worth adding a --text-2xs token if more places end up needing this.
+     Line-height dropped a step further too, --leading-normal (1.5) ->
+     --leading-snug (1.25). (Prior step down was --text-sm/1.7 ->
+     --text-xs/1.5.) */
+  font-size: 0.6875rem; /* 11px */
+  line-height: var(--leading-snug);
   color: var(--text-secondary);
   margin: 0;
+}
+
+/* ---- Card action (Card's CardAction sub-component) ----
+   Anna: "make all CTAs consistent pill button with soft border" — one
+   style now, not a bare-text vs. outlined-pill split. Border reads the
+   tone's soft color directly (matches the card's own new border
+   treatment); fill is white to match the card's white background; text
+   uses a darker mix of the tone color for a bit of color, which reads
+   fine here since it's sitting on white/near-white, not the old
+   full-strength pastel card background that caused a contrast bug. */
+.card-action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  /* Anna: "CTAs always on bottom right." auto margin-top pushes it to
+     the bottom of .card-content's column (whatever space is left above
+     it); align-self overrides the column's default stretch so it sits
+     at its own width on the right edge instead of spanning full width. */
+  margin-top: auto;
+  align-self: flex-end;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+  border: var(--border-thin) solid var(--card-accent-soft, var(--border-subtle));
+  background: var(--bg-default);
+  /* Smaller per Anna's ask — was --text-sm (14px). */
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  /* --card-accent now points at the *soft* (light pastel) token, not a
+     bold one (Card.tsx's tone prop sets both --card-accent and
+     --card-accent-soft to the same `-soft` value). A pale color mixed
+     80% into 20% black isn't dark enough for real contrast on white —
+     caught via the rendered mock, text was nearly invisible. Flipped
+     the ratio: mostly black with just a slice of the tone color, so it
+     reads as a dark, tone-tinted color instead. */
+  color: color-mix(in srgb, var(--card-accent, var(--text-primary)) 35%, black);
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    gap var(--motion-hover-duration) var(--motion-hover-ease),
+    background var(--motion-hover-duration) var(--motion-hover-ease),
+    border-color var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+.card-action:hover {
+  gap: var(--space-3);
+  background: color-mix(in srgb, var(--card-accent-soft, var(--bg-subtle)) 30%, var(--bg-default));
+  border-color: color-mix(in srgb, var(--card-accent, var(--border-subtle)) 90%, black 10%);
+}
+
+.card-action-icon {
+  /* Scaled down to match the smaller pill text. */
+  width: 0.875rem;
+  height: 0.875rem;
+  flex: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-action {
+    transition: none;
+  }
 }
 
 /* ---- Docs-only demo layout (sedge-design-system Cards section) ---- */
@@ -110,4 +233,14 @@
    on its own line. */
 .card-demo-grid--variants {
   grid-template-columns: repeat(4, 1fr);
+}
+
+/* The Examples row: a 3-up row then a 2-up row of wider cards. */
+.card-demo-grid--examples {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.card-demo-grid--examples-wide {
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: var(--space-5);
 }
