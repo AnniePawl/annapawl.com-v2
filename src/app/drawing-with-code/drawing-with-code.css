@@ -1,0 +1,662 @@
+/* ---- Drawing with Code page ----
+   Ported from the old annapawl.com repo's "dwc" (Drawing With Code) page —
+   a CSS-art teaching page with a grid of pure-CSS shapes and a live
+   HTML/CSS practice editor. The heading + shapes grid below are reverted
+   to the ORIGINAL page's exact design (hardcoded hex colors, original
+   pixel sizes/breakpoints, Tailwind-default heading type) per Anna's
+   request — she wants that part pixel-for-pixel like v1. Everything past
+   the shapes grid (prose, editor) still uses this site's own design
+   tokens (foundations/) as originally restyled. The original palette is
+   also kept as a standalone reference in claude/project-status.md. */
+
+.dwc-page {
+  background: var(--bg-subtle);
+}
+
+/* ---- Shapes grid (original design, reverted) ----
+   Ported verbatim from the old shapegrid.scss: same 12 hardcoded box
+   colors, same 4-tier responsive box sizing (100/125/150/175px at the old
+   page's own breakpoints — 536px/642px/999px — rather than this site's
+   640/1024 convention), same uniform dark hover-invert. */
+
+.dwc-shapes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+
+  width: 100%;
+  max-width: 56rem;
+  margin-inline: auto;
+}
+
+@media (min-width: 1024px) {
+  .dwc-shapes-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+.dwc-shapebox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100px;
+  height: 100px;
+  margin-inline: auto;
+
+  transition: background-color 150ms ease;
+}
+
+@media (min-width: 536px) {
+  .dwc-shapebox {
+    width: 125px;
+    height: 125px;
+  }
+}
+
+@media (min-width: 642px) {
+  .dwc-shapebox {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (min-width: 999px) {
+  .dwc-shapebox {
+    width: 175px;
+    height: 175px;
+  }
+}
+
+.dwc-shapebox:hover {
+  background-color: #292929;
+}
+
+.dwc-shapebox-1 {
+  background-color: #ffdbe0;
+}
+.dwc-shapebox-2 {
+  background-color: #cafcd2;
+}
+.dwc-shapebox-3 {
+  background-color: #9ea5ff;
+}
+.dwc-shapebox-4 {
+  background-color: #ffe984;
+}
+.dwc-shapebox-5 {
+  background-color: #ff9191;
+}
+.dwc-shapebox-6 {
+  background-color: #ccf3ff;
+}
+.dwc-shapebox-7 {
+  background-color: #e7c9ff;
+}
+.dwc-shapebox-8 {
+  background-color: #8fc1ff;
+}
+.dwc-shapebox-9 {
+  background-color: #e5ffb5;
+}
+.dwc-shapebox-10 {
+  background-color: #4791ff;
+}
+.dwc-shapebox-11 {
+  background-color: #fffbab;
+}
+.dwc-shapebox-12 {
+  background-color: #ffb88c;
+}
+
+/* ---- Shape geometry (original design, reverted) ----
+   Pure CSS/border tricks, ported verbatim from css-shapes.scss, hardcoded
+   colors and all. Octagon's diagonal corner wedges use the fixed lavender
+   #e7c9ff the original hardcoded ($octagon-border) — it happens to equal
+   shapebox-7's own background, which is what makes the corner-cut
+   illusion read correctly: the wedges need to match whatever's behind the
+   shape to look "cut away" rather than like another opaque triangle. */
+
+.dwc-shape--circle {
+  width: 65%;
+  height: 65%;
+  border-radius: 50%;
+  background: #56a7fc;
+}
+
+.dwc-shape--square {
+  width: 60%;
+  height: 60%;
+  background: #ffb1cf;
+}
+
+.dwc-shape--triangle {
+  width: 0;
+  height: 0;
+  border: 3em solid transparent;
+  border-bottom: 5em solid #ffe984;
+  transform: scale(0.75) translateY(-25px);
+}
+
+@media (min-width: 536px) {
+  .dwc-shape--triangle {
+    transform: scale(0.85) translateY(-20px);
+  }
+}
+
+@media (min-width: 642px) {
+  .dwc-shape--triangle {
+    transform: scale(1) translateY(-20px);
+  }
+}
+
+@media (min-width: 999px) {
+  .dwc-shape--triangle {
+    transform: scale(1.25) translateY(-23px);
+  }
+}
+
+.dwc-shape--pentagon {
+  position: relative;
+  width: 54px;
+  box-sizing: content-box;
+  background: transparent;
+  border-style: solid;
+  border-width: 51px 18px 0;
+  border-color: #c39eff transparent;
+  transform: scale(0.8) translateY(18px);
+}
+
+@media (min-width: 536px) {
+  .dwc-shape--pentagon {
+    transform: scale(0.9) translateY(18px);
+  }
+}
+
+@media (min-width: 642px) {
+  .dwc-shape--pentagon {
+    transform: scale(1.1) translateY(18px);
+  }
+}
+
+@media (min-width: 999px) {
+  .dwc-shape--pentagon {
+    transform: scale(1.3) translateY(18px);
+  }
+}
+
+.dwc-shape--pentagon::before {
+  content: "";
+  position: absolute;
+  top: -85px;
+  left: -18px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 45px 35px;
+  border-color: transparent transparent #c39eff;
+}
+
+.dwc-shape--oval {
+  width: 50%;
+  height: 70%;
+  border-radius: 50%;
+  background: #d1fff8;
+}
+
+.dwc-shape--rectangle {
+  width: 45%;
+  height: 65%;
+  background: #ff9666;
+}
+
+.dwc-shape--trapezoid {
+  width: 125px;
+  height: 0;
+  background: transparent;
+  border-bottom: 65px solid #536fb8;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  transform: scale(0.7);
+}
+
+@media (min-width: 536px) {
+  .dwc-shape--trapezoid {
+    border-bottom: 80px solid #536fb8;
+    transform: scale(0.7);
+  }
+}
+
+@media (min-width: 642px) {
+  .dwc-shape--trapezoid {
+    transform: scale(0.8);
+  }
+}
+
+@media (min-width: 999px) {
+  .dwc-shape--trapezoid {
+    transform: scale(1);
+  }
+}
+
+.dwc-shape--parallelogram {
+  width: 53%;
+  height: 53%;
+  background: #e9ffab;
+  transform: skew(20deg);
+}
+
+.dwc-shape--hexagon {
+  position: relative;
+  width: 104px;
+  height: 62px;
+  margin-top: 30px;
+  background: #ffc2ef;
+  transform: scale(0.62) translateY(-22px);
+}
+
+@media (min-width: 536px) {
+  .dwc-shape--hexagon {
+    transform: scale(0.7) translateY(-18px);
+  }
+}
+
+@media (min-width: 642px) {
+  .dwc-shape--hexagon {
+    transform: scale(0.85) translateY(-13px);
+  }
+}
+
+@media (min-width: 999px) {
+  .dwc-shape--hexagon {
+    transform: translateY(-10px);
+  }
+}
+
+.dwc-shape--hexagon::before {
+  content: " ";
+  position: absolute;
+  top: -30px;
+  width: 0;
+  height: 0;
+  border-bottom: 30.5px solid #ffc2ef;
+  border-left: 52px solid transparent;
+  border-right: 52px solid transparent;
+}
+
+.dwc-shape--hexagon::after {
+  content: "";
+  position: absolute;
+  bottom: -29.5px;
+  width: 0;
+  border-top: 30px solid #ffc2ef;
+  border-left: 52px solid transparent;
+  border-right: 52px solid transparent;
+}
+
+.dwc-shape--octagon {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  background: #ff8080;
+  transform: scale(0.7);
+}
+
+@media (min-width: 536px) {
+  .dwc-shape--octagon {
+    transform: scale(0.8);
+  }
+}
+
+@media (min-width: 642px) {
+  .dwc-shape--octagon {
+    transform: scale(0.92);
+  }
+}
+
+@media (min-width: 999px) {
+  .dwc-shape--octagon {
+    transform: scale(1.1);
+  }
+}
+
+.dwc-shape--octagon::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 0;
+  border-bottom: 29px solid #ff8080;
+  border-left: 29px solid #e7c9ff;
+  border-right: 29px solid #e7c9ff;
+}
+
+.dwc-shape--octagon::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100px;
+  height: 0;
+  border-top: 29px solid #ff8080;
+  border-left: 29px solid #e7c9ff;
+  border-right: 29px solid #e7c9ff;
+}
+
+.dwc-shape--star {
+  position: relative;
+  display: block;
+  width: 0;
+  height: 0;
+  margin: 50px 0;
+  background: transparent;
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+  border-bottom: 70px solid #ed79ce;
+  transform: rotate(35deg) scale(0.4);
+}
+
+@media (min-width: 536px) {
+  .dwc-shape--star {
+    transform: rotate(35deg) scale(0.48);
+  }
+}
+
+@media (min-width: 642px) {
+  .dwc-shape--star {
+    transform: rotate(35deg) scale(0.55);
+  }
+}
+
+@media (min-width: 999px) {
+  .dwc-shape--star {
+    transform: rotate(35deg) scale(0.65);
+  }
+}
+
+.dwc-shape--star::before {
+  content: "";
+  position: absolute;
+  display: block;
+  top: -45px;
+  left: -65px;
+  width: 0;
+  height: 0;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-bottom: 80px solid #ed79ce;
+  transform: rotate(-35deg);
+}
+
+.dwc-shape--star::after {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 3px;
+  left: -105px;
+  width: 0;
+  height: 0;
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+  border-bottom: 70px solid #ed79ce;
+  transform: rotate(-70deg);
+}
+
+.dwc-shape--heart {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 0 10px;
+  background: #a6ffbe;
+  transform: translateY(10px) rotate(-45deg) scale(1.35);
+}
+
+@media (min-width: 536px) {
+  .dwc-shape--heart {
+    transform: translateY(10px) rotate(-45deg) scale(1.55);
+  }
+}
+
+@media (min-width: 642px) {
+  .dwc-shape--heart {
+    transform: translateY(10px) rotate(-45deg) scale(1.9);
+  }
+}
+
+@media (min-width: 999px) {
+  .dwc-shape--heart {
+    transform: translateY(10px) rotate(-45deg) scale(2.15);
+  }
+}
+
+.dwc-shape--heart::before,
+.dwc-shape--heart::after {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #a6ffbe;
+}
+
+.dwc-shape--heart::before {
+  top: -17px;
+  left: 0;
+}
+
+.dwc-shape--heart::after {
+  top: 0;
+  left: 17px;
+}
+
+/* ---- Shape hover states (original design, reverted) ----
+   Original hovered EVERY shapebox to a near-black background, and
+   recolored each shape (and, for the border-trick shapes, their
+   pseudo-element wedges) to near-white — except octagon's corner wedges,
+   which flip to the box's own hover background instead, preserving the
+   "wedges match what's behind" trick even inverted. */
+
+.dwc-shapebox:hover .dwc-shape--circle,
+.dwc-shapebox:hover .dwc-shape--square,
+.dwc-shapebox:hover .dwc-shape--oval,
+.dwc-shapebox:hover .dwc-shape--parallelogram,
+.dwc-shapebox:hover .dwc-shape--rectangle {
+  background: #fcfcfc;
+}
+
+.dwc-shapebox:hover .dwc-shape--triangle {
+  border-bottom-color: #fcfcfc;
+}
+
+.dwc-shapebox:hover .dwc-shape--pentagon {
+  border-color: #fcfcfc transparent;
+}
+
+.dwc-shapebox:hover .dwc-shape--pentagon::before {
+  border-color: transparent transparent #fcfcfc;
+}
+
+.dwc-shapebox:hover .dwc-shape--trapezoid {
+  border-bottom-color: #fcfcfc;
+}
+
+.dwc-shapebox:hover .dwc-shape--octagon {
+  background: #fcfcfc;
+}
+
+.dwc-shapebox:hover .dwc-shape--octagon::before {
+  border-bottom-color: #fcfcfc;
+  border-left-color: #292929;
+  border-right-color: #292929;
+}
+
+.dwc-shapebox:hover .dwc-shape--octagon::after {
+  border-top-color: #fcfcfc;
+  border-left-color: #292929;
+  border-right-color: #292929;
+}
+
+.dwc-shapebox:hover .dwc-shape--hexagon {
+  background: #fcfcfc;
+}
+
+.dwc-shapebox:hover .dwc-shape--hexagon::before {
+  border-bottom-color: #fcfcfc;
+}
+
+.dwc-shapebox:hover .dwc-shape--hexagon::after {
+  border-top-color: #fcfcfc;
+}
+
+.dwc-shapebox:hover .dwc-shape--star,
+.dwc-shapebox:hover .dwc-shape--star::before,
+.dwc-shapebox:hover .dwc-shape--star::after {
+  border-bottom-color: #fcfcfc;
+}
+
+.dwc-shapebox:hover .dwc-shape--heart,
+.dwc-shapebox:hover .dwc-shape--heart::before,
+.dwc-shapebox:hover .dwc-shape--heart::after {
+  background: #fcfcfc;
+}
+
+/* ---- Prose sections ---- */
+
+/* Same eyebrow convention as .card-eyebrow/.field-label/.tooltip-panel-label
+   elsewhere in this design system, used for this page's subheadings
+   instead of the old page's uppercase+tracked-but-not-tokenized Tailwind
+   classes. */
+.dwc-eyebrow {
+  display: block;
+  margin-bottom: var(--space-2);
+
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  color: var(--indigo-bold);
+}
+
+.dwc-prose {
+  width: 100%;
+  max-width: 56rem;
+  margin-inline: auto;
+}
+
+.dwc-prose p {
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+}
+
+@media (min-width: 768px) {
+  .dwc-prose p {
+    font-size: var(--text-base);
+  }
+}
+
+.dwc-prose-sub {
+  margin-left: var(--space-5);
+}
+
+@media (min-width: 768px) {
+  .dwc-prose-sub {
+    margin-left: var(--space-8);
+  }
+}
+
+.dwc-code-figure {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--neutral-900);
+}
+
+.dwc-code-figure pre {
+  margin: 0;
+  padding: var(--space-4);
+  overflow-x: auto;
+  font-family: monospace;
+  font-size: var(--text-xs);
+  line-height: var(--leading-relaxed);
+  color: var(--indigo-soft);
+}
+
+@media (min-width: 768px) {
+  .dwc-code-figure pre {
+    font-size: var(--text-sm);
+  }
+}
+
+/* ---- Practice editor ---- */
+
+.dwc-practice {
+  width: 100%;
+  max-width: 56rem;
+  margin-inline: auto;
+
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.dwc-practice-panes {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .dwc-practice-panes {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.dwc-editor {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+@media (min-width: 640px) {
+  .dwc-editor:first-child {
+    border-right: 1px solid var(--border-subtle);
+    border-bottom: none;
+  }
+}
+
+.dwc-editor-title {
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  padding: var(--space-2) var(--space-3);
+
+  background: var(--indigo-soft);
+  color: var(--text-primary);
+}
+
+.dwc-editor-codemirror {
+  font-size: 13px;
+}
+
+.dwc-practice-preview {
+  display: block;
+  width: 100%;
+  height: 220px;
+  border: none;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-default);
+}
+
+.dwc-divider {
+  width: 100%;
+  max-width: 56rem;
+  margin: var(--space-8) auto;
+  height: 2px;
+  background: var(--border-subtle);
+}
