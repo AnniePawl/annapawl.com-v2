@@ -1,6 +1,8 @@
+import Link from "next/link";
 import type { NavSection, SectionGroup } from "../_data/sections";
 import { cx } from "../../../lib/cx";
-import Shape from "../../../components/ui/Shape";
+import { CLOVER_LEAF_PATHS } from "../../../components/ui/Shape";
+import "./logo.css";
 
 // Top nav for the hero — the reference this was built from uses its own
 // nav bar (logo + Intro/Foundations/Components pills) instead of a
@@ -21,29 +23,45 @@ export default function HeroNav({
   const activeGroup = sections.find((s) => s.id === activeId)?.group;
 
   return (
-    <header className="sticky top-0 z-20 border-b border-[color-mix(in_srgb,var(--text-primary)_10%,transparent)] bg-[#fffcf7]/95 backdrop-blur-sm">
+    <header className="sticky top-0 z-20 border-b border-[color-mix(in_srgb,var(--text-primary)_10%,transparent)] bg-[#fffcf8] backdrop-blur-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4">
-        <div className="flex items-center gap-3">
-          {/* Logo mark — a single orange "bloom," swapped in for the
-              old Rubik's-cube-style 3x3 facelet grid. First pass used
-              `scallop`, but that reads more like a rounded cog/cloud
-              than an actual flower — swapped to `bloom`, a new Shape
-              variant (see Shape.tsx) built specifically as a 6-petal
-              flower silhouette, so it actually reads as a bloom rather
-              than a generic soft shape. Reusing a Shape primitive here
-              (rather than a one-off SVG) keeps the logo in the same
-              visual language as the hero's own shape cluster. Solid
-              `-bold` orange, not `-soft`, so it reads as a mark rather
-              than a soft UI fill at this small a size. Sized a touch
-              bigger than the old grid mark (h-7 → h-8) since 6 petals
-              need a little more room to read clearly at logo scale. */}
-          <Shape
-            variant="bloom"
-            className="h-8 w-8 text-orange-bold"
+        {/* Logo — links home (no prior href existed on this mark; "/"
+            is the standard logo-to-home convention). Interactive: on
+            hover/keyboard-focus the mark rotates ~8deg + scales to
+            1.04 and the upper-right (NE) petal swaps from emerald to
+            lilac, everything else stays put -- see logo.css for the
+            transition/reduced-motion rules. Renders the four petal
+            paths individually (CLOVER_LEAF_PATHS, shared with
+            Shape.tsx's `clover` variant) instead of via <Shape>,
+            since each petal needs its own class to be recolored
+            independently; decorative clover instances elsewhere
+            (Hero.tsx, ShapeExamples.tsx) keep using
+            <Shape variant="clover" /> untouched and stay
+            noninteractive. `.focus-ring` gives it the same visible
+            keyboard-focus indicator as the rest of the site. */}
+        <Link
+          href="/"
+          className="sedge-logo-link focus-ring flex items-center gap-3"
+        >
+          <svg
+            viewBox="0 0 200 200"
+            className="sedge-logo-mark h-8 w-8"
             aria-hidden="true"
-          />
+          >
+            {(["NE", "SE", "SW", "NW"] as const).map((leaf) => (
+              <path
+                key={leaf}
+                className={
+                  leaf === "NE"
+                    ? "sedge-logo-leaf sedge-logo-leaf--ne"
+                    : "sedge-logo-leaf"
+                }
+                d={CLOVER_LEAF_PATHS[leaf]}
+              />
+            ))}
+          </svg>
           <span className="flex items-baseline gap-2">
-            <span className="h-display text-xl">Sedge</span>
+            <span className="text-xl">Sedge</span>
             <span aria-hidden="true" className="text-[var(--border-subtle)]">
               |
             </span>
@@ -51,7 +69,7 @@ export default function HeroNav({
               Design System
             </span>
           </span>
-        </div>
+        </Link>
 
         <nav
           aria-label="Section groups"
@@ -77,7 +95,7 @@ export default function HeroNav({
                   "rounded-[var(--radius-pill)] px-4 py-2 text-sm font-medium transition",
                   isActive
                     ? "bg-indigo-soft text-[var(--text-primary)]"
-                    : "text-[var(--text-secondary)] hover:bg-indigo-soft hover:text-[var(--text-primary)]"
+                    : "text-[var(--text-secondary)] hover:bg-indigo-soft/30 hover:text-[var(--text-primary)]"
                 )}
               >
                 {group}

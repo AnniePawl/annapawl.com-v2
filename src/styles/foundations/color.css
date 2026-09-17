@@ -2,109 +2,165 @@
   /* =========================
      Neutrals
   ========================== */
-  --neutral-0: #ffffff;
-  --neutral-50: #fafafa;
-  --neutral-100: #f4f4f5;
-  --neutral-200: #e4e4e7;
-  --neutral-500: #71717a;
-  --neutral-700: #3f3f46;
-  --neutral-900: #2a2a2e; /* charcoal, not pure black — was #171719 */
-  --neutral-1000: #09090b;
 
+  --neutral-0: #FFFFFF;
+  --neutral-50: #FAFAFA;
+  --neutral-100: #F4F4F5;
+  --neutral-200: #E4E4E7;
+  --neutral-500: #71717A;
+  --neutral-700: #3F3F46;
+  --neutral-900: #2A2A2E;
+  --neutral-1000: #09090B;
+
+  --cream: #FFFCF8;
+  --charcoal: var(--neutral-900);
 
   /* =========================
-    Brand Palette
+     Warm Colors
+     Soft: pale backgrounds
+     Bold: stronger accents
   ========================== */
+
   /* Pink */
-  --pink-soft: #ffd7e0;
-  --pink-bold: #ff63b1;
+  --pink-soft: #FFD0EA;
+  --pink-bold: #F472B6;
 
   /* Red */
-  --red-soft: #ff8e8e;
-  --red-bold: #ff5252;
+  --red-soft: #FF9999;
+  --red-bold: #F05454;
+
+  /* Coral */
+  --coral-soft: #FFBFA6;
+  --coral-bold: #FF7954;
 
   /* Orange */
-  --orange-soft: #ffd190;
-  --orange-bold: #ff9645;
+  --orange-soft: #FFC88E;
+  --orange-bold: #FFA34D;
 
-  /* Yellow */
-  --yellow-soft: #fffb89;
-  --yellow-bold: #ffe46b;
+  /* Lemon */
+  --lemon-soft: #FFF0A2;
+  --lemon-bold: #FFE669;
+
+  /* Amber */
+  --amber-soft: #FFDF8E;
+  --amber-bold: #F3C144;
+
+  /* =========================
+     Greens
+  ========================== */
 
   /* Lime */
-  --lime-soft: #d9ffa7;
-  --lime-bold: #a5ef36;
+  --lime-soft: #E1FFA4;
+  --lime-bold: #B0D964;
+
+  /* Sage */
+  --sage-soft: #ABD3AE;
+  --sage-bold: #6EA472;
 
   /* Mint */
-  --mint-soft: #b8ffda;
-  --mint-bold: #17db9a;
+  --mint-soft: #B5FFDB;
+  --mint-bold: #5CE1B1;
 
-  /* Green */
-  --green-soft: #b0ffba;
-  --green-bold: #3cd675;
+  /* Emerald — logo color */
+  --emerald-soft: #479C6D;
+  --emerald-bold: #2D6144;
+
+  /* =========================
+     Blues + Purple
+  ========================== */
 
   /* Sky */
-  --sky-soft: #caecff;
-  --sky-bold: #54c9ff;
+  --sky-soft: #AFE3FF;
+  --sky-bold: #67CAF8;
 
   /* Blue */
-  --blue-soft: #afd2ff;
-  --blue-bold: #4c81f4;
+  --blue-soft: #98C7FD;
+  --blue-bold: #5088EA;
+
+  /* Steel */
+  --steel-soft: #9DADCB;
+  --steel-bold: #5C77AA;
+
+  /* Lilac */
+  --lilac-soft: #D7BAFF;
+  --lilac-bold: #BB73FF;
 
   /* Indigo */
-  --indigo-soft: #bcc2ff;
-  --indigo-bold: #8983ff;
+  --indigo-soft: #B8B5FF;
+  --indigo-bold: #8B87F5;
 
-  /* Violet */
-  --violet-soft: #dac5ff;
-  --violet-bold: #996dff;
+  /* Plum */
+  --plum-soft: #D89FD7;
+  --plum-bold: #A855A7;
 
-  /* Neutral — not one of the 11 brand hues, but follows the same
-     -soft/-bold pairing so it works as a `tone` value anywhere a brand
-     hue does (e.g. Modal's `tone` prop) without special-casing. A quiet
-     default for general-purpose use rather than a color statement. */
+  /* =========================
+     Earth Colors
+  ========================== */
+
+  /* Sand */
+  --sand-soft: #F4DFC6;
+  --sand-bold: #D6B894;
+
+  /* Clay */
+  --clay-soft: #F2BAA2;
+  --clay-bold: #D5764D;
+
+  /* Taupe */
+  --taupe-soft: #C3B6AD;
+  --taupe-bold: #9D8C81;
+
+  /* Neutral component tone */
   --neutral-soft: var(--neutral-50);
   --neutral-bold: var(--neutral-700);
 
-
   /* =========================
-     Semantic tokens (UI usage)
+     Backgrounds + Surfaces
   ========================== */
 
-  /* Background Colors */
-  --bg-default: var(--neutral-0);
+  --bg-default: var(--cream);
   --bg-subtle: var(--neutral-50);
-  --surface: var(--lime-bold); 
-  /* ^cards, modals, menus, etc */
+  --surface: var(--neutral-0);
 
-  /* Text Colors
-     Anna loved the charcoal (--text-primary) used by the typography
-     section's type-scale samples and asked for all text and headings
-     sitewide to match it — so --text-secondary and --text-muted now
-     point at --text-primary too instead of their own lighter neutrals.
-     There's no more light/dark hierarchy between primary/secondary/muted
-     text — every consumer of any of the three (Card, Badge, Modal, Form,
-     Button, and every sedge-design-system doc section) renders the same charcoal.
-     --text-inverse is untouched (that's for text on dark/accent
-     backgrounds, a different axis entirely). */
-  --text-primary: var(--neutral-900);
-  --text-secondary: var(--text-primary);
+  /* =========================
+     Text
+  ========================== */
+
+  --text-primary: var(--charcoal);
+  --text-secondary: var(--charcoal);
+  --text-muted: var(--charcoal);
+
+  /* For suitably dark backgrounds */
   --text-inverse: var(--neutral-0);
-  --text-muted: var(--text-primary);
 
-  /* Border Colors */
+  /* =========================
+     Borders
+  ========================== */
+
   --border-subtle: var(--neutral-200);
   --border-strong: var(--neutral-700);
 
-  /* Default accent for interactive elements */
+  /* =========================
+     Interactive Accent
+  ========================== */
+
   --accent: var(--blue-bold);
   --accent-soft: var(--blue-soft);
 
-  /* Hover / active are derived from --accent so they stay in sync
-     if the accent color ever changes. */
-  --accent-hover: color-mix(in srgb, var(--accent) 85%, black);
-  --accent-active: color-mix(in srgb, var(--accent) 70%, black);
+  --accent-hover: color-mix(
+    in srgb,
+    var(--accent) 85%,
+    black
+  );
 
-  /* Focus ring */
+  --accent-active: color-mix(
+    in srgb,
+    var(--accent) 70%,
+    black
+  );
+
+  /* =========================
+     Focus
+  ========================== */
+
   --focus-ring-color: var(--accent);
 }

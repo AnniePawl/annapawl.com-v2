@@ -14,17 +14,17 @@ const SCALE: {
 }[] = [
   {
     className: "h-display",
-    metaLines: ["Space Grotesk", "80px", "700", "-0.03em tracking"],
+    metaLines: ["Inter", "80px", "700", "0.05em tracking"],
     sample: SAMPLE_LINE,
   },
   {
     className: "h1",
-    metaLines: ["Space Grotesk", "60px", "700", "-0.03em tracking"],
+    metaLines: ["Inter", "60px", "700", "-0.03em tracking"],
     sample: SAMPLE_LINE,
   },
   {
     className: "h2",
-    metaLines: ["Space Grotesk", "36px", "700", "-0.02em tracking"],
+    metaLines: ["Inter", "36px", "700", "-0.02em tracking"],
     sample: SAMPLE_LINE,
   },
   {
@@ -73,9 +73,9 @@ export default function TypographyExamples() {
         next week.
       </p>
       <p>
-        Right now that&rsquo;s Space Grotesk for headings, paired with Inter for
-        body copy, which stays quiet and does the reading work. Still
-        testing — no promises this sticks.
+        Right now that&rsquo;s Inter, everywhere — headings and body copy
+        alike. A serif Display detour (Bodoni Moda) got a try and didn&rsquo;t
+        stick — back to one consistent typeface across the whole scale.
       </p>
 
       <hr className="poster-divider" />
@@ -111,15 +111,9 @@ export default function TypographyExamples() {
       <div className="typo-grid-2">
         <div>
           <span className="poster-label">Typeface</span>
-          <p className="typo-typeface-name">Space Grotesk</p>
+          <p className="typo-typeface-name">Inter</p>
           <span className="typo-typeface-caption">
-            — headings only (Display, H1, H2).
-          </span>
-          <p className="typo-typeface-name" style={{ marginTop: "var(--space-2)" }}>
-            Inter
-          </p>
-          <span className="typo-typeface-caption">
-            — everything else.
+            — used everywhere, headings and body alike.
             <Squiggle />
           </span>
         </div>

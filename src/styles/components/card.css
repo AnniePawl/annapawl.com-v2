@@ -135,9 +135,8 @@
 }
 
 .card-heading {
-  /* The site's special heading typeface (Space Grotesk, set in
-     layout.tsx), not the body sans — was --font-sans, which was never
-     actually right for a "title" font here. */
+  /* --font-heading — aliased to Inter (--font-sans) in typography.css,
+     same font the body uses, not a separate display typeface anymore. */
   font-family: var(--font-heading);
   /* Smaller per Anna's ask — was --text-2xl (24px). */
   font-size: var(--text-xl);

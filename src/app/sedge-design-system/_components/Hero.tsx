@@ -9,167 +9,153 @@ import {
 import Shape from "../../../components/ui/Shape";
 import "./poster.css";
 
-// Same 5 items/copy as before — see _data/sections.ts for why this lives
-// here instead of a standalone Overview section. Styling changed (see
-// below) but the words didn't.
 const AT_A_GLANCE = [
   {
     icon: Target,
     title: "Thoughtful + precise",
-    caption: "details with intention",
+    caption: "Details with intention",
   },
   {
     icon: Palette,
     title: "Colorful by design",
-    caption: "expansive on purpose",
+    caption: "Expansive on purpose",
   },
   {
     icon: SlidersHorizontal,
     title: "Flexible foundation",
-    caption: "built to adapt + evolve",
+    caption: "Built to adapt + evolve",
   },
   {
     icon: Wand2,
     title: "Room to play",
-    caption: "experiment, noodle, learn",
+    caption: "Experiment, noodle, learn",
   },
   {
     icon: Heart,
     title: "Delight in the details",
-    caption: "function meets personality",
+    caption: "Function meets personality",
   },
 ];
 
-// Soft badge color per "At a glance" item — the soft/bold pairing this
-// site already uses everywhere (soft = functional UI fill, bold =
-// expressive accent) is what keeps these icon badges legible next to the
-// bold decorative cluster on the right, rather than competing with it.
 const BADGE_COLORS = [
   "var(--pink-soft)",
   "var(--mint-soft)",
   "var(--sky-soft)",
-  "var(--yellow-soft)",
-  "var(--violet-soft)",
+  "var(--lemon-soft)",
+  "var(--lilac-soft)",
 ];
 
 /**
- * The page's hero — sits above the sidebar/docs app and fills the entire
- * first screen: `min-h-[calc(100dvh-4.5rem)]` (4.5rem being HeroNav's own
- * height) plus `flex flex-col justify-center` means the content block is
- * vertically centered in whatever's left of the viewport below the sticky
- * nav.
- *
- * Layout: a two-track `lg:grid-cols-[3fr_1.5fr]` template — left column
- * (eyebrow, title, the original copy in full, CTA, then "At a glance" as
- * a row of soft-badged icons) gets 3fr, the decorative shape cluster on
- * the right gets 1.5fr — roughly 33% of the row now, widened from an
- * even 1-of-4-columns (25%) split because the shapes felt cramped in
- * that narrower rail after the "way bigger" round. Plain shapes only on
- * the right, no doodle arrows or hand-written notes layered on top of
- * them. Using an explicit two-value grid template (rather than
- * `grid-cols-N` + `col-span-*`) means each child's column is just its
- * position in source order — no span classes needed on either child.
- *
- * Typography hierarchy (per Anna's reference screenshot): eyebrow stays
- * small/tracked, "Sedge" itself is the single dominant element — no
- * second "Design System" line underneath it anymore (that already lives
- * in the eyebrow above), sized way up and set to the heaviest weight
- * Tailwind exposes (`font-black`/900) with tight negative tracking so it
- * reads as a bold wordmark rather than a heading. Note: Space Grotesk's
- * variable-font weight axis on Google Fonts tops out at 700 (see
- * layout.tsx's comment), so 900 clamps to that same 700 instance under
- * the hood — the extra visual weight actually comes from the much larger
- * size + tightened tracking, not from a heavier face that doesn't exist.
- * First paragraph is bumped from text-sm to text-base (slightly bigger
- * than the second paragraph) to step the hierarchy down gradually rather
- * than both paragraphs reading as one undifferentiated block.
+ * Latest refinement pass, per Anna's own "latest mockup" screenshots
+ * (no eyebrow, bigger overlapping shape cluster, pill-shaped icon
+ * badges, no "At a Glance" label): eyebrow line removed entirely —
+ * "Sedge" is the first element in the column now, no top margin needed
+ * beyond the column's own `pt-5`. Shape cluster grown substantially
+ * (container `h-[360px]` -> `h-[420px]`, every shape bigger and
+ * repositioned to overlap its neighbors more) so it reads as one
+ * cohesive cluster with visual weight closer to the text column, rather
+ * than several small floating pieces — still the same 7 shapes/colors/
+ * variants/float animations as every round before this one, nothing
+ * added. "At a Glance" eyebrow label is gone too (per Anna's explicit
+ * "do not restore" — an earlier round had added it, this one drops it
+ * for good), and the icon badges are now horizontal pills (`w-24 h-10`,
+ * `rounded-full` on a wider-than-tall box) instead of plain circles.
  */
 export default function Hero({ onExplore }: { onExplore: () => void }) {
   return (
-    <section className="relative mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-7xl flex-col justify-center overflow-hidden px-6 py-10">
+    <section className="pt-12 relative mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-7xl flex-col justify-center overflow-hidden px-6 py-6">
       <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[3fr_1.5fr]">
         <div className="pt-5">
-          <span className="poster-label text-stone-400">A Living Design System · EST 2026</span>
-          <h1 className="h-display mt-3  text-[clamp(4rem,9vw,8rem)] font-black leading-[0.85] tracking-[0em]">
+          <h1 className="h-display text-[clamp(3.75rem,8vw,7rem)] font-[680] leading-[0.9] tracking-[-0.02em]">
             Sedge
           </h1>
-          <p className="mt-10 max-w-2xl !text-xl leading-normal text-[var(--text-secondary)]">
-            A living record of the UI decisions
-            behind my digital garden and a playground for developing a
-            visual language that feels distinctly <b>me</b>.
+
+          <p className="mt-8 max-w-2xl text-[22px] leading-snug text-[var(--text-primary)] md:text-2xl">
+            A living record of the UI decisions behind my digital garden and
+            a playground for developing a visual language that feels
+            distinctly <b>me</b>.
           </p>
-          <p className="mt-3 max-w-2xl text-base leading-normal text-stone-500">
-          As a frontend developer with a deep love of design, I’ve become increasingly curious — and sometimes obsessive — about how things look, feel, and respond. Sedge gives structure to that curiosity, with plenty of room for color, weird little details, and moments of delight. Like any garden, it’s meant to be tended to and grown over time — a place to experiment, break a few rules, and evolve as I learn, noodle, and refine my taste. 🌱
+
+          <p className="mt-5 max-w-xl text-sm leading-relaxed text-stone-500">
+            As a frontend developer with a deep love of design, I'm always exploring the space 
+            between structure and experimentation. Sedge is where those ideas take shape - thoughtful at its core, playful around the
+            edges, and designed to evolve as I do. 
           </p>
-         
 
           <button
             type="button"
             onClick={onExplore}
-            className="mt-6 inline-flex items-center gap-2 rounded-[var(--radius-pill)] bg-indigo-soft px-6 py-3 text-xs font-bold tracking-wide text-[var(--text-primary)] uppercase transition hover:brightness-95"
+            className="group mt-8 inline-flex items-center gap-2 rounded-[var(--radius-pill)] bg-indigo-soft px-6 py-3 text-xs font-bold tracking-wide text-[var(--text-primary)] uppercase transition hover:brightness-95"
           >
             Explore the system
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            <ArrowRight className="h-4 w-4 transition-transform duration-200 ease-out
+      group-hover:translate-x-1.5" aria-hidden="true" />
           </button>
-
-          <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-3 lg:grid-cols-5">
-            {AT_A_GLANCE.map(({ icon: Icon, title, caption }, i) => (
-              <div key={title} className="flex flex-col items-start gap-2">
-                <span
-                  className="flex h-10 w-10 items-center justify-center rounded-full"
-                  style={{ background: BADGE_COLORS[i % BADGE_COLORS.length] }}
-                >
-                  <Icon
-                    className="h-5 w-5 text-[var(--text-primary)]"
-                    aria-hidden="true"
-                  />
-                </span>
-                <div className="text-sm font-semibold text-[var(--text-primary)]">
-                  {title}
-                </div>
-                <div className="text-xs text-[var(--text-secondary)]">
-                  {caption}
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
 
-        {/* Decorative cluster — bold-toned shapes only, no arrows/notes,
-            each with a slow ambient float (see poster.css's
-            .hero-float-* classes / @keyframes hero-float-*). Sizes/positions are
-            absolute within a fixed-height container, so this is an
-            approximation rather than a pixel match to any reference;
-            easiest lever to adjust later is the h-[*] values below.
-            Sized deliberately larger than the 1-of-4-columns rail itself
-            (~300px at max-w-7xl) per Anna's "way large" ask — shapes are
-            meant to bleed past the rail's own edges into the gap/page
-            margin; the section's own `overflow-hidden` (see the
-            <section> above) is what stops them from spilling past the
-            hero itself. */}
+        {/* Decorative cluster — refinement pass: pulled the whole
+            composition down and inward toward the text column (it was
+            bleeding ~40px above this container and ~56px past the
+            column's own right edge, which read as "too high, too far
+            right"). Each shape's inset was retuned individually rather
+            than wrapping the group in one transform, so a few pieces
+            could also get their own optical correction:
+             - the lime scallop (now the one clearly dominant shape)
+               sits inset from the container's own top/right edges
+               instead of overflowing past them, so it stays inside the
+               page's content column instead of spilling past it;
+             - the pink scallop shrank 288px -> 240px so it reads as a
+               clear *supporting* shape rather than a second dominant
+               one, and moved further down/left with the rest of the
+               cluster;
+             - the violet quarter-round and blue clover shrank slightly
+               too, so the cluster reads as dominant / two supporting /
+               smaller accents instead of several same-weight pieces;
+             - the coral burst moved right, clear of the pink scallop's
+               bounding box — the two were almost-touching by only a
+               few px before.
+            Three new small accents (all existing soft-color tokens,
+            kept small so the cluster stays airy) fill in the gaps that
+            opened up: a ring bridging the lime/pink seam, a small dot
+            near that same seam, and a larger dot alone in the open
+            pocket toward the lower-left of the cluster, for asymmetric
+            balance. Same 7 original shapes/colors/variants otherwise —
+            nothing removed, nothing recolored. Still noninteractive and
+            hidden from assistive tech (aria-hidden here, and on every
+            Shape itself), and only rendered at lg+ (hidden below),
+            same as before, so there's nothing new to collide with text
+            or overflow on smaller layouts. */}
         <div
-          className="relative hidden h-[600px] lg:block"
+          className="relative hidden h-[420px] lg:block"
           aria-hidden="true"
         >
-          <span
-            className="hero-float-sm absolute top-16 -left-6 h-24 w-24 rounded-full bg-orange-soft"
+          <Shape
+            variant="circle"
+            className="hero-float-sm absolute top-4 -left-11 h-28 w-28 text-orange-soft"
             style={{ animationDuration: "6s", animationDelay: "0s" }}
           />
 
+          {/* Dominant shape — inset from the container's own top/right
+              edges (rather than overflowing them) so it reads as
+              anchored to the column instead of spilling past the
+              page's content boundary. */}
           <Shape
             variant="scallop"
-            className="hero-float-lg absolute -top-8 -right-10 h-80 w-80 text-lime-soft"
+            className="hero-float-lg absolute top-2 right-2 h-80 w-80 text-lime-soft"
             style={{ animationDuration: "7.5s", animationDelay: "0.4s" }}
           />
 
+          {/* Supporting shape #1 — shrunk from 288px so it's clearly
+              secondary to the lime scallop, and moved down/left with
+              the rest of the cluster. */}
           <Shape
             variant="scallop"
-            className="hero-float-md absolute top-40 -left-8 h-72 w-72 text-pink-soft"
+            className="hero-float-md absolute top-24 -left-14 h-60 w-60 text-pink-soft"
             style={{ animationDuration: "6.5s", animationDelay: "1.1s" }}
           />
 
           <span
-            className="hero-float-sm absolute top-72 -right-10 h-36 w-36 bg-violet-soft"
+            className="hero-float-sm absolute top-56 right-2 h-40 w-40 bg-violet-soft"
             style={{
               borderRadius: "100% 0 0 0",
               animationDuration: "5.5s",
@@ -177,22 +163,88 @@ export default function Hero({ onExplore }: { onExplore: () => void }) {
             }}
           />
 
+          {/* Supporting shape #2 — paired weight with the pink scallop,
+              both a clear step down from the dominant lime scallop. */}
           <Shape
             variant="clover"
-            className="hero-float-md absolute right-0 bottom-20 h-52 w-52 text-blue-soft"
+            className="hero-float-md absolute right-6 bottom-2 h-52 w-52 text-blue-soft"
             style={{ animationDuration: "6.8s", animationDelay: "1.6s" }}
           />
 
           <span
-            className="hero-float-rotated absolute bottom-4 -left-4 h-56 w-20 rounded-2xl bg-yellow-soft"
+            className="hero-float-rotated absolute bottom-0 -left-10 h-56 w-20 rounded-2xl bg-lemon-soft"
             style={{ animationDuration: "5s", animationDelay: "0.3s" }}
           />
 
+          {/* Moved right, clear of the pink scallop's bounding box —
+              was almost-touching it by only a few px. */}
           <Shape
             variant="burst"
-            className="hero-float-sm absolute bottom-0 left-28 h-32 w-32 text-red-soft"
+            className="hero-float-sm absolute bottom-6 left-40 h-24 w-24 text-red-soft"
             style={{ animationDuration: "4.8s", animationDelay: "1.2s" }}
           />
+
+          {/* New: small ring + two differently-sized dots, added to
+              bridge the lime/pink seam and balance the open pocket
+              lower-left of the cluster. Kept small, on existing soft
+              color tokens (lilac wasn't in Hero's palette yet but is
+              part of the same token set) so the composition stays
+              airy rather than busier. */}
+          <Shape
+            variant="ring"
+            className="hero-float-sm absolute top-7 left-24 h-14 w-14"
+            style={{
+              color: "var(--lilac-soft)",
+              animationDuration: "5.2s",
+              animationDelay: "0.9s",
+            }}
+          />
+
+          <Shape
+            variant="circle"
+            className="hero-float-sm absolute top-[78px] left-[164px] h-6 w-6 text-steel-soft"
+            style={{ animationDuration: "4.5s", animationDelay: "0.2s" }}
+          />
+
+          <Shape
+            variant="circle"
+            className="hero-float-sm absolute top-[360px] left-20 h-10 w-10 text-sky-soft"
+            style={{ animationDuration: "5.8s", animationDelay: "1.4s" }}
+          />
+        </div>
+      </div>
+
+      {/* "At a glance" — full-width closing row, no eyebrow label (per
+          Anna's explicit "do not restore the At a Glance heading"),
+          divider sitting close to the row above it rather than a big
+          empty gap. */}
+      <div className="">
+        <hr className="poster-divider my-4" />
+
+        <div className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-5">
+          <span className="md:hidden text-lg uppercase font-soft text-stone-400">At a glance</span>
+          {AT_A_GLANCE.map(({ icon: Icon, title, caption }, i) => (
+            <div
+              key={title}
+              className="flex flex-row items-center gap-3 lg:flex-col lg:gap-2"
+            >
+              <span
+                className="flex h-10 w-24 shrink-0 items-center justify-center rounded-full"
+                style={{ background: BADGE_COLORS[i % BADGE_COLORS.length] }}
+              >
+                <Icon
+                  className="h-6 w-6 text-[var(--text-primary)]"
+                  aria-hidden="true"
+                />
+              </span>
+              <div className="flex flex-col md:items-center">
+                <div className="text-sm font-semibold text-[var(--text-primary)]">
+                  {title}
+                </div>
+                <div className="text-xs text-stone-500">{caption}</div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

@@ -1,0 +1,46 @@
+/* Interactive nav logo (HeroNav.tsx) — hover/focus recolors just the
+   NE (upper-right) petal to lilac while the other three stay
+   emerald, plus a small rotate+scale flourish on the whole mark.
+   Scoped to .sedge-logo-link / .sedge-logo-mark / .sedge-logo-leaf --
+   decorative `clover` Shape instances elsewhere (Hero.tsx's cluster,
+   ShapeExamples.tsx's docs gallery) don't use these classes and stay
+   plain, static currentColor renders with no hover wiring, per the
+   brief: "Scope this interaction to the linked logo; decorative
+   clover shapes should remain noninteractive." */
+
+.sedge-logo-mark {
+  display: block;
+  transform: rotate(0deg) scale(1);
+  transform-origin: center;
+  transition: transform var(--motion-duration-base) var(--motion-hover-ease);
+}
+
+/* ~260ms requested; --motion-duration-base (250ms) is the closest
+   existing semantic duration token rather than a one-off value. */
+.sedge-logo-link:hover .sedge-logo-mark,
+.sedge-logo-link:focus-visible .sedge-logo-mark {
+  transform: rotate(8deg) scale(1.04);
+}
+
+.sedge-logo-leaf {
+  fill: var(--emerald-bold);
+  transition: fill var(--motion-duration-base) var(--motion-hover-ease);
+}
+
+.sedge-logo-link:hover .sedge-logo-leaf--ne,
+.sedge-logo-link:focus-visible .sedge-logo-leaf--ne {
+  fill: var(--lilac-bold);
+}
+
+/* Reduced motion: keep only the color change. Zeroing
+   --motion-duration-base (done sitewide in motion.css) removes the
+   *animation*, but the rotate/scale transform would still apply
+   instantly on hover/focus without this -- so the transform itself is
+   removed here, leaving just the (now-instant) leaf-color swap. */
+@media (prefers-reduced-motion: reduce) {
+  .sedge-logo-mark,
+  .sedge-logo-link:hover .sedge-logo-mark,
+  .sedge-logo-link:focus-visible .sedge-logo-mark {
+    transform: none;
+  }
+}

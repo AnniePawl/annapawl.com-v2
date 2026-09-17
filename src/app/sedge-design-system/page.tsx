@@ -74,11 +74,11 @@ export default function DesignSystemOverview() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fffcf7]">
+    <div className="min-h-screen bg-[#fffcf8]">
       <HeroNav sections={SECTIONS} activeId={activeId} onSelect={scrollTo} />
       <Hero onExplore={() => scrollTo(SECTIONS[0].id)} />
 
-      <div className="mx-auto max-w-7xl px-6 pb-12">
+      <div className="mx-auto max-w-7xl px-6 py-12">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[250px_1fr]">
           <aside className="hidden lg:block">
             <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto rounded-2xl p-[1.5px]">
