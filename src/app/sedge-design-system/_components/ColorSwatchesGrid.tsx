@@ -36,9 +36,15 @@ function swatchTextColor(hex: string): string {
 
   const whiteContrast = 1.05 / (background + 0.05);
 
+  // Fixed --charcoal/--neutral-0 here on purpose, not the themed
+  // --text-primary/--text-inverse aliases: this is answering "what's
+  // readable against this swatch's exact hex", which doesn't change
+  // just because the design system is in dark mode -- the swatch tiles
+  // themselves are rendered straight from each token's own fixed hex
+  // (see ColorTile below), so the text on them needs to stay fixed too.
   return whiteContrast > charcoalContrast
-    ? "var(--text-inverse)"
-    : "var(--text-primary)";
+    ? "var(--neutral-0)"
+    : "var(--charcoal)";
 }
 
 function ColorTile({ varName, hex }: ColorSwatch) {

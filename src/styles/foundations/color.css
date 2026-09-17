@@ -109,6 +109,39 @@
   --taupe-soft: #C3B6AD;
   --taupe-bold: #9D8C81;
 
+  /* =========================
+     Earth Colors — Extended
+     Added for the sedge-design-system dark theme's accent palette
+     (moss/ochre/mauve; sage + clay above are reused as-is). These are
+     base palette tokens like every other family on this page -- usable
+     anywhere, in either theme, regardless of whether dark mode is on.
+     Dark-theme-specific *semantic* mappings (which of these apply to
+     backgrounds/text/borders when dark mode is active) live separately
+     in sedge-design-system/theme.css, scoped to that page only -- see
+     the comment there for why the split matters.
+  ========================== */
+
+  /* Moss — deeper, more olive than Sage above */
+  --moss-soft: #B7C98A;
+  --moss-bold: #7A8F4E;
+
+  /* Ochre */
+  --ochre-soft: #E8C077;
+  --ochre-bold: #C6871E;
+
+  /* Dusty mauve — muted, distinct from the more saturated Plum above */
+  --mauve-soft: #D8B4C4;
+  --mauve-bold: #9C6B85;
+
+  /* Peat / bark / ivory — warm dark-mode neutrals, siblings of --cream/
+     --charcoal above but warmer than --charcoal's neutral gray-black.
+     Single values (no -soft/-bold pair), same pattern as --cream/
+     --charcoal. */
+  --peat: #211A14;
+  --bark: #3A2E24;
+  --bark-soft: #4A3B2E;
+  --ivory: #F2E9D8;
+
   /* Neutral component tone */
   --neutral-soft: var(--neutral-50);
   --neutral-bold: var(--neutral-700);
@@ -157,6 +190,24 @@
     var(--accent) 70%,
     black
   );
+
+  /* =========================
+     Surface washes + one-off surfaces
+     Tokenized so sedge-design-system/theme.css can re-point them for
+     dark mode; values here are the existing light-mode look, unchanged.
+  ========================== */
+
+  /* Translucent panel washes (poster-sticky / poster-aside-card,
+     tooltip). Were hardcoded rgba(255,255,255,...) before -- same
+     numbers, just named now. */
+  --surface-wash-strong: rgba(255, 255, 255, 0.55);
+  --surface-wash-soft: rgba(255, 255, 255, 0.4);
+
+  /* Sedge's sidebar-nav wrapper background (was a hardcoded bg-lime-200
+     Tailwind utility). Defaults to the same lime-soft pastel it already
+     was; dark mode repoints this to a moss-tinted dark surface instead
+     of just leaving a bright pastel green box floating on a dark page. */
+  --sidebar-surface: var(--lime-soft);
 
   /* =========================
      Focus

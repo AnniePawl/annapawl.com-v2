@@ -65,6 +65,18 @@ const config: Config = {
         "clay-bold": "var(--clay-bold)",
         "taupe-soft": "var(--taupe-soft)",
         "taupe-bold": "var(--taupe-bold)",
+        // Earth Colors — Extended (see color.css) -- sedge-design-system
+        // dark theme's accent palette.
+        "moss-soft": "var(--moss-soft)",
+        "moss-bold": "var(--moss-bold)",
+        "ochre-soft": "var(--ochre-soft)",
+        "ochre-bold": "var(--ochre-bold)",
+        "mauve-soft": "var(--mauve-soft)",
+        "mauve-bold": "var(--mauve-bold)",
+        peat: "var(--peat)",
+        bark: "var(--bark)",
+        "bark-soft": "var(--bark-soft)",
+        ivory: "var(--ivory)",
       },
       fontFamily: {
         sans: ["var(--font-sans)"],

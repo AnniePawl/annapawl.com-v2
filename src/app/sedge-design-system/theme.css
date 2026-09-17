@@ -1,0 +1,180 @@
+/* ---- Sedge design-system theme scope ----
+   Everything in this file is scoped under [data-sedge-theme="dark"],
+   an attribute set on a wrapper <div> that ThemeProvider.tsx renders
+   around this route's whole subtree (see
+   sedge-design-system/layout.tsx). That's the only place this
+   attribute exists in the app, so nothing here can ever leak onto the
+   rest of the site, and the rest of the site is free to define its own
+   surfaces independently.
+
+   This is deliberately a thin *semantic* layer, not a second palette:
+   every rule below just re-points an existing semantic token (defined
+   once, for light mode, in foundations/color.css) at one of the earth-
+   tone *base* tokens also defined there (--peat/--bark/--ivory/--moss/
+   --ochre/--mauve, alongside the existing --sage/--clay). Because
+   nearly every component in this codebase (button.css, card.css,
+   poster.css, etc.) already reads colors through the semantic tokens
+   (var(--bg-default), var(--text-primary), var(--border-subtle)...)
+   rather than hardcoding hex, re-pointing them here is enough to theme
+   the whole page -- components don't need their own dark-mode variants.
+   The exceptions (places that render a *base* pastel token like
+   --indigo-soft directly, e.g. active nav pills) are handled at the
+   call site instead, since those pastels are meant to stay pastel in
+   both themes -- see the comments on --sidebar-surface below and in
+   HeroNav.tsx/Hero.tsx/MobileNav.tsx/SidebarNav.tsx for why. */
+
+[data-sedge-theme="dark"] {
+  /* Backgrounds + surfaces */
+  --bg-default: var(--peat);
+  --bg-subtle: var(--bark);
+  --surface: var(--bark);
+
+  /* `color` (not just the --text-primary variable) needs to be set
+     explicitly here, on the element the attribute actually lives on.
+     globals.css sets `body { color: var(--text-primary) }`, and body
+     sits *outside* this div (ThemeProvider wraps everything below
+     body, not body itself) -- so body's own `color` is computed from
+     the :root/light value of --text-primary, then inherited straight
+     down through any element that never re-declares `color` itself
+     (a bare heading using only .h1/.h2/.h3, GroupHeading's dividers,
+     the HeroNav wordmark span...). Those elements looked fine because
+     they truly do have `color: inherit`, they just inherit a color
+     that was already resolved *before* reaching this scope. Setting
+     `color` here means anything relying on plain inheritance starts
+     from a node that has the correct dark-mode value, instead of
+     leapfrogging past it back to body's light-mode one. Elements that
+     set an explicit var(--text-primary)/var(--text-secondary)/etc
+     class themselves were never affected -- they resolve the variable
+     at their own position in the tree either way. */
+  color: var(--text-primary);
+
+  /* Text */
+  --text-primary: var(--ivory);
+  --text-secondary: color-mix(in srgb, var(--ivory) 82%, var(--bark) 18%);
+  --text-muted: color-mix(in srgb, var(--ivory) 60%, var(--bark) 40%);
+
+  /* Borders */
+  --border-subtle: color-mix(in srgb, var(--ivory) 18%, var(--bark) 82%);
+  --border-strong: color-mix(in srgb, var(--ivory) 42%, var(--bark) 58%);
+
+  /* Interactive accent -- swapped from the sitewide blue to a warm
+     terracotta (clay) so buttons/links/focus rings (--focus-ring-color
+     is aliased to --accent in focus.css) read as part of the same warm
+     earth-tone family instead of a cool blue sitting oddly on a peat/
+     bark page. --accent-hover/-active keep the same "mix toward black"
+     formula focus.css/button.css already use for the light-mode blue. */
+  --accent: var(--clay-bold);
+  --accent-soft: var(--clay-soft);
+  --accent-hover: color-mix(in srgb, var(--accent) 85%, black);
+  --accent-active: color-mix(in srgb, var(--accent) 70%, black);
+
+  /* Translucent panel washes -- a light wash reads as a *lowered*
+     panel on a light page (poster-sticky/poster-aside-card/tooltip);
+     on a dark page the equivalent is a faint lift toward --ivory
+     instead of toward white. */
+  --surface-wash-strong: color-mix(in srgb, var(--ivory) 16%, transparent);
+  --surface-wash-soft: color-mix(in srgb, var(--ivory) 10%, transparent);
+
+  /* Sidebar wrapper -- was a flat lime-soft pastel; here it becomes a
+     moss-tinted dark surface instead of leaving a bright green box
+     floating on a dark page (see page.tsx). */
+  --sidebar-surface: color-mix(in srgb, var(--moss-bold) 22%, var(--bark));
+
+  /* Elevation -- the light-mode shadow scale (elevation.css) is a soft
+     black shadow, which all but disappears against peat/bark. A faint
+     light haze reads as "lifted" on a dark surface the same way a dark
+     shadow does on a light one. */
+  --shadow-xs: 0 1px 0 rgba(242, 233, 216, 0.05);
+  --shadow-sm: 0 1px 2px rgba(242, 233, 216, 0.08);
+  --shadow-md: 0 8px 20px rgba(242, 233, 216, 0.10);
+  --shadow-lg: 0 16px 40px rgba(242, 233, 216, 0.14);
+}
+
+/* ---- Sedge section backgrounds ----
+   Section.tsx/PosterSection.tsx cycle through the palette's pastel
+   `-soft` tokens for each section's background (see
+   _data/sectionColor.ts) -- pure pastel blocks work in light mode but
+   would read as light-mode islands dropped onto a dark page, so dark
+   mode swaps to a subtle earth-tone tint over --bark instead (same
+   cycling logic, different destination -- see darkAccentForSection).
+   Both components set --section-bg-light/--section-bg-dark as inline
+   custom properties (per-section, since each section picks a different
+   color from the cycle); this is the shared rule that actually applies
+   whichever one is active. */
+.doc-section,
+.poster-section {
+  background: var(--section-bg-light);
+}
+
+[data-sedge-theme="dark"] .doc-section,
+[data-sedge-theme="dark"] .poster-section {
+  background: var(--section-bg-dark);
+}
+
+/* ---- Theme toggle (HeroNav) ----
+   Two icon-only buttons + a "/" divider between them, no pill
+   background/fill/shadow per the brief -- just a color change (quiet
+   --text-muted when inactive, --text-primary when active) plus a thin
+   underline under whichever one is active. */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* Comfortable touch target (40px) around a visually small (16-18px)
+     icon, rather than growing the icon itself. */
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: none;
+  background: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  position: relative;
+  transition: color var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+.theme-toggle-btn:hover {
+  color: var(--text-secondary);
+}
+
+.theme-toggle-btn[aria-pressed="true"] {
+  color: var(--text-primary);
+}
+
+/* Thin underline beneath the active icon only. */
+.theme-toggle-btn[aria-pressed="true"]::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 6px;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 1.5px;
+  background: currentColor;
+}
+
+.theme-toggle-slash {
+  color: var(--border-strong);
+  font-size: var(--text-sm);
+  user-select: none;
+}
+
+.theme-toggle-divider {
+  width: var(--border-thin);
+  height: 1.25rem;
+  background: var(--border-subtle);
+  flex: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle-btn {
+    transition: none;
+  }
+}

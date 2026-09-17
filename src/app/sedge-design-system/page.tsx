@@ -74,7 +74,7 @@ export default function DesignSystemOverview() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fffcf8]">
+    <div className="min-h-screen bg-[var(--bg-default)]">
       <HeroNav sections={SECTIONS} activeId={activeId} onSelect={scrollTo} />
       <Hero onExplore={() => scrollTo(SECTIONS[0].id)} />
 
@@ -82,7 +82,14 @@ export default function DesignSystemOverview() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[250px_1fr]">
           <aside className="hidden lg:block">
             <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto rounded-2xl p-[1.5px]">
-              <div className="rounded-xl bg-lime-200 p-4 text-zinc-900">
+              {/* --sidebar-surface: a themed token (defaults to the
+                  same lime-soft pastel this always was; dark mode
+                  repoints it to a moss-tinted dark surface instead of
+                  leaving a bright green box on a dark page -- see
+                  color.css/theme.css). Text follows the themed
+                  --text-primary since this wrapper's own background
+                  now themes too. */}
+              <div className="rounded-xl bg-[var(--sidebar-surface)] p-4 text-[var(--text-primary)]">
                 <SidebarNav
                   sections={SECTIONS}
                   activeId={activeId}

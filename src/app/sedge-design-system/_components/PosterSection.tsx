@@ -1,5 +1,6 @@
+import type { CSSProperties } from "react";
 import type { LucideIcon } from "lucide-react";
-import { colorForSection } from "../_data/sectionColor";
+import { colorForSection, darkAccentForSection } from "../_data/sectionColor";
 import "./poster.css";
 
 /**
@@ -26,12 +27,20 @@ export default function PosterSection({
   children: React.ReactNode;
 }) {
   const bgToken = colorForSection(id);
+  const darkAccentToken = darkAccentForSection(id);
+  // See theme.css's ".doc-section, .poster-section" rule -- same
+  // pattern as Section.tsx, kept identical so the two container
+  // components can never drift apart.
+  const sectionThemeVars = {
+    "--section-bg-light": `var(${bgToken})`,
+    "--section-bg-dark": `color-mix(in srgb, var(${darkAccentToken}) 20%, var(--bark))`,
+  } as CSSProperties;
 
   return (
     <section
       id={id}
       className="poster-section scroll-mt-24"
-      style={{ background: `var(${bgToken})` }}
+      style={sectionThemeVars}
     >
       <h1 className="h-display text-[length:var(--type-h1-size)] tracking-[var(--type-h1-tracking)] poster-heading">
         <Icon className="poster-heading-icon" aria-hidden="true" />

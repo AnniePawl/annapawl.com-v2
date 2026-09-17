@@ -18,7 +18,7 @@ export default function MobileNav({
   return (
     <nav
       aria-label="Section navigation"
-      className="no-scrollbar sticky top-0 z-10 -mx-2 mb-6 flex items-center gap-2 overflow-x-auto bg-[#fffcf7]/95 px-2 py-3 backdrop-blur-sm lg:hidden"
+      className="no-scrollbar sticky top-0 z-10 -mx-2 mb-6 flex items-center gap-2 overflow-x-auto bg-[var(--bg-default)]/95 px-2 py-3 backdrop-blur-sm lg:hidden"
     >
       {sections.map((section, index) => {
         const Icon = section.icon;
@@ -35,7 +35,7 @@ export default function MobileNav({
             {isNewGroup ? (
               <span
                 aria-hidden="true"
-                className="mx-1 h-6 w-px shrink-0 bg-zinc-300"
+                className="mx-1 h-6 w-px shrink-0 bg-[var(--border-subtle)]"
               />
             ) : null}
             <button
@@ -44,8 +44,11 @@ export default function MobileNav({
               className={cx(
                 "focus-ring flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium whitespace-nowrap transition",
                 isActive
-                  ? "border-transparent bg-indigo-soft text-zinc-900"
-                  : "border-zinc-200 bg-white text-zinc-700"
+                  ? // bg-indigo-soft is a base pastel token, unaffected
+                    // by theme -- fixed --charcoal text, same reasoning
+                    // as HeroNav's active pill.
+                    "border-transparent bg-indigo-soft text-[var(--charcoal)]"
+                  : "border-[var(--border-subtle)] bg-[var(--bg-default)] text-[var(--text-secondary)]"
               )}
             >
               <Icon className="h-3.5 w-3.5" aria-hidden="true" />

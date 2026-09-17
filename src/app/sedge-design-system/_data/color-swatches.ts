@@ -114,6 +114,23 @@ export const COLOR_PAIRS: ColorPair[] = [
     soft: { varName: "--taupe-soft", hex: "#C3B6AD" },
     bold: { varName: "--taupe-bold", hex: "#9D8C81" },
   },
+
+  // Earth colors — extended (sedge-design-system dark theme accents)
+  {
+    family: "Moss",
+    soft: { varName: "--moss-soft", hex: "#B7C98A" },
+    bold: { varName: "--moss-bold", hex: "#7A8F4E" },
+  },
+  {
+    family: "Ochre",
+    soft: { varName: "--ochre-soft", hex: "#E8C077" },
+    bold: { varName: "--ochre-bold", hex: "#C6871E" },
+  },
+  {
+    family: "Mauve",
+    soft: { varName: "--mauve-soft", hex: "#D8B4C4" },
+    bold: { varName: "--mauve-bold", hex: "#9C6B85" },
+  },
 ];
 
 export const NEUTRAL_SWATCHES: ColorSwatch[] = [
@@ -130,4 +147,10 @@ export const NEUTRAL_SWATCHES: ColorSwatch[] = [
 export const PAGE_SWATCHES: ColorSwatch[] = [
   { varName: "--cream", hex: "#FFFCF8" },
   { varName: "--charcoal", hex: "#2A2A2E" },
+  // Dark-mode siblings of cream/charcoal -- warmer than a plain gray
+  // dark theme. See sedge-design-system/theme.css for where these get
+  // used as the dark theme's --bg-default/--text-primary.
+  { varName: "--peat", hex: "#211A14" },
+  { varName: "--bark", hex: "#3A2E24" },
+  { varName: "--ivory", hex: "#F2E9D8" },
 ];

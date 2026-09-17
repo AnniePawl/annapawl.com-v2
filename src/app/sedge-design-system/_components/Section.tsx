@@ -1,6 +1,8 @@
+import type { CSSProperties } from "react";
 import type { LucideIcon } from "lucide-react";
 import { cx } from "../../../lib/cx";
-import { colorForSection } from "../_data/sectionColor";
+import { colorForSection, darkAccentForSection } from "../_data/sectionColor";
+import "./poster.css";
 
 export default function Section({
   id,
@@ -18,12 +20,22 @@ export default function Section({
   children: React.ReactNode;
 }) {
   const bgToken = colorForSection(id);
+  const darkAccentToken = darkAccentForSection(id);
+  // See theme.css's ".doc-section, .poster-section" rule -- it reads
+  // these two custom properties and picks whichever one applies
+  // (light by default, dark under [data-sedge-theme="dark"]) rather
+  // than this component setting `background` directly, which an inline
+  // style can't be overridden by a scoped stylesheet rule.
+  const sectionThemeVars = {
+    "--section-bg-light": `var(${bgToken})`,
+    "--section-bg-dark": `color-mix(in srgb, var(${darkAccentToken}) 20%, var(--bark))`,
+  } as CSSProperties;
 
   return (
     <section
       id={id}
-      className="scroll-mt-24 rounded-xl p-8"
-      style={{ background: `var(${bgToken})` }}
+      className="doc-section scroll-mt-24 rounded-xl p-8"
+      style={sectionThemeVars}
     >
       <div className="flex flex-col">
         <h1

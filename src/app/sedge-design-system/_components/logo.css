@@ -32,6 +32,19 @@
   fill: var(--lilac-bold);
 }
 
+/* Dark theme: readable sage instead of emerald (emerald reads muddy
+   against peat/bark), hover/focus NE petal swaps to a mauve accent
+   instead of lilac to stay in the earth-tone family -- same rotate+
+   scale animation above is untouched, only the two fill colors change. */
+[data-sedge-theme="dark"] .sedge-logo-leaf {
+  fill: var(--sage-bold);
+}
+
+[data-sedge-theme="dark"] .sedge-logo-link:hover .sedge-logo-leaf--ne,
+[data-sedge-theme="dark"] .sedge-logo-link:focus-visible .sedge-logo-leaf--ne {
+  fill: var(--mauve-bold);
+}
+
 /* Reduced motion: keep only the color change. Zeroing
    --motion-duration-base (done sitewide in motion.css) removes the
    *animation*, but the rotate/scale transform would still apply

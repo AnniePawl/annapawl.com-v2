@@ -76,7 +76,7 @@ export default function Hero({ onExplore }: { onExplore: () => void }) {
             distinctly <b>me</b>.
           </p>
 
-          <p className="mt-5 max-w-xl text-sm leading-relaxed text-stone-500">
+          <p className="mt-5 max-w-xl text-sm leading-relaxed text-[var(--text-secondary)]">
             As a frontend developer with a deep love of design, I'm always exploring the space 
             between structure and experimentation. Sedge is where those ideas take shape - thoughtful at its core, playful around the
             edges, and designed to evolve as I do. 
@@ -85,7 +85,12 @@ export default function Hero({ onExplore }: { onExplore: () => void }) {
           <button
             type="button"
             onClick={onExplore}
-            className="group mt-8 inline-flex items-center gap-2 rounded-[var(--radius-pill)] bg-indigo-soft px-6 py-3 text-xs font-bold tracking-wide text-[var(--text-primary)] uppercase transition hover:brightness-95"
+            // bg-indigo-soft is a base palette token (stays the same
+            // light pastel in both themes, see theme.css's top comment),
+            // so the label needs a fixed dark color rather than
+            // --text-primary, which turns near-white in dark mode and
+            // would go invisible against this pill.
+            className="group mt-8 inline-flex items-center gap-2 rounded-[var(--radius-pill)] bg-indigo-soft px-6 py-3 text-xs font-bold tracking-wide text-[var(--charcoal)] uppercase transition hover:brightness-95"
           >
             Explore the system
             <ArrowRight className="h-4 w-4 transition-transform duration-200 ease-out
@@ -222,7 +227,7 @@ export default function Hero({ onExplore }: { onExplore: () => void }) {
         <hr className="poster-divider my-4" />
 
         <div className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-5">
-          <span className="md:hidden text-lg uppercase font-soft text-stone-400">At a glance</span>
+          <span className="md:hidden text-lg uppercase font-soft text-[var(--text-muted)]">At a glance</span>
           {AT_A_GLANCE.map(({ icon: Icon, title, caption }, i) => (
             <div
               key={title}
@@ -232,8 +237,12 @@ export default function Hero({ onExplore }: { onExplore: () => void }) {
                 className="flex h-10 w-24 shrink-0 items-center justify-center rounded-full"
                 style={{ background: BADGE_COLORS[i % BADGE_COLORS.length] }}
               >
+                {/* BADGE_COLORS are base palette -soft tokens, always a
+                    light pastel in both themes -- fixed --charcoal here
+                    for the same reason as the button above, not the
+                    themed --text-primary. */}
                 <Icon
-                  className="h-6 w-6 text-[var(--text-primary)]"
+                  className="h-6 w-6 text-[var(--charcoal)]"
                   aria-hidden="true"
                 />
               </span>
@@ -241,7 +250,7 @@ export default function Hero({ onExplore }: { onExplore: () => void }) {
                 <div className="text-sm font-semibold text-[var(--text-primary)]">
                   {title}
                 </div>
-                <div className="text-xs text-stone-500">{caption}</div>
+                <div className="text-xs text-[var(--text-secondary)]">{caption}</div>
               </div>
             </div>
           ))}

@@ -78,7 +78,7 @@
   display: inline-block;
   padding: var(--space-4);
   border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.55);
+  background: var(--surface-wash-strong);
   font-size: var(--text-sm);
   font-weight: var(--font-medium);
   line-height: var(--leading-snug);
@@ -90,7 +90,7 @@
 .poster-aside-card {
   border-radius: var(--radius-lg);
   padding: var(--space-5);
-  background: rgba(255, 255, 255, 0.4);
+  background: var(--surface-wash-soft);
 }
 
 .poster-aside-card ul {

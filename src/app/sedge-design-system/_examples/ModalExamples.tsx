@@ -44,7 +44,7 @@ export default function ModalExamples() {
     <section style={{ maxWidth: 720 }}>
       <CodeBlock code={USAGE} className="mb-8" />
 
-      <p className="mb-3 text-sm font-medium text-zinc-600">
+      <p className="mb-3 text-sm font-medium text-[var(--text-secondary)]">
         Tones — a little color for every context
       </p>
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>

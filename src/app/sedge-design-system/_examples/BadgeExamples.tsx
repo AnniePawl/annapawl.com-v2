@@ -31,7 +31,7 @@ export default function BadgeExamples() {
     <section style={{ maxWidth: 720 }}>
       <CodeBlock code={USAGE} className="mb-8" />
 
-      <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">
+      <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">
         Semantic
       </p>
       <div className="badge-demo-row mb-8">
@@ -42,7 +42,7 @@ export default function BadgeExamples() {
         <Badge variant="danger">Danger</Badge>
       </div>
 
-      <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">
+      <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">
         Tones — category / tag labels
       </p>
       <div className="badge-demo-row">

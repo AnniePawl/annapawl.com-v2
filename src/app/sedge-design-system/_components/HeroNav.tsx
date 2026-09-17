@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { NavSection, SectionGroup } from "../_data/sections";
 import { cx } from "../../../lib/cx";
 import { CLOVER_LEAF_PATHS } from "../../../components/ui/Shape";
+import ThemeToggle from "./ThemeToggle";
 import "./logo.css";
 
 // Top nav for the hero — the reference this was built from uses its own
@@ -9,7 +10,12 @@ import "./logo.css";
 // sidebar, sitting above the docs app. The pills below map onto the same
 // three groups the sidebar/GroupHeading already use, so clicking one
 // jumps to that group's first section exactly like a sidebar item would.
-const NAV_GROUPS: SectionGroup[] = ["Intro", "Foundations", "Components", "Resources"];
+// "Resources" used to be a 4th pill here, but SectionGroup never actually
+// had a "Resources" value (see _data/sections.ts) and no section was ever
+// tagged with it -- it was a dead, unclickable pill (and a standing tsc
+// error). Replaced with the light/dark theme selector instead of just
+// deleted outright.
+const NAV_GROUPS: SectionGroup[] = ["Intro", "Foundations", "Components"];
 
 export default function HeroNav({
   sections,
@@ -23,7 +29,7 @@ export default function HeroNav({
   const activeGroup = sections.find((s) => s.id === activeId)?.group;
 
   return (
-    <header className="sticky top-0 z-20 border-b border-[color-mix(in_srgb,var(--text-primary)_10%,transparent)] bg-[#fffcf8] backdrop-blur-sm">
+    <header className="sticky top-0 z-20 border-b border-[color-mix(in_srgb,var(--text-primary)_10%,transparent)] bg-[var(--bg-default)] backdrop-blur-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4">
         {/* Logo — links home (no prior href existed on this mark; "/"
             is the standard logo-to-home convention). Interactive: on
@@ -71,38 +77,46 @@ export default function HeroNav({
           </span>
         </Link>
 
-        <nav
-          aria-label="Section groups"
-          className="hidden items-center gap-1 md:flex"
-        >
-          {NAV_GROUPS.map((group) => {
-            const target = sections.find((s) => s.group === group);
-            const isActive = activeGroup === group;
+        <div className="hidden items-center gap-4 md:flex">
+          <nav aria-label="Section groups" className="flex items-center gap-1">
+            {NAV_GROUPS.map((group) => {
+              const target = sections.find((s) => s.group === group);
+              const isActive = activeGroup === group;
 
-            return (
-              <button
-                key={group}
-                type="button"
-                onClick={() => target && onSelect(target.id)}
-                className={cx(
-                  // Hover is a soft-purple pill (--violet-soft), distinct
-                  // from the active pill's --indigo-soft — was a generic
-                  // neutral --bg-subtle gray, which is what read as
-                  // "weird" here (the pill shape itself was already
-                  // right). Kept text on --text-primary on hover too, to
-                  // match the readable contrast active already has,
-                  // rather than leaving the lighter --text-secondary.
-                  "rounded-[var(--radius-pill)] px-4 py-2 text-sm font-medium transition",
-                  isActive
-                    ? "bg-indigo-soft text-[var(--text-primary)]"
-                    : "text-[var(--text-secondary)] hover:bg-indigo-soft/30 hover:text-[var(--text-primary)]"
-                )}
-              >
-                {group}
-              </button>
-            );
-          })}
-        </nav>
+              return (
+                <button
+                  key={group}
+                  type="button"
+                  onClick={() => target && onSelect(target.id)}
+                  className={cx(
+                    // Hover is a soft-purple pill (--violet-soft), distinct
+                    // from the active pill's --indigo-soft — was a generic
+                    // neutral --bg-subtle gray, which is what read as
+                    // "weird" here (the pill shape itself was already
+                    // right).
+                    "rounded-[var(--radius-pill)] px-4 py-2 text-sm font-medium transition",
+                    isActive
+                      ? // bg-indigo-soft is a base palette token, not a
+                        // themed one -- it stays the same light pastel in
+                        // both themes on purpose (see theme.css's top
+                        // comment), so its text needs to stay a fixed dark
+                        // color too rather than following --text-primary
+                        // (which turns near-white in dark mode and would
+                        // go invisible against this pill).
+                        "bg-indigo-soft text-[var(--charcoal)]"
+                      : "text-[var(--text-secondary)] hover:bg-indigo-soft/30 hover:text-[var(--text-primary)]"
+                  )}
+                >
+                  {group}
+                </button>
+              );
+            })}
+          </nav>
+
+          <span aria-hidden="true" className="theme-toggle-divider" />
+
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );

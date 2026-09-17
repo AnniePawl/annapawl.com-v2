@@ -42,9 +42,17 @@ export default function SidebarNav({
                       onClick={() => onSelect(section.id)}
                       className={cx(
                         "flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-xs md:text-sm transition",
+                        // bg-indigo-soft is a base pastel token
+                        // (unaffected by theme) -- fixed --charcoal
+                        // text on it, same reasoning as HeroNav's
+                        // active pill. The inactive/default state sits
+                        // on the sidebar's own wrapper background
+                        // instead (--sidebar-surface, page.tsx), which
+                        // *does* theme, so that one reads the themed
+                        // --text-primary.
                         activeId === section.id
-                          ? "bg-indigo-soft font-medium text-zinc-900"
-                          : "text-zinc-900 hover:bg-indigo-soft hover:text-zinc-900"
+                          ? "bg-indigo-soft font-medium text-[var(--charcoal)]"
+                          : "text-[var(--text-primary)] hover:bg-indigo-soft hover:text-[var(--charcoal)]"
                       )}
                     >
                       <Icon
