@@ -150,7 +150,7 @@ export const PAGE_SWATCHES: ColorSwatch[] = [
   // Dark-mode siblings of cream/charcoal -- warmer than a plain gray
   // dark theme. See sedge-design-system/theme.css for where these get
   // used as the dark theme's --bg-default/--text-primary.
-  { varName: "--peat", hex: "#211A14" },
-  { varName: "--bark", hex: "#3A2E24" },
+  { varName: "--peat", hex: "#231f1c" },
+  { varName: "--chocolate", hex: "#503f35" },
   { varName: "--ivory", hex: "#F2E9D8" },
 ];

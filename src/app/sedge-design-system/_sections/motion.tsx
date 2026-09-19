@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Section from "../_components/Section";
+import CodeBlock from "../_components/CodeBlock";
 import { SECTIONS } from "../_data/sections";
 import Button from "../../../components/ui/Button";
 
@@ -74,6 +75,65 @@ export default function MotionSection() {
               background: "var(--accent)",
               animation: `motion-demo var(--motion-modal-duration) var(--motion-modal-ease)`,
             }}
+          />
+        </div>
+
+        <div>
+          <h4 style={{ marginBottom: 12, fontSize: 14, fontWeight: 600 }}>Cursor</h4>
+          <p style={{ marginBottom: 16, color: "var(--text-secondary)", fontSize: 14 }}>
+            A reusable &ldquo;tiny dot&rdquo; cursor (<code>components/ui/CustomCursor.tsx</code>),
+            mounted once in the root layout and active site-wide. Hover each
+            example below to see its live behavior.
+          </p>
+          <div style={{ display: "flex", gap: 24, flexWrap: "wrap", marginBottom: 16 }}>
+            <div style={{ textAlign: "center" }}>
+              <div
+                style={{
+                  width: 140,
+                  height: 88,
+                  border: "1px dashed var(--border-subtle)",
+                  borderRadius: "var(--radius-md)",
+                }}
+              />
+              <p style={{ marginTop: 8, fontSize: 12, color: "var(--text-muted)" }}>
+                Default — 7px dot
+              </p>
+            </div>
+            <div style={{ textAlign: "center" }}>
+              <Button variant="secondary" style={{ minWidth: 140 }}>
+                Hover me
+              </Button>
+              <p style={{ marginTop: 8, fontSize: 12, color: "var(--text-muted)" }}>
+                Interactive — 22px ring
+              </p>
+            </div>
+            <div style={{ textAlign: "center" }}>
+              <div
+                style={{
+                  width: 140,
+                  height: 88,
+                  border: "1px dashed var(--border-subtle)",
+                  borderRadius: "var(--radius-md)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: 8,
+                }}
+              >
+                <span style={{ fontSize: 13 }}>Selectable text</span>
+              </div>
+              <p style={{ marginTop: 8, fontSize: 12, color: "var(--text-muted)" }}>
+                Native — text keeps its I-beam
+              </p>
+            </div>
+          </div>
+          <p style={{ marginBottom: 12, color: "var(--text-secondary)", fontSize: 14 }}>
+            Transitions over <code>--motion-hover-duration</code> (150ms), and also
+            defers to native cursors over form controls, editable content, and
+            disabled controls. Opt a region or page out entirely:
+          </p>
+          <CodeBlock
+            code={`<div data-cursor-native>\n  {/* this region always keeps the native cursor */}\n</div>`}
           />
         </div>
       </div>

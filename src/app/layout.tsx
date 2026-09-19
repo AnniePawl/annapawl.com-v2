@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import CustomCursor from "../components/ui/CustomCursor";
 
 // Sitewide typeface — every level (Display, H1-H4, body) renders in
 // Inter. Bodoni Moda was tried for the Display level specifically, then
@@ -27,7 +28,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="font-sans">{children}</body>
+      <body className="font-sans">
+        {children}
+        <CustomCursor />
+      </body>
     </html>
   );
 }

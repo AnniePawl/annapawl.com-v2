@@ -37,6 +37,7 @@ const AT_A_GLANCE = [
   },
 ];
 
+
 const BADGE_COLORS = [
   "var(--pink-soft)",
   "var(--mint-soft)",
@@ -63,7 +64,7 @@ const BADGE_COLORS = [
  */
 export default function Hero({ onExplore }: { onExplore: () => void }) {
   return (
-    <section className="pt-12 relative mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-7xl flex-col justify-center overflow-hidden px-6 py-6">
+    <section id='top' className="pt-12 relative mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-7xl flex-col justify-center overflow-hidden px-6 py-6">
       <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[3fr_1.5fr]">
         <div className="pt-5">
           <h1 className="h-display text-[clamp(3.75rem,8vw,7rem)] font-[680] leading-[0.9] tracking-[-0.02em]">

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import HeroNav from "./_components/HeroNav";
+import { useLenis } from "./_components/SmoothScrollProvider";
 import Hero from "./_components/Hero";
 import SidebarNav from "./_components/SidebarNav";
 import MobileNav from "./_components/MobileNav";
@@ -9,6 +10,7 @@ import GroupHeading from "./_components/GroupHeading";
 import { SECTIONS } from "./_data/sections";
 
 // Sections
+import AccordianSection from "./_sections/accordian";
 import ApproachSection from "./_sections/approach";
 import ColorsSection from "./_sections/colors";
 import TypographySection from "./_sections/typography";
@@ -25,10 +27,17 @@ import BadgesSection from "./_sections/badges";
 import TooltipsSection from "./_sections/tooltips";
 import FormsSection from "./_sections/forms";
 
+// How far above a target section HeroNav's sticky header sits --
+// matches the 96px (`scroll-mt-24`) Section.tsx/PosterSection.tsx
+// already carry for native anchor/keyboard jumps, so Lenis's own
+// scrollTo lands in exactly the same spot either path takes.
+const HEADER_SCROLL_OFFSET = 96;
+
 export default function DesignSystemOverview() {
   const [activeId, setActiveId] = useState(SECTIONS[0].id);
 
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
+  const lenis = useLenis();
 
   useEffect(() => {
     SECTIONS.forEach(({ id }) => {
@@ -61,27 +70,61 @@ export default function DesignSystemOverview() {
     return () => observer.disconnect();
   }, []);
 
+
+  // Scroll to section 
   const scrollTo = (id: string) => {
     const el = sectionRefs.current[id];
     if (!el) return;
 
-    // scrollIntoView finds whichever scrollable ancestor needs to move —
-    // now that's the window itself. The section's `scroll-mt-24` class
-    // supplies the top breathing room past the sticky HeroNav.
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (lenis) {
+      // Lenis's own short, restrained easing (see SmoothScrollProvider) --
+      // offset keeps the section's heading clear of the sticky header,
+      // same distance `scroll-mt-24` already reserves for the fallback
+      // below and for native anchor/keyboard jumps Lenis doesn't drive.
+      lenis.scrollTo(el, { offset: -HEADER_SCROLL_OFFSET });
+    } else {
+      // No Lenis instance (prefers-reduced-motion, or not mounted yet) —
+      // scrollIntoView finds whichever scrollable ancestor needs to move,
+      // now that's the window itself. The section's `scroll-mt-24` class
+      // supplies the same top breathing room past the sticky HeroNav.
+      // globals.css forces `scroll-behavior: auto` under reduced motion,
+      // so this "smooth" request becomes an instant native jump there —
+      // no animated transition, per the accessibility requirement.
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
 
     setActiveId(id);
   };
 
+  // Scroll to top 
+
+  const scrollToTop = () => {
+    if(lenis){
+      lenis.scrollTo(0);
+    }
+    else{
+      window.scrollTo({top:0, behavior:"instant"})
+    }
+  }
+
+
+
   return (
     <div className="min-h-screen bg-[var(--bg-default)]">
-      <HeroNav sections={SECTIONS} activeId={activeId} onSelect={scrollTo} />
+      <HeroNav sections={SECTIONS} activeId={activeId} onSelect={scrollTo} onScrollToTop={scrollToTop}  />
       <Hero onExplore={() => scrollTo(SECTIONS[0].id)} />
 
       <div className="mx-auto max-w-7xl px-6 py-12">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[250px_1fr]">
           <aside className="hidden lg:block">
-            <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto rounded-2xl p-[1.5px]">
+            {/* data-lenis-prevent: this column scrolls independently of
+                the page (its own overflow-y-auto), so Lenis shouldn't
+                hijack wheel input while the pointer is over it -- see
+                SmoothScrollProvider.tsx. */}
+            <div
+              className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto rounded-2xl p-[1.5px]"
+              data-lenis-prevent
+            >
               {/* --sidebar-surface: a themed token (defaults to the
                   same lime-soft pastel this always was; dark mode
                   repoints it to a moss-tinted dark surface instead of
@@ -107,7 +150,7 @@ export default function DesignSystemOverview() {
             />
 
             <ApproachSection />
-
+{/* Foundations */}
             <GroupHeading title="Foundations" />
             <ColorsSection />
             <TypographySection />
@@ -118,10 +161,12 @@ export default function DesignSystemOverview() {
             <MotionSection />
             <AccessibilitySection />
 
+{/* Components */}
             <GroupHeading title="Components" />
             <ButtonsSection />
             <CardsSection />
             <ModalsSection />
+            <AccordianSection />
             <BadgesSection />
             <TooltipsSection />
             <FormsSection />

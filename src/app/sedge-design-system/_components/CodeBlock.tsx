@@ -42,7 +42,12 @@ export default function CodeBlock({
       >
         {copied ? <Check size={14} /> : <Copy size={14} />}
       </button>
-      <pre className="overflow-x-auto p-4 pr-12 text-xs leading-relaxed">
+      {/* data-lenis-prevent: horizontal code scroll is independent of
+          the page -- see SmoothScrollProvider.tsx. */}
+      <pre
+        className="overflow-x-auto p-4 pr-12 text-xs leading-relaxed"
+        data-lenis-prevent
+      >
         <code className="font-mono text-zinc-100"
         style={{ color: "var(--indigo-soft)" }}>{code.trim()}</code>
       </pre>

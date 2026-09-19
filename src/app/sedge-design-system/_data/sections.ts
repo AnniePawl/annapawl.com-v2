@@ -15,6 +15,7 @@ import {
   MessageSquareText,
   FormInput,
   Brain,
+  ListChevronsUpDown
 } from "lucide-react";
 
 export type SectionGroup = "Intro" | "Foundations" | "Components";
@@ -77,6 +78,12 @@ export const SECTIONS: NavSection[] = [
     id: "buttons",
     title: "Buttons",
     icon: SquareMousePointer,
+    group: "Components",
+  },
+  {
+    id: "accordian",
+    title: "Accordian",
+    icon: ListChevronsUpDown,
     group: "Components",
   },
   { id: "cards", title: "Cards", icon: CreditCard, group: "Components" },

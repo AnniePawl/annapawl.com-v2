@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import ThemeProvider from "./_components/ThemeProvider";
+import SmoothScrollProvider from "./_components/SmoothScrollProvider";
 import "./theme.css";
+import "./smooth-scroll.css";
 
 // Nested layouts in the App Router must NOT render <html>/<body> — only the
 // root layout (src/app/layout.tsx) does that, and it already loads Inter
@@ -27,5 +29,14 @@ export default function SedgeDesignSystemLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <ThemeProvider>{children}</ThemeProvider>;
+  // SmoothScrollProvider wraps ThemeProvider (order doesn't matter --
+  // they don't interact) and, like it, lives only at this route's
+  // layout level: mounted when someone enters the design system,
+  // torn down the moment they leave it, so no other page on the site
+  // ever picks up the smooth-scroll behavior.
+  return (
+    <SmoothScrollProvider>
+      <ThemeProvider>{children}</ThemeProvider>
+    </SmoothScrollProvider>
+  );
 }

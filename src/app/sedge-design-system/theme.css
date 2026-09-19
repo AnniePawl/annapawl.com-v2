@@ -10,7 +10,7 @@
    This is deliberately a thin *semantic* layer, not a second palette:
    every rule below just re-points an existing semantic token (defined
    once, for light mode, in foundations/color.css) at one of the earth-
-   tone *base* tokens also defined there (--peat/--bark/--ivory/--moss/
+   tone *base* tokens also defined there (--peat/--chocolate/--ivory/--moss/
    --ochre/--mauve, alongside the existing --sage/--clay). Because
    nearly every component in this codebase (button.css, card.css,
    poster.css, etc.) already reads colors through the semantic tokens
@@ -26,8 +26,8 @@
 [data-sedge-theme="dark"] {
   /* Backgrounds + surfaces */
   --bg-default: var(--peat);
-  --bg-subtle: var(--bark);
-  --surface: var(--bark);
+  --bg-subtle: var(--chocolate);
+  --surface: var(--chocolate);
 
   /* `color` (not just the --text-primary variable) needs to be set
      explicitly here, on the element the attribute actually lives on.
@@ -50,18 +50,18 @@
 
   /* Text */
   --text-primary: var(--ivory);
-  --text-secondary: color-mix(in srgb, var(--ivory) 82%, var(--bark) 18%);
-  --text-muted: color-mix(in srgb, var(--ivory) 60%, var(--bark) 40%);
+  --text-secondary: color-mix(in srgb, var(--ivory) 82%, var(--chocolate) 18%);
+  --text-muted: color-mix(in srgb, var(--ivory) 60%, var(--chocolate) 40%);
 
   /* Borders */
-  --border-subtle: color-mix(in srgb, var(--ivory) 18%, var(--bark) 82%);
-  --border-strong: color-mix(in srgb, var(--ivory) 42%, var(--bark) 58%);
+  --border-subtle: color-mix(in srgb, var(--ivory) 18%, var(--chocolate) 82%);
+  --border-strong: color-mix(in srgb, var(--ivory) 42%, var(--chocolate) 58%);
 
   /* Interactive accent -- swapped from the sitewide blue to a warm
      terracotta (clay) so buttons/links/focus rings (--focus-ring-color
      is aliased to --accent in focus.css) read as part of the same warm
      earth-tone family instead of a cool blue sitting oddly on a peat/
-     bark page. --accent-hover/-active keep the same "mix toward black"
+     chocolate page. --accent-hover/-active keep the same "mix toward black"
      formula focus.css/button.css already use for the light-mode blue. */
   --accent: var(--clay-bold);
   --accent-soft: var(--clay-soft);
@@ -78,10 +78,10 @@
   /* Sidebar wrapper -- was a flat lime-soft pastel; here it becomes a
      moss-tinted dark surface instead of leaving a bright green box
      floating on a dark page (see page.tsx). */
-  --sidebar-surface: color-mix(in srgb, var(--moss-bold) 22%, var(--bark));
+  --sidebar-surface: color-mix(in srgb, var(--moss-bold) 22%, var(--chocolate));
 
   /* Elevation -- the light-mode shadow scale (elevation.css) is a soft
-     black shadow, which all but disappears against peat/bark. A faint
+     black shadow, which all but disappears against peat/chocolate. A faint
      light haze reads as "lifted" on a dark surface the same way a dark
      shadow does on a light one. */
   --shadow-xs: 0 1px 0 rgba(242, 233, 216, 0.05);
@@ -92,23 +92,39 @@
 
 /* ---- Sedge section backgrounds ----
    Section.tsx/PosterSection.tsx cycle through the palette's pastel
-   `-soft` tokens for each section's background (see
-   _data/sectionColor.ts) -- pure pastel blocks work in light mode but
-   would read as light-mode islands dropped onto a dark page, so dark
-   mode swaps to a subtle earth-tone tint over --bark instead (same
-   cycling logic, different destination -- see darkAccentForSection).
-   Both components set --section-bg-light/--section-bg-dark as inline
-   custom properties (per-section, since each section picks a different
-   color from the cycle); this is the shared rule that actually applies
-   whichever one is active. */
+   `-soft` tokens for each section (see _data/sectionColor.ts) and set
+   --section-bg-light/--section-bg-dark as inline custom properties
+   (per-section, since each section picks a different color from the
+   cycle); --section-bg-dark is still what dark mode fills with below,
+   but light mode's border is now one fixed color (--indigo-soft)
+   rather than reading --section-bg-light per section, so every
+   section gets the same quiet outline instead of one colored per its
+   spot in the cycle.
+
+   Light mode: no fill -- the section sits transparent on the page's
+   own neutral background, outlined by a thin 2px solid indigo-soft
+   border instead. Only `background`/`border` change here; corner
+   radius, padding and everything inside each section (swatches,
+   component examples, badges, buttons) are untouched, since those are
+   set elsewhere (Tailwind's rounded-xl/p-8 on Section.tsx, poster.css's
+   border-radius/padding on .poster-section, and each section's own
+   content).
+
+   Dark mode: unchanged from before -- pure pastel blocks would read as
+   light-mode islands dropped onto a dark page, so dark mode keeps its
+   original solid fill (a subtle earth-tone tint over --chocolate, see
+   darkAccentForSection) and explicitly has no border, so light mode's
+   new outline can't carry over. */
 .doc-section,
 .poster-section {
-  background: var(--section-bg-light);
+  background: transparent;
+  border: 2px solid var(--indigo-soft);
 }
 
 [data-sedge-theme="dark"] .doc-section,
 [data-sedge-theme="dark"] .poster-section {
   background: var(--section-bg-dark);
+  border: none;
 }
 
 /* ---- Theme toggle (HeroNav) ----
@@ -141,7 +157,7 @@
 }
 
 .theme-toggle-btn:hover {
-  color: var(--text-secondary);
+  color: var(--indigo-bold);
 }
 
 .theme-toggle-btn[aria-pressed="true"] {

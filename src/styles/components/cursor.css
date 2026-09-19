@@ -1,0 +1,47 @@
+.cc-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  box-sizing: border-box;
+  width: 8px;
+  height: 8px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: var(--cc-dot-color, var(--indigo-bold));
+
+  pointer-events: none;
+  z-index: 2147483647;
+  visibility: hidden;
+
+  transform: translate3d(-100px, -100px, 0);
+  will-change: transform;
+
+  transition:
+    width 150ms ease-out,
+    height 150ms ease-out,
+    background-color 150ms ease-out,
+    border-color 150ms ease-out;
+}
+
+.cc-cursor.cc-visible {
+  visibility: visible;
+}
+
+/* Dot becomes a hollow ring over enabled links/buttons. */
+.cc-cursor.cc-interactive {
+  width: 22px;
+  height: 22px;
+  background: transparent;
+  border-color: var(--cc-dot-color, #34313b);
+}
+
+html.cc-suppress-native {
+  cursor: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cc-cursor {
+    transition: none;
+  }
+}

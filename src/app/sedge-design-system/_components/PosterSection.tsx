@@ -33,7 +33,7 @@ export default function PosterSection({
   // components can never drift apart.
   const sectionThemeVars = {
     "--section-bg-light": `var(${bgToken})`,
-    "--section-bg-dark": `color-mix(in srgb, var(${darkAccentToken}) 20%, var(--bark))`,
+    "--section-bg-dark": `color-mix(in srgb, var(${darkAccentToken}) 20%, var(--chocolate))`,
   } as CSSProperties;
 
   return (

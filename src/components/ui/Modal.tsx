@@ -103,6 +103,13 @@ export default function Modal({
       onCancel={onClose}
       onClick={handleBackdropClick}
       aria-labelledby={title ? "modal-title" : undefined}
+      // Native <dialog>s render in the browser's top layer, above every
+      // ordinary stacking context -- including the custom cursor's fixed,
+      // z-indexed dot (components/ui/CustomCursor.tsx). Opting the whole
+      // modal out keeps the real OS cursor (and its own resize/text/
+      // pointer affordances) visible and correct while a dialog is open,
+      // rather than the dot silently disappearing underneath it.
+      data-cursor-native
     >
       {title ? (
         <div className="modal-header">
@@ -126,7 +133,13 @@ export default function Modal({
           </button>
         </div>
       ) : null}
-      <div className="modal-body">{children}</div>
+      {/* data-lenis-prevent is a no-op unless a page has mounted Lenis
+          (currently just sedge-design-system) -- when it has, this stops
+          Lenis from hijacking wheel input over the modal's own
+          independently-scrolling body. */}
+      <div className="modal-body" data-lenis-prevent>
+        {children}
+      </div>
     </dialog>
   );
 }

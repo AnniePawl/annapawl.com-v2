@@ -133,12 +133,12 @@
   --mauve-soft: #D8B4C4;
   --mauve-bold: #9C6B85;
 
-  /* Peat / bark / ivory — warm dark-mode neutrals, siblings of --cream/
+  /* Peat / chocolate / ivory — warm dark-mode neutrals, siblings of --cream/
      --charcoal above but warmer than --charcoal's neutral gray-black.
      Single values (no -soft/-bold pair), same pattern as --cream/
      --charcoal. */
-  --peat: #211A14;
-  --bark: #3A2E24;
+  --peat: #231f1c;
+  --chocolate: #503f35;
   --bark-soft: #4A3B2E;
   --ivory: #F2E9D8;
 
@@ -207,7 +207,7 @@
      Tailwind utility). Defaults to the same lime-soft pastel it already
      was; dark mode repoints this to a moss-tinted dark surface instead
      of just leaving a bright pastel green box floating on a dark page. */
-  --sidebar-surface: var(--lime-soft);
+  --sidebar-surface: var(--indigo-soft);
 
   /* =========================
      Focus

@@ -1,0 +1,26 @@
+/* ---- Sedge smooth scroll (SmoothScrollProvider.tsx) ----
+   Two small, self-scoping rules that only ever matter while Lenis is
+   actually mounted -- both target the `lenis`/`lenis-smooth` classes
+   Lenis itself adds to <html> for the lifetime of the instance and
+   removes again in destroy(), so these are inert everywhere else on
+   the site, not just visually but literally (the selectors can't
+   match without that class present). */
+
+/* globals.css never sets `scroll-behavior: smooth` in the first place
+   (only `auto`, and only under prefers-reduced-motion), so there's no
+   real conflict today -- this is a defensive guard, straight from
+   Lenis's own docs, against a *native* CSS smooth-scroll ever
+   double-animating on top of Lenis's own JS-driven easing. */
+html.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+/* Elements marked data-lenis-prevent (the sidebar's own scroll
+   column, code blocks, the mobile chip strip, modal bodies) already
+   stop Lenis from hijacking wheel input over them; this stops the
+   scroll from also *chaining* into the page behind them once they
+   hit their own scroll limit, the CSS-only equivalent for nested
+   scroll containers. */
+[data-lenis-prevent] {
+  overscroll-behavior: contain;
+}

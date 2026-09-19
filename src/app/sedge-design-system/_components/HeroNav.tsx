@@ -17,15 +17,20 @@ import "./logo.css";
 // deleted outright.
 const NAV_GROUPS: SectionGroup[] = ["Intro", "Foundations", "Components"];
 
+
+type HeroNavProps = {
+  sections: NavSection[];
+  activeId: string;
+  onSelect: (id: string) => void;
+  onScrollToTop: () => void;
+};
+
 export default function HeroNav({
   sections,
   activeId,
   onSelect,
-}: {
-  sections: NavSection[];
-  activeId: string;
-  onSelect: (id: string) => void;
-}) {
+  onScrollToTop,
+}: HeroNavProps) {
   const activeGroup = sections.find((s) => s.id === activeId)?.group;
 
   return (
@@ -45,40 +50,57 @@ export default function HeroNav({
             <Shape variant="clover" /> untouched and stay
             noninteractive. `.focus-ring` gives it the same visible
             keyboard-focus indicator as the rest of the site. */}
-        <Link
-          href="/"
-          className="sedge-logo-link focus-ring flex items-center gap-3"
-        >
-          <svg
-            viewBox="0 0 200 200"
-            className="sedge-logo-mark h-8 w-8"
-            aria-hidden="true"
+        <div className="flex items-center gap-3">
+          <Link
+            href="/"
+            className="sedge-logo-link focus-ring"
           >
-            {(["NE", "SE", "SW", "NW"] as const).map((leaf) => (
-              <path
-                key={leaf}
-                className={
-                  leaf === "NE"
-                    ? "sedge-logo-leaf sedge-logo-leaf--ne"
-                    : "sedge-logo-leaf"
-                }
-                d={CLOVER_LEAF_PATHS[leaf]}
-              />
-            ))}
-          </svg>
-          <span className="flex items-baseline gap-2">
-            <span className="text-xl">Sedge</span>
-            <span aria-hidden="true" className="text-[var(--border-subtle)]">
-              |
+            <svg
+              viewBox="0 0 200 200"
+              className="sedge-logo-mark h-8 w-8"
+              aria-hidden="true"
+            >
+              {(["NE", "SE", "SW", "NW"] as const).map((leaf) => (
+                <path
+                  key={leaf}
+                  className={
+                    leaf === "NE"
+                      ? "sedge-logo-leaf sedge-logo-leaf--ne"
+                      : "sedge-logo-leaf"
+                  }
+                  d={CLOVER_LEAF_PATHS[leaf]}
+                />
+              ))}
+            </svg>
+             </Link>
+             <a href="#top"
+             onClick = {(e) => {
+              e.preventDefault();
+              onScrollToTop();
+             }}             >
+            <span className="flex items-baseline gap-2">
+              <span className="text-xl">Sedge</span>
+              <span aria-hidden="true" className="text-[var(--border-subtle)]">
+                |
+              </span>
+              <span className="text-sm text-[var(--text-secondary)]">
+                Design System
+              </span>
             </span>
-            <span className="text-sm text-[var(--text-secondary)]">
-              Design System
-            </span>
-          </span>
-        </Link>
+            </a>
+         
+        </div>
 
-        <div className="hidden items-center gap-4 md:flex">
-          <nav aria-label="Section groups" className="flex items-center gap-1">
+        {/* Nav pills + divider stay desktop-only (MobileNav.tsx below the
+            hero covers section navigation on small screens instead), but
+            the theme toggle doesn't hide with them -- switching light/dark
+            needs to stay reachable on mobile too, so it sits outside the
+            md:flex pills group in an always-visible wrapper. */}
+        <div className="flex items-center gap-2 md:gap-4">
+          <nav
+            aria-label="Section groups"
+            className="hidden items-center gap-1 md:flex"
+          >
             {NAV_GROUPS.map((group) => {
               const target = sections.find((s) => s.group === group);
               const isActive = activeGroup === group;
@@ -97,13 +119,13 @@ export default function HeroNav({
                     "rounded-[var(--radius-pill)] px-4 py-2 text-sm font-medium transition",
                     isActive
                       ? // bg-indigo-soft is a base palette token, not a
-                        // themed one -- it stays the same light pastel in
-                        // both themes on purpose (see theme.css's top
-                        // comment), so its text needs to stay a fixed dark
-                        // color too rather than following --text-primary
-                        // (which turns near-white in dark mode and would
-                        // go invisible against this pill).
-                        "bg-indigo-soft text-[var(--charcoal)]"
+                      // themed one -- it stays the same light pastel in
+                      // both themes on purpose (see theme.css's top
+                      // comment), so its text needs to stay a fixed dark
+                      // color too rather than following --text-primary
+                      // (which turns near-white in dark mode and would
+                      // go invisible against this pill).
+                      "bg-indigo-soft text-[var(--charcoal)]"
                       : "text-[var(--text-secondary)] hover:bg-indigo-soft/30 hover:text-[var(--text-primary)]"
                   )}
                 >
@@ -113,7 +135,10 @@ export default function HeroNav({
             })}
           </nav>
 
-          <span aria-hidden="true" className="theme-toggle-divider" />
+          <span
+            aria-hidden="true"
+            className="theme-toggle-divider hidden md:block"
+          />
 
           <ThemeToggle />
         </div>

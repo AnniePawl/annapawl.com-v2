@@ -51,8 +51,8 @@ export default function SidebarNav({
                         // *does* theme, so that one reads the themed
                         // --text-primary.
                         activeId === section.id
-                          ? "bg-indigo-soft font-medium text-[var(--charcoal)]"
-                          : "text-[var(--text-primary)] hover:bg-indigo-soft hover:text-[var(--charcoal)]"
+                          ? "bg-lime-soft font-medium text-[var(--charcoal)]"
+                          : "text-[var(--text-primary)] hover:bg-lime-soft/80 hover:text-[var(--charcoal)]"
                       )}
                     >
                       <Icon
@@ -60,7 +60,7 @@ export default function SidebarNav({
                           "h-4 w-4",
                           activeId === section.id
                             ? "text-violet-600"
-                            : "text-lime-600"
+                            : "text-[var(--lime-soft)]"
                         )}
                       />
                       <span>{section.title}</span>

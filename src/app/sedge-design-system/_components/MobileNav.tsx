@@ -16,9 +16,13 @@ export default function MobileNav({
   onSelect: (id: string) => void;
 }) {
   return (
+    // data-lenis-prevent: this strip scrolls horizontally on its own
+    // (overflow-x-auto), independent of the page -- see
+    // SmoothScrollProvider.tsx.
     <nav
       aria-label="Section navigation"
       className="no-scrollbar sticky top-0 z-10 -mx-2 mb-6 flex items-center gap-2 overflow-x-auto bg-[var(--bg-default)]/95 px-2 py-3 backdrop-blur-sm lg:hidden"
+      data-lenis-prevent
     >
       {sections.map((section, index) => {
         const Icon = section.icon;
