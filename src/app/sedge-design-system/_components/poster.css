@@ -27,6 +27,41 @@
   flex-shrink: 0;
 }
 
+/* ---- Phone widths (< Tailwind `sm`) ----
+   The section chrome above was sized for desktop: 48px (poster) / 32px
+   (doc) of padding on every side plus a 60px heading leaves ~230px of
+   content at 375px wide, and a long single-word title ("Accessibility",
+   "Typography") can't wrap, so it ran off the card and got clipped by
+   the page's horizontal-overflow guard (globals.css). Below `sm` the
+   padding tightens to --space-5, the icon is allowed to sit above the
+   title when they don't fit side by side, and the title scales with the
+   viewport (capped at --type-h1-size, which it reaches at ~630px, so
+   nothing changes from `sm` up). The 9.5vw slope is what lets the
+   longest title fit at 320px. */
+@media (width < 40rem) {
+  .poster-section,
+  .doc-section {
+    padding: var(--space-5);
+  }
+
+  .poster-heading,
+  .doc-section > div > h1 {
+    flex-wrap: wrap;
+    row-gap: var(--space-2);
+  }
+
+  .poster-heading,
+  .doc-section h1 {
+    font-size: clamp(1.875rem, 9.5vw, var(--type-h1-size));
+  }
+
+  /* GroupHeading.tsx -- same treatment for the Foundations / Components
+     dividers, which use the same H1 size. */
+  .group-heading {
+    font-size: clamp(1.75rem, 8vw, var(--type-h1-size));
+  }
+}
+
 .poster-body p {
   /* max-width: 64ch; */
   color: var(--text-secondary);

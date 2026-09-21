@@ -62,7 +62,9 @@
 /* ---- Typeface / Weight / Tones row ---- */
 .typo-grid-2 {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  /* minmax(0, ...) so the Usage code block can scroll inside its own
+     column instead of stretching the track (and the section) around it. */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
   gap: var(--space-6);
 }
 
@@ -190,4 +192,40 @@
   width: 100%;
   height: 6px;
   color: var(--text-secondary);
+}
+
+/* ---- Phone widths (< Tailwind `sm`) ----
+   Everything above assumes a wide card: a fixed 160px label column beside
+   the scale samples (with a dotted rail at left: 176px through the dots),
+   and 1fr/2fr grids whose tracks refuse to shrink below their content --
+   which is what let the Usage code block push the whole section ~250px
+   past the viewport. Below `sm` each scale row stacks (label above its
+   sample, rail + dots dropped since there's no column for them to
+   connect), the two-up grids become one column, and the footer note and
+   aside stack too. Samples keep their true documented size; the only
+   concession is that a single very long word may break rather than
+   overflow at the very narrowest widths. */
+@media (width < 40rem) {
+  .typo-scale-rail,
+  .typo-scale-dot {
+    display: none;
+  }
+
+  .typo-scale-row {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    row-gap: var(--space-2);
+  }
+
+  .typo-scale-sample {
+    overflow-wrap: anywhere;
+  }
+
+  .typo-grid-2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .typo-poster-footer {
+    flex-direction: column;
+  }
 }

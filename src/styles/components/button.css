@@ -100,6 +100,14 @@
   gap: var(--space-5);
 }
 
+/* Phone widths: four 1fr columns each hold a full-width button, which
+   can't shrink below its label. Two per row instead. */
+@media (width < 40rem) {
+  .button-state-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .state-cell {
   display: flex;
   flex-direction: column;

@@ -33,32 +33,123 @@ import FormsSection from "./_sections/forms";
 // scrollTo lands in exactly the same spot either path takes.
 const HEADER_SCROLL_OFFSET = 96;
 
+// Tailwind's `lg` (64rem) -- the point where the sidebar takes over from
+// MobileNav (section-switcher.css). Below it the page has a second sticky
+// layer (the section switcher) under the header.
+const DESKTOP_QUERY = "(min-width: 64rem)";
+
 export default function DesignSystemOverview() {
   const [activeId, setActiveId] = useState(SECTIONS[0].id);
+  // Height of everything sticky above the content (site header, plus the
+  // mobile section switcher when it's showing) and the viewport height --
+  // both feed the scroll-spy's observation band below.
+  const [stickyMetrics, setStickyMetrics] = useState({
+    inset: 0,
+    viewportHeight: 0,
+    isDesktop: true,
+  });
 
+  const rootRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
   const lenis = useLenis();
+
+  // Measures the two sticky layers and publishes them as CSS custom
+  // properties on the page root -- section-switcher.css positions the
+  // switcher under the header with them and reserves that same space above
+  // scrolled-to headings (scroll-margin-top). Measured rather than
+  // hardcoded because the header's height isn't fixed: it grows when its
+  // wordmark wraps at narrow widths. The switcher reports 0 while it's
+  // `display: none` on desktop, so the same math covers both layouts.
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    const header = root.querySelector<HTMLElement>(":scope > header");
+    const switcher = root.querySelector<HTMLElement>("[data-section-switcher]");
+
+    const sync = () => {
+      const headerHeight = header?.offsetHeight ?? 0;
+      const switcherHeight = switcher?.offsetHeight ?? 0;
+      root.style.setProperty("--sedge-header-h", `${headerHeight}px`);
+      root.style.setProperty("--sedge-switcher-h", `${switcherHeight}px`);
+
+      const next = {
+        inset: headerHeight + switcherHeight,
+        viewportHeight: window.innerHeight,
+        isDesktop: window.matchMedia(DESKTOP_QUERY).matches,
+      };
+      setStickyMetrics((prev) =>
+        prev.inset === next.inset &&
+        prev.viewportHeight === next.viewportHeight &&
+        prev.isDesktop === next.isDesktop
+          ? prev
+          : next
+      );
+    };
+
+    const resizeObserver = new ResizeObserver(sync);
+    if (header) resizeObserver.observe(header);
+    if (switcher) resizeObserver.observe(switcher);
+    window.addEventListener("resize", sync);
+    sync();
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", sync);
+    };
+  }, []);
 
   useEffect(() => {
     SECTIONS.forEach(({ id }) => {
       sectionRefs.current[id] = document.getElementById(id);
     });
 
+    // Desktop keeps the original band exactly: from 120px below the top
+    // of the viewport to 30% of the way down it. Below `lg` the switcher
+    // makes the sticky stack taller than 120px, so the band starts under
+    // both layers instead (and keeps a minimum height, so a short
+    // landscape-phone viewport can't collapse it to nothing).
+    const { inset, viewportHeight, isDesktop } = stickyMetrics;
+    let rootMargin = "-120px 0px -70% 0px";
+    if (!isDesktop && inset > 0) {
+      const top = Math.max(120, inset);
+      const band = Math.max(96, viewportHeight * 0.3 - 120);
+      const bottom = Math.max(0, viewportHeight - top - band);
+      rootMargin = `-${top}px 0px -${bottom}px 0px`;
+    }
+
     // root: null (the browser viewport) — the page now scrolls normally
     // instead of the old fixed-height, internally-scrolling <main>, now
     // that the hero + its sticky nav sit above the docs app. The extra
     // -120px of top margin accounts for that sticky nav's height so a
     // section isn't marked "active" while it's still hidden underneath it.
+    //
+    // A callback only carries the entries that *changed*, so the sections
+    // currently inside the band are tracked across callbacks: picking the
+    // top-most of just one batch could latch onto a section whose tail was
+    // still crossing the band (say, while a nav jump is mid-scroll) and
+    // then never be corrected once that tail left, since leaving fires
+    // no "new" visible entry.
+    const inBand = new Set<string>();
     const observer = new IntersectionObserver(
       (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        entries.forEach((e) => {
+          if (e.isIntersecting) inBand.add(e.target.id);
+          else inBand.delete(e.target.id);
+        });
 
-        if (visible[0]?.target?.id) setActiveId(visible[0].target.id);
+        const visible = [...inBand]
+          .map((id) => sectionRefs.current[id])
+          .filter((el): el is HTMLElement => el != null)
+          .sort(
+            (a, b) =>
+              a.getBoundingClientRect().top - b.getBoundingClientRect().top
+          );
+
+        if (visible[0]?.id) setActiveId(visible[0].id);
       },
       {
-        rootMargin: "-120px 0px -70% 0px",
+        rootMargin,
         threshold: [0.01, 0.1],
       }
     );
@@ -68,7 +159,7 @@ export default function DesignSystemOverview() {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [stickyMetrics]);
 
 
   // Scroll to section 
@@ -81,7 +172,15 @@ export default function DesignSystemOverview() {
       // offset keeps the section's heading clear of the sticky header,
       // same distance `scroll-mt-24` already reserves for the fallback
       // below and for native anchor/keyboard jumps Lenis doesn't drive.
-      lenis.scrollTo(el, { offset: -HEADER_SCROLL_OFFSET });
+      //
+      // Below `lg` the clearance is header + section switcher, which is
+      // taller than 96px and varies with the header's height -- it comes
+      // from the sections' scroll-margin-top (section-switcher.css),
+      // which Lenis already subtracts from its target, so no extra offset
+      // is added on top of it there. Desktop keeps the fixed offset it
+      // has always used.
+      const isDesktop = window.matchMedia(DESKTOP_QUERY).matches;
+      lenis.scrollTo(el, { offset: isDesktop ? -HEADER_SCROLL_OFFSET : 0 });
     } else {
       // No Lenis instance (prefers-reduced-motion, or not mounted yet) —
       // scrollIntoView finds whichever scrollable ancestor needs to move,
@@ -110,12 +209,15 @@ export default function DesignSystemOverview() {
 
 
   return (
-    <div className="min-h-screen bg-[var(--bg-default)]">
+    <div ref={rootRef} className="min-h-screen bg-[var(--bg-default)]">
       <HeroNav sections={SECTIONS} activeId={activeId} onSelect={scrollTo} onScrollToTop={scrollToTop}  />
       <Hero onExplore={() => scrollTo(SECTIONS[0].id)} />
 
       <div className="mx-auto max-w-7xl px-6 py-12">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[250px_1fr]">
+        {/* minmax(0, 1fr) rather than a bare 1fr: a 1fr track's minimum is its
+            content's min-content width, which left <main> ~800px wide (past
+            the viewport) between 1024px and ~1140px. Identical above that. */}
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[250px_minmax(0,1fr)]">
           <aside className="hidden lg:block">
             {/* data-lenis-prevent: this column scrolls independently of
                 the page (its own overflow-y-auto), so Lenis shouldn't

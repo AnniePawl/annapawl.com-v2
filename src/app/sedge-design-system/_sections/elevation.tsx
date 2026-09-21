@@ -21,7 +21,7 @@ export default function ElevationSection() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
+          gridTemplateColumns: "repeat(auto-fit, minmax(6rem, 1fr))",
           gap: 24,
           maxWidth: 720,
         }}

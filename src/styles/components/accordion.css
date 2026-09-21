@@ -1,0 +1,131 @@
+/* =========================================================
+   Accordion - soft editorial, single-open FAQ pattern.
+   See components/ui/Accordian.tsx for the component this styles.
+
+   Deliberately fixed to its own pale-lavender palette rather than the
+   semantic text and surface tokens, so it reads the same no matter
+   whether the surrounding page has the design system light theme or the
+   dark theme active - an intentional, always-light editorial treatment,
+   not a themed component.
+========================================================= */
+
+.accordion {
+  /* --accordion-bg: var(--indigo-soft); */
+  --accordion-line: var(--indigo-bold);
+  --accordion-text:var(--text-primary);
+  /* --accordion-muted: #6E6072; */
+
+  background: var(--accordion-bg);
+  border-radius: 26px;
+  padding: var(--space-6);
+}
+
+/* border-top on every item (including the first) is what gives the list
+   both "a line above the questions" and "a line between them" from one
+   rule, instead of separate first-child/divider cases. */
+.accordion-item {
+  border-top: 1px solid var(--accordion-line);
+}
+
+.accordion-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+  margin: 0;
+  padding: var(--space-5) 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-sans);
+}
+
+.accordion-number {
+  flex-shrink: 0;
+  width: 1.75rem;
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  font-variant-numeric: tabular-nums;
+  color: var(--accordion-muted);
+}
+
+.accordion-question {
+  flex: 1;
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-snug);
+  color: var(--accordion-text);
+}
+
+/* Small rounded plus/minus control. Both lines are drawn with ::before/
+   ::after rather than an icon component -- ::after simply rotates from
+   vertical (plus) to horizontal (minus, overlapping ::before) on open,
+   so there is nothing to swap and no layout shift. */
+.accordion-control {
+  position: relative;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--accordion-line);
+  background:var(--indigo-bold)
+}
+
+.accordion-control::before,
+.accordion-control::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 1.5px;
+  background: var(--accordion-text);
+  transform: translate(-50%, -50%);
+  transition: transform var(--motion-hover-duration) var(--motion-ease-standard);
+}
+
+.accordion-control::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.accordion-item.is-open .accordion-control::after {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+/* Smooth open/close without measuring heights: the 0fr/1fr grid-row
+   trick needs the panel always in the DOM (Accordian.tsx never
+   conditionally unmounts it), which is also what lets aria-hidden --
+   not the `hidden` attribute, which would fight the transition --
+   correctly pull it from the accessibility tree while collapsed.
+   --motion-duration-base (and --motion-hover-duration above) already
+   collapse to 0ms under prefers-reduced-motion via foundations/
+   motion.css, so reduced motion is respected here for free. */
+.accordion-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--motion-duration-base) var(--motion-ease-standard);
+}
+
+.accordion-item.is-open .accordion-panel {
+  grid-template-rows: 1fr;
+}
+
+.accordion-panel-inner {
+  overflow: hidden;
+}
+
+.accordion-answer {
+  margin: 0 0 var(--space-5);
+  /* Clears the number/control columns above it so the answer text
+     left/right edges still line up with the question text, not the
+     full bleed width of the row. */
+  padding-right: calc(28px + var(--space-4));
+  padding-left: calc(1.75rem + var(--space-4));
+  padding-bottom: calc(1rem);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--font-regular);
+  line-height: var(--leading-relaxed);
+  color: var(--accordion-muted);
+}

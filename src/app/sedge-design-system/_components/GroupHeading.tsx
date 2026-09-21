@@ -7,7 +7,7 @@
 export default function GroupHeading({ title }: { title: string }) {
   return (
     <div className="px-1">
-      <h2 className="h1">{title}</h2>
+      <h2 className="h1 group-heading">{title}</h2>
       <hr className="poster-divider mt-4 mb-0" />
     </div>
   );

@@ -243,3 +243,14 @@
   grid-template-columns: repeat(2, 1fr);
   margin-top: var(--space-5);
 }
+
+/* Phone widths: fixed 2/3/4-up columns can't shrink below their cards'
+   content, so the demo rows overflowed the section. One card per row. */
+@media (width < 40rem) {
+  .card-demo-grid,
+  .card-demo-grid--variants,
+  .card-demo-grid--examples,
+  .card-demo-grid--examples-wide {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
