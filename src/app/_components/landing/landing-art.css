@@ -1,0 +1,1982 @@
+/* ---- Landing page CSS-art illustrations (part 1) ----
+   Ported from the v1 CRA site's src/components/css-items/{books,dessert,
+   digitalClock,laptop}. All decorative -- every root node here is rendered
+   with aria-hidden="true" from the TSX side (art/*.tsx).
+
+   Conversion notes (apply to every file in landing-art.css):
+   - Sass $variables became CSS custom properties, scoped on each
+     illustration's own root class (rather than :root) so nothing here
+     leaks into the rest of the page -- same reasoning as the sedge design
+     system's component-scoped tokens.
+   - Sass arithmetic ($x * n) became calc(var(--x) * n) 1:1, so the
+     original constants stay visible and editable instead of being
+     baked into opaque literals.
+   - Sass's `&` nesting is kept as-is -- native CSS nesting (this repo's
+     Tailwind v4 / Lightning CSS pipeline) supports the same syntax, so no
+     `sass` package is needed for the port.
+   - The v1 site mounted exactly one of a desktop/tablet/mobile React tree
+     at a time (window.innerWidth in JS). This port keeps all three trees
+     in the DOM and switches which one is visible with CSS media queries
+     on the shelves themselves (landing.css, ".desktop-shelves" etc.) --
+     see that file. Because a hidden ancestor is `display: none`, none of
+     the breakpoint-specific selectors below need their own extra media
+     query: a `.mobile-books-container` never animates or receives
+     pointer events unless its ancestor `.mobile-shelves` is the one
+     current display is showing.
+   - A few genuinely dead rules from the source were dropped rather than
+     translated (they never matched anything, or were always immediately
+     overridden by a higher-specificity rule right below them in the same
+     file) -- noted inline where that happened. Nothing that ever
+     actually rendered was changed. */
+
+/* ============================================================
+   Books (horizontal stack) — src/components/css-items/books
+   ============================================================ */
+
+.books-container {
+  /* Base constants, shared by every .book--N below. */
+  --book-height: 22px;
+  --book-border-radius: 2px;
+  --book-width: calc(var(--book-height) * 4);
+  --book-pages: #fffefa;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.tablet-books-container,
+.desktop-books-container {
+  transform: translateY(-139px);
+}
+
+.mobile-books-container {
+  transform: scale(0.9) translateY(-126px);
+}
+
+.book {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--book-height);
+  width: var(--book-width);
+  border-radius: 2px;
+}
+
+/* Book 1 — color set below is the one that's actually visible: the
+   source declared a duller base color per book here, then immediately
+   overrode every one of them with a brighter "desktop" palette via a
+   higher-specificity descendant selector applied to all three
+   breakpoints. Porting straight to the color that always won, rather
+   than keeping two layers where the first never shows. */
+.book--1 {
+  position: relative;
+  z-index: 5;
+  margin-left: -3px;
+  background-color: #aa90e7;
+  height: calc(var(--book-height) * 0.8);
+  width: calc(var(--book-width) * 0.8);
+  border-top-left-radius: var(--book-border-radius);
+  border-bottom-left-radius: var(--book-border-radius);
+
+  &::after {
+    content: "";
+    height: calc(var(--book-height) * 0.5);
+    width: calc(var(--book-width) * 0.99);
+    border-top-left-radius: calc(var(--book-border-radius) * 0.5);
+    border-bottom-left-radius: calc(var(--book-border-radius) * 0.5);
+    margin-left: 4%;
+    background-image: repeating-linear-gradient(
+      var(--book-pages) 0 2.5px,
+      lightgray 2.5px 4px
+    );
+  }
+}
+
+.book--2 {
+  background-color: #5796e9;
+  border-top-left-radius: var(--book-border-radius);
+  border-bottom-left-radius: var(--book-border-radius);
+  margin-right: 1.25%;
+  position: relative;
+  z-index: 4;
+
+  &::after {
+    content: "";
+    background-image: repeating-linear-gradient(
+      var(--book-pages) 0 3px,
+      lightgray 3px 4.5px
+    );
+    border-top-left-radius: calc(var(--book-border-radius) * 0.5);
+    border-bottom-left-radius: calc(var(--book-border-radius) * 0.5);
+    height: calc(var(--book-height) * 0.75);
+    width: calc(var(--book-width) * 0.99);
+    margin-left: 3%;
+  }
+
+  &::before {
+    content: "";
+    margin-right: 50%;
+    height: calc(var(--book-height) * 0.4);
+    position: absolute;
+    border-left: 4px solid #414141;
+    border-right: 4px solid #414141;
+    border-bottom: 4px solid transparent;
+  }
+}
+
+.book--3 {
+  position: relative;
+  z-index: 3;
+  margin-left: 1%;
+  width: calc(var(--book-width) * 1.1);
+  justify-content: space-around;
+  background-image: linear-gradient(#ffe5aa 0 60%, #ffc876 60% 40%);
+
+  &::before {
+    content: "";
+    height: calc(var(--book-height) * 0.6);
+    width: calc(var(--book-width) * 0.3);
+    background-image: linear-gradient(#c4c5ff 0 65%, #9d9ee7 65% 100%);
+  }
+
+  &::after {
+    content: "";
+    height: var(--book-height);
+    width: calc(var(--book-width) * 0.2);
+    background-image: linear-gradient(#c4c5ff 0 60%, #9d9ee7 60% 100%);
+    border-top-right-radius: var(--book-border-radius);
+    border-bottom-right-radius: var(--book-border-radius);
+    margin-right: calc(var(--book-width) * -0.23);
+  }
+}
+
+.book--4 {
+  position: relative;
+  z-index: 2;
+  width: calc(var(--book-width) * 1.2);
+  height: calc(var(--book-height) * 1.15);
+  border-right: 9px double #414141;
+  border-left: 9px double #414141;
+  background-image: linear-gradient(#b4ffdc 0 60%, #7cedb8 60% 100%);
+
+  &::before {
+    content: "";
+    border-left: 10px double #414141;
+    height: calc(var(--book-height) * 1.15);
+    padding: 2px;
+  }
+
+  &::after {
+    content: "";
+    border-left: 3px solid #414141;
+    height: calc(var(--book-height) * 1.15);
+  }
+}
+
+.book--5 {
+  width: calc(var(--book-width) * 1.4);
+  height: calc(var(--book-height) * 1.2);
+  background-image: linear-gradient(#92c1ff 0 65%, #5796e9 65% 100%);
+
+  &::before {
+    content: "";
+    margin-right: calc(var(--book-width) * 0.45);
+    border-right: 14px double #fff67f;
+    height: calc(var(--book-height) * 1.2);
+  }
+
+  &::after {
+    content: "";
+    border-radius: 1px;
+    width: calc(var(--book-width) * 0.35);
+    height: calc(var(--book-height) * 0.8);
+    background-image: linear-gradient(#fffcd7 0 65%, #fff67f 65% 100%);
+  }
+}
+
+/* Desktop: hover-triggered, one book at a time with a staggered delay.
+   Tablet/mobile: no hover available, so it plays automatically on a
+   loop instead -- same "reuse the illustration, change the trigger for
+   touch" idea used throughout. Source generated these five rules with a
+   Sass @for loop over a 6-entry delay list; unrolled by hand here since
+   the port isn't bringing in a Sass compiler. */
+.books-container:hover .book--1 {
+  animation: books-animation 1s 0s forwards;
+}
+.books-container:hover .book--2 {
+  animation: books-animation 1s 0.2s forwards;
+}
+.books-container:hover .book--3 {
+  animation: books-animation 1s 0.4s forwards;
+}
+.books-container:hover .book--4 {
+  animation: books-animation 1s 0.6s forwards;
+}
+.books-container:hover .book--5 {
+  animation: books-animation 1s 0.8s forwards;
+}
+
+.tablet-books-container .book--1,
+.mobile-books-container .book--1 {
+  animation: books-animation2 6s 0s infinite;
+}
+.tablet-books-container .book--2,
+.mobile-books-container .book--2 {
+  animation: books-animation2 6s 0.2s infinite;
+}
+.tablet-books-container .book--3,
+.mobile-books-container .book--3 {
+  animation: books-animation2 6s 0.4s infinite;
+}
+.tablet-books-container .book--4,
+.mobile-books-container .book--4 {
+  animation: books-animation2 6s 0.6s infinite;
+}
+.tablet-books-container .book--5,
+.mobile-books-container .book--5 {
+  animation: books-animation2 6s 0.8s infinite;
+}
+
+@keyframes books-animation {
+  100% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes books-animation2 {
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* ============================================================
+   Books2 (vertical stack) — src/components/css-items/books
+   ============================================================ */
+
+.v-books-container {
+  --v-book-height: 83px;
+  --v-book-width: calc(var(--v-book-height) * 0.27);
+  --book-end-height: 55px;
+  --book-end-width: 10px;
+
+  display: flex;
+  align-items: flex-end;
+  transform: translateY(-121px) scale(1.1);
+}
+
+.mobile-books2-container {
+  transform: translateY(-100px);
+}
+
+.tablet-books2-container {
+  transform: translateY(-158px) scale(1.1);
+}
+
+.v-book-end {
+  height: var(--book-end-height);
+  width: var(--book-end-width);
+  background-color: #7ab1fd;
+
+  &::after {
+    content: "";
+    display: flex;
+    height: var(--book-end-width);
+    width: calc(var(--book-end-height) * 0.6);
+    background-image: linear-gradient(to bottom, #417ecc 30%, #7ab1fd 30%);
+    background-color: #7ab1fd;
+    transform: translateX(-33px) translateY(45px);
+  }
+}
+
+.v-book {
+  height: var(--v-book-height);
+  width: var(--v-book-width);
+  border-radius: 2px;
+}
+
+.v-book--1 {
+  height: calc(var(--v-book-height) * 1.15);
+  border-top-left-radius: 1px;
+  border-bottom-left-radius: 1px;
+  background-image: linear-gradient(to right, #ffcbf5 0 50%, #ffe1fa 50% 40%);
+
+  &::before {
+    content: "";
+    display: flex;
+    border-top: 14px double #414141;
+    height: calc(var(--v-book-width) * 0.5);
+    transform: translateY(10px);
+  }
+
+  &::after {
+    content: "";
+    display: flex;
+    border-top: 14px double #414141;
+    height: calc(var(--v-book-width) * 0.5);
+    transform: translateY(60px);
+  }
+}
+
+.v-book--2 {
+  width: calc(var(--v-book-width) * 0.8);
+  background-image: linear-gradient(to right, #ffd787 0 50%, #ffef91 50% 40%);
+
+  &::before {
+    content: "";
+    display: flex;
+    border-top: 14px double #7ab1fd;
+    height: calc(var(--v-book-width) * 0.2);
+    transform: translateY(61.5px) translateX(0px);
+  }
+
+  &::after {
+    content: "";
+    display: flex;
+    border-top: 14px double #7ab1fd;
+    height: calc(var(--v-book-width) * 0.2);
+    transform: translateY(-6px) translateX(0);
+  }
+}
+
+.v-book--3 {
+  position: relative;
+  z-index: 3;
+  height: calc(var(--v-book-height) * 1.08);
+  justify-content: space-around;
+  background-image: linear-gradient(to right, #c9b6ff 0 50%, #dcd0ff 50% 40%);
+
+  &::before {
+    content: "";
+    display: flex;
+    border-top: 6.5px double #ccffe7;
+    border-bottom: 6.5px double #ccffe7;
+    height: calc(var(--v-book-width) * 0.5);
+    transform: translateY(8px);
+  }
+
+  &::after {
+    content: "";
+    display: flex;
+    border-top: 6.5px double #ccffe7;
+    border-bottom: 6.5px double #ccffe7;
+    height: calc(var(--v-book-width) * 0.5);
+    transform: translateY(55px);
+  }
+}
+
+.v-book--4 {
+  transform: rotate(-10deg) translate(7px);
+  height: calc(var(--v-book-height) * 0.95);
+  width: calc(var(--v-book-width) * 0.9);
+  background-image: linear-gradient(to right, #7ab1fd 0 50%, #a3c9ff 50% 100%);
+
+  &::before {
+    content: "";
+    display: flex;
+    border-top: 14px double #ffcbf6;
+    height: calc(var(--v-book-width) * 0.5);
+    transform: translateY(10px);
+  }
+
+  &::after {
+    border-radius: 0 0 1px 1px;
+    height: calc(var(--v-book-height) * 0.2);
+    width: calc(var(--v-book-width) * 0.9);
+    transform: translateY(40px) translateX(0px);
+    content: "";
+    display: flex;
+    background-image: linear-gradient(to right, #fdbaf2 0 50%, #ffd4f8 50%);
+  }
+}
+
+/* Same desktop-hover / tablet+mobile-autoplay split as Books above, and
+   same by-hand unroll of the source's Sass @for loop (over a 4-entry
+   delay list, used differently for the hover case vs. the autoplay
+   case -- kept faithful to that asymmetry rather than "fixed"). */
+.desktop-books2-container:hover .v-book--1 {
+  animation: v-books-animation 1s 0.2s forwards;
+}
+.desktop-books2-container:hover .v-book--2 {
+  animation: v-books-animation 1s 0.4s forwards;
+}
+.desktop-books2-container:hover .v-book--3 {
+  animation: v-books-animation 1s 0.6s forwards;
+}
+.desktop-books2-container:hover .v-book--4 {
+  animation: v-books-animation 1s 0.8s forwards;
+}
+
+.tablet-books2-container .v-book--1,
+.mobile-books2-container .v-book--1 {
+  animation: v-books-animation 5s 0s infinite;
+}
+.tablet-books2-container .v-book--2,
+.mobile-books2-container .v-book--2 {
+  animation: v-books-animation 5s 1s infinite;
+}
+.tablet-books2-container .v-book--3,
+.mobile-books2-container .v-book--3 {
+  animation: v-books-animation 5s 2s infinite;
+}
+.tablet-books2-container .v-book--4,
+.mobile-books2-container .v-book--4 {
+  animation: v-books-animation 5s 3s infinite;
+}
+
+@keyframes v-books-animation {
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* ============================================================
+   Dessert stand — src/components/css-items/dessert
+   ============================================================ */
+
+.dessert-container {
+  --glass-height: 80px;
+  --glass-width: 95px;
+  --cake-height: 27px;
+  --cake-width: 60px;
+  --stand-base-height: 20px;
+  --stand-base-width: 15px;
+  --cake-clr3: #9d8d83;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transform: scale(1.15) translateY(-113px);
+}
+
+.tablet-dessert-container {
+  transform: scale(1.15) translateY(-116px);
+}
+
+.mobile-dessert-container {
+  transform: translateY(-113px);
+}
+
+.tablet-dessert-container .dessert__spiral {
+  visibility: visible;
+}
+
+.dessert__stand-top {
+  display: flex;
+  position: relative;
+  z-index: 5;
+  justify-content: center;
+  height: var(--glass-height);
+  width: var(--glass-width);
+  background: linear-gradient(45deg, transparent 65%, #ffffffb6 80%),
+    radial-gradient(transparent 0 55%, #ffffffb6);
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #ffffff;
+  border-radius: 45% 45% 0 0;
+
+  &::before {
+    content: "";
+    border-radius: 50%;
+    height: calc(var(--glass-width) * 0.25);
+    width: calc(var(--glass-width) * 0.25);
+    border: 2px solid #ffffff;
+    background: linear-gradient(45deg, transparent 35%, #ffffffb6 60%);
+    transform: translateY(calc(var(--glass-height) * -0.3));
+  }
+}
+
+.dessert__stand-base {
+  z-index: 10;
+  display: flex;
+  align-content: center;
+  height: var(--stand-base-height);
+  width: var(--stand-base-width);
+  background: linear-gradient(to right, #5899f4 0 50%, #5899f4 50%);
+  transform: translateY(7px);
+
+  &::before {
+    content: "";
+    position: absolute;
+    height: 6px;
+    width: 30px;
+    background: linear-gradient(to right, #5899f4 0 50%, #5899f4 50%);
+    transform: translateY(var(--stand-base-height))
+      translateX(calc(var(--stand-base-width) / -2));
+    border-radius: 25px 25px 0 0;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: calc(var(--glass-width) * 1.25);
+    height: calc(var(--glass-width) * 0.12);
+    background: radial-gradient(circle at 50% 100%, #5899f4 75%, transparent 35%);
+    background-size: calc(var(--cake-width) / 4);
+    transform: translateY(-11px) translateX(calc(var(--glass-width) * -0.55));
+  }
+}
+
+/* Cake — the source's `border: px solid $cake-clr2;` line (missing a
+   numeric value) is invalid CSS and was silently ignored by every
+   browser anyway; dropped rather than translated. */
+.dessert__base {
+  z-index: 4;
+  transform: scale(0.9) translateY(calc(var(--cake-height) / 1.3));
+  position: absolute;
+  height: var(--cake-height);
+  width: var(--cake-width);
+  border-right: 2px solid var(--cake-clr3);
+  border-left: 2px solid var(--cake-clr3);
+  border-top: 2px solid var(--cake-clr3);
+  border-radius: 2px 2px 0 0;
+  background: linear-gradient(
+      45deg,
+      var(--cake-clr3) 0 25%,
+      transparent 0 75%,
+      var(--cake-clr3) 75%
+    ),
+    linear-gradient(45deg, var(--cake-clr3) 0 25%, transparent 0 75%, var(--cake-clr3) 75%);
+  background-color: #fffaa1;
+  background-size: calc(var(--cake-width) / 3) calc(var(--cake-width) / 3);
+  background-position: 0 0, calc(var(--cake-width) / 6) calc(var(--cake-width) / 6);
+
+  &::before {
+    content: "";
+    display: flex;
+    width: calc(var(--cake-width) * 0.8);
+    height: calc(var(--cake-height) / 2);
+    border-right: 2px solid var(--cake-clr3);
+    border-left: 2px solid var(--cake-clr3);
+    background: linear-gradient(
+      #a9fff6 0 20%,
+      rgb(255, 149, 141) 0 40%,
+      #a9fff6 0 60%,
+      rgb(255, 149, 141) 0 80%,
+      #a9fff6 0 80%
+    );
+    transform: translateX(calc(var(--cake-width) * 0.06))
+      translateY(calc(var(--cake-height) / -1.75));
+  }
+
+  &::after {
+    content: "";
+    display: flex;
+    border-right: 2px solid var(--cake-clr3);
+    border-left: 2px solid var(--cake-clr3);
+    border-top: 2px solid var(--cake-clr3);
+    border-radius: 4px 4px 0 0;
+    width: calc(var(--cake-width) * 0.8);
+    height: calc(var(--cake-height) / 1.8);
+    background: radial-gradient(circle at 50% 0%, rgb(255, 149, 141) 36%, #a9fff6 3%);
+    background-size: calc(var(--cake-width) / 6);
+    transform: translateX(calc(var(--cake-width) * 0.06))
+      translateY(calc(var(--cake-height) / -0.66));
+  }
+}
+
+.dessert__spiral {
+  visibility: hidden;
+  animation: spiral 10s linear infinite;
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  height: calc(var(--cake-height) * 4.7);
+  width: calc(var(--cake-height) * 4.7);
+  z-index: 1;
+  background: radial-gradient(transparent, transparent 65%),
+    conic-gradient(
+      transparent 0% 5%,
+      #ffea61b4 5% 10%,
+      transparent 10% 15%,
+      #ffea61b4 15% 20%,
+      transparent 20% 25%,
+      #ffea61b4 25% 30%,
+      transparent 30% 35%,
+      #ffea61b4 35% 40%,
+      transparent 40% 45%,
+      #ffea61b4 45% 50%,
+      transparent 50% 55%,
+      #ffea61b4 55% 60%,
+      transparent 60% 65%,
+      #ffea61b4 65% 70%,
+      transparent 70% 75%,
+      #ffea61b4 75% 80%,
+      transparent 80% 85%,
+      #ffea61b4 85% 90%,
+      transparent 90% 95%,
+      #ffea61b4 95% 100%
+    );
+}
+
+.dessert-container:hover .dessert__spiral {
+  visibility: visible;
+}
+
+@keyframes spiral {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================================
+   Digital clock — src/components/css-items/digitalClock
+   ============================================================ */
+
+.clock {
+  --clock-height: 55px;
+  --clock-width: 110px;
+
+  transform: translateY(-61px);
+  height: var(--clock-height);
+  width: var(--clock-width);
+  border: 2px solid #5796e9;
+  font-family: monospace;
+  color: white;
+  font-size: 1.15em;
+  font-weight: bold;
+  background-color: #fff896;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  position: relative;
+
+  &:hover {
+    animation: alarm 0.1s infinite;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    transform: translateX(calc(var(--clock-width) / 1.9));
+    background-image: repeating-linear-gradient(#5796e9 0 10%, #fff896 0 15%);
+    height: calc(var(--clock-height) / 2);
+    width: calc(var(--clock-height) / 9);
+    border-radius: 0 2px 2px 0;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    height: calc(var(--clock-height) / 15);
+    background-image: linear-gradient(to right, #ff92e2 0 40%, transparent 0 60%, #ff92e2 0 100%);
+    width: calc(var(--clock-height) / 2);
+    transform: translateY(calc(var(--clock-height) / -1.88))
+      translateX(calc(var(--clock-height) / -2));
+  }
+
+  p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 0;
+    width: calc(var(--clock-width) / 1.15);
+    border: 5px solid #292929;
+    border-radius: 2px;
+    padding: 5%;
+    background: linear-gradient(
+        to right,
+        transparent 0 64%,
+        #292929 0 67%,
+        transparent 0 100%
+      ),
+      linear-gradient(#9b9b9b 0 50%, #4d4d4d 0 100%);
+
+    &::before {
+      content: "";
+      position: absolute;
+      height: calc(var(--clock-height) / 9);
+      width: calc(var(--clock-width) / 1.2);
+      background-color: #5796e9;
+      transform: translateY(calc(var(--clock-height) / 1.8));
+    }
+  }
+}
+
+@keyframes alarm {
+  35% {
+    transform: translateY(-61px) rotate(10deg);
+  }
+  65% {
+    transform: translateY(-61px) rotate(-10deg);
+  }
+}
+
+/* Mobile/tablet: no hover, so the clock \"shakes\" automatically instead
+   of only on hover -- same reuse-the-illustration/change-the-trigger
+   idea as the other pieces. Not present in the v1 source (the JS-mounted
+   desktop-only clock never got this treatment on touch), added here so
+   the piece isn't inert outside of a mouse -- flagged in the final
+   report as a small port-time addition, not a visual regression. */
+.tablet-digitalClock-container.clock,
+.mobile-digitalClock-container.clock {
+  animation: alarm-mobile 1s infinite;
+}
+
+@keyframes alarm-mobile {
+  35% {
+    transform: translateY(-61px) rotate(10deg) scale(0.93);
+  }
+  65% {
+    transform: translateY(-61px) rotate(-10deg) scale(0.93);
+  }
+}
+
+/* ============================================================
+   Laptop — src/components/css-items/laptop
+   ============================================================ */
+
+.laptop-container {
+  --laptop-height: 125px;
+  --laptop-width: 175px;
+  --terminal-height: 95px;
+  --terminal-width: 145px;
+}
+
+.desktop-laptop-container {
+  transform: scale(0.97) translateY(-145px);
+}
+.desktop-laptop-container:hover .laptop__terminal p {
+  animation: typing-animation 5s steps(15) forwards, blink 1s infinite;
+}
+
+.mobile-laptop-container {
+  transform: scale(0.78) translateY(-160px);
+}
+.mobile-laptop-container .laptop__terminal p {
+  animation: typing-animation 4s steps(15) infinite, blink 1s infinite;
+}
+
+.tablet-laptop-container {
+  transform: scale(0.85) translateY(-154px);
+}
+.tablet-laptop-container .laptop__terminal p {
+  animation: typing-animation 4s steps(15) infinite, blink 1s infinite;
+}
+
+.laptop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--laptop-height);
+  width: var(--laptop-width);
+  border-radius: 5px 5px 0 0;
+  background-color: #fcffb3;
+  box-shadow: 0 0 0 1.5px #414141, 0 0 0 6px #ffffff, 0 0 10px black,
+    0 0 0 8px #5796e9;
+  z-index: 0;
+  position: relative;
+
+  &::before {
+    height: 16px;
+    width: 230px;
+    border-radius: 2px;
+    border-top: 2px solid #5796e9;
+    border-left: 2px solid #5796e9;
+    border-right: 2px solid #5796e9;
+    border-bottom: 3px solid #414141;
+    content: "";
+    position: absolute;
+    background-color: #ffffff;
+    transform: translateY(72px);
+    box-shadow: 0px 0px 1px rgb(178, 193, 212);
+  }
+
+  &::after {
+    content: " ";
+    position: absolute;
+    height: 4px;
+    width: 45px;
+    border-radius: 0 0 1.5px 1.5px;
+    background-image: linear-gradient(#b3b3b3 35%, #414141 10%);
+    transform: translateY(65px);
+  }
+
+  .laptop__screen {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    height: calc(var(--laptop-height) * 0.86);
+    width: calc(var(--laptop-width) * 0.94);
+    background-image: linear-gradient(45deg, #bfc8ff 65%, #aebcf2 65%);
+
+    &::before {
+      content: "";
+      position: absolute;
+      height: 7px;
+      width: 7px;
+      border-radius: 50%;
+      background-image: radial-gradient(
+        #abebff 0 20%,
+        #808080 20% 50%,
+        rgb(58, 58, 58) 50% 90%
+      );
+      transform: translateX(-5px) translateY(-58.5px);
+    }
+  }
+
+  .laptop__terminal {
+    position: relative;
+    transform: translateX(0px) translateY(-2px);
+    height: var(--terminal-height);
+    width: var(--terminal-width);
+    border-radius: 1.5px 1.5px 0 0;
+    background-color: #1111114f;
+    border-top: 7px solid #fdcfff;
+
+    &::before {
+      content: "🔴\00a0\00a0🟡\00a0\00a0🟢\00a0\00a0\00a0 \00a0\00a0\00a0📂 ~/ code / css-stuff";
+      position: absolute;
+      font-size: 3.5px;
+      transform: translateX(3px) translateY(-6.5px);
+    }
+
+    p {
+      padding: 4px;
+      color: white;
+      font-size: 12px;
+      font-family: menlo, monaco;
+      border-right: 1px solid white;
+      margin: 0;
+      width: 1.5ch;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  }
+}
+
+@keyframes typing-animation {
+  20%,
+  100% {
+    width: 85%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+/* ---- Landing page CSS-art illustrations (part 2) ----
+   Ported from newtonsCradle, radio, sewing (+ sewing-machine, pin-cushion,
+   tape), writing/pens, teacup and the shelves themselves. Same conversion
+   notes as landing-art-1.css. */
+
+/* ============================================================
+   Newton's cradle — src/components/css-items/newtonsCradle
+   ============================================================ */
+
+.newtonsCradle {
+  --frame-height: 100px;
+  --frame-width: 150px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tablet-newtonsCradle-container {
+  transform: scale(0.7) translateY(-165px);
+}
+
+.desktop-newtonsCradle-container {
+  transform: scale(0.7) translateY(-140px);
+}
+.desktop-newtonsCradle-container:hover .frame > div:first-child {
+  animation: swing1 2s ease infinite;
+}
+.desktop-newtonsCradle-container:hover .frame > div:last-child {
+  animation: swing2 2s infinite;
+}
+
+.mobile-newtonsCradle-container {
+  transform: scale(0.65) translateY(-146px) translateX(-20px);
+}
+
+.frame {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: var(--frame-height);
+  width: var(--frame-width);
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 0 0 3px #5796e9, 0 0 0 8px #bdffd3, 0 0 0 11px #5796e9;
+
+  &::before,
+  &::after {
+    content: "";
+    display: flex;
+    height: calc(var(--frame-height) * 0.1);
+    width: calc(var(--frame-width) * 0.15);
+    border: 2px solid #5796e9;
+    border-radius: 2px;
+    background-color: #bdffd3;
+  }
+
+  &::before {
+    transform: translateX(calc(var(--frame-width) * -0.1))
+      translateY(calc(var(--frame-width) * 0.01));
+  }
+
+  &::after {
+    transform: translateX(calc(var(--frame-width) * 0.1))
+      translateY(calc(var(--frame-width) * 0.01));
+  }
+}
+
+.sphere {
+  height: calc(var(--frame-width) * 0.15);
+  width: calc(var(--frame-width) * 0.15);
+  border: 2px solid #4372d1;
+  background: radial-gradient(
+    circle at 28% 28%,
+    white 0% 20%,
+    #ffe373 20% 60%,
+    #e7ba19 60% 100%
+  );
+  border-radius: 50%;
+  transform: translateY(-15px);
+  position: relative;
+
+  &::before {
+    content: "";
+    display: flex;
+    height: calc(var(--frame-height) * 0.64);
+    width: 2px;
+    background-color: #4372d1;
+    transform: translateX(calc(var(--frame-width) * 0.055))
+      translateY(calc(var(--frame-height) * -0.65));
+  }
+}
+
+.base {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(var(--frame-height) * 0.15);
+  width: calc(var(--frame-width) * 1.35);
+  border-radius: 4px 4px 0 0;
+  background-image: linear-gradient(rgb(163, 174, 255) 0 70%, #4372d1 70%);
+}
+
+@keyframes swing1 {
+  0% {
+    transform: rotate(0deg) translateY(-15px) translateX(0);
+  }
+  25% {
+    transform: rotate(20deg) translateY(-13px) translateX(-25px);
+  }
+  50%,
+  100% {
+    transform: rotate(0deg) translateY(-15px) translateX(0);
+  }
+}
+
+@keyframes swing2 {
+  0%,
+  50% {
+    transform: rotate(0deg) translateY(-15px) translateX(0);
+  }
+  75% {
+    transform: rotate(-20deg) translateY(-13px) translateX(25px);
+  }
+  100% {
+    transform: rotate(0deg) translateY(-15px) translateX(0);
+  }
+}
+
+/* ============================================================
+   Radio — src/components/css-items/radio
+   The source file has an un-themed base layer that a later "themed"
+   block always overrides at equal/higher specificity; only the themed,
+   actually-visible result is ported here (same "drop the dead layer"
+   treatment as Books above).
+   ============================================================ */
+
+.radio-container {
+  --radio-height: 95px;
+  --radio-width: 130px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.desktop-radio-container {
+  transform: scale(0.95) translateY(-108px);
+}
+.tablet-radio-container {
+  transform: scale(0.93) translateY(-92px);
+}
+.mobile-radio-container {
+  transform: scale(0.9) translateY(-96px);
+}
+
+.radio-top {
+  position: relative;
+  height: 25px;
+  width: var(--radio-width);
+  border-radius: 6px 6px 0 0;
+  background-color: #5796e9;
+  box-shadow: 0 0 0 2px #414141;
+
+  &::before {
+    /* antenna */
+    content: "";
+    position: absolute;
+    height: 38px;
+    width: 2px;
+    background-color: #414141;
+    transform: rotate(-25deg) translateY(-34px) translateX(38px);
+  }
+
+  &::after {
+    /* handle */
+    content: "";
+    position: absolute;
+    height: 10px;
+    width: 40px;
+    border-radius: 6px;
+    border: 3px solid #414141;
+    border-bottom: none;
+    transform: translateY(-9px) translateX(45px);
+  }
+}
+
+.radio-bottom {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  width: var(--radio-width);
+  padding: 0 8px;
+  border-radius: 0 0 6px 6px;
+  background-color: #7ab1fd;
+  box-shadow: 0 0 0 2px #414141;
+}
+
+.radio-display-station {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 26px;
+  width: 46px;
+  border-radius: 2px;
+  background-color: #292929;
+  color: #fff896;
+  font-family: monospace;
+  font-size: 0.75rem;
+}
+
+.radio-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.radio-button1,
+.radio-button2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: 2px solid #414141;
+  background-color: #ffcbe9;
+  color: #414141;
+  font-family: inherit;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+  transition: background-color var(--motion-hover-duration, 150ms) ease;
+}
+
+@media (hover: hover) {
+  .radio-button1:hover,
+  .radio-button2:hover {
+    background-color: #7ab1fd;
+  }
+}
+
+/* Speaker + antenna wobble: hover-triggered on desktop, automatic on
+   tablet/mobile since there's no hover to trigger it there. */
+.desktop-radio-container:hover .radio-top::before {
+  animation: antenna-wobble 0.6s ease-in-out infinite;
+}
+.tablet-radio-container .radio-top::before,
+.mobile-radio-container .radio-top::before {
+  animation: antenna-wobble 2s ease-in-out infinite;
+}
+
+@keyframes antenna-wobble {
+  50% {
+    transform: rotate(-15deg) translateY(-34px) translateX(38px);
+  }
+}
+
+/* ============================================================
+   Sewing scene — src/components/css-items/sewing
+   (Sewing.js composes Tape + PinCushion + SewingMachine)
+   ============================================================ */
+
+.sewing {
+  display: flex;
+  width: 335px;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.mobile-sewing-container {
+  transform: scale(0.88) translateY(-179px);
+}
+
+.desktop-sewing-container,
+.tablet-sewing-container {
+  transform: scale(1) translateY(-168px);
+}
+
+/* ---- Sewing machine ---- */
+
+.sewing-machine {
+  --sm-top-height: 50px;
+  --sm-top-width: 185px;
+  --sm-left-arm-width: 45px;
+  position: relative;
+}
+
+.needle {
+  position: absolute;
+  height: 20px;
+  width: 3.5px;
+  background-color: #ffcbe9;
+  transform: translateY(calc(var(--sm-top-height) + 11px))
+    translateX(calc(var(--sm-left-arm-width) / 2.2));
+
+  &::before {
+    content: "";
+    display: flex;
+    height: 18px;
+    width: 8px;
+    border-radius: 0.5px;
+    transform: translateX(-2px) translateY(3px);
+    background-image: linear-gradient(to bottom, #414141 0 20%, transparent 20% 85%, #414141 85%);
+  }
+
+  &::after {
+    content: "";
+    display: flex;
+    height: 15px;
+    width: 1px;
+    background-color: #414141;
+    transform: translateY(2px) translateX(1.2px);
+    border-radius: 0 0 50% 50%;
+  }
+}
+
+.thread {
+  height: 25px;
+  width: 16px;
+  transform: translateX(142px);
+  background-image: repeating-linear-gradient(35deg, #5796e9, #5796e9 0 5%, #fff896 5% 10%);
+
+  &::before {
+    content: "";
+    display: flex;
+    height: 25px;
+    width: calc(16px * 1.22);
+    border-radius: 2px;
+    transform: translateX(-2px);
+    background-image: linear-gradient(
+      to bottom,
+      #b8a0a0 0 10%,
+      #8f7777 10% 20%,
+      transparent 20% 80%,
+      #b8a0a0 80% 90%,
+      #8f7777 90%
+    );
+  }
+
+  &::after {
+    content: "";
+    display: flex;
+    height: 1px;
+    width: 105px;
+    background-color: #5796e9;
+    transform: translateX(-104px) translateY(-9.5px) rotate(-9.5deg);
+  }
+}
+
+.sewing-machine__top {
+  display: flex;
+  height: var(--sm-top-height);
+  width: var(--sm-top-width);
+  border-radius: 5px 5px 0 0px;
+  background-color: white;
+  box-shadow: 0 4px #5796e9, 0px 0px 4px rgb(169, 194, 250);
+
+  &::before {
+    content: "";
+    height: 11px;
+    width: var(--sm-left-arm-width);
+    position: absolute;
+    border-radius: 0 0 1px 1px;
+    transform: translateY(var(--sm-top-height));
+    box-shadow: 0 3px #5796e9;
+    background-color: white;
+  }
+
+  &::after {
+    content: "";
+    background-image: linear-gradient(#ffcbe9 0 80%, #414141 80%);
+    height: calc(var(--sm-top-height) * 0.3);
+    width: calc(var(--sm-top-height) * 0.8);
+    transform: translateX(calc(var(--sm-top-height) * 1.5))
+      translateY(calc(var(--sm-top-height) / 2.5));
+  }
+}
+
+.sewing-machine__right {
+  content: "";
+  height: 50px;
+  width: 50px;
+  background-color: white;
+  box-shadow: -4px 0px #5796e9, 0px 3px 2px #5796e9;
+  transform: translateX(135px);
+  position: relative;
+
+  &::before {
+    content: "";
+    height: calc(var(--sm-top-height) / 1.4);
+    width: calc(var(--sm-top-height) / 4);
+    position: absolute;
+    border-radius: 0 25% 25% 0;
+    transform: translateY(-20px) translateX(50px);
+    background-image: linear-gradient(to right, #ffcbe9 0 70%, #414141 70%);
+  }
+
+  &::after {
+    content: "";
+    display: flex;
+    height: calc(var(--sm-top-height) * 0.6);
+    width: 10px;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      #ffcbe9 0 10%,
+      #414141 10% 20%,
+      transparent 20% 40%
+    );
+    transform: translateX(18px) translateY(10px);
+  }
+}
+
+.sewing-machine__bottom {
+  height: 40px;
+  width: calc(var(--sm-top-width) + 15px);
+  border-radius: 5px 0 0 0px;
+  background-color: white;
+  transform: translateX(-15px);
+  box-shadow: 0 3px #5796e9, 0px 2px 2px #5796e9;
+
+  &::before {
+    content: "";
+    display: flex;
+    height: 85px;
+    width: 125px;
+    background-image: repeating-linear-gradient(
+        #fff896c5,
+        #fff896c5 5%,
+        #5796e980 5% 10%
+      ),
+      repeating-linear-gradient(90deg, rgba(255, 184, 223, 0.9), rgba(255, 184, 223, 0.9) 5%, transparent 5% 10%);
+    clip-path: polygon(30% 0%, 90% 0%, 90% 20%, 30% 45%);
+  }
+}
+
+.desktop-sewing-container > .sewing-machine:hover > .needle::after {
+  animation: needle-animation 0.2s infinite;
+}
+.desktop-sewing-container > .sewing-machine:hover > .thread {
+  animation: thread-animation 1s infinite;
+}
+.desktop-sewing-container > .sewing-machine:hover > .thread::after {
+  animation: thread-animation2 2s infinite;
+}
+.desktop-sewing-container > .sewing-machine:hover > .sewing-machine__bottom::before {
+  animation: fabric-animation 5s forwards;
+}
+
+.mobile-sewing-container > .sewing-machine > .needle::after,
+.tablet-sewing-container > .sewing-machine > .needle::after {
+  animation: needle-animation 0.2s infinite;
+}
+.mobile-sewing-container > .sewing-machine > .thread,
+.tablet-sewing-container > .sewing-machine > .thread {
+  animation: thread-animation 2s infinite;
+}
+.mobile-sewing-container > .sewing-machine > .thread::after,
+.tablet-sewing-container > .sewing-machine > .thread::after {
+  animation: thread-animation2 2s infinite;
+}
+.mobile-sewing-container > .sewing-machine > .sewing-machine__bottom::before,
+.tablet-sewing-container > .sewing-machine > .sewing-machine__bottom::before {
+  animation: fabric-animation 7s infinite;
+}
+
+@keyframes needle-animation {
+  50% {
+    transform: translateY(-4.5px) translateX(1.2px);
+  }
+}
+
+@keyframes thread-animation {
+  50% {
+    background-image: repeating-linear-gradient(35deg, #5796e9, #5796e9 2% 12%, #fff896 12% 16%);
+  }
+}
+
+@keyframes thread-animation2 {
+  50% {
+    transform-origin: center left;
+    transform: translateX(-105px) translateY(-1px) rotate(0deg);
+  }
+}
+
+@keyframes fabric-animation {
+  50% {
+    height: 200px;
+    width: 125px;
+  }
+}
+
+/* ---- Pin cushion + pins ---- */
+
+.pin-cushion-container {
+  transform: scale(0.85) translateY(1px);
+}
+
+.pin-cushion {
+  height: 6px;
+  width: 50px;
+  position: relative;
+  border-radius: 1px;
+  background-color: #fffefb;
+  box-shadow: 0 3px #414141;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    height: 22.5px;
+    box-shadow: 0 4px #ff6e6e;
+    width: 45px;
+    background-color: #ffcbe9;
+    border-radius: 10em 10em 0 0;
+    transform: translateY(-27px) translateX(2.4px);
+  }
+}
+
+.pin {
+  position: relative;
+  z-index: 5;
+  margin-right: 8.5px;
+  height: 20px;
+  width: 1px;
+  background-image: linear-gradient(to bottom, gray, #cfcfcf);
+
+  &::before {
+    position: absolute;
+    display: flex;
+    content: "";
+    height: 4px;
+    width: 4px;
+    border-radius: 50%;
+    background-color: #fc93d0;
+    border: 0.1em solid #ff7cc8;
+    transform: translateX(-1.4px) translateY(-4px);
+  }
+}
+
+.pins {
+  display: flex;
+  z-index: 5;
+  position: absolute;
+  justify-content: space-around;
+  transform: translateY(-32px);
+}
+
+.pin:nth-child(1) {
+  transform: rotate(-35deg) translateY(5px);
+}
+.pin:nth-child(2) {
+  transform: rotate(-20deg);
+}
+.pin:nth-child(3) {
+  transform: rotate(-9deg) translateY(-3px);
+}
+.pin:nth-child(4) {
+  transform: rotate(3deg) translateY(-3px);
+}
+.pin:nth-child(5) {
+  transform: rotate(20deg) translateY(-1px);
+}
+.pin:nth-child(6) {
+  transform: rotate(35deg) translateY(5px);
+}
+
+.pin-cushion-container:hover .pins .pin::before {
+  animation: pin-animation 0.5s infinite;
+}
+.mobile-pin-cushion .pins .pin::before,
+.tablet-pin-cushion .pins .pin::before {
+  animation: pin-animation 2s infinite;
+}
+
+@keyframes pin-animation {
+  50% {
+    background-color: #7ab1fd;
+    border: 0.1em solid #2165c6;
+  }
+}
+
+/* ---- Tape ---- */
+
+.tape {
+  position: relative;
+}
+
+.tape__top {
+  height: 11px;
+  width: 34px;
+  border-radius: 2px 0 0 1px;
+  background-color: #fdf7a1;
+  box-shadow: 0 2.75px #fdde51;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+  }
+
+  &::before {
+    height: 5.5px;
+    width: 34px;
+    background-image: repeating-linear-gradient(
+      to right,
+      transparent,
+      transparent 11%,
+      #414141 11%,
+      #414141 16%
+    );
+  }
+
+  &::after {
+    height: 0;
+    width: 0;
+    border-style: solid;
+    border-width: 14.3px 0 0 14.3px;
+    border-color: transparent transparent transparent #fdde51;
+    margin-left: 34px;
+  }
+}
+
+.tape__bottom {
+  height: 49.3px;
+  width: 11px;
+  position: absolute;
+  background-color: #fdf7a1;
+  margin-left: 34px;
+  margin-top: 3.3px;
+  box-shadow: 2.75px 0 #fdde51;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+  }
+
+  &::before {
+    height: 47.6px;
+    width: 55%;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 10%,
+      #414141 10%,
+      #414141 13%
+    );
+  }
+
+  &::after {
+    height: 11px;
+    width: 11px;
+    margin-top: 49.3px;
+    border-radius: 0 0 1px 1px;
+    box-shadow: 2.75px 0 #414141;
+    background-color: #414141;
+    border: 3.3px solid #c2c2c2;
+  }
+}
+
+.tape:hover .tape__bottom {
+  animation: tape-animation1 2s;
+}
+.tape:hover .tape__bottom::before {
+  animation: tape-animation2 2s;
+}
+.tape:hover .tape__bottom::after {
+  animation: tape-animation3 2s;
+}
+
+.mobile-tape .tape__bottom,
+.tablet-tape .tape__bottom {
+  animation: tape-animation1 6s 1s infinite;
+}
+.mobile-tape .tape__bottom::before,
+.tablet-tape .tape__bottom::before {
+  animation: tape-animation2 6s 1s infinite;
+}
+.mobile-tape .tape__bottom::after,
+.tablet-tape .tape__bottom::after {
+  animation: tape-animation3 6s 1s infinite;
+}
+
+@keyframes tape-animation1 {
+  50% {
+    height: 102px;
+  }
+}
+@keyframes tape-animation2 {
+  50% {
+    height: 102px;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 6%,
+      #414141 6%,
+      #414141 7.5%
+    );
+  }
+}
+@keyframes tape-animation3 {
+  50% {
+    transform: translateY(52.7px);
+  }
+}
+
+/* ============================================================
+   Pens + cup — src/components/css-items/writing (Pens.js)
+   ============================================================ */
+
+.desktop-pens-container,
+.tablet-pens-container {
+  transform: translateY(-155px) scale(0.98);
+}
+.mobile-pens-container {
+  transform: translateY(-151px) scale(0.93);
+}
+
+.cup-contents {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  transform: translateY(23px);
+}
+
+.cup {
+  border: 3px solid #ff9ae1;
+  position: relative;
+  height: 55px;
+  width: 54px;
+  border-radius: 0 0 2px 2px;
+  background-image: linear-gradient(to right, #ffdff0 0 50%, #fff8fa 50%);
+
+  &::before {
+    content: "";
+    display: flex;
+    height: 4.5px;
+    width: 59.4px;
+    border-radius: 1.5px;
+    background-image: linear-gradient(#ffe9f0 0 50%, #ff9ae1 50%);
+    transform: translateY(-4px) translateX(-5px);
+  }
+
+  &::after {
+    content: "";
+    display: flex;
+    height: 10.8px;
+    width: 43.2px;
+    border-right: 3px solid #ff9ae1;
+    border-left: 3px solid #ff9ae1;
+    border-bottom: 3px solid #ff9ae1;
+    border-radius: 0 0 1px 1px;
+    background-image: linear-gradient(to right, #ffdff0 0 50%, #fff8fa 50%);
+    transform: translateY(44px) translateX(2.5px);
+  }
+}
+
+.ruler {
+  display: flex;
+  position: relative;
+  z-index: 0;
+  height: 95px;
+  width: 18px;
+  border-radius: 1px;
+  transform: translateX(-5px) translateY(-15px) rotate(-8deg);
+  background-image: linear-gradient(to right, #ffc061 0 50%, #ffd494 50%);
+
+  &::before {
+    content: "";
+    display: flex;
+    height: 95px;
+    width: 10.8px;
+    transform: translateY(5px);
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 7%,
+      #4f4f4f 7%,
+      #4f4f4f 8.5%
+    );
+  }
+
+  &::after {
+    content: "";
+    height: 4.5px;
+    width: 4.5px;
+    border-radius: 50%;
+    background-color: #d4e7ff;
+    transform: translateY(3px) translateX(-4px);
+  }
+}
+
+.pen {
+  position: relative;
+  z-index: 1;
+  height: 65px;
+  width: 8px;
+  border-radius: 1px;
+  background-image: linear-gradient(to right, #ff92c9 0 50%, #fcbfe9 50%);
+  transform: translateX(-6px) translateY(20px);
+
+  &::before {
+    content: "";
+    position: absolute;
+    display: flex;
+    height: 7.2px;
+    width: 5.2px;
+    background-image: linear-gradient(to right, #414141 0 50%, #999999 50%);
+    transform: translateY(-7px) translateX(1.5px);
+    border-radius: 50% 50% 0 0;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    display: flex;
+    border-radius: 45%;
+    height: 24px;
+    width: 4px;
+    background-image: linear-gradient(to right, #414141 0 50%, #999999 50%);
+    transform: translateY(4px) translateX(2px);
+  }
+}
+
+.pencil {
+  position: relative;
+  height: 80px;
+  width: 3px;
+
+  &::before {
+    content: "";
+    display: flex;
+    height: 6px;
+    width: 6px;
+    border-radius: 1.5px 1.5px 0 0;
+    transform: translateY(-10px);
+    background-image: linear-gradient(to right, #ff5c4a 0 50%, #ff988d 50%);
+  }
+
+  &::after {
+    content: "";
+    display: flex;
+    height: 6px;
+    width: 3px;
+    background-color: #414141;
+    box-shadow: 3px 0px #bbbbbb;
+    transform: translateY(-10px);
+  }
+}
+
+.pencil--1 {
+  z-index: 0;
+  background-color: #f3d860;
+  box-shadow: 3px 0 #fff67f;
+  transform: rotate(-3deg) translateX(-6px);
+}
+
+.pencil--2 {
+  background-color: #5796e9;
+  box-shadow: 3px 0 #a3cbff;
+  transform: rotate(5deg) translatex(-1.5px);
+}
+
+@keyframes ruler-animation {
+  50% {
+    transform: translateX(-5px) translateY(-8px) rotate(-8deg);
+  }
+}
+@keyframes pen-animation {
+  50% {
+    transform: translateX(-6px) translateY(7px);
+  }
+}
+@keyframes pencil1-animation {
+  25% {
+    transform: rotate(-3deg) translateX(-5px) translateY(7px);
+  }
+}
+@keyframes pencil2-animation {
+  75% {
+    transform: rotate(5deg) translateX(-1px) translateY(10px);
+  }
+}
+
+.desktop-pens-container:hover .cup-contents .ruler {
+  animation: ruler-animation 3s infinite;
+}
+.desktop-pens-container:hover .cup-contents .pen {
+  animation: pen-animation 2s infinite;
+}
+.desktop-pens-container:hover .cup-contents .pencil--1 {
+  animation: pencil1-animation 2s infinite;
+}
+.desktop-pens-container:hover .cup-contents .pencil--2 {
+  animation: pencil2-animation 2s infinite;
+}
+
+.mobile-pens-container .cup-contents .ruler,
+.tablet-pens-container .cup-contents .ruler {
+  animation: ruler-animation 5.5s infinite;
+}
+.mobile-pens-container .cup-contents .pen,
+.tablet-pens-container .cup-contents .pen {
+  animation: pen-animation 4.5s infinite;
+}
+.mobile-pens-container .cup-contents .pencil--1,
+.tablet-pens-container .cup-contents .pencil--1 {
+  animation: pencil1-animation 4.5s infinite;
+}
+.mobile-pens-container .cup-contents .pencil--2,
+.tablet-pens-container .cup-contents .pencil--2 {
+  animation: pencil2-animation 4.5s infinite;
+}
+
+/* ============================================================
+   Teacup — src/components/css-items/teacup
+   ============================================================ */
+
+.teacup-container {
+  transform: scale(0.95) translateY(-64px);
+}
+
+.mobile-teacup-container {
+  transform: scale(0.95) translateY(-91px);
+}
+
+.teacup {
+  height: 60px;
+  width: 58px;
+  position: relative;
+  border: 2.5px solid #4890b4;
+  border-radius: 0 0 18px 18px;
+  background-image: linear-gradient(to right, #9adeed 0 50%, #d1fff5 50%);
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    transform: translateY(6px) translateX(40px);
+    height: 37px;
+    width: 34px;
+    border-radius: 50%;
+    border: 2.5px solid #4890b4;
+    background-image: radial-gradient(#eaf3ff 0% 40%, #4890b4 40% 50%, #d1fff5 50%);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    height: 35px;
+    width: 20px;
+    transform: translateY(0px) translateX(10px);
+    background-image: linear-gradient(
+        to right,
+        transparent 0 43%,
+        rgb(255, 141, 128) 43% 55%,
+        transparent 55%
+      ),
+      linear-gradient(to bottom, transparent 0 40%, rgb(255, 141, 128) 40%);
+  }
+}
+
+.teacup:hover + .steam {
+  animation: steam 2s ease-in-out;
+}
+
+.steam {
+  z-index: -1;
+  position: absolute;
+  height: 60px;
+  width: 48px;
+  transform: translateY(-75px) translateX(4px);
+  background: linear-gradient(to bottom, #eaf3ff, transparent),
+    repeating-radial-gradient(
+      circle at 25% 30%,
+      rgb(255, 158, 252) 0px,
+      rgb(255, 158, 252) 4px,
+      transparent 5px,
+      transparent 10px
+    ),
+    repeating-radial-gradient(
+      circle at 75% 50%,
+      rgb(255, 158, 252) 0px,
+      rgb(255, 158, 252) 4px,
+      transparent 5px,
+      transparent 10px
+    );
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  opacity: 1;
+}
+
+@keyframes steam {
+  50% {
+    transform: translateY(-95px) translateX(4px);
+  }
+}
+
+/* ============================================================
+   Shelves — src/components/css-items/shelves/shelves.scss
+   The wooden shelf + bracket that every item sits on, and the layout
+   containers for each breakpoint's set of shelves.
+   ============================================================ */
+
+.shelf {
+  height: 15px;
+  width: 63vw;
+  display: flex;
+  background-image: linear-gradient(#f1dbc1 0 70%, #7ab1fd 70% 100%);
+  justify-content: space-around;
+  box-shadow: 0 10px 15px -2px #a6cefc;
+  border-radius: 2px;
+
+  &::before,
+  &::after {
+    content: "";
+    margin-top: 15px;
+    background-image: linear-gradient(#f1dbc1 0 70%, #7ab1fd 70% 100%);
+    height: 20px;
+    width: 12px;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+  }
+}
+
+.desktop-shelves,
+.tablet-shelves {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 120vh;
+  min-height: 780px;
+  transform: scale(0.9);
+
+  .shelf-contents {
+    width: 63vw;
+    display: flex;
+    position: absolute;
+    justify-content: space-evenly;
+  }
+}
+
+.tablet-shelves {
+  .shelf {
+    width: 80vw;
+  }
+  .shelf-contents {
+    width: 80vw;
+  }
+}
+
+.mobile-shelves {
+  position: relative;
+  z-index: 0;
+  transform: scale(0.92);
+  height: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  .mobile-shelf {
+    width: 85vw;
+  }
+
+  .mobile-shelf-contents {
+    width: 85vw;
+    position: absolute;
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
+
+/* ============================================================
+   Reduced motion — disables every animation declared above, across
+   every illustration and every breakpoint (hover-triggered and
+   autoplay alike). Source (v1) had no reduced-motion handling at all.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .book--1,
+  .book--2,
+  .book--3,
+  .book--4,
+  .book--5,
+  .v-book--1,
+  .v-book--2,
+  .v-book--3,
+  .v-book--4,
+  .dessert__spiral,
+  .clock,
+  .laptop__terminal p,
+  .frame > div:first-child,
+  .frame > div:last-child,
+  .radio-top::before,
+  .needle::after,
+  .thread,
+  .thread::after,
+  .sewing-machine__bottom::before,
+  .pins .pin::before,
+  .tape__bottom,
+  .tape__bottom::before,
+  .tape__bottom::after,
+  .cup-contents .ruler,
+  .cup-contents .pen,
+  .cup-contents .pencil--1,
+  .cup-contents .pencil--2,
+  .teacup + .steam {
+    animation: none !important;
+  }
+}

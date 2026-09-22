@@ -1,0 +1,525 @@
+/* ---- Landing page shell ----
+   Ported from v1's App.js -> Main.js -> {Desktop,Tablet,Mobile}.js tree.
+   The source picked one of three React trees at runtime from
+   window.innerWidth (JS breakpoint switching, with a real SSR/hydration
+   risk in Next.js and a couple of live bugs -- an inconsistent mobile
+   threshold between the initial check and the resize handler, and a
+   resize listener re-subscribed on every render from a missing
+   useEffect dependency array).
+
+   This port instead renders all three sections (desktop / tablet /
+   mobile) every time and lets CSS decide which one is visible, the same
+   technique this design system already uses for MobileNav vs SidebarNav
+   in sedge-design-system. There's exactly one visible section at any
+   width (no gap at the boundaries), nothing here depends on
+   window.innerWidth, and resizing across a breakpoint no longer remounts
+   (and resets) whichever section becomes visible -- a small behavior
+   improvement over the source, not a visual one. */
+
+.landing-desktop-section,
+.landing-tablet-section,
+.landing-mobile-section {
+  display: none;
+}
+
+@media (min-width: 1000px) {
+  .landing-desktop-section {
+    display: flex;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 999px) {
+  .landing-tablet-section {
+    display: flex;
+  }
+}
+
+@media (max-width: 599px) {
+  .landing-mobile-section {
+    display: flex;
+  }
+}
+
+/* Landing-specific font stack. Montserrat is scoped to this subtree only
+   (via next/font's generated --font-montserrat variable, applied on the
+   outer .landing wrapper in Landing.tsx) -- the sitewide Inter setup in
+   layout.tsx / typography.css is untouched everywhere else on the site. */
+.landing {
+  --landing-font: var(--font-montserrat), var(--font-sans);
+  --landing-wall: #e8f1ff;
+  --landing-ink: #414141;
+  font-family: var(--landing-font);
+  color: var(--landing-ink);
+}
+
+.landing-heading {
+  font-family: var(--landing-font);
+  font-weight: 800;
+  color: var(--landing-ink);
+}
+
+/* Color-mode invert control (InvertClrBtn.js). Applied directly to
+   #landing-home / #landing-about via a toggled class, same technique as
+   the source (which used getElementById + classList.toggle) -- kept as
+   an imperative DOM call in Controls.tsx since it only ever runs inside
+   a client click handler, never during render, so it stays SSR-safe. */
+.invert-wrapper,
+.invert-wrapper2 {
+  filter: invert(1) hue-rotate(160deg) contrast(1) saturate(2);
+}
+
+/* ============================================================
+   Desktop section
+   ============================================================ */
+
+.landing-desktop-section {
+  width: 100%;
+}
+
+.landing-desktop-content {
+  display: flex;
+  flex-direction: column;
+  width: 73vw;
+  position: absolute;
+  right: 0;
+}
+
+.landing-desktop-about {
+  width: 27vw;
+  min-width: 320px;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #fafafa;
+  line-height: 25px;
+  font-size: 13px;
+  padding: 3.5%;
+}
+
+.landing-desktop-about-inner {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+}
+
+.landing-desktop-about h1 {
+  padding-top: var(--space-4, 1rem);
+  font-size: var(--text-3xl, 1.875rem);
+  letter-spacing: 0.02em;
+}
+
+.landing-desktop-about h2 {
+  font-size: var(--text-lg, 1.125rem);
+  font-weight: 500;
+  padding-top: 0.25rem;
+}
+
+.landing-desktop-about .landing-location {
+  color: #5088ea;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.landing-desktop-about p {
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+}
+
+.landing-desktop-shelves-container {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><circle cx='16' cy='16' r='8' fill='%23ff654a'/></svg>")
+      16 16, auto;
+  position: relative;
+  height: 100vh;
+  width: 73vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--landing-wall);
+  overflow: hidden;
+}
+
+/* ============================================================
+   Tablet section
+   ============================================================ */
+
+.landing-tablet-section {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--landing-wall);
+  overflow: hidden;
+  position: relative;
+}
+
+.landing-tablet-contact {
+  position: absolute;
+  margin-left: 10px;
+  bottom: 5px;
+  left: 0;
+}
+
+/* ============================================================
+   Mobile section
+   ============================================================ */
+
+.landing-mobile-section {
+  flex-direction: column;
+  width: 100%;
+}
+
+.landing-mobile-about {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4, 1rem);
+  padding: 4rem 2.5rem 2.5rem;
+}
+
+.landing-mobile-about h1 {
+  padding-bottom: 1.5rem;
+  font-weight: 800;
+  line-height: 21px;
+  flex: none;
+}
+
+.landing-mobile-about p {
+  font-size: 11.2px;
+  line-height: 19px;
+}
+
+.landing-mobile-shelves-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: var(--landing-wall);
+}
+
+.landing-mobile-footer {
+  height: 7vh;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--landing-ink);
+  font-size: 13px;
+}
+
+.landing-mobile-footer span {
+  color: #ff6464;
+}
+
+/* ============================================================
+   Legacy links (/dwc, /foodblog don't exist in this site yet) and
+   real links (a[href], e.g. /embroidery) share the same look as the
+   source's inline `text-blue-500 underline` treatment.
+   ============================================================ */
+
+.landing-inline-link,
+.landing-legacy-link {
+  color: #5088ea;
+  text-decoration: underline;
+  text-underline-offset: 1px;
+}
+
+.landing-legacy-link {
+  cursor: default;
+  text-decoration-style: dashed;
+}
+
+/* ============================================================
+   Info button (opens the "about this page" modal)
+   ============================================================ */
+
+.landing-info-btn {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--landing-ink);
+}
+
+.landing-info-btn svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+@media (hover: hover) {
+  .landing-info-btn:hover svg {
+    fill: #5796e9;
+    animation: landing-info-spin 0.5s;
+  }
+}
+
+@keyframes landing-info-spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.landing-desktop-about-info {
+  top: 20px;
+  right: 25px;
+}
+
+.landing-tablet-info {
+  top: 16px;
+  right: 16px;
+}
+
+.landing-mobile-info {
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+}
+
+/* ============================================================
+   Modal content (uses the shared ui/Modal component for dialog
+   semantics -- this just styles what goes inside it)
+   ============================================================ */
+
+.landing-modal-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3, 0.75rem);
+  flex-wrap: wrap;
+  margin-top: var(--space-2, 0.5rem);
+}
+
+.landing-modal-actions svg {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.4rem;
+}
+
+/* ============================================================
+   Controls: color slider + invert toggle (desktop only, same as source)
+   ============================================================ */
+
+.landing-controls {
+  position: absolute;
+  z-index: 20;
+}
+
+.landing-invert-btn {
+  position: absolute;
+  top: 3.5rem;
+  left: 1.25rem;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 20;
+}
+
+.landing-invert-btn img {
+  width: 1.75rem;
+  height: 1.75rem;
+  filter: saturate(2);
+  transition: transform var(--motion-hover-duration, 300ms) ease;
+}
+
+.landing-invert-btn[aria-pressed="true"] img {
+  transform: rotate(180deg);
+}
+
+.landing-color-slider-wrap {
+  position: absolute;
+  bottom: 14%;
+  left: 50%;
+  transform: translateX(-50%) scale(0.8);
+  z-index: 20;
+}
+
+.landing-color-slider {
+  width: min(500px, 70vw);
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  padding: 15px;
+}
+
+.landing-color-slider::-moz-range-track {
+  height: 8px;
+  border-radius: 20px;
+  box-shadow: inset 1px 1px 3px #46464680;
+  background: linear-gradient(
+    to right,
+    #ffc2c2 0%,
+    #fff2b3 17%,
+    #bdffc1 33%,
+    #bde8ff 50%,
+    #abb1ff 66%,
+    #ffbdec 83%,
+    #ffc2c8 100%
+  );
+}
+
+.landing-color-slider::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 20px;
+  box-shadow: inset 1px 1px 2px #57575780;
+  background: linear-gradient(
+    to right,
+    #ffbcbc 0%,
+    #fff1ad 17%,
+    #b8ffbd 33%,
+    #b0e4ff 50%,
+    #a7adff 66%,
+    #ffbbec 83%,
+    #ffa2ab 100%
+  );
+}
+
+.landing-color-slider::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgb(255, 255, 255);
+  box-shadow: inset 3px 3px 2px rgb(176, 176, 176);
+}
+
+.landing-color-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgb(98, 98, 98);
+  box-shadow: inset 3px 3px 2px rgb(0, 0, 0);
+  transform: translateY(-5px);
+}
+
+.landing-color-slider:hover {
+  cursor: grab;
+}
+
+/* ============================================================
+   Contact (Contact.js)
+   ============================================================ */
+
+.landing-contact {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3, 0.75rem);
+  margin-top: var(--space-6, 2rem);
+}
+
+.landing-contact-icons {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3, 0.75rem);
+}
+
+.landing-contact-icons a {
+  display: inline-flex;
+  color: var(--landing-ink);
+  transition: color var(--motion-hover-duration, 150ms) ease;
+}
+
+.landing-contact-icons svg {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+@media (hover: hover) {
+  .landing-contact-icons a:hover {
+    color: #5796e9;
+  }
+}
+
+.landing-envelope {
+  position: relative;
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.landing-envelope::before {
+  content: "";
+  display: block;
+  height: 25px;
+  width: 35px;
+  border: 3px solid var(--landing-ink);
+  border-radius: 1.5px;
+}
+
+.landing-envelope::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  width: 20.65px;
+  height: 0;
+  border-top: 1.5px solid var(--landing-ink);
+  transform-origin: left center;
+  transform: rotate(20deg);
+}
+
+.landing-envelope-flap2 {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 20.65px;
+  height: 0;
+  border-top: 1.5px solid var(--landing-ink);
+  transform-origin: right center;
+  transform: rotate(-20deg);
+  pointer-events: none;
+}
+
+.landing-copied-msg {
+  font-size: 12px;
+  color: #5796e9;
+  margin: 0;
+}
+
+.landing-copied-msg[data-visible="false"] {
+  opacity: 0;
+}
+
+.landing-copied-msg[data-visible="true"] {
+  animation: landing-envelope-clicked 2s forwards;
+}
+
+@keyframes landing-envelope-clicked {
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ============================================================
+   Shared reduced-motion + focus-safety for landing-only chrome
+   (the illustration animations' own reduced-motion block lives in
+   landing-art.css, next to the keyframes it disables)
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-info-btn svg,
+  .landing-invert-btn img,
+  .landing-copied-msg {
+    animation: none !important;
+    transition: none !important;
+  }
+}
