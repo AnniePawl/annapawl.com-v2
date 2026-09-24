@@ -1,0 +1,94 @@
+/* Styles for TeaCup.tsx (same folder). CSS-art conversion notes that
+   apply to every css-items stylesheet live at the top of landing.css. */
+
+/* ============================================================
+   Teacup — src/components/css-items/teacup
+   ============================================================ */
+
+.teacup-container {
+  transform: scale(0.95) translateY(-64px);
+}
+
+.mobile-teacup-container {
+  transform: scale(0.95) translateY(-91px);
+}
+
+.teacup {
+  height: 60px;
+  width: 58px;
+  position: relative;
+  border: 2.5px solid #4890b4;
+  border-radius: 0 0 18px 18px;
+  background-image: linear-gradient(to right, #9adeed 0 50%, #d1fff5 50%);
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    transform: translateY(6px) translateX(40px);
+    height: 37px;
+    width: 34px;
+    border-radius: 50%;
+    border: 2.5px solid #4890b4;
+    background-image: radial-gradient(#eaf3ff 0% 40%, #4890b4 40% 50%, #d1fff5 50%);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    height: 35px;
+    width: 20px;
+    transform: translateY(0px) translateX(10px);
+    background-image: linear-gradient(
+        to right,
+        transparent 0 43%,
+        rgb(255, 141, 128) 43% 55%,
+        transparent 55%
+      ),
+      linear-gradient(to bottom, transparent 0 40%, rgb(255, 141, 128) 40%);
+  }
+}
+
+.teacup:hover + .steam {
+  animation: steam 2s ease-in-out;
+}
+
+.steam {
+  z-index: -1;
+  position: absolute;
+  height: 60px;
+  width: 48px;
+  transform: translateY(-75px) translateX(4px);
+  background: linear-gradient(to bottom, #eaf3ff, transparent),
+    repeating-radial-gradient(
+      circle at 25% 30%,
+      rgb(255, 158, 252) 0px,
+      rgb(255, 158, 252) 4px,
+      transparent 5px,
+      transparent 10px
+    ),
+    repeating-radial-gradient(
+      circle at 75% 50%,
+      rgb(255, 158, 252) 0px,
+      rgb(255, 158, 252) 4px,
+      transparent 5px,
+      transparent 10px
+    );
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  opacity: 1;
+}
+
+@keyframes steam {
+  50% {
+    transform: translateY(-95px) translateX(4px);
+  }
+}
+
+/* Reduced motion -- disables this item's animations (hover-triggered
+   and autoplay alike). Source (v1) had no reduced-motion handling. */
+@media (prefers-reduced-motion: reduce) {
+  .teacup + .steam {
+    animation: none !important;
+  }
+}

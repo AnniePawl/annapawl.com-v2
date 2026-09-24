@@ -24,27 +24,12 @@ export function DesktopAbout() {
   return (
     <div id="landing-about" className="landing-desktop-about">
       <div className="landing-desktop-about-inner">
-        <h1 className="landing-heading">Anna Pawl</h1>
-        <h2>UX Engineer</h2>
+        <h1 className="">Anna</h1>
+        <h1 className="">Pawl</h1>
+        <h2>Design Engineer</h2>
         <p className="landing-location">Seattle, WA | New York, NY</p>
-        <p>
-          Hi! Welcome to my little corner of the internet. I&apos;m a
-          software engineer that appreciates delightful UX and a designer
-          who sees creativity in code. I specialize in ensuring that
-          aesthetic concepts translate seamlessly into functional
-          interfaces. I bridge development and design to craft intuitive,
-          engaging digital experiences. ✨
-          <br />
-          <br />
-          <strong>General nerdery: </strong>
-          <LegacyLink>CSS art</LegacyLink>, cello noodling,{" "}
-          <LegacyLink>forkplay</LegacyLink>, roller skating, hoarding
-          postage stamps,{" "}
-          <Link href="/embroidery" className="landing-inline-link">
-            embroidery
-          </Link>
-          , book club, thrifting for weird old treasures, spiraling down
-          internet rabbit holes 🐰
+        <p className='text-sm leading-4'>
+         Hi! Welcome to my little corner of the internet. I’m a software engineer who appreciates delightful UX and a designer who sees creativity in code. I bring thoughtful design to life through intuitive interactions, carefully crafted interfaces, and playful details. From the first sketch to the final implementation, I care as much about how an experience feels as how it works. ✨
         </p>
         <Contact />
       </div>
@@ -60,7 +45,7 @@ export function MobileAbout() {
         <br />
         Pawl
       </h1>
-      <p>
+      <p className='text-xs'>
         Hi! Welcome to my little corner of the internet. I&apos;m a software
         engineer that appreciates delightful UX and a designer who sees
         creativity in code. I specialize in ensuring that aesthetic

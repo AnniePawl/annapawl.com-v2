@@ -16,6 +16,39 @@
    (and resets) whichever section becomes visible -- a small behavior
    improvement over the source, not a visual one. */
 
+/* ---- CSS-art illustrations: css-items/<item>/ ----
+   Each shelf illustration lives in its own folder under css-items/
+   (books, dessert, digitalClock, laptop, newtonsCradle, radio, sewing,
+   shelves, teacup, writing), mirroring the v1 CRA site's
+   src/components/css-items/ layout: the .tsx component and its
+   stylesheet side by side, one import per component. Every decorative
+   root node is rendered with aria-hidden="true" from the TSX side.
+
+   Conversion notes (apply to every css-items stylesheet):
+   - Sass $variables became CSS custom properties, scoped on each
+     illustration's own root class (rather than :root) so nothing
+     leaks into the rest of the page -- same reasoning as the sedge design
+     system's component-scoped tokens.
+   - Sass arithmetic ($x * n) became calc(var(--x) * n) 1:1, so the
+     original constants stay visible and editable instead of being
+     baked into opaque literals.
+   - Sass's `&` nesting is kept as-is -- native CSS nesting (this repo's
+     Tailwind v4 / Lightning CSS pipeline) supports the same syntax, so no
+     `sass` package is needed.
+   - All three breakpoint trees stay in the DOM and CSS media queries
+     (below) decide which is visible. Because a hidden ancestor is
+     `display: none`, none of the breakpoint-specific item selectors need
+     their own media query: a `.mobile-books-container` never animates or
+     receives pointer events unless `.landing-mobile-section` is showing.
+   - A few genuinely dead rules from the source were dropped rather than
+     translated (they never matched anything, or were always immediately
+     overridden by a higher-specificity rule right below them in the same
+     file) -- noted inline where that happened. Nothing that ever
+     actually rendered was changed.
+   - Selectors are unique per item file (no two css-items stylesheets
+     style the same element), so the order Next.js concatenates them in
+     doesn't affect rendering. Keep it that way when adding rules. */
+
 .landing-desktop-section,
 .landing-tablet-section,
 .landing-mobile-section {
@@ -53,15 +86,15 @@
 }
 
 .landing-heading {
-  font-family: var(--landing-font);
+  /* font-family: var(--landing-font);
   font-weight: 800;
-  color: var(--landing-ink);
+  color: var(--landing-ink); */
 }
 
 /* Color-mode invert control (InvertClrBtn.js). Applied directly to
    #landing-home / #landing-about via a toggled class, same technique as
    the source (which used getElementById + classList.toggle) -- kept as
-   an imperative DOM call in Controls.tsx since it only ever runs inside
+   an imperative DOM call in css-items/shelves/InvertClrBtn.tsx since it only ever runs inside
    a client click handler, never during render, so it stays SSR-safe. */
 .invert-wrapper,
 .invert-wrapper2 {
@@ -92,7 +125,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background-color: #fafafa;
+  background-color: var(--bg-default);
   line-height: 25px;
   font-size: 13px;
   padding: 3.5%;
@@ -107,7 +140,10 @@
 .landing-desktop-about h1 {
   padding-top: var(--space-4, 1rem);
   font-size: var(--text-3xl, 1.875rem);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.05em;
+  font-weight:800;
+
+  /* padding-bottom:10px; */
 }
 
 .landing-desktop-about h2 {
@@ -120,11 +156,14 @@
   color: #5088ea;
   font-weight: 500;
   margin-bottom: 1.5rem;
+  font-family:Montserrat;
+  font-size:14px;
+  padding-top:4px;
 }
 
 .landing-desktop-about p {
   letter-spacing: 0.02em;
-  line-height: 1.4;
+  line-height: 2;
 }
 
 .landing-desktop-shelves-container {
@@ -147,7 +186,7 @@
 .landing-tablet-section {
   height: 100vh;
   width: 100vw;
-  display: flex;
+  /* display: flex; */
   align-items: center;
   justify-content: center;
   background-color: var(--landing-wall);
@@ -268,6 +307,15 @@
 .landing-desktop-about-info {
   top: 20px;
   right: 25px;
+  width: 44px;
+  height: 44px;
+  /* Keep the trigger above the positioned shelf background. */
+  z-index: 10;
+}
+
+.landing-desktop-about-info svg {
+  width: 28px;
+  height: 28px;
 }
 
 .landing-tablet-info {
@@ -301,112 +349,15 @@
 }
 
 /* ============================================================
-   Controls: color slider + invert toggle (desktop only, same as source)
+   Controls wrapper (desktop only, same as source). The color slider and
+   invert toggle themselves now live with the desktop shelves in
+   css-items/shelves/ (ColorSlider.tsx + color-slider.css,
+   InvertClrBtn.tsx + invert-clr-btn.css).
    ============================================================ */
 
 .landing-controls {
   position: absolute;
   z-index: 20;
-}
-
-.landing-invert-btn {
-  position: absolute;
-  top: 3.5rem;
-  left: 1.25rem;
-  width: 44px;
-  height: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  z-index: 20;
-}
-
-.landing-invert-btn img {
-  width: 1.75rem;
-  height: 1.75rem;
-  filter: saturate(2);
-  transition: transform var(--motion-hover-duration, 300ms) ease;
-}
-
-.landing-invert-btn[aria-pressed="true"] img {
-  transform: rotate(180deg);
-}
-
-.landing-color-slider-wrap {
-  position: absolute;
-  bottom: 14%;
-  left: 50%;
-  transform: translateX(-50%) scale(0.8);
-  z-index: 20;
-}
-
-.landing-color-slider {
-  width: min(500px, 70vw);
-  cursor: pointer;
-  -webkit-appearance: none;
-  appearance: none;
-  background-color: transparent;
-  padding: 15px;
-}
-
-.landing-color-slider::-moz-range-track {
-  height: 8px;
-  border-radius: 20px;
-  box-shadow: inset 1px 1px 3px #46464680;
-  background: linear-gradient(
-    to right,
-    #ffc2c2 0%,
-    #fff2b3 17%,
-    #bdffc1 33%,
-    #bde8ff 50%,
-    #abb1ff 66%,
-    #ffbdec 83%,
-    #ffc2c8 100%
-  );
-}
-
-.landing-color-slider::-webkit-slider-runnable-track {
-  height: 8px;
-  border-radius: 20px;
-  box-shadow: inset 1px 1px 2px #57575780;
-  background: linear-gradient(
-    to right,
-    #ffbcbc 0%,
-    #fff1ad 17%,
-    #b8ffbd 33%,
-    #b0e4ff 50%,
-    #a7adff 66%,
-    #ffbbec 83%,
-    #ffa2ab 100%
-  );
-}
-
-.landing-color-slider::-moz-range-thumb {
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  border: none;
-  background-color: rgb(255, 255, 255);
-  box-shadow: inset 3px 3px 2px rgb(176, 176, 176);
-}
-
-.landing-color-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  border: none;
-  background-color: rgb(98, 98, 98);
-  box-shadow: inset 3px 3px 2px rgb(0, 0, 0);
-  transform: translateY(-5px);
-}
-
-.landing-color-slider:hover {
-  cursor: grab;
 }
 
 /* ============================================================
@@ -511,13 +462,12 @@
 
 /* ============================================================
    Shared reduced-motion + focus-safety for landing-only chrome
-   (the illustration animations' own reduced-motion block lives in
-   landing-art.css, next to the keyframes it disables)
+   (each illustration's own reduced-motion block lives in its
+   css-items/<item>/*.css file, next to the keyframes it disables)
    ============================================================ */
 
 @media (prefers-reduced-motion: reduce) {
   .landing-info-btn svg,
-  .landing-invert-btn img,
   .landing-copied-msg {
     animation: none !important;
     transition: none !important;

@@ -1,0 +1,35 @@
+/* Positioned against the visible desktop shelf viewport, outside the inverted artwork. */
+
+.landing-invert-btn {
+  position: absolute;
+  top: 20px;
+  left: 25px;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 20;
+}
+
+.landing-invert-btn img {
+  width: 1.75rem;
+  height: 1.75rem;
+  filter: saturate(2);
+  transition: transform var(--motion-hover-duration, 300ms) ease;
+}
+
+.landing-invert-btn[aria-pressed="true"] img {
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-invert-btn img {
+    animation: none !important;
+    transition: none !important;
+  }
+}

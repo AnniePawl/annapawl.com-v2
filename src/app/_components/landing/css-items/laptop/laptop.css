@@ -1,0 +1,147 @@
+/* Styles for Laptop.tsx (same folder). CSS-art conversion notes that
+   apply to every css-items stylesheet live at the top of landing.css. */
+
+/* ============================================================
+   Laptop — src/components/css-items/laptop
+   ============================================================ */
+
+.laptop-container {
+  --laptop-height: 125px;
+  --laptop-width: 175px;
+  --terminal-height: 95px;
+  --terminal-width: 145px;
+}
+
+.desktop-laptop-container {
+  transform: scale(0.97) translateY(-145px);
+}
+.desktop-laptop-container:hover .laptop__terminal p {
+  animation: typing-animation 5s steps(15) forwards, blink 1s infinite;
+}
+
+.mobile-laptop-container {
+  transform: scale(0.78) translateY(-160px);
+}
+.mobile-laptop-container .laptop__terminal p {
+  animation: typing-animation 4s steps(15) infinite, blink 1s infinite;
+}
+
+.tablet-laptop-container {
+  transform: scale(0.85) translateY(-154px);
+}
+.tablet-laptop-container .laptop__terminal p {
+  animation: typing-animation 4s steps(15) infinite, blink 1s infinite;
+}
+
+.laptop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--laptop-height);
+  width: var(--laptop-width);
+  border-radius: 5px 5px 0 0;
+  background-color: #fcffb3;
+  box-shadow: 0 0 0 1.5px #414141, 0 0 0 6px #ffffff, 0 0 10px black,
+    0 0 0 8px #5796e9;
+  z-index: 0;
+  position: relative;
+
+  &::before {
+    height: 16px;
+    width: 230px;
+    border-radius: 2px;
+    border-top: 2px solid #5796e9;
+    border-left: 2px solid #5796e9;
+    border-right: 2px solid #5796e9;
+    border-bottom: 3px solid #414141;
+    content: "";
+    position: absolute;
+    background-color: #ffffff;
+    transform: translateY(72px);
+    box-shadow: 0px 0px 1px rgb(178, 193, 212);
+  }
+
+  &::after {
+    content: " ";
+    position: absolute;
+    height: 4px;
+    width: 45px;
+    border-radius: 0 0 1.5px 1.5px;
+    background-image: linear-gradient(#b3b3b3 35%, #414141 10%);
+    transform: translateY(65px);
+  }
+
+  .laptop__screen {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    height: calc(var(--laptop-height) * 0.86);
+    width: calc(var(--laptop-width) * 0.94);
+    background-image: linear-gradient(45deg, #bfc8ff 65%, #aebcf2 65%);
+
+    &::before {
+      content: "";
+      position: absolute;
+      height: 7px;
+      width: 7px;
+      border-radius: 50%;
+      background-image: radial-gradient(
+        #abebff 0 20%,
+        #808080 20% 50%,
+        rgb(58, 58, 58) 50% 90%
+      );
+      transform: translateX(-5px) translateY(-58.5px);
+    }
+  }
+
+  .laptop__terminal {
+    position: relative;
+    transform: translateX(0px) translateY(-2px);
+    height: var(--terminal-height);
+    width: var(--terminal-width);
+    border-radius: 1.5px 1.5px 0 0;
+    background-color: #1111114f;
+    border-top: 7px solid #fdcfff;
+
+    &::before {
+      content: "🔴\00a0\00a0🟡\00a0\00a0🟢\00a0\00a0\00a0 \00a0\00a0\00a0📂 ~/ code / css-stuff";
+      position: absolute;
+      font-size: 3.5px;
+      transform: translateX(3px) translateY(-6.5px);
+    }
+
+    p {
+      padding: 4px;
+      color: white;
+      font-size: 12px;
+      font-family: menlo, monaco;
+      border-right: 1px solid white;
+      margin: 0;
+      width: 1.5ch;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  }
+}
+
+@keyframes typing-animation {
+  20%,
+  100% {
+    width: 85%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+/* Reduced motion -- disables this item's animations (hover-triggered
+   and autoplay alike). Source (v1) had no reduced-motion handling. */
+@media (prefers-reduced-motion: reduce) {
+  .laptop__terminal p {
+    animation: none !important;
+  }
+}

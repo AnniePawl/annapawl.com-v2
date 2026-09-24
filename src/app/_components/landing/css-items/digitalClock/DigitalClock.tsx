@@ -10,6 +10,7 @@
 // statically prerendered at build time (a plain server-computed string
 // would instead freeze at whatever time the build ran).
 import { useEffect, useState } from "react";
+import "./digital-clock.css";
 
 export default function DigitalClock({ cn }: { cn?: string }) {
   const [time, setTime] = useState("");

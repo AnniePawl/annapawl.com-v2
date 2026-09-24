@@ -18,9 +18,12 @@ import { DesktopAbout, MobileAbout } from "./About";
 import { Contact } from "./Contact";
 import { Footer } from "./Footer";
 import { InfoButton } from "./InfoButton";
-import { DesktopShelves, TabletShelves, MobileShelves } from "./Shelves";
+import { ColorSlider } from "./css-items/shelves/ColorSlider";
+import { InvertClrBtn } from "./css-items/shelves/InvertClrBtn";
+import { DesktopShelves } from "./css-items/shelves/DesktopShelves";
+import { MobileShelves } from "./css-items/shelves/MobileShelves";
+import { TabletShelves } from "./css-items/shelves/TabletShelves";
 import "./landing.css";
-import "./landing-art.css";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -37,8 +40,12 @@ export function Landing() {
         <DesktopAbout />
         <div className="landing-desktop-content">
           <div id="landing-home" className="landing-desktop-shelves-container">
+            <InvertClrBtn
+              targets={[{ id: "landing-shelves-bg", className: "invert-wrapper" }]}
+            />
             <InfoButton className="landing-desktop-about-info" />
             <DesktopShelves />
+            <ColorSlider targetId="landing-shelves-bg" />
           </div>
         </div>
       </div>

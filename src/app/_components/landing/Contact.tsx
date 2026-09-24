@@ -1,63 +1,80 @@
 "use client";
 
-// Ported from src/components/about-me/Contact.js. Cleanup done here per
-// the port brief: target="blank" typo on the CodePen link fixed to
-// "_blank" (plus rel="noopener noreferrer", missing on both external
-// links in the source); the clickable envelope <div> is now a real
-// <button> with an accessible name; the stray console.log(clicked) is
-// gone; and the fade-in/timeout pairing is one setTimeout in the click
-// handler instead of a useEffect keyed on `clicked` that re-fired (and
-// re-armed a new timer) on both the true -> false and the false -> true
-// transition -- same visible result, one timer instead of two.
 import { useEffect, useRef, useState } from "react";
+import { Mail } from "lucide-react";
 import { GitHubIcon, CodepenIcon } from "./icons";
+import styles from "./contact.module.css";
+
+const EMAIL = "annampawl@gmail.com";
 
 export function Contact() {
-  const [copied, setCopied] = useState(false);
+  const [status, setStatus] = useState<"idle" | "copying" | "copied" | "error">("idle");
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const mountedRef = useRef(false);
+  const copyingRef = useRef(false);
 
-  useEffect(() => () => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
   }, []);
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText("annampawl@gmail.com").catch(() => {});
-    setCopied(true);
+  const handleCopy = async () => {
+    if (copyingRef.current) return;
+    copyingRef.current = true;
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => setCopied(false), 1000);
+    setStatus("copying");
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      if (!mountedRef.current) return;
+      setStatus("copied");
+      timeoutRef.current = setTimeout(() => setStatus("idle"), 2500);
+    } catch {
+      if (mountedRef.current) setStatus("error");
+    } finally {
+      copyingRef.current = false;
+    }
   };
 
   return (
-    <div className="landing-contact">
-      <div className="landing-contact-icons">
+    <div className={styles.contact}>
+      <div className={styles.controls}>
         <a
+          className={`${styles.control} focus-ring`}
           href="https://github.com/AnniePawl"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub"
+          title="GitHub"
         >
           <GitHubIcon />
         </a>
         <a
+          className={`${styles.control} focus-ring`}
           href="https://codepen.io/annampawl"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="CodePen"
+          title="CodePen"
         >
           <CodepenIcon />
         </a>
+        <button
+          type="button"
+          className={`${styles.control} focus-ring`}
+          onClick={handleCopy}
+          disabled={status === "copying"}
+          aria-label="Copy email address"
+          title="Copy email address"
+        >
+          <Mail aria-hidden="true" strokeWidth={1.8} />
+        </button>
       </div>
-      <button
-        type="button"
-        className="landing-envelope focus-ring"
-        onClick={handleCopy}
-        aria-label="Copy email address"
-      >
-        <span className="landing-envelope-flap2" aria-hidden="true" />
-      </button>
-      <p className="landing-copied-msg" data-visible={copied} aria-live="polite">
-        {copied ? "Email copied!" : ""}
-      </p>
+      <span className={styles.feedback} role="status" aria-live="polite" aria-atomic="true">
+        {status === "copying" ? "Copying…" : status === "copied" ? "Email copied!" : status === "error" ? `Couldn’t copy. Email: ${EMAIL}` : ""}
+      </span>
     </div>
   );
 }

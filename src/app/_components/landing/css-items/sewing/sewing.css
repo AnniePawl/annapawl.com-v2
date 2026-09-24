@@ -1,0 +1,23 @@
+/* Styles for Sewing.tsx (same folder). CSS-art conversion notes that
+   apply to every css-items stylesheet live at the top of landing.css. */
+
+/* ============================================================
+   Sewing scene — src/components/css-items/sewing
+   (Sewing.js composes Tape + PinCushion + SewingMachine)
+   ============================================================ */
+
+.sewing {
+  display: flex;
+  width: 335px;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.mobile-sewing-container {
+  transform: scale(0.88) translateY(-179px);
+}
+
+.desktop-sewing-container,
+.tablet-sewing-container {
+  transform: scale(1) translateY(-168px);
+}

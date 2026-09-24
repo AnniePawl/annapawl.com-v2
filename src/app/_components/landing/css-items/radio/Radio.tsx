@@ -7,6 +7,7 @@
 // (including the station math) unchanged. Decorative frame/body marked
 // aria-hidden; the interactive controls are not.
 import { useState } from "react";
+import "./radio.css";
 
 export default function Radio({ cn }: { cn?: string }) {
   const [station, setStation] = useState(105.9);
