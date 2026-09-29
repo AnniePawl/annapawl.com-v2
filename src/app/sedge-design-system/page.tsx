@@ -6,7 +6,6 @@ import { useLenis } from "./_components/SmoothScrollProvider";
 import Hero from "./_components/Hero";
 import SidebarNav from "./_components/SidebarNav";
 import MobileNav from "./_components/MobileNav";
-import GroupHeading from "./_components/GroupHeading";
 import { SECTIONS } from "./_data/sections";
 
 // Sections
@@ -224,17 +223,10 @@ export default function DesignSystemOverview() {
                 hijack wheel input while the pointer is over it -- see
                 SmoothScrollProvider.tsx. */}
             <div
-              className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto rounded-2xl p-[1.5px]"
+              className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto no-scrollbar"
               data-lenis-prevent
             >
-              {/* --sidebar-surface: a themed token (defaults to the
-                  same lime-soft pastel this always was; dark mode
-                  repoints it to a moss-tinted dark surface instead of
-                  leaving a bright green box on a dark page -- see
-                  color.css/theme.css). Text follows the themed
-                  --text-primary since this wrapper's own background
-                  now themes too. */}
-              <div className="rounded-xl bg-[var(--sidebar-surface)] p-4 text-[var(--text-primary)]">
+              <div className="text-left text-[var(--text-primary)]">
                 <SidebarNav
                   sections={SECTIONS}
                   activeId={activeId}
@@ -253,7 +245,6 @@ export default function DesignSystemOverview() {
 
             <ApproachSection />
 {/* Foundations */}
-            <GroupHeading title="Foundations" />
             <ColorsSection />
             <TypographySection />
             <SpacingSection />
@@ -264,7 +255,6 @@ export default function DesignSystemOverview() {
             <AccessibilitySection />
 
 {/* Components */}
-            <GroupHeading title="Components" />
             <ButtonsSection />
             <CardsSection />
             <ModalsSection />

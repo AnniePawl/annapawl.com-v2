@@ -1,5 +1,6 @@
 import Section from "../_components/Section";
 import { SECTIONS } from "../_data/sections";
+import "./spacing.css";
 
 const meta = SECTIONS.find((s) => s.id === "spacing")!;
 
@@ -29,10 +30,10 @@ export default function SpacingSection() {
               {token}
             </code>
             <div
+              className="spacing-bar"
               style={{
                 height: 12,
                 width: `var(${token})`,
-                background: "var(--accent)",
                 borderRadius: "var(--radius-xs)",
               }}
             />

@@ -14,52 +14,58 @@
   color: var(--text-primary);
 }
 
-.poster-heading {
+/* ---- Section heading (SectionHeading.tsx) ----
+   Editorial layout: extra-bold title on the left ending in a bold-indigo
+   period, icon + group label ("Foundations") on the right sitting on the
+   title's baseline, and a 2px rule underneath both. Dark mode switches
+   the label to --indigo-soft (theme.css); the rule uses --text-primary,
+   so it flips with the theme automatically. */
+.sedge-section-heading {
   display: flex;
-  align-items: center;
-  gap: var(--space-3);
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-4);
   margin: 0 0 var(--space-5);
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--text-primary);
 }
-
-.poster-heading-icon {
-  width: 2rem;
-  height: 2rem;
+.sedge-section-heading-title {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+  /* Title case, 680 weight and -0.02em tracking, matching the Hero's
+     "Sedge" wordmark (Hero.tsx <h1>), one clear step smaller. */
+  font-family: var(--font-heading);
+  font-size: clamp(2.25rem, 5.5vw, 3.75rem);
+  font-weight: 680;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+.sedge-section-heading-dot { color: var(--indigo-bold); }
+.sedge-section-heading-group {
+  display: inline-flex;
   flex-shrink: 0;
+  align-items: center;
+  gap: 7px;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--indigo-bold);
 }
-
-/* ---- Phone widths (< Tailwind `sm`) ----
-   The section chrome above was sized for desktop: 48px (poster) / 32px
-   (doc) of padding on every side plus a 60px heading leaves ~230px of
-   content at 375px wide, and a long single-word title ("Accessibility",
-   "Typography") can't wrap, so it ran off the card and got clipped by
-   the page's horizontal-overflow guard (globals.css). Below `sm` the
-   padding tightens to --space-5, the icon is allowed to sit above the
-   title when they don't fit side by side, and the title scales with the
-   viewport (capped at --type-h1-size, which it reaches at ~630px, so
-   nothing changes from `sm` up). The 9.5vw slope is what lets the
-   longest title fit at 320px. */
+.sedge-section-heading-icon { width: 15px; height: 15px; flex-shrink: 0; }
 @media (width < 40rem) {
-  .poster-section,
-  .doc-section {
-    padding: var(--space-5);
-  }
-
-  .poster-heading,
-  .doc-section > div > h1 {
-    flex-wrap: wrap;
-    row-gap: var(--space-2);
-  }
-
-  .poster-heading,
-  .doc-section h1 {
-    font-size: clamp(1.875rem, 9.5vw, var(--type-h1-size));
-  }
-
-  /* GroupHeading.tsx -- same treatment for the Foundations / Components
-     dividers, which use the same H1 size. */
-  .group-heading {
-    font-size: clamp(1.75rem, 8vw, var(--type-h1-size));
-  }
+  .poster-section, .doc-section { padding: var(--space-5); }
+  /* Long titles ("Accessibility") would push the label off-screen, so on
+     phones the label moves above the title instead. */
+  .sedge-section-heading { flex-direction: column-reverse; align-items: flex-start; gap: var(--space-3); }
+  /* Long titles ("Accessibility.") need a slightly smaller size to fit
+     on one line on a phone (checked from 320px up). */
+  .sedge-section-heading-title { font-size: clamp(2rem, 10vw, 2.25rem); }
+  .group-heading { font-size: clamp(1.75rem, 8vw, var(--type-h1-size)); }
 }
 
 .poster-body p {

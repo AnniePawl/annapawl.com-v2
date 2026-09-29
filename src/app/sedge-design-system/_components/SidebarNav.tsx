@@ -25,11 +25,11 @@ export default function SidebarNav({
   }
 
   return (
-    <nav className="h-full">
+    <nav className="h-full text-left">
       <ul className="space-y-5">
         {groups.map((group) => (
           <li key={group.name}>
-            <p className="mb-2 border-b border-[color-mix(in_srgb,var(--text-primary)_20%,transparent)] px-3 pb-2 text-[11px] font-bold tracking-wide text-[var(--text-primary)] uppercase">
+            <p className="mb-2 border-b border-[color-mix(in_srgb,var(--text-primary)_20%,transparent)] px-0 pb-2 text-[11px] font-bold tracking-wide text-[var(--text-primary)] uppercase">
               {group.name}
             </p>
             <ul className="space-y-1 md:space-y-2">
@@ -41,27 +41,15 @@ export default function SidebarNav({
                     <button
                       onClick={() => onSelect(section.id)}
                       className={cx(
-                        "flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-xs md:text-sm transition",
-                        // bg-indigo-soft is a base pastel token
-                        // (unaffected by theme) -- fixed --charcoal
-                        // text on it, same reasoning as HeroNav's
-                        // active pill. The inactive/default state sits
-                        // on the sidebar's own wrapper background
-                        // instead (--sidebar-surface, page.tsx), which
-                        // *does* theme, so that one reads the themed
-                        // --text-primary.
+                        "flex w-full items-center justify-start gap-2 rounded-lg px-3 py-2 text-left text-xs md:text-sm transition",
                         activeId === section.id
                           ? "bg-lime-soft font-medium text-[var(--charcoal)]"
                           : "text-[var(--text-primary)] hover:bg-lime-soft/80 hover:text-[var(--charcoal)]"
                       )}
                     >
                       <Icon
-                        className={cx(
-                          "h-4 w-4",
-                          activeId === section.id
-                            ? "text-violet-600"
-                            : "text-[var(--lime-soft)]"
-                        )}
+                        className="h-4 w-4 shrink-0 sedge-sidebar-icon"
+                        aria-hidden="true"
                       />
                       <span>{section.title}</span>
                     </button>

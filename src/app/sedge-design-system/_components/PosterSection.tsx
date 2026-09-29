@@ -1,3 +1,4 @@
+import SectionHeading from "./SectionHeading";
 import type { CSSProperties } from "react";
 import type { LucideIcon } from "lucide-react";
 import { colorForSection, darkAccentForSection } from "../_data/sectionColor";
@@ -42,10 +43,7 @@ export default function PosterSection({
       className="poster-section scroll-mt-24"
       style={sectionThemeVars}
     >
-      <h1 className="h-display text-[length:var(--type-h1-size)] tracking-[var(--type-h1-tracking)] poster-heading">
-        <Icon className="poster-heading-icon" aria-hidden="true" />
-        {heading}
-      </h1>
+      <SectionHeading id={id} heading={heading} icon={Icon} />
 
       <div className="poster-body">{children}</div>
     </section>

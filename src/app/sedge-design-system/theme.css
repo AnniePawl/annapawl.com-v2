@@ -90,40 +90,10 @@
   --shadow-lg: 0 16px 40px rgba(242, 233, 216, 0.14);
 }
 
-/* ---- Sedge section backgrounds ----
-   Section.tsx/PosterSection.tsx cycle through the palette's pastel
-   `-soft` tokens for each section (see _data/sectionColor.ts) and set
-   --section-bg-light/--section-bg-dark as inline custom properties
-   (per-section, since each section picks a different color from the
-   cycle); --section-bg-dark is still what dark mode fills with below,
-   but light mode's border is now one fixed color (--indigo-soft)
-   rather than reading --section-bg-light per section, so every
-   section gets the same quiet outline instead of one colored per its
-   spot in the cycle.
-
-   Light mode: no fill -- the section sits transparent on the page's
-   own neutral background, outlined by a thin 2px solid indigo-soft
-   border instead. Only `background`/`border` change here; corner
-   radius, padding and everything inside each section (swatches,
-   component examples, badges, buttons) are untouched, since those are
-   set elsewhere (Tailwind's rounded-xl/p-8 on Section.tsx, poster.css's
-   border-radius/padding on .poster-section, and each section's own
-   content).
-
-   Dark mode: unchanged from before -- pure pastel blocks would read as
-   light-mode islands dropped onto a dark page, so dark mode keeps its
-   original solid fill (a subtle earth-tone tint over --chocolate, see
-   darkAccentForSection) and explicitly has no border, so light mode's
-   new outline can't carry over. */
+/* Sections share the page background in both themes. */
 .doc-section,
 .poster-section {
   background: transparent;
-  border: 2px solid var(--indigo-soft);
-}
-
-[data-sedge-theme="dark"] .doc-section,
-[data-sedge-theme="dark"] .poster-section {
-  background: var(--section-bg-dark);
   border: none;
 }
 
@@ -193,4 +163,33 @@
   .theme-toggle-btn {
     transition: none;
   }
+}
+
+/* Sidebar icons follow the page theme. */
+.sedge-sidebar-icon {
+  color: var(--indigo-bold);
+}
+
+[data-sedge-theme="dark"] .sedge-sidebar-icon {
+  color: var(--indigo-soft);
+}
+
+/* ---- Section heading label (SectionHeading.tsx) ----
+   Icon + "Foundations"/"Components" label switches to soft indigo on the
+   dark background; the title's period stays --indigo-bold. */
+[data-sedge-theme="dark"] .sedge-section-heading-group {
+  color: var(--indigo-soft);
+}
+
+/* ---- Approach section: "Four guiding principles" label + 01-04 numbers ----
+   Bold indigo in light mode (approach.css), soft indigo on the dark
+   background, same as the section-heading label above. */
+[data-sedge-theme="dark"] .approach-label,
+[data-sedge-theme="dark"] .approach-number {
+  color: var(--indigo-soft);
+}
+
+/* ---- Spacing section: scale example bars (spacing.css) ---- */
+[data-sedge-theme="dark"] .spacing-bar {
+  background: var(--indigo-soft);
 }

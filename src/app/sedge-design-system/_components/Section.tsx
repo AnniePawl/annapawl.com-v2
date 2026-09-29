@@ -1,3 +1,4 @@
+import SectionHeading from "./SectionHeading";
 import type { CSSProperties } from "react";
 import type { LucideIcon } from "lucide-react";
 import { cx } from "../../../lib/cx";
@@ -38,15 +39,7 @@ export default function Section({
       style={sectionThemeVars}
     >
       <div className="flex flex-col">
-        <h1
-          className="h-display text-[length:var(--type-h1-size)] tracking-[var(--type-h1-tracking)] flex items-center gap-3 pb-5"
-        >
-          {/* No color class — inherits currentColor from .h-display's own
-              color: var(--text-primary), so the icon always matches the
-              heading text exactly instead of drifting to its own gray. */}
-          <Icon className="h-10 w-10" aria-hidden="true" />
-          {heading}
-        </h1>
+        <SectionHeading id={id} heading={heading} icon={Icon} />
         {subheading ? (
           <h2 className="mb-5">{subheading}</h2>
         ) : null}

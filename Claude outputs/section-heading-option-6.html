@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section Heading Option 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* Tokens copied from src/styles/foundations/color.css + typography.css */
+  :root {
+    --cream: #FFFCF8;
+    --charcoal: #2A2A2E;
+    --neutral-500: #71717A;
+    --neutral-700: #3F3F46;
+    --lemon-soft: #FFF0A2;
+    --mint-soft: #B5FFDB;  --mint-bold: #5CE1B1;
+    --orange-soft: #FFC88E; --orange-bold: #FFA34D;
+    --pink-soft: #FFD0EA;  --pink-bold: #F472B6;
+    --sky-soft: #AFE3FF;
+    --indigo-soft: #B8B5FF; --indigo-bold: #8B87F5;
+    --rule: color-mix(in srgb, var(--charcoal) 18%, transparent);
+    --font: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--cream); color: var(--charcoal); font-family: var(--font); -webkit-font-smoothing: antialiased; }
+  .page { max-width: 1040px; margin: 0 auto; padding: 48px 16px 96px; }
+  .intro h1 { font-size: clamp(2rem, 5vw, 3rem); letter-spacing: -0.045em; margin: 0 0 8px; font-weight: 800; }
+  .intro p { margin: 0 0 40px; max-width: 64ch; line-height: 1.55; color: var(--neutral-700); }
+  .intro code { font-size: .9em; }
+
+  .label { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; margin: 0 0 14px; }
+  .label .tag { font: 700 11px/1 var(--font); letter-spacing: .08em; text-transform: uppercase; background: var(--charcoal); color: var(--cream); padding: 6px 9px; border-radius: 999px; }
+  .label .name { font-weight: 700; font-size: 15px; }
+  .label .why { color: var(--neutral-500); font-size: 14px; flex-basis: 100%; line-height: 1.5; }
+  .canvas { border: 1px dashed var(--rule); border-radius: 20px; padding: clamp(20px, 4vw, 40px); overflow: hidden; margin-bottom: 56px; }
+  .stack > .sec + .sec { margin-top: 64px; }
+
+  /* ---- The heading ---- */
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    font: 600 12px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase;
+    border-top: 2px solid var(--charcoal); padding-top: 12px; margin-bottom: 18px; }
+  .num { display: inline-flex; align-items: center; background: var(--sec-soft); color: var(--charcoal);
+    padding: 6px 10px; border-radius: 999px; }
+  .group { display: inline-flex; align-items: center; gap: 7px; font-weight: 700; color: var(--group-color, var(--indigo-bold)); }
+  .group .icon { width: 15px; height: 15px; }
+  .grid { display: grid; grid-template-columns: 1fr; gap: 12px 40px; align-items: end; margin-bottom: 28px; }
+  @media (min-width: 760px) { .grid { grid-template-columns: 1.1fr 1fr; } }
+  .h { margin: 0; font-size: clamp(2.75rem, 9vw, 5.5rem); font-weight: 800; letter-spacing: -0.06em; line-height: .9; }
+  .h .dot { color: var(--sec-bold); }
+  .desc { margin: 0; max-width: 62ch; font-size: 16px; line-height: 1.65; }
+  .swatches { display: flex; flex-wrap: wrap; gap: 10px; }
+  .sw { width: 56px; height: 56px; border-radius: 14px; }
+
+  /* Alternates for the group label */
+  .alt-pill .group { background: var(--indigo-bold); color: var(--charcoal); padding: 6px 10px 6px 8px; border-radius: 999px; }
+  .alt-dark { --group-color: #6560E0; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="intro">
+    <h1>Option 6, refined</h1>
+    <p>The number stays in a pill in the section's soft color on the left. The group name (Foundations, Components…) moves to the right, where "16 sections" was, with the section icon, in bold indigo. The period after the heading keeps the section's bold color. Shown on three sections so you can see the section color change while the indigo label stays constant.</p>
+  </header>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-palette" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>
+      <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>
+      <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+    </symbol>
+    <symbol id="i-type" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/>
+    </symbol>
+    <symbol id="i-pointer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 14a8 8 0 0 1-8 8"/><path d="M18 11v-1a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V9a2 2 0 0 0-2-2a2 2 0 0 0-2 2v1"/><path d="M10 9.5V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v10"/><path d="M18 11a2 2 0 1 1 4 0v3a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>
+    </symbol>
+  </svg>
+
+  <div class="label"><span class="tag">6</span><span class="name">As described</span>
+    <span class="why">Bold indigo (--indigo-bold) on cream is only about 3:1 contrast. That's fine for large text, but low for this small 12px label. Two fixes are shown further down if you want it to pass AA.</span></div>
+  <div class="canvas stack">
+    <section class="sec" style="--sec-soft:var(--orange-soft);--sec-bold:var(--orange-bold)">
+      <div class="top"><span class="num">02</span><span class="group"><svg class="icon"><use href="#i-palette"/></svg>Foundations</span></div>
+      <div class="grid"><h2 class="h">Colors<span class="dot">.</span></h2><p class="desc">A soft-and-bold palette: pastel tints for surfaces, saturated partners for accents and emphasis. Every hue ships as a pair so contrast is built in.</p></div>
+      <div class="swatches"><div class="sw" style="background:var(--pink-soft)"></div><div class="sw" style="background:var(--lemon-soft)"></div><div class="sw" style="background:var(--mint-soft)"></div><div class="sw" style="background:var(--sky-soft)"></div><div class="sw" style="background:var(--indigo-soft)"></div></div>
+    </section>
+    <section class="sec" style="--sec-soft:var(--mint-soft);--sec-bold:var(--mint-bold)">
+      <div class="top"><span class="num">03</span><span class="group"><svg class="icon"><use href="#i-type"/></svg>Foundations</span></div>
+      <div class="grid"><h2 class="h">Typography<span class="dot">.</span></h2><p class="desc">Inter, everywhere — headings and body copy alike, with a tight scale from Display down to captions.</p></div>
+    </section>
+    <section class="sec" style="--sec-soft:var(--pink-soft);--sec-bold:var(--pink-bold)">
+      <div class="top"><span class="num">10</span><span class="group"><svg class="icon"><use href="#i-pointer"/></svg>Components</span></div>
+      <div class="grid"><h2 class="h">Buttons<span class="dot">.</span></h2><p class="desc">Primary, secondary and ghost buttons, each with hover, pressed, focus and disabled states.</p></div>
+    </section>
+  </div>
+
+  <div class="label"><span class="tag">6b</span><span class="name">Indigo pill</span>
+    <span class="why">The same layout, but the group label becomes a bold-indigo pill with charcoal text, like a matching bookend to the number pill. Passes AA (about 4.7:1).</span></div>
+  <div class="canvas alt-pill">
+    <section class="sec" style="--sec-soft:var(--orange-soft);--sec-bold:var(--orange-bold)">
+      <div class="top"><span class="num">02</span><span class="group"><svg class="icon"><use href="#i-palette"/></svg>Foundations</span></div>
+      <div class="grid"><h2 class="h">Colors<span class="dot">.</span></h2><p class="desc">A soft-and-bold palette: pastel tints for surfaces, saturated partners for accents and emphasis. Every hue ships as a pair so contrast is built in.</p></div>
+    </section>
+  </div>
+
+  <div class="label"><span class="tag">6c</span><span class="name">Deeper indigo text</span>
+    <span class="why">The same plain label as 6, one step darker (#6560E0), so it passes AA (about 4.8:1) while still reading clearly as indigo. It isn't a token yet; it could become --indigo-ink.</span></div>
+  <div class="canvas alt-dark">
+    <section class="sec" style="--sec-soft:var(--orange-soft);--sec-bold:var(--orange-bold)">
+      <div class="top"><span class="num">02</span><span class="group"><svg class="icon"><use href="#i-palette"/></svg>Foundations</span></div>
+      <div class="grid"><h2 class="h">Colors<span class="dot">.</span></h2><p class="desc">A soft-and-bold palette: pastel tints for surfaces, saturated partners for accents and emphasis. Every hue ships as a pair so contrast is built in.</p></div>
+    </section>
+  </div>
+</div>
+</body>
+</html>
