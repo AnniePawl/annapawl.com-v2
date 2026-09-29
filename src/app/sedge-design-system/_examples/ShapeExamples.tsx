@@ -13,22 +13,22 @@ const RADIUS_SCALE = [
 
 
 const ACCENT_SHAPES: { variant: ShapeVariant; color: string }[] = [
-  { variant: "blob", color: "var(--pink-bold)" },
-  { variant: "burst", color: "var(--yellow-bold)" },
-  { variant: "scallop", color: "var(--sky-bold)" },
+  { variant: "blob", color: "var(--indigo-soft)" },
+  { variant: "burst", color: "var(--indigo-soft)" },
+  { variant: "scallop", color: "var(--indigo-soft)" },
   // Simplified to four single-lobe petals (one smooth rounded tip
   // each, tapering to a point at center) meeting tip-to-tip with deep
   // V gaps between them -- same CLOVER_LEAF_PATHS geometry the
   // interactive nav logo uses (see HeroNav.tsx and the comment on
   // `clover` in Shape.tsx).
-  { variant: "clover", color: "var(--mint-bold)" },
+  { variant: "clover", color: "var(--indigo-soft)" },
   // Added for the Sedge hero cluster refinement -- two more reusable
   // accent variants, same currentColor API as the rest.
-  { variant: "circle", color: "var(--lilac-bold)" },
-  { variant: "ring", color: "var(--coral-bold)" },
+  { variant: "circle", color: "var(--indigo-soft)" },
+  { variant: "ring", color: "var(--indigo-soft)" },
   // Added for the "soft four-leaf clover" pass -- six evenly-spaced
   // rounded petals, solid silhouette, no center dot.
-  { variant: "flower", color: "var(--plum-bold)" },
+  { variant: "flower", color: "var(--indigo-soft)" },
 ];
 
 const USAGE = `
@@ -50,7 +50,7 @@ export default function ShapeExamples() {
               style={{
                 height: 64,
                 width: 64,
-                background: "var(--accent-soft)",
+                background: "var(--indigo-soft)",
                 borderRadius: `var(${token})`,
               }}
             />

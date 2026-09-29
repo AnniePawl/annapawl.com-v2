@@ -10,7 +10,7 @@ export default function ModalsSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="Modals create a focused little space within the page — useful for tasks, decisions, or moments that deserve a bit more attention. Built on the native <dialog> element, a flexible tone prop sets the modal’s --modal-accent, bringing coordinated color to the icon, divider, and actions while keeping the underlying structure consistent."
+      description="Modals create a focused little space within the page for messages that deserve attention. A card-like indigo outline keeps the surface consistent, while three action colors provide a small amount of emphasis."
     >
       <ModalExamples />
     </Section>

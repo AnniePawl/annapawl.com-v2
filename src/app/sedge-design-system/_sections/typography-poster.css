@@ -49,7 +49,7 @@
   width: 8px;
   height: 8px;
   border-radius: var(--radius-pill);
-  background: var(--text-primary);
+  background: var(--indigo-soft);
 }
 
 .typo-scale-sample {
@@ -57,7 +57,7 @@
   color: var(--text-primary);
 }
 
-/* ---- Typeface / Weight / Tones row ---- */
+/* ---- Typeface / Weight ---- */
 .typo-grid-2 {
   display: grid;
   /* minmax(0, ...) so the Usage code block can scroll inside its own
@@ -71,8 +71,10 @@
 }
 
 .typo-typeface-name {
-  font-size: var(--text-2xl);
+  font-size: var(--text-5xl);
   font-weight: var(--font-semibold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
   margin: 0;
 }
 
@@ -84,10 +86,13 @@
 }
 
 .typo-weight-row {
-  position: relative;
-  display: flex;
-  gap: var(--space-6);
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-6) var(--space-5);
+}
+
+.typo-weight-item {
+  min-width: 0;
 }
 
 .typo-weight-sample {
@@ -201,6 +206,11 @@
 
   .typo-grid-2 {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .typo-weight-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5) var(--space-3);
   }
 
   .typo-poster-footer {

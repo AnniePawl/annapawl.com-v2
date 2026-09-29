@@ -33,14 +33,8 @@ export const CLOVER_LEAF_PATHS = {
 
 const PATHS: Record<Exclude<ShapeVariant, "bloom" | "flower" | "petals" | "quatrefoil" | "circle" | "ring">, string> = {
   blob: "M40,100 C40,60 60,30 110,35 C160,40 175,60 170,110 C165,165 130,175 85,170 C45,165 40,140 40,100 Z",
-  // "organic" is Card's "organic oval" example (see the Card redesign's
-  // card.css .card-accent--organic) — same path as `blob`, just given a
-  // non-uniform box + rotation there so it reads as a stretched oval
-  // instead of blob's rounder upper-right placement. Kept as its own
-  // named variant (not a className hack on top of "blob") so the
-  // accent={ShapeVariant} API stays the single source of truth for both
-  // which Shape renders and which .card-accent--* placement rule
-  // applies.
+  // Same geometry as `blob`, kept as a separate named option for places
+  // that present it with a stretched aspect ratio.
   organic: "M40,100 C40,60 60,30 110,35 C160,40 175,60 170,110 C165,165 130,175 85,170 C45,165 40,140 40,100 Z",
   burst:
     "M100,10 L117.2,58.4 L163.6,36.4 L141.6,82.8 L190,100 L141.6,117.2 L163.6,163.6 L117.2,141.6 L100,190 L82.8,141.6 L36.4,163.6 L58.4,117.2 L10,100 L58.4,82.8 L36.4,36.4 L82.8,58.4 Z",

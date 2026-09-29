@@ -16,11 +16,13 @@
      now points straight at --font-heading again like every other level. */
   --font-heading: var(--font-sans);
 
-    /* FONT WEIGHTS */
+  /* FONT WEIGHTS */
+  --font-light: 300;
   --font-regular: 400;
   --font-medium: 500;
   --font-semibold: 600;
   --font-bold: 700;
+  --font-extrabold: 800;
 
   /* FONT SIZES */
   --text-xs: 0.75rem;   /* 12 */
@@ -33,13 +35,6 @@
   --text-4xl: 2.25rem;  /* 36 */
   --text-5xl: 3rem;     /* 48 */
   --text-6xl: 3.75rem;  /* 60 */
-  /* Was 3.5rem (56px) — smaller than --text-6xl (60px) used by H1, so the
-     display style was quietly rendering *smaller* than H1 despite the
-     scale intending it as the largest level (see the comment on
-     --type-display-size below, and the label was still claiming "80"
-     the whole time). Fixed to actually be 80px. */
-  --text-heading: 5rem; /* 80 */
-
   /* LINE HEIGHTS */
   --leading-tight: 1.1;
   --leading-snug: 1.25;
@@ -53,40 +48,40 @@
   --tracking-wide: 0.05em;
   --tracking-wider: 1em;
 
-  /* DISPLAY / HERO — same weight/case/family as H1, just bigger.
-     --text-heading (5rem / 80px) is what keeps it the largest level,
-     comfortably above H1's 3.75rem / 60px. (A Bodoni Moda detour for just
-     this level was tried and then reverted -- see the FONT FAMILIES
-     comment above.) */
+  /* DISPLAY / HERO — the live Sedge wordmark treatment. clamp() keeps
+     it at 60px on narrow screens, lets it grow with the viewport, and
+     caps it at 112px on wide screens. */
   --type-display-family: var(--font-heading);
-  --type-display-size: var(--text-heading);
-  --type-display-weight: var(--font-bold);
-  --type-display-leading: 0.95;
-  --type-display-tracking: .05em;
+  --type-display-size: clamp(3.75rem, 8vw, 7rem);
+  --type-display-weight: 680;
+  --type-display-leading: 0.9;
+  --type-display-tracking: -0.02em;
   --type-display-transform: none;
 
   /* HEADINGS — bold + tighter + more editorial than Display, so the two
-     levels contrast instead of H1 just reading as "smaller Display". */
+     levels contrast instead of H1 just reading as "smaller Display".
+     Each role keeps its existing desktop size and scales down gently on
+     narrower screens without needing separate mobile-only classes. */
   --type-h1-family: var(--font-heading);
-  --type-h1-size: var(--text-6xl);
+  --type-h1-size: clamp(2.5rem, 7vw, 3.75rem);
   --type-h1-weight: var(--font-bold);
   --type-h1-leading: 1;
   --type-h1-tracking: -0.03em;
 
   --type-h2-family: var(--font-heading);
-  --type-h2-size: var(--text-4xl);
+  --type-h2-size: clamp(1.875rem, 5vw, 2.25rem);
   --type-h2-weight: var(--font-bold);
   --type-h2-leading: var(--leading-tight);
   --type-h2-tracking: -0.02em;
 
   --type-h3-family: var(--font-sans);
-  --type-h3-size: var(--text-2xl);
+  --type-h3-size: clamp(1.25rem, 3vw, 1.5rem);
   --type-h3-weight: var(--font-semibold);
   --type-h3-leading: var(--leading-snug);
   --type-h3-tracking: var(--tracking-normal);
 
   --type-h4-family: var(--font-sans);
-  --type-h4-size: var(--text-xl);
+  --type-h4-size: clamp(1.125rem, 2vw, 1.25rem);
   --type-h4-weight: var(--font-semibold);
   --type-h4-leading: var(--leading-snug);
   --type-h4-tracking: var(--tracking-normal);
@@ -97,6 +92,20 @@
   --type-body-weight: var(--font-regular);
   --type-body-leading: var(--leading-relaxed);
   --type-body-tracking: var(--tracking-normal);
+
+  /* EYEBROW — small editorial labels used above or beside content. */
+  --type-eyebrow-family: var(--font-sans);
+  --type-eyebrow-size: var(--text-xs);
+  --type-eyebrow-weight: var(--font-semibold);
+  --type-eyebrow-leading: var(--leading-normal);
+  --type-eyebrow-tracking: 0.12em;
+
+  /* SUPPORTING — compact explanatory copy with generous line spacing. */
+  --type-supporting-family: var(--font-sans);
+  --type-supporting-size: 0.8125rem;
+  --type-supporting-weight: var(--font-regular);
+  --type-supporting-leading: var(--leading-relaxed);
+  --type-supporting-tracking: var(--tracking-normal);
 }
 
 /* ---- Global base typography ---- */
@@ -161,10 +170,21 @@ p {
   letter-spacing: var(--type-body-tracking);
 }
 
-/* NOTES */
-/* 
-Layer A: Typographic Scrale
-Layer B: Sematic Roles
-Layer C: Impelementation Classes
+/* SEMANTIC ROLES */
+.type-eyebrow {
+  font-family: var(--type-eyebrow-family);
+  font-size: var(--type-eyebrow-size);
+  font-weight: var(--type-eyebrow-weight);
+  line-height: var(--type-eyebrow-leading);
+  letter-spacing: var(--type-eyebrow-tracking);
+  text-transform: uppercase;
+  color: var(--indigo-bold);
+}
 
-*/
+.type-supporting {
+  font-family: var(--type-supporting-family);
+  font-size: var(--type-supporting-size);
+  font-weight: var(--type-supporting-weight);
+  line-height: var(--type-supporting-leading);
+  letter-spacing: var(--type-supporting-tracking);
+}

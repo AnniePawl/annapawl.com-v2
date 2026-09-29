@@ -72,7 +72,7 @@ export default function MotionSection() {
               width: 48,
               height: 48,
               borderRadius: "var(--radius-md)",
-              background: "var(--accent)",
+              background: "var(--indigo-soft)",
               animation: `motion-demo var(--motion-modal-duration) var(--motion-modal-ease)`,
             }}
           />

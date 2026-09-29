@@ -46,7 +46,7 @@ export default function ApproachSection() {
       </div>
 
       <div className="approach-principles">
-        <h3 className="approach-label">Four guiding principles</h3>
+        <h3 className="approach-label type-eyebrow">Four guiding principles</h3>
         <ol className="approach-list">
           {PRINCIPLES.map(({ title, body }, i) => (
             <li className="approach-principle" key={title}>
@@ -54,7 +54,7 @@ export default function ApproachSection() {
                 {String(i + 1).padStart(2, "0")}
               </span>
               <h4>{title}</h4>
-              <p>{body}</p>
+              <p className="type-supporting">{body}</p>
             </li>
           ))}
         </ol>

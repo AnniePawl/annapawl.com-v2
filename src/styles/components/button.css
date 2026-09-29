@@ -56,19 +56,28 @@
 
 /* Primary variant */
 .btn--primary {
-  background: var(--accent);
-  color: var(--text-inverse);
+  --focus-ring-color: var(--indigo-bold);
+  background: var(--indigo-soft);
+  color: var(--charcoal);
   box-shadow: var(--shadow-button);
 }
 
 .btn--primary:hover,
 .btn--primary[data-state="hover"] {
-  background: var(--accent-hover);
+  background: color-mix(
+    in srgb,
+    var(--indigo-soft) 80%,
+    var(--indigo-bold)
+  );
 }
 
 .btn--primary:active,
 .btn--primary[data-state="pressed"] {
-  background: var(--accent-active);
+  background: color-mix(
+    in srgb,
+    var(--indigo-soft) 65%,
+    var(--indigo-bold)
+  );
   box-shadow: var(--shadow-sm);
   transform: translateY(1px);
 }

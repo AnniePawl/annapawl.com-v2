@@ -10,7 +10,7 @@ export default function CardsSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="Cards are one of the most-used building blocks across my digital garden, so they’re designed to be consistent without feeling repetitive. A shared structure keeps them grounded, while flexible backgrounds, accents, and details give each one room to have its own vibe."
+      description="Cards are one of the most-used building blocks across my digital garden. Two quiet variants keep them consistent: an outlined card for the default surface and a soft indigo card for a little more emphasis."
     >
       <CardExamples />
     </Section>

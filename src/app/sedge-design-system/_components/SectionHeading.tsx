@@ -25,7 +25,7 @@ export default function SectionHeading({
           .
         </span>
       </h2>
-      <span className="sedge-section-heading-group">
+      <span className="sedge-section-heading-group type-eyebrow">
         <Icon className="sedge-section-heading-icon" aria-hidden="true" />
         {group}
       </span>

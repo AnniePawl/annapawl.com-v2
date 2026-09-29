@@ -1,77 +1,57 @@
 "use client";
 
-import { CSSProperties, MouseEvent, ReactNode, useEffect, useRef } from "react";
-import type { LucideIcon } from "lucide-react";
+import {
+  CSSProperties,
+  MouseEvent,
+  ReactNode,
+  useEffect,
+  useId,
+  useRef,
+} from "react";
 import { cx } from "../../lib/cx";
+import Button from "./Button";
 
-// The brand palette's hue names (foundations/color.css) plus "neutral" —
-// same convention as Card's `tone` prop and Badge's `tone` prop. Each name
-// resolves to a matched bold+soft color combo (--{tone}-bold / -soft)
-// that drives every accent piece in the modal from one knob: the whole
-// modal background, the title divider, the optional icon badge, any
-// `.btn--primary` inside the modal (e.g. a "Confirm" button), and the
-// close button (icon color + hover background). "neutral" resolves to
-// --neutral-bold / --neutral-soft (a soft white-ish background rather
-// than a color) — a quiet default for modals that shouldn't read as
-// belonging to a specific category.
-export type ModalTone =
-  | "pink"
-  | "red"
-  | "orange"
-  | "yellow"
-  | "lime"
-  | "mint"
-  | "green"
-  | "sky"
-  | "blue"
-  | "indigo"
-  | "violet"
-  | "neutral";
+export type ModalTone = "lemon" | "coral" | "mint";
+
+const MODAL_TONES: Record<ModalTone, string> = {
+  lemon: "var(--lemon-bold)",
+  coral: "var(--coral-bold)",
+  mint: "var(--mint-soft)",
+};
 
 export interface ModalProps {
   open: boolean;
   onClose: () => void;
-  title?: string;
-  /**
-   * Optional icon rendered in a colored circular badge to the left of the
-   * title. Has no effect without a `title`, since it lives in the title
-   * row. Any lucide-react icon component.
-   */
-  icon?: LucideIcon;
-  /**
-   * Optional color combo — one of the brand palette's hues, i.e. its
-   * paired bold + soft tones (--{tone}-bold / -soft). Sets
-   * --modal-accent / --modal-accent-soft inline, which the title divider,
-   * icon badge, close button, and any `.btn--primary` inside the modal
-   * all read from — change this one prop and all of them match. Falls
-   * back to the shared --accent / --accent-soft tokens when not set.
-   */
+  eyebrow: string;
+  title: string;
+  description: ReactNode;
+  actionLabel: ReactNode;
+  onAction?: () => void;
   tone?: ModalTone;
-  children: ReactNode;
   className?: string;
 }
 
 /**
- * Built on the native <dialog> element, which gives us focus trapping,
- * Escape-to-close, and a ::backdrop for free — no extra JS or portal
- * needed.
+ * A focused, card-like dialog with one clear action. Native <dialog>
+ * provides focus trapping, Escape-to-close, and the backdrop layer.
  */
 export default function Modal({
   open,
   onClose,
+  eyebrow,
   title,
-  icon: Icon,
-  tone,
-  children,
+  description,
+  actionLabel,
+  onAction,
+  tone = "lemon",
   className,
 }: ModalProps) {
   const ref = useRef<HTMLDialogElement>(null);
-  const toneStyle: CSSProperties | undefined = tone
-    ? ({
-        "--modal-accent": `var(--${tone}-bold)`,
-        "--modal-accent-soft": `var(--${tone}-soft)`,
-      } as CSSProperties)
-    : undefined;
+  const titleId = useId();
+  const descriptionId = useId();
+  const toneStyle = {
+    "--modal-tone": MODAL_TONES[tone],
+  } as CSSProperties;
 
   useEffect(() => {
     const dialog = ref.current;
@@ -80,18 +60,22 @@ export default function Modal({
     if (!open && dialog.open) dialog.close();
   }, [open]);
 
-  // Clicking the backdrop (outside the dialog's own box) closes it. The
-  // <dialog> element's click target is the backdrop when the click lands
-  // outside its content box, so we compare against its bounding rect.
   const handleBackdropClick = (event: MouseEvent<HTMLDialogElement>) => {
     const rect = ref.current?.getBoundingClientRect();
     if (!rect) return;
+
     const inBounds =
       event.clientX >= rect.left &&
       event.clientX <= rect.right &&
       event.clientY >= rect.top &&
       event.clientY <= rect.bottom;
+
     if (!inBounds) onClose();
+  };
+
+  const handleAction = () => {
+    if (onAction) onAction();
+    else onClose();
   };
 
   return (
@@ -102,43 +86,30 @@ export default function Modal({
       onClose={onClose}
       onCancel={onClose}
       onClick={handleBackdropClick}
-      aria-labelledby={title ? "modal-title" : undefined}
-      // Native <dialog>s render in the browser's top layer, above every
-      // ordinary stacking context -- including the custom cursor's fixed,
-      // z-indexed dot (components/ui/CustomCursor.tsx). Opting the whole
-      // modal out keeps the real OS cursor (and its own resize/text/
-      // pointer affordances) visible and correct while a dialog is open,
-      // rather than the dot silently disappearing underneath it.
+      aria-labelledby={titleId}
+      aria-describedby={descriptionId}
       data-cursor-native
     >
-      {title ? (
-        <div className="modal-header">
-          <div className="modal-header-content">
-            {Icon ? (
-              <span className="modal-icon" aria-hidden="true">
-                <Icon className="modal-icon-svg" />
-              </span>
-            ) : null}
-            <h3 className="modal-title" id="modal-title">
-              {title}
-            </h3>
-          </div>
-          <button
-            type="button"
-            className="modal-close focus-ring"
-            onClick={onClose}
-            aria-label="Close"
-          >
-            ✕
-          </button>
-        </div>
-      ) : null}
-      {/* data-lenis-prevent is a no-op unless a page has mounted Lenis
-          (currently just sedge-design-system) -- when it has, this stops
-          Lenis from hijacking wheel input over the modal's own
-          independently-scrolling body. */}
-      <div className="modal-body" data-lenis-prevent>
-        {children}
+      <button
+        type="button"
+        className="modal-close focus-ring"
+        onClick={onClose}
+        aria-label="Close"
+      >
+        ✕
+      </button>
+
+      <div className="modal-content" data-lenis-prevent>
+        <span className="modal-eyebrow type-eyebrow">{eyebrow}</span>
+        <h3 className="modal-title" id={titleId}>
+          {title}
+        </h3>
+        <p className="modal-description" id={descriptionId}>
+          {description}
+        </p>
+        <Button className="modal-action" onClick={handleAction}>
+          {actionLabel}
+        </Button>
       </div>
     </dialog>
   );

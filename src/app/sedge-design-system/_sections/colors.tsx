@@ -9,13 +9,7 @@ export default function ColorsSection() {
     <Section id={meta.id} heading={meta.title} icon={meta.icon}>
       <div className="sedge-section-intro" style={{ position: "relative" }}>
         <p>
-          These are the colors that make me happy. I realize there
-          are probably more than a traditional design system, but I&rsquo;m making
-          the rules here. The palette is intentionally expansive: less
-          about limiting what I can use and more about giving me a whole
-          world of color to pull from. Bold and soft variations let the
-          mood shift from moment to moment while keeping everything part
-          of the same visual world.
+        These are the colors that make me happy. Yes, there are a lot of them—I’m making the rules here. This is my digital garden, and I want a whole world of color to pull from as it grows. Bright, bubbly shades bring the energy, while a quieter palette is reserved for moments that call for more restraint. Soft and bold variations make it easy to dial the energy up or down without losing cohesion.
         </p>
 
       </div>

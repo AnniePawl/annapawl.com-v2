@@ -6,7 +6,7 @@ import ThemeToggle from "./ThemeToggle";
 import "./logo.css";
 
 
-const NAV_GROUPS: SectionGroup[] = ["Intro", "Foundations", "Components"];
+const NAV_GROUPS: SectionGroup[] = ["Intro", "Foundations", "Components", "Patterns"];
 
 type HeroNavProps = {
   sections: NavSection[];

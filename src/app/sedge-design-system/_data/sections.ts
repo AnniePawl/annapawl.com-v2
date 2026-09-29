@@ -15,15 +15,17 @@ import {
   MessageSquareText,
   FormInput,
   Brain,
+  FileText,
   ListChevronsUpDown
 } from "lucide-react";
 
-export type SectionGroup = "Intro" | "Foundations" | "Components";
+export type SectionGroup = "Intro" | "Foundations" | "Components" | "Patterns";
 
 export const SECTION_GROUPS: SectionGroup[] = [
   "Intro",
   "Foundations",
   "Components",
+  "Patterns",
 ];
 
 export type NavSection = {
@@ -37,9 +39,10 @@ export type NavSection = {
 
 // Order: Intro (the "why" before the specifics), then Foundations (the
 // token-level building blocks — color, type, spacing, layout, shape,
-// elevation, motion, accessibility), then Components (the whole component
-// library, built on top of those foundations). Sidebar/mobile nav and the
-// section headings in the main column both read this same grouping —
+// elevation, motion, accessibility), then Components (the component
+// library), then Patterns (repeatable page structures composed from both).
+// Sidebar/mobile nav and the section headings in the main column read this
+// same grouping —
 // keep new sections declared inside the right block rather than appended
 // at the end.
 export const SECTIONS: NavSection[] = [
@@ -101,4 +104,24 @@ export const SECTIONS: NavSection[] = [
     group: "Components",
   },
   { id: "forms", title: "Forms", icon: FormInput, group: "Components" },
+
+  // Patterns
+  {
+    id: "page-shell",
+    title: "Page Shell",
+    icon: LayoutTemplate,
+    group: "Patterns",
+  },
+  {
+    id: "page-header",
+    title: "Page Header",
+    icon: CaseSensitive,
+    group: "Patterns",
+  },
+  {
+    id: "article-layout",
+    title: "Article Layout",
+    icon: FileText,
+    group: "Patterns",
+  },
 ];

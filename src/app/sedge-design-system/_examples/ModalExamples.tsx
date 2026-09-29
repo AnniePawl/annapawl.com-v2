@@ -1,14 +1,12 @@
 "use client";
 
 import { CSSProperties, useState } from "react";
-import { Cloud, Info, Leaf, Sparkles, Sun } from "lucide-react";
 import Button from "../../../components/ui/Button";
 import Modal, { type ModalTone } from "../../../components/ui/Modal";
 import CodeBlock from "../_components/CodeBlock";
 
 const USAGE = `
 import { useState } from "react";
-import { Sparkles } from "lucide-react";
 import Modal from "@/components/ui/Modal";
 
 const [open, setOpen] = useState(false);
@@ -18,50 +16,44 @@ const [open, setOpen] = useState(false);
 <Modal
   open={open}
   onClose={() => setOpen(false)}
+  eyebrow="Just so you know"
   title="Modal title"
-  icon={Sparkles}
-  tone="pink"
->
-  <p>Modal body content.</p>
-</Modal>
+  description="A short explanation of what needs your attention."
+  actionLabel="Got it"
+  tone="lemon"
+/>
 `;
 
-// Each trigger button below is a soft-tinted, tone-outlined swatch (see
-// .tone-trigger in modal.css) previewing its own modal's tone — pick one,
-// see it carried through icon, divider, and both actions.
-const TONE_EXAMPLES: { tone: ModalTone; icon: typeof Sparkles; label: string }[] = [
-  { tone: "yellow", icon: Sun, label: "Yellow" },
-  { tone: "mint", icon: Leaf, label: "Mint" },
-  { tone: "sky", icon: Cloud, label: "Sky" },
-  { tone: "pink", icon: Sparkles, label: "Pink" },
-  { tone: "neutral", icon: Info, label: "Neutral" },
+const TONE_EXAMPLES: Array<{
+  tone: ModalTone;
+  color: string;
+  label: string;
+}> = [
+  { tone: "lemon", color: "var(--lemon-bold)", label: "Lemon" },
+  { tone: "coral", color: "var(--coral-bold)", label: "Coral" },
+  { tone: "mint", color: "var(--mint-soft)", label: "Mint" },
 ];
 
 export default function ModalExamples() {
-  const [activeTone, setActiveTone] = useState<(typeof TONE_EXAMPLES)[number] | null>(null);
+  const [activeTone, setActiveTone] = useState<ModalTone | null>(null);
 
   return (
     <section style={{ maxWidth: 720 }}>
       <CodeBlock code={USAGE} className="mb-8" />
 
       <p className="mb-3 text-sm font-medium text-[var(--text-secondary)]">
-        Tones — a little color for every context
+        Action colors
       </p>
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-        {TONE_EXAMPLES.map((example) => (
+        {TONE_EXAMPLES.map(({ tone, color, label }) => (
           <Button
-            key={example.tone}
+            key={tone}
             variant="secondary"
             className="tone-trigger"
-            style={
-              {
-                "--tone-accent": `var(--${example.tone}-bold)`,
-                "--tone-accent-soft": `var(--${example.tone}-soft)`,
-              } as CSSProperties
-            }
-            onClick={() => setActiveTone(example)}
+            style={{ "--tone-color": color } as CSSProperties}
+            onClick={() => setActiveTone(tone)}
           >
-            {example.label}
+            {label}
           </Button>
         ))}
       </div>
@@ -69,28 +61,13 @@ export default function ModalExamples() {
       <Modal
         open={activeTone !== null}
         onClose={() => setActiveTone(null)}
+        eyebrow="Just so you know"
         title="Modal title"
-        icon={activeTone?.icon}
-        tone={activeTone?.tone}
-      >
-        <p>
-          This is the modal body. Dismiss it with the close button, the
-          Escape key, or by clicking the backdrop.
-        </p>
-        <div
-          style={{
-            display: "flex",
-            gap: 12,
-            marginTop: 24,
-            justifyContent: "flex-end",
-          }}
-        >
-          <Button variant="secondary" onClick={() => setActiveTone(null)}>
-            Cancel
-          </Button>
-          <Button onClick={() => setActiveTone(null)}>Confirm</Button>
-        </div>
-      </Modal>
+        description="This focused little space keeps the message short, clear, and easy to act on."
+        actionLabel="Got it"
+        onAction={() => setActiveTone(null)}
+        tone={activeTone ?? "lemon"}
+      />
     </section>
   );
 }

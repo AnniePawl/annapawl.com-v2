@@ -7,6 +7,7 @@ import Hero from "./_components/Hero";
 import SidebarNav from "./_components/SidebarNav";
 import MobileNav from "./_components/MobileNav";
 import { SECTIONS } from "./_data/sections";
+import PageShell from "../../components/layout/PageShell";
 
 // Sections
 import AccordianSection from "./_sections/accordian";
@@ -25,6 +26,9 @@ import ModalsSection from "./_sections/modals";
 import BadgesSection from "./_sections/badges";
 import TooltipsSection from "./_sections/tooltips";
 import FormsSection from "./_sections/forms";
+import PageShellSection from "./_sections/page-shell";
+import PageHeaderSection from "./_sections/page-header";
+import ArticleLayoutSection from "./_sections/article-layout";
 
 // Tailwind's `lg` (64rem) -- the point where the sidebar takes over from
 // MobileNav (section-switcher.css). Below it the page has a second sticky
@@ -199,11 +203,14 @@ export default function DesignSystemOverview() {
       <HeroNav sections={SECTIONS} activeId={activeId} onSelect={scrollTo} onScrollToTop={scrollToTop}  />
       <Hero onExplore={() => scrollTo(SECTIONS[0].id)} />
 
-      <div className="mx-auto max-w-7xl px-6 py-12">
+      <PageShell>
         {/* minmax(0, 1fr) rather than a bare 1fr: a 1fr track's minimum is its
             content's min-content width, which left <main> ~800px wide (past
             the viewport) between 1024px and ~1140px. Identical above that. */}
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[250px_minmax(0,1fr)]">
+        <div
+          className="grid grid-cols-1 lg:grid-cols-[250px_minmax(0,1fr)]"
+          style={{ gap: "var(--space-7)" }}
+        >
           <aside className="hidden lg:block">
             {/* data-lenis-prevent: this column scrolls independently of
                 the page (its own overflow-y-auto), so Lenis shouldn't
@@ -223,7 +230,10 @@ export default function DesignSystemOverview() {
             </div>
           </aside>
 
-          <main className="space-y-12">
+          <main
+            className="flex min-w-0 flex-col"
+            style={{ gap: "var(--section-gap)" }}
+          >
             <MobileNav
               sections={SECTIONS}
               activeId={activeId}
@@ -249,9 +259,14 @@ export default function DesignSystemOverview() {
             <BadgesSection />
             <TooltipsSection />
             <FormsSection />
+
+{/* Patterns */}
+            <PageShellSection />
+            <PageHeaderSection />
+            <ArticleLayoutSection />
           </main>
         </div>
-      </div>
+      </PageShell>
     </div>
   );
 }

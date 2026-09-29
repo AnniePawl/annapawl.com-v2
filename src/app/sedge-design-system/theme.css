@@ -176,6 +176,10 @@
   color: var(--indigo-soft);
 }
 
+[data-sedge-theme="dark"] .type-eyebrow {
+  color: var(--indigo-soft);
+}
+
 /* ---- Approach section: "Four guiding principles" label + 01-04 numbers ----
    Bold indigo in light mode (approach.css), soft indigo on the dark
    background, same as the section-heading label above. */
