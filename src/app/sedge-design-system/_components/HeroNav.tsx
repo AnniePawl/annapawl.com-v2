@@ -25,7 +25,7 @@ export default function HeroNav({
 
   return (
     <header className="sticky top-0 z-20 border-b border-[color-mix(in_srgb,var(--text-primary)_10%,transparent)] bg-[var(--bg-default)] backdrop-blur-sm">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-6 py-4 sm:gap-6">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-3 md:px-6 py-3 md:py-4 sm:gap-6">
         <div className="flex items-center gap-3">
           <Link
             href="/"

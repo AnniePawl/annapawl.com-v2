@@ -26,12 +26,6 @@ import BadgesSection from "./_sections/badges";
 import TooltipsSection from "./_sections/tooltips";
 import FormsSection from "./_sections/forms";
 
-// How far above a target section HeroNav's sticky header sits --
-// matches the 96px (`scroll-mt-24`) Section.tsx/PosterSection.tsx
-// already carry for native anchor/keyboard jumps, so Lenis's own
-// scrollTo lands in exactly the same spot either path takes.
-const HEADER_SCROLL_OFFSET = 96;
-
 // Tailwind's `lg` (64rem) -- the point where the sidebar takes over from
 // MobileNav (section-switcher.css). Below it the page has a second sticky
 // layer (the section switcher) under the header.
@@ -168,18 +162,11 @@ export default function DesignSystemOverview() {
 
     if (lenis) {
       // Lenis's own short, restrained easing (see SmoothScrollProvider) --
-      // offset keeps the section's heading clear of the sticky header,
-      // same distance `scroll-mt-24` already reserves for the fallback
-      // below and for native anchor/keyboard jumps Lenis doesn't drive.
-      //
-      // Below `lg` the clearance is header + section switcher, which is
-      // taller than 96px and varies with the header's height -- it comes
-      // from the sections' scroll-margin-top (section-switcher.css),
-      // which Lenis already subtracts from its target, so no extra offset
-      // is added on top of it there. Desktop keeps the fixed offset it
-      // has always used.
-      const isDesktop = window.matchMedia(DESKTOP_QUERY).matches;
-      lenis.scrollTo(el, { offset: isDesktop ? -HEADER_SCROLL_OFFSET : 0 });
+      // Lenis reads the target's computed scroll-margin-top itself. That
+      // gives desktop the section's `scroll-mt-24` clearance and mobile
+      // the responsive header + switcher clearance from
+      // section-switcher.css without applying either offset twice.
+      lenis.scrollTo(el);
     } else {
       // No Lenis instance (prefers-reduced-motion, or not mounted yet) —
       // scrollIntoView finds whichever scrollable ancestor needs to move,

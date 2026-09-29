@@ -1,4 +1,4 @@
-import PosterSection from "../_components/PosterSection";
+import Section from "../_components/Section";
 import "./approach.css";
 import { SECTIONS } from "../_data/sections";
 
@@ -25,8 +25,8 @@ const PRINCIPLES = [
 
 export default function ApproachSection() {
   return (
-    <PosterSection id={meta.id} heading={meta.title} icon={meta.icon}>
-      <div className="approach-intro">
+    <Section id={meta.id} heading={meta.title} icon={meta.icon}>
+      <div className="approach-intro sedge-section-intro">
         <p>
           I&rsquo;m drawn to the balance between personality and precision
           — work that feels expressive and human, while still considered
@@ -59,10 +59,6 @@ export default function ApproachSection() {
           ))}
         </ol>
       </div>
-      {/* <footer className="approach-footer">
-        <span>Personality &amp; precision</span>
-        <span>A work in progress</span>
-      </footer> */}
-    </PosterSection>
+    </Section>
   );
 }

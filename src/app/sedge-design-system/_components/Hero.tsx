@@ -7,7 +7,7 @@ import {
   Wand2,
 } from "lucide-react";
 import Shape from "../../../components/ui/Shape";
-import "./poster.css";
+import "./section.css";
 
 const AT_A_GLANCE = [
   {
@@ -47,7 +47,7 @@ const BADGE_COLORS = [
 
 export default function Hero({ onExplore }: { onExplore: () => void }) {
   return (
-    <section id='top' className="pt-10 md:pt-12 relative mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-7xl flex-col justify-center overflow-hidden px-6 py-6">
+    <section id='top' className="pt-8 relative mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-7xl flex-col justify-center overflow-hidden px-6 py-6">
       <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[3fr_1.5fr]">
         <div className="pt-5">
           <h1 className="h-display text-[clamp(3.75rem,8vw,7rem)] font-[680] leading-[0.9] tracking-[-0.02em]">
@@ -60,7 +60,7 @@ export default function Hero({ onExplore }: { onExplore: () => void }) {
             distinctly <b>me</b>.
           </p>
 
-          <p className="mt-5 max-w-xl text-sm leading-relaxed text-[var(--text-secondary)]">
+          <p className="mt-5 max-w-xl text-base leading-normal text-[var(--text-secondary)]">
             As a frontend developer with a deep love of design, I'm always exploring the space
             between structure and experimentation. Sedge is where those ideas take shape - thoughtful at its core, playful around the
             edges, and designed to evolve as I do.
@@ -145,7 +145,7 @@ export default function Hero({ onExplore }: { onExplore: () => void }) {
       <div className="">
         <hr className="poster-divider my-4" />
         <div className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-5">
-          <span className="md:hidden text-base font-semibold text-[var(--text-muted)]">At a glance</span>
+          {/* <span className="md:hidden text-lg  font-semibold text-[var(--text-muted)]">At a glance</span> */}
           {AT_A_GLANCE.map(({ icon: Icon, title, caption }, i) => (
             <div
               key={title}

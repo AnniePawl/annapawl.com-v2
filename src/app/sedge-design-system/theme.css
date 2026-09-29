@@ -13,7 +13,7 @@
    tone *base* tokens also defined there (--peat/--chocolate/--ivory/--moss/
    --ochre/--mauve, alongside the existing --sage/--clay). Because
    nearly every component in this codebase (button.css, card.css,
-   poster.css, etc.) already reads colors through the semantic tokens
+   section.css, etc.) already reads colors through the semantic tokens
    (var(--bg-default), var(--text-primary), var(--border-subtle)...)
    rather than hardcoding hex, re-pointing them here is enough to theme
    the whole page -- components don't need their own dark-mode variants.
@@ -68,11 +68,7 @@
   --accent-hover: color-mix(in srgb, var(--accent) 85%, black);
   --accent-active: color-mix(in srgb, var(--accent) 70%, black);
 
-  /* Translucent panel washes -- a light wash reads as a *lowered*
-     panel on a light page (poster-sticky/poster-aside-card/tooltip);
-     on a dark page the equivalent is a faint lift toward --ivory
-     instead of toward white. */
-  --surface-wash-strong: color-mix(in srgb, var(--ivory) 16%, transparent);
+  /* The tooltip panel wash lifts toward --ivory on the dark page. */
   --surface-wash-soft: color-mix(in srgb, var(--ivory) 10%, transparent);
 
   /* Sidebar wrapper -- was a flat lime-soft pastel; here it becomes a
@@ -91,8 +87,7 @@
 }
 
 /* Sections share the page background in both themes. */
-.doc-section,
-.poster-section {
+.sedge-section {
   background: transparent;
   border: none;
 }

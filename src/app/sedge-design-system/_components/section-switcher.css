@@ -336,14 +336,13 @@
 /* ---- Scroll clearance ----
    Below `lg` two sticky layers (header + this bar) sit over the top of the
    page, so headings need to stop below both. Sections already carry
-   `scroll-mt-24` (Section.tsx / PosterSection.tsx) for the header alone;
+   `scroll-mt-24` (Section.tsx) for the header alone;
    here that grows to header + bar + a little breathing room. The same
    value drives both native scrolling (scrollIntoView, keyboard/anchor
    jumps) and Lenis, which subtracts a target's scroll-margin-top itself
    (see scrollTo in page.tsx). `lg` and up keep the original 6rem. */
 @media (width < 64rem) {
-  .doc-section,
-  .poster-section {
+  .sedge-section {
     scroll-margin-top: calc(
       var(--sedge-header-h, 5rem) + var(--sedge-switcher-h, 3.75rem) +
         var(--space-4)

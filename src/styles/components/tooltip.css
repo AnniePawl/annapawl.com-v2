@@ -172,7 +172,7 @@
    scoped panels instead: a translucent-white surface floating on the
    section's own pastel background, no border, same recipe
    .poster-aside-card uses elsewhere on this page, defined again here
-   so this docs section doesn't depend on poster.css being loaded. */
+   so this docs section doesn't depend on section.css being loaded. */
 
 .tooltip-panels {
   display: grid;

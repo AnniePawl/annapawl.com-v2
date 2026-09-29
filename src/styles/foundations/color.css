@@ -197,10 +197,7 @@
      dark mode; values here are the existing light-mode look, unchanged.
   ========================== */
 
-  /* Translucent panel washes (poster-sticky / poster-aside-card,
-     tooltip). Were hardcoded rgba(255,255,255,...) before -- same
-     numbers, just named now. */
-  --surface-wash-strong: rgba(255, 255, 255, 0.55);
+  /* Translucent tooltip panel wash. */
   --surface-wash-soft: rgba(255, 255, 255, 0.4);
 
   /* Sedge's sidebar-nav wrapper background (was a hardcoded bg-lime-200

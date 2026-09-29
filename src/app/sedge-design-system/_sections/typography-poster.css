@@ -1,13 +1,11 @@
 /* ---- Typography section — internal layout ----
    Docs-only. The outer card/header (background, radius, padding, no
    border/shadow, icon + heading) now comes from the shared
-   PosterSection/poster.css, same as Overview/Approach/Colors. Only the
+   Section/section.css, same as Overview/Approach/Colors. Only the
    content specific to this section — the scale timeline, typeface/weight/
-   tracking rows, footer — lives here. Doodle marks (squiggle, burst,
-   asterisk) are illustrative marginalia, not real typography — Inter is
-   still the only typeface used for actual text, styled with italic/
-   rotation to read as a quick handwritten note rather than switching in a
-   second font. */
+   tracking rows, footer — lives here. The asterisk is illustrative
+   marginalia, not real typography — Inter is still the only typeface used
+   for actual text. */
 
 /* ---- Scale timeline ---- */
 .typo-scale-list {
@@ -79,20 +77,10 @@
 }
 
 .typo-typeface-caption {
-  position: relative;
   display: inline-block;
   margin-top: var(--space-1);
   font-size: var(--text-xs);
   color: var(--text-muted);
-}
-
-.typo-typeface-caption svg {
-  position: absolute;
-  left: 0;
-  bottom: -5px;
-  width: 100%;
-  height: 6px;
-  color: var(--text-secondary);
 }
 
 .typo-weight-row {
@@ -177,21 +165,11 @@
 }
 
 .typo-poster-aside {
-  position: relative;
   font-style: italic;
   font-size: var(--text-sm);
   color: var(--text-secondary);
   transform: rotate(-3deg);
   white-space: nowrap;
-}
-
-.typo-poster-aside svg {
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 100%;
-  height: 6px;
-  color: var(--text-secondary);
 }
 
 /* ---- Phone widths (< Tailwind `sm`) ----

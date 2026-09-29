@@ -1,5 +1,4 @@
-import PosterSection from "../_components/PosterSection";
-import { PosterNote } from "../_components/Doodle";
+import Section from "../_components/Section";
 import ColorSwatchesGrid from "../_components/ColorSwatchesGrid";
 import { SECTIONS } from "../_data/sections";
 
@@ -7,12 +6,11 @@ const meta = SECTIONS.find((s) => s.id === "colors")!;
 
 export default function ColorsSection() {
   return (
-    <PosterSection id={meta.id} heading={meta.title} icon={meta.icon}>
-      <div style={{ position: "relative" }}>
+    <Section id={meta.id} heading={meta.title} icon={meta.icon}>
+      <div className="sedge-section-intro" style={{ position: "relative" }}>
         <p>
-          These are the colors that make me happy. Yes, I realize there
-          are probably more than a traditional design system would
-          recommend, but that&rsquo;s kind of the point — I&rsquo;m making
+          These are the colors that make me happy. I realize there
+          are probably more than a traditional design system, but I&rsquo;m making
           the rules here. The palette is intentionally expansive: less
           about limiting what I can use and more about giving me a whole
           world of color to pull from. Bold and soft variations let the
@@ -25,6 +23,6 @@ export default function ColorsSection() {
       <div style={{ marginTop: "var(--space-6)" }}>
         <ColorSwatchesGrid />
       </div>
-    </PosterSection>
+    </Section>
   );
 }

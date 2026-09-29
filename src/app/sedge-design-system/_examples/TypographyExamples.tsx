@@ -1,6 +1,5 @@
 import { Asterisk } from "lucide-react";
 import CodeBlock from "../_components/CodeBlock";
-import { Squiggle } from "../_components/Doodle";
 
 // Same line at every size, rather than a different snippet per row — it's
 // what makes a type scale actually readable as a scale (compare the same
@@ -114,7 +113,6 @@ export default function TypographyExamples() {
           <p className="typo-typeface-name">Inter</p>
           <span className="typo-typeface-caption">
             — used everywhere, headings and body alike.
-            <Squiggle />
           </span>
         </div>
 
@@ -187,7 +185,6 @@ export default function TypographyExamples() {
 
         <span className="typo-poster-aside">
           ask me again next week
-          <Squiggle />
         </span>
       </div>
     </>

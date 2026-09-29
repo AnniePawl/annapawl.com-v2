@@ -75,7 +75,7 @@ function ColorTile({ varName, hex }: ColorSwatch) {
       type="button"
       onClick={handleCopy}
       aria-label={`Copy var(${varName}), ${hex}`}
-      className="focus-ring group relative flex min-h-32 w-full min-w-0 flex-col justify-end gap-1 rounded-none border-0 p-3 text-left [appearance:none]"
+      className="focus-ring group relative flex min-h-24 md:min-h-32 w-full md:min-w-0 flex-col justify-end gap-1 rounded-none border-0 p-3 text-left [appearance:none]"
       style={{
         background: `var(${varName}, ${hex})`,
         color: swatchTextColor(hex),
@@ -92,7 +92,7 @@ function ColorTile({ varName, hex }: ColorSwatch) {
         )}
       </span>
 
-      <code className="break-all font-mono text-xs font-medium leading-snug">
+      <code className="hidden break-all font-mono text-xs font-medium leading-snug sm:block">
         {varName}
       </code>
 
@@ -111,7 +111,7 @@ export default function ColorSwatchesGrid() {
   return (
     <div className="space-y-8">
       <section aria-label="Brand palette">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 grid-cols-2 lg:grid-cols-3">
           {COLOR_PAIRS.map(({ family, soft, bold }) => (
             <article key={family} className="min-w-0">
               <h3 className="mb-2 text-sm font-semibold text-[var(--text-primary)]">
