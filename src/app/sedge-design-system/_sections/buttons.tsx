@@ -9,7 +9,7 @@ export default function ButtonsSection() {
     <Section id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="Buttons show up everywhere, so they need to feel consistent without all looking the same. Shared structure and interaction states keep them familiar and predictable, while flexible colors, shapes, and details leave room for the occasional quirky one.">
+      description="Buttons use a shared pill shape and playful color pairings to feel consistent without becoming too buttoned-up. Dark cherry with soft moss leads the way, while soft cherry with soft blue offers a lighter alternative.">
       <ButtonStates />
     </Section>
   );

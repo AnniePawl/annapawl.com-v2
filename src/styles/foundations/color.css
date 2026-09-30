@@ -29,6 +29,10 @@
   --red-soft: #FF9999;
   --red-bold: #F05454;
 
+  /* Cherry */
+  --cherry-soft: #A83B59;
+  --cherry-bold: #5A1226;
+
   /* Coral */
   --coral-soft: #FFBFA6;
   --coral-bold: #FF7954;
@@ -70,7 +74,7 @@
   ========================== */
 
   /* Sky */
-  --sky-soft: #AFE3FF;
+  --sky-soft: #D1E3FF;
   --sky-bold: #67CAF8;
 
   /* Blue */
@@ -190,6 +194,12 @@
     var(--accent) 70%,
     black
   );
+
+  /* Editorial links */
+  --link-color: var(--cherry-bold);
+  --link-color-hover: var(--cherry-soft);
+  --link-color-visited: var(--plum-bold);
+  --link-decoration: var(--blue-soft);
 
   /* =========================
      Surface washes + one-off surfaces

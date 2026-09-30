@@ -10,19 +10,13 @@
 ========================================================= */
 
 .accordion {
-  /* --accordion-bg: var(--indigo-soft); */
   --accordion-line: var(--indigo-bold);
-  --accordion-text:var(--text-primary);
-  /* --accordion-muted: #6E6072; */
-
+  --accordion-text: var(--text-primary);
   background: var(--accordion-bg);
   border-radius: 26px;
   padding: var(--space-6);
 }
 
-/* border-top on every item (including the first) is what gives the list
-   both "a line above the questions" and "a line between them" from one
-   rule, instead of separate first-child/divider cases. */
 .accordion-item {
   border-top: 1px solid var(--accordion-line);
 }
@@ -44,16 +38,18 @@
 .accordion-number {
   flex-shrink: 0;
   width: 1.75rem;
+  font-family: var(--font-sans);
   font-size: var(--text-sm);
   font-weight: var(--font-medium);
-  font-variant-numeric: tabular-nums;
-  color: var(--accordion-muted);
+  letter-spacing: 0.04em;
+  font-variant-numeric: normal;
+  color: var(--indigo-bold);
 }
 
 .accordion-question {
   flex: 1;
-  font-size: var(--text-lg);
-  font-weight: var(--font-semibold);
+  font-size: var(--text-base);
+  font-weight: var(--font-regular);
   line-height: var(--leading-snug);
   color: var(--accordion-text);
 }
@@ -68,8 +64,11 @@
   width: 28px;
   height: 28px;
   border-radius: var(--radius-full);
-  border: 1px solid var(--accordion-line);
-  background:var(--indigo-bold)
+  background: var(--indigo-soft);
+}
+.accordion-control:hover{
+  background:var(--indigo-bold);
+  transition: var(--motion-duration-slow)
 }
 
 .accordion-control::before,
@@ -80,7 +79,7 @@
   left: 50%;
   width: 10px;
   height: 1.5px;
-  background: var(--accordion-text);
+  background: var(--cherry-bold);
   transform: translate(-50%, -50%);
   transition: transform var(--motion-hover-duration) var(--motion-ease-standard);
 }

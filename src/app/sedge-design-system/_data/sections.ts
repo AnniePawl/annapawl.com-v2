@@ -16,7 +16,10 @@ import {
   FormInput,
   Brain,
   FileText,
-  ListChevronsUpDown
+  Sparkles,
+  ListChevronsUpDown,
+  Link2,
+  Info,
 } from "lucide-react";
 
 export type SectionGroup = "Intro" | "Foundations" | "Components" | "Patterns";
@@ -59,6 +62,7 @@ export const SECTIONS: NavSection[] = [
     icon: CaseSensitive,
     group: "Foundations",
   },
+  { id: "icons", title: "Icons", icon: Sparkles, group: "Foundations" },
   { id: "spacing", title: "Spacing", icon: Ruler, group: "Foundations" },
   {
     id: "layout",
@@ -83,6 +87,8 @@ export const SECTIONS: NavSection[] = [
     icon: SquareMousePointer,
     group: "Components",
   },
+  { id: "links", title: "Links", icon: Link2, group: "Components" },
+  { id: "callouts", title: "Callouts", icon: Info, group: "Components" },
   {
     id: "accordian",
     title: "Accordian",

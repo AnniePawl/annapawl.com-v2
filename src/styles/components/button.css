@@ -56,9 +56,9 @@
 
 /* Primary variant */
 .btn--primary {
-  --focus-ring-color: var(--indigo-bold);
-  background: var(--indigo-soft);
-  color: var(--charcoal);
+  --focus-ring-color: var(--cherry-soft);
+  background: var(--cherry-bold);
+  color: var(--moss-soft);
   box-shadow: var(--shadow-button);
 }
 
@@ -66,8 +66,8 @@
 .btn--primary[data-state="hover"] {
   background: color-mix(
     in srgb,
-    var(--indigo-soft) 80%,
-    var(--indigo-bold)
+    var(--cherry-bold) 86%,
+    var(--moss-soft)
   );
 }
 
@@ -75,8 +75,8 @@
 .btn--primary[data-state="pressed"] {
   background: color-mix(
     in srgb,
-    var(--indigo-soft) 65%,
-    var(--indigo-bold)
+    var(--cherry-bold) 72%,
+    var(--moss-soft)
   );
   box-shadow: var(--shadow-sm);
   transform: translateY(1px);
@@ -84,21 +84,27 @@
 
 /* Secondary variant */
 .btn--secondary {
-  background: var(--bg-default);
-  color: var(--text-primary);
-  border-color: var(--border-subtle);
+  --focus-ring-color: var(--blue-bold);
+  background: var(--cherry-soft);
+  color: var(--charcoal);
+  border-color: var(--blue-soft);
   box-shadow: none;
 }
 
 .btn--secondary:hover,
 .btn--secondary[data-state="hover"] {
-  background: var(--bg-subtle);
-  border-color: var(--border-strong);
+  background: var(--blue-soft);
+  border-color: var(--blue-soft);
 }
 
 .btn--secondary:active,
 .btn--secondary[data-state="pressed"] {
-  background: var(--bg-subtle);
+  background: color-mix(
+    in srgb,
+    var(--blue-soft) 78%,
+    var(--cherry-soft)
+  );
+  border-color: var(--blue-soft);
   transform: translateY(1px);
 }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import { Check, Copy } from "lucide-react";
 import { cx } from "../../../lib/cx";
 
@@ -32,7 +32,7 @@ export default function CodeBlock({
   return (
     <div
       className={cx("relative rounded-lg overflow-hidden bg-zinc-800", className)}
-     
+      style={{ "--cursor-dot-color": "var(--indigo-soft)" } as CSSProperties}
     >
       <button
         type="button"

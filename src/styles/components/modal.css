@@ -1,5 +1,5 @@
 /* ---- Modal component ----
-   A card-like native dialog with one indigo outline and one clear action. */
+   Two-tone editorial dialog: a soft surface with a slim top label rail. */
 
 .modal {
   position: fixed;
@@ -9,10 +9,10 @@
   margin: auto;
   padding: 0;
   overflow: hidden;
-  border: var(--border-md) solid var(--indigo-soft);
+  border: none;
   border-radius: var(--radius-modal);
-  background: var(--bg-default);
-  color: var(--text-primary);
+  background: var(--editorial-surface);
+  color: var(--charcoal);
   box-shadow: var(--shadow-modal);
 }
 
@@ -44,6 +44,16 @@
   to { opacity: 1; }
 }
 
+.modal-label-rail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 2.875rem;
+  padding: var(--space-2) var(--space-3) var(--space-2) var(--space-5);
+  background: var(--editorial-accent);
+  color: var(--editorial-accent-text);
+}
+
 .modal-content {
   display: flex;
   flex-direction: column;
@@ -52,13 +62,12 @@
 }
 
 .modal-eyebrow {
-  margin-bottom: var(--space-3);
-  color: var(--indigo-bold);
+  color: inherit;
 }
 
 .modal-title {
   margin: 0 0 var(--space-2);
-  color: var(--text-primary);
+  color: var(--editorial-heading);
   font-family: var(--font-heading);
   font-size: var(--text-xl);
   font-weight: var(--font-bold);
@@ -67,16 +76,12 @@
 
 .modal-description {
   margin: 0;
-  color: var(--text-secondary);
+  color: color-mix(in srgb, var(--charcoal) 78%, transparent);
   font-size: var(--text-sm);
   line-height: var(--leading-normal);
 }
 
 .modal-close {
-  position: absolute;
-  top: var(--space-4);
-  right: var(--space-4);
-  z-index: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -84,9 +89,9 @@
   height: 2rem;
   padding: 0;
   border: none;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-pill);
   background: transparent;
-  color: var(--text-secondary);
+  color: inherit;
   cursor: pointer;
   font-size: var(--text-sm);
   line-height: 1;
@@ -96,50 +101,166 @@
 }
 
 .modal-close:hover {
-  background: var(--indigo-soft);
-  color: var(--charcoal);
+  background: color-mix(in srgb, var(--editorial-accent-text) 18%, transparent);
+  color: inherit;
 }
 
 .modal .modal-action {
-  --focus-ring-color: var(--modal-tone);
+  --focus-ring-color: var(--editorial-accent);
   align-self: flex-end;
+  min-width: 9.75rem;
   margin-top: var(--space-6);
-  background: var(--modal-tone);
-  color: var(--charcoal);
+  padding-inline: var(--space-5);
+  background: var(--editorial-accent);
+  color: var(--editorial-accent-text);
+  box-shadow: none;
 }
 
 .modal .modal-action:hover,
 .modal .modal-action[data-state="hover"] {
-  background: color-mix(in srgb, var(--modal-tone) 85%, black);
+  background: var(--editorial-accent-hover);
+  box-shadow: none;
 }
 
 .modal .modal-action:active,
 .modal .modal-action[data-state="pressed"] {
-  background: color-mix(in srgb, var(--modal-tone) 72%, black);
+  background: var(--editorial-accent-hover);
+  box-shadow: none;
 }
 
-/* Docs-only tone triggers preview the modal action color. */
-.tone-trigger.btn--secondary {
-  background: var(--tone-color);
-  border-color: var(--tone-color);
+/* The action keeps its footprint fixed; only the arrow moves. */
+.modal-action-icon,
+.modal-preview-action-icon,
+.colorway-trigger-icon {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  flex-shrink: 0;
+  transition: transform var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+.modal-action:hover .modal-action-icon,
+.modal-action:focus-visible .modal-action-icon,
+.modal-preview-action:hover .modal-preview-action-icon,
+.modal-preview-action:focus-visible .modal-preview-action-icon,
+.colorway-trigger:hover .colorway-trigger-icon,
+.colorway-trigger:focus-visible .colorway-trigger-icon {
+  transform: translateX(var(--space-1));
+}
+
+/* Docs-only compact modal previews. */
+.modal-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.modal-preview {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-height: 15rem;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--editorial-surface);
   color: var(--charcoal);
 }
 
-.tone-trigger.btn--secondary:hover,
-.tone-trigger.btn--secondary[data-state="hover"] {
-  background: color-mix(in srgb, var(--tone-color) 85%, black);
-  border-color: var(--tone-color);
+.modal-preview-rail {
+  display: flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: var(--space-2) var(--space-4);
+  background: var(--editorial-accent);
+  color: var(--editorial-accent-text);
 }
 
-.tone-trigger.btn--secondary:active,
-.tone-trigger.btn--secondary[data-state="pressed"] {
-  background: color-mix(in srgb, var(--tone-color) 72%, black);
-  border-color: var(--tone-color);
+.modal-preview-content {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--space-4);
+}
+
+.modal-preview-eyebrow {
+  color: inherit;
+}
+
+.modal-preview-title {
+  margin: 0;
+  color: var(--editorial-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  line-height: var(--leading-snug);
+}
+
+.modal-preview-description {
+  margin: var(--space-2) 0 var(--space-4);
+  color: color-mix(in srgb, var(--charcoal) 78%, transparent);
+  font-size: var(--text-xs);
+  line-height: var(--leading-relaxed);
+}
+
+.modal-preview .modal-preview-action {
+  min-width: 8.5rem;
+  margin-top: auto;
+  padding: var(--space-2) var(--space-4);
+  background: var(--editorial-accent);
+  color: var(--editorial-accent-text);
+  font-size: var(--text-xs);
+  box-shadow: none;
+}
+
+.modal-preview .modal-preview-action:hover,
+.modal-preview .modal-preview-action:active {
+  background: var(--editorial-accent-hover);
+  box-shadow: none;
+}
+
+/* Matching two-tone buttons use the surface at rest and the accent on hover. */
+.colorway-trigger.btn--secondary {
+  min-width: 12.5rem;
+  background: var(--editorial-surface);
+  border-color: var(--editorial-accent);
+  color: var(--charcoal);
+  box-shadow: none;
+}
+
+.colorway-trigger.btn--secondary:hover,
+.colorway-trigger.btn--secondary[data-state="hover"] {
+  background: var(--editorial-accent);
+  border-color: var(--editorial-accent);
+  color: var(--editorial-accent-text);
+}
+
+.colorway-trigger.btn--secondary:active,
+.colorway-trigger.btn--secondary[data-state="pressed"] {
+  background: var(--editorial-accent-hover);
+  border-color: var(--editorial-accent);
+  color: var(--editorial-accent-text);
+  box-shadow: none;
+}
+
+.modal-colorway-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+@media (width < 48rem) {
+  .modal-preview-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .modal[open],
   .modal[open]::backdrop {
     animation: none;
+  }
+
+  .modal-action-icon,
+  .modal-preview-action-icon,
+  .colorway-trigger-icon {
+    transition: none;
   }
 }

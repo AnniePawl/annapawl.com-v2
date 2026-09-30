@@ -8,10 +8,6 @@ const ACTIVE_MEDIA = "(pointer: fine) and (hover: hover)";
 const INTERACTIVE_SELECTOR =
   'a[href], button, [role="button"], [role="link"], summary, label[for]';
 
-const TEXT_SELECTOR =
-  "p, span, h1, h2, h3, h4, h5, h6, li, blockquote, figcaption, " +
-  "caption, td, th, dt, dd, label, strong, em, b, i, small, code, pre";
-
 const SPECIAL_CURSORS = new Set([
   "text",
   // "vertical-text",
@@ -82,6 +78,29 @@ export default function CustomCursor() {
     let position: { x: number; y: number } | null = null;
     let frame = 0;
 
+    function getCursorElements(createDialogMirrors = false) {
+      if (createDialogMirrors && isDocumentation) {
+        document
+          .querySelectorAll<HTMLDialogElement>("dialog[open]")
+          .forEach((dialog) => {
+            let mirror = dialog.querySelector<HTMLElement>(
+              ":scope > [data-cc-dialog-cursor]"
+            );
+
+            if (!mirror) {
+              mirror = document.createElement("div");
+              mirror.className = "cc-cursor cc-documentation";
+              mirror.dataset.ccCursor = "";
+              mirror.dataset.ccDialogCursor = "";
+              mirror.setAttribute("aria-hidden", "true");
+              dialog.appendChild(mirror);
+            }
+          });
+      }
+
+      return document.querySelectorAll<HTMLElement>("[data-cc-cursor]");
+    }
+
     function restoreNativeCursor() {
       root.classList.remove("cc-suppress-native");
 
@@ -102,7 +121,9 @@ export default function CustomCursor() {
 
     function hide() {
       restoreNativeCursor();
-      cursor!.classList.remove("cc-visible", "cc-interactive");
+      getCursorElements().forEach((element) => {
+        element.classList.remove("cc-visible", "cc-interactive");
+      });
     }
 
     function suppressNativeCursor(target: Element) {
@@ -187,20 +208,21 @@ export default function CustomCursor() {
       // The root-mounted cursor does not inherit route-scoped themes.
       const theme = getComputedStyle(target);
       const dotColor =
+        theme.getPropertyValue("--cursor-dot-color").trim() ||
         theme.getPropertyValue("--text-primary").trim() ||
         theme.color;
       const haloColor =
         theme.getPropertyValue("--cursor-halo-color").trim() ||
         "#ad8dc6";
 
-      cursor!.style.setProperty("--cc-dot-color", dotColor);
-      cursor!.style.setProperty("--cc-halo-color", haloColor);
-
-      cursor!.style.transform =
-        `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
-
-      cursor!.classList.toggle("cc-interactive", isInteractive);
-      cursor!.classList.add("cc-visible");
+      getCursorElements(true).forEach((element) => {
+        element.style.setProperty("--cc-dot-color", dotColor);
+        element.style.setProperty("--cc-halo-color", haloColor);
+        element.style.transform =
+          `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+        element.classList.toggle("cc-interactive", isInteractive);
+        element.classList.add("cc-visible");
+      });
 
       // Hide the native cursor only after positioning/showing ours.
       suppressNativeCursor(target);
@@ -280,13 +302,20 @@ export default function CustomCursor() {
       window.removeEventListener("blur", reset);
       window.removeEventListener("resize", scheduleUpdate);
       media.removeEventListener("change", reset);
+      document
+        .querySelectorAll("[data-cc-dialog-cursor]")
+        .forEach((mirror) => mirror.remove());
       reset();
     };
   }, [isDocumentation]);
 
   return (
-    <div ref={cursorRef} className="cc-cursor" aria-hidden="true"
-      style={isDocumentation ? { width: 8, height: 8, border: "none", borderRadius: "50%", background: "var(--cc-dot-color, #34313b)" } : undefined}>
+    <div
+      ref={cursorRef}
+      className={isDocumentation ? "cc-cursor cc-documentation" : "cc-cursor"}
+      data-cc-cursor
+      aria-hidden="true"
+    >
       {/* Original halo markup, preserved:
       <span className="cc-halo" />
       <span className="cc-center" />

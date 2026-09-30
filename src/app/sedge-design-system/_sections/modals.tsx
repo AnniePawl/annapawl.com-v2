@@ -10,7 +10,7 @@ export default function ModalsSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="Modals create a focused little space within the page for messages that deserve attention. A card-like indigo outline keeps the surface consistent, while three action colors provide a small amount of emphasis."
+      description="Modals create a focused little space for messages that deserve attention. A slim top rail gives the eyebrow a clear home, while the softer surface keeps the title, message, and one action easy to scan."
     >
       <ModalExamples />
     </Section>

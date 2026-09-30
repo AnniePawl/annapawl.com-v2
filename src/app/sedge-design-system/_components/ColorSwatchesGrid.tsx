@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { Check, Copy } from "lucide-react";
 import {
   COLOR_PAIRS,
-  NEUTRAL_SWATCHES,
   PAGE_SWATCHES,
   type ColorSwatch,
 } from "../_data/color-swatches";
@@ -127,26 +126,9 @@ export default function ColorSwatchesGrid() {
         </div>
       </section>
 
-      <section aria-label="Neutral palette">
-        <h3 className="mb-3 text-sm font-semibold text-[var(--text-primary)]">
-          Neutrals
-        </h3>
-
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-          {NEUTRAL_SWATCHES.map((swatch) => (
-            <div
-              key={swatch.varName}
-              className="overflow-hidden rounded-2xl shadow-sm"
-            >
-              <ColorTile {...swatch} />
-            </div>
-          ))}
-        </div>
-      </section>
-
       <section aria-label="Page background and text colors">
         <h3 className="mb-3 text-sm font-semibold text-[var(--text-primary)]">
-          Page background &amp; text
+          Background &amp; text
         </h3>
 
         <div className="grid grid-cols-2 gap-3">

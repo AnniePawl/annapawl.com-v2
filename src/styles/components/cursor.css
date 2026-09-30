@@ -28,6 +28,16 @@
   visibility: visible;
 }
 
+/* The design-system docs use the cursor's compact dot treatment everywhere,
+   including synchronized mirrors rendered inside native dialog top layers. */
+.cc-cursor.cc-documentation {
+  width: 8px;
+  height: 8px;
+  border: none;
+  border-radius: 50%;
+  background: var(--cc-dot-color, #34313b);
+}
+
 /* Dot becomes a hollow ring over enabled links/buttons. */
 .cc-cursor.cc-interactive {
   width: 22px;

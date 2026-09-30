@@ -16,6 +16,8 @@ const config: Config = {
         "pink-bold": "var(--pink-bold)",
         "red-soft": "var(--red-soft)",
         "red-bold": "var(--red-bold)",
+        "cherry-soft": "var(--cherry-soft)",
+        "cherry-bold": "var(--cherry-bold)",
         "coral-soft": "var(--coral-soft)",
         "coral-bold": "var(--coral-bold)",
         "orange-soft": "var(--orange-soft)",

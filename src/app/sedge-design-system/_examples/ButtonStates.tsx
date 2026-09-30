@@ -15,7 +15,7 @@ export default function ButtonStates() {
     <section style={{ maxWidth: 720 }}>
       <CodeBlock code={USAGE} className="mb-8" />
 
-      <h3 style={{ marginBottom: 16 }}>Primary Button States</h3>
+      <h3 style={{ marginBottom: 16 }}>Dark cherry + soft moss</h3>
 
       <div className="button-state-grid">
         <State label="Enabled">
@@ -35,7 +35,7 @@ export default function ButtonStates() {
         </State>
       </div>
 
-      <h3 style={{ margin: "32px 0 16px" }}>Secondary Button States</h3>
+      <h3 style={{ margin: "32px 0 16px" }}>Soft cherry + soft blue</h3>
 
       <div className="button-state-grid">
         <State label="Enabled">

@@ -68,6 +68,13 @@
   --accent-hover: color-mix(in srgb, var(--accent) 85%, black);
   --accent-active: color-mix(in srgb, var(--accent) 70%, black);
 
+  /* Editorial links keep the same behavior with lighter palette values
+     that remain legible on the peat background. */
+  --link-color: var(--moss-soft);
+  --link-color-hover: var(--blue-soft);
+  --link-color-visited: var(--lilac-soft);
+  --link-decoration: var(--cherry-soft);
+
   /* The tooltip panel wash lifts toward --ivory on the dark page. */
   --surface-wash-soft: color-mix(in srgb, var(--ivory) 10%, transparent);
 

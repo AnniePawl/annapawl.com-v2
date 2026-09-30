@@ -14,6 +14,7 @@ import AccordianSection from "./_sections/accordian";
 import ApproachSection from "./_sections/approach";
 import ColorsSection from "./_sections/colors";
 import TypographySection from "./_sections/typography";
+import IconsSection from "./_sections/icons";
 import SpacingSection from "./_sections/spacing";
 import LayoutSection from "./_sections/layout";
 import RadiusDocsSection from "./_sections/radius";
@@ -21,6 +22,8 @@ import ElevationSection from "./_sections/elevation";
 import MotionSection from "./_sections/motion";
 import AccessibilitySection from "./_sections/accessibility";
 import ButtonsSection from "./_sections/buttons";
+import LinksSection from "./_sections/links";
+import CalloutsSection from "./_sections/callouts";
 import CardsSection from "./_sections/cards";
 import ModalsSection from "./_sections/modals";
 import BadgesSection from "./_sections/badges";
@@ -244,6 +247,7 @@ export default function DesignSystemOverview() {
 {/* Foundations */}
             <ColorsSection />
             <TypographySection />
+            <IconsSection />
             <SpacingSection />
             <LayoutSection />
             <RadiusDocsSection />
@@ -253,6 +257,8 @@ export default function DesignSystemOverview() {
 
 {/* Components */}
             <ButtonsSection />
+            <LinksSection />
+            <CalloutsSection />
             <CardsSection />
             <ModalsSection />
             <AccordianSection />

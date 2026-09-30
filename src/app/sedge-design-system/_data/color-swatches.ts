@@ -24,6 +24,11 @@ export const COLOR_PAIRS: ColorPair[] = [
     bold: { varName: "--red-bold", hex: "#F05454" },
   },
   {
+    family: "Cherry",
+    soft: { varName: "--cherry-soft", hex: "#A83B59" },
+    bold: { varName: "--cherry-bold", hex: "#5A1226" },
+  },
+  {
     family: "Coral",
     soft: { varName: "--coral-soft", hex: "#FFBFA6" },
     bold: { varName: "--coral-bold", hex: "#FF7954" },
@@ -69,7 +74,7 @@ export const COLOR_PAIRS: ColorPair[] = [
   // Blues + purple
   {
     family: "Sky",
-    soft: { varName: "--sky-soft", hex: "#AFE3FF" },
+    soft: { varName: "--sky-soft", hex: "#D1E3FF" },
     bold: { varName: "--sky-bold", hex: "#67CAF8" },
   },
   {
@@ -133,24 +138,7 @@ export const COLOR_PAIRS: ColorPair[] = [
   },
 ];
 
-export const NEUTRAL_SWATCHES: ColorSwatch[] = [
-  { varName: "--neutral-0", hex: "#FFFFFF" },
-  { varName: "--neutral-50", hex: "#FAFAFA" },
-  { varName: "--neutral-100", hex: "#F4F4F5" },
-  { varName: "--neutral-200", hex: "#E4E4E7" },
-  { varName: "--neutral-500", hex: "#71717A" },
-  { varName: "--neutral-700", hex: "#3F3F46" },
-  { varName: "--neutral-900", hex: "#2A2A2E" },
-  { varName: "--neutral-1000", hex: "#09090B" },
-];
-
 export const PAGE_SWATCHES: ColorSwatch[] = [
   { varName: "--cream", hex: "#FFFCF8" },
   { varName: "--charcoal", hex: "#2A2A2E" },
-  // Dark-mode siblings of cream/charcoal -- warmer than a plain gray
-  // dark theme. See sedge-design-system/theme.css for where these get
-  // used as the dark theme's --bg-default/--text-primary.
-  { varName: "--peat", hex: "#231f1c" },
-  { varName: "--chocolate", hex: "#503f35" },
-  { varName: "--ivory", hex: "#F2E9D8" },
 ];

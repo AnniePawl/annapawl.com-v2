@@ -1,23 +1,22 @@
 "use client";
 
 import {
-  CSSProperties,
   MouseEvent,
   ReactNode,
   useEffect,
   useId,
   useRef,
 } from "react";
+import { ArrowRight } from "lucide-react";
 import { cx } from "../../lib/cx";
 import Button from "./Button";
+import {
+  EDITORIAL_COLORWAYS,
+  type EditorialColorway,
+} from "./editorialColorways";
 
-export type ModalTone = "lemon" | "coral" | "mint";
-
-const MODAL_TONES: Record<ModalTone, string> = {
-  lemon: "var(--lemon-bold)",
-  coral: "var(--coral-bold)",
-  mint: "var(--mint-soft)",
-};
+export type ModalColorway = EditorialColorway;
+export const MODAL_COLORWAYS = EDITORIAL_COLORWAYS;
 
 export interface ModalProps {
   open: boolean;
@@ -27,7 +26,7 @@ export interface ModalProps {
   description: ReactNode;
   actionLabel: ReactNode;
   onAction?: () => void;
-  tone?: ModalTone;
+  colorway?: ModalColorway;
   className?: string;
 }
 
@@ -43,15 +42,13 @@ export default function Modal({
   description,
   actionLabel,
   onAction,
-  tone = "lemon",
+  colorway = "pink-emerald",
   className,
 }: ModalProps) {
   const ref = useRef<HTMLDialogElement>(null);
   const titleId = useId();
   const descriptionId = useId();
-  const toneStyle = {
-    "--modal-tone": MODAL_TONES[tone],
-  } as CSSProperties;
+  const colorwayStyle = MODAL_COLORWAYS[colorway];
 
   useEffect(() => {
     const dialog = ref.current;
@@ -82,7 +79,7 @@ export default function Modal({
     <dialog
       ref={ref}
       className={cx("modal", className)}
-      style={toneStyle}
+      style={colorwayStyle}
       onClose={onClose}
       onCancel={onClose}
       onClick={handleBackdropClick}
@@ -90,17 +87,19 @@ export default function Modal({
       aria-describedby={descriptionId}
       data-cursor-native
     >
-      <button
-        type="button"
-        className="modal-close focus-ring"
-        onClick={onClose}
-        aria-label="Close"
-      >
-        ✕
-      </button>
+      <header className="modal-label-rail">
+        <span className="modal-eyebrow type-eyebrow">{eyebrow}</span>
+        <button
+          type="button"
+          className="modal-close focus-ring"
+          onClick={onClose}
+          aria-label="Close"
+        >
+          ✕
+        </button>
+      </header>
 
       <div className="modal-content" data-lenis-prevent>
-        <span className="modal-eyebrow type-eyebrow">{eyebrow}</span>
         <h3 className="modal-title" id={titleId}>
           {title}
         </h3>
@@ -109,6 +108,7 @@ export default function Modal({
         </p>
         <Button className="modal-action" onClick={handleAction}>
           {actionLabel}
+          <ArrowRight className="modal-action-icon" aria-hidden="true" />
         </Button>
       </div>
     </dialog>
