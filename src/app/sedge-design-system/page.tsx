@@ -51,6 +51,8 @@ export default function DesignSystemOverview() {
 
   const rootRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
+  const scrollTargetRef = useRef<string | null>(null);
+  const scrollReleaseTimerRef = useRef<number | null>(null);
   const lenis = useLenis();
 
   // Measures the two sticky layers and publishes them as CSS custom
@@ -146,7 +148,9 @@ export default function DesignSystemOverview() {
               a.getBoundingClientRect().top - b.getBoundingClientRect().top
           );
 
-        if (visible[0]?.id) setActiveId(visible[0].id);
+        if (!scrollTargetRef.current && visible[0]?.id) {
+          setActiveId(visible[0].id);
+        }
       },
       {
         rootMargin,
@@ -160,32 +164,40 @@ export default function DesignSystemOverview() {
 
     return () => observer.disconnect();
   }, [stickyMetrics]);
-
-
-  // Scroll to section 
   const scrollTo = (id: string) => {
     const el = sectionRefs.current[id];
     if (!el) return;
 
-    if (lenis) {
-      // Lenis's own short, restrained easing (see SmoothScrollProvider) --
-      // Lenis reads the target's computed scroll-margin-top itself. That
-      // gives desktop the section's `scroll-mt-24` clearance and mobile
-      // the responsive header + switcher clearance from
-      // section-switcher.css without applying either offset twice.
-      lenis.scrollTo(el);
-    } else {
-      // No Lenis instance (prefers-reduced-motion, or not mounted yet) —
-      // scrollIntoView finds whichever scrollable ancestor needs to move,
-      // now that's the window itself. The section's `scroll-mt-24` class
-      // supplies the same top breathing room past the sticky HeroNav.
-      // globals.css forces `scroll-behavior: auto` under reduced motion,
-      // so this "smooth" request becomes an instant native jump there —
-      // no animated transition, per the accessibility requirement.
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    scrollTargetRef.current = id;
+    setActiveId(id);
+
+    if (scrollReleaseTimerRef.current !== null) {
+      window.clearTimeout(scrollReleaseTimerRef.current);
     }
 
-    setActiveId(id);
+    const releaseScrollTracking = () => {
+      if (scrollTargetRef.current !== id) return;
+      scrollTargetRef.current = null;
+      scrollReleaseTimerRef.current = null;
+    };
+
+    scrollReleaseTimerRef.current = window.setTimeout(
+      releaseScrollTracking,
+      1200
+    );
+
+    if (lenis) {
+      // Lenis respects the target's responsive scroll margin.
+      lenis.scrollTo(el, { onComplete: releaseScrollTracking });
+    } else {
+      const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+      el.scrollIntoView({
+        behavior: reducedMotion ? "auto" : "smooth",
+        block: "start",
+      });
+    }
   };
 
   // Scroll to top 

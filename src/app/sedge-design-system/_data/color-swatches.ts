@@ -3,6 +3,7 @@ export type ColorSwatch = {
   hex: string;
 };
 
+// Each sample dispayed as a soft/bold pair
 export type ColorPair = {
   family: string;
   soft: ColorSwatch;
@@ -12,7 +13,7 @@ export type ColorPair = {
 // Hex values mirror foundations/color.css.
 // Keep this list in the same order as the palette.
 export const COLOR_PAIRS: ColorPair[] = [
-  // Warm colors
+  // Pinks/Reds
   {
     family: "Pink",
     soft: { varName: "--pink-soft", hex: "#FFD0EA" },
@@ -39,14 +40,24 @@ export const COLOR_PAIRS: ColorPair[] = [
     bold: { varName: "--orange-bold", hex: "#FFA34D" },
   },
   {
-    family: "Lemon",
-    soft: { varName: "--lemon-soft", hex: "#FFF0A2" },
-    bold: { varName: "--lemon-bold", hex: "#FFE669" },
+    family: "Clay",
+    soft: { varName: "--clay-soft", hex: "#F2BAA2" },
+    bold: { varName: "--clay-bold", hex: "#D5764D" },
+  },
+  {
+    family: "Ochre",
+    soft: { varName: "--ochre-soft", hex: "#E8C077" },
+    bold: { varName: "--ochre-bold", hex: "#C6871E" },
   },
   {
     family: "Amber",
     soft: { varName: "--amber-soft", hex: "#FFDF8E" },
     bold: { varName: "--amber-bold", hex: "#F3C144" },
+  },
+  {
+    family: "Lemon",
+    soft: { varName: "--lemon-soft", hex: "#FFF0A2" },
+    bold: { varName: "--lemon-bold", hex: "#FFE669" },
   },
 
   // Greens
@@ -61,6 +72,11 @@ export const COLOR_PAIRS: ColorPair[] = [
     bold: { varName: "--sage-bold", hex: "#6EA472" },
   },
   {
+    family: "Moss",
+    soft: { varName: "--moss-soft", hex: "#B7C98A" },
+    bold: { varName: "--moss-bold", hex: "#7A8F4E" },
+  },
+  {
     family: "Mint",
     soft: { varName: "--mint-soft", hex: "#B5FFDB" },
     bold: { varName: "--mint-bold", hex: "#5CE1B1" },
@@ -71,7 +87,7 @@ export const COLOR_PAIRS: ColorPair[] = [
     bold: { varName: "--emerald-bold", hex: "#2D6144" },
   },
 
-  // Blues + purple
+  // Blues + Purples
   {
     family: "Sky",
     soft: { varName: "--sky-soft", hex: "#D1E3FF" },
@@ -102,39 +118,27 @@ export const COLOR_PAIRS: ColorPair[] = [
     soft: { varName: "--plum-soft", hex: "#D89FD7" },
     bold: { varName: "--plum-bold", hex: "#A855A7" },
   },
-
-  // Earth colors
+  {
+    family: "Mauve",
+    soft: { varName: "--mauve-soft", hex: "#D8B4C4" },
+    bold: { varName: "--mauve-bold", hex: "#9C6B85" },
+  },
+  // Browns
   {
     family: "Sand",
     soft: { varName: "--sand-soft", hex: "#F4DFC6" },
     bold: { varName: "--sand-bold", hex: "#D6B894" },
   },
-  {
-    family: "Clay",
-    soft: { varName: "--clay-soft", hex: "#F2BAA2" },
-    bold: { varName: "--clay-bold", hex: "#D5764D" },
-  },
+
   {
     family: "Taupe",
     soft: { varName: "--taupe-soft", hex: "#C3B6AD" },
     bold: { varName: "--taupe-bold", hex: "#9D8C81" },
   },
-
-  // Earth colors — extended (sedge-design-system dark theme accents)
   {
-    family: "Moss",
-    soft: { varName: "--moss-soft", hex: "#B7C98A" },
-    bold: { varName: "--moss-bold", hex: "#7A8F4E" },
-  },
-  {
-    family: "Ochre",
-    soft: { varName: "--ochre-soft", hex: "#E8C077" },
-    bold: { varName: "--ochre-bold", hex: "#C6871E" },
-  },
-  {
-    family: "Mauve",
-    soft: { varName: "--mauve-soft", hex: "#D8B4C4" },
-    bold: { varName: "--mauve-bold", hex: "#9C6B85" },
+    family: "Chocolate",
+    soft: { varName: "--chocolate-soft", hex: "#A47F68" },
+    bold: { varName: "--chocolate-bold", hex: "#231F1C" },
   },
 ];
 

@@ -10,7 +10,7 @@ export default function BadgesSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="Badges keep small bits of information easy to spot — whether it’s a status, category, or count. Neutral works for everyday labels, accent adds a little emphasis, and semantic colors make states clear at a glance."
+      description="Badges are compact labels for topics, categories, and small bits of garden metadata. They use cream and charcoal by default, while optional background and foreground colors allow lighter or darker treatments. The foreground color is shared by the text and border."
     >
       <BadgeExamples />
     </Section>

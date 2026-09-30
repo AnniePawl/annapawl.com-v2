@@ -2,19 +2,9 @@
   /* FONT FAMILIES */
   --font-sans: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  /* Every font in the design system reads Inter by default — display text
-     included, per Anna's "make it all Inter" call (see the round that
-     replaced the Space Grotesk/Inter split). --font-heading is simply
-     aliased to --font-sans rather than loading a second typeface, so
-     .h1/.h2 (and anything else reading --font-heading directly, e.g.
-     Card's CardHeading) fall in line automatically with zero per-usage
-     changes.
-     A dedicated --font-display/Bodoni-Moda alias briefly existed here for
-     the Display type-scale level only, then was reverted back to Inter
-     per Anna's "update display text back to original inter display font"
-     -- removed rather than left dead, since --type-display-family below
-     now points straight at --font-heading again like every other level. */
-  --font-heading: var(--font-sans);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  /* Every font in the design system reads Inter by default */
 
   /* FONT WEIGHTS */
   --font-light: 300;
@@ -35,6 +25,7 @@
   --text-4xl: 2.25rem;  /* 36 */
   --text-5xl: 3rem;     /* 48 */
   --text-6xl: 3.75rem;  /* 60 */
+
   /* LINE HEIGHTS */
   --leading-tight: 1.1;
   --leading-snug: 1.25;
@@ -58,9 +49,7 @@
   --type-display-tracking: -0.02em;
   --type-display-transform: none;
 
-  /* HEADINGS — bold + tighter + more editorial than Display, so the two
-     levels contrast instead of H1 just reading as "smaller Display".
-     Each role keeps its existing desktop size and scales down gently on
+  /* HEADINGS — bold + tighter + more editorial than Display. Each role keeps its existing desktop size and scales down gently on
      narrower screens without needing separate mobile-only classes. */
   --type-h1-family: var(--font-heading);
   --type-h1-size: clamp(2.5rem, 7vw, 3.75rem);
@@ -106,6 +95,13 @@
   --type-supporting-weight: var(--font-regular);
   --type-supporting-leading: var(--leading-relaxed);
   --type-supporting-tracking: var(--tracking-normal);
+
+  /* NAVIGATION */
+  --type-nav-family: var(--font-sans);
+  --type-nav-size: var(--text-sm);
+  --type-nav-weight: var(--font-medium);
+  --type-nav-leading: var(--leading-normal);
+  --type-nav-tracking: var(--tracking-normal);
 }
 
 /* ---- Global base typography ---- */
@@ -121,10 +117,6 @@
   line-height: var(--type-display-leading);
   letter-spacing: var(--type-display-tracking);
   text-transform: var(--type-display-transform);
-  /* Charcoal (--neutral-900), not pure black — matches body's default
-     text color. Explicit here rather than left to inherit, since at
-     least one usage (sedge-design-system's Section.tsx) was overriding it with
-     Tailwind's much darker `text-zinc-900`. */
   color: var(--text-primary);
 }
 
@@ -187,4 +179,12 @@ p {
   font-weight: var(--type-supporting-weight);
   line-height: var(--type-supporting-leading);
   letter-spacing: var(--type-supporting-tracking);
+}
+
+.type-nav {
+  font-family: var(--type-nav-family);
+  font-size: var(--type-nav-size);
+  font-weight: var(--type-nav-weight);
+  line-height: var(--type-nav-leading);
+  letter-spacing: var(--type-nav-tracking);
 }

@@ -1,33 +1,48 @@
 import { CSSProperties, ReactNode, useId } from "react";
 import { cx } from "../../lib/cx";
 
-// Matches the brand palette's hue names (foundations/color.css) — same
-// convention as Card's/Badge's `tone` prop (11 hues, no "neutral" — the
-// tooltip's own default mint already covers the untoned case).
-export type TooltipTone =
+export type TooltipHue =
   | "pink"
   | "red"
+  | "cherry"
+  | "coral"
   | "orange"
-  | "yellow"
+  | "clay"
+  | "ochre"
+  | "amber"
+  | "lemon"
   | "lime"
+  | "sage"
+  | "moss"
   | "mint"
-  | "green"
+  | "emerald"
   | "sky"
   | "blue"
+  | "steel"
+  | "lilac"
   | "indigo"
-  | "violet";
+  | "plum"
+  | "mauve"
+  | "sand"
+  | "taupe"
+  | "chocolate";
+
+export type TooltipTone =
+  | TooltipHue
+  | {
+      background: TooltipColor;
+      foreground: TooltipColor;
+    };
+
+export type TooltipColor =
+  | "cream"
+  | "charcoal"
+  | `${TooltipHue}-${"soft" | "bold"}`;
 
 export interface TooltipProps {
   label: string;
   children: ReactNode;
   side?: "top" | "bottom";
-  /**
-   * Optional color combo — one of the brand palette's hues. Sets
-   * --tooltip-bg / --tooltip-accent inline (the hue's -soft / -bold
-   * tokens), which the bubble's fill, border, and little pointer all
-   * read from. Falls back to the component's own default mint when
-   * not set.
-   */
   tone?: TooltipTone;
   className?: string;
 }
@@ -45,10 +60,12 @@ export default function Tooltip({
   className,
 }: TooltipProps) {
   const id = useId();
+  const background = typeof tone === "string" ? `${tone}-soft` : tone?.background;
+  const foreground = typeof tone === "string" ? `${tone}-bold` : tone?.foreground;
   const toneStyle: CSSProperties | undefined = tone
     ? ({
-        "--tooltip-bg": `var(--${tone}-soft)`,
-        "--tooltip-accent": `var(--${tone}-bold)`,
+        "--tooltip-bg": `var(--${background})`,
+        "--tooltip-foreground": `var(--${foreground})`,
       } as CSSProperties)
     : undefined;
 

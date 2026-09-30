@@ -52,9 +52,10 @@ const USAGE = `
 <h1 className="h-display">Sedge</h1>
 <h1 className="h1">Section heading</h1>
 <h2 className="h2">Subsection heading</h2>
-<p>Body copy — the base <p> style, no class needed.</p>
-<span className="type-eyebrow">Foundations</span>
-<p className="type-supporting">Compact supporting copy.</p>
+<p>Body copy uses the global paragraph style</p>
+<span className="type-eyebrow">Lil uppercase moment</span>
+<p className="type-supporting">Small, compact, extra line height</p>
+<span className="type-nav">Navigation label</span>
 `;
 
 export default function TypographyExamples() {
@@ -126,7 +127,7 @@ export default function TypographyExamples() {
           </div>
           <span className="typo-scale-dot" aria-hidden="true" />
           <p className="type-supporting typo-scale-sample">
-             One seriously saucy little squirrel, last seen fleeing the bird feeder. Armed with audacity and possibly an acorn. Do not attempt to apprehend—suspect is extremely squirrely.
+            One seriously saucy little squirrel, last seen fleeing the bird feeder. Armed with audacity and possibly an acorn. Do not attempt to apprehend—suspect is extremely squirrely.
           </p>
         </div>
 
@@ -137,6 +138,15 @@ export default function TypographyExamples() {
           </div>
           <span className="typo-scale-dot" aria-hidden="true" />
           <p className="type-eyebrow typo-scale-sample">Nut job</p>
+        </div>
+
+        <div className="typo-scale-row">
+          <div>
+            <code className="typo-scale-class">.type-nav</code>
+            <div className="typo-scale-meta">14px / 500 / 1.5 leading</div>
+          </div>
+          <span className="typo-scale-dot" aria-hidden="true" />
+          <p className="type-nav typo-scale-sample">Foundations</p>
         </div>
       </div>
 

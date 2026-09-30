@@ -8,18 +8,7 @@
   background: var(--bg-subtle);
 }
 
-.pattern-preview .page-shell {
-  padding-block: var(--space-6);
-}
-
-.pattern-preview-content {
-  padding: var(--space-5);
-  border: var(--border-md) solid var(--indigo-soft);
-  border-radius: var(--radius-md);
-  background: var(--bg-default);
-}
-
-.pattern-preview-content p {
+.page-shell-example-copy {
   max-width: var(--measure-sm);
   margin: var(--space-2) 0 0;
   color: var(--text-secondary);
@@ -40,7 +29,6 @@
 }
 
 @media (width < 40rem) {
-  .pattern-preview-content,
   .pattern-preview .page-header {
     padding: var(--space-4);
   }

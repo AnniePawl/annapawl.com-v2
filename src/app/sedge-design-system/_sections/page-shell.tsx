@@ -6,7 +6,7 @@ import "./patterns.css";
 
 const meta = SECTIONS.find((section) => section.id === "page-shell")!;
 
-const USAGE = `import PageShell from "@/src/components/layout/PageShell";
+const USAGE = `import PageShell from "@/components/layout/PageShell";
 
 export default function BooksPage() {
   return (
@@ -24,19 +24,15 @@ export default function PageShellSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="The page shell keeps content centered and gives every page the same responsive outer spacing. It uses the shared page gutter, section gap, and maximum width, so individual pages don’t have to rebuild the frame."
+      description="The page shell is invisible layout scaffolding: no border, radius, or background. It keeps content centered inside a shared maximum width, adds responsive side gutters, and provides equal spacing at the top and bottom of the page."
     >
-      <div className="pattern-preview">
-        <PageShell>
-          <div className="pattern-preview-content">
-            <span className="type-eyebrow">Inside the page shell</span>
-            <p>
-              The outer gutter adjusts with the screen while the content stays
-              centered inside a consistent maximum width.
-            </p>
-          </div>
-        </PageShell>
-      </div>
+      <PageShell>
+        <span className="type-eyebrow">Inside the page shell</span>
+        <p className="page-shell-example-copy">
+          The side gutters adjust with the screen while the content stays
+          centered inside a consistent maximum width.
+        </p>
+      </PageShell>
 
       <hr className="poster-divider" />
       <span className="poster-label type-eyebrow">Usage</span>

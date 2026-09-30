@@ -137,13 +137,12 @@
   --mauve-soft: #D8B4C4;
   --mauve-bold: #9C6B85;
 
-  /* Peat / chocolate / ivory — warm dark-mode neutrals, siblings of --cream/
-     --charcoal above but warmer than --charcoal's neutral gray-black.
-     Single values (no -soft/-bold pair), same pattern as --cream/
-     --charcoal. */
-  --peat: #231f1c;
-  --chocolate: #503f35;
-  --bark-soft: #4A3B2E;
+  /* Chocolate — a warm brown pair. Bold doubles as the dark-theme page
+     background; soft is available as a lighter editorial surface/accent. */
+  --chocolate-soft: #A47F68;
+  --chocolate-bold: #231F1C;
+
+  /* Warm inverse text for the dark theme. */
   --ivory: #F2E9D8;
 
   /* Neutral component tone */
@@ -163,11 +162,17 @@
   ========================== */
 
   --text-primary: var(--charcoal);
-  --text-secondary: var(--charcoal);
-  --text-muted: var(--charcoal);
-
-  /* For suitably dark backgrounds */
-  --text-inverse: var(--neutral-0);
+  --text-secondary: color-mix(
+    in srgb,
+    var(--charcoal) 75%,
+    var(--cream)
+  );
+  --text-muted: color-mix(
+    in srgb,
+    var(--charcoal) 68%,
+    var(--cream)
+  );
+  --text-inverse: var(--cream);
 
   /* =========================
      Borders

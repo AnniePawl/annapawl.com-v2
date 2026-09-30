@@ -26,6 +26,12 @@ function luminance(hex: string): number {
 
 const CHARCOAL_LUMINANCE = luminance("#2A2A2E");
 
+const TEXT_ROLES = [
+  { token: "--text-primary", label: "Primary" },
+  { token: "--text-secondary", label: "Secondary" },
+  { token: "--text-muted", label: "Muted" },
+];
+
 function swatchTextColor(hex: string): string {
   const background = luminance(hex);
 
@@ -74,7 +80,7 @@ function ColorTile({ varName, hex }: ColorSwatch) {
       type="button"
       onClick={handleCopy}
       aria-label={`Copy var(${varName}), ${hex}`}
-      className="focus-ring group relative flex min-h-24 md:min-h-32 w-full md:min-w-0 flex-col justify-end gap-1 rounded-none border-0 p-3 text-left [appearance:none]"
+      className="focus-ring group relative flex min-h-[var(--space-10)] w-full flex-col justify-end gap-[var(--space-1)] rounded-none border-0 p-[var(--space-3)] text-left [appearance:none] md:min-h-[var(--space-11)] md:min-w-0"
       style={{
         background: `var(${varName}, ${hex})`,
         color: swatchTextColor(hex),
@@ -82,20 +88,20 @@ function ColorTile({ varName, hex }: ColorSwatch) {
     >
       <span
         aria-hidden="true"
-        className="absolute top-3 right-3 transition-transform group-hover:scale-110"
+        className="absolute top-[var(--space-3)] right-[var(--space-3)] transition-transform duration-[var(--motion-hover-duration)] ease-[var(--motion-hover-ease)] group-hover:scale-110"
       >
         {status === "Copied" ? (
-          <Check size={16} />
+          <Check className="icon-sm" />
         ) : (
-          <Copy size={16} />
+          <Copy className="icon-sm" />
         )}
       </span>
 
-      <code className="hidden break-all font-mono text-xs font-medium leading-snug sm:block">
+      <code className="hidden break-all font-mono text-[length:var(--text-xs)] [font-weight:var(--font-medium)] leading-[var(--leading-snug)] sm:block">
         {varName}
       </code>
 
-      <span className="font-mono text-xs leading-snug">
+      <span className="font-mono text-[length:var(--text-xs)] leading-[var(--leading-snug)]">
         {hex}
       </span>
 
@@ -108,16 +114,16 @@ function ColorTile({ varName, hex }: ColorSwatch) {
 
 export default function ColorSwatchesGrid() {
   return (
-    <div className="space-y-8">
+    <div className="space-y-[var(--space-8)]">
       <section aria-label="Brand palette">
-        <div className="grid gap-4 grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-2 gap-[var(--space-4)] lg:grid-cols-3">
           {COLOR_PAIRS.map(({ family, soft, bold }) => (
             <article key={family} className="min-w-0">
-              <h3 className="mb-2 text-sm font-semibold text-[var(--text-primary)]">
+              <h3 className="mb-[var(--space-2)] text-[length:var(--text-sm)] [font-weight:var(--font-semibold)] text-[var(--text-primary)]">
                 {family}
               </h3>
 
-              <div className="grid grid-cols-2 overflow-hidden rounded-2xl shadow-sm">
+              <div className="grid grid-cols-2 overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-card)]">
                 <ColorTile {...soft} />
                 <ColorTile {...bold} />
               </div>
@@ -127,19 +133,49 @@ export default function ColorSwatchesGrid() {
       </section>
 
       <section aria-label="Page background and text colors">
-        <h3 className="mb-3 text-sm font-semibold text-[var(--text-primary)]">
+        <h3 className="mb-[var(--space-3)] text-[length:var(--text-sm)] [font-weight:var(--font-semibold)] text-[var(--text-primary)]">
           Background &amp; text
         </h3>
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-[var(--space-3)]">
           {PAGE_SWATCHES.map((swatch) => (
             <div
               key={swatch.varName}
-              className="overflow-hidden rounded-2xl shadow-sm"
+              className="overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-card)]"
             >
               <ColorTile {...swatch} />
             </div>
           ))}
+        </div>
+
+        <div className="mt-[var(--space-6)]">
+          <h3 className="mb-[var(--space-3)] text-[length:var(--text-sm)] [font-weight:var(--font-semibold)] text-[var(--text-primary)]">
+            Text roles
+          </h3>
+
+          <div className="grid gap-[var(--space-3)] md:grid-cols-2">
+            <div className="space-y-[var(--space-3)] rounded-[var(--radius-card)] bg-[var(--bg-default)] p-[var(--space-4)] shadow-[var(--shadow-card)]">
+              {TEXT_ROLES.map(({ token, label }) => (
+                <div
+                  className="flex items-baseline justify-between gap-[var(--space-4)]"
+                  key={token}
+                  style={{ color: `var(${token})` }}
+                >
+                  <span>{label}</span>
+                  <code className="font-mono text-[length:var(--text-xs)]">
+                    {token}
+                  </code>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex items-baseline justify-between gap-[var(--space-4)] rounded-[var(--radius-card)] bg-[var(--chocolate-bold)] p-[var(--space-4)] text-[var(--text-inverse)] shadow-[var(--shadow-card)]">
+              <span>Inverse</span>
+              <code className="font-mono text-[length:var(--text-xs)]">
+                --text-inverse
+              </code>
+            </div>
+          </div>
         </div>
       </section>
     </div>

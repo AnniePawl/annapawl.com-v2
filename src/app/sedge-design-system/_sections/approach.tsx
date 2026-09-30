@@ -26,25 +26,15 @@ const PRINCIPLES = [
 export default function ApproachSection() {
   return (
     <Section id={meta.id} heading={meta.title} icon={meta.icon}>
-      <div className="approach-intro sedge-section-intro">
+      <div className="sedge-section-intro">
         <p>
-          I&rsquo;m drawn to the balance between personality and precision
-          — work that feels expressive and human, while still considered
-          in every detail. I love playfulness, color, and unexpected
-          moments that give an interface a sense of character and charm.
+       I’m drawn to the balance between personality and precision — work that feels expressive and human, while still considered in every detail. I love playfulness, color, and unexpected moments that give an interface a sense of character and charm.
         </p>
         <p>
-          I don&rsquo;t think of a design system as a set of rules to
-          follow perfectly. I see it as a foundation: enough structure to
-          create consistency, but enough flexibility to experiment, try
-          something funky, or break a rule when it makes the experience
-          better. The goal isn&rsquo;t to smooth out every irregularity,
-          but to create a system where personality and precision can
-          coexist.
+      For this project, my design system is a foundation rather than a strict set of rules: structured enough to create consistency, but flexible enough to experiment, try something funky, or break a rule when it makes the experience better. The goal isn’t to smooth out every irregularity, but to create a system where personality and precision can comfortably coexist.
         </p>
 
       </div>
-
       <div className="approach-principles">
         <h3 className="approach-label type-eyebrow">Four guiding principles</h3>
         <ol className="approach-list">
@@ -53,7 +43,7 @@ export default function ApproachSection() {
               <span className="approach-number" aria-hidden="true">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <h4>{title}</h4>
+              <h4 className="h4">{title}</h4>
               <p className="type-supporting">{body}</p>
             </li>
           ))}

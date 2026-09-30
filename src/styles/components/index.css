@@ -25,10 +25,6 @@
   );
 }
 
-.page-shell--flush {
-  padding-block: 0;
-}
-
 .page-header {
   display: flex;
   flex-direction: column;

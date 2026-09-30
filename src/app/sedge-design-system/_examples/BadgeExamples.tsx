@@ -4,26 +4,26 @@ import CodeBlock from "../_components/CodeBlock";
 const USAGE = `
 import Badge from "@/components/ui/Badge";
 
-<Badge>Neutral</Badge>
-<Badge variant="accent">Accent</Badge>
-<Badge variant="success">Success</Badge>
-<Badge variant="warning">Warning</Badge>
-<Badge variant="danger">Danger</Badge>
-
-// Tone — bold outlined pill, for category/tag labels
-<Badge tone="pink">Design</Badge>
+<Badge>Field note</Badge>
+<Badge tone="moss">Currently reading</Badge>
+<Badge tone={{ background: "pink-soft", foreground: "emerald-bold" }}>
+  Tiny obsession
+</Badge>
 `;
 
 const TONE_EXAMPLES: { label: string; tone: BadgeTone }[] = [
-  { label: "Design", tone: "pink" },
-  { label: "Code", tone: "orange" },
-  { label: "Books", tone: "yellow" },
-  { label: "Embroidery", tone: "green" },
-  { label: "Random", tone: "mint" },
-  { label: "Recs", tone: "sky" },
-  { label: "Ideas", tone: "blue" },
-  { label: "Media", tone: "indigo" },
-  { label: "Play", tone: "violet" },
+  {
+    label: "Favorites",
+    tone: { background: "moss-soft", foreground: "cherry-bold" },
+  },
+  {
+    label: "Tiny obsession",
+    tone: { background: "pink-soft", foreground: "emerald-bold" },
+  },
+  {
+    label: "Worth a detour",
+    tone: { background: "sky-soft", foreground: "cherry-bold" },
+  },
 ];
 
 export default function BadgeExamples() {
@@ -31,23 +31,10 @@ export default function BadgeExamples() {
     <section style={{ maxWidth: 720 }}>
       <CodeBlock code={USAGE} className="mb-8" />
 
-      <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">
-        Semantic
-      </p>
-      <div className="badge-demo-row mb-8">
-        <Badge>Neutral</Badge>
-        <Badge variant="accent">Accent</Badge>
-        <Badge variant="success">Success</Badge>
-        <Badge variant="warning">Warning</Badge>
-        <Badge variant="danger">Danger</Badge>
-      </div>
-
-      <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">
-        Tones — category / tag labels
-      </p>
       <div className="badge-demo-row">
+        <Badge>Field note</Badge>
         {TONE_EXAMPLES.map(({ label, tone }) => (
-          <Badge key={tone} tone={tone}>
+          <Badge key={label} tone={tone}>
             {label}
           </Badge>
         ))}

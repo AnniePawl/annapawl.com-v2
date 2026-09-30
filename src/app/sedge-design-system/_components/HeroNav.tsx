@@ -27,10 +27,8 @@ export default function HeroNav({
     <header className="sticky top-0 z-20 border-b border-[color-mix(in_srgb,var(--text-primary)_10%,transparent)] bg-[var(--bg-default)] backdrop-blur-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-3 md:px-6 py-3 md:py-4 sm:gap-6">
         <div className="flex items-center gap-3">
-          <Link
-            href="/"
-            className="sedge-logo-link focus-ring"
-          >
+          {/* Logo-->Home */}
+          <Link href="/" className="sedge-logo-link focus-ring">
             <svg
               viewBox="0 0 200 200"
               className="sedge-logo-mark h-8 w-8"
@@ -48,23 +46,26 @@ export default function HeroNav({
                 />
               ))}
             </svg>
-             </Link>
-             <a href="#top"
-             onClick = {(e) => {
+          </Link>
+          {/* Copy-->Top of page */}
+          <a
+            href="#top"
+            className="sedge-wordmark-link focus-ring"
+            onClick={(e) => {
               e.preventDefault();
               onScrollToTop();
-             }}             >
+            }}
+          >
             <span className="flex items-baseline gap-2">
-              <span className="text-xl">Sedge</span>
+              <span className="sedge-wordmark-title">Sedge</span>
               <span aria-hidden="true" className="text-[var(--border-subtle)]">
                 |
               </span>
-              <span className="text-sm text-[var(--text-secondary)]">
+              <span className="sedge-wordmark-subtitle">
                 Design System
               </span>
             </span>
-            </a>
-         
+          </a>
         </div>
 
         <div className="flex items-center gap-2 md:gap-4">
@@ -82,11 +83,10 @@ export default function HeroNav({
                   type="button"
                   onClick={() => target && onSelect(target.id)}
                   className={cx(
-                
-                    "rounded-[var(--radius-pill)] px-4 py-2 text-sm font-medium transition",
+                    "sedge-group-nav-link type-nav focus-ring",
                     isActive
-                      ? "bg-indigo-soft text-[var(--charcoal)]"
-                      : "text-[var(--text-secondary)] hover:bg-indigo-soft/30 hover:text-[var(--text-primary)]"
+                      ? "sedge-group-nav-link--active"
+                      : "sedge-group-nav-link--inactive"
                   )}
                 >
                   {group}
