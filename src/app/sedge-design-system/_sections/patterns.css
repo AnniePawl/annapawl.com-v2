@@ -1,0 +1,35 @@
+/* Docs-only framing for page-pattern examples. The shared pattern classes
+   live in styles/components/index.css and are used by the real page. */
+
+.pattern-preview {
+  overflow: hidden;
+  border: var(--border-thin) solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--bg-subtle);
+}
+
+.page-shell-example-copy {
+  max-width: var(--measure-sm);
+  margin: var(--space-2) 0 0;
+  color: var(--text-secondary);
+}
+
+.pattern-preview .page-header {
+  padding: var(--space-6);
+}
+
+.pattern-preview .article-layout {
+  padding-block: var(--space-6);
+}
+
+.pattern-preview .article-layout-body h4 {
+  font-size: var(--type-h4-size);
+  font-weight: var(--type-h4-weight);
+  line-height: var(--type-h4-leading);
+}
+
+@media (width < 40rem) {
+  .pattern-preview .page-header {
+    padding: var(--space-4);
+  }
+}

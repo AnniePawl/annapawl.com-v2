@@ -5,7 +5,7 @@
    redefined here.
 
    `[data-state="hover"|"pressed"]` selectors exist purely so the
-   vibe-system docs page can force-preview a state side by side —
+   sedge-design-system docs page can force-preview a state side by side —
    normal usage elsewhere never needs to set data-state. */
 
 .btn {
@@ -56,48 +56,71 @@
 
 /* Primary variant */
 .btn--primary {
-  background: var(--accent);
-  color: var(--text-inverse);
+  --focus-ring-color: var(--cherry-soft);
+  background: var(--cherry-bold);
+  color: var(--moss-soft);
   box-shadow: var(--shadow-button);
 }
 
 .btn--primary:hover,
 .btn--primary[data-state="hover"] {
-  background: var(--accent-hover);
+  background: color-mix(
+    in srgb,
+    var(--cherry-bold) 86%,
+    var(--moss-soft)
+  );
 }
 
 .btn--primary:active,
 .btn--primary[data-state="pressed"] {
-  background: var(--accent-active);
+  background: color-mix(
+    in srgb,
+    var(--cherry-bold) 72%,
+    var(--moss-soft)
+  );
   box-shadow: var(--shadow-sm);
   transform: translateY(1px);
 }
 
 /* Secondary variant */
 .btn--secondary {
-  background: var(--bg-default);
-  color: var(--text-primary);
-  border-color: var(--border-subtle);
+  --focus-ring-color: var(--blue-bold);
+  background: var(--cherry-soft);
+  color: var(--charcoal);
+  border-color: var(--blue-soft);
   box-shadow: none;
 }
 
 .btn--secondary:hover,
 .btn--secondary[data-state="hover"] {
-  background: var(--bg-subtle);
-  border-color: var(--border-strong);
+  background: var(--blue-soft);
+  border-color: var(--blue-soft);
 }
 
 .btn--secondary:active,
 .btn--secondary[data-state="pressed"] {
-  background: var(--bg-subtle);
+  background: color-mix(
+    in srgb,
+    var(--blue-soft) 78%,
+    var(--cherry-soft)
+  );
+  border-color: var(--blue-soft);
   transform: translateY(1px);
 }
 
-/* ---- Docs-only demo layout (vibe-system Buttons section) ---- */
+/* ---- Docs-only demo layout (sedge-design-system Buttons section) ---- */
 .button-state-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--space-5);
+}
+
+/* Phone widths: four 1fr columns each hold a full-width button, which
+   can't shrink below its label. Two per row instead. */
+@media (width < 40rem) {
+  .button-state-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .state-cell {

@@ -1,28 +1,21 @@
 /* ---- Modal component ----
-   Built on native <dialog>. Browser handles centering, focus trap, and
-   the ::backdrop layer — we only style appearance and motion. */
+   Two-tone editorial dialog: a soft surface with a slim top label rail. */
 
 .modal {
-  /* Native <dialog> centers itself via `margin: auto` in the browser's
-     UA stylesheet (it's already `position: fixed; inset: 0` there) —
-     but Tailwind's Preflight resets margin to 0 on every element, which
-     silently wins over that UA default and left-aligns the dialog to
-     the top-left. Restating margin: auto here (this file is imported
-     into the `components` layer, which is ordered after Tailwind's
-     `base`/Preflight layer, so it wins back) is what actually centers it. */
-  margin: auto;
-  padding: 0;
-  border: none;
-  border-radius: var(--radius-modal);
-  box-shadow: var(--shadow-modal);
-  background: var(--bg-default);
-  color: var(--text-primary);
+  position: fixed;
+  inset: 0;
   width: min(480px, calc(100vw - var(--space-6) * 2));
   max-height: calc(100vh - var(--space-6) * 2);
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  border: none;
+  border-radius: var(--radius-modal);
+  background: var(--editorial-surface);
+  color: var(--charcoal);
+  box-shadow: var(--shadow-modal);
 }
 
-/* size="lg" — content-heavy modals (stats, tables) that need more room
-   than the default width. Still responsive via the same min() pattern. */
 .modal--lg {
   width: min(720px, calc(100vw - var(--space-6) * 2));
 }
@@ -51,36 +44,49 @@
 }
 
 @keyframes modal-backdrop-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .modal[open],
-  .modal[open]::backdrop {
-    animation: none;
-  }
-}
-
-.modal-header {
+.modal-label-rail {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-4);
-  padding: var(--space-5) var(--space-6);
-  border-bottom: var(--border-thin) solid var(--border-subtle);
+  min-height: 2.875rem;
+  padding: var(--space-2) var(--space-3) var(--space-2) var(--space-5);
+  background: var(--editorial-accent);
+  color: var(--editorial-accent-text);
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-6);
+  overflow-y: auto;
+}
+
+.modal-eyebrow {
+  color: inherit;
 }
 
 .modal-title {
-  font-family: var(--font-sans);
-  font-size: var(--text-lg);
-  font-weight: var(--font-semibold);
-  color: var(--text-primary);
+  margin: 0 0 var(--space-2);
+  color: var(--editorial-heading);
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  line-height: 1.15;
+}
+
+.modal-description {
   margin: 0;
+  color: color-mix(in srgb, var(--charcoal) 78%, transparent);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+}
+
+.modal-body {
+  margin-top: var(--space-5);
 }
 
 .modal-close {
@@ -89,33 +95,180 @@
   justify-content: center;
   width: 2rem;
   height: 2rem;
-  border-radius: var(--radius-sm);
+  padding: 0;
   border: none;
+  border-radius: var(--radius-pill);
   background: transparent;
-  color: var(--text-muted);
+  color: inherit;
+  cursor: pointer;
   font-size: var(--text-sm);
   line-height: 1;
-  cursor: pointer;
-  transition: background-color var(--motion-hover-duration) var(--motion-hover-ease);
+  transition:
+    background-color var(--motion-hover-duration) var(--motion-hover-ease),
+    color var(--motion-hover-duration) var(--motion-hover-ease);
 }
 
 .modal-close:hover {
-  background: var(--bg-subtle);
-  color: var(--text-primary);
+  background: color-mix(in srgb, var(--editorial-accent-text) 18%, transparent);
+  color: inherit;
 }
 
-.modal-body {
-  padding: var(--space-6);
-  overflow-y: auto;
-  font-size: var(--text-sm);
+.modal .modal-action {
+  --focus-ring-color: var(--editorial-accent);
+  align-self: flex-end;
+  min-width: 9.75rem;
+  margin-top: var(--space-6);
+  padding-inline: var(--space-5);
+  background: var(--editorial-accent);
+  color: var(--editorial-accent-text);
+  box-shadow: none;
+}
+
+.modal .modal-action:hover,
+.modal .modal-action[data-state="hover"] {
+  background: var(--editorial-accent-hover);
+  box-shadow: none;
+}
+
+.modal .modal-action:active,
+.modal .modal-action[data-state="pressed"] {
+  background: var(--editorial-accent-hover);
+  box-shadow: none;
+}
+
+/* The action keeps its footprint fixed; only the arrow moves. */
+.modal-action-icon,
+.modal-preview-action-icon,
+.colorway-trigger-icon {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  flex-shrink: 0;
+  transition: transform var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+.modal-action:hover .modal-action-icon,
+.modal-action:focus-visible .modal-action-icon,
+.modal-preview-action:hover .modal-preview-action-icon,
+.modal-preview-action:focus-visible .modal-preview-action-icon,
+.colorway-trigger:hover .colorway-trigger-icon,
+.colorway-trigger:focus-visible .colorway-trigger-icon {
+  transform: translateX(var(--space-1));
+}
+
+/* Docs-only compact modal previews. */
+.modal-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.modal-preview {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-height: 15rem;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--editorial-surface);
+  color: var(--charcoal);
+}
+
+.modal-preview-rail {
+  display: flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: var(--space-2) var(--space-4);
+  background: var(--editorial-accent);
+  color: var(--editorial-accent-text);
+}
+
+.modal-preview-content {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--space-4);
+}
+
+.modal-preview-eyebrow {
+  color: inherit;
+}
+
+.modal-preview-title {
+  margin: 0;
+  color: var(--editorial-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  line-height: var(--leading-snug);
+}
+
+.modal-preview-description {
+  margin: var(--space-2) 0 var(--space-4);
+  color: color-mix(in srgb, var(--charcoal) 78%, transparent);
+  font-size: var(--text-xs);
   line-height: var(--leading-relaxed);
-  color: var(--text-secondary);
 }
 
-.modal-body p {
-  margin: 0 0 var(--space-4);
+.modal-preview .modal-preview-action {
+  min-width: 8.5rem;
+  margin-top: auto;
+  padding: var(--space-2) var(--space-4);
+  background: var(--editorial-accent);
+  color: var(--editorial-accent-text);
+  font-size: var(--text-xs);
+  box-shadow: none;
 }
 
-.modal-body p:last-child {
-  margin-bottom: 0;
+.modal-preview .modal-preview-action:hover,
+.modal-preview .modal-preview-action:active {
+  background: var(--editorial-accent-hover);
+  box-shadow: none;
+}
+
+/* Matching two-tone buttons use the surface at rest and the accent on hover. */
+.colorway-trigger.btn--secondary {
+  min-width: 12.5rem;
+  background: var(--editorial-surface);
+  border-color: var(--editorial-accent);
+  color: var(--charcoal);
+  box-shadow: none;
+}
+
+.colorway-trigger.btn--secondary:hover,
+.colorway-trigger.btn--secondary[data-state="hover"] {
+  background: var(--editorial-accent);
+  border-color: var(--editorial-accent);
+  color: var(--editorial-accent-text);
+}
+
+.colorway-trigger.btn--secondary:active,
+.colorway-trigger.btn--secondary[data-state="pressed"] {
+  background: var(--editorial-accent-hover);
+  border-color: var(--editorial-accent);
+  color: var(--editorial-accent-text);
+  box-shadow: none;
+}
+
+.modal-colorway-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+@media (width < 48rem) {
+  .modal-preview-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal[open],
+  .modal[open]::backdrop {
+    animation: none;
+  }
+
+  .modal-action-icon,
+  .modal-preview-action-icon,
+  .colorway-trigger-icon {
+    transition: none;
+  }
 }

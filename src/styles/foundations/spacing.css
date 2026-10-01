@@ -13,9 +13,8 @@
   --space-10: 6rem;    /* 96 */
   --space-11: 8rem;    /* 128 */
 
-  /* Semantic aliases */
-  --container-pad: var(--space-6);
-  --section-gap: var(--space-8);
-  --stack-gap: var(--space-4);
-  --inline-gap: var(--space-2); 
+  /* Semantic layout spacing — reserved for stable, repeated page-level
+     decisions. Component internals continue to use the numbered scale. */
+  --page-gutter: clamp(var(--space-4), 3vw, var(--space-5));
+  --section-gap: var(--space-7);
 }

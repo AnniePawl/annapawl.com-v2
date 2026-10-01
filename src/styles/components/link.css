@@ -1,0 +1,96 @@
+/* ---- Editorial links ----
+   Opt-in rather than global so navigation, logos, and clickable cards can
+   keep their own interaction treatment. */
+
+.text-link {
+  --focus-ring-color: var(--link-color);
+  color: var(--link-color);
+  font-weight: var(--font-medium);
+  text-decoration-line: underline;
+  text-decoration-color: var(--link-decoration);
+  text-decoration-thickness: 1px;
+  text-decoration-skip-ink: none;
+  text-underline-offset: 0.3em;
+  transition:
+    color var(--motion-hover-duration) var(--motion-hover-ease),
+    text-decoration-color var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+.text-link:visited,
+.text-link[data-state="visited"] {
+  color: var(--link-color-visited);
+}
+
+/* Docs-only forced default keeps the comparison stable even after its
+   fragment link has been visited in the current browser session. */
+.text-link[data-state="default"] {
+  color: var(--link-color);
+}
+
+.text-link:hover,
+.text-link[data-state="hover"] {
+  color: var(--link-color-hover);
+  text-decoration-color: currentColor;
+}
+
+.text-link--standalone {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: fit-content;
+}
+
+.text-link-icon {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  flex-shrink: 0;
+  transition: transform var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+.text-link--external:hover .text-link-icon,
+.text-link--external:focus-visible .text-link-icon {
+  transform: translate(2px, -2px);
+}
+
+.link-example-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-5);
+}
+
+.link-example-list p {
+  margin: 0;
+}
+
+.link-state-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-5);
+}
+
+.link-state-cell {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.link-state-label {
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+}
+
+@media (width < 40rem) {
+  .link-state-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-link,
+  .text-link-icon {
+    transition: none;
+  }
+}

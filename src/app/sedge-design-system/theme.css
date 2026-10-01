@@ -1,0 +1,217 @@
+/* ---- Sedge design-system theme scope ----
+   Everything in this file is scoped under [data-sedge-theme="dark"],
+   an attribute set on a wrapper <div> that ThemeProvider.tsx renders
+   around this route's whole subtree (see
+   sedge-design-system/layout.tsx). That's the only place this
+   attribute exists in the app, so nothing here can ever leak onto the
+   rest of the site, and the rest of the site is free to define its own
+   surfaces independently.
+
+   This is deliberately a thin *semantic* layer, not a second palette:
+   every rule below just re-points an existing semantic token (defined
+   once, for light mode, in foundations/color.css) at one of the earth-
+   tone *base* tokens also defined there (--chocolate-bold/--ivory/--moss/
+   --ochre/--mauve, alongside the existing --sage/--clay). Because
+   nearly every component in this codebase (button.css, card.css,
+   section.css, etc.) already reads colors through the semantic tokens
+   (var(--bg-default), var(--text-primary), var(--border-subtle)...)
+   rather than hardcoding hex, re-pointing them here is enough to theme
+   the whole page -- components don't need their own dark-mode variants.
+   The exceptions (places that render a *base* pastel token like
+   --indigo-soft directly, e.g. active nav pills) are handled at the
+   call site instead, since those pastels are meant to stay pastel in
+   both themes -- see the comments on --sidebar-surface below and in
+   HeroNav.tsx/Hero.tsx/MobileNav.tsx/SidebarNav.tsx for why. */
+
+[data-sedge-theme="dark"] {
+  /* Backgrounds + surfaces */
+  --bg-default: var(--chocolate-bold);
+  --bg-subtle: color-mix(
+    in srgb,
+    var(--chocolate-bold) 88%,
+    var(--ivory) 12%
+  );
+  --surface: color-mix(
+    in srgb,
+    var(--chocolate-bold) 82%,
+    var(--ivory) 18%
+  );
+
+  /* `color` (not just the --text-primary variable) needs to be set
+     explicitly here, on the element the attribute actually lives on.
+     globals.css sets `body { color: var(--text-primary) }`, and body
+     sits *outside* this div (ThemeProvider wraps everything below
+     body, not body itself) -- so body's own `color` is computed from
+     the :root/light value of --text-primary, then inherited straight
+     down through any element that never re-declares `color` itself
+     (a bare heading using only .h1/.h2/.h3, GroupHeading's dividers,
+     the HeroNav wordmark span...). Those elements looked fine because
+     they truly do have `color: inherit`, they just inherit a color
+     that was already resolved *before* reaching this scope. Setting
+     `color` here means anything relying on plain inheritance starts
+     from a node that has the correct dark-mode value, instead of
+     leapfrogging past it back to body's light-mode one. Elements that
+     set an explicit var(--text-primary)/var(--text-secondary)/etc
+     class themselves were never affected -- they resolve the variable
+     at their own position in the tree either way. */
+  color: var(--text-primary);
+
+  /* Text */
+  --text-primary: var(--text-inverse);
+  --text-secondary: color-mix(
+    in srgb,
+    var(--text-inverse) 78%,
+    var(--chocolate-bold)
+  );
+  --text-muted: color-mix(
+    in srgb,
+    var(--text-inverse) 60%,
+    var(--chocolate-bold)
+  );
+
+  /* Borders */
+  --border-subtle: color-mix(in srgb, var(--ivory) 18%, var(--chocolate-bold) 82%);
+  --border-strong: color-mix(in srgb, var(--ivory) 42%, var(--chocolate-bold) 58%);
+
+  /* Interactive accent -- swapped from the sitewide blue to a warm
+     terracotta (clay) so buttons/links/focus rings (--focus-ring-color
+     is aliased to --accent in focus.css) read as part of the same warm
+     earth-tone family instead of a cool blue sitting oddly on a chocolate
+     page. --accent-hover/-active keep the same "mix toward black"
+     formula focus.css/button.css already use for the light-mode blue. */
+  --accent: var(--clay-bold);
+  --accent-soft: var(--clay-soft);
+  --accent-hover: color-mix(in srgb, var(--accent) 85%, black);
+  --accent-active: color-mix(in srgb, var(--accent) 70%, black);
+
+  /* Editorial links keep the same behavior with lighter palette values
+     that remain legible on the chocolate background. */
+  --link-color: var(--moss-soft);
+  --link-color-hover: var(--blue-soft);
+  --link-color-visited: var(--lilac-soft);
+  --link-decoration: var(--cherry-soft);
+
+  /* The tooltip panel wash lifts toward --ivory on the dark page. */
+  --surface-wash-soft: color-mix(in srgb, var(--ivory) 10%, transparent);
+
+  /* Sidebar wrapper -- was a flat lime-soft pastel; here it becomes a
+     moss-tinted dark surface instead of leaving a bright green box
+     floating on a dark page (see page.tsx). */
+  --sidebar-surface: color-mix(
+    in srgb,
+    var(--moss-bold) 22%,
+    var(--chocolate-bold)
+  );
+
+  /* Elevation -- the light-mode shadow scale (elevation.css) is a soft
+     black shadow, which all but disappears against chocolate. A faint
+     light haze reads as "lifted" on a dark surface the same way a dark
+     shadow does on a light one. */
+  --shadow-xs: 0 1px 0 rgba(242, 233, 216, 0.05);
+  --shadow-sm: 0 1px 2px rgba(242, 233, 216, 0.08);
+  --shadow-md: 0 8px 20px rgba(242, 233, 216, 0.10);
+  --shadow-lg: 0 16px 40px rgba(242, 233, 216, 0.14);
+}
+
+/* Sections share the page background in both themes. */
+.sedge-section {
+  background: transparent;
+  border: none;
+}
+
+/* ---- Theme toggle (HeroNav) ----
+   Two icon-only buttons + a "/" divider between them, no pill
+   background/fill/shadow per the brief -- just a color change (quiet
+   --text-muted when inactive, --text-primary when active) plus a thin
+   underline under whichever one is active. */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* Comfortable touch target (40px) around a visually small (16-18px)
+     icon, rather than growing the icon itself. */
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: none;
+  background: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  cursor: pointer;
+  position: relative;
+  transition: color var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+.theme-toggle-btn:hover {
+  color: var(--indigo-bold);
+}
+
+/* Thin underline beneath the active icon only. */
+.theme-toggle-btn[aria-pressed="true"]::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 6px;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 1.5px;
+  background: currentColor;
+}
+
+.theme-toggle-slash {
+  color: var(--border-strong);
+  font-size: var(--text-sm);
+  user-select: none;
+}
+
+.theme-toggle-divider {
+  width: var(--border-thin);
+  height: 1.25rem;
+  background: var(--border-subtle);
+  flex: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle-btn {
+    transition: none;
+  }
+}
+
+/* Sidebar icons follow the page theme. */
+.sedge-sidebar-icon {
+  color: var(--indigo-bold);
+}
+
+[data-sedge-theme="dark"] .sedge-sidebar-icon {
+  color: var(--indigo-soft);
+}
+
+/* ---- Section heading label (SectionHeading.tsx) ----
+   Icon + "Foundations"/"Components" label switches to soft indigo on the
+   dark background; the title's period stays --indigo-bold. */
+[data-sedge-theme="dark"] .sedge-section-heading-group {
+  color: var(--indigo-soft);
+}
+
+[data-sedge-theme="dark"] .type-eyebrow {
+  color: var(--indigo-soft);
+}
+
+/* ---- Approach section: "Four guiding principles" label + 01-04 numbers ----
+   Bold indigo in light mode (approach.css), soft indigo on the dark
+   background, same as the section-heading label above. */
+[data-sedge-theme="dark"] .approach-label,
+[data-sedge-theme="dark"] .approach-number {
+  color: var(--indigo-soft);
+}
+
+/* ---- Spacing section: scale example bars (spacing.css) ---- */
+[data-sedge-theme="dark"] .spacing-bar {
+  background: var(--indigo-soft);
+}

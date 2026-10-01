@@ -1,0 +1,133 @@
+import type { LucideIcon } from "lucide-react";
+import {
+  Palette,
+  CaseSensitive,
+  Ruler,
+  LayoutTemplate,
+  Radius,
+  Layers,
+  Zap,
+  Accessibility,
+  SquareMousePointer,
+  CreditCard,
+  PanelsTopLeft,
+  BadgeCheck,
+  MessageSquareText,
+  FormInput,
+  Brain,
+  FileText,
+  Sparkles,
+  ListChevronsUpDown,
+  Link2,
+  Info,
+} from "lucide-react";
+
+export type SectionGroup = "Intro" | "Foundations" | "Components" | "Patterns";
+
+export const SECTION_GROUPS: SectionGroup[] = [
+  "Intro",
+  "Foundations",
+  "Components",
+  "Patterns",
+];
+
+export type NavSection = {
+  id: string;
+  title: string;
+  subheading?: string;
+  description?: string;
+  icon: LucideIcon;
+  group: SectionGroup;
+};
+
+// Order: Intro (the "why" before the specifics), then Foundations (the
+// token-level building blocks — color, type, spacing, layout, shape,
+// elevation, motion, accessibility), then Components (the component
+// library), then Patterns (repeatable page structures composed from both).
+// Sidebar/mobile nav and the section headings in the main column read this
+// same grouping —
+// keep new sections declared inside the right block rather than appended
+// at the end.
+export const SECTIONS: NavSection[] = [
+  // Intro — Overview used to live here as its own section; its copy and
+  // "At a glance" card now live in the Hero instead (see Hero.tsx), so
+  // Approach is the first real Intro section in the flow.
+  { id: "approach", title: "Approach", icon: Brain, group: "Intro" },
+
+  // Foundations
+  { id: "colors", title: "Colors", icon: Palette, group: "Foundations" },
+  {
+    id: "typography",
+    title: "Typography",
+    icon: CaseSensitive,
+    group: "Foundations",
+  },
+  { id: "icons", title: "Icons", icon: Sparkles, group: "Foundations" },
+  { id: "spacing", title: "Spacing", icon: Ruler, group: "Foundations" },
+  {
+    id: "layout",
+    title: "Layout",
+    icon: LayoutTemplate,
+    group: "Foundations",
+  },
+  { id: "shape", title: "Shape", icon: Radius, group: "Foundations" },
+  { id: "elevation", title: "Elevation", icon: Layers, group: "Foundations" },
+  { id: "motion", title: "Motion", icon: Zap, group: "Foundations" },
+  {
+    id: "accessibility",
+    title: "Accessibility",
+    icon: Accessibility,
+    group: "Foundations",
+  },
+
+  // Components
+  {
+    id: "buttons",
+    title: "Buttons",
+    icon: SquareMousePointer,
+    group: "Components",
+  },
+  { id: "links", title: "Links", icon: Link2, group: "Components" },
+  { id: "callouts", title: "Callouts", icon: Info, group: "Components" },
+  {
+    id: "accordian",
+    title: "Accordian",
+    icon: ListChevronsUpDown,
+    group: "Components",
+  },
+  { id: "cards", title: "Cards", icon: CreditCard, group: "Components" },
+  {
+    id: "modals",
+    title: "Modals",
+    icon: PanelsTopLeft,
+    group: "Components",
+  },
+  { id: "badges", title: "Badges", icon: BadgeCheck, group: "Components" },
+  {
+    id: "tooltips",
+    title: "Tooltips",
+    icon: MessageSquareText,
+    group: "Components",
+  },
+  { id: "forms", title: "Forms", icon: FormInput, group: "Components" },
+
+  // Patterns
+  {
+    id: "page-shell",
+    title: "Page Shell",
+    icon: LayoutTemplate,
+    group: "Patterns",
+  },
+  {
+    id: "page-header",
+    title: "Page Header",
+    icon: CaseSensitive,
+    group: "Patterns",
+  },
+  {
+    id: "article-layout",
+    title: "Article Layout",
+    icon: FileText,
+    group: "Patterns",
+  },
+];

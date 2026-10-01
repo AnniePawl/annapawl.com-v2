@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Shape from "../../components/ui/Shape";
+import { Star } from "lucide-react";
 import { FAVORITE_TAG, type BookInfo, type BookLookup } from "../../lib/googleBooks";
 
 export interface ShelfEntry {
@@ -41,11 +41,12 @@ export default function BookTile({ lookup, info }: ShelfEntry) {
       )}
 
       {lookup.tags?.includes(FAVORITE_TAG) && (
+        // Star Ion for faves 
         <div
-          className="absolute top-2 right-2 flex h-7 w-7 items-center justify-center rounded-[var(--radius-full)] bg-black shadow-[var(--shadow-sm)]"
+          className="absolute top-2 right-2 flex h-7 w-7 items-center justify-center rounded-[var(--radius-full)] bg-[var(--mauve-soft)] shadow-[var(--shadow-sm)]"
           title="Favorite"
         >
-          <Shape variant="star" className="h-4 w-4 text-yellow-bold" />
+          <Star className="h-4 w-4 fill-[var(--cherry-bold)] text-[var(--cherry-bold)]" />
         </div>
       )}
     </div>

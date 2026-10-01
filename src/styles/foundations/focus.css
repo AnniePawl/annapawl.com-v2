@@ -10,7 +10,7 @@
 }
 
 /* Reusable pattern. Add data-state="focus" to force-preview this state
-   without real keyboard focus (used in vibe-system docs). */
+   without real keyboard focus (used in sedge-design-system docs). */
 .focus-ring {
   outline: none;
   border-radius: var(--focus-ring-radius);

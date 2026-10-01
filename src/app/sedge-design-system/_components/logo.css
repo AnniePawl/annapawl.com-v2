@@ -1,0 +1,121 @@
+/* Interactive nav logo — hover/focus recolors upper-right petal, plus a small rotate+scale flourish on the whole mark.*/
+
+.sedge-logo-mark {
+  display: block;
+  transform: rotate(0deg) scale(1);
+  transform-origin: center;
+  transition: transform var(--motion-duration-base) var(--motion-hover-ease);
+}
+
+/* ~260ms --motion-duration-base (250ms)*/
+.sedge-logo-link:hover .sedge-logo-mark,
+.sedge-logo-link:focus-visible .sedge-logo-mark {
+  transform: rotate(8deg) scale(1.04);
+}
+
+.sedge-logo-leaf {
+  fill: var(--indigo-bold);
+  transition: fill var(--motion-duration-base) var(--motion-hover-ease);
+}
+
+.sedge-logo-link:hover .sedge-logo-leaf--ne,
+.sedge-logo-link:focus-visible .sedge-logo-leaf--ne {
+  fill: var(--mint-bold);
+}
+
+/* Update colors on dark mode */
+[data-sedge-theme="dark"] .sedge-logo-leaf {
+  fill: var(--indigo-soft);
+}
+
+[data-sedge-theme="dark"] .sedge-logo-link:hover .sedge-logo-leaf--ne,
+[data-sedge-theme="dark"] .sedge-logo-link:focus-visible .sedge-logo-leaf--ne {
+  fill: var(--lemon-soft);
+}
+
+.sedge-wordmark-link {
+  --focus-ring-color: var(--indigo-bold);
+  --wordmark-hover-color: var(--indigo-bold);
+  border-radius: var(--radius-sm);
+}
+
+.sedge-wordmark-title,
+.sedge-wordmark-subtitle {
+  transition: color var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+.sedge-wordmark-title {
+  font-family: var(--font-sans);
+  font-size: var(--text-xl);
+  font-weight: var(--font-regular);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-normal);
+  color: var(--text-primary);
+}
+
+.sedge-wordmark-subtitle {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--font-regular);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-normal);
+  color: var(--text-secondary);
+}
+
+.sedge-wordmark-link:hover .sedge-wordmark-title,
+.sedge-wordmark-link:hover .sedge-wordmark-subtitle,
+.sedge-wordmark-link:focus-visible .sedge-wordmark-title,
+.sedge-wordmark-link:focus-visible .sedge-wordmark-subtitle {
+  color: var(--wordmark-hover-color);
+}
+
+[data-sedge-theme="dark"] .sedge-wordmark-link {
+  --focus-ring-color: var(--indigo-soft);
+  --wordmark-hover-color: var(--indigo-soft);
+}
+
+.sedge-group-nav-link {
+  --focus-ring-color: var(--indigo-bold);
+  padding: var(--space-2) var(--space-4);
+  border: 0;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition:
+    color var(--motion-hover-duration) var(--motion-hover-ease),
+    background-color var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+.sedge-group-nav-link--active {
+  background: var(--indigo-soft);
+  color: var(--charcoal);
+}
+
+.sedge-group-nav-link--inactive {
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+.sedge-group-nav-link--inactive:hover {
+  background: color-mix(in srgb, var(--indigo-soft) 30%, transparent);
+  color: var(--text-primary);
+}
+
+[data-sedge-theme="dark"] .sedge-group-nav-link {
+  --focus-ring-color: var(--indigo-soft);
+}
+
+/* Reduced motion: keep only the color change. Transform itself is
+   removed here, leaving just the instant leaf-color swap. */
+@media (prefers-reduced-motion: reduce) {
+  .sedge-logo-mark,
+  .sedge-logo-link:hover .sedge-logo-mark,
+  .sedge-logo-link:focus-visible .sedge-logo-mark {
+    transform: none;
+  }
+
+  .sedge-wordmark-title,
+  .sedge-wordmark-subtitle,
+  .sedge-group-nav-link {
+    transition: none;
+  }
+}

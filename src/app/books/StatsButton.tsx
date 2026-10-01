@@ -25,16 +25,23 @@ export default function StatsButton({ stats }: StatsButtonProps) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        // Same colors as the "16 books" badge (.badge--accent): soft
-        // blue fill, bold blue border, and blue-mixed-with-black text —
-        // exact recipe, just on a circular icon button instead of a pill.
-        className="focus-ring flex h-9 w-9 shrink-0 items-center justify-center rounded-[var(--radius-full)] border-2 border-[var(--accent)] bg-[var(--accent-soft)] text-[color:color-mix(in_srgb,var(--accent)_78%,black)] transition-colors duration-[var(--motion-hover-duration)] ease-[var(--motion-hover-ease)] hover:bg-[color-mix(in_srgb,var(--accent-soft)_85%,var(--accent))]"
+        className="bookshelf-stats-trigger focus-ring"
         aria-label="View reading stats"
       >
         <ChartColumn className="h-4 w-4" />
       </button>
 
-      <Modal open={open} onClose={() => setOpen(false)} title="Reading Stats" size="lg">
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        eyebrow="Reading archive"
+        title="Your shelf at a glance."
+        description="A quick snapshot of the books and authors collected here."
+        actionLabel="Done"
+        onAction={() => setOpen(false)}
+        colorway="sky-cherry"
+        size="lg"
+      >
         <div className="grid grid-cols-3 gap-4">
           <StatTile label="Books read" value={stats.totalBooks} />
           <StatTile label="Pages read" value={stats.totalPages.toLocaleString()} />

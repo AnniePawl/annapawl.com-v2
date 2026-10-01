@@ -1,20 +1,19 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter } from "next/font/google";
+import CustomCursor from "../components/ui/CustomCursor";
 
+// Sitewide typeface — every level (Display, H1-H4, body) renders in
+// Inter. Bodoni Moda was tried for the Display level specifically, then
+// reverted back to Inter per Anna's "update display text back to
+// original inter display font" -- see typography.css's FONT FAMILIES
+// comment for the full history. Inter is a variable font on Google Fonts
+// with a full 100–900 weight axis, so next/font pulls the whole range
+// without an explicit weight array.
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
-  // Optional: Inter supports variable weights without listing all.
-  // If you prefer explicit, you can keep your weight array.
-});
-
-const space = Space_Grotesk({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-space",
-  // Space Grotesk supports variable weights too.
 });
 
 export const metadata: Metadata = {
@@ -28,8 +27,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${space.variable}`}>
-      <body className="font-sans">{children}</body>
+    <html lang="en" className={inter.variable}>
+      <body className="font-sans">
+        {children}
+        <CustomCursor />
+      </body>
     </html>
   );
 }

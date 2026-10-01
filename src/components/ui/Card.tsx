@@ -1,45 +1,46 @@
-import { HTMLAttributes, forwardRef } from "react";
+import {
+  AnchorHTMLAttributes,
+  ButtonHTMLAttributes,
+  HTMLAttributes,
+  forwardRef,
+} from "react";
+import { ArrowRight } from "lucide-react";
 import { cx } from "../../lib/cx";
 
-type CardVariant = "default" | "soft";
+type CardVariant = "outline" | "soft";
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   variant?: CardVariant;
-  /** Adds hover/press affordances for cards that act as clickable targets. */
-  interactive?: boolean;
-  /**
-   * Documentation/demo use only — forces a visual state (hover/pressed)
-   * without real interaction, so the vibe-system docs page can show every
-   * state side by side. Never set this in real usage.
-   */
-  "data-state"?: "hover" | "pressed";
 }
 
 const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
-  { variant = "default", interactive = false, className, children, tabIndex, ...rest },
+  { variant = "outline", className, children, ...rest },
   ref
 ) {
   return (
     <div
       ref={ref}
-      // Interactive cards need to be keyboard-focusable since they use a
-      // <div> rather than a native interactive element.
-      tabIndex={interactive ? tabIndex ?? 0 : tabIndex}
-      className={cx(
-        "card",
-        variant === "soft" && "card--soft",
-        interactive && "card--interactive",
-        interactive && "focus-ring",
-        className
-      )}
+      className={cx("card", `card--${variant}`, className)}
       {...rest}
     >
-      {children}
+      <div className="card-content">{children}</div>
     </div>
   );
 });
 
 export default Card;
+
+export function CardEyebrow({
+  className,
+  children,
+  ...rest
+}: HTMLAttributes<HTMLSpanElement>) {
+  return (
+    <span className={cx("card-eyebrow", "type-eyebrow", className)} {...rest}>
+      {children}
+    </span>
+  );
+}
 
 export function CardHeading({
   className,
@@ -62,5 +63,57 @@ export function CardBody({
     <p className={cx("card-body", className)} {...rest}>
       {children}
     </p>
+  );
+}
+
+type CardActionCommonProps = {
+  /** Set false for cases that want the label without the trailing arrow. */
+  showArrow?: boolean;
+  className?: string;
+  children?: React.ReactNode;
+};
+
+export type CardActionProps =
+  | (CardActionCommonProps & AnchorHTMLAttributes<HTMLAnchorElement> & { href: string })
+  | (CardActionCommonProps & ButtonHTMLAttributes<HTMLButtonElement> & { href?: undefined });
+
+/** Renders an anchor when `href` is passed and a button otherwise. */
+export function CardAction({
+  showArrow = true,
+  className,
+  children,
+  href,
+  ...rest
+}: CardActionProps) {
+  const classes = cx("card-action", className);
+  const content = (
+    <>
+      {children}
+      {showArrow && (
+        <ArrowRight className="card-action-icon" aria-hidden="true" />
+      )}
+    </>
+  );
+
+  if (href) {
+    return (
+      <a
+        href={href}
+        className={classes}
+        {...(rest as AnchorHTMLAttributes<HTMLAnchorElement>)}
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      className={classes}
+      {...(rest as ButtonHTMLAttributes<HTMLButtonElement>)}
+    >
+      {content}
+    </button>
   );
 }

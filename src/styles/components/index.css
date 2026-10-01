@@ -1,6 +1,70 @@
 @import "./button.css";
+@import "./link.css";
 @import "./card.css";
 @import "./modal.css";
+@import "./callout.css";
 @import "./badge.css";
 @import "./tooltip.css";
 @import "./form.css";
+@import "./cursor.css";
+@import "./accordion.css";
+
+/* Shared page-level patterns. Foundations provide the spacing and measure
+   tokens; these classes compose them into reusable structures. */
+.page-shell {
+  width: 100%;
+  max-width: var(--page-shell-max-width, var(--page-max-width));
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+  padding-block: var(--section-gap);
+}
+
+.page-shell--reading {
+  --page-shell-max-width: calc(
+    var(--measure-md) + var(--page-gutter) + var(--page-gutter)
+  );
+}
+
+.page-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: var(--measure-lg);
+}
+
+.page-header-eyebrow {
+  margin-bottom: var(--space-3);
+}
+
+.page-header-title {
+  margin: 0;
+  font-family: var(--type-h1-family);
+  font-size: var(--type-h1-size);
+  font-weight: var(--type-h1-weight);
+  line-height: var(--type-h1-leading);
+  letter-spacing: var(--type-h1-tracking);
+  color: var(--text-primary);
+}
+
+.page-header-description {
+  max-width: var(--measure-sm);
+  margin: var(--space-4) 0 0;
+  color: var(--text-secondary);
+}
+
+.page-header-meta {
+  margin-top: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.article-layout-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-7);
+}
+
+.article-layout-body > * {
+  margin-block: 0;
+}

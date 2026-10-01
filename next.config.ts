@@ -19,6 +19,11 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "play.google.com",
+        pathname: "/books/content/images/**",
+      },
+      {
+        protocol: "https",
         hostname: "*.googleusercontent.com",
       },
     ],

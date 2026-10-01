@@ -1,0 +1,5 @@
+/* Spacing scale example bars: bold indigo in light mode, soft indigo in
+   dark mode (theme.css) -- same pairing as the section-heading label and
+   the Approach section's principle numbers. The color lives here rather
+   than in spacing.tsx's inline style so theme.css can override it. */
+.spacing-bar { background: var(--indigo-bold); }

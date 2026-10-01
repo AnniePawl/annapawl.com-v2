@@ -4,6 +4,9 @@
    instead of maintaining a parallel token set. */
 
 :root {
+  /* Shared outer width for page shells. */
+  --page-max-width: 80rem;
+
   /* Layout measures — reading widths, not covered by Tailwind by default */
   --measure-xs: 45ch;   /* captions, narrow columns */
   --measure-sm: 60ch;   /* body text */
