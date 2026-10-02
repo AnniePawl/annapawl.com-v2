@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import CodeBlock from "../_components/CodeBlock";
+import "./LinkExamples.css";
 
 const USAGE = `
 <a className="text-link focus-ring" href="/books">
@@ -14,15 +15,13 @@ const USAGE = `
 >
   Browse Lucide icons
   <ArrowUpRight className="text-link-icon" aria-hidden="true" />
+  <span className="sr-only"> (opens in a new tab)</span>
 </a>
 `;
 
 export default function LinkExamples() {
   return (
     <div>
-      <CodeBlock code={USAGE} className="mb-8" />
-
-      <span className="poster-label type-eyebrow">Examples</span>
       <div className="link-state-grid">
         <LinkState label="Default">
           <a
@@ -30,7 +29,7 @@ export default function LinkExamples() {
             href="#article-layout"
             data-state="default"
           >
-            Read the full article
+            Learn more
           </a>
         </LinkState>
 
@@ -40,36 +39,37 @@ export default function LinkExamples() {
             href="#article-layout-hover"
             data-state="hover"
           >
-            Read the full article
+            Learn more
           </a>
         </LinkState>
 
-        <LinkState label="Clicked">
+        <LinkState label="Visited">
           <a
             className="text-link text-link--standalone focus-ring"
             href="#article-layout-clicked"
             data-state="visited"
           >
-            Read the full article
+            Learn more
+          </a>
+        </LinkState>
+
+        <LinkState label="External">
+          <a
+            className="text-link text-link--standalone text-link--external focus-ring"
+            href="https://lucide.dev/icons/"
+            target="_blank"
+            rel="noreferrer"
+            data-state="default"
+          >
+            Learn more
+            <ArrowUpRight className="text-link-icon" aria-hidden="true" />
+            <span className="sr-only"> (opens in a new tab)</span>
           </a>
         </LinkState>
       </div>
-
-      <hr className="poster-divider" />
-
-      <div className="link-example-list">
-        <span className="link-state-label">External</span>
-
-        <a
-          className="text-link text-link--standalone text-link--external focus-ring"
-          href="https://lucide.dev/icons/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Browse Lucide icons
-          <ArrowUpRight className="text-link-icon" aria-hidden="true" />
-        </a>
-      </div>
+      <hr className="poster-divider mt-4 mb-0" />
+      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
+      <CodeBlock code={USAGE} className="mb-8" />
     </div>
   );
 }
@@ -83,8 +83,8 @@ function LinkState({
 }) {
   return (
     <div className="link-state-cell">
-      <span className="link-state-label">{label}</span>
       {children}
+      <span className="link-state-label">{label}</span>
     </div>
   );
 }

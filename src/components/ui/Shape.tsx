@@ -1,6 +1,6 @@
 import { SVGAttributes } from "react";
 
-export type ShapeVariant = "blob" | "burst" | "scallop" | "clover" | "bloom" | "flower" | "petals" | "organic" | "quatrefoil" | "circle" | "ring";
+export type ShapeVariant = "blob" | "burst" | "scallop" | "clover" | "bloom" | "flower" | "peanut" | "petals" | "organic" | "quatrefoil" | "circle" | "ring";
 
 // Custom accent shapes, inspired by the idea behind Material's expressive
 // shape library (decorative, non-interactive accents — not buttons) but
@@ -40,6 +40,8 @@ const PATHS: Record<Exclude<ShapeVariant, "bloom" | "flower" | "petals" | "quatr
     "M100,10 L117.2,58.4 L163.6,36.4 L141.6,82.8 L190,100 L141.6,117.2 L163.6,163.6 L117.2,141.6 L100,190 L82.8,141.6 L36.4,163.6 L58.4,117.2 L10,100 L58.4,82.8 L36.4,36.4 L82.8,58.4 Z",
   scallop:
     "M170,100 Q182.1,122 160.6,135 Q160.1,160.1 135,160.6 Q122,182.1 100,170 Q78,182.1 65,160.6 Q39.9,160.1 39.4,135 Q17.9,122 30,100 Q17.9,78 39.4,65 Q39.9,39.9 65,39.4 Q78,17.9 100,30 Q122,17.9 135,39.4 Q160.1,39.9 160.6,65 Q182.1,78 170,100 Z",
+  peanut:
+    "M100,6 C150,6 183.33,28 178.33,56 C175,76 148.33,85 148.33,100 C148.33,115 175,124 178.33,144 C183.33,172 150,194 100,194 C50,194 16.67,172 21.67,144 C25,124 51.67,115 51.67,100 C51.67,85 25,76 21.67,56 C16.67,28 50,6 100,6 Z",
   // Simplified from the heart-leaf pass down to four single-lobe
   // petals (see CLOVER_LEAF_PATHS above) meeting tip-to-tip at center
   // -- reads clearly as a four-petal clover with deep V gaps instead

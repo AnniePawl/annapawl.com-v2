@@ -21,7 +21,7 @@ export default function ArticleLayoutSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="The article layout combines the page shell and page header with a comfortable reading width and steady vertical rhythm. It’s the starting point for blog posts, notes, and other long-form garden paths."
+      description="The article layout combines the page shell and a quieter article header with a comfortable reading width and steady vertical rhythm. It’s the starting point for blog posts, notes, and other long-form garden paths."
     >
       <div className="pattern-preview">
         <ArticleLayout
@@ -44,7 +44,7 @@ export default function ArticleLayoutSection() {
       </div>
 
       <hr className="poster-divider" />
-      <span className="poster-label type-eyebrow">Usage</span>
+      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
       <CodeBlock code={USAGE} />
     </Section>
   );

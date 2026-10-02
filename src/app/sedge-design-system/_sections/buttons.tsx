@@ -9,7 +9,8 @@ export default function ButtonsSection() {
     <Section id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="Buttons use a shared pill shape and playful color pairings to feel consistent without becoming too buttoned-up. Dark cherry with soft moss leads the way, while soft cherry with soft blue offers a lighter alternative.">
+      description="Buttons use a compact pill shape and come in three sizes. The default pairs soft indigo with charcoal and can include an optional icon, such as an arrow. Like other components in the system, buttons can be customized with background and foreground color tokens, offering the flexibility to match the mood of each page or experience.">
+      <hr className="poster-divider mt-4 mb-0" />
       <ButtonStates />
     </Section>
   );

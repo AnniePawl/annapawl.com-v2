@@ -35,7 +35,7 @@ export default function PageShellSection() {
       </PageShell>
 
       <hr className="poster-divider" />
-      <span className="poster-label type-eyebrow">Usage</span>
+      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
       <CodeBlock code={USAGE} />
     </Section>
   );

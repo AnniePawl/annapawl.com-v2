@@ -12,6 +12,7 @@ import PageShell from "../../components/layout/PageShell";
 // Sections
 import AccordianSection from "./_sections/accordian";
 import ApproachSection from "./_sections/approach";
+import LogoSection from "./_sections/logo";
 import ColorsSection from "./_sections/colors";
 import TypographySection from "./_sections/typography";
 import IconsSection from "./_sections/icons";
@@ -257,6 +258,7 @@ export default function DesignSystemOverview() {
 
             <ApproachSection />
 {/* Foundations */}
+            <LogoSection />
             <ColorsSection />
             <TypographySection />
             <IconsSection />

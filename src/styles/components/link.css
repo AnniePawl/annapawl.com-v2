@@ -3,7 +3,7 @@
    keep their own interaction treatment. */
 
 .text-link {
-  --focus-ring-color: var(--link-color);
+  --focus-ring-color: var(--link-decoration);
   color: var(--link-color);
   font-weight: var(--font-medium);
   text-decoration-line: underline;
@@ -19,12 +19,14 @@
 .text-link:visited,
 .text-link[data-state="visited"] {
   color: var(--link-color-visited);
+  text-decoration-color: var(--link-decoration-visited);
 }
 
 /* Docs-only forced default keeps the comparison stable even after its
    fragment link has been visited in the current browser session. */
 .text-link[data-state="default"] {
   color: var(--link-color);
+  text-decoration-color: var(--link-decoration);
 }
 
 .text-link:hover,
@@ -50,42 +52,6 @@
 .text-link--external:hover .text-link-icon,
 .text-link--external:focus-visible .text-link-icon {
   transform: translate(2px, -2px);
-}
-
-.link-example-list {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-5);
-}
-
-.link-example-list p {
-  margin: 0;
-}
-
-.link-state-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-5);
-}
-
-.link-state-cell {
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-3);
-}
-
-.link-state-label {
-  color: var(--text-muted);
-  font-size: var(--text-xs);
-}
-
-@media (width < 40rem) {
-  .link-state-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -12,6 +12,7 @@ import {
   FieldLabel,
 } from "../../../components/ui/FormField";
 import CodeBlock from "../_components/CodeBlock";
+import "./FormExamples.css";
 
 const USAGE = `
 import { FormField, FieldLabel, FieldHint } from "@/components/ui/FormField";
@@ -42,6 +43,7 @@ export default function FormExamples() {
 
   return (
     <section style={{ maxWidth: 720 }}>
+      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
       <CodeBlock code={USAGE} className="mb-8" />
 
       <div className="form-demo-grid">

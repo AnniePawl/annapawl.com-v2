@@ -108,16 +108,3 @@
     transition: none;
   }
 }
-
-/* ---- Docs-only demo layout ---- */
-.card-demo-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-5);
-}
-
-@media (width < 40rem) {
-  .card-demo-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}

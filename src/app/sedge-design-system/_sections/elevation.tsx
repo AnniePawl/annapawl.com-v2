@@ -18,6 +18,7 @@ export default function ElevationSection() {
       icon={meta.icon}
       description="Elevation adds depth and helps establish hierarchy without making the interface feel overly layered. I keep shadows fairly subtle, using more lift as elements move from resting surfaces to interactive elements and overlays."
     >
+      <hr className="poster-divider mt-4 mb-0" />
       <div
         style={{
           display: "grid",
@@ -32,7 +33,7 @@ export default function ElevationSection() {
               style={{
                 height: 88,
                 borderRadius: "var(--radius-md)",
-                background: "var(--bg-default)",
+                background: "var(--indigo-soft)",
                 boxShadow: `var(${token})`,
               }}
             />

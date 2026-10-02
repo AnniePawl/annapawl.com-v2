@@ -1,4 +1,5 @@
 import CodeBlock from "../_components/CodeBlock";
+import "./TypographyExamples.css";
 
 const SCALE: {
   className: string;
@@ -61,9 +62,6 @@ const USAGE = `
 export default function TypographyExamples() {
   return (
     <>
-      {/* Intro */}
-      <p>After auditioning more fonts than strictly necessary, I landed on Inter across the whole system. One typeface gives everything a steady foundation, while clamped display and heading sizes scale smoothly across smaller screens. Shifts in weight and spacing keep the hierarchy clear, and special text tokens—like eyebrows and supporting copy—give the smaller moments their own voice without disrupting the system.</p>
-
       <hr className="poster-divider" />
 
       {/* Typeface */}
@@ -172,7 +170,7 @@ export default function TypographyExamples() {
         </div>
 
         <div>
-          <span className="poster-label type-eyebrow">Usage</span>
+          <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
           <CodeBlock code={USAGE} />
         </div>
       </div>

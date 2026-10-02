@@ -9,9 +9,9 @@ import Button from "../../../components/ui/Button";
 const meta = SECTIONS.find((s) => s.id === "motion")!;
 
 const DURATIONS = [
-  { token: "--motion-duration-fast", label: "fast — 150ms", ms: 150 },
-  { token: "--motion-duration-base", label: "base — 250ms", ms: 250 },
-  { token: "--motion-duration-slow", label: "slow — 400ms", ms: 400 },
+  { token: "--motion-duration-fast", label: "fast — 200ms", ms: 200 },
+  { token: "--motion-duration-base", label: "base — 400ms", ms: 400 },
+  { token: "--motion-duration-slow", label: "slow — 600ms", ms: 600 },
 ];
 
 const EASINGS = [
@@ -31,9 +31,10 @@ export default function MotionSection() {
       icon={meta.icon}
       description="Motion adds personality and helps make interactions feel responsive and intuitive. A small set of durations and easing curves keeps motion consistent across the system. Faster transitions handle lightweight interactions like hover states, while slower, more expressive motion is reserved for larger UI changes. Motion is reduced automatically when a user prefers less movement."
     >
-      <div style={{ display: "flex", flexDirection: "column", gap: 32, maxWidth: 640 }}>
-        <div>
-          <h4 style={{ marginBottom: 12, fontSize: 14, fontWeight: 600 }}>Durations</h4>
+      <hr className="poster-divider mt-4 mb-0" />
+      <div className="motion-section-block">
+        <div className='mb-6'>
+          <h3 className='type-eyebrow' style={{ marginBottom: 12 }}>Durations</h3>
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             {DURATIONS.map(({ token, label }) => (
               <div key={token} style={{ display: "flex", alignItems: "center", gap: 16 }}>
@@ -47,7 +48,7 @@ export default function MotionSection() {
         </div>
 
         <div>
-          <h4 style={{ marginBottom: 12, fontSize: 14, fontWeight: 600 }}>Easings</h4>
+          <h3 className='type-eyebrow' style={{ marginBottom: 12 }}>Easings</h3>
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             {EASINGS.map(({ token, label }) => (
               <div key={token} style={{ display: "flex", alignItems: "center", gap: 16 }}>
@@ -59,39 +60,91 @@ export default function MotionSection() {
             ))}
           </div>
         </div>
+      </div>
 
+      <hr className="poster-divider mt-4 mb-0" />
+
+      <div className="motion-section-block">
         <div>
-          <h4 style={{ marginBottom: 12, fontSize: 14, fontWeight: 600 }}>Live demo</h4>
-          <Button variant="secondary" onClick={() => setPlay((n) => n + 1)}>
-            Replay
+          <h3 className="type-eyebrow" style={{ marginBottom: 12 }}>Live demo</h3>
+          <Button onClick={() => setPlay((n) => n + 1)}>
+            Replay all
           </Button>
-          <div
-            key={play}
-            style={{
-              marginTop: 16,
-              width: 48,
-              height: 48,
-              borderRadius: "var(--radius-md)",
-              background: "var(--indigo-soft)",
-              animation: `motion-demo var(--motion-modal-duration) var(--motion-modal-ease)`,
-            }}
-          />
-        </div>
 
+          <div className="motion-demo-group">
+            <div>
+              <h4 className="motion-demo-title">Durations</h4>
+              <p className="motion-demo-note">Same easing and distance; only the duration changes.</p>
+            </div>
+            <div className="motion-demo-rows">
+              {DURATIONS.map(({ token, label }) => (
+                <div className="motion-demo-row" key={token}>
+                  <code>{label}</code>
+                  <div className="motion-demo-track">
+                    <div
+                      key={`${play}-${token}`}
+                      className="motion-demo-runner"
+                      style={{
+                        animation: play
+                          ? `motion-demo var(${token}) var(--motion-ease-standard) both`
+                          : "none",
+                      }}
+                    >
+                      <span className="motion-demo-box" />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="motion-demo-group">
+            <div>
+              <h4 className="motion-demo-title">Easings</h4>
+              <p className="motion-demo-note">Same duration and distance; only the easing curve changes.</p>
+            </div>
+            <div className="motion-demo-rows">
+              {EASINGS.map(({ token, label }) => (
+                <div className="motion-demo-row" key={token}>
+                  <code>{label}</code>
+                  <div className="motion-demo-track">
+                    <div
+                      key={`${play}-${token}`}
+                      className="motion-demo-runner"
+                      style={{
+                        animation: play
+                          ? `motion-demo 1000ms var(${token}) both`
+                          : "none",
+                      }}
+                    >
+                      <span className="motion-demo-box" />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr className="poster-divider mt-4 mb-0" />
+
+      <div className="motion-section-block">
         <div>
-          <h4 style={{ marginBottom: 12, fontSize: 14, fontWeight: 600 }}>Cursor</h4>
-          <p style={{ marginBottom: 16, color: "var(--text-secondary)", fontSize: 14 }}>
-            A reusable &ldquo;tiny dot&rdquo; cursor (<code>components/ui/CustomCursor.tsx</code>),
-            mounted once in the root layout and active site-wide. Hover each
-            example below to see its live behavior.
+          <h3 className="type-eyebrow" style={{ marginBottom: 12 }}>Cursor</h3>
+          <p className='mb-8' style={{ color: "var(--text-secondary)", fontSize: 14 }}>
+            The cursor stays a compact dot at rest, expands into a small, hollow ring
+            over interactive elements, and remains a dot over selectable text.
+            Form controls retain their useful native cursors. On dark surfaces,
+            the custom cursor shifts to soft indigo to maintain contrast.
           </p>
-          <div style={{ display: "flex", gap: 24, flexWrap: "wrap", marginBottom: 16 }}>
+          <div className='mb-8' style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
             <div style={{ textAlign: "center" }}>
               <div
                 style={{
-                  width: 140,
-                  height: 88,
-                  border: "1px dashed var(--border-subtle)",
+                  width: 112,
+                  height: 64,
+                  border: "1px dashed var(--indigo-soft)",
                   borderRadius: "var(--radius-md)",
                 }}
               />
@@ -100,48 +153,100 @@ export default function MotionSection() {
               </p>
             </div>
             <div style={{ textAlign: "center" }}>
-              <Button variant="secondary" style={{ minWidth: 140 }}>
-                Hover me
+              <Button
+                tone={{ background: "indigo-soft", foreground: "charcoal" }}
+              >
+                Hover Me
               </Button>
               <p style={{ marginTop: 8, fontSize: 12, color: "var(--text-muted)" }}>
-                Interactive — 22px ring
-              </p>
-            </div>
-            <div style={{ textAlign: "center" }}>
-              <div
-                style={{
-                  width: 140,
-                  height: 88,
-                  border: "1px dashed var(--border-subtle)",
-                  borderRadius: "var(--radius-md)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: 8,
-                }}
-              >
-                <span style={{ fontSize: 13 }}>Selectable text</span>
-              </div>
-              <p style={{ marginTop: 8, fontSize: 12, color: "var(--text-muted)" }}>
-                Native — text keeps its I-beam
+                Interactive — 16px ring
               </p>
             </div>
           </div>
-          <p style={{ marginBottom: 12, color: "var(--text-secondary)", fontSize: 14 }}>
-            Transitions over <code>--motion-hover-duration</code> (150ms), and also
-            defers to native cursors over form controls, editable content, and
-            disabled controls. Opt a region or page out entirely:
+          <p className='mb-6' style={{ color: "var(--text-secondary)", fontSize: 14 }}>
+            The transition uses <code>--motion-hover-duration</code> (200ms).
+            Form controls, editable content, disabled controls, and explicitly
+            opted-out regions retain their native cursor:
           </p>
+          <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
           <CodeBlock
-            code={`<div data-cursor-native>\n  {/* this region always keeps the native cursor */}\n</div>`}
+            code={`<div data-cursor-native>\n  {/* Use the native cursor throughout this region. */}\n</div>`}
           />
         </div>
       </div>
 
       <style>{`
+        .motion-section-block {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .motion-demo-group {
+          display: grid;
+          gap: 10px;
+          margin-top: 20px;
+          max-width: 520px;
+        }
+
+        .motion-demo-title {
+          margin: 0;
+          font-size: var(--text-sm);
+          font-weight: var(--font-semibold);
+        }
+
+        .motion-demo-note {
+          margin: 2px 0 0;
+          color: var(--text-muted);
+          font-size: var(--text-xs);
+        }
+
+        .motion-demo-rows {
+          display: grid;
+          gap: 8px;
+        }
+
+        .motion-demo-row {
+          display: grid;
+          grid-template-columns: 8rem minmax(8rem, 1fr);
+          align-items: center;
+          gap: 12px;
+        }
+
+        .motion-demo-row code {
+          color: var(--text-secondary);
+          font-size: var(--text-xs);
+        }
+
+        .motion-demo-track {
+          height: 18px;
+          overflow: hidden;
+          border-radius: var(--radius-pill);
+          background: color-mix(in srgb, var(--indigo-soft) 30%, transparent);
+        }
+
+        .motion-demo-runner {
+          width: calc(100% - 18px);
+          height: 18px;
+        }
+
+        .motion-demo-box {
+          display: block;
+          width: 18px;
+          height: 18px;
+          border-radius: var(--radius-xs);
+          background: var(--indigo-bold);
+        }
+
         @keyframes motion-demo {
-          from { opacity: 0; transform: translateY(-8px) scale(0.9); }
-          to { opacity: 1; transform: translateY(0) scale(1); }
+          from { transform: translateX(0); }
+          to { transform: translateX(100%); }
+        }
+
+        @media (width < 40rem) {
+          .motion-demo-row {
+            grid-template-columns: 6.5rem minmax(7rem, 1fr);
+            gap: 8px;
+          }
         }
       `}</style>
     </Section>

@@ -1,0 +1,63 @@
+.home-logo {
+  --focus-ring-color: var(--home-logo-base, var(--indigo-bold));
+  --home-logo-size: 2rem;
+  --home-logo-base: var(--indigo-bold);
+  --home-logo-hover-accent: var(--mint-bold);
+  display: inline-flex;
+  border-radius: var(--radius-sm);
+}
+
+.home-logo-mark {
+  display: block;
+  width: var(--home-logo-size);
+  height: var(--home-logo-size);
+  transform: rotate(0deg) scale(1);
+  transform-origin: center;
+  transition: transform var(--motion-duration-base) var(--motion-hover-ease);
+}
+
+.home-logo-leaf {
+  transition: fill var(--motion-duration-base) var(--motion-hover-ease);
+}
+
+.home-logo-leaf--ne {
+  fill: var(--home-logo-ne, var(--home-logo-base));
+}
+
+.home-logo-leaf--se {
+  fill: var(--home-logo-se, var(--home-logo-base));
+}
+
+.home-logo-leaf--sw {
+  fill: var(--home-logo-sw, var(--home-logo-base));
+}
+
+.home-logo-leaf--nw {
+  fill: var(--home-logo-nw, var(--home-logo-base));
+}
+
+.home-logo:hover .home-logo-mark,
+.home-logo:focus-visible .home-logo-mark,
+.home-logo[data-state="hover"] .home-logo-mark {
+  transform: rotate(8deg) scale(1.04);
+}
+
+.home-logo:hover .home-logo-leaf--ne,
+.home-logo:focus-visible .home-logo-leaf--ne,
+.home-logo[data-state="hover"] .home-logo-leaf--ne {
+  fill: var(--home-logo-hover-accent);
+}
+
+[data-sedge-theme="dark"] .home-logo {
+  --home-logo-base: var(--indigo-soft);
+  --home-logo-hover-accent: var(--lemon-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-logo-mark,
+  .home-logo:hover .home-logo-mark,
+  .home-logo:focus-visible .home-logo-mark,
+  .home-logo[data-state="hover"] .home-logo-mark {
+    transform: none;
+  }
+}

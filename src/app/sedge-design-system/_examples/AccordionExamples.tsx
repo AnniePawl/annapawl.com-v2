@@ -24,6 +24,7 @@ const FAQ_ITEMS: AccordionItem[] = [
 export default function AccordionExamples() {
   return (
     <div style={{ maxWidth: 640 }}>
+      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
       <CodeBlock code={USAGE} className="mb-8" />
       <Accordian items={FAQ_ITEMS} />
     </div>

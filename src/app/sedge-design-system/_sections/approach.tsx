@@ -10,8 +10,8 @@ const PRINCIPLES = [
     body: "Moments of delight should feel intentional. Interaction, motion, color, and unexpected details should support the experience rather than compete with it.",
   },
   {
-    title: "Crafted, not generic",
-    body: "Reusable doesn’t have to mean generic. I want the system to have a point of view, with thoughtful details that make the things I build feel distinctly my own.",
+    title: "Built to customize",
+    body: "Reusable doesn’t have to mean repetitive. Shared structure keeps things consistent, while flexible color props let components mix, match, and shift with the mood of each page. Lots of choose your own adventure moments!",
   },
   {
     title: "Systematic underneath",
@@ -19,7 +19,7 @@ const PRINCIPLES = [
   },
   {
     title: "Designed to evolve",
-    body: "Nothing here is too precious to change. Patterns can be questioned, tested, refined, and replaced as I grow, learn, and discover new things to try!",
+    body: "Nothing here is too precious to change. Patterns can be questioned, tested, refined, and replaced as I grow, learn, change my mind, and discover new things to try!",
   },
 ];
 

@@ -12,9 +12,10 @@ export default function AccessibilitySection() {
       icon={meta.icon}
       description="Accessibility is something I’m continuing to learn about and build into the system. These foundations are a starting point for making the playful parts of the interface work for more people."
     >
+      <hr className="poster-divider mt-4 mb-0" />
       <div style={{ display: "flex", flexDirection: "column", gap: 32, maxWidth: 640 }}>
         <div>
-          <h4 style={{ marginBottom: 8, fontSize: 14, fontWeight: 600 }}>Focus ring</h4>
+          <h4 className='type-eyebrow' style={{ marginBottom: 5 }}>Focus ring</h4>
           <p style={{ marginBottom: 12, color: "var(--text-secondary)", fontSize: 14 }}>
             Interactive elements share a consistent <code>.focus-ring</code> utility
             (foundations/focus.css) so keyboard navigation stays visible throughout the site. Tab the button below to see it in action.
@@ -23,21 +24,21 @@ export default function AccessibilitySection() {
         </div>
 
         <div>
-          <h4 style={{ marginBottom: 8, fontSize: 14, fontWeight: 600 }}>Reduced motion</h4>
+          <h4 className='type-eyebrow' style={{ marginBottom: 5 }}>Reduced motion</h4>
           <p style={{ color: "var(--text-secondary)", fontSize: 14 }}>
-            Motion adds a lot of personality to the site, but it shouldn’t be required to use it. Animations and transitions respect prefers-reduced-motion, reducing movement for people who have that preference enabled.
+            Motion adds personality to the site, but it shouldn’t be required to use it. When reduced motion is preferred, smooth scrolling and decorative animations are disabled, while motion-token durations collapse to remove unnecessary movement.
           </p>
         </div>
 
         <div>
-          <h4 style={{ marginBottom: 8, fontSize: 14, fontWeight: 600 }}>Color & Contrast</h4>
+          <h4 className='type-eyebrow' style={{ marginBottom: 5 }}>Color & Contrast</h4>
           <p style={{ color: "var(--text-secondary)", fontSize: 14 }}>
-            With such an expansive palette, contrast is something I’m especially mindful of. Core text and background combinations are checked for WCAG AA contrast, while the broader palette is continuing to be tested as colors find their way into different contexts.
+            With such an expansive palette, contrast is something I’m especially mindful of. I’m working on a contrast-checking script to evaluate core color combinations against WCAG AA guidelines, while continuing to review colors in context as they’re introduced throughout the system.
           </p>
         </div>
 
         <div>
-          <h4 style={{ marginBottom: 8, fontSize: 14, fontWeight: 600 }}>
+          <h4 className='type-eyebrow' style={{ marginBottom: 5 }}>
             Semantics
           </h4>
           <p style={{ color: "var(--text-secondary)", fontSize: 14 }}>

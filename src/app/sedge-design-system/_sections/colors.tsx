@@ -30,6 +30,7 @@ export default function ColorsSection() {
           cohesion.
         </p>
       </div>
+      <hr className="poster-divider mt-4 mb-0" />
       <div className="mt-[var(--space-6)]">
         <ColorSwatchesGrid />
       </div>

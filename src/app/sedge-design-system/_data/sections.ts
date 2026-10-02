@@ -20,6 +20,7 @@ import {
   ListChevronsUpDown,
   Link2,
   Info,
+  Clover,
 } from "lucide-react";
 
 export type SectionGroup = "Intro" | "Foundations" | "Components" | "Patterns";
@@ -53,6 +54,7 @@ export const SECTIONS: NavSection[] = [
   // "At a glance" card now live in the Hero instead (see Hero.tsx), so
   // Approach is the first real Intro section in the flow.
   { id: "approach", title: "Approach", icon: Brain, group: "Intro" },
+  { id: "logo", title: "Logo", icon: Clover, group: "Intro" },
 
   // Foundations
   { id: "colors", title: "Colors", icon: Palette, group: "Foundations" },

@@ -1,0 +1,46 @@
+.tooltip-wrapper--static .tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+.tooltip-wrapper--static .tooltip-trigger {
+  cursor: default;
+}
+
+.tooltip-panel {
+  padding: var(--space-6);
+  border-radius: var(--radius-2xl);
+  background: var(--surface-wash-soft);
+}
+
+.tooltip-panel-label {
+  display: block;
+  margin-bottom: var(--space-2);
+  color: var(--text-primary);
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tooltip-panel-desc {
+  margin: 0 0 var(--space-2);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.tooltip-demo-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-6);
+  padding: 3rem 0 var(--space-2);
+}
+
+.tooltip-demo-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3.25rem;
+}

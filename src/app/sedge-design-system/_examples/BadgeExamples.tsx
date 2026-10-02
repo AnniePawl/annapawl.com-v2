@@ -1,5 +1,6 @@
 import Badge, { type BadgeTone } from "../../../components/ui/Badge";
 import CodeBlock from "../_components/CodeBlock";
+import "./BadgeExamples.css";
 
 const USAGE = `
 import Badge from "@/components/ui/Badge";
@@ -29,6 +30,7 @@ const TONE_EXAMPLES: { label: string; tone: BadgeTone }[] = [
 export default function BadgeExamples() {
   return (
     <section style={{ maxWidth: 720 }}>
+      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
       <CodeBlock code={USAGE} className="mb-8" />
 
       <div className="badge-demo-row">

@@ -76,13 +76,6 @@
   transform: translateX(var(--space-1));
 }
 
-/* Docs-only layout. */
-.callout-demo-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: var(--space-4);
-}
-
 @media (prefers-reduced-motion: reduce) {
   .callout-action-icon {
     transition: none;

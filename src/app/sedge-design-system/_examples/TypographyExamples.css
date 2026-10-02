@@ -1,6 +1,5 @@
-/* Typography section layout. */
+/* Typography example layout. */
 
-/* ---- Scale timeline ---- */
 .typo-scale-list {
   position: relative;
   display: flex;
@@ -31,9 +30,9 @@
 
 .typo-scale-meta {
   margin-top: 2px;
+  color: var(--text-secondary);
   font-size: var(--text-xs);
   line-height: var(--leading-snug);
-  color: var(--text-secondary);
 }
 
 .typo-scale-dot {
@@ -50,28 +49,25 @@
   color: var(--text-primary);
 }
 
-/* ---- Typeface / Weight ---- */
 .typo-grid-2 {
   display: grid;
-  /* minmax(0, ...) so the Usage code block can scroll inside its own
-     column instead of stretching the track (and the section) around it. */
   grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
   gap: var(--space-6);
 }
 
 .typo-typeface-name {
+  margin: 0;
   font-size: var(--text-5xl);
   font-weight: var(--font-semibold);
   line-height: var(--leading-tight);
   letter-spacing: var(--tracking-tight);
-  margin: 0;
 }
 
 .typo-typeface-caption {
   display: inline-block;
   margin-top: var(--space-1);
-  font-size: var(--text-xs);
   color: var(--text-muted);
+  font-size: var(--text-xs);
 }
 
 .typo-weight-row {
@@ -90,8 +86,8 @@
 }
 
 .typo-weight-label {
-  font-size: var(--text-xs);
   color: var(--text-muted);
+  font-size: var(--text-xs);
 }
 
 .typo-tracking-row {
@@ -105,11 +101,10 @@
 }
 
 .typo-tracking-label {
-  font-size: var(--text-xs);
   color: var(--text-muted);
+  font-size: var(--text-xs);
 }
 
-/* Stack the scale and two-column layouts on phones. */
 @media (width < 40rem) {
   .typo-scale-rail,
   .typo-scale-dot {

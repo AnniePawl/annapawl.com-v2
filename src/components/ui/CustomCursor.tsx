@@ -159,9 +159,7 @@ export default function CustomCursor() {
       //   return;
       // }
 
-      // Documentation keeps the custom cursor over text, fields,
-      // and regions that normally opt out. Other pages are unchanged.
-      if (!target || (!isDocumentation && wantsNativeCursor(target))) {
+      if (!target || wantsNativeCursor(target)) {
         hide();
         return;
       }
@@ -180,24 +178,16 @@ export default function CustomCursor() {
       // }
 
       if (
-        !isDocumentation &&
-        (SPECIAL_CURSORS.has(computedCursor) ||
-          isDisabled(target) ||
-          (interactive && isDisabled(interactive)))
+        SPECIAL_CURSORS.has(computedCursor) ||
+        isDisabled(target) ||
+        (interactive && isDisabled(interactive))
       ) {
         hide();
         return;
       }
 
-      // Link/button labels belong to their interactive parent.
-      // Original interactive appearance, preserved:
-      // const isInteractive =
-      //   interactive !== null || computedCursor === "pointer";
-
-      // On documentation, keep a plain dot even over links/buttons.
       const isInteractive =
-        !isDocumentation &&
-        (interactive !== null || computedCursor === "pointer");
+        interactive !== null || computedCursor === "pointer";
 
       // if (!isInteractive && target.closest(TEXT_SELECTOR)) {
       //   hide();

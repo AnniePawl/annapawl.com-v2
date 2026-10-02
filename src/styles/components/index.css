@@ -8,6 +8,7 @@
 @import "./form.css";
 @import "./cursor.css";
 @import "./accordion.css";
+@import "./home-logo.css";
 
 /* Shared page-level patterns. Foundations provide the spacing and measure
    tokens; these classes compose them into reusable structures. */
@@ -25,18 +26,18 @@
   );
 }
 
-.page-header {
+.article-header {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   max-width: var(--measure-lg);
 }
 
-.page-header-eyebrow {
+.article-header-eyebrow {
   margin-bottom: var(--space-3);
 }
 
-.page-header-title {
+.article-header-title {
   margin: 0;
   font-family: var(--type-h1-family);
   font-size: var(--type-h1-size);
@@ -46,16 +47,171 @@
   color: var(--text-primary);
 }
 
-.page-header-description {
+.article-header-description {
   max-width: var(--measure-sm);
   margin: var(--space-4) 0 0;
   color: var(--text-secondary);
 }
 
-.page-header-meta {
+.article-header-meta {
   margin-top: var(--space-3);
   font-size: var(--text-sm);
   color: var(--text-muted);
+}
+
+.editorial-page-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.editorial-page-header-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 2rem;
+  padding-inline: var(--space-1);
+  color: var(--editorial-header-bar-text);
+}
+
+.editorial-page-header-bar-label {
+  color: currentColor;
+}
+
+.editorial-page-header-rule {
+  flex: 1;
+  border-top: var(--border-md) solid currentColor;
+  opacity: 0.7;
+}
+
+.editorial-page-header-layout {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  grid-template-rows: minmax(15rem, auto) auto;
+  overflow: hidden;
+}
+
+.editorial-page-header-rail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-row: 1 / 3;
+  background: var(--editorial-header-rail-bg);
+  color: var(--editorial-header-rail-text);
+}
+
+.editorial-page-header-rail span {
+  color: currentColor;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.editorial-page-header-stage {
+  position: relative;
+  min-width: 0;
+  background: var(--editorial-header-heading-bg);
+}
+
+.editorial-page-header-eyebrow {
+  position: absolute;
+  top: var(--space-5);
+  right: var(--space-5);
+  color: var(--editorial-header-prefix-text);
+}
+
+.editorial-page-header-title {
+  position: absolute;
+  right: var(--space-6);
+  bottom: -0.05em;
+  left: var(--space-6);
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: clamp(5rem, 10.5vw, 9.5rem);
+  font-weight: var(--font-extrabold);
+  line-height: 0.72;
+  letter-spacing: -0.05em;
+}
+
+.editorial-page-header-title span {
+  display: block;
+}
+
+.editorial-page-header-prefix {
+  margin: 0 0 0.85em 0.1em;
+  color: var(--editorial-header-prefix-text);
+  font-size: 0.15em;
+  font-weight: var(--font-regular);
+  line-height: 1;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.editorial-page-header-title-text {
+  color: var(--editorial-header-title-text);
+}
+
+.editorial-page-header-description {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: flex-end;
+  min-height: 8rem;
+  padding: var(--space-6) var(--space-8);
+  background: var(--editorial-header-description-bg);
+  color: var(--editorial-header-description-text);
+}
+
+.editorial-page-header-description p {
+  max-width: var(--measure-md);
+  margin: 0;
+  color: currentColor;
+  text-align: right;
+}
+
+.editorial-page-header-meta {
+  margin-top: var(--space-2);
+  font-size: var(--text-xs);
+  color: currentColor;
+}
+
+@media (width < 40rem) {
+  .editorial-page-header {
+    gap: var(--space-1);
+  }
+
+  .editorial-page-header-bar {
+    gap: var(--space-2);
+    min-height: 1.75rem;
+  }
+
+  .editorial-page-header-bar-label {
+    font-size: var(--text-xs);
+  }
+
+  .editorial-page-header-layout {
+    grid-template-columns: 3.5rem minmax(0, 1fr);
+    grid-template-rows: minmax(14rem, auto) auto;
+  }
+
+  .editorial-page-header-title {
+    right: var(--space-4);
+    left: var(--space-4);
+    font-size: clamp(3rem, 16vw, 5rem);
+  }
+
+  .editorial-page-header-prefix {
+    margin-bottom: 1em;
+  }
+
+  .editorial-page-header-eyebrow {
+    top: var(--space-4);
+    right: var(--space-4);
+  }
+
+  .editorial-page-header-description {
+    min-height: auto;
+    padding: var(--space-4);
+  }
 }
 
 .article-layout-body {

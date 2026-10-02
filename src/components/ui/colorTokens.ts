@@ -1,0 +1,31 @@
+export type PaletteHue =
+  | "pink"
+  | "red"
+  | "cherry"
+  | "coral"
+  | "orange"
+  | "clay"
+  | "ochre"
+  | "amber"
+  | "lemon"
+  | "lime"
+  | "sage"
+  | "moss"
+  | "mint"
+  | "emerald"
+  | "sky"
+  | "blue"
+  | "steel"
+  | "lilac"
+  | "indigo"
+  | "plum"
+  | "mauve"
+  | "sand"
+  | "taupe"
+  | "chocolate";
+
+export type PaletteColor =
+  | "cream"
+  | "charcoal"
+  | "ivory"
+  | `${PaletteHue}-${"soft" | "bold"}`;

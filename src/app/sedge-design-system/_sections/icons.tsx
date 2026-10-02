@@ -29,6 +29,7 @@ export default function IconsSection() {
       icon={meta.icon}
       description="Icons come from Lucide: simple, friendly, and consistent without asking me to draw hundreds of tiny pictures. They inherit the color around them and use three shared sizes to stay aligned across labels, buttons, and controls."
     >
+      <hr className="poster-divider mt-4 mb-0" />
       <div
         style={{
           display: "grid",
@@ -69,10 +70,10 @@ export default function IconsSection() {
       </div>
 
       <hr className="poster-divider" />
-      <span className="poster-label type-eyebrow">Usage</span>
+      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
       <CodeBlock code={USAGE} />
-            <p className="type-supporting pt-5" style={{ margin: "0 0 var(--space-5)" }}>
-     
+      <p className="type-supporting pt-5" style={{ margin: "0 0 var(--space-5)" }}>
+
         <a
           href="https://lucide.dev/icons/"
           target="_blank"

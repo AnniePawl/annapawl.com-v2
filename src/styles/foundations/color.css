@@ -201,10 +201,11 @@
   );
 
   /* Editorial links */
-  --link-color: var(--cherry-bold);
-  --link-color-hover: var(--cherry-soft);
+  --link-color: var(--indigo-bold);
+  --link-color-hover: var(--plum-bold);
   --link-color-visited: var(--plum-bold);
-  --link-decoration: var(--blue-soft);
+  --link-decoration: var(--indigo-bold);
+  --link-decoration-visited: var(--plum-bold);
 
   /* =========================
      Surface washes + one-off surfaces

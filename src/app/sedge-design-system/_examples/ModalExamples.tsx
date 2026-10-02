@@ -8,6 +8,7 @@ import Modal, {
   type ModalColorway,
 } from "../../../components/ui/Modal";
 import CodeBlock from "../_components/CodeBlock";
+import "./ModalExamples.css";
 
 const USAGE = `
 import { useState } from "react";
@@ -71,6 +72,7 @@ export default function ModalExamples() {
 
   return (
     <section>
+      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
       <CodeBlock code={USAGE} className="mb-8" />
 
       <span className="poster-label type-eyebrow">Compact previews</span>

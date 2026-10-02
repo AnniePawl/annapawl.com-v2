@@ -16,6 +16,7 @@ const ACCENT_SHAPES: { variant: ShapeVariant; color: string }[] = [
   { variant: "blob", color: "var(--indigo-soft)" },
   { variant: "burst", color: "var(--indigo-soft)" },
   { variant: "scallop", color: "var(--indigo-soft)" },
+  { variant: "peanut", color: "var(--indigo-soft)" },
   // Simplified to four single-lobe petals (one smooth rounded tip
   // each, tapering to a point at center) meeting tip-to-tip with deep
   // V gaps between them -- same CLOVER_LEAF_PATHS geometry the
@@ -41,9 +42,12 @@ import Shape from "@/components/ui/Shape";
 
 export default function ShapeExamples() {
   return (
-    <section style={{ maxWidth: 720 }}>
-      <h3 style={{ marginBottom: 16 }}>Corner radius</h3>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 20 }}>
+    <section>
+      <h3 className='type-eyebrow' style={{ marginBottom: 24 }}>Corner radius</h3>
+      <div
+        className='flex w-full md:justify-between flex-wrap gap-5'
+        style={{ maxWidth: 720 }}
+      >
         {RADIUS_SCALE.map(({ token, label }) => (
           <div key={token} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             <div
@@ -59,13 +63,17 @@ export default function ShapeExamples() {
           </div>
         ))}
       </div>
+       <hr className="poster-divider mt-4 mb-0" />
 
-      <h3 style={{ margin: "32px 0 16px" }}>Accent shapes</h3>
+      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Accent shapes</h3>
       <p style={{ marginBottom: 16, fontSize: 14, color: "var(--text-secondary)" }}>
        Accent shapes are decorative by design — used for image crops, avatar masks, and background details rather than interactive controls. Their irregularity works best as a visual accent, where it can add personality without changing how something is expected to behave.
       </p>
-      <CodeBlock code={USAGE} className="mb-6" />
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 28 }}>
+
+      <div
+        className='flex w-full flex-wrap gap-5 mb-10'
+        style={{ maxWidth: 720 }}
+      >
         {ACCENT_SHAPES.map(({ variant, color }) => (
           <div key={variant} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
             <Shape
@@ -76,6 +84,8 @@ export default function ShapeExamples() {
           </div>
         ))}
       </div>
+      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
+      <CodeBlock code={USAGE} className="mb-6" />
     </section>
   );
 }

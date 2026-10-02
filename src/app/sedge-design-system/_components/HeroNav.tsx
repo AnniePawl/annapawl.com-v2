@@ -1,7 +1,6 @@
-import Link from "next/link";
 import type { NavSection, SectionGroup } from "../_data/sections";
 import { cx } from "../../../lib/cx";
-import { CLOVER_LEAF_PATHS } from "../../../components/ui/Shape";
+import HomeLogo from "../../../components/ui/HomeLogo";
 import ThemeToggle from "./ThemeToggle";
 import "./logo.css";
 
@@ -28,25 +27,7 @@ export default function HeroNav({
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-3 md:px-6 py-3 md:py-4 sm:gap-6">
         <div className="flex items-center gap-3">
           {/* Logo-->Home */}
-          <Link href="/" className="sedge-logo-link focus-ring">
-            <svg
-              viewBox="0 0 200 200"
-              className="sedge-logo-mark h-8 w-8"
-              aria-hidden="true"
-            >
-              {(["NE", "SE", "SW", "NW"] as const).map((leaf) => (
-                <path
-                  key={leaf}
-                  className={
-                    leaf === "NE"
-                      ? "sedge-logo-leaf sedge-logo-leaf--ne"
-                      : "sedge-logo-leaf"
-                  }
-                  d={CLOVER_LEAF_PATHS[leaf]}
-                />
-              ))}
-            </svg>
-          </Link>
+          <HomeLogo />
           {/* Copy-->Top of page */}
           <a
             href="#top"

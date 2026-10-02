@@ -1,12 +1,11 @@
 /** Shared section styles; individual sections own their content + layouts. */
 
 .sedge-section {
-  --section-description-size: var(--text-2xl);
   position: relative;
   border-radius: var(--radius-2xl);
   padding: var(--space-7);
   color: var(--text-primary);
-  border: 2px solid var(--indigo-soft);
+  /* border: 2px solid var(--indigo-soft); */
 }
 
 @media (width < 40rem) {
@@ -65,16 +64,12 @@
 
 
 
-  /* Long titles ("Accessibility") would push the label off-screen, so on
-     phones the label moves above the title instead. */
   .sedge-section-heading {
     flex-direction: column-reverse;
     align-items: flex-start;
     gap: var(--space-3);
   }
 
-  /* Long titles ("Accessibility.") need a slightly smaller size to fit
-     on one line on a phone (checked from 320px up). */
   .sedge-section-heading-title {
     font-size: clamp(2rem, 10vw, 2.25rem);
   }
@@ -95,8 +90,10 @@
 }
 
 @media (width < 40rem) {
-  .sedge-section {
-    --section-description-size: var(--text-xs);
+  .sedge-section-description,
+  .sedge-section-intro > p:not(.type-supporting):not(.type-eyebrow),
+  :where(.sedge-section-content) > p:not(.type-supporting):not(.type-eyebrow) {
+    font-size: var(--text-sm);
   }
 }
 

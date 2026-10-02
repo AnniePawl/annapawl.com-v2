@@ -40,6 +40,7 @@ export default function SpacingSection() {
       icon={meta.icon}
       description="Spacing is one of those quiet things that makes everything feel more intentional. A shared scale keeps padding, gaps, and layout rhythm consistent, while a small semantic layer handles the page gutter and space between major sections."
     >
+      <hr className="poster-divider mt-4 mb-0" />
       <div
         style={{
           display: "flex",

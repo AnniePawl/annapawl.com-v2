@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { cx } from "../../lib/cx";
-import PageHeader from "./PageHeader";
+import ArticleHeader from "./ArticleHeader";
 import PageShell from "./PageShell";
 
 export default function ArticleLayout({
@@ -22,7 +22,7 @@ export default function ArticleLayout({
 }) {
   return (
     <PageShell width="reading" className={cx("article-layout", className)}>
-      <PageHeader
+      <ArticleHeader
         eyebrow={eyebrow}
         title={title}
         description={description}

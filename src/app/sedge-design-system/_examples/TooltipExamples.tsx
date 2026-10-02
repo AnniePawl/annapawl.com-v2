@@ -1,6 +1,7 @@
 import Button from "../../../components/ui/Button";
 import Tooltip from "../../../components/ui/Tooltip";
 import CodeBlock from "../_components/CodeBlock";
+import "./TooltipExamples.css";
 
 const USAGE = `
 import Tooltip from "@/components/ui/Tooltip";
@@ -31,6 +32,7 @@ import Tooltip from "@/components/ui/Tooltip";
 export default function TooltipExamples() {
   return (
     <section style={{ maxWidth: 960 }}>
+      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
       <CodeBlock code={USAGE} className="mb-8" />
 
       <div className="tooltip-panel">

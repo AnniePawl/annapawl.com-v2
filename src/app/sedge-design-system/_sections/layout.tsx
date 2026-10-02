@@ -21,6 +21,7 @@ export default function LayoutSection() {
       icon={meta.icon}
       description="Layout starts with a consistent page frame and comfortable reading widths. The page shell handles the shared maximum width and responsive gutters, measure tokens keep text easy to read, and Tailwind handles one-off responsive grids."
     >
+      <hr className="poster-divider mt-4 mb-0" />
       <span className="poster-label type-eyebrow">Page frame</span>
       <div style={{ display: "flex", gap: "var(--space-3)" }}>
         <code style={{ fontSize: "var(--text-xs)", color: "var(--text-primary)" }}>

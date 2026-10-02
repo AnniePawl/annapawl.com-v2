@@ -1,5 +1,6 @@
 import Callout from "../../../components/ui/Callout";
 import CodeBlock from "../_components/CodeBlock";
+import "./CalloutExamples.css";
 
 const USAGE = `
 import Callout from "@/components/ui/Callout";
@@ -18,6 +19,7 @@ import Callout from "@/components/ui/Callout";
 export default function CalloutExamples() {
   return (
     <div>
+      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
       <CodeBlock code={USAGE} className="mb-8" />
 
       <span className="poster-label type-eyebrow">Examples</span>

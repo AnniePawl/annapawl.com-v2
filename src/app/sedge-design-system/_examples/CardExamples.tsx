@@ -5,6 +5,7 @@ import Card, {
   CardHeading,
 } from "../../../components/ui/Card";
 import CodeBlock from "../_components/CodeBlock";
+import "./CardExamples.css";
 
 const USAGE = `
 import Card, { CardEyebrow, CardHeading, CardBody, CardAction } from "@/components/ui/Card";
@@ -22,6 +23,7 @@ import Card, { CardEyebrow, CardHeading, CardBody, CardAction } from "@/componen
 export default function CardExamples() {
   return (
     <section style={{ maxWidth: 720 }}>
+      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
       <CodeBlock code={USAGE} className="mb-8" />
 
       <h3 style={{ marginBottom: 16 }}>Examples</h3>

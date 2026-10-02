@@ -1,0 +1,24 @@
+.link-state-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-5);
+}
+
+.link-state-cell {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.link-state-label {
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+}
+
+@media (width < 40rem) {
+  .link-state-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,31 +1,8 @@
 import { CSSProperties, HTMLAttributes } from "react";
 import { cx } from "../../lib/cx";
+import type { PaletteColor, PaletteHue } from "./colorTokens";
 
-export type BadgeHue =
-  | "pink"
-  | "red"
-  | "cherry"
-  | "coral"
-  | "orange"
-  | "clay"
-  | "ochre"
-  | "amber"
-  | "lemon"
-  | "lime"
-  | "sage"
-  | "moss"
-  | "mint"
-  | "emerald"
-  | "sky"
-  | "blue"
-  | "steel"
-  | "lilac"
-  | "indigo"
-  | "plum"
-  | "mauve"
-  | "sand"
-  | "taupe"
-  | "chocolate";
+export type BadgeHue = PaletteHue;
 
 export type BadgeTone =
   | BadgeHue
@@ -34,10 +11,7 @@ export type BadgeTone =
       foreground: BadgeColor;
     };
 
-export type BadgeColor =
-  | "cream"
-  | "charcoal"
-  | `${BadgeHue}-${"soft" | "bold"}`;
+export type BadgeColor = PaletteColor;
 
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   tone?: BadgeTone;
