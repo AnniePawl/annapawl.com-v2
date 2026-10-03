@@ -10,8 +10,9 @@ export default function CardsSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="Cards are one of the most-used building blocks across my digital garden. Two quiet variants keep them consistent: an outlined card for the default surface and a soft indigo card for a little more emphasis."
+      description="Cards group a short title and supporting copy into a simple, self-contained surface. Two variants keep the pattern focused: an outlined card for quieter grouping and a filled card for stronger emphasis. Background, foreground, and border colors can use any palette tokens, while actions are added separately only when the content needs one."
     >
+      <hr className="poster-divider mt-4 mb-0" />
       <CardExamples />
     </Section>
   );

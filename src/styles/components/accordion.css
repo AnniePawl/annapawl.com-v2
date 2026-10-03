@@ -1,16 +1,20 @@
 /* =========================================================
    Accordion - soft editorial, single-open FAQ pattern.
-   See components/ui/Accordian.tsx for the component this styles.
+   See components/ui/Accordion.tsx for the component this styles.
 
-   Deliberately fixed to its own pale-lavender palette rather than the
-   semantic text and surface tokens, so it reads the same no matter
-   whether the surrounding page has the design system light theme or the
-   dark theme active - an intentional, always-light editorial treatment,
-   not a themed component.
+   A single tone controls the dividers, item numbers, and circular
+   expand/collapse controls. It can be changed through the component's
+   tone prop; indigo-bold is the default.
 ========================================================= */
 
 .accordion {
-  --accordion-line: var(--indigo-bold);
+  --accordion-tone: var(--indigo-bold);
+  --accordion-tone-hover: color-mix(
+    in srgb,
+    var(--accordion-tone) 84%,
+    var(--charcoal)
+  );
+  --accordion-line: var(--accordion-tone);
   --accordion-text: var(--text-primary);
   background: var(--accordion-bg);
   border-radius: 26px;
@@ -18,7 +22,7 @@
 }
 
 .accordion-item {
-  border-top: 1px solid var(--accordion-line);
+  border-top: 2px solid var(--accordion-line);
 }
 
 .accordion-row {
@@ -43,7 +47,7 @@
   font-weight: var(--font-medium);
   letter-spacing: 0.04em;
   font-variant-numeric: normal;
-  color: var(--indigo-bold);
+  color: var(--accordion-tone);
 }
 
 .accordion-question {
@@ -64,11 +68,13 @@
   width: 28px;
   height: 28px;
   border-radius: var(--radius-full);
-  background: var(--indigo-soft);
+  background: var(--accordion-tone);
+  transition: background-color var(--motion-hover-duration)
+    var(--motion-ease-standard);
 }
-.accordion-control:hover{
-  background:var(--indigo-bold);
-  transition: var(--motion-duration-slow)
+
+.accordion-row:hover .accordion-control {
+  background: var(--accordion-tone-hover);
 }
 
 .accordion-control::before,
@@ -79,7 +85,7 @@
   left: 50%;
   width: 10px;
   height: 1.5px;
-  background: var(--cherry-bold);
+  background: var(--cream);
   transform: translate(-50%, -50%);
   transition: transform var(--motion-hover-duration) var(--motion-ease-standard);
 }
@@ -93,7 +99,7 @@
 }
 
 /* Smooth open/close without measuring heights: the 0fr/1fr grid-row
-   trick needs the panel always in the DOM (Accordian.tsx never
+   trick needs the panel always in the DOM (Accordion.tsx never
    conditionally unmounts it), which is also what lets aria-hidden --
    not the `hidden` attribute, which would fight the transition --
    correctly pull it from the accessibility tree while collapsed.

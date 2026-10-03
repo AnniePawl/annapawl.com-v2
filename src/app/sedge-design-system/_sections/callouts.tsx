@@ -10,8 +10,9 @@ export default function CalloutsSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="Callouts add non-blocking emphasis inside an article or page. They share the modal’s top label rail and two-tone palette, but stay embedded in the reading flow and only include an action when it genuinely helps."
+      description="Callouts add compact, non-blocking emphasis inside an article or page. I use them in posts to highlight a side note, reminder, related idea, or small update. Their two-tone treatment can combine any surface and accent colors from the palette: the surface color carries into the label rail’s text, while the accent connects the rail and optional action link. Body copy can be colored independently to remain readable on lighter or darker surfaces."
     >
+      <hr className="poster-divider mt-4 mb-0" />
       <CalloutExamples />
     </Section>
   );

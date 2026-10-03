@@ -26,6 +26,19 @@ const USAGE = `<PageHeader
   }}
 />`;
 
+const PUBLICATION_USAGE = `<PageHeader
+  variant="publication"
+  barStart="The Bookshelf"
+  barEnd="← All notes"
+  eyebrow="Notes, CSS art"
+  title="Drawing with Code"
+  description="A record of what I’ve read, what stayed with me, and what I’d happily press into someone else’s hands."
+  meta="Oct 3, 2026 · 4 min read"
+  metaCenter="Filed under: CSS, Illustration, Front-end"
+  metaEnd="Share"
+  colors={{ accent: "var(--red-bold)" }}
+/>`;
+
 export default function PageHeaderSection() {
   return (
     <Section
@@ -71,11 +84,27 @@ export default function PageHeaderSection() {
             headingLevel={3}
           />
         </div>
+
+        <div className="pattern-preview pattern-preview--publication-header">
+          <PageHeader
+            variant="publication"
+            barStart="The Bookshelf"
+            barEnd="← All notes"
+            eyebrow="Notes, CSS art"
+            title="Drawing with Code"
+            description="A record of what I’ve read, what stayed with me, and what I’d happily press into someone else’s hands."
+            meta="Oct 3, 2026 · 4 min read"
+            metaCenter="Filed under: CSS, Illustration, Front-end"
+            metaEnd="Share"
+            colors={{ accent: "var(--red-bold)" }}
+            headingLevel={3}
+          />
+        </div>
       </div>
 
       <hr className="poster-divider" />
       <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
-      <CodeBlock code={USAGE} />
+      <CodeBlock code={`${USAGE}\n\n${PUBLICATION_USAGE}`} />
     </Section>
   );
 }

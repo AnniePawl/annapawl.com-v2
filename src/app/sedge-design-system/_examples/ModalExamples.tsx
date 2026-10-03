@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight } from "lucide-react";
 import Button from "../../../components/ui/Button";
 import Modal, {
   MODAL_COLORWAYS,
@@ -23,8 +22,7 @@ const [open, setOpen] = useState(false);
   onClose={() => setOpen(false)}
   eyebrow="From the garden"
   title="Something new is growing."
-  description="A short, useful message with one clear next step."
-  actionLabel="Take a look"
+  description="A short, useful message that can be dismissed from the top-right corner."
   colorway="sky-coral"
 />
 `;
@@ -35,31 +33,27 @@ const COLORWAY_EXAMPLES: Array<{
   eyebrow: string;
   title: string;
   description: string;
-  actionLabel: string;
 }> = [
   {
     colorway: "pink-emerald",
-    label: "Soft pink + emerald bold",
+    label: "Pink + emerald",
     eyebrow: "From the garden",
     title: "Something new is growing.",
     description: "A small update, ready for a closer look.",
-    actionLabel: "Take a look",
   },
   {
     colorway: "sky-coral",
-    label: "Sky soft + coral bold",
+    label: "Sky + coral",
     eyebrow: "Worth noting",
     title: "A thoughtful interruption.",
     description: "Just enough contrast to earn your attention.",
-    actionLabel: "Keep reading",
   },
   {
     colorway: "moss-cherry",
-    label: "Moss soft + cherry bold",
+    label: "Moss + cherry",
     eyebrow: "A bright idea",
     title: "Save this for later.",
     description: "One clear thought, without the extra fuss.",
-    actionLabel: "Got it",
   },
 ];
 
@@ -72,46 +66,8 @@ export default function ModalExamples() {
 
   return (
     <section>
-      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
-      <CodeBlock code={USAGE} className="mb-8" />
-
-      <span className="poster-label type-eyebrow">Compact previews</span>
-      <div className="modal-preview-grid">
-        {COLORWAY_EXAMPLES.map((example) => (
-          <article
-            className="modal-preview"
-            style={MODAL_COLORWAYS[example.colorway]}
-            key={example.colorway}
-          >
-            <div className="modal-preview-rail">
-              <span className="modal-preview-eyebrow type-eyebrow">
-                {example.eyebrow}
-              </span>
-            </div>
-            <div className="modal-preview-content">
-              <h3 className="modal-preview-title">{example.title}</h3>
-              <p className="modal-preview-description">
-                {example.description}
-              </p>
-              <Button
-                className="modal-preview-action"
-                size="sm"
-                onClick={() => setActiveColorway(example.colorway)}
-              >
-                {example.actionLabel}
-                <ArrowRight
-                  className="modal-preview-action-icon"
-                  aria-hidden="true"
-                />
-              </Button>
-            </div>
-          </article>
-        ))}
-      </div>
-
-      <hr className="poster-divider" />
-
-      <span className="poster-label type-eyebrow">Matching buttons</span>
+      <hr className="poster-divider mt-4 mb-0" />
+      <span className="poster-label type-eyebrow">Try the modal</span>
       <div className="modal-colorway-buttons">
         {COLORWAY_EXAMPLES.map((example) => (
           <Button
@@ -122,10 +78,6 @@ export default function ModalExamples() {
             onClick={() => setActiveColorway(example.colorway)}
           >
             {example.label}
-            <ArrowRight
-              className="colorway-trigger-icon"
-              aria-hidden="true"
-            />
           </Button>
         ))}
       </div>
@@ -139,10 +91,11 @@ export default function ModalExamples() {
           activeExample?.description ??
           "A small update, ready for a closer look."
         }
-        actionLabel={activeExample?.actionLabel ?? "Take a look"}
-        onAction={() => setActiveColorway(null)}
         colorway={activeColorway ?? "pink-emerald"}
       />
+      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
+
+      <CodeBlock code={USAGE} className="mb-8" />
     </section>
   );
 }

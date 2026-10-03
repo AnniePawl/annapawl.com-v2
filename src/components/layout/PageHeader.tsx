@@ -10,21 +10,11 @@ export interface PageHeaderColors {
   titleText?: string;
   descriptionBackground?: string;
   descriptionText?: string;
+  accent?: string;
 }
 
-export default function PageHeader({
-  barStart = "Digital garden",
-  barEnd = "Garden archive",
-  railLabel = "Garden archive",
-  eyebrow,
-  titlePrefix,
-  title,
-  description,
-  meta,
-  colors = {},
-  headingLevel = 1,
-  className,
-}: {
+export interface PageHeaderProps {
+  variant?: "editorial" | "publication";
   barStart?: string;
   barEnd?: string;
   railLabel?: string;
@@ -33,10 +23,29 @@ export default function PageHeader({
   title: string;
   description?: string;
   meta?: ReactNode;
+  metaCenter?: ReactNode;
+  metaEnd?: ReactNode;
   colors?: PageHeaderColors;
   headingLevel?: 1 | 2 | 3;
   className?: string;
-}) {
+}
+
+export default function PageHeader({
+  variant = "editorial",
+  barStart = "Digital garden",
+  barEnd = "Garden archive",
+  railLabel = "Garden archive",
+  eyebrow,
+  titlePrefix,
+  title,
+  description,
+  meta,
+  metaCenter,
+  metaEnd,
+  colors = {},
+  headingLevel = 1,
+  className,
+}: PageHeaderProps) {
   const Heading = headingLevel === 2 ? "h2" : headingLevel === 3 ? "h3" : "h1";
   const style = {
     "--editorial-header-bar-text": colors.barText ?? "var(--charcoal)",
@@ -49,7 +58,43 @@ export default function PageHeader({
       colors.descriptionBackground ?? "var(--mauve-soft)",
     "--editorial-header-description-text":
       colors.descriptionText ?? "var(--cherry-bold)",
+    "--publication-header-accent": colors.accent ?? "var(--red-bold)",
   } as CSSProperties;
+
+  if (variant === "publication") {
+    return (
+      <header className={cx("publication-page-header", className)} style={style}>
+        <div className="publication-page-header-utility">
+          <div>
+            <span className="publication-page-header-collection">{barStart}</span>
+            {description ? (
+              <p className="publication-page-header-description">{description}</p>
+            ) : null}
+          </div>
+          <span className="publication-page-header-back">{barEnd}</span>
+        </div>
+
+        <div className="publication-page-header-stage">
+          {eyebrow ? (
+            <span className="publication-page-header-eyebrow">
+              <span className="publication-page-header-eyebrow-mark" aria-hidden="true" />
+              {eyebrow}
+            </span>
+          ) : null}
+          <Heading className="publication-page-header-title">
+            {title}
+            <span className="publication-page-header-title-mark" aria-hidden="true" />
+          </Heading>
+        </div>
+
+        <div className="publication-page-header-meta">
+          <span>{meta}</span>
+          <span>{metaCenter}</span>
+          <span>{metaEnd}</span>
+        </div>
+      </header>
+    );
+  }
 
   return (
     <header className={cx("editorial-page-header", className)} style={style}>

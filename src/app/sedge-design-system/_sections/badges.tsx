@@ -12,7 +12,10 @@ export default function BadgesSection() {
       icon={meta.icon}
       description="Badges are compact labels for topics, categories, and small bits of garden metadata. They use cream and charcoal by default, while optional background and foreground colors allow lighter or darker treatments. The foreground color is shared by the text and border."
     >
+      <hr className="poster-divider mt-4 mb-0" />
+
       <BadgeExamples />
     </Section>
   );
 }
+

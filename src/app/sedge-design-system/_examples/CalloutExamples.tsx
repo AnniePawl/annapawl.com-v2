@@ -7,8 +7,11 @@ import Callout from "@/components/ui/Callout";
 
 <Callout
   eyebrow="Worth a detour"
-  title="A related garden path."
-  colorway="sky-cherry"
+  colors={{
+    surface: "chocolate-bold",
+    accent: "pink-soft",
+    bodyText: "ivory",
+  }}
   actionLabel="Keep wandering"
   actionHref="/garden"
 >
@@ -19,30 +22,36 @@ import Callout from "@/components/ui/Callout";
 export default function CalloutExamples() {
   return (
     <div>
-      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
-      <CodeBlock code={USAGE} className="mb-8" />
-
       <span className="poster-label type-eyebrow">Examples</span>
       <div className="callout-demo-grid">
         <Callout
           eyebrow="Still growing"
-          title="This note is a work in progress."
-          colorway="pink-emerald"
+          colors={{
+            surface: "pink-soft",
+            accent: "emerald-bold",
+            bodyText: "charcoal",
+          }}
         >
-          The main idea is here; the edges are still getting a little garden
-          maintenance.
+          I’m still testing how this pattern behaves across longer posts. The structure feels right, but the spacing and color pairings may change as I use it more.
         </Callout>
 
         <Callout
           eyebrow="Worth a detour"
-          title="A related garden path."
-          colorway="sky-cherry"
-          actionLabel="Keep wandering"
+          colors={{
+            surface: "sky-soft",
+            accent: "cherry-bold",
+            bodyText: "charcoal",
+          }}
+          actionLabel="Check it out"
           actionHref="#article-layout"
         >
-          Helpful extra context, without interrupting the main idea.
+          I found this resource especially helpful for learning more about accessibility and putting its principles into practice.
         </Callout>
       </div>
+      <hr className="poster-divider mt-4 mb-0" />
+      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
+      <CodeBlock code={USAGE} className="mb-8" />
+
     </div>
   );
 }

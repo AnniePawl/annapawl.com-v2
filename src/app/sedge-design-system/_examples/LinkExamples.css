@@ -17,6 +17,33 @@
   font-size: var(--text-xs);
 }
 
+.link-breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  color: var(--text-primary);
+  font-size: var(--text-xs);
+  list-style: none;
+}
+
+.link-breadcrumbs .text-link {
+  --focus-ring-color: var(--text-primary);
+  color: var(--text-primary);
+  text-decoration-color: currentColor;
+}
+
+.link-breadcrumb-separator {
+  color: var(--text-muted);
+}
+
+.link-breadcrumb-current {
+  color: var(--text-primary);
+  font-weight: var(--font-medium);
+}
+
 @media (width < 40rem) {
   .link-state-grid {
     grid-template-columns: 1fr;

@@ -92,8 +92,8 @@ export const SECTIONS: NavSection[] = [
   { id: "links", title: "Links", icon: Link2, group: "Components" },
   { id: "callouts", title: "Callouts", icon: Info, group: "Components" },
   {
-    id: "accordian",
-    title: "Accordian",
+    id: "accordion",
+    title: "Accordion",
     icon: ListChevronsUpDown,
     group: "Components",
   },

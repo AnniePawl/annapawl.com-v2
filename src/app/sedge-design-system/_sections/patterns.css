@@ -47,6 +47,24 @@
   padding: var(--space-4) var(--space-5);
 }
 
+.pattern-preview--publication-header,
+.pattern-preview--publication {
+  padding: 0.5rem;
+  border: 0;
+  border-radius: 0;
+  background: var(--charcoal);
+}
+
+.pattern-preview--publication-header .publication-page-header {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.pattern-preview--publication .publication-article-layout {
+  width: 100%;
+}
+
 .pattern-preview .article-layout {
   padding-block: var(--space-6);
 }

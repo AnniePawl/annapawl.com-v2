@@ -1,26 +1,47 @@
 import {
-  AnchorHTMLAttributes,
-  ButtonHTMLAttributes,
+  CSSProperties,
   HTMLAttributes,
   forwardRef,
 } from "react";
-import { ArrowRight } from "lucide-react";
 import { cx } from "../../lib/cx";
+import type { PaletteColor } from "./colorTokens";
 
-type CardVariant = "outline" | "soft";
+type CardVariant = "outline" | "filled";
+
+export type CardTone = {
+  background?: PaletteColor;
+  foreground?: PaletteColor;
+  border?: PaletteColor;
+};
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   variant?: CardVariant;
+  tone?: CardTone;
 }
 
 const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
-  { variant = "outline", className, children, ...rest },
+  { variant = "outline", tone, className, children, style, ...rest },
   ref
 ) {
+  const toneStyle = tone
+    ? ({
+        ...(tone.background && {
+          "--card-background": `var(--${tone.background})`,
+        }),
+        ...(tone.foreground && {
+          "--card-foreground": `var(--${tone.foreground})`,
+        }),
+        ...(tone.border && {
+          "--card-border": `var(--${tone.border})`,
+        }),
+      } as CSSProperties)
+    : undefined;
+
   return (
     <div
       ref={ref}
       className={cx("card", `card--${variant}`, className)}
+      style={{ ...toneStyle, ...style }}
       {...rest}
     >
       <div className="card-content">{children}</div>
@@ -30,25 +51,13 @@ const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
 
 export default Card;
 
-export function CardEyebrow({
-  className,
-  children,
-  ...rest
-}: HTMLAttributes<HTMLSpanElement>) {
-  return (
-    <span className={cx("card-eyebrow", "type-eyebrow", className)} {...rest}>
-      {children}
-    </span>
-  );
-}
-
-export function CardHeading({
+export function CardTitle({
   className,
   children,
   ...rest
 }: HTMLAttributes<HTMLHeadingElement>) {
   return (
-    <h3 className={cx("card-heading", className)} {...rest}>
+    <h3 className={cx("card-title", className)} {...rest}>
       {children}
     </h3>
   );
@@ -63,57 +72,5 @@ export function CardBody({
     <p className={cx("card-body", className)} {...rest}>
       {children}
     </p>
-  );
-}
-
-type CardActionCommonProps = {
-  /** Set false for cases that want the label without the trailing arrow. */
-  showArrow?: boolean;
-  className?: string;
-  children?: React.ReactNode;
-};
-
-export type CardActionProps =
-  | (CardActionCommonProps & AnchorHTMLAttributes<HTMLAnchorElement> & { href: string })
-  | (CardActionCommonProps & ButtonHTMLAttributes<HTMLButtonElement> & { href?: undefined });
-
-/** Renders an anchor when `href` is passed and a button otherwise. */
-export function CardAction({
-  showArrow = true,
-  className,
-  children,
-  href,
-  ...rest
-}: CardActionProps) {
-  const classes = cx("card-action", className);
-  const content = (
-    <>
-      {children}
-      {showArrow && (
-        <ArrowRight className="card-action-icon" aria-hidden="true" />
-      )}
-    </>
-  );
-
-  if (href) {
-    return (
-      <a
-        href={href}
-        className={classes}
-        {...(rest as AnchorHTMLAttributes<HTMLAnchorElement>)}
-      >
-        {content}
-      </a>
-    );
-  }
-
-  return (
-    <button
-      type="button"
-      className={classes}
-      {...(rest as ButtonHTMLAttributes<HTMLButtonElement>)}
-    >
-      {content}
-    </button>
   );
 }

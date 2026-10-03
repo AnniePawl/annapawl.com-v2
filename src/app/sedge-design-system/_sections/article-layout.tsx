@@ -1,4 +1,7 @@
-import ArticleLayout from "../../../components/layout/ArticleLayout";
+import ArticleLayout, {
+  ArticleSection,
+} from "../../../components/layout/ArticleLayout";
+import PageHeader from "../../../components/layout/PageHeader";
 import CodeBlock from "../_components/CodeBlock";
 import Section from "../_components/Section";
 import { SECTIONS } from "../_data/sections";
@@ -7,12 +10,33 @@ import "./patterns.css";
 const meta = SECTIONS.find((section) => section.id === "article-layout")!;
 
 const USAGE = `<ArticleLayout
-  eyebrow="Book notes"
-  title="Braiding Sweetgrass"
-  description="Notes on reciprocity, attention, and the living world."
-  meta="Robin Wall Kimmerer · Read in 2026"
+  variant="publication"
+  header={
+    <PageHeader
+      variant="publication"
+      barStart="The Bookshelf"
+      barEnd="← All notes"
+      eyebrow="Notes, CSS art"
+      title="Drawing with Code"
+      description="A record of what I’ve read and what stayed with me."
+      meta="Oct 3, 2026 · 4 min read"
+      metaCenter="Filed under: CSS, Illustration, Front-end"
+      metaEnd="Share"
+      colors={{ accent: "var(--red-bold)" }}
+    />
+  }
+  contents={[
+    { id: "what-is-it", label: "What is drawing with code?", tone: "red-bold" },
+    { id: "the-div", label: "It’s all about the <div>", tone: "indigo-bold" },
+  ]}
+  footerStart="About"
+  footerCenter="Shelves: Fiction, Essays, Poetry, Memoir, Notes"
+  footerEnd="Search"
 >
-  <p>My notes begin here...</p>
+  <p>CSS art lies at the intersection of vector illustration and front-end development.</p>
+  <ArticleSection id="what-is-it" title="What is drawing with code?" tone="red-bold">
+    <p>Article copy...</p>
+  </ArticleSection>
 </ArticleLayout>`;
 
 export default function ArticleLayoutSection() {
@@ -21,25 +45,79 @@ export default function ArticleLayoutSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="The article layout combines the page shell and a quieter article header with a comfortable reading width and steady vertical rhythm. It’s the starting point for blog posts, notes, and other long-form garden paths."
+      description="Article layouts provide different reading structures for different kinds of stories. The publication variant pairs a framed page header with a contents rail, generous reading column, colored section markers, and a quiet utility footer."
     >
-      <div className="pattern-preview">
+      <div className="pattern-preview pattern-preview--publication">
         <ArticleLayout
-          eyebrow="From the garden"
-          title="On collecting tiny ideas"
-          description="A small note about leaving room for thoughts to grow."
-          meta="September 29, 2026 · 4 minute read"
-          headingLevel={3}
+          variant="publication"
+          header={
+            <PageHeader
+              variant="publication"
+              barStart="The Bookshelf"
+              barEnd="← All notes"
+              eyebrow="Notes, CSS art"
+              title="Drawing with Code"
+              description="A record of what I’ve read, what stayed with me, and what I’d happily press into someone else’s hands."
+              meta="Oct 3, 2026 · 4 min read"
+              metaCenter="Filed under: CSS, Illustration, Front-end"
+              metaEnd="Share"
+              colors={{ accent: "var(--red-bold)" }}
+              headingLevel={3}
+            />
+          }
+          contents={[
+            {
+              id: "what-is-it",
+              label: "What is drawing with code?",
+              tone: "red-bold",
+            },
+            {
+              id: "the-div",
+              label: "It’s all about the <div>",
+              tone: "indigo-bold",
+            },
+            {
+              id: "recap",
+              label: "CSS, a little recap",
+              tone: "lilac-soft",
+            },
+            {
+              id: "toolkit",
+              label: "Beginner’s CSS toolkit",
+              tone: "emerald-bold",
+            },
+            { id: "try-it", label: "Try it out", tone: "amber-bold" },
+          ]}
+          footerStart="About"
+          footerCenter="Shelves: Fiction, Essays, Poetry, Memoir, Notes"
+          footerEnd="Search"
         >
           <p>
-            Not every idea arrives fully formed. Some start as a sentence, a
-            question, or a link worth keeping close.
+            CSS art lies at the intersection of vector illustration and
+            front-end development. It involves manipulating &lt;div&gt; HTML
+            elements with CSS to render shapes in the browser.
           </p>
-          <h4>Plant first, organize later</h4>
-          <p>
-            The layout stays out of the way so the writing has room to become
-            whatever it needs to be.
-          </p>
+          <ArticleSection
+            id="what-is-it"
+            title="What is drawing with code?"
+            tone="red-bold"
+          >
+            <p>
+              These shapes are customized by assigning values to properties
+              like height, border-radius, box-shadow, and background-color.
+            </p>
+          </ArticleSection>
+          <ArticleSection
+            id="the-div"
+            title="It’s all about the <div>"
+            tone="indigo-bold"
+          >
+            <p>
+              The &lt;div&gt; element is the building block of every pure CSS
+              composition. A div is simply an empty container used to house
+              other elements and create structure on a web page.
+            </p>
+          </ArticleSection>
         </ArticleLayout>
       </div>
 

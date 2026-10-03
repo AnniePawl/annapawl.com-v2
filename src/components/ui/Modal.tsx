@@ -7,9 +7,8 @@ import {
   useId,
   useRef,
 } from "react";
-import { ArrowRight } from "lucide-react";
+import { X } from "lucide-react";
 import { cx } from "../../lib/cx";
-import Button from "./Button";
 import {
   EDITORIAL_COLORWAYS,
   type EditorialColorway,
@@ -24,14 +23,12 @@ export interface ModalProps {
   eyebrow: string;
   title: string;
   description: ReactNode;
-  actionLabel: ReactNode;
-  onAction?: () => void;
   colorway?: ModalColorway;
   className?: string;
 }
 
 /**
- * A focused, card-like dialog with one clear action. Native <dialog>
+ * A focused, card-like dialog. Native <dialog>
  * provides focus trapping, Escape-to-close, and the backdrop layer.
  */
 export default function Modal({
@@ -40,8 +37,6 @@ export default function Modal({
   eyebrow,
   title,
   description,
-  actionLabel,
-  onAction,
   colorway = "pink-emerald",
   className,
 }: ModalProps) {
@@ -70,11 +65,6 @@ export default function Modal({
     if (!inBounds) onClose();
   };
 
-  const handleAction = () => {
-    if (onAction) onAction();
-    else onClose();
-  };
-
   return (
     <dialog
       ref={ref}
@@ -95,7 +85,7 @@ export default function Modal({
           onClick={onClose}
           aria-label="Close"
         >
-          ✕
+          <X className="modal-close-icon" aria-hidden="true" />
         </button>
       </header>
 
@@ -106,10 +96,6 @@ export default function Modal({
         <p className="modal-description" id={descriptionId}>
           {description}
         </p>
-        <Button className="modal-action" onClick={handleAction}>
-          {actionLabel}
-          <ArrowRight className="modal-action-icon" aria-hidden="true" />
-        </Button>
       </div>
     </dialog>
   );

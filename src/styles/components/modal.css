@@ -8,7 +8,7 @@
   max-height: calc(100vh - var(--space-6) * 2);
   margin: auto;
   padding: 0;
-  overflow: hidden;
+  overflow: visible;
   border: none;
   border-radius: var(--radius-modal);
   background: var(--editorial-surface);
@@ -17,7 +17,7 @@
 }
 
 .modal::backdrop {
-  background: color-mix(in srgb, var(--neutral-1000) 50%, transparent);
+  background: color-mix(in srgb, var(--neutral-1000) 60%, transparent);
 }
 
 .modal[open] {
@@ -47,9 +47,9 @@
 .modal-label-rail {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   min-height: 2.875rem;
   padding: var(--space-2) var(--space-3) var(--space-2) var(--space-5);
+  border-radius: var(--radius-modal) var(--radius-modal) 0 0;
   background: var(--editorial-accent);
   color: var(--editorial-accent-text);
 }
@@ -76,69 +76,50 @@
 
 .modal-description {
   margin: 0;
-  color: color-mix(in srgb, var(--charcoal) 78%, transparent);
+  color: var(--charcoal);
   font-size: var(--text-sm);
   line-height: var(--leading-normal);
 }
 
 .modal-close {
+  --focus-ring-color: var(--editorial-accent);
+  position: absolute;
+  z-index: 1;
+  top: calc(var(--space-2) * -1.5);
+  right: calc(var(--space-2) * -1.5);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 2rem;
   height: 2rem;
   padding: 0;
-  border: none;
+  border: var(--border-md) solid var(--editorial-accent);
   border-radius: var(--radius-pill);
-  background: transparent;
-  color: inherit;
+  background: var(--editorial-surface);
+  color: var(--editorial-accent);
+  box-shadow: var(--shadow-sm);
   cursor: pointer;
-  font-size: var(--text-sm);
   line-height: 1;
   transition:
-    background-color var(--motion-hover-duration) var(--motion-hover-ease),
-    color var(--motion-hover-duration) var(--motion-hover-ease);
+    box-shadow var(--motion-hover-duration) var(--motion-hover-ease),
+    transform var(--motion-hover-duration) var(--motion-hover-ease);
 }
 
 .modal-close:hover {
-  background: color-mix(in srgb, var(--editorial-accent-text) 18%, transparent);
-  color: inherit;
+  background: var(--editorial-surface);
+  color: var(--editorial-accent);
+  box-shadow: var(--shadow-md);
+  transform: rotate(12deg) scale(1.05);
 }
 
-.modal .modal-action {
-  --focus-ring-color: var(--editorial-accent);
-  align-self: flex-end;
-  min-width: 9.75rem;
-  margin-top: var(--space-6);
-  padding-inline: var(--space-5);
-  background: var(--editorial-accent);
-  color: var(--editorial-accent-text);
-  box-shadow: none;
+.modal-close:active {
+  transform: rotate(12deg) scale(0.96);
 }
 
-.modal .modal-action:hover,
-.modal .modal-action[data-state="hover"] {
-  background: var(--editorial-accent-hover);
-  box-shadow: none;
-}
-
-.modal .modal-action:active,
-.modal .modal-action[data-state="pressed"] {
-  background: var(--editorial-accent-hover);
-  box-shadow: none;
-}
-
-/* The action keeps its footprint fixed; only the arrow moves. */
-.modal-action-icon {
-  width: var(--icon-sm);
-  height: var(--icon-sm);
-  flex-shrink: 0;
-  transition: transform var(--motion-hover-duration) var(--motion-hover-ease);
-}
-
-.modal-action:hover .modal-action-icon,
-.modal-action:focus-visible .modal-action-icon {
-  transform: translateX(var(--space-1));
+.modal-close-icon {
+  width: 1rem;
+  height: 1rem;
+  stroke-width: 3;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -147,7 +128,12 @@
     animation: none;
   }
 
-  .modal-action-icon {
+  .modal-close {
     transition: none;
+  }
+
+  .modal-close:hover,
+  .modal-close:active {
+    transform: none;
   }
 }

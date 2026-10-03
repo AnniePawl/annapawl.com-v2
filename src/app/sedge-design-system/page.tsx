@@ -10,7 +10,7 @@ import { SECTIONS } from "./_data/sections";
 import PageShell from "../../components/layout/PageShell";
 
 // Sections
-import AccordianSection from "./_sections/accordian";
+import AccordionSection from "./_sections/accordion";
 import ApproachSection from "./_sections/approach";
 import LogoSection from "./_sections/logo";
 import ColorsSection from "./_sections/colors";
@@ -275,7 +275,7 @@ export default function DesignSystemOverview() {
             <CalloutsSection />
             <CardsSection />
             <ModalsSection />
-            <AccordianSection />
+            <AccordionSection />
             <BadgesSection />
             <TooltipsSection />
             <FormsSection />

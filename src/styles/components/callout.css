@@ -5,8 +5,8 @@
 .callout {
   overflow: hidden;
   border-radius: var(--radius-lg);
-  background: var(--editorial-surface);
-  color: var(--charcoal);
+  background: var(--callout-surface);
+  color: var(--callout-body-text);
 }
 
 .callout-label-rail {
@@ -14,8 +14,8 @@
   align-items: center;
   min-height: 2.75rem;
   padding: var(--space-2) var(--space-5);
-  background: var(--editorial-accent);
-  color: var(--editorial-accent-text);
+  background: var(--callout-accent);
+  color: var(--callout-surface);
 }
 
 .callout-eyebrow {
@@ -26,18 +26,8 @@
   padding: var(--space-5);
 }
 
-.callout-title {
-  margin: 0;
-  color: var(--editorial-heading);
-  font-family: var(--font-heading);
-  font-size: var(--text-lg);
-  font-weight: var(--font-bold);
-  line-height: var(--leading-snug);
-}
-
 .callout-description {
-  margin-top: var(--space-2);
-  color: color-mix(in srgb, var(--charcoal) 78%, transparent);
+  color: var(--callout-body-text);
   line-height: var(--leading-normal);
 }
 
@@ -50,15 +40,15 @@
 }
 
 .callout-action {
-  --focus-ring-color: var(--editorial-accent);
+  --focus-ring-color: var(--callout-accent);
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
   margin-top: var(--space-4);
-  color: var(--editorial-heading);
+  color: var(--callout-accent);
   font-weight: var(--font-semibold);
   text-decoration-line: underline;
-  text-decoration-color: var(--editorial-accent);
+  text-decoration-color: var(--callout-accent);
   text-decoration-thickness: 1px;
   text-decoration-skip-ink: none;
   text-underline-offset: 0.3em;

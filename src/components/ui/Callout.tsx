@@ -1,43 +1,58 @@
-import type { HTMLAttributes, ReactNode } from "react";
+import type { CSSProperties, HTMLAttributes, ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
 import { cx } from "../../lib/cx";
-import {
-  EDITORIAL_COLORWAYS,
-  type EditorialColorway,
-} from "./editorialColorways";
+import type { PaletteColor } from "./colorTokens";
+
+export type CalloutColors = {
+  /** Main content surface; also used for text on the accent rail. */
+  surface: PaletteColor;
+  /** Accent rail background; also used for the title. */
+  accent: PaletteColor;
+  /** Main body copy. Defaults to charcoal. */
+  bodyText?: PaletteColor;
+};
 
 export interface CalloutProps extends HTMLAttributes<HTMLElement> {
   eyebrow: string;
-  title: string;
   children: ReactNode;
-  colorway?: EditorialColorway;
+  colors?: CalloutColors;
   actionLabel?: ReactNode;
   actionHref?: string;
 }
 
+const DEFAULT_COLORS: CalloutColors = {
+  surface: "moss-soft",
+  accent: "cherry-bold",
+  bodyText: "charcoal",
+};
+
 /** A non-blocking editorial aside that shares the modal's two-tone frame. */
 export default function Callout({
   eyebrow,
-  title,
   children,
-  colorway = "moss-cherry",
+  colors = DEFAULT_COLORS,
   actionLabel,
   actionHref,
   className,
   style,
   ...rest
 }: CalloutProps) {
+  const colorStyle = {
+    "--callout-surface": `var(--${colors.surface})`,
+    "--callout-accent": `var(--${colors.accent})`,
+    "--callout-body-text": `var(--${colors.bodyText ?? "charcoal"})`,
+  } as CSSProperties;
+
   return (
     <aside
       {...rest}
       className={cx("callout", className)}
-      style={{ ...EDITORIAL_COLORWAYS[colorway], ...style }}
+      style={{ ...colorStyle, ...style }}
     >
       <div className="callout-label-rail">
         <span className="callout-eyebrow type-eyebrow">{eyebrow}</span>
       </div>
       <div className="callout-content">
-        <h3 className="callout-title">{title}</h3>
         <div className="callout-description">{children}</div>
         {actionLabel && actionHref ? (
           <a className="callout-action focus-ring" href={actionHref}>

@@ -1,0 +1,42 @@
+.accordion-demo {
+  padding-inline: 0;
+}
+
+.accordion-tone-picker {
+  margin: var(--space-5) 0 0;
+  padding: 0;
+  border: 0;
+}
+
+.accordion-tone-picker legend {
+  margin-bottom: var(--space-3);
+}
+
+.accordion-tone-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-5);
+}
+
+.accordion-tone-option .radio-wrapper {
+  padding: 6px 10px;
+  color: var(--cream);
+  background: var(--tone-option-color);
+  border: 1.5px solid var(--tone-option-color);
+  border-radius: var(--radius-pill);
+}
+
+.accordion-tone-option .radio-label {
+  color: var(--cream);
+}
+
+.accordion-tone-option .radio-box,
+.accordion-tone-option .radio-wrapper:hover .radio-box,
+.accordion-tone-option .radio-box:has(.radio-input:checked) {
+  background: transparent;
+  border-color: var(--cream);
+}
+
+.accordion-tone-option .radio-dot {
+  background: var(--cream);
+}

@@ -1,4 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 import CodeBlock from "../_components/CodeBlock";
 import "./LinkExamples.css";
 
@@ -67,6 +68,44 @@ export default function LinkExamples() {
           </a>
         </LinkState>
       </div>
+
+      <hr className="poster-divider mt-4 mb-0" />
+      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Breadcrumbs</h3>
+
+      <nav aria-label="Breadcrumb">
+        <ol className="link-breadcrumbs">
+          <li>
+            <Link
+              className="text-link focus-ring"
+              href="/"
+              data-state="default"
+            >
+              Home
+            </Link>
+          </li>
+          <li className="link-breadcrumb-separator" aria-hidden="true">
+            /
+          </li>
+          <li>
+            <Link
+              className="text-link focus-ring"
+              href="/sedge-design-system"
+              data-state="default"
+            >
+              Design system
+            </Link>
+          </li>
+          <li className="link-breadcrumb-separator" aria-hidden="true">
+            /
+          </li>
+          <li>
+            <span className="link-breadcrumb-current" aria-current="page">
+              Links
+            </span>
+          </li>
+        </ol>
+      </nav>
+
       <hr className="poster-divider mt-4 mb-0" />
       <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
       <CodeBlock code={USAGE} className="mb-8" />
