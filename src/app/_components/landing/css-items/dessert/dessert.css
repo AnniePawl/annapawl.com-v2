@@ -1,0 +1,200 @@
+/* Styles for Dessert.tsx (same folder). CSS-art conversion notes that
+   apply to every css-items stylesheet live at the top of landing.css. */
+
+/* ============================================================
+   Dessert stand — src/components/css-items/dessert
+   ============================================================ */
+
+.dessert-container {
+  --glass-height: 80px;
+  --glass-width: 95px;
+  --cake-height: 27px;
+  --cake-width: 60px;
+  --stand-base-height: 20px;
+  --stand-base-width: 15px;
+  --cake-clr3: #9d8d83;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transform: scale(1.15) translateY(-113px);
+}
+
+.tablet-dessert-container {
+  transform: scale(1.15) translateY(-116px);
+}
+
+.mobile-dessert-container {
+  transform: translateY(-113px);
+}
+
+.tablet-dessert-container .dessert__spiral {
+  visibility: visible;
+}
+
+.dessert__stand-top {
+  display: flex;
+  position: relative;
+  z-index: 5;
+  justify-content: center;
+  height: var(--glass-height);
+  width: var(--glass-width);
+  background: linear-gradient(45deg, transparent 65%, #ffffffb6 80%),
+    radial-gradient(transparent 0 55%, #ffffffb6);
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #ffffff;
+  border-radius: 45% 45% 0 0;
+
+  &::before {
+    content: "";
+    border-radius: 50%;
+    height: calc(var(--glass-width) * 0.25);
+    width: calc(var(--glass-width) * 0.25);
+    border: 2px solid #ffffff;
+    background: linear-gradient(45deg, transparent 35%, #ffffffb6 60%);
+    transform: translateY(calc(var(--glass-height) * -0.3));
+  }
+}
+
+.dessert__stand-base {
+  z-index: 10;
+  display: flex;
+  align-content: center;
+  height: var(--stand-base-height);
+  width: var(--stand-base-width);
+  background: linear-gradient(to right, #5899f4 0 50%, #5899f4 50%);
+  transform: translateY(7px);
+
+  &::before {
+    content: "";
+    position: absolute;
+    height: 6px;
+    width: 30px;
+    background: linear-gradient(to right, #5899f4 0 50%, #5899f4 50%);
+    transform: translateY(var(--stand-base-height))
+      translateX(calc(var(--stand-base-width) / -2));
+    border-radius: 25px 25px 0 0;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: calc(var(--glass-width) * 1.25);
+    height: calc(var(--glass-width) * 0.12);
+    background: radial-gradient(circle at 50% 100%, #5899f4 75%, transparent 35%);
+    background-size: calc(var(--cake-width) / 4);
+    transform: translateY(-11px) translateX(calc(var(--glass-width) * -0.55));
+  }
+}
+
+/* Cake — the source's `border: px solid $cake-clr2;` line (missing a
+   numeric value) is invalid CSS and was silently ignored by every
+   browser anyway; dropped rather than translated. */
+.dessert__base {
+  z-index: 4;
+  transform: scale(0.9) translateY(calc(var(--cake-height) / 1.3));
+  position: absolute;
+  height: var(--cake-height);
+  width: var(--cake-width);
+  border-right: 2px solid var(--cake-clr3);
+  border-left: 2px solid var(--cake-clr3);
+  border-top: 2px solid var(--cake-clr3);
+  border-radius: 2px 2px 0 0;
+  background: linear-gradient(
+      45deg,
+      var(--cake-clr3) 0 25%,
+      transparent 0 75%,
+      var(--cake-clr3) 75%
+    ),
+    linear-gradient(45deg, var(--cake-clr3) 0 25%, transparent 0 75%, var(--cake-clr3) 75%);
+  background-color: #fffaa1;
+  background-size: calc(var(--cake-width) / 3) calc(var(--cake-width) / 3);
+  background-position: 0 0, calc(var(--cake-width) / 6) calc(var(--cake-width) / 6);
+
+  &::before {
+    content: "";
+    display: flex;
+    width: calc(var(--cake-width) * 0.8);
+    height: calc(var(--cake-height) / 2);
+    border-right: 2px solid var(--cake-clr3);
+    border-left: 2px solid var(--cake-clr3);
+    background: linear-gradient(
+      #a9fff6 0 20%,
+      rgb(255, 149, 141) 0 40%,
+      #a9fff6 0 60%,
+      rgb(255, 149, 141) 0 80%,
+      #a9fff6 0 80%
+    );
+    transform: translateX(calc(var(--cake-width) * 0.06))
+      translateY(calc(var(--cake-height) / -1.75));
+  }
+
+  &::after {
+    content: "";
+    display: flex;
+    border-right: 2px solid var(--cake-clr3);
+    border-left: 2px solid var(--cake-clr3);
+    border-top: 2px solid var(--cake-clr3);
+    border-radius: 4px 4px 0 0;
+    width: calc(var(--cake-width) * 0.8);
+    height: calc(var(--cake-height) / 1.8);
+    background: radial-gradient(circle at 50% 0%, rgb(255, 149, 141) 36%, #a9fff6 3%);
+    background-size: calc(var(--cake-width) / 6);
+    transform: translateX(calc(var(--cake-width) * 0.06))
+      translateY(calc(var(--cake-height) / -0.66));
+  }
+}
+
+.dessert__spiral {
+  visibility: hidden;
+  animation: spiral 10s linear infinite;
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  height: calc(var(--cake-height) * 4.7);
+  width: calc(var(--cake-height) * 4.7);
+  z-index: 1;
+  background: radial-gradient(transparent, transparent 65%),
+    conic-gradient(
+      transparent 0% 5%,
+      #ffea61b4 5% 10%,
+      transparent 10% 15%,
+      #ffea61b4 15% 20%,
+      transparent 20% 25%,
+      #ffea61b4 25% 30%,
+      transparent 30% 35%,
+      #ffea61b4 35% 40%,
+      transparent 40% 45%,
+      #ffea61b4 45% 50%,
+      transparent 50% 55%,
+      #ffea61b4 55% 60%,
+      transparent 60% 65%,
+      #ffea61b4 65% 70%,
+      transparent 70% 75%,
+      #ffea61b4 75% 80%,
+      transparent 80% 85%,
+      #ffea61b4 85% 90%,
+      transparent 90% 95%,
+      #ffea61b4 95% 100%
+    );
+}
+
+.dessert-container:hover .dessert__spiral {
+  visibility: visible;
+}
+
+@keyframes spiral {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Reduced motion -- disables this item's animations (hover-triggered
+   and autoplay alike). Source (v1) had no reduced-motion handling. */
+@media (prefers-reduced-motion: reduce) {
+  .dessert__spiral {
+    animation: none !important;
+  }
+}

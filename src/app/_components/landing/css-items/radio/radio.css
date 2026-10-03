@@ -1,0 +1,311 @@
+/* Converted from your latest original radio SCSS attachment. */
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap");
+.radio-top {
+  height: 30px;
+  width: 145px;
+  border-right: 6px solid #7089ac;
+  border-left: 6px solid #7089ac;
+  border-top: 6px solid #7089ac;
+  border-bottom: 3px solid #7089ac;
+  border-radius: 3px 3px 0 0;
+  background-image: repeating-linear-gradient(45deg, #7089ac 0%, #7089ac 1%, transparent 1%, transparent 5%), repeating-linear-gradient(-45deg, #7089ac 0%, #7089ac 1%, #eaf4ff 1%, #eaf4ff 5%);
+}
+
+.radio-top::before,
+.radio-top::after {
+  content: "";
+}
+
+.radio-top::before {
+  position: absolute;
+  height: 2px;
+  width: 116px;
+  border-radius: 30%;
+  background-color: #7089ac;
+  box-shadow: 0px 1px #414141;
+  transform: translateY(-21px) translateX(4.5px) rotate(-14deg);
+}
+
+.radio-top::after {
+  height: 9px;
+  width: 14px;
+  display: flex;
+  background-color: #7089ac;
+  border-radius: 50%;
+  transform: translateY(-9px) translateX(6px);
+}
+
+.radio-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 51px;
+  width: 145px;
+  border-radius: 0 0 2px 2px;
+  border-right: 6px solid #7089ac;
+  border-left: 6px solid #7089ac;
+  border-bottom: 6px solid #7089ac;
+}
+.radio-bottom .radio-display-station {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1px;
+  height: 21px;
+  width: 46.4px;
+  background-image: linear-gradient(#8f8f8f 0 50%, #414141 0 100%);
+  color: white;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.7em;
+}
+.radio-bottom .radio-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  transform: translateY(3px);
+  width: 33%;
+}
+.radio-bottom .radio-button1,
+.radio-bottom .radio-button2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 8.5px;
+  font-size: 6px;
+  background-color: #eaf4ff;
+  font-family: "Roboto Mono", monospace;
+  color: #414141;
+  border-radius: 1px;
+  padding: 3px;
+  width: 15px;
+  border: 1px solid #7089ac;
+}
+.radio-bottom .radio-button1:hover,
+.radio-bottom .radio-button2:hover {
+  background-color: #7089ac;
+  color: #eaf4ff;
+}
+
+.radio-buttons::before,
+.radio-buttons::after {
+  content: "";
+  position: absolute;
+  height: 33px;
+  width: 33.35px;
+  border: 2px solid #7089ac;
+  border-radius: 50%;
+  bottom: 2.32px;
+  background-image: repeating-linear-gradient(45deg, #414141 0%, #414141 2.5%, transparent 2.5%, transparent 10%), repeating-linear-gradient(-45deg, #7089ac 0%, #7089ac 2.5%, #eaf4ff 2.5%, #eaf4ff 10%);
+}
+
+.radio-buttons::before {
+  right: 50px;
+}
+
+.radio-buttons::after {
+  left: 50px;
+}
+
+.radio-button1::before,
+.radio-button2::before {
+  content: "";
+  position: absolute;
+  height: 6px;
+  width: 13.5px;
+  border-radius: 0 0 1px 1px;
+  bottom: -16.5px;
+  background-image: linear-gradient(to right, #7089ac 0 80%, #414141 80%);
+}
+
+.radio-button1::before {
+  left: -35px;
+}
+
+.radio-button2::before {
+  right: -35px;
+}
+
+.radio-button1::after,
+.radio-button2::after {
+  content: "";
+  position: absolute;
+  height: 4.5px;
+  width: 13.5px;
+  border-radius: 1px 1px 0 0;
+  transform: translateY(-67.5px) translateX(30px);
+  background-image: linear-gradient(to right, #7089ac 0 80%, #414141 80%);
+}
+
+.desktop-radio-container,
+.tablet-radio-container {
+  transform: translateY(-89px) scale(1.1);
+}
+
+.mobile-radio-container {
+  transform: scale(0.95) translateY(-91px);
+}
+
+.desktop-radio-container .radio-top,
+.tablet-radio-container .radio-top,
+.mobile-radio-container .radio-top {
+  border-right: 6px solid #7ab1fd;
+  border-left: 6px solid #7ab1fd;
+  border-top: 6px solid #7ab1fd;
+  border-bottom: 3px solid #7ab1fd;
+  background-image: repeating-linear-gradient(45deg, #5796e9 0%, #5796e9 1%, transparent 1%, transparent 5%), repeating-linear-gradient(-45deg, #5796e9 0%, #5796e9 1%, #eaf4ff 1%, #eaf4ff 5%);
+}
+.desktop-radio-container .radio-top::before,
+.tablet-radio-container .radio-top::before,
+.mobile-radio-container .radio-top::before {
+  background-color: #7ab1fd;
+  box-shadow: 0px 1px #8f8f8f;
+}
+.desktop-radio-container .radio-top::after,
+.tablet-radio-container .radio-top::after,
+.mobile-radio-container .radio-top::after {
+  background-color: #7ab1fd;
+}
+.desktop-radio-container .radio-bottom,
+.tablet-radio-container .radio-bottom,
+.mobile-radio-container .radio-bottom {
+  background-color: #ffdfe9;
+  border-right: 6px solid #7ab1fd;
+  border-left: 6px solid #7ab1fd;
+  border-bottom: 6px solid #7ab1fd;
+}
+.desktop-radio-container .radio-bottom .radio-display-station,
+.tablet-radio-container .radio-bottom .radio-display-station,
+.mobile-radio-container .radio-bottom .radio-display-station {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #7ab1fd;
+  background-color: #8f8f8f;
+}
+.desktop-radio-container .radio-bottom .radio-button1,
+.desktop-radio-container .radio-bottom .radio-button2,
+.tablet-radio-container .radio-bottom .radio-button1,
+.tablet-radio-container .radio-bottom .radio-button2,
+.mobile-radio-container .radio-bottom .radio-button1,
+.mobile-radio-container .radio-bottom .radio-button2 {
+  background-color: #5796e9;
+  background-color: #fff67e;
+  font-family: "Roboto Mono", monospace;
+  font-weight: 900;
+  color: #5796e9;
+  color: #414141;
+  border: 1px solid #414141;
+  border: 1.5px solid #5796e9;
+}
+.desktop-radio-container .radio-bottom .radio-button1:hover,
+.desktop-radio-container .radio-bottom .radio-button2:hover,
+.tablet-radio-container .radio-bottom .radio-button1:hover,
+.tablet-radio-container .radio-bottom .radio-button2:hover,
+.mobile-radio-container .radio-bottom .radio-button1:hover,
+.mobile-radio-container .radio-bottom .radio-button2:hover {
+  background-color: #ffdfe9;
+  border: 1px solid #5796e9;
+  color: #5796e9;
+}
+.desktop-radio-container .radio-bottom .radio-button1::after,
+.desktop-radio-container .radio-bottom .radio-button2::after,
+.tablet-radio-container .radio-bottom .radio-button1::after,
+.tablet-radio-container .radio-bottom .radio-button2::after,
+.mobile-radio-container .radio-bottom .radio-button1::after,
+.mobile-radio-container .radio-bottom .radio-button2::after {
+  background-image: linear-gradient(to right, #7ab1fd 0 80%, #414141 80%);
+}
+.desktop-radio-container .radio-bottom .radio-buttons::before,
+.desktop-radio-container .radio-bottom .radio-buttons::after,
+.tablet-radio-container .radio-bottom .radio-buttons::before,
+.tablet-radio-container .radio-bottom .radio-buttons::after,
+.mobile-radio-container .radio-bottom .radio-buttons::before,
+.mobile-radio-container .radio-bottom .radio-buttons::after {
+  border: 2px solid #5796e9;
+  background-image: repeating-linear-gradient(45deg, #5796e9 0%, #5796e9 2.5%, transparent 2.5%, transparent 10%), repeating-linear-gradient(-45deg, #5796e9 0%, #5796e9 2.5%, #eaf4ff 2.5%, #eaf4ff 10%);
+}
+.desktop-radio-container .radio-bottom .radio-button1::before,
+.desktop-radio-container .radio-bottom .radio-button2::before,
+.tablet-radio-container .radio-bottom .radio-button1::before,
+.tablet-radio-container .radio-bottom .radio-button2::before,
+.mobile-radio-container .radio-bottom .radio-button1::before,
+.mobile-radio-container .radio-bottom .radio-button2::before {
+  background-image: linear-gradient(to right, #7ab1fd 0 80%, #414141 80%);
+}
+
+.mobile-radio-container > .radio-top {
+  animation: desktop-speaker-animation1 3s ease infinite;
+}
+
+.mobile-radio-container > .radio-bottom > .radio-buttons::before {
+  animation: desktop-speaker-animation2 3s ease infinite;
+}
+
+.mobile-radio-container > .radio-bottom > .radio-buttons::after {
+  animation: desktop-speaker-animation2 3s ease infinite;
+}
+
+.mobile-radio-container > .radio-top::before {
+  animation: antena-animation 5s infinite;
+}
+
+.tablet-radio-container > .radio-top {
+  animation: desktop-speaker-animation1 3s ease infinite;
+}
+
+.tablet-radio-container > .radio-bottom > .radio-buttons::before {
+  animation: desktop-speaker-animation2 3s ease infinite;
+}
+
+.tablet-radio-container > .radio-bottom > .radio-buttons::after {
+  animation: desktop-speaker-animation2 3s ease infinite;
+}
+
+.tablet-radio-container > .radio-top::before {
+  animation: antena-animation 5s infinite;
+}
+
+.desktop-radio-container:hover > .radio-top {
+  animation: desktop-speaker-animation1 1s ease infinite;
+}
+
+.desktop-radio-container:hover > .radio-bottom > .radio-buttons::before {
+  animation: desktop-speaker-animation2 1s ease infinite;
+}
+
+.desktop-radio-container:hover > .radio-bottom > .radio-buttons::after {
+  animation: desktop-speaker-animation2 1s ease infinite;
+}
+
+.desktop-radio-container:hover > .radio-top::before {
+  animation: antena-animation 3s infinite;
+}
+
+@keyframes antena-animation {
+  50% {
+    width: 116px;
+    transform: translateY(-25.5px) translateX(6px) rotate(-21deg);
+  }
+}
+@keyframes speaker-animation1 {
+  50% {
+    background-image: repeating-linear-gradient(45deg, #5796e9 0%, #5796e9 1.5%, transparent 1.5%, transparent 5%), repeating-linear-gradient(-45deg, #5796e9 0%, #5796e9 1.5%, #eaf4ff 1.5%, #eaf4ff 5%);
+  }
+}
+@keyframes speaker-animation2 {
+  50% {
+    background-image: repeating-linear-gradient(45deg, #414141 0%, #414141 4.5%, transparent 4.5%, transparent 13%), repeating-linear-gradient(-45deg, #414141 0%, #414141 4.5%, #eaf4ff 4.5%, #eaf4ff 13%);
+  }
+}
+@keyframes desktop-speaker-animation1 {
+  50% {
+    background-image: repeating-linear-gradient(45deg, #5796e9 0%, #5796e9 1.5%, transparent 1.5%, transparent 5%), repeating-linear-gradient(-45deg, #5796e9 0%, #5796e9 1.5%, #eaf4ff 1.5%, #eaf4ff 5%);
+  }
+}
+@keyframes desktop-speaker-animation2 {
+  50% {
+    background-image: repeating-linear-gradient(45deg, #5796e9 0%, #5796e9 4.5%, transparent 4.5%, transparent 13%), repeating-linear-gradient(-45deg, #5796e9 0%, #5796e9 4.5%, #eaf4ff 4.5%, #eaf4ff 13%);
+  }
+}

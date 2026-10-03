@@ -1,0 +1,118 @@
+/* Original shared reset, scoped to the clock */
+.clock,
+.clock *,
+.clock::before,
+.clock::after,
+.clock *::before,
+.clock *::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.clock {
+  transform: translateY(-61px);
+  height: 55px;
+  width: 110px;
+  border: 2px solid #5796e9;
+  font-family: monospace;
+  color: white;
+  font-size: 1.15em;
+  font-weight: bold;
+  background-color: #fff896;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+
+  /* Optional automatic animation:
+  animation: alarm-mobile 1s infinite;
+  */
+}
+
+.clock:hover {
+  animation: alarm 0.1s infinite;
+}
+
+/* Side button */
+.clock::before {
+  content: "";
+  position: absolute;
+  transform: translateX(57.894737px);
+  background-image: repeating-linear-gradient(
+    #5796e9 0 10%,
+    #fff896 0 15%
+  );
+  height: 27.5px;
+  width: 6.111111px;
+  border-radius: 0 2px 2px 0;
+}
+
+/* Top buttons */
+.clock::after {
+  content: "";
+  position: absolute;
+  height: 3.666667px;
+  width: 27.5px;
+  background-image: linear-gradient(
+    to right,
+    #ff92e2 0 40%,
+    transparent 0 60%,
+    #ff92e2 0 100%
+  );
+  transform: translateY(-29.255319px) translateX(-27.5px);
+}
+
+/* Clock display */
+.clock p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95.652174px;
+  font-family: Monaco, Consolas, "Liberation Mono", monospace;  
+  font-size:14px;
+  border: 5px solid #292929;
+  font-weight:bold;
+  border-radius: 2px;
+  padding: 3%;
+  background:
+    linear-gradient(
+      to right,
+      transparent 0 64%,
+      #292929 0 67%,
+      transparent 0 100%
+    ),
+    linear-gradient(
+      #9b9b9b 0 50%,
+      #4d4d4d 0 100%
+    );
+}
+
+/* Base */
+.clock p::before {
+  content: "";
+  position: absolute;
+  height: 6.111111px;
+  width: 91.666667px;
+  background-color: #5796e9;
+  transform: translateY(30.555556px);
+}
+
+@keyframes alarm-mobile {
+  35% {
+    transform: translateY(-61px) rotate(10deg) scale(0.93);
+  }
+
+  65% {
+    transform: translateY(-61px) rotate(-10deg) scale(0.93);
+  }
+}
+
+@keyframes alarm {
+  35% {
+    transform: translateY(-61px) rotate(10deg);
+  }
+
+  65% {
+    transform: translateY(-61px) rotate(-10deg);
+  }
+}

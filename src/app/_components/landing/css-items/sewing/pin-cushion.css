@@ -1,0 +1,100 @@
+/* Styles for PinCushion.tsx and Pin.tsx (same folder). CSS-art conversion notes that
+   apply to every css-items stylesheet live at the top of landing.css. */
+
+/* ---- Pin cushion + pins ---- */
+
+.pin-cushion-container {
+  transform: scale(0.85) translateY(1px);
+}
+
+.pin-cushion {
+  height: 6px;
+  width: 50px;
+  position: relative;
+  border-radius: 1px;
+  background-color: #fffefb;
+  box-shadow: 0 3px #414141;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    height: 22.5px;
+    box-shadow: 0 4px #ff6e6e;
+    width: 45px;
+    background-color: #ffcbe9;
+    border-radius: 10em 10em 0 0;
+    transform: translateY(-27px) translateX(2.4px);
+  }
+}
+
+.pin {
+  position: relative;
+  z-index: 5;
+  margin-right: 8.5px;
+  height: 20px;
+  width: 1px;
+  background-image: linear-gradient(to bottom, gray, #cfcfcf);
+
+  &::before {
+    position: absolute;
+    display: flex;
+    content: "";
+    height: 4px;
+    width: 4px;
+    border-radius: 50%;
+    background-color: #fc93d0;
+    border: 0.1em solid #ff7cc8;
+    transform: translateX(-1.4px) translateY(-4px);
+  }
+}
+
+.pins {
+  display: flex;
+  z-index: 5;
+  position: absolute;
+  justify-content: space-around;
+  transform: translateY(-32px);
+}
+
+.pin:nth-child(1) {
+  transform: rotate(-35deg) translateY(5px);
+}
+.pin:nth-child(2) {
+  transform: rotate(-20deg);
+}
+.pin:nth-child(3) {
+  transform: rotate(-9deg) translateY(-3px);
+}
+.pin:nth-child(4) {
+  transform: rotate(3deg) translateY(-3px);
+}
+.pin:nth-child(5) {
+  transform: rotate(20deg) translateY(-1px);
+}
+.pin:nth-child(6) {
+  transform: rotate(35deg) translateY(5px);
+}
+
+.pin-cushion-container:hover .pins .pin::before {
+  animation: pin-animation 0.5s infinite;
+}
+.mobile-pin-cushion .pins .pin::before,
+.tablet-pin-cushion .pins .pin::before {
+  animation: pin-animation 2s infinite;
+}
+
+@keyframes pin-animation {
+  50% {
+    background-color: #7ab1fd;
+    border: 0.1em solid #2165c6;
+  }
+}
+
+/* Reduced motion -- disables this item's animations (hover-triggered
+   and autoplay alike). Source (v1) had no reduced-motion handling. */
+@media (prefers-reduced-motion: reduce) {
+  .pins .pin::before {
+    animation: none !important;
+  }
+}

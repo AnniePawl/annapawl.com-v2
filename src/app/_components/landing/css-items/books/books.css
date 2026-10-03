@@ -1,0 +1,236 @@
+/* Styles for Books.tsx (same folder). CSS-art conversion notes that
+   apply to every css-items stylesheet live at the top of landing.css. */
+
+/* ============================================================
+   Books (horizontal stack) — src/components/css-items/books
+   ============================================================ */
+
+.books-container {
+  /* Base constants, shared by every .book--N below. */
+  --book-height: 22px;
+  --book-border-radius: 2px;
+  --book-width: calc(var(--book-height) * 4);
+  --book-pages: #fffefa;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.tablet-books-container,
+.desktop-books-container {
+  transform: translateY(-139px);
+}
+
+.mobile-books-container {
+  transform: scale(0.9) translateY(-126px);
+}
+
+.book {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--book-height);
+  width: var(--book-width);
+  border-radius: 2px;
+}
+
+/* Book 1 — color set below is the one that's actually visible: the
+   source declared a duller base color per book here, then immediately
+   overrode every one of them with a brighter "desktop" palette via a
+   higher-specificity descendant selector applied to all three
+   breakpoints. Porting straight to the color that always won, rather
+   than keeping two layers where the first never shows. */
+.book--1 {
+  position: relative;
+  z-index: 5;
+  margin-left: -3px;
+  background-color: #aa90e7;
+  height: calc(var(--book-height) * 0.8);
+  width: calc(var(--book-width) * 0.8);
+  border-top-left-radius: var(--book-border-radius);
+  border-bottom-left-radius: var(--book-border-radius);
+
+  &::after {
+    content: "";
+    height: calc(var(--book-height) * 0.5);
+    width: calc(var(--book-width) * 0.99);
+    border-top-left-radius: calc(var(--book-border-radius) * 0.5);
+    border-bottom-left-radius: calc(var(--book-border-radius) * 0.5);
+    margin-left: 4%;
+    background-image: repeating-linear-gradient(
+      var(--book-pages) 0 2.5px,
+      lightgray 2.5px 4px
+    );
+  }
+}
+
+.book--2 {
+  background-color: #5796e9;
+  border-top-left-radius: var(--book-border-radius);
+  border-bottom-left-radius: var(--book-border-radius);
+  margin-right: 1.25%;
+  position: relative;
+  z-index: 4;
+
+  &::after {
+    content: "";
+    background-image: repeating-linear-gradient(
+      var(--book-pages) 0 3px,
+      lightgray 3px 4.5px
+    );
+    border-top-left-radius: calc(var(--book-border-radius) * 0.5);
+    border-bottom-left-radius: calc(var(--book-border-radius) * 0.5);
+    height: calc(var(--book-height) * 0.75);
+    width: calc(var(--book-width) * 0.99);
+    margin-left: 3%;
+  }
+
+  &::before {
+    content: "";
+    margin-right: 50%;
+    height: calc(var(--book-height) * 0.4);
+    position: absolute;
+    border-left: 4px solid #414141;
+    border-right: 4px solid #414141;
+    border-bottom: 4px solid transparent;
+  }
+}
+
+.book--3 {
+  position: relative;
+  z-index: 3;
+  margin-left: 1%;
+  width: calc(var(--book-width) * 1.1);
+  justify-content: space-around;
+  background-image: linear-gradient(#ffe5aa 0 60%, #ffc876 60% 40%);
+
+  &::before {
+    content: "";
+    height: calc(var(--book-height) * 0.6);
+    width: calc(var(--book-width) * 0.3);
+    background-image: linear-gradient(#c4c5ff 0 65%, #9d9ee7 65% 100%);
+  }
+
+  &::after {
+    content: "";
+    height: var(--book-height);
+    width: calc(var(--book-width) * 0.2);
+    background-image: linear-gradient(#c4c5ff 0 60%, #9d9ee7 60% 100%);
+    border-top-right-radius: var(--book-border-radius);
+    border-bottom-right-radius: var(--book-border-radius);
+    margin-right: calc(var(--book-width) * -0.23);
+  }
+}
+
+.book--4 {
+  position: relative;
+  z-index: 2;
+  width: calc(var(--book-width) * 1.2);
+  height: calc(var(--book-height) * 1.15);
+  border-right: 9px double #414141;
+  border-left: 9px double #414141;
+  background-image: linear-gradient(#b4ffdc 0 60%, #7cedb8 60% 100%);
+
+  &::before {
+    content: "";
+    border-left: 10px double #414141;
+    height: calc(var(--book-height) * 1.15);
+    padding: 2px;
+  }
+
+  &::after {
+    content: "";
+    border-left: 3px solid #414141;
+    height: calc(var(--book-height) * 1.15);
+  }
+}
+
+.book--5 {
+  width: calc(var(--book-width) * 1.4);
+  height: calc(var(--book-height) * 1.2);
+  background-image: linear-gradient(#92c1ff 0 65%, #5796e9 65% 100%);
+
+  &::before {
+    content: "";
+    margin-right: calc(var(--book-width) * 0.45);
+    border-right: 14px double #fff67f;
+    height: calc(var(--book-height) * 1.2);
+  }
+
+  &::after {
+    content: "";
+    border-radius: 1px;
+    width: calc(var(--book-width) * 0.35);
+    height: calc(var(--book-height) * 0.8);
+    background-image: linear-gradient(#fffcd7 0 65%, #fff67f 65% 100%);
+  }
+}
+
+/* Desktop: hover-triggered, one book at a time with a staggered delay.
+   Tablet/mobile: no hover available, so it plays automatically on a
+   loop instead -- same "reuse the illustration, change the trigger for
+   touch" idea used throughout. Source generated these five rules with a
+   Sass @for loop over a 6-entry delay list; unrolled by hand here since
+   the port isn't bringing in a Sass compiler. */
+.books-container:hover .book--1 {
+  animation: books-animation 1s 0s forwards;
+}
+.books-container:hover .book--2 {
+  animation: books-animation 1s 0.2s forwards;
+}
+.books-container:hover .book--3 {
+  animation: books-animation 1s 0.4s forwards;
+}
+.books-container:hover .book--4 {
+  animation: books-animation 1s 0.6s forwards;
+}
+.books-container:hover .book--5 {
+  animation: books-animation 1s 0.8s forwards;
+}
+
+.tablet-books-container .book--1,
+.mobile-books-container .book--1 {
+  animation: books-animation2 6s 0s infinite;
+}
+.tablet-books-container .book--2,
+.mobile-books-container .book--2 {
+  animation: books-animation2 6s 0.2s infinite;
+}
+.tablet-books-container .book--3,
+.mobile-books-container .book--3 {
+  animation: books-animation2 6s 0.4s infinite;
+}
+.tablet-books-container .book--4,
+.mobile-books-container .book--4 {
+  animation: books-animation2 6s 0.6s infinite;
+}
+.tablet-books-container .book--5,
+.mobile-books-container .book--5 {
+  animation: books-animation2 6s 0.8s infinite;
+}
+
+@keyframes books-animation {
+  100% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes books-animation2 {
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Reduced motion -- disables this item's animations (hover-triggered
+   and autoplay alike). Source (v1) had no reduced-motion handling. */
+@media (prefers-reduced-motion: reduce) {
+  .book--1,
+  .book--2,
+  .book--3,
+  .book--4,
+  .book--5 {
+    animation: none !important;
+  }
+}
