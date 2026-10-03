@@ -16,6 +16,10 @@
   box-shadow: var(--shadow-modal);
 }
 
+.modal--lg {
+  width: min(720px, calc(100vw - var(--space-6) * 2));
+}
+
 .modal::backdrop {
   background: color-mix(in srgb, var(--neutral-1000) 60%, transparent);
 }
@@ -79,6 +83,10 @@
   color: var(--charcoal);
   font-size: var(--text-sm);
   line-height: var(--leading-normal);
+}
+
+.modal-body {
+  margin-top: var(--space-5);
 }
 
 .modal-close {

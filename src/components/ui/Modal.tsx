@@ -17,14 +17,18 @@ import {
 export type ModalColorway = EditorialColorway;
 export const MODAL_COLORWAYS = EDITORIAL_COLORWAYS;
 
+type ModalSize = "default" | "lg";
+
 export interface ModalProps {
   open: boolean;
   onClose: () => void;
   eyebrow: string;
   title: string;
   description: ReactNode;
+  children?: ReactNode;
   colorway?: ModalColorway;
   className?: string;
+  size?: ModalSize;
 }
 
 /**
@@ -37,8 +41,10 @@ export default function Modal({
   eyebrow,
   title,
   description,
+  children,
   colorway = "pink-emerald",
   className,
+  size = "default",
 }: ModalProps) {
   const ref = useRef<HTMLDialogElement>(null);
   const titleId = useId();
@@ -68,7 +74,7 @@ export default function Modal({
   return (
     <dialog
       ref={ref}
-      className={cx("modal", className)}
+      className={cx("modal", size === "lg" && "modal--lg", className)}
       style={colorwayStyle}
       onClose={onClose}
       onCancel={onClose}
@@ -93,9 +99,10 @@ export default function Modal({
         <h3 className="modal-title" id={titleId}>
           {title}
         </h3>
-        <p className="modal-description" id={descriptionId}>
+        <div className="modal-description" id={descriptionId}>
           {description}
-        </p>
+        </div>
+        {children ? <div className="modal-body">{children}</div> : null}
       </div>
     </dialog>
   );
