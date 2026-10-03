@@ -1,49 +1,45 @@
-import { Asterisk } from "lucide-react";
 import CodeBlock from "../_components/CodeBlock";
-import { Squiggle } from "../_components/Doodle";
-
-// Same line at every size, rather than a different snippet per row — it's
-// what makes a type scale actually readable as a scale (compare the same
-// words getting bigger/smaller, not different sentences).
-const SAMPLE_LINE = "Good type, good vibes";
+import "./TypographyExamples.css";
 
 const SCALE: {
   className: string;
   metaLines: string[];
   sample: string;
 }[] = [
-  {
-    className: "h-display",
-    metaLines: ["Space Grotesk", "80px", "700", "-0.03em tracking"],
-    sample: SAMPLE_LINE,
-  },
-  {
-    className: "h1",
-    metaLines: ["Space Grotesk", "60px", "700", "-0.03em tracking"],
-    sample: SAMPLE_LINE,
-  },
-  {
-    className: "h2",
-    metaLines: ["Space Grotesk", "36px", "700", "-0.02em tracking"],
-    sample: SAMPLE_LINE,
-  },
-  {
-    className: "h3",
-    metaLines: ["Inter", "24px", "600", "normal tracking"],
-    sample: SAMPLE_LINE,
-  },
-  {
-    className: "h4",
-    metaLines: ["Inter", "20px", "600", "normal tracking"],
-    sample: SAMPLE_LINE,
-  },
-];
+    {
+      className: "h-display",
+      metaLines: ["Inter", "60–112px", "680", "-0.02em tracking"],
+      sample: "Squirrel",
+    },
+    {
+      className: "h1",
+      metaLines: ["Inter", "40–60px", "700", "-0.03em tracking"],
+      sample: "Saucy squirrel",
+    },
+    {
+      className: "h2",
+      metaLines: ["Inter", "30–36px", "700", "-0.02em tracking"],
+      sample: "Seriously saucy squirrel",
+    },
+    {
+      className: "h3",
+      metaLines: ["Inter", "20–24px", "600", "normal tracking"],
+      sample: "One seriously saucy squirrel",
+    },
+    {
+      className: "h4",
+      metaLines: ["Inter", "18–20px", "600", "normal tracking"],
+      sample: "One seriously saucy little squirrel",
+    },
+  ];
 
 const WEIGHTS = [
+  { weight: "var(--font-light)", label: "Light · 300" },
   { weight: "var(--font-regular)", label: "Regular · 400" },
   { weight: "var(--font-medium)", label: "Medium · 500" },
   { weight: "var(--font-semibold)", label: "Semibold · 600" },
   { weight: "var(--font-bold)", label: "Bold · 700" },
+  { weight: "var(--font-extrabold)", label: "Extra Bold · 800" },
 ];
 
 const TRACKING = [
@@ -54,34 +50,50 @@ const TRACKING = [
 
 const USAGE = `
 /* implementation classes — foundations/typography.css */
-<h1 className="h-display">Sedge Design System</h1>
+<h1 className="h-display">Sedge</h1>
 <h1 className="h1">Section heading</h1>
 <h2 className="h2">Subsection heading</h2>
-<p>Body copy — the base <p> style, no class needed.</p>
+<p>Body copy uses the global paragraph style</p>
+<span className="type-eyebrow">Lil uppercase moment</span>
+<p className="type-supporting">Small, compact, extra line height</p>
+<span className="type-nav">Navigation label</span>
 `;
 
 export default function TypographyExamples() {
   return (
     <>
-      {/* Intro */}
-      <p>
-        I agonize over fonts more than I&rsquo;d like to admit. The right
-        typeface can completely change the personality of a page, so
-        choosing one somehow feels like a v big d. Right now I&rsquo;m
-        drawn to clean, modern sans serifs with just enough character to
-        keep things interesting — but I&rsquo;ll probably change my mind
-        next week.
-      </p>
-      <p>
-        Right now that&rsquo;s Space Grotesk for headings, paired with Inter for
-        body copy, which stays quiet and does the reading work. Still
-        testing — no promises this sticks.
-      </p>
+      <hr className="poster-divider" />
+
+      {/* Typeface */}
+      <div className="typo-typeface-section">
+        <span className="poster-label type-eyebrow">Typeface</span>
+        <p className="typo-typeface-name">Inter</p>
+        <span className="typo-typeface-caption">
+          Used everywhere, from display headings to body copy.
+        </span>
+      </div>
+
+      <hr className="poster-divider" />
+
+      {/* Weight */}
+      <div>
+        <span className="poster-label type-eyebrow">Weight</span>
+        <div className="typo-weight-row">
+          {WEIGHTS.map(({ weight, label }) => (
+            <div className="typo-weight-item" key={label}>
+              <p className="typo-weight-sample" style={{ fontWeight: weight }}>
+                Petrichor
+              </p>
+              <span className="typo-weight-label">{label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
 
       <hr className="poster-divider" />
 
       {/* Scale */}
-      <span className="poster-label">Scale</span>
+      <span className="poster-label type-eyebrow">Scale</span>
       <div className="typo-scale-list">
         <div className="typo-scale-rail" aria-hidden="true" />
         {SCALE.map(({ className, metaLines, sample }) => (
@@ -101,56 +113,38 @@ export default function TypographyExamples() {
             <div className="typo-scale-meta">16px / 400 / Inter</div>
           </div>
           <span className="typo-scale-dot" aria-hidden="true" />
-          <p className="typo-scale-sample">{SAMPLE_LINE}</p>
-        </div>
-      </div>
-
-      <hr className="poster-divider" />
-
-      {/* Typeface + Weight */}
-      <div className="typo-grid-2">
-        <div>
-          <span className="poster-label">Typeface</span>
-          <p className="typo-typeface-name">Space Grotesk</p>
-          <span className="typo-typeface-caption">
-            — headings only (Display, H1, H2).
-          </span>
-          <p className="typo-typeface-name" style={{ marginTop: "var(--space-2)" }}>
-            Inter
+          <p className="typo-scale-sample">
+            One seriously saucy little squirrel, last seen fleeing the bird feeder.
           </p>
-          <span className="typo-typeface-caption">
-            — everything else.
-            <Squiggle />
-          </span>
         </div>
 
-        <div style={{ position: "relative" }}>
-          <span className="poster-label">Weight</span>
-          <div className="typo-weight-row">
-            {WEIGHTS.map(({ weight, label }) => (
-              <div key={label}>
-                <p className="typo-weight-sample" style={{ fontWeight: weight }}>
-                  Playful
-                </p>
-                <span className="typo-weight-label">{label}</span>
-              </div>
-            ))}
-
-            <svg
-              className="typo-burst"
-              viewBox="0 0 200 200"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M100,10 L117.2,58.4 L163.6,36.4 L141.6,82.8 L190,100 L141.6,117.2 L163.6,163.6 L117.2,141.6 L100,190 L82.8,141.6 L36.4,163.6 L58.4,117.2 L10,100 L58.4,82.8 L36.4,36.4 L82.8,58.4 Z"
-                stroke="currentColor"
-                strokeWidth="3"
-                strokeLinejoin="round"
-              />
-            </svg>
-            <span className="typo-burst-label">for now!</span>
+        <div className="typo-scale-row">
+          <div>
+            <code className="typo-scale-class">.type-supporting</code>
+            <div className="typo-scale-meta">13px / 400 / 1.7 leading</div>
           </div>
+          <span className="typo-scale-dot" aria-hidden="true" />
+          <p className="type-supporting typo-scale-sample">
+            One seriously saucy little squirrel, last seen fleeing the bird feeder. Armed with audacity and possibly an acorn. Do not attempt to apprehend—suspect is extremely squirrely.
+          </p>
+        </div>
+
+        <div className="typo-scale-row">
+          <div>
+            <code className="typo-scale-class">.type-eyebrow</code>
+            <div className="typo-scale-meta">12px / 600 / 0.12em tracking</div>
+          </div>
+          <span className="typo-scale-dot" aria-hidden="true" />
+          <p className="type-eyebrow typo-scale-sample">Nut job</p>
+        </div>
+
+        <div className="typo-scale-row">
+          <div>
+            <code className="typo-scale-class">.type-nav</code>
+            <div className="typo-scale-meta">14px / 500 / 1.5 leading</div>
+          </div>
+          <span className="typo-scale-dot" aria-hidden="true" />
+          <p className="type-nav typo-scale-sample">Foundations</p>
         </div>
       </div>
 
@@ -159,7 +153,7 @@ export default function TypographyExamples() {
       {/* Tracking + Usage */}
       <div className="typo-grid-2">
         <div>
-          <span className="poster-label">Tracking</span>
+          <span className="poster-label type-eyebrow">Tracking</span>
           <div className="typo-tracking-row">
             {TRACKING.map(({ value, label }) => (
               <div key={label}>
@@ -167,7 +161,7 @@ export default function TypographyExamples() {
                   className="typo-tracking-sample"
                   style={{ fontSize: "var(--text-lg)", letterSpacing: value }}
                 >
-                  SEDGE DESIGN SYSTEM
+                  Rubber Ducky
                 </p>
                 <span className="typo-tracking-label">{label}</span>
               </div>
@@ -176,26 +170,11 @@ export default function TypographyExamples() {
         </div>
 
         <div>
-          <span className="poster-label">Usage</span>
+          <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
           <CodeBlock code={USAGE} />
         </div>
       </div>
 
-      <hr className="poster-divider" />
-
-      {/* Footer */}
-      <div className="typo-poster-footer">
-        <p className="typo-poster-footer-note">
-          <Asterisk size={14} />
-          This is a living system. Type choices, sizes, and scales will
-          evolve as the site (and my taste) evolves.
-        </p>
-
-        <span className="typo-poster-aside">
-          ask me again next week
-          <Squiggle />
-        </span>
-      </div>
     </>
   );
 }

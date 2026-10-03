@@ -440,21 +440,3 @@ textarea.input:focus-visible {
   font-size: var(--text-sm);
   color: var(--text-primary);
 }
-
-
-/* =========================================================
-   Docs demo
-========================================================= */
-
-.form-demo-grid {
-  display: grid;
-  gap: var(--space-5);
-
-  max-width: 440px;
-}
-
-.form-demo-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-5);
-}

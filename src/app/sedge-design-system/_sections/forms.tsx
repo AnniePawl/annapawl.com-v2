@@ -12,6 +12,8 @@ export default function FormsSection() {
       icon={meta.icon}
       description="Forms should feel clear, familiar, and easy to move through. Shared styles for inputs, labels, focus, and feedback keep things consistent while leaving room for a little personality where it fits."
     >
+      <hr className="poster-divider mt-4 mb-0" />
+      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Example</h3>
       <FormExamples />
     </Section>
   );

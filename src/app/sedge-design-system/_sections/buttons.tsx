@@ -9,7 +9,8 @@ export default function ButtonsSection() {
     <Section id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="Buttons show up everywhere, so they need to feel consistent without all looking the same. Shared structure and interaction states keep them familiar and predictable, while flexible colors, shapes, and details leave room for the occasional quirky one.">
+      description="Buttons use a compact pill shape and come in three sizes. The default pairs soft indigo with charcoal and can include an optional icon, such as an arrow. Like other components in the system, buttons can be customized with background and foreground color tokens, offering the flexibility to match the mood of each page or experience.">
+      <hr className="poster-divider mt-4 mb-0" />
       <ButtonStates />
     </Section>
   );

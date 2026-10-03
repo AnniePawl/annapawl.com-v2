@@ -1,57 +1,48 @@
 import Badge, { type BadgeTone } from "../../../components/ui/Badge";
 import CodeBlock from "../_components/CodeBlock";
+import "./BadgeExamples.css";
 
 const USAGE = `
 import Badge from "@/components/ui/Badge";
 
-<Badge>Neutral</Badge>
-<Badge variant="accent">Accent</Badge>
-<Badge variant="success">Success</Badge>
-<Badge variant="warning">Warning</Badge>
-<Badge variant="danger">Danger</Badge>
-
-// Tone — bold outlined pill, for category/tag labels
-<Badge tone="pink">Design</Badge>
+<Badge>Field note</Badge>
+<Badge tone="moss">Currently reading</Badge>
+<Badge tone={{ background: "pink-soft", foreground: "emerald-bold" }}>
+  Tiny obsession
+</Badge>
 `;
 
 const TONE_EXAMPLES: { label: string; tone: BadgeTone }[] = [
-  { label: "Design", tone: "pink" },
-  { label: "Code", tone: "orange" },
-  { label: "Books", tone: "yellow" },
-  { label: "Embroidery", tone: "green" },
-  { label: "Random", tone: "mint" },
-  { label: "Recs", tone: "sky" },
-  { label: "Ideas", tone: "blue" },
-  { label: "Media", tone: "indigo" },
-  { label: "Play", tone: "violet" },
+  {
+    label: "Favorites",
+    tone: { background: "moss-soft", foreground: "cherry-bold" },
+  },
+  {
+    label: "Tiny obsession",
+    tone: { background: "pink-soft", foreground: "emerald-bold" },
+  },
+  {
+    label: "Worth a detour",
+    tone: { background: "sky-soft", foreground: "cherry-bold" },
+  },
 ];
 
 export default function BadgeExamples() {
   return (
     <section style={{ maxWidth: 720 }}>
-      <CodeBlock code={USAGE} className="mb-8" />
-
-      <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">
-        Semantic
-      </p>
-      <div className="badge-demo-row mb-8">
-        <Badge>Neutral</Badge>
-        <Badge variant="accent">Accent</Badge>
-        <Badge variant="success">Success</Badge>
-        <Badge variant="warning">Warning</Badge>
-        <Badge variant="danger">Danger</Badge>
-      </div>
-
-      <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">
-        Tones — category / tag labels
-      </p>
+     <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Examples</h3>
       <div className="badge-demo-row">
+        <Badge>Field note</Badge>
         {TONE_EXAMPLES.map(({ label, tone }) => (
-          <Badge key={tone} tone={tone}>
+          <Badge key={label} tone={tone}>
             {label}
           </Badge>
         ))}
       </div>
+       <hr className="poster-divider mt-4 mb-0" />
+       <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
+      <CodeBlock code={USAGE} className="mb-8" />
+
     </section>
   );
 }

@@ -1,14 +1,16 @@
 "use client";
 
-import { CSSProperties, useState } from "react";
-import { Cloud, Info, Leaf, Sparkles, Sun } from "lucide-react";
+import { useState } from "react";
 import Button from "../../../components/ui/Button";
-import Modal, { type ModalTone } from "../../../components/ui/Modal";
+import Modal, {
+  MODAL_COLORWAYS,
+  type ModalColorway,
+} from "../../../components/ui/Modal";
 import CodeBlock from "../_components/CodeBlock";
+import "./ModalExamples.css";
 
 const USAGE = `
 import { useState } from "react";
-import { Sparkles } from "lucide-react";
 import Modal from "@/components/ui/Modal";
 
 const [open, setOpen] = useState(false);
@@ -18,48 +20,62 @@ const [open, setOpen] = useState(false);
 <Modal
   open={open}
   onClose={() => setOpen(false)}
-  title="Modal title"
-  icon={Sparkles}
-  tone="pink"
->
-  <p>Modal body content.</p>
-</Modal>
+  eyebrow="From the garden"
+  title="Something new is growing."
+  description="A short, useful message that can be dismissed from the top-right corner."
+  colorway="sky-coral"
+/>
 `;
 
-// Each trigger button below is a soft-tinted, tone-outlined swatch (see
-// .tone-trigger in modal.css) previewing its own modal's tone — pick one,
-// see it carried through icon, divider, and both actions.
-const TONE_EXAMPLES: { tone: ModalTone; icon: typeof Sparkles; label: string }[] = [
-  { tone: "yellow", icon: Sun, label: "Yellow" },
-  { tone: "mint", icon: Leaf, label: "Mint" },
-  { tone: "sky", icon: Cloud, label: "Sky" },
-  { tone: "pink", icon: Sparkles, label: "Pink" },
-  { tone: "neutral", icon: Info, label: "Neutral" },
+const COLORWAY_EXAMPLES: Array<{
+  colorway: ModalColorway;
+  label: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+}> = [
+  {
+    colorway: "pink-emerald",
+    label: "Pink + emerald",
+    eyebrow: "From the garden",
+    title: "Something new is growing.",
+    description: "A small update, ready for a closer look.",
+  },
+  {
+    colorway: "sky-coral",
+    label: "Sky + coral",
+    eyebrow: "Worth noting",
+    title: "A thoughtful interruption.",
+    description: "Just enough contrast to earn your attention.",
+  },
+  {
+    colorway: "moss-cherry",
+    label: "Moss + cherry",
+    eyebrow: "A bright idea",
+    title: "Save this for later.",
+    description: "One clear thought, without the extra fuss.",
+  },
 ];
 
 export default function ModalExamples() {
-  const [activeTone, setActiveTone] = useState<(typeof TONE_EXAMPLES)[number] | null>(null);
+  const [activeColorway, setActiveColorway] =
+    useState<ModalColorway | null>(null);
+  const activeExample = COLORWAY_EXAMPLES.find(
+    ({ colorway }) => colorway === activeColorway
+  );
 
   return (
-    <section style={{ maxWidth: 720 }}>
-      <CodeBlock code={USAGE} className="mb-8" />
-
-      <p className="mb-3 text-sm font-medium text-zinc-600">
-        Tones — a little color for every context
-      </p>
-      <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-        {TONE_EXAMPLES.map((example) => (
+    <section>
+      <hr className="poster-divider mt-4 mb-0" />
+      <span className="poster-label type-eyebrow">Try the modal</span>
+      <div className="modal-colorway-buttons">
+        {COLORWAY_EXAMPLES.map((example) => (
           <Button
-            key={example.tone}
+            key={example.colorway}
             variant="secondary"
-            className="tone-trigger"
-            style={
-              {
-                "--tone-accent": `var(--${example.tone}-bold)`,
-                "--tone-accent-soft": `var(--${example.tone}-soft)`,
-              } as CSSProperties
-            }
-            onClick={() => setActiveTone(example)}
+            className="colorway-trigger"
+            style={MODAL_COLORWAYS[example.colorway]}
+            onClick={() => setActiveColorway(example.colorway)}
           >
             {example.label}
           </Button>
@@ -67,30 +83,19 @@ export default function ModalExamples() {
       </div>
 
       <Modal
-        open={activeTone !== null}
-        onClose={() => setActiveTone(null)}
-        title="Modal title"
-        icon={activeTone?.icon}
-        tone={activeTone?.tone}
-      >
-        <p>
-          This is the modal body. Dismiss it with the close button, the
-          Escape key, or by clicking the backdrop.
-        </p>
-        <div
-          style={{
-            display: "flex",
-            gap: 12,
-            marginTop: 24,
-            justifyContent: "flex-end",
-          }}
-        >
-          <Button variant="secondary" onClick={() => setActiveTone(null)}>
-            Cancel
-          </Button>
-          <Button onClick={() => setActiveTone(null)}>Confirm</Button>
-        </div>
-      </Modal>
+        open={activeColorway !== null}
+        onClose={() => setActiveColorway(null)}
+        eyebrow={activeExample?.eyebrow ?? "From the garden"}
+        title={activeExample?.title ?? "Something new is growing."}
+        description={
+          activeExample?.description ??
+          "A small update, ready for a closer look."
+        }
+        colorway={activeColorway ?? "pink-emerald"}
+      />
+      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
+
+      <CodeBlock code={USAGE} className="mb-8" />
     </section>
   );
 }

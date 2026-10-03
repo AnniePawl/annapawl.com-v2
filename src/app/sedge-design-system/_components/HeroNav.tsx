@@ -1,90 +1,87 @@
 import type { NavSection, SectionGroup } from "../_data/sections";
 import { cx } from "../../../lib/cx";
-import Shape from "../../../components/ui/Shape";
+import HomeLogo from "../../../components/ui/HomeLogo";
+import ThemeToggle from "./ThemeToggle";
+import "./logo.css";
 
-// Top nav for the hero — the reference this was built from uses its own
-// nav bar (logo + Intro/Foundations/Components pills) instead of a
-// sidebar, sitting above the docs app. The pills below map onto the same
-// three groups the sidebar/GroupHeading already use, so clicking one
-// jumps to that group's first section exactly like a sidebar item would.
-const NAV_GROUPS: SectionGroup[] = ["Intro", "Foundations", "Components", "Resources"];
+
+const NAV_GROUPS: SectionGroup[] = ["Intro", "Foundations", "Components", "Patterns"];
+
+type HeroNavProps = {
+  sections: NavSection[];
+  activeId: string;
+  onSelect: (id: string) => void;
+  onScrollToTop: () => void;
+};
 
 export default function HeroNav({
   sections,
   activeId,
   onSelect,
-}: {
-  sections: NavSection[];
-  activeId: string;
-  onSelect: (id: string) => void;
-}) {
+  onScrollToTop,
+}: HeroNavProps) {
   const activeGroup = sections.find((s) => s.id === activeId)?.group;
 
   return (
-    <header className="sticky top-0 z-20 border-b border-[color-mix(in_srgb,var(--text-primary)_10%,transparent)] bg-[#fffcf7]/95 backdrop-blur-sm">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4">
+    <header className="sticky top-0 z-20 border-b border-[color-mix(in_srgb,var(--text-primary)_10%,transparent)] bg-[var(--bg-default)] backdrop-blur-sm">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-3 md:px-6 py-3 md:py-4 sm:gap-6">
         <div className="flex items-center gap-3">
-          {/* Logo mark — a single orange "bloom," swapped in for the
-              old Rubik's-cube-style 3x3 facelet grid. First pass used
-              `scallop`, but that reads more like a rounded cog/cloud
-              than an actual flower — swapped to `bloom`, a new Shape
-              variant (see Shape.tsx) built specifically as a 6-petal
-              flower silhouette, so it actually reads as a bloom rather
-              than a generic soft shape. Reusing a Shape primitive here
-              (rather than a one-off SVG) keeps the logo in the same
-              visual language as the hero's own shape cluster. Solid
-              `-bold` orange, not `-soft`, so it reads as a mark rather
-              than a soft UI fill at this small a size. Sized a touch
-              bigger than the old grid mark (h-7 → h-8) since 6 petals
-              need a little more room to read clearly at logo scale. */}
-          <Shape
-            variant="bloom"
-            className="h-8 w-8 text-orange-bold"
-            aria-hidden="true"
-          />
-          <span className="flex items-baseline gap-2">
-            <span className="h-display text-xl">Sedge</span>
-            <span aria-hidden="true" className="text-[var(--border-subtle)]">
-              |
+          {/* Logo-->Home */}
+          <HomeLogo />
+          {/* Copy-->Top of page */}
+          <a
+            href="#top"
+            className="sedge-wordmark-link focus-ring"
+            onClick={(e) => {
+              e.preventDefault();
+              onScrollToTop();
+            }}
+          >
+            <span className="flex items-baseline gap-2">
+              <span className="sedge-wordmark-title">Sedge</span>
+              <span aria-hidden="true" className="text-[var(--border-subtle)]">
+                |
+              </span>
+              <span className="sedge-wordmark-subtitle">
+                Design System
+              </span>
             </span>
-            <span className="text-sm text-[var(--text-secondary)]">
-              Design System
-            </span>
-          </span>
+          </a>
         </div>
 
-        <nav
-          aria-label="Section groups"
-          className="hidden items-center gap-1 md:flex"
-        >
-          {NAV_GROUPS.map((group) => {
-            const target = sections.find((s) => s.group === group);
-            const isActive = activeGroup === group;
+        <div className="flex items-center gap-2 md:gap-4">
+          <nav
+            aria-label="Section groups"
+            className="hidden items-center gap-1 md:flex"
+          >
+            {NAV_GROUPS.map((group) => {
+              const target = sections.find((s) => s.group === group);
+              const isActive = activeGroup === group;
 
-            return (
-              <button
-                key={group}
-                type="button"
-                onClick={() => target && onSelect(target.id)}
-                className={cx(
-                  // Hover is a soft-purple pill (--violet-soft), distinct
-                  // from the active pill's --indigo-soft — was a generic
-                  // neutral --bg-subtle gray, which is what read as
-                  // "weird" here (the pill shape itself was already
-                  // right). Kept text on --text-primary on hover too, to
-                  // match the readable contrast active already has,
-                  // rather than leaving the lighter --text-secondary.
-                  "rounded-[var(--radius-pill)] px-4 py-2 text-sm font-medium transition",
-                  isActive
-                    ? "bg-indigo-soft text-[var(--text-primary)]"
-                    : "text-[var(--text-secondary)] hover:bg-indigo-soft hover:text-[var(--text-primary)]"
-                )}
-              >
-                {group}
-              </button>
-            );
-          })}
-        </nav>
+              return (
+                <button
+                  key={group}
+                  type="button"
+                  onClick={() => target && onSelect(target.id)}
+                  className={cx(
+                    "sedge-group-nav-link type-nav focus-ring",
+                    isActive
+                      ? "sedge-group-nav-link--active"
+                      : "sedge-group-nav-link--inactive"
+                  )}
+                >
+                  {group}
+                </button>
+              );
+            })}
+          </nav>
+
+          <span
+            aria-hidden="true"
+            className="theme-toggle-divider hidden md:block"
+          />
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import { Check, Copy } from "lucide-react";
 import { cx } from "../../../lib/cx";
 
@@ -32,7 +32,7 @@ export default function CodeBlock({
   return (
     <div
       className={cx("relative rounded-lg overflow-hidden bg-zinc-800", className)}
-     
+      style={{ "--cursor-dot-color": "var(--indigo-soft)" } as CSSProperties}
     >
       <button
         type="button"
@@ -42,7 +42,12 @@ export default function CodeBlock({
       >
         {copied ? <Check size={14} /> : <Copy size={14} />}
       </button>
-      <pre className="overflow-x-auto p-4 pr-12 text-xs leading-relaxed">
+      {/* data-lenis-prevent: horizontal code scroll is independent of
+          the page -- see SmoothScrollProvider.tsx. */}
+      <pre
+        className="overflow-x-auto p-4 pr-12 text-xs leading-relaxed"
+        data-lenis-prevent
+      >
         <code className="font-mono text-zinc-100"
         style={{ color: "var(--indigo-soft)" }}>{code.trim()}</code>
       </pre>

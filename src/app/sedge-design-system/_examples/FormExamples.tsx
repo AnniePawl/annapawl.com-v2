@@ -12,6 +12,7 @@ import {
   FieldLabel,
 } from "../../../components/ui/FormField";
 import CodeBlock from "../_components/CodeBlock";
+import "./FormExamples.css";
 
 const USAGE = `
 import { FormField, FieldLabel, FieldHint } from "@/components/ui/FormField";
@@ -42,8 +43,6 @@ export default function FormExamples() {
 
   return (
     <section style={{ maxWidth: 720 }}>
-      <CodeBlock code={USAGE} className="mb-8" />
-
       <div className="form-demo-grid">
         <FormField>
           <FieldLabel htmlFor="email">Identify yourself</FieldLabel>
@@ -93,6 +92,10 @@ export default function FormExamples() {
 
         <Checkbox id="terms" label="I read the tiny words" />
       </div>
+      <hr className="poster-divider mt-4 mb-0" />
+      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
+       <CodeBlock code={USAGE} className="mb-8" />
+
     </section>
   );
 }

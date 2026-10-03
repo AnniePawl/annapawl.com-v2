@@ -21,12 +21,34 @@ html {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Sitewide horizontal-overflow guard (added after a mobile overscroll
+     report on the sedge-design-system page). This used to be
+     `overflow-x: hidden`, on the theory that hiding only the x axis
+     (never `overflow` shorthand, both axes) would leave `position:
+     sticky` alone -- it doesn't: per the CSS Overflow spec, setting
+     overflow-x to anything other than `visible` forces a `visible`
+     overflow-y to compute as `auto` too, so `overflow-x: hidden` alone
+     still turns html/body into a scroll container and still breaks
+     sticky descendants. That's exactly what was happening to
+     SidebarNav's `sticky top-24` (a long-tracking sticky sidebar is far
+     more likely to visibly break from this than HeroNav/MobileNav's
+     short top:0 stickiness, which can still look fine even inside a
+     wonky nested scroll container). `overflow-x: clip` fixes this
+     properly: it's exempted from that same forcing rule, so overflow-y
+     stays `visible` and html/body never becomes a second scroll
+     container in the first place. Still a safety net on top of fixing
+     the actual offending element(s); it clips anything that slips past
+     its own component's own bounds rather than letting it push the
+     whole page wider than the viewport. */
+  overflow-x: clip;
 }
 
 body {
   margin: 0;
   background-color: var(--bg-default);
   color: var(--text-primary);
+  overflow-x: clip;
+  width: 100%;
 }
 
 /* Box sizing reset */

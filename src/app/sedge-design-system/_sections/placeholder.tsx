@@ -15,7 +15,7 @@ export default function PlaceholderSection({
   return (
     <Section id={id} heading={heading} icon={icon}>
       {children ?? (
-        <p className="text-zinc-600">
+        <p className="text-[var(--text-secondary)]">
           Coming soon — I’ll document this once the pattern is solid in the UI.
         </p>
       )}

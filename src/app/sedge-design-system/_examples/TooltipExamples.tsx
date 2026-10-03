@@ -1,121 +1,81 @@
-"use client";
-
-import { CSSProperties, useState } from "react";
-import Button from "../../../components/ui/Button";
-import Tooltip, { TooltipTone } from "../../../components/ui/Tooltip";
+import { CircleHelp } from "lucide-react";
+import Tooltip from "../../../components/ui/Tooltip";
 import CodeBlock from "../_components/CodeBlock";
+import "./TooltipExamples.css";
 
 const USAGE = `
+import { CircleHelp } from "lucide-react";
 import Tooltip from "@/components/ui/Tooltip";
 
-<Tooltip label="Tooltip on top" side="top">
-  <Button variant="secondary">Hover me</Button>
+<Tooltip
+  label="Counts finished books only"
+  side="top"
+  tone={{
+    background: "sky-soft",
+    foreground: "cherry-bold",
+  }}
+>
+  <span className="label-with-info">
+    Reading goal
+    <CircleHelp aria-hidden="true" />
+  </span>
 </Tooltip>
 
-<Tooltip label="Tinted tooltip" tone="violet">
-  <Button variant="secondary">Hover me</Button>
+<Tooltip
+  label="The Left Hand of Darkness — Ursula K. Le Guin"
+  side="bottom"
+  tone={{
+    background: "sky-soft",
+    foreground: "cherry-bold",
+  }}
+>
+  <span className="truncated-title">The Left Hand of Darkness…</span>
 </Tooltip>
 `;
 
-// Same 11-hue set as Card's/Badge's own tone pickers.
-const TONES: TooltipTone[] = [
-  "pink",
-  "red",
-  "orange",
-  "yellow",
-  "lime",
-  "mint",
-  "green",
-  "sky",
-  "blue",
-  "indigo",
-  "violet",
-];
-
 export default function TooltipExamples() {
-  const [tone, setTone] = useState<TooltipTone>("mint");
-
   return (
     <section style={{ maxWidth: 960 }}>
-      <CodeBlock code={USAGE} className="mb-8" />
+      <h3 className="type-eyebrow tooltip-examples-heading">Examples</h3>
 
-      {/* Two plain, locally-styled panels — not the Card component. Anna:
-          "update UI for tooltip... dont add 'cards' but make sections." */}
-      <div className="tooltip-panels">
-        <div className="tooltip-panel">
-          <span className="tooltip-panel-label">Placement</span>
-          <p className="tooltip-panel-desc">
-            Tooltips can appear above or below the trigger.
-          </p>
-
-          {/* Anna: "instead of having to see tooltips on hover- simply
-              show it by default and remove hover funtionality bc its
-              just an example." These two are illustration only, so the
-              bubble is forced open (tooltip-wrapper--static) instead of
-              needing a real hover/focus. */}
-          <div className="tooltip-demo-row">
-            <div className="tooltip-demo-cell">
-              <Tooltip
-                label="You found the tooltip!"
-                side="top"
-                className="tooltip-wrapper--static"
-              >
-                <Button variant="secondary">Top Example</Button>
-              </Tooltip>
-            </div>
-
-            <div className="tooltip-demo-cell">
-              <Tooltip
-                label="Psst... down here."
-                side="bottom"
-                className="tooltip-wrapper--static"
-              >
-                <Button variant="secondary">Bottom Example</Button>
-              </Tooltip>
-            </div>
-          </div>
+      <div className="tooltip-demo-row">
+        <div className="tooltip-demo-cell">
+          <Tooltip
+            label="Counts finished books only"
+            side="top"
+            tone={{
+              background: "sky-soft",
+              foreground: "cherry-bold",
+            }}
+            className="tooltip-wrapper--static"
+          >
+            <span className="tooltip-info-trigger">
+              Reading goal
+              <CircleHelp aria-hidden="true" />
+            </span>
+          </Tooltip>
         </div>
 
-        <div className="tooltip-panel">
-          <span className="tooltip-panel-label">Try a tone</span>
-          <p className="tooltip-panel-desc">
-            Same tooltip, different color. Pick a tone to preview it live.
-          </p>
-
-          <div className="tooltip-demo-row">
-            <Tooltip label={`This is ${tone}`} tone={tone}>
-              <Button variant="secondary">Hover me</Button>
-            </Tooltip>
-          </div>
-
-          <hr className="tooltip-panel-divider" />
-
-          <span className="tooltip-panel-sublabel">Tone</span>
-          <div
-            className="tooltip-tone-picker"
-            role="radiogroup"
-            aria-label="Tooltip tone"
+        <div className="tooltip-demo-cell">
+          <Tooltip
+            label="The Left Hand of Darkness — Ursula K. Le Guin"
+            side="bottom"
+            tone={{
+              background: "sky-soft",
+              foreground: "cherry-bold",
+            }}
+            className="tooltip-wrapper--static"
           >
-            {TONES.map((t) => (
-              <button
-                key={t}
-                type="button"
-                role="radio"
-                aria-checked={tone === t}
-                aria-label={t}
-                className={
-                  "tooltip-tone-swatch" +
-                  (tone === t ? " tooltip-tone-swatch--selected" : "")
-                }
-                style={
-                  { "--swatch-color": `var(--${t}-bold)` } as CSSProperties
-                }
-                onClick={() => setTone(t)}
-              />
-            ))}
-          </div>
+            <span className="tooltip-truncated-trigger">
+              The Left Hand of Darkness…
+            </span>
+          </Tooltip>
         </div>
       </div>
+      <hr className="poster-divider mt-4 mb-0" />
+      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
+      <CodeBlock code={USAGE} className="mb-8" />
+
     </section>
   );
 }

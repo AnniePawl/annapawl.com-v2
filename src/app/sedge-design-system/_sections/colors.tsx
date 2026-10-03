@@ -1,30 +1,39 @@
-import PosterSection from "../_components/PosterSection";
-import { PosterNote } from "../_components/Doodle";
+import Section from "../_components/Section";
 import ColorSwatchesGrid from "../_components/ColorSwatchesGrid";
+import { Laugh } from "lucide-react";
 import { SECTIONS } from "../_data/sections";
+
 
 const meta = SECTIONS.find((s) => s.id === "colors")!;
 
 export default function ColorsSection() {
   return (
-    <PosterSection id={meta.id} heading={meta.title} icon={meta.icon}>
-      <div style={{ position: "relative" }}>
+    <Section id={meta.id} heading={meta.title} icon={meta.icon}>
+      <div className="sedge-section-intro">
         <p>
-          These are the colors that make me happy. Yes, I realize there
-          are probably more than a traditional design system would
-          recommend, but that&rsquo;s kind of the point — I&rsquo;m making
-          the rules here. The palette is intentionally expansive: less
-          about limiting what I can use and more about giving me a whole
-          world of color to pull from. Bold and soft variations let the
-          mood shift from moment to moment while keeping everything part
-          of the same visual world.
+          These are the colors that make me happy. Yes, there are a lot of
+          them... I’m making the rules here{" "}
+          <Laugh
+            aria-hidden="true"
+            className="icon-sm inline-block align-[-0.125em] text-[var(--indigo-bold)]"
+          />
+          <br />I want a whole world of color to pull from as my digital garden
+          grows.
         </p>
-
+        <p>
+          Bright, bubbly shades bring the energy, while a more subdued palette
+          adds a little moodiness. Throughout the system, colors mix and match
+          in playful duets, and many components include a tone option for extra
+          flexibility—leaving room for special moments and a bit of
+          choose-your-own-adventure energy. Each color comes in soft and bold
+          variations, making it easy to dial things up or down without losing
+          cohesion.
+        </p>
       </div>
-
-      <div style={{ marginTop: "var(--space-6)" }}>
+      <hr className="poster-divider mt-4 mb-0" />
+      <div className="mt-[var(--space-6)]">
         <ColorSwatchesGrid />
       </div>
-    </PosterSection>
+    </Section>
   );
 }

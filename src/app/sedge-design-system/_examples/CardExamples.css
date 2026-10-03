@@ -1,0 +1,28 @@
+.card-demo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5);
+}
+
+.card-demo-item {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.card-demo-item .card {
+  flex: 1;
+}
+
+.card-demo-label {
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  text-align: center;
+}
+
+@media (width < 40rem) {
+  .card-demo-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

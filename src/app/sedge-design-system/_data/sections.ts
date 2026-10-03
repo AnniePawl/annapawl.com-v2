@@ -15,14 +15,21 @@ import {
   MessageSquareText,
   FormInput,
   Brain,
+  FileText,
+  Sparkles,
+  ListChevronsUpDown,
+  Link2,
+  Info,
+  Clover,
 } from "lucide-react";
 
-export type SectionGroup = "Intro" | "Foundations" | "Components";
+export type SectionGroup = "Intro" | "Foundations" | "Components" | "Patterns";
 
 export const SECTION_GROUPS: SectionGroup[] = [
   "Intro",
   "Foundations",
   "Components",
+  "Patterns",
 ];
 
 export type NavSection = {
@@ -36,9 +43,10 @@ export type NavSection = {
 
 // Order: Intro (the "why" before the specifics), then Foundations (the
 // token-level building blocks — color, type, spacing, layout, shape,
-// elevation, motion, accessibility), then Components (the whole component
-// library, built on top of those foundations). Sidebar/mobile nav and the
-// section headings in the main column both read this same grouping —
+// elevation, motion, accessibility), then Components (the component
+// library), then Patterns (repeatable page structures composed from both).
+// Sidebar/mobile nav and the section headings in the main column read this
+// same grouping —
 // keep new sections declared inside the right block rather than appended
 // at the end.
 export const SECTIONS: NavSection[] = [
@@ -46,6 +54,7 @@ export const SECTIONS: NavSection[] = [
   // "At a glance" card now live in the Hero instead (see Hero.tsx), so
   // Approach is the first real Intro section in the flow.
   { id: "approach", title: "Approach", icon: Brain, group: "Intro" },
+  { id: "logo", title: "Logo", icon: Clover, group: "Intro" },
 
   // Foundations
   { id: "colors", title: "Colors", icon: Palette, group: "Foundations" },
@@ -55,6 +64,7 @@ export const SECTIONS: NavSection[] = [
     icon: CaseSensitive,
     group: "Foundations",
   },
+  { id: "icons", title: "Icons", icon: Sparkles, group: "Foundations" },
   { id: "spacing", title: "Spacing", icon: Ruler, group: "Foundations" },
   {
     id: "layout",
@@ -79,6 +89,14 @@ export const SECTIONS: NavSection[] = [
     icon: SquareMousePointer,
     group: "Components",
   },
+  { id: "links", title: "Links", icon: Link2, group: "Components" },
+  { id: "callouts", title: "Callouts", icon: Info, group: "Components" },
+  {
+    id: "accordion",
+    title: "Accordion",
+    icon: ListChevronsUpDown,
+    group: "Components",
+  },
   { id: "cards", title: "Cards", icon: CreditCard, group: "Components" },
   {
     id: "modals",
@@ -94,4 +112,24 @@ export const SECTIONS: NavSection[] = [
     group: "Components",
   },
   { id: "forms", title: "Forms", icon: FormInput, group: "Components" },
+
+  // Patterns
+  {
+    id: "page-shell",
+    title: "Page Shell",
+    icon: LayoutTemplate,
+    group: "Patterns",
+  },
+  {
+    id: "page-header",
+    title: "Page Header",
+    icon: CaseSensitive,
+    group: "Patterns",
+  },
+  {
+    id: "article-layout",
+    title: "Article Layout",
+    icon: FileText,
+    group: "Patterns",
+  },
 ];

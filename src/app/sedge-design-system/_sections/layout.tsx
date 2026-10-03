@@ -19,9 +19,22 @@ export default function LayoutSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="Layout tokens here are focused on reading width rather than page structure. They keep text blocks comfortable to read across different contexts, while the larger responsive layout is handled directly with Tailwind.
-"
+      description="Layout starts with a consistent page frame and comfortable reading widths. The page shell handles the shared maximum width and responsive gutters, measure tokens keep text easy to read, and Tailwind handles one-off responsive grids."
     >
+      <hr className="poster-divider mt-4 mb-0" />
+      <span className="poster-label type-eyebrow">Page frame</span>
+      <div style={{ display: "flex", gap: "var(--space-3)" }}>
+        <code style={{ fontSize: "var(--text-xs)", color: "var(--text-primary)" }}>
+          --page-max-width
+        </code>
+        <span style={{ fontSize: "var(--text-xs)", color: "var(--text-secondary)" }}>
+          80rem — shared outer page width
+        </span>
+      </div>
+
+      <hr className="poster-divider" />
+
+      <span className="poster-label type-eyebrow">Reading measures</span>
       <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
         {MEASURES.map(({ token, label }) => (
           <div key={token}>
