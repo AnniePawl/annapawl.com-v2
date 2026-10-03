@@ -1,0 +1,73 @@
+/* ---- Callout component ----
+   Inline, non-blocking companion to the modal. Both share a two-tone
+   surface and top label rail, while callouts omit dialog controls. */
+
+.callout {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--callout-surface);
+  color: var(--callout-body-text);
+}
+
+.callout-label-rail {
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: var(--space-2) var(--space-5);
+  background: var(--callout-accent);
+  color: var(--callout-surface);
+}
+
+.callout-eyebrow {
+  color: inherit;
+}
+
+.callout-content {
+  padding: var(--space-5);
+}
+
+.callout-description {
+  color: var(--callout-body-text);
+  line-height: var(--leading-normal);
+}
+
+.callout-description > :first-child {
+  margin-top: 0;
+}
+
+.callout-description > :last-child {
+  margin-bottom: 0;
+}
+
+.callout-action {
+  --focus-ring-color: var(--callout-accent);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  color: var(--callout-accent);
+  font-weight: var(--font-semibold);
+  text-decoration-line: underline;
+  text-decoration-color: var(--callout-accent);
+  text-decoration-thickness: 1px;
+  text-decoration-skip-ink: none;
+  text-underline-offset: 0.3em;
+}
+
+.callout-action-icon {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  flex-shrink: 0;
+  transition: transform var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+.callout-action:hover .callout-action-icon,
+.callout-action:focus-visible .callout-action-icon {
+  transform: translateX(var(--space-1));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .callout-action-icon {
+    transition: none;
+  }
+}

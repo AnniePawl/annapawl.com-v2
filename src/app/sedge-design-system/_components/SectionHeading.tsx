@@ -1,0 +1,29 @@
+import type { LucideIcon } from "lucide-react";
+import { SECTIONS } from "../_data/sections";
+
+export default function SectionHeading({
+  id,
+  heading,
+  icon: Icon,
+}: {
+  id: string;
+  heading: string;
+  icon: LucideIcon;
+}) {
+  const group = SECTIONS.find((s) => s.id === id)?.group;
+
+  return (
+    <div className="sedge-section-heading">
+      <h2 className="sedge-section-heading-title">
+        {heading}
+        <span className="sedge-section-heading-dot" aria-hidden="true">
+          .
+        </span>
+      </h2>
+      <span className="sedge-section-heading-group type-eyebrow">
+        <Icon className="sedge-section-heading-icon" aria-hidden="true" />
+        {group}
+      </span>
+    </div>
+  );
+}

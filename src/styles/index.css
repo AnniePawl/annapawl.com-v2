@@ -1,2 +1,9 @@
-@import "./foundations/index.css";
-@import "./components/index.css";
+/* layer(...) assigns these into Tailwind's own base/components layers
+   (declared by `@import "tailwindcss"` in globals.css) instead of leaving
+   them unlayered. Unlayered CSS always beats layered CSS regardless of
+   specificity, which is why a bare `p { font-size: ... }` in
+   foundations/typography.css was silently overriding every Tailwind
+   `text-*` utility on every <p> — this puts custom CSS back into the
+   normal cascade so utility classes can override it as expected. */
+@import "./foundations/index.css" layer(base);
+@import "./components/index.css" layer(components);

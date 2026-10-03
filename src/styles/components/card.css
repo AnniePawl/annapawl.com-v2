@@ -1,26 +1,56 @@
+/* ---- Card component ----
+   Two static surfaces: an indigo outline and a bold indigo fill. */
 
-.ds-card {
-  background: var(--surface, #ffffff);
-  color: var(--text, #18181b);
+.card {
+  --card-background: var(--bg-default);
+  --card-foreground: var(--text-primary);
+  --card-border: transparent;
 
-  border-radius: var(--radius-card);
-  border: 1px solid var(--border, rgba(24, 24, 27, 0.1));
-
-  box-shadow: var(--shadow-card);
-
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   padding: var(--space-6);
+  border: var(--border-md) solid var(--card-border);
+  border-radius: var(--radius-card);
+  background: var(--card-background);
+  color: var(--card-foreground);
+  box-shadow: none;
 }
 
-/* Optional variants */
-.ds-card--soft {
-  background: var(--surface-muted, #fafafa);
+.card--outline {
+  --card-border: var(--indigo-bold);
 }
 
-.ds-card--interactive {
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+.card--filled {
+  --card-background: var(--indigo-bold);
+  --card-foreground: var(--charcoal);
 }
 
-.ds-card--interactive:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
+.card-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* ---- Card sub-components ---- */
+.card-title {
+  margin: 0 0 var(--space-3);
+  color: var(--card-foreground);
+  font-family: var(--type-eyebrow-family);
+  font-size: var(--type-eyebrow-size);
+  font-weight: var(--type-eyebrow-weight);
+  line-height: var(--type-eyebrow-leading);
+  letter-spacing: var(--type-eyebrow-tracking);
+  text-transform: uppercase;
+}
+
+.card-body {
+  margin: 0;
+  color: color-mix(in srgb, var(--card-foreground) 78%, transparent);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
 }

@@ -1,0 +1,136 @@
+/* =========================================================
+   Accordion - soft editorial, single-open FAQ pattern.
+   See components/ui/Accordion.tsx for the component this styles.
+
+   A single tone controls the dividers, item numbers, and circular
+   expand/collapse controls. It can be changed through the component's
+   tone prop; indigo-bold is the default.
+========================================================= */
+
+.accordion {
+  --accordion-tone: var(--indigo-bold);
+  --accordion-tone-hover: color-mix(
+    in srgb,
+    var(--accordion-tone) 84%,
+    var(--charcoal)
+  );
+  --accordion-line: var(--accordion-tone);
+  --accordion-text: var(--text-primary);
+  background: var(--accordion-bg);
+  border-radius: 26px;
+  padding: var(--space-6);
+}
+
+.accordion-item {
+  border-top: 2px solid var(--accordion-line);
+}
+
+.accordion-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+  margin: 0;
+  padding: var(--space-5) 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-sans);
+}
+
+.accordion-number {
+  flex-shrink: 0;
+  width: 1.75rem;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  letter-spacing: 0.04em;
+  font-variant-numeric: normal;
+  color: var(--accordion-tone);
+}
+
+.accordion-question {
+  flex: 1;
+  font-size: var(--text-base);
+  font-weight: var(--font-regular);
+  line-height: var(--leading-snug);
+  color: var(--accordion-text);
+}
+
+/* Small rounded plus/minus control. Both lines are drawn with ::before/
+   ::after rather than an icon component -- ::after simply rotates from
+   vertical (plus) to horizontal (minus, overlapping ::before) on open,
+   so there is nothing to swap and no layout shift. */
+.accordion-control {
+  position: relative;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  background: var(--accordion-tone);
+  transition: background-color var(--motion-hover-duration)
+    var(--motion-ease-standard);
+}
+
+.accordion-row:hover .accordion-control {
+  background: var(--accordion-tone-hover);
+}
+
+.accordion-control::before,
+.accordion-control::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 1.5px;
+  background: var(--cream);
+  transform: translate(-50%, -50%);
+  transition: transform var(--motion-hover-duration) var(--motion-ease-standard);
+}
+
+.accordion-control::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.accordion-item.is-open .accordion-control::after {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+/* Smooth open/close without measuring heights: the 0fr/1fr grid-row
+   trick needs the panel always in the DOM (Accordion.tsx never
+   conditionally unmounts it), which is also what lets aria-hidden --
+   not the `hidden` attribute, which would fight the transition --
+   correctly pull it from the accessibility tree while collapsed.
+   --motion-duration-base (and --motion-hover-duration above) already
+   collapse to 0ms under prefers-reduced-motion via foundations/
+   motion.css, so reduced motion is respected here for free. */
+.accordion-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--motion-duration-base) var(--motion-ease-standard);
+}
+
+.accordion-item.is-open .accordion-panel {
+  grid-template-rows: 1fr;
+}
+
+.accordion-panel-inner {
+  overflow: hidden;
+}
+
+.accordion-answer {
+  margin: 0 0 var(--space-5);
+  /* Clears the number/control columns above it so the answer text
+     left/right edges still line up with the question text, not the
+     full bleed width of the row. */
+  padding-right: calc(28px + var(--space-4));
+  padding-left: calc(1.75rem + var(--space-4));
+  padding-bottom: calc(1rem);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--font-regular);
+  line-height: var(--leading-relaxed);
+  color: var(--accordion-muted);
+}

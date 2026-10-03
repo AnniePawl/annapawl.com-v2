@@ -1,0 +1,82 @@
+/* Docs-only framing for page-pattern examples. */
+
+.pattern-preview {
+  overflow: hidden;
+  border: var(--border-thin) solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--bg-subtle);
+}
+
+.page-shell-example-copy {
+  max-width: var(--measure-sm);
+  margin: var(--space-2) 0 0;
+  color: var(--text-secondary);
+}
+
+.page-header-examples {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+}
+
+.pattern-preview--page-header {
+  display: flex;
+  justify-content: center;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.pattern-preview--page-header .editorial-page-header {
+  width: 100%;
+}
+
+.pattern-preview--page-header .editorial-page-header-layout {
+  grid-template-columns: 4rem minmax(0, 1fr);
+  grid-template-rows: minmax(10rem, auto) auto;
+}
+
+.pattern-preview--page-header .editorial-page-header-title {
+  right: var(--space-4);
+  left: var(--space-4);
+  font-size: clamp(3.25rem, 7vw, 4.5rem);
+}
+
+.pattern-preview--page-header .editorial-page-header-description {
+  min-height: auto;
+  padding: var(--space-4) var(--space-5);
+}
+
+.pattern-preview--publication-header,
+.pattern-preview--publication {
+  padding: 0.5rem;
+  border: 0;
+  border-radius: 0;
+  background: var(--charcoal);
+}
+
+.pattern-preview--publication-header .publication-page-header {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.pattern-preview--publication .publication-article-layout {
+  width: 100%;
+}
+
+.pattern-preview .article-layout {
+  padding-block: var(--space-6);
+}
+
+.pattern-preview .article-layout-body h4 {
+  font-size: var(--type-h4-size);
+  font-weight: var(--type-h4-weight);
+  line-height: var(--type-h4-leading);
+}
+
+@media (width < 40rem) {
+  .pattern-preview--page-header {
+    overflow: visible;
+  }
+}

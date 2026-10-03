@@ -1,2 +1,29 @@
 @import "./button.css";
+@import "./link.css";
 @import "./card.css";
+@import "./modal.css";
+@import "./callout.css";
+@import "./badge.css";
+@import "./tooltip.css";
+@import "./form.css";
+@import "./cursor.css";
+@import "./accordion.css";
+@import "./home-logo.css";
+@import "./page-header.css";
+@import "./article-layout.css";
+
+/* Shared page-level patterns. Foundations provide the spacing and measure
+   tokens; these classes compose them into reusable structures. */
+.page-shell {
+  width: 100%;
+  max-width: var(--page-shell-max-width, var(--page-max-width));
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+  padding-block: var(--section-gap);
+}
+
+.page-shell--reading {
+  --page-shell-max-width: calc(
+    var(--measure-md) + var(--page-gutter) + var(--page-gutter)
+  );
+}

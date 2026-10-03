@@ -1,0 +1,63 @@
+.tooltip-wrapper--static .tooltip {
+  left: 50%;
+  width: max-content;
+  max-width: min(17rem, calc(100vw - 2rem));
+  white-space: normal;
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%);
+}
+
+.tooltip-wrapper--static .tooltip::after {
+  left: 50%;
+}
+
+.tooltip-wrapper--static .tooltip-trigger {
+  cursor: default;
+}
+
+.tooltip-examples-heading {
+  margin: var(--space-6) 0 var(--space-4);
+}
+
+.tooltip-demo-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--space-6);
+  padding: 3rem 0 var(--space-4);
+}
+
+.tooltip-demo-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3.25rem;
+  width: min(17rem, 100%);
+}
+
+.tooltip-info-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+}
+
+.tooltip-info-trigger svg {
+  width: 17px;
+  height: 17px;
+  color: var(--indigo-bold);
+}
+
+.tooltip-truncated-trigger {
+  display: block;
+  width: 13.5rem;
+  overflow: hidden;
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -1,58 +1,141 @@
-:root {
-  --purple-500: #7c3aed;
-  --purple-600: #6d28d9;
-  --purple-700: #5b21b6;
+/* ---- Button component ----
+   Real interaction states come from native pseudo-classes (:hover,
+   :active, :disabled). The focus ring comes from the shared
+   `.focus-ring` utility (see foundations/focus.css) rather than being
+   redefined here.
 
-  --focus-ring: rgba(124, 58, 237, 0.45);
-}
+   `[data-state="hover"|"pressed"]` selectors exist purely so the
+   sedge-design-system docs page can force-preview a state side by side —
+   normal usage elsewhere never needs to set data-state. */
 
-.button-state-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-}
-
-.state-cell {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
-
-.state-label {
-  font-size: 12px;
-  color: #555;
-}
-
-/* Base button */
 .btn {
-  appearance: none;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 18px;
-  font-size: 14px;
-  font-weight: 500;
-  color: white;
-  background: var(--purple-500);
-  cursor: default;
-  transition: background 120ms ease, transform 80ms ease;
+  --button-background: var(--indigo-soft);
+  --button-foreground: var(--charcoal);
+  --button-border: transparent;
+  --button-shadow: none;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+
+  font-family: var(--font-sans);
+  font-weight: var(--font-bold);
+  line-height: 1;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  border-radius: var(--radius-button);
+  border: var(--border-default) solid var(--button-border);
+  background: var(--button-background);
+  color: var(--button-foreground);
+  box-shadow: var(--button-shadow);
+  cursor: pointer;
+  user-select: none;
+
+  --focus-ring-color: var(--button-foreground);
+
+  transition:
+    background-color var(--motion-ui-duration) var(--motion-ui-ease),
+    border-color var(--motion-ui-duration) var(--motion-ui-ease),
+    box-shadow var(--motion-hover-duration) var(--motion-hover-ease),
+    transform var(--motion-hover-duration) var(--motion-hover-ease);
 }
 
-/* Forced visual states */
-.btn-enabled {
-  background: var(--purple-500);
+.btn:hover,
+.btn[data-state="hover"] {
+  background: color-mix(
+    in srgb,
+    var(--button-background) 88%,
+    var(--button-foreground)
+  );
 }
 
-.btn-hover {
-  background: var(--purple-600);
-}
-
-.btn-focus {
-  background: var(--purple-500);
-  box-shadow: 0 0 0 4px var(--focus-ring);
-}
-
-.btn-pressed {
-  background: var(--purple-700);
+.btn:active,
+.btn[data-state="pressed"] {
+  background: color-mix(
+    in srgb,
+    var(--button-background) 76%,
+    var(--button-foreground)
+  );
+  box-shadow: var(--shadow-sm);
   transform: translateY(1px);
+}
+
+.btn--bordered {
+  --button-border: var(--button-foreground);
+}
+
+.btn-label,
+.btn-end-icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-end-icon {
+  transition: transform var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+.btn-end-icon > svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.btn:hover .btn-end-icon,
+.btn[data-state="hover"] .btn-end-icon {
+  transform: translateX(0.375rem);
+}
+
+.btn:disabled {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Sizes */
+.btn--sm {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-xs);
+}
+
+.btn--md {
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--text-xs);
+}
+
+.btn--lg {
+  padding: var(--space-4) var(--space-6);
+  font-size: var(--text-sm);
+}
+
+.btn--default {
+  --button-background: var(--indigo-soft);
+  --button-foreground: var(--charcoal);
+}
+
+/* Primary variant */
+.btn--primary {
+  --button-background: var(--cherry-bold);
+  --button-foreground: var(--moss-soft);
+  --button-shadow: var(--shadow-button);
+}
+
+/* Secondary variant */
+.btn--secondary {
+  --button-background: var(--cherry-soft);
+  --button-foreground: var(--charcoal);
+  --button-border: var(--blue-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-end-icon {
+    transition: none;
+  }
+
+  .btn:hover .btn-end-icon,
+  .btn[data-state="hover"] .btn-end-icon {
+    transform: none;
+  }
 }
