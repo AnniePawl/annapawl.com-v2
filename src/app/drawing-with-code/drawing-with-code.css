@@ -10,7 +10,8 @@
    also kept as a standalone reference in claude/project-status.md. */
 
 .dwc-page {
-  background: var(--bg-subtle);
+  min-height: 100vh;
+  background: var(--cream);
 }
 
 /* ---- Shapes grid (original design, reverted) ----
@@ -75,36 +76,47 @@
 .dwc-shapebox-1 {
   background-color: #ffdbe0;
 }
+
 .dwc-shapebox-2 {
   background-color: #cafcd2;
 }
+
 .dwc-shapebox-3 {
   background-color: #9ea5ff;
 }
+
 .dwc-shapebox-4 {
   background-color: #ffe984;
 }
+
 .dwc-shapebox-5 {
   background-color: #ff9191;
 }
+
 .dwc-shapebox-6 {
   background-color: #ccf3ff;
 }
+
 .dwc-shapebox-7 {
   background-color: #e7c9ff;
 }
+
 .dwc-shapebox-8 {
   background-color: #8fc1ff;
 }
+
 .dwc-shapebox-9 {
   background-color: #e5ffb5;
 }
+
 .dwc-shapebox-10 {
   background-color: #4791ff;
 }
+
 .dwc-shapebox-11 {
   background-color: #fffbab;
 }
+
 .dwc-shapebox-12 {
   background-color: #ffb88c;
 }
@@ -559,6 +571,7 @@
 }
 
 .dwc-prose-sub {
+  margin-top: var(--space-5);
   margin-left: var(--space-5);
 }
 
@@ -566,6 +579,24 @@
   .dwc-prose-sub {
     margin-left: var(--space-8);
   }
+}
+
+.dwc-prose-sub h3 {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  font-weight: var(--font-bold);
+  line-height: var(--leading-snug);
+  color: var(--indigo-bold);
+}
+
+.dwc-page .publication-article-section>p+p {
+  margin-top: var(--space-4);
+}
+
+.dwc-page .dwc-code-figure,
+.dwc-page .dwc-practice {
+  margin-top: var(--space-5);
 }
 
 .dwc-code-figure {

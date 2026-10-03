@@ -1,52 +1,99 @@
-import ShapesGrid from "./_components/ShapesGrid";
+import ArticleLayout, {
+  ArticleSection,
+} from "../../components/layout/ArticleLayout";
+import PageHeader from "../../components/layout/PageHeader";
+import HomeLogo from "../../components/ui/HomeLogo";
+// import ShapesGrid from "./_components/ShapesGrid";
 import CodeSnippet from "./_components/CodeSnippet";
 import Practice from "./_components/Practice";
 import "./drawing-with-code.css";
 
-/**
- * Ported from the old annapawl.com repo's "dwc" page (src/components/dwc/).
- * The heading + shapes grid below are reverted to the ORIGINAL page's exact
- * design (hardcoded colors/sizes, Tailwind-default heading type) per Anna's
- * request; the rest of the page still uses this site's own design tokens —
- * see claude/project-status.md for the original palette. Educational copy below is
- * Anna's own, carried over verbatim from dwc.js. The two code screenshots
- * from the old page are real formatted code here instead (CodeSnippet)
- * rather than ported raster images.
- */
 export default function DrawingWithCodePage() {
   return (
-    <main className="dwc-page flex min-h-screen w-full flex-col items-center gap-10 px-4 pb-16 pt-16 md:gap-12 md:pt-20 lg:px-0">
-      <h1 className="uppercase font-black text-zinc-800 text-lg md:text-xl tracking-[3.5px] md:tracking-[6.5px]">
-        Drawing with Code
-      </h1>
+    <main className="dwc-page">
+      <ArticleLayout
+        variant="publication"
+        header={
+          <PageHeader
+            variant="publication"
+            collectionLabel="CSS Art"
+            eyebrow="Notes, CSS art"
+            title="Drawing with Code"
+            description="A record of what I’ve read, what stayed with me, and what I’d happily press into someone else’s hands."
+            meta="Oct 3, 2026 · 4 min read"
+            metaEnd="CSS, Illustration, Front-end"
+            utilityStart={
+              <HomeLogo
+                colors={{
+                  northeast: "var(--emerald-bold)",
+                  southeast: "var(--red-bold)",
+                  southwest: "var(--red-bold)",
+                  northwest: "var(--red-bold)",
+                  hoverAccent: "var(--indigo-bold)",
+                }}
+                size="1.75rem"
+              />
+            }
+            colors={{ accent: "var(--red-bold)" }}
+          />
+        }
+        contents={[
+          {
+            id: "what-is-drawing-with-code",
+            label: "What is drawing with code?",
+            tone: "red-bold",
+          },
+          {
+            id: "the-div",
+            label: "It’s all about the <div>",
+            tone: "indigo-bold",
+          },
+          {
+            id: "css-recap",
+            label: "CSS, a little recap",
+            tone: "lilac-soft",
+          },
+          {
+            id: "beginners-css-toolkit",
+            label: "Beginner’s CSS toolkit",
+            tone: "emerald-bold",
+          },
+          { id: "try-it-out", label: "Try it out", tone: "amber-bold" },
+        ]}
+        footerStart="About"
+        footerCenter="Shelves: Fiction, Essays, Poetry, Memoir, Notes"
+        footerEnd="Search"
+      >
+        {/* <ShapesGrid /> */}
 
-      <ShapesGrid />
+        <ArticleSection
+          id="what-is-drawing-with-code"
+          title="What is drawing with code?"
+          tone="red-bold"
+        >
+          <p>
+            CSS art lies at the intersection of vector illustration and
+            front-end development. It involves manipulating &lt;div&gt; HTML
+            elements with CSS to render shapes in the browser. These shapes
+            are customized by assigning values to various properties like
+            height, border-radius, box-shadow and background-color. With
+            countless CSS properties to work with, it&rsquo;s possible to
+            create intricate pieces without a vector illustration software
+            like Illustrator.
+          </p>
 
-      <div className="dwc-prose flex flex-col gap-2">
-        <span className="dwc-eyebrow">What is drawing with code?</span>
-        <p>
-          CSS art lies at the intersection of vector illustration and
-          front-end development. It involves manipulating &lt;div&gt; HTML
-          elements with CSS to render shapes in the browser. These shapes
-          are customized by assigning values to various properties like
-          height, border-radius, box-shadow and background-color. With
-          countless CSS properties to work with, it&rsquo;s possible to
-          create intricate pieces without a vector illustration software
-          like Illustrator.
-        </p>
-      </div>
-
-      <CodeSnippet
-        code={`<div className="circle-container">
+          <CodeSnippet
+            code={`<div className="circle-container">
   <div className="inner-circle"></div>
 </div>`}
-      />
+          />
+        </ArticleSection>
 
-      <div className="dwc-prose flex flex-col gap-5">
-        <div className="flex flex-col gap-2">
-          <span className="dwc-eyebrow">
-            It&rsquo;s all about the <span className="font-mono lowercase">&lt;div&gt;</span>
-          </span>
+        <ArticleSection
+          id="the-div"
+          title="It’s all about the <div>"
+          tone="indigo-bold"
+        >
           <p>
             The &lt;div&gt; element is the building block of every pure CSS
             composition. A div is simply an empty container, often used to
@@ -56,53 +103,50 @@ export default function DrawingWithCodePage() {
             Take a look at the example above. Let&rsquo;s break down the
             HTML portion of CSS art.
           </p>
-        </div>
 
-        <div className="dwc-prose-sub flex flex-col gap-2">
-          <h2 className="font-mono text-base font-bold text-[var(--indigo-bold)] md:text-lg">
-            Parent &lt;div&gt;
-          </h2>
-          <p>
-            Every CSS composition starts with a parent div. Think of it as
-            your canvas. In the example above, &lt;div
-            className=&apos;circle-container&apos;&gt; acts as an invisible
-            box that encapsulates all other elements.
-          </p>
-        </div>
+          <div className="dwc-prose-sub">
+            <h3>Parent &lt;div&gt;</h3>
+            <p>
+              Every CSS composition starts with a parent div. Think of it as
+              your canvas. In the example above, &lt;div
+              className=&apos;circle-container&apos;&gt; acts as an invisible
+              box that encapsulates all other elements.
+            </p>
+          </div>
 
-        <div className="dwc-prose-sub flex flex-col gap-2">
-          <h2 className="font-mono text-base font-bold text-[var(--indigo-bold)] md:text-lg">
-            Child &lt;div&gt;
-          </h2>
-          <p>
-            Styled child divs, which are nested within parent elements, give
-            your composition structure and substance. Nesting elements is
-            useful because you can position a child div relative to its
-            parent. As your CSS skills improve, you&rsquo;ll be able to
-            create elaborate pieces with a single div. For now, break your
-            vision down into simple parts and create a child div for every
-            shape.
-          </p>
-        </div>
+          <div className="dwc-prose-sub">
+            <h3>Child &lt;div&gt;</h3>
+            <p>
+              Styled child divs, which are nested within parent elements, give
+              your composition structure and substance. Nesting elements is
+              useful because you can position a child div relative to its
+              parent. As your CSS skills improve, you&rsquo;ll be able to
+              create elaborate pieces with a single div. For now, break your
+              vision down into simple parts and create a child div for every
+              shape.
+            </p>
+          </div>
 
-        <div className="dwc-prose-sub flex flex-col gap-2">
-          <h2 className="font-mono text-base font-bold text-[var(--indigo-bold)] md:text-lg">
-            Custom Classes
-          </h2>
-          <p>
-            Each div needs a custom class. Your stylesheet uses these
-            references to differentiate between elements. Be concise and
-            descriptive for your styling sanity. In the code snippet above,
-            className=&apos;inner-circle&apos; is more effective than
-            className=&apos;circle&apos; because it allows me to target a
-            specific sphere and give it distinct styles. Remember, assigning
-            a class doesn&rsquo;t do anything by default. Styles need to be
-            applied to give a div character.
-          </p>
-        </div>
+          <div className="dwc-prose-sub">
+            <h3>Custom Classes</h3>
+            <p>
+              Each div needs a custom class. Your stylesheet uses these
+              references to differentiate between elements. Be concise and
+              descriptive for your styling sanity. In the code snippet above,
+              className=&apos;inner-circle&apos; is more effective than
+              className=&apos;circle&apos; because it allows me to target a
+              specific sphere and give it distinct styles. Remember, assigning
+              a class doesn&rsquo;t do anything by default. Styles need to be
+              applied to give a div character.
+            </p>
+          </div>
+        </ArticleSection>
 
-        <div className="flex flex-col gap-2 pt-4">
-          <span className="dwc-eyebrow">CSS, a little recap</span>
+        <ArticleSection
+          id="css-recap"
+          title="CSS, a little recap"
+          tone="lilac-soft"
+        >
           <p>
             CSS is short for Cascading Style Sheets. A style sheet interacts
             with HTML elements to add aesthetic substance to a document. To
@@ -134,20 +178,21 @@ export default function DrawingWithCodePage() {
             process entails styling divs, which are otherwise
             indistinguishable from one another.
           </p>
-        </div>
-      </div>
 
-      <CodeSnippet
-        code={`.rectangle {
+          <CodeSnippet
+            code={`.rectangle {
   width: 45%;
   height: 65%;
   background-color: #ff9666;
 }`}
-      />
+          />
+        </ArticleSection>
 
-      <div className="dwc-prose flex flex-col gap-5">
-        <div className="flex flex-col gap-2">
-          <span className="dwc-eyebrow">Beginner&rsquo;s CSS toolkit</span>
+        <ArticleSection
+          id="beginners-css-toolkit"
+          title="Beginner’s CSS toolkit"
+          tone="emerald-bold"
+        >
           <p>
             There is a lot you can accomplish with the basics. Start small,
             and add new CSS properties to your toolkit as you grow.
@@ -158,71 +203,59 @@ export default function DrawingWithCodePage() {
             design before transforming it into a 3D edition. Below is a
             short list of CSS properties to help you get started.
           </p>
-        </div>
 
-        <div className="dwc-prose-sub flex flex-col gap-2">
-          <h2 className="font-mono text-base font-bold text-[var(--indigo-bold)] md:text-lg">
-            height, width
-          </h2>
+          <div className="dwc-prose-sub">
+            <h3>height, width</h3>
+            <p>
+              These properties are used to set the height and width of your
+              element. Default div size is determined by the HTML content it
+              contains. Without any content, your div won&rsquo;t appear to
+              exist. It&rsquo;s important to explicitly mention these
+              properties for this reason. Use px or % values to define your
+              div&rsquo;s size.
+            </p>
+          </div>
+
+          <div className="dwc-prose-sub">
+            <h3>background-color</h3>
+            <p>
+              This property sets the color of your div. I like using
+              Google&rsquo;s color picker to find the perfect hue and its
+              corresponding HEX or RGB value.
+            </p>
+          </div>
+
+          <div className="dwc-prose-sub">
+            <h3>border-radius</h3>
+            <p>
+              This property sets the radius of your div&rsquo;s corners. Divs
+              are square by default, but you can generate other shapes by
+              manipulating borders. If you assign one value to this property,
+              that radius applies to all four corners. For example,
+              border-radius: 50% makes a circle. You can specify up to three
+              additional values to adjust corners separately.
+            </p>
+          </div>
+
+          <div className="dwc-prose-sub">
+            <h3>transform: translateY / translateX</h3>
+            <p>
+              This property repositions your div vertically/horizontally
+              along a 2D plane. Positioning elements is an essential part of
+              creating more complex designs. Use px values to start moving
+              components around your canvas.
+            </p>
+          </div>
+        </ArticleSection>
+
+        <ArticleSection id="try-it-out" title="Try it out" tone="amber-bold">
           <p>
-            These properties are used to set the height and width of your
-            element. Default div size is determined by the HTML content it
-            contains. Without any content, your div won&rsquo;t appear to
-            exist. It&rsquo;s important to explicitly mention these
-            properties for this reason. Use px or % values to define your
-            div&rsquo;s size.
+            Mess around with the CSS in the code editor below to see how you
+            can manipulate the output.
           </p>
-        </div>
-
-        <div className="dwc-prose-sub flex flex-col gap-2">
-          <h2 className="font-mono text-base font-bold text-[var(--indigo-bold)] md:text-lg">
-            background-color
-          </h2>
-          <p>
-            This property sets the color of your div. I like using
-            Google&rsquo;s color picker to find the perfect hue and its
-            corresponding HEX or RGB value.
-          </p>
-        </div>
-
-        <div className="dwc-prose-sub flex flex-col gap-2">
-          <h2 className="font-mono text-base font-bold text-[var(--indigo-bold)] md:text-lg">
-            border-radius
-          </h2>
-          <p>
-            This property sets the radius of your div&rsquo;s corners. Divs
-            are square by default, but you can generate other shapes by
-            manipulating borders. If you assign one value to this property,
-            that radius applies to all four corners. For example,
-            border-radius: 50% makes a circle. You can specify up to three
-            additional values to adjust corners separately.
-          </p>
-        </div>
-
-        <div className="dwc-prose-sub flex flex-col gap-2">
-          <h2 className="font-mono text-base font-bold text-[var(--indigo-bold)] md:text-lg">
-            transform: translateY / translateX
-          </h2>
-          <p>
-            This property repositions your div vertically/horizontally
-            along a 2D plane. Positioning elements is an essential part of
-            creating more complex designs. Use px values to start moving
-            components around your canvas.
-          </p>
-        </div>
-      </div>
-
-      <div className="dwc-divider" />
-
-      <div className="dwc-prose flex flex-col gap-2 text-center">
-        <h2 className="h2 text-center">Try it out</h2>
-        <p>
-          Mess around with the CSS in the code editor below to see how you
-          can manipulate the output.
-        </p>
-      </div>
-
-      <Practice />
+          <Practice />
+        </ArticleSection>
+      </ArticleLayout>
     </main>
   );
 }

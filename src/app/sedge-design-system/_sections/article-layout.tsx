@@ -14,7 +14,7 @@ const USAGE = `<ArticleLayout
   header={
     <PageHeader
       variant="publication"
-      barStart="The Bookshelf"
+      collectionLabel="The Bookshelf"
       barEnd="← All notes"
       eyebrow="Notes, CSS art"
       title="Drawing with Code"
@@ -53,7 +53,7 @@ export default function ArticleLayoutSection() {
           header={
             <PageHeader
               variant="publication"
-              barStart="The Bookshelf"
+              collectionLabel="The Bookshelf"
               barEnd="← All notes"
               eyebrow="Notes, CSS art"
               title="Drawing with Code"

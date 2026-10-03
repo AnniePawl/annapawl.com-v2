@@ -15,7 +15,7 @@ export interface PageHeaderColors {
 
 export interface PageHeaderProps {
   variant?: "editorial" | "publication";
-  barStart?: string;
+  collectionLabel?: string;
   barEnd?: string;
   railLabel?: string;
   eyebrow?: ReactNode;
@@ -25,6 +25,7 @@ export interface PageHeaderProps {
   meta?: ReactNode;
   metaCenter?: ReactNode;
   metaEnd?: ReactNode;
+  utilityStart?: ReactNode;
   colors?: PageHeaderColors;
   headingLevel?: 1 | 2 | 3;
   className?: string;
@@ -32,7 +33,7 @@ export interface PageHeaderProps {
 
 export default function PageHeader({
   variant = "editorial",
-  barStart = "Digital garden",
+  collectionLabel = "Digital garden",
   barEnd = "Garden archive",
   railLabel = "Garden archive",
   eyebrow,
@@ -42,6 +43,7 @@ export default function PageHeader({
   meta,
   metaCenter,
   metaEnd,
+  utilityStart,
   colors = {},
   headingLevel = 1,
   className,
@@ -65,13 +67,29 @@ export default function PageHeader({
     return (
       <header className={cx("publication-page-header", className)} style={style}>
         <div className="publication-page-header-utility">
-          <div>
-            <span className="publication-page-header-collection">{barStart}</span>
-            {description ? (
-              <p className="publication-page-header-description">{description}</p>
-            ) : null}
-          </div>
-          <span className="publication-page-header-back">{barEnd}</span>
+          {utilityStart ? (
+            <>
+              <div className="publication-page-header-utility-start">
+                {utilityStart}
+              </div>
+              <div className="publication-page-header-utility-end">
+                <span className="publication-page-header-collection">{collectionLabel}</span>
+                {description ? (
+                  <p className="publication-page-header-description">{description}</p>
+                ) : null}
+              </div>
+            </>
+          ) : (
+            <>
+              <div>
+                <span className="publication-page-header-collection">{collectionLabel}</span>
+                {description ? (
+                  <p className="publication-page-header-description">{description}</p>
+                ) : null}
+              </div>
+              <span className="publication-page-header-back">{barEnd}</span>
+            </>
+          )}
         </div>
 
         <div className="publication-page-header-stage">
@@ -99,7 +117,7 @@ export default function PageHeader({
   return (
     <header className={cx("editorial-page-header", className)} style={style}>
       <div className="editorial-page-header-bar">
-        <span className="type-eyebrow editorial-page-header-bar-label">{barStart}</span>
+        <span className="type-eyebrow editorial-page-header-bar-label">{collectionLabel}</span>
         <span className="editorial-page-header-rule" aria-hidden="true" />
         <span className="type-eyebrow editorial-page-header-bar-label">{barEnd}</span>
       </div>

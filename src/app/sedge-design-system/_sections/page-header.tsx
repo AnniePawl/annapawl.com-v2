@@ -7,7 +7,7 @@ import "./patterns.css";
 const meta = SECTIONS.find((section) => section.id === "page-header")!;
 
 const USAGE = `<PageHeader
-  barStart="Digital garden"
+  collectionLabel="Digital garden"
   barEnd="Reading archive"
   railLabel="Reading archive"
   eyebrow="Ongoing collection"
@@ -28,7 +28,7 @@ const USAGE = `<PageHeader
 
 const PUBLICATION_USAGE = `<PageHeader
   variant="publication"
-  barStart="The Bookshelf"
+  collectionLabel="The Bookshelf"
   barEnd="← All notes"
   eyebrow="Notes, CSS art"
   title="Drawing with Code"
@@ -51,7 +51,7 @@ export default function PageHeaderSection() {
       <div className="page-header-examples">
         <div className="pattern-preview pattern-preview--page-header">
           <PageHeader
-            barStart="Digital garden"
+            collectionLabel="Digital garden"
             barEnd="Reading archive"
             railLabel="Reading archive"
             eyebrow="Ongoing collection"
@@ -64,7 +64,7 @@ export default function PageHeaderSection() {
 
         <div className="pattern-preview pattern-preview--page-header">
           <PageHeader
-            barStart="Digital garden"
+            collectionLabel="Digital garden"
             barEnd="Field notes"
             railLabel="Field notes"
             eyebrow="Still growing"
@@ -88,7 +88,7 @@ export default function PageHeaderSection() {
         <div className="pattern-preview pattern-preview--publication-header">
           <PageHeader
             variant="publication"
-            barStart="The Bookshelf"
+            collectionLabel="The Bookshelf"
             barEnd="← All notes"
             eyebrow="Notes, CSS art"
             title="Drawing with Code"
