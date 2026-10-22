@@ -27,7 +27,7 @@ export default function LinkExamples() {
         <LinkState label="Default">
           <a
             className="text-link text-link--standalone focus-ring"
-            href="#article-layout"
+            href="#post-layout"
             data-state="default"
           >
             Learn more
@@ -69,8 +69,7 @@ export default function LinkExamples() {
         </LinkState>
       </div>
 
-      <hr className="poster-divider mt-4 mb-0" />
-      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Breadcrumbs</h3>
+      <h3 className="sedge-subheading">Breadcrumbs</h3>
 
       <nav aria-label="Breadcrumb">
         <ol className="link-breadcrumbs">
@@ -106,8 +105,7 @@ export default function LinkExamples() {
         </ol>
       </nav>
 
-      <hr className="poster-divider mt-4 mb-0" />
-      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
+      <h3 className="sedge-subheading">Usage</h3>
       <CodeBlock code={USAGE} className="mb-8" />
     </div>
   );

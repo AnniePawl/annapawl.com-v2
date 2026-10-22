@@ -142,7 +142,11 @@ export const COLOR_PAIRS: ColorPair[] = [
   },
 ];
 
-export const PAGE_SWATCHES: ColorSwatch[] = [
-  { varName: "--cream", hex: "#FFFCF8" },
-  { varName: "--charcoal", hex: "#2A2A2E" },
+// The colors that hold every page together: the ground everything sits on
+// and the ink everything is written in, plus their dark-mode partners.
+export const PAGE_SWATCHES: (ColorSwatch & { label: string })[] = [
+  { label: "Cream — ground", varName: "--cream", hex: "#FFFCF8" },
+  { label: "Ivory", varName: "--ivory", hex: "#F2E9D8" },
+  { label: "Charcoal — ink", varName: "--charcoal", hex: "#2A2A2E" },
+  { label: "Chocolate", varName: "--chocolate-bold", hex: "#231F1C" },
 ];

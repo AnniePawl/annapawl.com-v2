@@ -32,7 +32,7 @@ export default function SidebarNav({
             <p className="mb-2 border-b border-[color-mix(in_srgb,var(--text-primary)_20%,transparent)] px-0 pb-2 text-[11px] font-bold tracking-wide text-[var(--text-primary)] uppercase">
               {group.name}
             </p>
-            <ul className="space-y-1 md:space-y-1">
+            <ul className="space-y-1 md:space-y-1" data-group={group.name}>
               {group.items.map((section) => {
                 const Icon = section.icon;
 

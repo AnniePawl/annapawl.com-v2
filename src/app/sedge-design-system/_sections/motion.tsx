@@ -29,12 +29,12 @@ export default function MotionSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="Motion adds personality and helps make interactions feel responsive and intuitive. A small set of durations and easing curves keeps motion consistent across the system. Faster transitions handle lightweight interactions like hover states, while slower, more expressive motion is reserved for larger UI changes. Motion is reduced automatically when a user prefers less movement."
+      lede="Motion adds personality and helps make interactions feel responsive and intuitive."
+      description="A small set of durations and easing curves keeps motion consistent across the system. Faster transitions handle lightweight interactions like hover states, while slower, more expressive motion is reserved for larger UI changes. Motion is reduced automatically when a user prefers less movement."
     >
-      <hr className="poster-divider mt-4 mb-0" />
       <div className="motion-section-block">
         <div className='mb-6'>
-          <h3 className='type-eyebrow' style={{ marginBottom: 12 }}>Durations</h3>
+          <h3 className="sedge-subheading">Durations</h3>
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             {DURATIONS.map(({ token, label }) => (
               <div key={token} style={{ display: "flex", alignItems: "center", gap: 16 }}>
@@ -48,7 +48,7 @@ export default function MotionSection() {
         </div>
 
         <div>
-          <h3 className='type-eyebrow' style={{ marginBottom: 12 }}>Easings</h3>
+          <h3 className="sedge-subheading">Easings</h3>
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             {EASINGS.map(({ token, label }) => (
               <div key={token} style={{ display: "flex", alignItems: "center", gap: 16 }}>
@@ -62,11 +62,10 @@ export default function MotionSection() {
         </div>
       </div>
 
-      <hr className="poster-divider mt-4 mb-0" />
 
       <div className="motion-section-block">
         <div>
-          <h3 className="type-eyebrow" style={{ marginBottom: 12 }}>Live demo</h3>
+          <h3 className="sedge-subheading">Live demo</h3>
           <Button onClick={() => setPlay((n) => n + 1)}>
             Replay all
           </Button>
@@ -127,11 +126,10 @@ export default function MotionSection() {
         </div>
       </div>
 
-      <hr className="poster-divider mt-4 mb-0" />
 
       <div className="motion-section-block">
         <div>
-          <h3 className="type-eyebrow" style={{ marginBottom: 12 }}>Cursor</h3>
+          <h3 className="sedge-subheading">Cursor</h3>
           <p className='mb-8' style={{ color: "var(--text-secondary)", fontSize: 14 }}>
             The cursor stays a compact dot at rest, expands into a small, hollow ring
             over interactive elements, and remains a dot over selectable text.
@@ -168,7 +166,7 @@ export default function MotionSection() {
             Form controls, editable content, disabled controls, and explicitly
             opted-out regions retain their native cursor:
           </p>
-          <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
+          <h3 className="sedge-subheading">Usage</h3>
           <CodeBlock
             code={`<div data-cursor-native>\n  {/* Use the native cursor throughout this region. */}\n</div>`}
           />

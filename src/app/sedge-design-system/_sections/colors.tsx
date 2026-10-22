@@ -8,10 +8,15 @@ const meta = SECTIONS.find((s) => s.id === "colors")!;
 
 export default function ColorsSection() {
   return (
-    <Section id={meta.id} heading={meta.title} icon={meta.icon}>
+    <Section
+      id={meta.id}
+      heading={meta.title}
+      icon={meta.icon}
+      lede="These are the colors that make me happy."
+    >
       <div className="sedge-section-intro">
         <p>
-          These are the colors that make me happy. Yes, there are a lot of
+          Yes, there are a lot of
           them... I’m making the rules here{" "}
           <Laugh
             aria-hidden="true"
@@ -30,10 +35,7 @@ export default function ColorsSection() {
           cohesion.
         </p>
       </div>
-      <hr className="poster-divider mt-4 mb-0" />
-      <div className="mt-[var(--space-6)]">
-        <ColorSwatchesGrid />
-      </div>
+      <ColorSwatchesGrid />
     </Section>
   );
 }

@@ -10,9 +10,9 @@ export default function RadiusDocsSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="Shape works in two layers: a consistent corner-radius scale for functional UI, and a small set of custom accent shapes for more expressive moments. Decorative shapes add a little character where structure matters less."
+      lede="Square by default, soft where it counts."
+      description="Shape works in two layers: a small corner-radius scale for the few functional moments that need softening, and a set of custom accent shapes that add character where structure matters less."
     >
-      <hr className="poster-divider mt-4 mb-0" />
       <ShapeExamples />
     </Section>
   );

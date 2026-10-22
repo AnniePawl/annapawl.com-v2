@@ -4,32 +4,48 @@ import "./spacing.css";
 
 const meta = SECTIONS.find((s) => s.id === "spacing")!;
 
+// "Used for" reflects where each step actually shows up across the garden
+// (post-layout.css, books.css, section.css, drawer.css…). Keep it honest
+// when layouts change.
 const SCALE = [
-  { token: "--space-0", label: "0" },
-  { token: "--space-1", label: "4" },
-  { token: "--space-2", label: "8" },
-  { token: "--space-3", label: "12" },
-  { token: "--space-4", label: "16" },
-  { token: "--space-5", label: "24" },
-  { token: "--space-6", label: "32" },
-  { token: "--space-7", label: "48" },
-  { token: "--space-8", label: "64" },
-  { token: "--space-9", label: "80" },
-  { token: "--space-10", label: "96" },
-  { token: "--space-11", label: "128" },
+  { token: "--space-1", px: 4, usedFor: "Icon ↔ label, tight inline gaps" },
+  { token: "--space-2", px: 8, usedFor: "Marker ↔ text, small label gaps", everyday: true },
+  { token: "--space-3", px: 12, usedFor: "Label → content, list rows", everyday: true },
+  { token: "--space-4", px: 16, usedFor: "Grid gaps, mobile page gutter", everyday: true },
+  { token: "--space-5", px: 24, usedFor: "Desktop page gutter, heading → body", everyday: true },
+  { token: "--space-6", px: 32, usedFor: "Lede spacing, below subheadings, drawer padding", everyday: true },
+  { token: "--space-7", px: 48, usedFor: "Content top, between blocks, min column gap" },
+  { token: "--space-8", px: 64, usedFor: "Bookshelf content top, mobile page end" },
+  { token: "--space-9", px: 80, usedFor: "Above subheadings, end of an article" },
+  { token: "--space-10", px: 96, usedFor: "Max column gap on wide screens" },
+  { token: "--space-11", px: 128, usedFor: "End of the Bookshelf page" },
 ];
 
-const SEMANTIC_SPACING = [
+const ALIASES = [
   {
     token: "--page-gutter",
     value: "16–24px",
-    purpose: "Responsive left and right page padding",
+    usedFor: "Left and right page padding; grows with the screen",
   },
   {
     token: "--section-gap",
     value: "48px",
-    purpose: "Vertical space between major page sections",
+    usedFor: "Vertical space between major page sections",
   },
+  {
+    token: "--column-gap",
+    value: "48–96px",
+    usedFor: "Sticky rail ↔ main column (Bookshelf, posts)",
+  },
+];
+
+// The vertical rhythm of a Sedge section, top to bottom.
+const ANATOMY = [
+  { label: "Section heading", gap: null },
+  { label: "Lede", gap: "32 · space-6" },
+  { label: "Description", gap: "24 · space-5" },
+  { label: "Subheading", gap: "80 · space-9" },
+  { label: "Examples", gap: "32 · space-6" },
 ];
 
 export default function SpacingSection() {
@@ -38,76 +54,66 @@ export default function SpacingSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="Spacing is one of those quiet things that makes everything feel more intentional. A shared scale keeps padding, gaps, and layout rhythm consistent, while a small semantic layer handles the page gutter and space between major sections."
+      lede="Spacing is one of those quiet things that makes everything feel more intentional."
+      description="Five everyday steps (8–32px) handle almost everything inside components. The larger steps are saved for layout: the top and end of a page, the gap beside a rail, and the air above a subheading."
     >
-      <hr className="poster-divider mt-4 mb-0" />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "var(--space-3)",
-          maxWidth: 480,
-        }}
-      >
-        {SCALE.map(({ token, label }) => (
-          <div
-            key={token}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "var(--space-4)",
-            }}
-          >
-            <code
-              style={{
-                width: 90,
-                fontSize: "var(--text-xs)",
-                color: "var(--text-muted)",
-              }}
-            >
+      <h3 className="sedge-subheading">Scale</h3>
+      <div className="spacing-table" role="table" aria-label="Spacing scale">
+        {SCALE.map(({ token, px, usedFor, everyday }) => (
+          <div className="spacing-row" role="row" key={token}>
+            <code className="spacing-token" role="cell">
               {token}
             </code>
-            <div
-              className="spacing-bar"
-              style={{
-                height: "var(--space-3)",
-                width: `var(${token})`,
-                borderRadius: "var(--radius-xs)",
-              }}
-            />
-            <span style={{ fontSize: "var(--text-xs)", color: "var(--text-muted)" }}>
-              {label}px
+            <span className="spacing-px" role="cell">
+              {px}
+            </span>
+            <span className="spacing-bar-cell" role="cell">
+              <span
+                className="spacing-bar"
+                style={{ width: `var(${token})` }}
+                aria-hidden="true"
+              />
+            </span>
+            <span className="spacing-used" role="cell">
+              {usedFor}
+              {everyday ? <span className="spacing-everyday">Everyday</span> : null}
             </span>
           </div>
         ))}
       </div>
 
-      <hr className="poster-divider" />
-
-      <span className="poster-label type-eyebrow">Layout aliases</span>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "var(--space-4)",
-        }}
-      >
-        {SEMANTIC_SPACING.map(({ token, value, purpose }) => (
-          <div key={token}>
-            <code
-              style={{ fontSize: "var(--text-xs)", color: "var(--text-primary)" }}
-            >
+      <h3 className="sedge-subheading">Layout aliases</h3>
+      <div className="spacing-table" role="table" aria-label="Layout spacing aliases">
+        {ALIASES.map(({ token, value, usedFor }) => (
+          <div className="spacing-row spacing-row--alias" role="row" key={token}>
+            <code className="spacing-token" role="cell">
               {token}
             </code>
-            <p
-              className="type-supporting"
-              style={{ margin: "4px 0 0", color: "var(--text-secondary)" }}
-            >
-              {value} · {purpose}
-            </p>
+            <span className="spacing-px" role="cell">
+              {value}
+            </span>
+            <span className="spacing-used" role="cell">
+              {usedFor}
+            </span>
           </div>
         ))}
       </div>
+
+      <h3 className="sedge-subheading">In practice</h3>
+      <p>The vertical rhythm of every section on this page, top to bottom.</p>
+      <ol className="spacing-anatomy">
+        {ANATOMY.map(({ label, gap }) => (
+          <li key={label}>
+            {gap ? (
+              <span className="spacing-anatomy-gap">
+                <span className="spacing-anatomy-measure" aria-hidden="true" />
+                {gap}
+              </span>
+            ) : null}
+            <span className="spacing-anatomy-block">{label}</span>
+          </li>
+        ))}
+      </ol>
     </Section>
   );
 }

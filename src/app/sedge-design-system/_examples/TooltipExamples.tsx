@@ -36,7 +36,7 @@ import Tooltip from "@/components/ui/Tooltip";
 export default function TooltipExamples() {
   return (
     <section style={{ maxWidth: 960 }}>
-      <h3 className="type-eyebrow tooltip-examples-heading">Examples</h3>
+      <h3 className="sedge-subheading tooltip-examples-heading">Examples</h3>
 
       <div className="tooltip-demo-row">
         <div className="tooltip-demo-cell">
@@ -72,8 +72,7 @@ export default function TooltipExamples() {
           </Tooltip>
         </div>
       </div>
-      <hr className="poster-divider mt-4 mb-0" />
-      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
+      <h3 className="sedge-subheading">Usage</h3>
       <CodeBlock code={USAGE} className="mb-8" />
 
     </section>

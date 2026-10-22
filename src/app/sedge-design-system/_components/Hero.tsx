@@ -51,7 +51,7 @@ export default function Hero({ onExplore }: { onExplore: () => void }) {
     <section id='top' className="pt-8 relative mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-7xl flex-col justify-center overflow-hidden px-6 py-6">
       <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[3fr_1.5fr]">
         <div className="pt-5">
-          <h1 className="h-display">
+          <h1 className="h-display sedge-hero-title">
             Sedge
           </h1>
 
@@ -111,7 +111,7 @@ export default function Hero({ onExplore }: { onExplore: () => void }) {
             style={{ animationDuration: "6.8s", animationDelay: "1.6s" }}
           />
           <Shape
-            variant="peanut"
+            variant="arch"
             preserveAspectRatio="none"
             className="hero-float-rotated absolute bottom-0 -left-10 h-56 w-20 text-lemon-bold"
             style={{ animationDuration: "5s", animationDelay: "0.3s" }}

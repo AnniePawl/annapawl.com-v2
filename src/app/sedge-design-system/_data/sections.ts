@@ -121,15 +121,15 @@ export const SECTIONS: NavSection[] = [
     group: "Patterns",
   },
   {
-    id: "page-header",
-    title: "Page Header",
-    icon: CaseSensitive,
+    id: "post-layout",
+    title: "Post Layout",
+    icon: FileText,
     group: "Patterns",
   },
   {
-    id: "article-layout",
-    title: "Article Layout",
-    icon: FileText,
+    id: "editorial-header",
+    title: "Editorial Header",
+    icon: CaseSensitive,
     group: "Patterns",
   },
 ];

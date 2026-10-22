@@ -10,9 +10,9 @@ export default function AccordionSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="A single-open FAQ pattern for grouping related questions without the visual weight of separate cards. Thin dividers keep each row distinct, while one tone prop coordinates the divider, number, and control colors to suit each page."
+      lede="A single-open FAQ pattern for grouping related questions without the visual weight of separate cards."
+      description="Thin dividers keep each row distinct, while one tone prop coordinates the divider, number, and control colors to suit each page."
     >
-      <hr className="poster-divider mt-4 mb-0" />
       <AccordionExamples />
     </Section>
   );

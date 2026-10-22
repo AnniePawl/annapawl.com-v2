@@ -46,9 +46,8 @@ export default function AccordionExamples() {
         alignSelf: "flex-start",
       }}
     >
-      {/* <hr className="poster-divider mt-4 mb-0" /> */}
 
-      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Example</h3>
+      <h3 className="sedge-subheading">Example</h3>
 
       <Accordion items={FAQ_ITEMS} className="accordion-demo" tone={tone} />
 
@@ -78,8 +77,7 @@ export default function AccordionExamples() {
         </div>
       </fieldset>
 
-      <hr className="poster-divider mt-4 mb-0" />
-      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
+      <h3 className="sedge-subheading">Usage</h3>
       <CodeBlock code={USAGE} className="mb-8" />
     </div>
   );

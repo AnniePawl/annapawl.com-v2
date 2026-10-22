@@ -1,78 +1,50 @@
 /* Typography example layout. */
 
-.typo-scale-list {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-}
-
-.typo-scale-rail {
-  position: absolute;
-  top: 0.5rem;
-  bottom: 0.5rem;
-  left: 176px;
-  border-left: 2px dotted color-mix(in srgb, var(--text-primary) 45%, transparent);
-}
-
-.typo-scale-row {
-  display: grid;
-  grid-template-columns: 160px 32px 1fr;
-  align-items: center;
-  column-gap: 0;
-}
-
-.typo-scale-class {
-  font-family: var(--font-mono, ui-monospace, monospace);
-  font-size: var(--text-xs);
-  font-weight: var(--font-bold);
-}
-
-.typo-scale-meta {
+.typo-muted {
+  display: block;
   margin-top: 2px;
   color: var(--text-secondary);
-  font-size: var(--text-xs);
-  line-height: var(--leading-snug);
 }
 
-.typo-scale-dot {
-  position: relative;
-  justify-self: center;
-  width: 8px;
-  height: 8px;
-  border-radius: var(--radius-pill);
-  background: var(--indigo-soft);
+.typo-italic {
+  font-style: italic;
 }
 
-.typo-scale-sample {
-  margin: 0;
-  color: var(--text-primary);
-}
-
-.typo-grid-2 {
+/* Typeface */
+.typo-typeface {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-  gap: var(--space-6);
+  grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
+  align-items: end;
+  gap: var(--space-7);
+}
+
+.typo-typeface-aa {
+  font-size: clamp(7rem, 16vw, 12.5rem);
+  font-weight: var(--font-regular);
+  line-height: 0.8;
+  letter-spacing: -0.06em;
+  color: var(--text-primary);
 }
 
 .typo-typeface-name {
   margin: 0;
-  font-size: var(--text-5xl);
-  font-weight: var(--font-semibold);
-  line-height: var(--leading-tight);
-  letter-spacing: var(--tracking-tight);
+  font-size: 2.125rem;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
 }
 
-.typo-typeface-caption {
-  display: inline-block;
-  margin-top: var(--space-1);
-  color: var(--text-muted);
-  font-size: var(--text-xs);
+.typo-typeface-alphabet {
+  margin: var(--space-4) 0 var(--space-3);
+  font-size: 1.375rem;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  word-break: break-all;
 }
 
+/* Weight */
 .typo-weight-row {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--space-6) var(--space-5);
 }
 
@@ -80,53 +52,167 @@
   min-width: 0;
 }
 
+.typo-weight-item.is-muted {
+  opacity: 0.55;
+}
+
 .typo-weight-sample {
-  margin: 0;
-  font-size: var(--text-xl);
+  margin: 0 0 var(--space-2);
+  font-size: 2.5rem;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
 }
 
 .typo-weight-label {
-  color: var(--text-muted);
-  font-size: var(--text-xs);
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: var(--font-medium);
 }
 
-.typo-tracking-row {
+/* Scale: spec column | hairline | sample */
+/* Rows have no padding of their own — the cells do — so the vertical
+   hairline runs edge to edge and meets the row rules, like a table. */
+.typo-scale-list {
+  margin-top: calc(var(--space-6) * -1); /* sit right under the subheading rule */
+  border-bottom: 1px solid color-mix(in srgb, var(--text-primary) 20%, transparent);
+}
+
+.typo-scale-row {
+  display: grid;
+  grid-template-columns: 13.75rem minmax(0, 1fr);
+  gap: 0;
+}
+
+.typo-scale-row + .typo-scale-row {
+  border-top: 1px solid color-mix(in srgb, var(--text-primary) 14%, transparent);
+}
+
+.typo-scale-info {
+  padding: 1.625rem var(--space-6) 1.625rem 0;
+}
+
+.typo-scale-role {
+  display: block;
+  font-size: 0.9375rem;
+  font-weight: var(--font-medium);
+}
+
+.typo-scale-class {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+}
+
+.typo-scale-meta {
+  display: block;
+  margin-top: 6px;
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  line-height: 1.4;
+}
+
+.typo-scale-used {
+  display: block;
+  margin-top: 4px;
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  font-style: italic;
+}
+
+.typo-scale-sample-cell {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  justify-content: center;
+  min-width: 0;
+  padding: 1.625rem 0 1.625rem var(--space-6);
+  border-left: 1px solid color-mix(in srgb, var(--text-primary) 20%, transparent);
+}
+
+.typo-scale-sample {
+  margin: 0;
+  max-width: 36rem;
+  color: var(--text-primary);
+  overflow-wrap: anywhere;
+}
+
+.typo-scale-sample.type-title,
+.typo-scale-sample.type-section,
+.typo-scale-sample.type-lede {
+  max-width: none;
+}
+
+/* Keep the giant sample inside the column. */
+.typo-scale-sample.type-title {
+  font-size: clamp(3.5rem, 9vw, 7.5rem);
+}
+
+.typo-scale-sample + .typo-scale-sample {
+  margin-top: 6px;
+}
+
+.typo-scale-mark {
+  display: inline-block;
+  width: 0.42em;
+  height: 0.72em;
+  margin-left: 0.12em;
+  background: var(--section-tone, var(--emerald-soft));
+}
+
+/* The label sample is a real subheading, minus its spacing + rule. */
+.typo-scale-label-sample.sedge-subheading {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* Tracking */
+.typo-tracking-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-6);
 }
 
 .typo-tracking-sample {
-  margin: 0;
+  display: flex;
+  align-items: flex-end;
+  min-height: 2.75rem;
+  margin: 0 0 var(--space-3);
+  line-height: 1;
 }
 
-.typo-tracking-label {
-  color: var(--text-muted);
-  font-size: var(--text-xs);
+.typo-tracking-sample--tight {
+  font-size: 2.25rem;
+  white-space: nowrap;
+  letter-spacing: -0.06em;
+}
+
+.typo-tracking-sample--normal {
+  font-size: 1.375rem;
+  letter-spacing: 0;
 }
 
 @media (width < 40rem) {
-  .typo-scale-rail,
-  .typo-scale-dot {
-    display: none;
+  .typo-scale-list {
+    margin-top: calc(var(--space-5) * -1);
   }
 
+  .typo-typeface,
   .typo-scale-row {
     grid-template-columns: minmax(0, 1fr);
-    align-items: start;
-    row-gap: var(--space-2);
+    gap: var(--space-3);
   }
 
-  .typo-scale-sample {
-    overflow-wrap: anywhere;
+  .typo-scale-info {
+    padding: var(--space-4) 0 var(--space-2);
   }
 
-  .typo-grid-2 {
-    grid-template-columns: minmax(0, 1fr);
+  .typo-scale-sample-cell {
+    padding: var(--space-2) 0 var(--space-4) var(--space-4);
   }
 
-  .typo-weight-row {
+  .typo-weight-row,
+  .typo-tracking-row {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-5) var(--space-3);
   }
 }

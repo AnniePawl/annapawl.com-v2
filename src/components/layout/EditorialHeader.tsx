@@ -1,7 +1,7 @@
 import type { CSSProperties, ReactNode } from "react";
 import { cx } from "../../lib/cx";
 
-export interface PageHeaderColors {
+export interface EditorialHeaderColors {
   barText?: string;
   railBackground?: string;
   railText?: string;
@@ -10,11 +10,9 @@ export interface PageHeaderColors {
   titleText?: string;
   descriptionBackground?: string;
   descriptionText?: string;
-  accent?: string;
 }
 
-export interface PageHeaderProps {
-  variant?: "editorial" | "publication";
+export interface EditorialHeaderProps {
   collectionLabel?: string;
   barEnd?: string;
   railLabel?: string;
@@ -23,16 +21,12 @@ export interface PageHeaderProps {
   title: string;
   description?: string;
   meta?: ReactNode;
-  metaCenter?: ReactNode;
-  metaEnd?: ReactNode;
-  utilityStart?: ReactNode;
-  colors?: PageHeaderColors;
+  colors?: EditorialHeaderColors;
   headingLevel?: 1 | 2 | 3;
   className?: string;
 }
 
-export default function PageHeader({
-  variant = "editorial",
+export default function EditorialHeader({
   collectionLabel = "Digital garden",
   barEnd = "Garden archive",
   railLabel = "Garden archive",
@@ -41,13 +35,10 @@ export default function PageHeader({
   title,
   description,
   meta,
-  metaCenter,
-  metaEnd,
-  utilityStart,
   colors = {},
   headingLevel = 1,
   className,
-}: PageHeaderProps) {
+}: EditorialHeaderProps) {
   const Heading = headingLevel === 2 ? "h2" : headingLevel === 3 ? "h3" : "h1";
   const style = {
     "--editorial-header-bar-text": colors.barText ?? "var(--charcoal)",
@@ -60,59 +51,7 @@ export default function PageHeader({
       colors.descriptionBackground ?? "var(--mauve-soft)",
     "--editorial-header-description-text":
       colors.descriptionText ?? "var(--cherry-bold)",
-    "--publication-header-accent": colors.accent ?? "var(--red-bold)",
   } as CSSProperties;
-
-  if (variant === "publication") {
-    return (
-      <header className={cx("publication-page-header", className)} style={style}>
-        <div className="publication-page-header-utility">
-          {utilityStart ? (
-            <>
-              <div className="publication-page-header-utility-start">
-                {utilityStart}
-              </div>
-              <div className="publication-page-header-utility-end">
-                <span className="publication-page-header-collection">{collectionLabel}</span>
-                {description ? (
-                  <p className="publication-page-header-description">{description}</p>
-                ) : null}
-              </div>
-            </>
-          ) : (
-            <>
-              <div>
-                <span className="publication-page-header-collection">{collectionLabel}</span>
-                {description ? (
-                  <p className="publication-page-header-description">{description}</p>
-                ) : null}
-              </div>
-              <span className="publication-page-header-back">{barEnd}</span>
-            </>
-          )}
-        </div>
-
-        <div className="publication-page-header-stage">
-          {eyebrow ? (
-            <span className="publication-page-header-eyebrow">
-              <span className="publication-page-header-eyebrow-mark" aria-hidden="true" />
-              {eyebrow}
-            </span>
-          ) : null}
-          <Heading className="publication-page-header-title">
-            {title}
-            <span className="publication-page-header-title-mark" aria-hidden="true" />
-          </Heading>
-        </div>
-
-        <div className="publication-page-header-meta">
-          <span>{meta}</span>
-          <span>{metaCenter}</span>
-          <span>{metaEnd}</span>
-        </div>
-      </header>
-    );
-  }
 
   return (
     <header className={cx("editorial-page-header", className)} style={style}>

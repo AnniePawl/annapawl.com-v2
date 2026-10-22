@@ -16,14 +16,38 @@
   }
 }
 
+/* ---- Section heading ----
+   Title + group-colored block (the PostHeader title mark), with the
+   section icon + group label on the right. One tone per group, so the
+   color tells you where you are: Intro / Foundations / Components /
+   Patterns. Dark-mode tones are in theme.css. */
 .sedge-section-heading {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: flex-end;
   gap: var(--space-4);
   margin: 0 0 var(--space-5);
   padding-bottom: 14px;
-  border-bottom: 2px solid var(--text-primary);
+  border-bottom: 1px solid color-mix(in srgb, var(--text-primary) 58%, transparent);
+}
+
+/* Group tones — shared by section heading blocks/icons and the sidebar
+   icons (anything with data-group). Tones read on both cream and chocolate,
+   so no dark-mode overrides are needed. */
+[data-group="Intro"] {
+  --section-tone: var(--indigo-bold);
+}
+
+[data-group="Foundations"] {
+  --section-tone: var(--emerald-soft);
+}
+
+[data-group="Components"] {
+  --section-tone: var(--pink-bold);
+}
+
+[data-group="Patterns"] {
+  --section-tone: var(--blue-soft);
 }
 
 .sedge-section-heading-title {
@@ -31,29 +55,36 @@
   margin: 0;
   overflow-wrap: anywhere;
   font-family: var(--font-heading);
-  font-size: clamp(2.25rem, 5.5vw, 3.75rem);
-  font-weight: 680;
-  line-height: 0.95;
-  letter-spacing: -0.02em;
+  font-size: var(--type-section-size);
+  font-weight: var(--type-section-weight);
+  line-height: var(--type-section-leading);
+  letter-spacing: var(--type-section-tracking);
   color: var(--text-primary);
 }
 
-.sedge-section-heading-dot {
-  color: var(--indigo-bold);
+.sedge-section-heading-mark {
+  display: inline-block;
+  width: 0.42em;
+  height: 0.72em;
+  margin-left: 0.12em;
+  background: var(--section-tone, var(--indigo-soft));
 }
 
 .sedge-section-heading-group {
   display: inline-flex;
   flex-shrink: 0;
   align-items: center;
-  gap: 7px;
-  color: var(--indigo-bold);
+  gap: var(--space-2);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-weight: var(--font-medium);
 }
 
 .sedge-section-heading-icon {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
+  color: var(--section-tone);
 }
 
 @media (width < 40rem) {
@@ -80,11 +111,30 @@
 }
 
 
+/* Section lede — same treatment as the Bookshelf header lede
+   (.post-header-lede), sized for a section rather than a page. */
+.sedge-section-lede {
+  max-width: 50rem;
+  margin: var(--space-6) 0 var(--space-5);
+  color: var(--text-primary);
+  font-size: var(--type-lede-size);
+  line-height: var(--type-lede-leading);
+  letter-spacing: var(--type-lede-tracking);
+}
+
+@media (width < 40rem) {
+  .sedge-section-lede {
+    margin-top: var(--space-4);
+    font-size: 1.25rem;
+    line-height: 1.18;
+  }
+}
+
 .sedge-section-description,
 .sedge-section-intro > p:not(.type-supporting):not(.type-eyebrow),
 :where(.sedge-section-content) > p:not(.type-supporting):not(.type-eyebrow) {
   margin: 0 0 var(--space-4);
-  color: var(--text-secondary);
+  color: var(--text-primary);
   font-size: var(--text-base);
   line-height: var(--leading-normal);
 }
@@ -102,6 +152,77 @@
   margin-bottom: 0;
 }
 
+/* ---- Subheading ----
+   One uniform style for every subheading inside a section (States,
+   Usage, Examples…): a small block in the section's group tone — a
+   miniature of the section-heading mark — then the label in small,
+   widely spaced caps, with a light rule underneath and generous air
+   around it. --section-tone comes from data-group on the section. */
+.sedge-subheading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-9) 0 var(--space-6);
+  padding-bottom: 0.875rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--text-primary) 30%, transparent);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  line-height: var(--type-label-leading);
+  letter-spacing: var(--type-label-tracking);
+  text-transform: uppercase;
+}
+
+.sedge-subheading::before {
+  content: "";
+  flex: none;
+  width: 0.4375rem;
+  height: 0.6875rem;
+  background: var(--section-tone, var(--indigo-bold));
+}
+
+@media (width < 40rem) {
+  .sedge-subheading {
+    margin: var(--space-7) 0 var(--space-5);
+  }
+}
+
+/* ---- Numbered list ----
+   Ruled rows with a number in the section tone, the same rhythm as the
+   Approach principles. */
+.sedge-numbered-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: sedge-item;
+}
+
+.sedge-numbered-list > li {
+  display: grid;
+  grid-template-columns: var(--space-6) minmax(0, 1fr);
+  align-items: baseline;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--text-primary) 20%, transparent);
+  color: var(--text-primary);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  counter-increment: sedge-item;
+}
+
+.sedge-numbered-list > li::before {
+  content: counter(sedge-item, decimal-leading-zero);
+  color: var(--section-tone, var(--indigo-bold));
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  letter-spacing: 0.04em;
+}
+
+.sedge-numbered-list > li:first-child {
+  padding-top: 0;
+}
+
 .poster-divider {
   border: none;
   border-top: 1px solid color-mix(in srgb, var(--text-primary) 20%, transparent);
@@ -111,6 +232,12 @@
 .poster-label {
   display: block;
   margin-bottom: var(--space-4);
+}
+
+.sedge-hero-title {
+  font-weight: var(--font-regular);
+  line-height: 0.82;
+  letter-spacing: -0.065em;
 }
 
 /* ---- Hero decorative-shape float ----

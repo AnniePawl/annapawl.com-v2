@@ -1,180 +1,202 @@
 import CodeBlock from "../_components/CodeBlock";
 import "./TypographyExamples.css";
 
+// Every role here mirrors the ROLES tokens in foundations/typography.css —
+// the specs below are documentation, so keep them in sync if a token moves.
 const SCALE: {
+  role: string;
   className: string;
-  metaLines: string[];
+  spec: string;
+  usedIn: string;
   sample: string;
+  mark?: boolean;
 }[] = [
-    {
-      className: "h-display",
-      metaLines: ["Inter", "60–112px", "680", "-0.02em tracking"],
-      sample: "Squirrel",
-    },
-    {
-      className: "h1",
-      metaLines: ["Inter", "40–60px", "700", "-0.03em tracking"],
-      sample: "Saucy squirrel",
-    },
-    {
-      className: "h2",
-      metaLines: ["Inter", "30–36px", "700", "-0.02em tracking"],
-      sample: "Seriously saucy squirrel",
-    },
-    {
-      className: "h3",
-      metaLines: ["Inter", "20–24px", "600", "normal tracking"],
-      sample: "One seriously saucy squirrel",
-    },
-    {
-      className: "h4",
-      metaLines: ["Inter", "18–20px", "600", "normal tracking"],
-      sample: "One seriously saucy little squirrel",
-    },
-  ];
+  {
+    role: "Page title",
+    className: "type-title",
+    spec: "68–152px · 400 · −0.065em · 0.82",
+    usedIn: "Bookshelf, Drawing with Code headers",
+    sample: "Squirrel",
+    mark: true,
+  },
+  {
+    role: "Section heading",
+    className: "type-section",
+    spec: "36–60px · 400 · −0.055em · 0.88",
+    usedIn: "Every Sedge section",
+    sample: "Saucy squirrel",
+    mark: true,
+  },
+  {
+    role: "Lede",
+    className: "type-lede",
+    spec: "22–32px · 400 · −0.03em · 1.12",
+    usedIn: "Header + section intros",
+    sample: "One seriously saucy squirrel, last seen fleeing the bird feeder.",
+  },
+  {
+    role: "Heading",
+    className: "type-heading",
+    spec: "22–28px · 400 · −0.025em · 1.15",
+    usedIn: "Article sections, years, principles",
+    sample: "Seriously saucy squirrel",
+  },
+  {
+    role: "Body",
+    className: "type-body",
+    spec: "16px · 400 · 1.7",
+    usedIn: "Descriptions, article copy",
+    sample:
+      "One seriously saucy little squirrel, last seen fleeing the bird feeder. Armed with audacity and possibly an acorn.",
+  },
+  {
+    role: "Supporting",
+    className: "type-supporting",
+    spec: "13px · 400 · 1.7 · secondary",
+    usedIn: "Principle notes, small explanations",
+    sample:
+      "Do not attempt to apprehend — suspect is extremely squirrely and may be carrying snacks.",
+  },
+  {
+    role: "Label",
+    className: "type-label",
+    spec: "11.5px · 600 · caps · +0.16em",
+    usedIn: "Subheadings",
+    sample: "Nut job",
+  },
+  {
+    role: "Meta",
+    className: "type-meta",
+    spec: "12px · 400 · 1.35 · italic variant",
+    usedIn: "Details rules, captions, counts",
+    sample: "Oct 3, 2026 · 5 min read · 18 books",
+  },
+  {
+    role: "Code",
+    className: "type-mono",
+    spec: "13px · mono · 1.6",
+    usedIn: "Tokens, code blocks",
+    sample: "var(--squirrel-bold) · #8B87F5",
+  },
+];
 
 const WEIGHTS = [
-  { weight: "var(--font-light)", label: "Light · 300" },
-  { weight: "var(--font-regular)", label: "Regular · 400" },
-  { weight: "var(--font-medium)", label: "Medium · 500" },
-  { weight: "var(--font-semibold)", label: "Semibold · 600" },
-  { weight: "var(--font-bold)", label: "Bold · 700" },
-  { weight: "var(--font-extrabold)", label: "Extra Bold · 800" },
+  { weight: "var(--font-regular)", label: "Regular · 400", note: "The default. Titles, headings, ledes, body." },
+  { weight: "var(--font-medium)", label: "Medium · 500", note: "Nav, small titles, emphasis in UI." },
+  { weight: "var(--font-semibold)", label: "Semibold · 600", note: "Spaced-caps labels only." },
+  { weight: "var(--font-bold)", label: "Bold · 700", note: "Reserved. Use sparingly, on purpose.", muted: true },
 ];
 
 const TRACKING = [
-  { value: "var(--tracking-tight)", label: "Tight" },
-  { value: "var(--tracking-normal)", label: "Normal" },
-  { value: "var(--tracking-wide)", label: "Wide" },
+  {
+    label: "Tight · −0.065 to −0.025em",
+    note: "Anything 22px and up. The bigger, the tighter.",
+    className: "typo-tracking-sample--tight",
+  },
+  {
+    label: "Normal · 0",
+    note: "Body, supporting, meta.",
+    className: "typo-tracking-sample--normal",
+  },
+  {
+    label: "Wide · +0.16em",
+    note: "Spaced-caps labels only.",
+    className: "type-label typo-tracking-sample--wide",
+  },
 ];
 
 const USAGE = `
-/* implementation classes — foundations/typography.css */
-<h1 className="h-display">Sedge</h1>
-<h1 className="h1">Section heading</h1>
-<h2 className="h2">Subsection heading</h2>
-<p>Body copy uses the global paragraph style</p>
-<span className="type-eyebrow">Lil uppercase moment</span>
-<p className="type-supporting">Small, compact, extra line height</p>
-<span className="type-nav">Navigation label</span>
+/* foundations/typography.css — one class per role */
+<h1 className="type-title">Bookshelf</h1>
+<h2 className="type-section">Colors</h2>
+<p className="type-lede">These are the colors that make me happy.</p>
+<h3 className="type-heading">Playful, with purpose</h3>
+<p className="type-body">Body copy</p>
+<p className="type-supporting">A small explanation</p>
+<span className="type-label">Usage</span>
+<span className="type-meta">Oct 3, 2026 · 5 min read</span>
 `;
 
 export default function TypographyExamples() {
   return (
     <>
-      <hr className="poster-divider" />
-
       {/* Typeface */}
-      <div className="typo-typeface-section">
-        <span className="poster-label type-eyebrow">Typeface</span>
-        <p className="typo-typeface-name">Inter</p>
-        <span className="typo-typeface-caption">
-          Used everywhere, from display headings to body copy.
+      <h3 className="sedge-subheading">Typeface</h3>
+      <div className="typo-typeface">
+        <span className="typo-typeface-aa" aria-hidden="true">
+          Aa
         </span>
+        <div>
+          <p className="typo-typeface-name">Inter</p>
+          <p className="typo-typeface-alphabet">
+            ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789 &amp;!?@
+          </p>
+          <span className="type-meta typo-muted">
+            Used everywhere, from page titles to captions. Monospace only for
+            code and token values.
+          </span>
+        </div>
       </div>
-
-      <hr className="poster-divider" />
 
       {/* Weight */}
-      <div>
-        <span className="poster-label type-eyebrow">Weight</span>
-        <div className="typo-weight-row">
-          {WEIGHTS.map(({ weight, label }) => (
-            <div className="typo-weight-item" key={label}>
-              <p className="typo-weight-sample" style={{ fontWeight: weight }}>
-                Petrichor
-              </p>
-              <span className="typo-weight-label">{label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <hr className="poster-divider" />
-
-      {/* Scale */}
-      <span className="poster-label type-eyebrow">Scale</span>
-      <div className="typo-scale-list">
-        <div className="typo-scale-rail" aria-hidden="true" />
-        {SCALE.map(({ className, metaLines, sample }) => (
-          <div className="typo-scale-row" key={className}>
-            <div>
-              <code className="typo-scale-class">.{className}</code>
-              <div className="typo-scale-meta">{metaLines.join(" / ")}</div>
-            </div>
-            <span className="typo-scale-dot" aria-hidden="true" />
-            <p className={`${className} typo-scale-sample`}>{sample}</p>
+      <h3 className="sedge-subheading">Weight</h3>
+      <div className="typo-weight-row">
+        {WEIGHTS.map(({ weight, label, note, muted }) => (
+          <div className={muted ? "typo-weight-item is-muted" : "typo-weight-item"} key={label}>
+            <p className="typo-weight-sample" style={{ fontWeight: weight }}>
+              Petrichor
+            </p>
+            <span className="typo-weight-label">{label}</span>
+            <span className="type-meta typo-muted">{note}</span>
           </div>
         ))}
-
-        <div className="typo-scale-row">
-          <div>
-            <code className="typo-scale-class">p · Body</code>
-            <div className="typo-scale-meta">16px / 400 / Inter</div>
-          </div>
-          <span className="typo-scale-dot" aria-hidden="true" />
-          <p className="typo-scale-sample">
-            One seriously saucy little squirrel, last seen fleeing the bird feeder.
-          </p>
-        </div>
-
-        <div className="typo-scale-row">
-          <div>
-            <code className="typo-scale-class">.type-supporting</code>
-            <div className="typo-scale-meta">13px / 400 / 1.7 leading</div>
-          </div>
-          <span className="typo-scale-dot" aria-hidden="true" />
-          <p className="type-supporting typo-scale-sample">
-            One seriously saucy little squirrel, last seen fleeing the bird feeder. Armed with audacity and possibly an acorn. Do not attempt to apprehend—suspect is extremely squirrely.
-          </p>
-        </div>
-
-        <div className="typo-scale-row">
-          <div>
-            <code className="typo-scale-class">.type-eyebrow</code>
-            <div className="typo-scale-meta">12px / 600 / 0.12em tracking</div>
-          </div>
-          <span className="typo-scale-dot" aria-hidden="true" />
-          <p className="type-eyebrow typo-scale-sample">Nut job</p>
-        </div>
-
-        <div className="typo-scale-row">
-          <div>
-            <code className="typo-scale-class">.type-nav</code>
-            <div className="typo-scale-meta">14px / 500 / 1.5 leading</div>
-          </div>
-          <span className="typo-scale-dot" aria-hidden="true" />
-          <p className="type-nav typo-scale-sample">Foundations</p>
-        </div>
       </div>
 
-      <hr className="poster-divider" />
-
-      {/* Tracking + Usage */}
-      <div className="typo-grid-2">
-        <div>
-          <span className="poster-label type-eyebrow">Tracking</span>
-          <div className="typo-tracking-row">
-            {TRACKING.map(({ value, label }) => (
-              <div key={label}>
-                <p
-                  className="typo-tracking-sample"
-                  style={{ fontSize: "var(--text-lg)", letterSpacing: value }}
-                >
-                  Rubber Ducky
+      {/* Scale */}
+      <h3 className="sedge-subheading">Scale · by role</h3>
+      <div className="typo-scale-list">
+        {SCALE.map(({ role, className, spec, usedIn, sample, mark }) => (
+          <div className="typo-scale-row" key={className}>
+            <div className="typo-scale-info">
+              <span className="typo-scale-role">{role}</span>
+              <code className="typo-scale-class">.{className}</code>
+              <span className="typo-scale-meta">{spec}</span>
+              <span className="typo-scale-used">{usedIn}</span>
+            </div>
+            <div className="typo-scale-sample-cell">
+              {className === "type-label" ? (
+                <span className="sedge-subheading typo-scale-label-sample">{sample}</span>
+              ) : (
+                <p className={`${className} typo-scale-sample`}>
+                  {sample}
+                  {mark ? <span className="typo-scale-mark" aria-hidden="true" /> : null}
                 </p>
-                <span className="typo-tracking-label">{label}</span>
-              </div>
-            ))}
+              )}
+              {className === "type-meta" ? (
+                <p className="type-meta typo-scale-sample typo-italic">
+                  Last seen near the bird feeder, possibly plotting.
+                </p>
+              ) : null}
+            </div>
           </div>
-        </div>
-
-        <div>
-          <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
-          <CodeBlock code={USAGE} />
-        </div>
+        ))}
       </div>
 
+      {/* Tracking */}
+      <h3 className="sedge-subheading">Tracking · size sets the spacing</h3>
+      <div className="typo-tracking-row">
+        {TRACKING.map(({ label, note, className }) => (
+          <div key={label}>
+            <p className={`typo-tracking-sample ${className}`}>Rubber ducky</p>
+            <span className="typo-weight-label">{label}</span>
+            <span className="type-meta typo-muted">{note}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Usage */}
+      <h3 className="sedge-subheading">Usage</h3>
+      <CodeBlock code={USAGE} />
     </>
   );
 }

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Star } from "lucide-react";
 import { FAVORITE_TAG, type BookInfo, type BookLookup } from "../../lib/googleBooks";
 
 export interface ShelfEntry {
@@ -20,7 +19,7 @@ export default function BookTile({ lookup, info }: ShelfEntry) {
   const thumbnail = lookup.coverUrl ?? info?.thumbnail ?? null;
 
   const cover = (
-    <div className="relative aspect-[2/3] w-full overflow-hidden rounded-[var(--radius-lg)] bg-[var(--bg-subtle)] shadow-[var(--shadow-card)] transition-transform duration-[var(--motion-hover-duration)] ease-[var(--motion-hover-ease)] group-hover:-translate-y-1">
+    <div className="bookshelf-cover relative aspect-[2/3] w-full overflow-hidden transition-transform duration-[var(--motion-hover-duration)] ease-[var(--motion-hover-ease)] group-hover:-translate-y-1">
       {thumbnail ? (
         <Image
           src={thumbnail}
@@ -41,21 +40,18 @@ export default function BookTile({ lookup, info }: ShelfEntry) {
       )}
 
       {lookup.tags?.includes(FAVORITE_TAG) && (
-        // Star Ion for faves 
-        <div
-          className="absolute top-2 right-2 flex h-7 w-7 items-center justify-center rounded-[var(--radius-full)] bg-[var(--mauve-soft)] shadow-[var(--shadow-sm)]"
-          title="Favorite"
-        >
-          <Star className="h-4 w-4 fill-[var(--cherry-bold)] text-[var(--cherry-bold)]" />
-        </div>
+        // Favorites get a small ribbon tab in the page accent.
+        <span className="bookshelf-ribbon" title="Favorite">
+          <span className="sr-only">Favorite</span>
+        </span>
       )}
     </div>
   );
 
   const meta = (
-    <div className="mt-2">
-      <p className="truncate text-sm font-medium text-[var(--text-primary)]">{title}</p>
-      <p className="truncate text-xs text-[var(--text-muted)]">{author}</p>
+    <div className="bookshelf-tile-meta">
+      <p className="bookshelf-tile-title">{title}</p>
+      <p className="bookshelf-tile-author">{author}</p>
       {lookup.tags && lookup.tags.length > 0 && (
         <div className="mt-1 flex flex-wrap gap-1">
           {/* {lookup.tags.map((tag) => (

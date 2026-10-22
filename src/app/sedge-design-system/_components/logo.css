@@ -13,8 +13,8 @@
   font-family: var(--font-sans);
   font-size: var(--text-xl);
   font-weight: var(--font-regular);
-  line-height: var(--leading-normal);
-  letter-spacing: var(--tracking-normal);
+  line-height: 1;
+  letter-spacing: -0.04em;
   color: var(--text-primary);
 }
 

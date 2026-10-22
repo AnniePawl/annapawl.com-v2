@@ -66,8 +66,7 @@ export default function ModalExamples() {
 
   return (
     <section>
-      <hr className="poster-divider mt-4 mb-0" />
-      <span className="poster-label type-eyebrow">Try the modal</span>
+      <span className="sedge-subheading">Try the modal</span>
       <div className="modal-colorway-buttons">
         {COLORWAY_EXAMPLES.map((example) => (
           <Button
@@ -93,7 +92,7 @@ export default function ModalExamples() {
         }
         colorway={activeColorway ?? "pink-emerald"}
       />
-      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
+      <h3 className="sedge-subheading">Usage</h3>
 
       <CodeBlock code={USAGE} className="mb-8" />
     </section>

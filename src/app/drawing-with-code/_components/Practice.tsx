@@ -19,15 +19,15 @@ const DEFAULT_CSS = `body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  margin: 0;
-  background-color: #fffcf7;
+  margin: 130px 0 0 0;
+  background-color: #D1E3FF;
 }
 
 .rainbow {
   width: 20vh;
   height: 20vh;
   border-radius: 50%;
-  background-color: #fffcf7;
+  background-color: var(--sky-soft);
   box-shadow:
     0 0 0 1.5em #dac5ff,
     0 0 0 3.5em #bcc2ff,

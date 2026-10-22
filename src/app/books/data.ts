@@ -11,13 +11,14 @@ import type { BookLookup } from "../../lib/googleBooks";
 export const booksByYear: Record<number, BookLookup[]> = {
   2026: [
     // TODO(anna): swap these for your real 2026 list.
-    { title: "Open Throat", author: "Henry Hoke", tags: ["Literary Fiction", "LGBTQ+", "Book Club"] },
-    { title: "Martyr", author: "Kaveh Akbar", tags: ["Literary Fiction", "Book Club"] },
-    { title: "Betty", author: "Tiffany McDaniel", volumeId:"hOO3DwAAQBAJ", tags: ["Favorites", "Made me cry", "Literary Fiction", "Historical Fiction", "Book Club"] },
+    { title: "Open Throat", volumeId:"SZyDEAAAQBAJ", author:"Henry Hoke", tags: ["Literary Fiction", "LGBTQ+", "Book Club"] },
+    { title: "Martyr", volumeId:"uRC7EAAAQBAJ", author: "Kaveh Akbar", tags: ["Literary Fiction", "LGBTQ+", "Book Club"] },
+    { title: "Betty", author: "Tiffany McDaniel", volumeId:"hOO3DwAAQBAJ", tags: ["Favorites", "Literary Fiction", "Made me cry",  "Historical Fiction", "Book Club"] },
     { title: "Klara and the Sun", author: "Kazuo Ishiguro", volumeId:"S7jrDwAAQBAJ", tags: ["Science Fiction", "Literary Fiction", "Dystopian"] },
-    { title: "Piranesi", author: "Susanna Clarke", tags: ["Favorites", "Fantasy", "Literary Fiction", "Book Club"] },
+    { title: "Piranesi", volumeId:"MUMIEAAAQBAJ", author: "Susanna Clarke", tags: ["Favorites", "Fantasy", "Literary Fiction", "Book Club"] },
     { title: "Ready Player One", author: "Ernest Cline", tags: ["Science Fiction", "Dystopian"] },
-    { title: "The Lost City of Z", author: "David Grann", volumeId: "QPih33JBeMwC", tags: ["Adventure", "History"] },
+    { title: "The Lost City of Z", author: "David Grann", volumeId: "QPih33JBeMwC", tags: ["Adventure", "History", "Nonfiction"] },
+    { title: "Into Thin Air", author: "Jon Krakauer", volumeId:"3FONDQAAQBAJ", tags: ["Adventure", "Survival", "Memoir", "Nonfiction"] },
     { title: "The Great Believers", author: "Rebecca Makkai", tags: ["Favorites", "Literary Fiction", "Historical Fiction", "LGBTQ+"] },
     {
       title: "Project Hail Mary",
@@ -27,8 +28,9 @@ export const booksByYear: Record<number, BookLookup[]> = {
         "https://play.google.com/books/content/images/frontcover/nxyOEAAAQBAJ?fife=w480-h690",
       tags: ["Favorites", "Science Fiction", "Adventure"],
     },
-    { title: "Endurance", author: "Alfred Lansing", volumeId: "WOEZAwAAQBAJ", tags: ["Adventure", "History"] },
+    { title: "Endurance", author: "Alfred Lansing", volumeId: "WOEZAwAAQBAJ", tags: ["Adventure", "Nonfiction", "Survival", "History"] },
     { title: "Fourth Wing", author: "Rebecca Yarros", volumeId:"E-OLEAAAQBAJ", tags: ["Fantasy", "Romance"] },
+    { title: "Iron Flame", author: "Rebecca Yarros", volumeId:"xIS9EAAAQBAJ", tags: ["Fantasy", "Romance"] },
     {
       title: "Blindness",
       author: "José Saramago",

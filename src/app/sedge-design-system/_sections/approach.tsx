@@ -25,18 +25,22 @@ const PRINCIPLES = [
 
 export default function ApproachSection() {
   return (
-    <Section id={meta.id} heading={meta.title} icon={meta.icon}>
+    <Section
+      id={meta.id}
+      heading={meta.title}
+      icon={meta.icon}
+      lede="I’m drawn to the balance between personality and precision — work that feels expressive and human, while still considered in every detail."
+    >
       <div className="sedge-section-intro">
         <p>
-       I’m drawn to the balance between personality and precision — work that feels expressive and human, while still considered in every detail. I love playfulness, color, and unexpected moments that give an interface a sense of character and charm.
+          I love playfulness, color, and unexpected moments that give an interface a sense of character and charm.
         </p>
         <p>
-      For this project, my design system is a foundation rather than a strict set of rules: structured enough to create consistency, but flexible enough to experiment, try something funky, or break a rule when it makes the experience better. The goal isn’t to smooth out every irregularity, but to create a system where personality and precision can comfortably coexist.
+          For this project, my design system is a foundation rather than a strict set of rules: structured enough to create consistency, but flexible enough to experiment, try something funky, or break a rule when it makes the experience better. The goal isn’t to smooth out every irregularity, but to create a system where personality and precision can comfortably coexist.
         </p>
-
       </div>
       <div className="approach-principles">
-        <h3 className="approach-label type-eyebrow">Four guiding principles</h3>
+        <h3 className="approach-label sedge-subheading">Four guiding principles</h3>
         <ol className="approach-list">
           {PRINCIPLES.map(({ title, body }, i) => (
             <li className="approach-principle" key={title}>

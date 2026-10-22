@@ -24,7 +24,8 @@ export default function PageShellSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="The page shell is invisible layout scaffolding: no border, radius, or background. It keeps content centered inside a shared maximum width, adds responsive side gutters, and provides equal spacing at the top and bottom of the page."
+      lede="The page shell is invisible layout scaffolding: no border, radius, or background."
+      description="It keeps content centered inside a shared maximum width, adds responsive side gutters, and provides equal spacing at the top and bottom of the page."
     >
       <PageShell>
         <span className="type-eyebrow">Inside the page shell</span>
@@ -34,8 +35,7 @@ export default function PageShellSection() {
         </p>
       </PageShell>
 
-      <hr className="poster-divider" />
-      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
+      <h3 className="sedge-subheading">Usage</h3>
       <CodeBlock code={USAGE} />
     </Section>
   );

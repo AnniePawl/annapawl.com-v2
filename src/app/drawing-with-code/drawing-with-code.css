@@ -24,7 +24,6 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0;
-
   width: 100%;
   max-width: 56rem;
   margin-inline: auto;
@@ -587,16 +586,84 @@
   font-size: var(--text-base);
   font-weight: var(--font-bold);
   line-height: var(--leading-snug);
-  color: var(--indigo-bold);
+  color: var(--emerald-bold);
 }
 
-.dwc-page .publication-article-section>p+p {
+.dwc-page .post-section > p + p {
   margin-top: var(--space-4);
 }
 
 .dwc-page .dwc-code-figure,
 .dwc-page .dwc-practice {
   margin-top: var(--space-5);
+}
+
+.dwc-page .post-section p code {
+  padding: 0.06em 0.22em;
+  border-radius: 0;
+  background: var(--neutral-100);
+  color: var(--neutral-900);
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  line-height: 1;
+}
+
+.dwc-page .post-section p strong {
+  font-weight: var(--font-bold);
+}
+
+.dwc-circle-example {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  align-items: stretch;
+  margin-top: var(--space-5);
+}
+
+.dwc-circle-example .dwc-code-figure {
+  margin-top: 0;
+}
+
+.dwc-circle-demo {
+  display: grid;
+  min-height: 13rem;
+  place-items: center;
+  padding: var(--space-5);
+  /* border: 1px solid var(--border-subtle); */
+  border-radius: var(--radius-lg);
+  background: var(--bg-default);
+}
+
+.dwc-circle-example-outer {
+  display: grid;
+  width: min(11.25rem, 72vw);
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--plum-bold);
+}
+
+.dwc-circle-example-inner {
+  width: 52%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--amber-bold);
+}
+
+@media (min-width: 700px) {
+  .dwc-circle-example {
+    grid-template-columns: minmax(13rem, 0.75fr) minmax(0, 1.5fr);
+  }
+
+  .dwc-circle-example .dwc-code-figure,
+  .dwc-circle-example .dwc-code-figure pre {
+    height: 100%;
+  }
+
+  .dwc-circle-example .dwc-code-figure pre {
+    display: flex;
+    align-items: center;
+  }
 }
 
 .dwc-code-figure {
@@ -654,7 +721,7 @@
 
 @media (min-width: 640px) {
   .dwc-editor:first-child {
-    border-right: 1px solid var(--border-subtle);
+    border-right: 2px solid var(--sky-soft);
     border-bottom: none;
   }
 }
@@ -664,10 +731,8 @@
   font-weight: var(--font-bold);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-
   padding: var(--space-2) var(--space-3);
-
-  background: var(--indigo-soft);
+  background: var(--sky-soft);
   color: var(--text-primary);
 }
 
@@ -675,12 +740,22 @@
   font-size: 13px;
 }
 
+.dwc-editor-codemirror .cm-editor,
+.dwc-editor-codemirror .cm-gutters {
+  background: var(--charcoal);
+}
+
+.dwc-editor-codemirror .cm-gutters {
+  border-right-color: var(--neutral-700);
+  color: var(--neutral-500);
+}
+
 .dwc-practice-preview {
   display: block;
   width: 100%;
-  height: 220px;
+  height: 255px;
   border: none;
-  border-top: 1px solid var(--border-subtle);
+  border-top: 2px solid var(--sky-soft);
   background: var(--bg-default);
 }
 

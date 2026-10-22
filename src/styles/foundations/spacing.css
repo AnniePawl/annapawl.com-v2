@@ -17,4 +17,7 @@
      decisions. Component internals continue to use the numbered scale. */
   --page-gutter: clamp(var(--space-4), 3vw, var(--space-5));
   --section-gap: var(--space-7);
+  /* Gap between a sticky rail and the main column (Bookshelf tag rail,
+     post contents rail). */
+  --column-gap: clamp(var(--space-7), 6vw, var(--space-10));
 }

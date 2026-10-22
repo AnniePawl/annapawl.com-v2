@@ -39,7 +39,7 @@ export default function ButtonStates() {
   return (
     <section>
 
-      <h3 className='type-eyebrow' style={{ marginBottom: 16 }}>Default Button</h3>
+      <h3 className="sedge-subheading">Default Button</h3>
 
       <div className="button-state-grid">
         <State label="Enabled">
@@ -58,9 +58,8 @@ export default function ButtonStates() {
           <Button data-state="pressed" endIcon={<ArrowRight />}>Button</Button>
         </State>
       </div>
-      <hr className="poster-divider mt-4 mb-0" />
 
-      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Custom Examples</h3>
+      <h3 className="sedge-subheading">Custom Examples</h3>
 
       {/* Tone 1 examples */}
       <div className="button-state-grid">
@@ -135,8 +134,7 @@ export default function ButtonStates() {
         </div>
       </div>
 
-      <hr className="poster-divider mt-4 mb-0" />
-      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Button Sizes</h3>
+      <h3 className="sedge-subheading">Button Sizes</h3>
 
       <div className="button-size-row">
         <State label="Small">
@@ -151,8 +149,7 @@ export default function ButtonStates() {
           <Button size="lg">Large</Button>
         </State>
       </div>
-      <hr className="poster-divider mt-4 mb-0" />
-      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
+      <h3 className="sedge-subheading">Usage</h3>
       <CodeBlock code={USAGE} className="mb-8" />
     </section>
   );

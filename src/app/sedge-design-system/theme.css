@@ -184,32 +184,17 @@
   }
 }
 
-/* Sidebar icons follow the page theme. */
+/* Sidebar icons take their group's tone (data-group, see section.css). */
 .sedge-sidebar-icon {
-  color: var(--indigo-bold);
-}
-
-[data-sedge-theme="dark"] .sedge-sidebar-icon {
-  color: var(--indigo-soft);
+  color: var(--section-tone, var(--indigo-soft));
 }
 
 [data-sedge-theme="dark"] .type-eyebrow {
   color: var(--indigo-soft);
 }
 
-[data-sedge-theme="dark"] .sedge-section-heading-group {
-  color: var(--indigo-soft);
-}
+/* Approach label + numbers stay indigo-bold in both themes, matching the
+   Intro section-heading block (approach.css). */
 
-/* ---- Approach section: "Four guiding principles" label + 01-04 numbers ----
-   Bold indigo in light mode (approach.css), soft indigo on the dark
-   background, same as the section-heading label above. */
-[data-sedge-theme="dark"] .approach-label,
-[data-sedge-theme="dark"] .approach-number {
-  color: var(--indigo-soft);
-}
 
-/* ---- Spacing section: scale example bars (spacing.css) ---- */
-[data-sedge-theme="dark"] .spacing-bar {
-  background: var(--indigo-soft);
-}
+

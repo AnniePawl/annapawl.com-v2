@@ -1,0 +1,124 @@
+/* Icons section — flat, ruled cells (same table language as Typography). */
+
+.icon-table {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: calc(var(--space-6) * -1); /* sit right under the subheading rule */
+  border-bottom: 1px solid color-mix(in srgb, var(--text-primary) 20%, transparent);
+}
+
+.icon-table-cell {
+  min-width: 0;
+  padding: var(--space-6) var(--space-5);
+}
+
+.icon-table-cell + .icon-table-cell {
+  border-left: 1px solid color-mix(in srgb, var(--text-primary) 20%, transparent);
+}
+
+.icon-table-cell:first-child {
+  padding-left: 0;
+}
+
+.icon-size-preview,
+.icon-context-preview {
+  display: flex;
+  align-items: center;
+  min-height: 4rem;
+  margin-bottom: var(--space-4);
+}
+
+/* Sample icons take the section's group tone. */
+.icon-size-preview svg {
+  color: var(--section-tone, var(--emerald-soft));
+}
+
+.icon-table-label {
+  display: block;
+  color: var(--text-primary);
+  font-size: 0.9375rem;
+  font-weight: var(--font-medium);
+}
+
+.icon-table-code {
+  display: block;
+  margin-top: 4px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+}
+
+.icon-table-note {
+  display: block;
+  margin-top: 4px;
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+}
+
+.icon-library-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: var(--space-4);
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.icon-library-link:hover {
+  text-decoration-color: var(--section-tone, var(--emerald-soft));
+  text-decoration-thickness: 2px;
+}
+
+/* In context */
+.icon-context-pair {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text-primary);
+}
+
+.icon-context-pair--nav {
+  font-size: var(--text-sm);
+}
+
+.icon-context-pair--nav svg {
+  color: var(--section-tone, var(--emerald-soft));
+}
+
+.icon-context-pair--meta {
+  font-size: var(--text-xs);
+}
+
+.icon-context-preview--colors {
+  gap: var(--space-4);
+  color: var(--text-primary);
+}
+
+.icon-context-tone {
+  color: var(--section-tone, var(--emerald-soft));
+}
+
+.icon-context-dark {
+  display: inline-flex;
+  padding: var(--space-2);
+  background: var(--chocolate-bold);
+  color: var(--cream);
+}
+
+@media (width < 40rem) {
+  .icon-table {
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: calc(var(--space-5) * -1);
+  }
+
+  .icon-table-cell,
+  .icon-table-cell:first-child {
+    padding: var(--space-5) 0;
+  }
+
+  .icon-table-cell + .icon-table-cell {
+    border-left: 0;
+    border-top: 1px solid color-mix(in srgb, var(--text-primary) 14%, transparent);
+  }
+}

@@ -1,12 +1,12 @@
-import PageHeader from "../../../components/layout/PageHeader";
+import EditorialHeader from "../../../components/layout/EditorialHeader";
 import CodeBlock from "../_components/CodeBlock";
 import Section from "../_components/Section";
 import { SECTIONS } from "../_data/sections";
 import "./patterns.css";
 
-const meta = SECTIONS.find((section) => section.id === "page-header")!;
+const meta = SECTIONS.find((section) => section.id === "editorial-header")!;
 
-const USAGE = `<PageHeader
+const USAGE = `<EditorialHeader
   collectionLabel="Digital garden"
   barEnd="Reading archive"
   railLabel="Reading archive"
@@ -26,31 +26,19 @@ const USAGE = `<PageHeader
   }}
 />`;
 
-const PUBLICATION_USAGE = `<PageHeader
-  variant="publication"
-  collectionLabel="The Bookshelf"
-  barEnd="← All notes"
-  eyebrow="Notes, CSS art"
-  title="Drawing with Code"
-  description="A record of what I’ve read, what stayed with me, and what I’d happily press into someone else’s hands."
-  meta="Oct 3, 2026 · 4 min read"
-  metaCenter="Filed under: CSS, Illustration, Front-end"
-  metaEnd="Share"
-  colors={{ accent: "var(--red-bold)" }}
-/>`;
-
-export default function PageHeaderSection() {
+export default function EditorialHeaderSection() {
   return (
     <Section
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="A bold, highly customizable header I designed for pages across my digital garden. It pairs an editorial structure with plenty of personality, and each element can be recolored using design-system tokens—giving every page its own look while keeping the overall experience cohesive."
+      lede="A bold, customizable header for collection and archive pages across the digital garden."
+      description="Its colors can change by page while its editorial structure keeps the experience cohesive."
     >
-      <span className="poster-label type-eyebrow">Examples</span>
-      <div className="page-header-examples">
-        <div className="pattern-preview pattern-preview--page-header">
-          <PageHeader
+      <span className="sedge-subheading">Examples</span>
+      <div className="editorial-header-examples">
+        <div className="pattern-preview pattern-preview--editorial-header">
+          <EditorialHeader
             collectionLabel="Digital garden"
             barEnd="Reading archive"
             railLabel="Reading archive"
@@ -62,8 +50,8 @@ export default function PageHeaderSection() {
           />
         </div>
 
-        <div className="pattern-preview pattern-preview--page-header">
-          <PageHeader
+        <div className="pattern-preview pattern-preview--editorial-header">
+          <EditorialHeader
             collectionLabel="Digital garden"
             barEnd="Field notes"
             railLabel="Field notes"
@@ -84,27 +72,12 @@ export default function PageHeaderSection() {
             headingLevel={3}
           />
         </div>
-
-        <div className="pattern-preview pattern-preview--publication-header">
-          <PageHeader
-            variant="publication"
-            collectionLabel="The Bookshelf"
-            barEnd="← All notes"
-            eyebrow="Notes, CSS art"
-            title="Drawing with Code"
-            description="A record of what I’ve read, what stayed with me, and what I’d happily press into someone else’s hands."
-            meta="Oct 3, 2026 · 4 min read"
-            metaCenter="Filed under: CSS, Illustration, Front-end"
-            metaEnd="Share"
-            colors={{ accent: "var(--red-bold)" }}
-            headingLevel={3}
-          />
-        </div>
       </div>
 
-      <hr className="poster-divider" />
-      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
-      <CodeBlock code={`${USAGE}\n\n${PUBLICATION_USAGE}`} />
+      <h3 className="sedge-subheading">
+        Usage
+      </h3>
+      <CodeBlock code={USAGE} />
     </Section>
   );
 }

@@ -1,7 +1,16 @@
-import { TrafficCone, Puzzle, Bug } from "lucide-react";
+import {
+  ArrowUpRight,
+  BookOpen,
+  Bug,
+  Clock,
+  Heart,
+  Puzzle,
+  TrafficCone,
+} from "lucide-react";
 import CodeBlock from "../_components/CodeBlock";
 import Section from "../_components/Section";
 import { SECTIONS } from "../_data/sections";
+import "./icons.css";
 
 const meta = SECTIONS.find((section) => section.id === "icons")!;
 
@@ -27,62 +36,72 @@ export default function IconsSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="Icons come from Lucide: simple, friendly, and consistent without asking me to draw hundreds of tiny pictures. They inherit the color around them and use three shared sizes to stay aligned across labels, buttons, and controls."
+      lede="Icons come from Lucide: simple, friendly, and consistent without asking me to draw hundreds of tiny pictures."
+      description="They inherit the color around them and use three shared sizes to stay aligned across labels, buttons, and controls."
     >
-      <hr className="poster-divider mt-4 mb-0" />
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))",
-          gap: "var(--space-4)",
-        }}
-      >
+      <h3 className="sedge-subheading">Sizes</h3>
+      <div className="icon-table">
         {SIZES.map(({ className, label, value, Icon }) => (
-          <div
-            key={className}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "var(--space-3)",
-              minHeight: 120,
-              padding: "var(--space-4)",
-              border: "var(--border-thin) solid var(--border-subtle)",
-              borderRadius: "var(--radius-md)",
-            }}
-          >
-            <Icon
-              className={className}
-              style={{ color: "var(--indigo-bold)" }}
-              aria-hidden="true"
-            />
-            <div style={{ textAlign: "center" }}>
-              <p style={{ margin: 0, fontWeight: "var(--font-semibold)" }}>
-                {label}
-              </p>
-              <code style={{ fontSize: "var(--text-xs)", color: "var(--text-muted)" }}>
-                {className} · {value}
-              </code>
+          <div className="icon-table-cell" key={className}>
+            <div className="icon-size-preview">
+              <Icon className={className} aria-hidden="true" />
             </div>
+            <span className="icon-table-label">{label}</span>
+            <code className="icon-table-code">
+              {className} · {value}
+            </code>
           </div>
         ))}
       </div>
+      <a
+        className="icon-library-link type-meta"
+        href="https://lucide.dev/icons/"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Browse all icons at lucide.dev
+        <ArrowUpRight className="icon-sm" aria-hidden="true" />
+      </a>
 
-      <hr className="poster-divider" />
-      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
+      <h3 className="sedge-subheading">In context</h3>
+      <div className="icon-table">
+        <div className="icon-table-cell">
+          <div className="icon-context-preview">
+            <span className="icon-context-pair icon-context-pair--nav">
+              <BookOpen className="icon-sm" aria-hidden="true" />
+              Bookshelf
+            </span>
+          </div>
+          <span className="icon-table-label">With labels</span>
+          <span className="icon-table-note">Small · beside 14px nav text</span>
+        </div>
+
+        <div className="icon-table-cell">
+          <div className="icon-context-preview">
+            <span className="icon-context-pair icon-context-pair--meta">
+              <Clock className="icon-sm" aria-hidden="true" />
+              5 min read
+            </span>
+          </div>
+          <span className="icon-table-label">With meta</span>
+          <span className="icon-table-note">Small · beside 12px details</span>
+        </div>
+
+        <div className="icon-table-cell">
+          <div className="icon-context-preview icon-context-preview--colors">
+            <Heart className="icon-md" aria-hidden="true" />
+            <Heart className="icon-md icon-context-tone" aria-hidden="true" />
+            <span className="icon-context-dark">
+              <Heart className="icon-md" aria-hidden="true" />
+            </span>
+          </div>
+          <span className="icon-table-label">Color</span>
+          <span className="icon-table-note">Inherits currentColor</span>
+        </div>
+      </div>
+
+      <h3 className="sedge-subheading">Usage</h3>
       <CodeBlock code={USAGE} />
-      <p className="type-supporting pt-5" style={{ margin: "0 0 var(--space-5)" }}>
-
-        <a
-          href="https://lucide.dev/icons/"
-          target="_blank"
-          rel="noreferrer"
-          style={{ color: "var(--indigo-bold)", textDecoration: "underline" }}
-        >
-          Browse the Lucide icon library
-        </a>
-      </p>
     </Section>
   );
 }

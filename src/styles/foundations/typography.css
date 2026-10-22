@@ -18,6 +18,7 @@
   --text-xs: 0.75rem;   /* 12 */
   --text-sm: 0.875rem;  /* 14 */
   --text-base: 1rem;    /* 16 */
+  --text-md: var(--text-base); /* alias — was referenced but never defined */
   --text-lg: 1.125rem;  /* 18 */
   --text-xl: 1.25rem;   /* 20 */
   --text-2xl: 1.5rem;   /* 24 */
@@ -37,7 +38,48 @@
   --tracking-tight: -0.05em;
   --tracking-normal: 0em;
   --tracking-wide: 0.05em;
-  --tracking-wider: 1em;
+  --tracking-wider: 0.16em; /* spaced-caps labels (was 1em, a typo) */
+
+  /* ---- ROLES ----
+     How type is actually used across the garden. Mostly regular weight:
+     hierarchy comes from size and spacing — the bigger the type, the
+     tighter the tracking; small labels get spaced out. Components point
+     at these tokens (post-layout.css, section.css, books.css…). */
+
+  /* Page title — PostHeader (Bookshelf, Drawing with Code) */
+  --type-title-size: clamp(4.25rem, 10vw, 9.5rem);
+  --type-title-weight: var(--font-regular);
+  --type-title-leading: 0.82;
+  --type-title-tracking: -0.065em;
+
+  /* Section heading — every Sedge section */
+  --type-section-size: clamp(2.25rem, 5.5vw, 3.75rem);
+  --type-section-weight: var(--font-regular);
+  --type-section-leading: 0.88;
+  --type-section-tracking: -0.055em;
+
+  /* Lede — the bigger intro line under page + section headings */
+  --type-lede-size: clamp(1.375rem, 2.5vw, 2rem);
+  --type-lede-weight: var(--font-regular);
+  --type-lede-leading: 1.12;
+  --type-lede-tracking: -0.03em;
+
+  /* Heading — article sections, bookshelf years, principle titles */
+  --type-heading-size: clamp(1.375rem, 2.5vw, 1.75rem);
+  --type-heading-weight: var(--font-regular);
+  --type-heading-leading: 1.15;
+  --type-heading-tracking: -0.025em;
+
+  /* Label — spaced-caps subheadings */
+  --type-label-size: 0.71875rem;
+  --type-label-weight: var(--font-semibold);
+  --type-label-leading: 1.3;
+  --type-label-tracking: var(--tracking-wider);
+
+  /* Meta — details rules, captions, counts */
+  --type-meta-size: var(--text-xs);
+  --type-meta-weight: var(--font-regular);
+  --type-meta-leading: 1.35;
 
   /* DISPLAY / HERO — the live Sedge wordmark treatment. clamp() keeps
      it at 60px on narrow screens, lets it grow with the viewport, and
@@ -162,7 +204,69 @@ p {
   letter-spacing: var(--type-body-tracking);
 }
 
-/* SEMANTIC ROLES */
+/* ROLE CLASSES — see the ROLES tokens above */
+.type-title {
+  font-family: var(--font-sans);
+  font-size: var(--type-title-size);
+  font-weight: var(--type-title-weight);
+  line-height: var(--type-title-leading);
+  letter-spacing: var(--type-title-tracking);
+}
+
+.type-section {
+  font-family: var(--font-sans);
+  font-size: var(--type-section-size);
+  font-weight: var(--type-section-weight);
+  line-height: var(--type-section-leading);
+  letter-spacing: var(--type-section-tracking);
+}
+
+.type-lede {
+  font-family: var(--font-sans);
+  font-size: var(--type-lede-size);
+  font-weight: var(--type-lede-weight);
+  line-height: var(--type-lede-leading);
+  letter-spacing: var(--type-lede-tracking);
+}
+
+.type-heading {
+  font-family: var(--font-sans);
+  font-size: var(--type-heading-size);
+  font-weight: var(--type-heading-weight);
+  line-height: var(--type-heading-leading);
+  letter-spacing: var(--type-heading-tracking);
+}
+
+.type-body {
+  font-family: var(--type-body-family);
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-leading);
+}
+
+.type-label {
+  font-family: var(--font-sans);
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  line-height: var(--type-label-leading);
+  letter-spacing: var(--type-label-tracking);
+  text-transform: uppercase;
+}
+
+.type-meta {
+  font-family: var(--font-sans);
+  font-size: var(--type-meta-size);
+  font-weight: var(--type-meta-weight);
+  line-height: var(--type-meta-leading);
+}
+
+.type-mono {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+/* SEMANTIC ROLES (older; .type-eyebrow is superseded by .type-label) */
 .type-eyebrow {
   font-family: var(--type-eyebrow-family);
   font-size: var(--type-eyebrow-size);

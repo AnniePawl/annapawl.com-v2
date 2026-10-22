@@ -1,24 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import { ChartColumn } from "lucide-react";
-import Modal from "../../components/ui/Modal";
+import Drawer from "../../components/ui/Drawer";
+import type { TagCount } from "./BookshelfBrowser";
 import type { ReadingStats } from "./stats";
+import { tagTone } from "./tagTones";
 
 interface StatsButtonProps {
   stats: ReadingStats;
+  tags: TagCount[];
 }
 
 /**
- * Trigger + modal for reading stats. Split out as its own client
- * component because BooksPage (page.tsx) is an async server component —
- * open/close state has to live somewhere that can use useState. The
- * numbers themselves are computed server-side in page.tsx (see stats.ts)
- * and just passed in as a prop.
+ * Trigger + side drawer for reading stats. A client component because
+ * BooksPage (page.tsx) is an async server component; the numbers are
+ * computed server-side (stats.ts) and passed in.
  */
-export default function StatsButton({ stats }: StatsButtonProps) {
+export default function StatsButton({ stats, tags }: StatsButtonProps) {
   const [open, setOpen] = useState(false);
   const missingPageData = stats.totalBooks - stats.booksWithPageData;
+
+  // Most-read tags first; bars are scaled to the biggest count.
+  const byCount = [...tags].sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+  const max = byCount[0]?.count ?? 1;
 
   return (
     <>
@@ -26,82 +31,82 @@ export default function StatsButton({ stats }: StatsButtonProps) {
         type="button"
         onClick={() => setOpen(true)}
         className="bookshelf-stats-trigger focus-ring"
-        aria-label="View reading stats"
       >
-        <ChartColumn className="h-4 w-4" />
+        <ChartColumn aria-hidden="true" />
+        Reading stats
       </button>
 
-      <Modal
+      <Drawer
         open={open}
         onClose={() => setOpen(false)}
         eyebrow="Reading archive"
-        title="Your shelf at a glance."
-        description="A quick snapshot of the books and authors collected here."
-        colorway="sky-cherry"
-        size="lg"
+        title="Reading stats"
+        accent="var(--cherry-bold)"
       >
-        <div className="grid grid-cols-3 gap-4">
-          <StatTile label="Books read" value={stats.totalBooks} />
-          <StatTile label="Pages read" value={stats.totalPages.toLocaleString()} />
-          <StatTile label="Authors read" value={stats.totalAuthors} />
-        </div>
-
-        {(stats.longest || stats.shortest) && (
-          <div className="mt-6 grid gap-3 sm:grid-cols-2">
-            {stats.longest && (
-              <BookStatRow
-                label="Longest book"
-                title={stats.longest.title}
-                detail={`${stats.longest.pages.toLocaleString()} pages`}
-              />
-            )}
-            {stats.shortest && (
-              <BookStatRow
-                label="Shortest book"
-                title={stats.shortest.title}
-                detail={`${stats.shortest.pages.toLocaleString()} pages`}
-              />
-            )}
+        <dl className="drawer-list">
+          <div>
+            <dt>Books read</dt>
+            <dd>{stats.totalBooks}</dd>
           </div>
-        )}
+          <div>
+            <dt>Pages turned</dt>
+            <dd>{stats.totalPages.toLocaleString()}</dd>
+          </div>
+          <div>
+            <dt>Authors</dt>
+            <dd>{stats.totalAuthors}</dd>
+          </div>
+          {stats.longest ? (
+            <div>
+              <dt>Longest</dt>
+              <dd>
+                {stats.longest.title} · {stats.longest.pages.toLocaleString()}
+              </dd>
+            </div>
+          ) : null}
+          {stats.shortest ? (
+            <div>
+              <dt>Shortest</dt>
+              <dd>
+                {stats.shortest.title} · {stats.shortest.pages.toLocaleString()}
+              </dd>
+            </div>
+          ) : null}
+        </dl>
 
-        {missingPageData > 0 && (
-          <p className="mt-6 text-xs text-[var(--text-muted)]">
-            Google doesn&rsquo;t have a page count on file for {missingPageData}{" "}
-            {missingPageData === 1 ? "book" : "books"} on your shelf, so pages
-            read (and longest/shortest) only reflect the rest.
+        {byCount.length > 0 ? (
+          <>
+            <span className="drawer-section-label">By tag</span>
+            <ul className="bookshelf-tag-bars">
+              {byCount.map(({ name, count }) => (
+                <li
+                  key={name}
+                  style={
+                    {
+                      "--tag-tone": tagTone(name),
+                      "--tag-share": `${(count / max) * 100}%`,
+                    } as CSSProperties
+                  }
+                >
+                  <span className="bookshelf-tag-bars-name">{name}</span>
+                  <span className="bookshelf-tag-bars-track" aria-hidden="true">
+                    <span />
+                  </span>
+                  <span className="bookshelf-tag-bars-count">{count}</span>
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : null}
+
+        {missingPageData > 0 ? (
+          <p className="drawer-note">
+            Page counts come from Google Books, which has none on file for{" "}
+            {missingPageData} {missingPageData === 1 ? "book" : "books"} here, so
+            pages turned (and longest/shortest) reflect the rest.
           </p>
-        )}
-      </Modal>
+        ) : null}
+      </Drawer>
     </>
-  );
-}
-
-function StatTile({ label, value }: { label: string; value: string | number }) {
-  return (
-    <div className="rounded-[var(--radius-lg)] bg-[var(--bg-subtle)] p-4 text-center">
-      <p className="font-[family-name:var(--font-display)] text-3xl font-semibold text-[var(--text-primary)]">
-        {value}
-      </p>
-      <p className="mt-1 text-xs text-[var(--text-muted)]">{label}</p>
-    </div>
-  );
-}
-
-function BookStatRow({
-  label,
-  title,
-  detail,
-}: {
-  label: string;
-  title: string;
-  detail: string;
-}) {
-  return (
-    <div className="rounded-[var(--radius-lg)] border border-[var(--border-subtle)] p-4">
-      <p className="text-xs text-[var(--text-muted)]">{label}</p>
-      <p className="mt-1 text-sm font-medium text-[var(--text-primary)]">{title}</p>
-      <p className="text-xs text-[var(--text-muted)]">{detail}</p>
-    </div>
   );
 }

@@ -31,7 +31,7 @@ export default function CodeBlock({
 
   return (
     <div
-      className={cx("relative rounded-lg overflow-hidden bg-zinc-800", className)}
+      className={cx("relative rounded-[var(--radius-sm)] overflow-hidden bg-zinc-800", className)}
       style={{ "--cursor-dot-color": "var(--indigo-soft)" } as CSSProperties}
     >
       <button

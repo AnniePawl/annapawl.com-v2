@@ -10,10 +10,10 @@ export default function FormsSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      description="Forms should feel clear, familiar, and easy to move through. Shared styles for inputs, labels, focus, and feedback keep things consistent while leaving room for a little personality where it fits."
+      lede="Forms should feel clear, familiar, and easy to move through."
+      description="Shared styles for inputs, labels, focus, and feedback keep things consistent while leaving room for a little personality where it fits."
     >
-      <hr className="poster-divider mt-4 mb-0" />
-      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Example</h3>
+      <h3 className="sedge-subheading">Example</h3>
       <FormExamples />
     </Section>
   );

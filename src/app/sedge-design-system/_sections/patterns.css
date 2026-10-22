@@ -13,13 +13,13 @@
   color: var(--text-secondary);
 }
 
-.page-header-examples {
+.editorial-header-examples {
   display: flex;
   flex-direction: column;
   gap: var(--space-7);
 }
 
-.pattern-preview--page-header {
+.pattern-preview--editorial-header {
   display: flex;
   justify-content: center;
   border: 0;
@@ -27,42 +27,44 @@
   background: transparent;
 }
 
-.pattern-preview--page-header .editorial-page-header {
+.pattern-preview--editorial-header .editorial-page-header {
   width: 100%;
 }
 
-.pattern-preview--page-header .editorial-page-header-layout {
+.pattern-preview--editorial-header .editorial-page-header-layout {
   grid-template-columns: 4rem minmax(0, 1fr);
   grid-template-rows: minmax(10rem, auto) auto;
 }
 
-.pattern-preview--page-header .editorial-page-header-title {
+.pattern-preview--editorial-header .editorial-page-header-title {
   right: var(--space-4);
   left: var(--space-4);
   font-size: clamp(3.25rem, 7vw, 4.5rem);
 }
 
-.pattern-preview--page-header .editorial-page-header-description {
+.pattern-preview--editorial-header .editorial-page-header-description {
   min-height: auto;
   padding: var(--space-4) var(--space-5);
 }
 
-.pattern-preview--publication-header,
-.pattern-preview--publication {
+.pattern-preview--post {
+  container-type: inline-size;
   padding: 0.5rem;
   border: 0;
   border-radius: 0;
   background: var(--charcoal);
 }
 
-.pattern-preview--publication-header .publication-page-header {
+.pattern-preview--post .post-layout {
   width: 100%;
-  overflow: hidden;
-  border-radius: 0;
 }
 
-.pattern-preview--publication .publication-article-layout {
-  width: 100%;
+.pattern-preview--post .post-header-title {
+  font-size: clamp(3.5rem, 18cqi, 5rem);
+}
+
+.pattern-preview--post .post-section h2 {
+  font-size: 1.35rem;
 }
 
 .pattern-preview .article-layout {
@@ -76,7 +78,7 @@
 }
 
 @media (width < 40rem) {
-  .pattern-preview--page-header {
+  .pattern-preview--editorial-header {
     overflow: visible;
   }
 }

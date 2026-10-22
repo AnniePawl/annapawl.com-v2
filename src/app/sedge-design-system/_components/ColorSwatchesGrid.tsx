@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { cx } from "../../../lib/cx";
 import { Check, Copy } from "lucide-react";
 import {
   COLOR_PAIRS,
   PAGE_SWATCHES,
   type ColorSwatch,
 } from "../_data/color-swatches";
+import "./color-swatches.css";
 
 function luminance(hex: string): number {
   const channels = [1, 3, 5].map((start) => {
@@ -52,7 +54,11 @@ function swatchTextColor(hex: string): string {
     : "var(--charcoal)";
 }
 
-function ColorTile({ varName, hex }: ColorSwatch) {
+function ColorTile({
+  varName,
+  hex,
+  variant,
+}: ColorSwatch & { variant?: "ground" }) {
   const [status, setStatus] = useState("");
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -75,21 +81,26 @@ function ColorTile({ varName, hex }: ColorSwatch) {
     timer.current = setTimeout(() => setStatus(""), 1500);
   };
 
+  // Cream and ivory sit on a cream page — give them a hairline edge.
+  const edged = luminance(hex) > 0.8;
+
   return (
     <button
       type="button"
       onClick={handleCopy}
       aria-label={`Copy var(${varName}), ${hex}`}
-      className="focus-ring group relative flex min-h-[var(--space-10)] w-full flex-col justify-end gap-[var(--space-1)] rounded-none border-0 p-[var(--space-3)] text-left [appearance:none] md:min-h-[var(--space-11)] md:min-w-0"
+      data-copied={status ? "" : undefined}
+      className={cx(
+        "swatch-tile focus-ring",
+        edged && "swatch-tile--edged",
+        variant === "ground" && "swatch-tile--ground"
+      )}
       style={{
         background: `var(${varName}, ${hex})`,
         color: swatchTextColor(hex),
       }}
     >
-      <span
-        aria-hidden="true"
-        className="absolute top-[var(--space-3)] right-[var(--space-3)] transition-transform duration-[var(--motion-hover-duration)] ease-[var(--motion-hover-ease)] group-hover:scale-110"
-      >
+      <span aria-hidden="true" className="swatch-copy">
         {status === "Copied" ? (
           <Check className="icon-sm" />
         ) : (
@@ -97,13 +108,11 @@ function ColorTile({ varName, hex }: ColorSwatch) {
         )}
       </span>
 
-      <code className="hidden break-all font-mono text-[length:var(--text-xs)] [font-weight:var(--font-medium)] leading-[var(--leading-snug)] sm:block">
-        {varName}
-      </code>
-
-      <span className="font-mono text-[length:var(--text-xs)] leading-[var(--leading-snug)]">
-        {hex}
-      </span>
+      {status ? (
+        <span aria-hidden="true" className="swatch-done">
+          {status}
+        </span>
+      ) : null}
 
       <span className="sr-only" role="status">
         {status}
@@ -114,70 +123,69 @@ function ColorTile({ varName, hex }: ColorSwatch) {
 
 export default function ColorSwatchesGrid() {
   return (
-    <div className="space-y-[var(--space-8)]">
-      <section aria-label="Brand palette">
-        <div className="grid grid-cols-2 gap-[var(--space-4)] lg:grid-cols-3">
-          {COLOR_PAIRS.map(({ family, soft, bold }) => (
-            <article key={family} className="min-w-0">
-              <h3 className="mb-[var(--space-2)] text-[length:var(--text-sm)] [font-weight:var(--font-semibold)] text-[var(--text-primary)]">
-                {family}
-              </h3>
-
-              <div className="grid grid-cols-2 overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-card)]">
-                <ColorTile {...soft} />
-                <ColorTile {...bold} />
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section aria-label="Page background and text colors">
-        <h3 className="mb-[var(--space-3)] text-[length:var(--text-sm)] [font-weight:var(--font-semibold)] text-[var(--text-primary)]">
-          Background &amp; text
-        </h3>
-
-        <div className="grid grid-cols-2 gap-[var(--space-3)]">
-          {PAGE_SWATCHES.map((swatch) => (
-            <div
-              key={swatch.varName}
-              className="overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-card)]"
-            >
-              <ColorTile {...swatch} />
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-[var(--space-6)]">
-          <h3 className="mb-[var(--space-3)] text-[length:var(--text-sm)] [font-weight:var(--font-semibold)] text-[var(--text-primary)]">
-            Text roles
-          </h3>
-
-          <div className="grid gap-[var(--space-3)] md:grid-cols-2">
-            <div className="space-y-[var(--space-3)] rounded-[var(--radius-card)] bg-[var(--bg-default)] p-[var(--space-4)] shadow-[var(--shadow-card)]">
-              {TEXT_ROLES.map(({ token, label }) => (
-                <div
-                  className="flex items-baseline justify-between gap-[var(--space-4)]"
-                  key={token}
-                  style={{ color: `var(${token})` }}
-                >
-                  <span>{label}</span>
-                  <code className="font-mono text-[length:var(--text-xs)]">
-                    {token}
-                  </code>
-                </div>
-              ))}
-            </div>
-
-            <div className="flex items-baseline justify-between gap-[var(--space-4)] rounded-[var(--radius-card)] bg-[var(--chocolate-bold)] p-[var(--space-4)] text-[var(--text-inverse)] shadow-[var(--shadow-card)]">
-              <span>Inverse</span>
-              <code className="font-mono text-[length:var(--text-xs)]">
-                --text-inverse
+    <div>
+      <h3 className="sedge-subheading">Ground &amp; ink</h3>
+      <div className="swatch-grid">
+        {PAGE_SWATCHES.map((swatch) => (
+          <div key={swatch.varName} className="min-w-0">
+            <ColorTile {...swatch} variant="ground" />
+            <span className="swatch-name">{swatch.label}</span>
+            <span className="swatch-values swatch-values--single">
+              <code>
+                {swatch.varName} · {swatch.hex}
               </code>
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <h3 className="sedge-subheading">Palette · soft / bold</h3>
+      <div className="swatch-grid">
+        {COLOR_PAIRS.map(({ family, soft, bold }) => (
+          <article key={family} className="min-w-0">
+            <div className="swatch-pair">
+              <ColorTile {...soft} />
+              <ColorTile {...bold} />
             </div>
+            <h4 className="swatch-name">{family}</h4>
+            <div className="swatch-values">
+              <span>
+                soft
+                <br />
+                {soft.hex}
+              </span>
+              <span>
+                bold
+                <br />
+                {bold.hex}
+              </span>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <h3 className="sedge-subheading">Text roles</h3>
+      <div className="text-role-list">
+        <div className="text-role-box">
+          {TEXT_ROLES.map(({ token, label }) => (
+            <div
+              className="text-role-row"
+              key={token}
+              style={{ color: `var(${token})` }}
+            >
+              <span>{label}</span>
+              <code>{token}</code>
+            </div>
+          ))}
+        </div>
+
+        <div className="text-role-box text-role-box--inverse">
+          <div className="text-role-row">
+            <span>Inverse</span>
+            <code>--text-inverse</code>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }

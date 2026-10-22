@@ -1,10 +1,12 @@
-import { BookOpen } from "lucide-react";
 import PageShell from "../../components/layout/PageShell";
-import BookshelfHeader from "./BookshelfHeader";
-import TagFilterBar from "./TagFilterBar";
-import BookTile, { type ShelfEntry } from "./BookTile";
+import PostHeader from "../../components/layout/PostLayout/PostHeader";
+import HomeLogo from "../../components/ui/HomeLogo";
+import BookshelfBrowser, { type TagCount, type YearSection } from "./BookshelfBrowser";
+import StatsButton from "./StatsButton";
+import type { ShelfEntry } from "./BookTile";
 import { booksByYear } from "./data";
-import { getBooksInfo } from "../../lib/googleBooks";
+import { computeStats } from "./stats";
+import { FAVORITE_TAG, getBooksInfo } from "../../lib/googleBooks";
 import "./books.css";
 
 export const metadata = {
@@ -18,7 +20,7 @@ const years = Object.keys(booksByYear)
   .sort((a, b) => b - a);
 
 export default async function BooksPage() {
-  const yearSections = await Promise.all(
+  const sections: YearSection[] = await Promise.all(
     years.map(async (year) => {
       const lookups = booksByYear[year];
       const infos = await getBooksInfo(lookups);
@@ -30,46 +32,62 @@ export default async function BooksPage() {
     })
   );
 
-  const allEntries = yearSections.flatMap((section) => section.books);
+  const allEntries = sections.flatMap((section) => section.books);
+  const stats = computeStats(allEntries);
 
-  // Every distinct tag in use across the whole shelf (genres + special
-  // ones like Favorites), alphabetized — the options TagFilterBar
-  // renders as clickable chips.
-  const allTags = Array.from(
+  // Every distinct tag in use across the shelf, alphabetized, with how many
+  // books carry it — the rail shows the count beside each tag.
+  const tags: TagCount[] = Array.from(
     new Set(allEntries.flatMap((entry) => entry.lookup.tags ?? []))
-  ).sort((a, b) => a.localeCompare(b));
+  )
+    .sort((a, b) => a.localeCompare(b))
+    .map((name) => ({
+      name,
+      count: allEntries.filter((entry) => entry.lookup.tags?.includes(name)).length,
+    }));
+
+  const favorites = tags.find((tag) => tag.name === FAVORITE_TAG)?.count ?? 0;
 
   return (
-    <PageShell>
-      <BookshelfHeader />
+    <PageShell className="bookshelf-page">
+      <PostHeader
+        utilityStart={
+          <HomeLogo
+            colors={{
+              northeast: "var(--emerald-bold)",
+              southeast: "var(--cherry-bold)",
+              southwest: "var(--cherry-bold)",
+              northwest: "var(--cherry-bold)",
+              hoverAccent: "var(--indigo-bold)",
+            }}
+            size="1.75rem"
+          />
+        }
+        descriptionTitle="Reading archive"
+        description="Book club picks, Little Library finds, and the occasional summer indulgence."
+        eyebrow="Digital garden"
+        title="Bookshelf"
+        accent="var(--cherry-bold)"
+        lede={
+          <>
+            I love looking through other people’s bookshelves — they show what
+            someone is curious about, drawn to, or trying to understand.{" "}
+            <span className="post-header-lede-muted">This is mine.</span>
+          </>
+        }
+        detailsStart="Ongoing collection · Since Jan 2026"
+        postTags={
+          <span className="bookshelf-details-end">
+            <span>
+              {stats.totalBooks} books · {stats.totalAuthors} authors · {favorites}{" "}
+              favorites
+            </span>
+            <StatsButton stats={stats} tags={tags} />
+          </span>
+        }
+      />
 
-      <div className="bookshelf-content">
-        <TagFilterBar allTags={allTags} entries={allEntries} />
-
-        {yearSections.map(({ year, books }) => (
-          <section key={year}>
-            <div className="bookshelf-year-heading">
-              <h2 className="h2">
-                {year}<span className="bookshelf-year-dot">.</span>
-              </h2>
-              <span className="bookshelf-year-meta">
-                <BookOpen aria-hidden="true" />
-                {books.length} {books.length === 1 ? "book" : "books"}
-              </span>
-            </div>
-
-            <div className="mt-[var(--space-5)] grid grid-cols-2 gap-x-[var(--space-4)] gap-y-[var(--space-6)] sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-              {books.map(({ lookup, info }) => (
-                <BookTile
-                  key={`${lookup.title}-${lookup.author ?? ""}`}
-                  lookup={lookup}
-                  info={info}
-                />
-              ))}
-            </div>
-          </section>
-        ))}
-      </div>
+      <BookshelfBrowser sections={sections} tags={tags} />
     </PageShell>
   );
 }

@@ -1,13 +1,21 @@
 :root {
-  /* Elevation (shadow) scale */
+  /* Flat by default. Rules, color, and space separate things on the page;
+     shadows are reserved for things that float ABOVE it (drawer, modal).
+     Use the semantic tokens below rather than the raw scale. */
+
+  /* Raw shadow scale — available, but avoid on resting surfaces. */
   --shadow-xs: 0 1px 0 rgba(24, 24, 27, 0.04);
   --shadow-sm: 0 1px 2px rgba(24, 24, 27, 0.08);
   --shadow-md: 0 8px 20px rgba(24, 24, 27, 0.10);
   --shadow-lg: 0 16px 40px rgba(24, 24, 27, 0.12);
 
-  /* Semantic aliases */
-  --shadow-pill: var(--shadow-xs);
-  --shadow-card: var(--shadow-sm);
-  --shadow-button: var(--shadow-md);
-  --shadow-modal: var(--shadow-lg);
+  /* Floating layers — the only places a shadow is part of the design. */
+  --shadow-overlay: 0 24px 60px rgba(9, 9, 11, 0.14); /* centered dialogs */
+  --shadow-drawer: -24px 0 60px rgba(9, 9, 11, 0.12); /* side panels */
+
+  /* Resting surfaces stay flat. */
+  --shadow-pill: none;
+  --shadow-card: none;
+  --shadow-button: none;
+  --shadow-modal: var(--shadow-overlay);
 }

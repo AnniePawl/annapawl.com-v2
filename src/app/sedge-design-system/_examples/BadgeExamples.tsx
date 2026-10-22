@@ -30,7 +30,7 @@ const TONE_EXAMPLES: { label: string; tone: BadgeTone }[] = [
 export default function BadgeExamples() {
   return (
     <section style={{ maxWidth: 720 }}>
-     <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Examples</h3>
+     <h3 className="sedge-subheading">Examples</h3>
       <div className="badge-demo-row">
         <Badge>Field note</Badge>
         {TONE_EXAMPLES.map(({ label, tone }) => (
@@ -39,8 +39,7 @@ export default function BadgeExamples() {
           </Badge>
         ))}
       </div>
-       <hr className="poster-divider mt-4 mb-0" />
-       <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
+       <h3 className="sedge-subheading">Usage</h3>
       <CodeBlock code={USAGE} className="mb-8" />
 
     </section>

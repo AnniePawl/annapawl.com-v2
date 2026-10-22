@@ -92,8 +92,7 @@ export default function FormExamples() {
 
         <Checkbox id="terms" label="I read the tiny words" />
       </div>
-      <hr className="poster-divider mt-4 mb-0" />
-      <h3 className='type-eyebrow' style={{ margin: "32px 0 16px" }}>Usage</h3>
+      <h3 className="sedge-subheading">Usage</h3>
        <CodeBlock code={USAGE} className="mb-8" />
 
     </section>
