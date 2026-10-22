@@ -11,7 +11,7 @@ export default function BadgesSection() {
       heading={meta.title}
       icon={meta.icon}
       lede="Badges are compact labels for topics, categories, and small bits of garden metadata."
-      description="They use cream and charcoal by default, while optional background and foreground colors allow lighter or darker treatments. The foreground color is shared by the text and border."
+      description="They share the bookshelf tag anatomy: a small upright marker beside charcoal text, with no pill, border, or fill. The marker follows the page accent by default, or takes any palette color when a set of labels needs to be told apart, like the bookshelf genres."
     >
 
       <BadgeExamples />

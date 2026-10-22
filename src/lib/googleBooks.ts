@@ -55,6 +55,12 @@ export interface BookLookup {
    * the exact string.
    */
   tags?: string[];
+  /**
+   * Year the book was first published. Optional override for reading
+   * stats — Google Books often returns the date of the specific edition
+   * (a 2015 paperback of a 1959 book), so set this when that's wrong.
+   */
+  firstPublished?: number;
 }
 
 export interface BookInfo {

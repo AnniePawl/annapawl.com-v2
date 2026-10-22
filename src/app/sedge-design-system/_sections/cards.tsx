@@ -11,7 +11,7 @@ export default function CardsSection() {
       heading={meta.title}
       icon={meta.icon}
       lede="Cards group a short title and supporting copy into a simple, self-contained surface."
-      description="Two variants keep the pattern focused: an outlined card for quieter grouping and a filled card for stronger emphasis. Background, foreground, and border colors can use any palette tokens, while actions are added separately only when the content needs one."
+      description="Cards share the callout’s plain treatment: cream surface, a hairline border, and 4px corners, with a spaced-caps title. The only color is the small marker beside the title, which follows the page accent. There are no filled or tinted variants for now; actions are added separately only when the content needs one."
     >
       <CardExamples />
     </Section>

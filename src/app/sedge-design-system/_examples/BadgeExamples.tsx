@@ -6,31 +6,21 @@ const USAGE = `
 import Badge from "@/components/ui/Badge";
 
 <Badge>Field note</Badge>
-<Badge tone="moss">Currently reading</Badge>
-<Badge tone={{ background: "pink-soft", foreground: "emerald-bold" }}>
-  Tiny obsession
-</Badge>
+<Badge tone="emerald-bold">Literary Fiction</Badge>
 `;
 
+// Same tag/color pairs as the bookshelf.
 const TONE_EXAMPLES: { label: string; tone: BadgeTone }[] = [
-  {
-    label: "Favorites",
-    tone: { background: "moss-soft", foreground: "cherry-bold" },
-  },
-  {
-    label: "Tiny obsession",
-    tone: { background: "pink-soft", foreground: "emerald-bold" },
-  },
-  {
-    label: "Worth a detour",
-    tone: { background: "sky-soft", foreground: "cherry-bold" },
-  },
+  { label: "Literary Fiction", tone: "emerald-bold" },
+  { label: "Fantasy", tone: "indigo-bold" },
+  { label: "Made Me Cry", tone: "sky-bold" },
+  { label: "Favorites", tone: "red-bold" },
 ];
 
 export default function BadgeExamples() {
   return (
     <section style={{ maxWidth: 720 }}>
-     <h3 className="sedge-subheading">Examples</h3>
+      <h3 className="sedge-subheading">Examples</h3>
       <div className="badge-demo-row">
         <Badge>Field note</Badge>
         {TONE_EXAMPLES.map(({ label, tone }) => (
@@ -39,9 +29,8 @@ export default function BadgeExamples() {
           </Badge>
         ))}
       </div>
-       <h3 className="sedge-subheading">Usage</h3>
+      <h3 className="sedge-subheading">Usage</h3>
       <CodeBlock code={USAGE} className="mb-8" />
-
     </section>
   );
 }

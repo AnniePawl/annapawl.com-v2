@@ -12,8 +12,9 @@
 
   /* Semantic aliases */
   --radius-card: var(--radius-2xl);
-  --radius-button: var(--radius-pill);
-  --radius-modal: var(--radius-lg);
+  --radius-button: var(--radius-xs);        /* everyday buttons */
+  --radius-button-pill: var(--radius-pill); /* standalone calls to action */
+  --radius-modal: var(--radius-xs);
   --radius-input: var(--radius-lg);
   --radius-icon:var(--radius-full)
 }

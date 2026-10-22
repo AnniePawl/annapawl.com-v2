@@ -1,27 +1,37 @@
-/* ---- Modal component ----
-   Two-tone editorial dialog: a soft surface with a slim top label rail. */
+/* ---- Modal component ("Notecard") ----
+   A small centered dialog for short moments. Cream, hairline border,
+   4px corners, spaced-caps label with the page-accent marker, a modest
+   title, and a plain × in the corner. Same backdrop and voice as the
+   Drawer ("The Margin"), which handles long, browsable content. */
 
 .modal {
+  --modal-rule: color-mix(in srgb, var(--charcoal) 58%, transparent);
+  --modal-marker: var(--page-accent);
+
   position: fixed;
   inset: 0;
-  width: min(480px, calc(100vw - var(--space-6) * 2));
-  max-height: calc(100vh - var(--space-6) * 2);
+  width: min(27rem, calc(100vw - var(--space-5) * 2));
+  max-height: calc(100dvh - var(--space-6) * 2);
   margin: auto;
   padding: 0;
   overflow: visible;
-  border: none;
-  border-radius: var(--radius-modal);
-  background: var(--editorial-surface);
+  border: 1px solid var(--modal-rule);
+  border-radius: var(--radius-xs);
+  background: var(--cream);
   color: var(--charcoal);
-  box-shadow: var(--shadow-modal);
+  box-shadow: none;
+  /* A dialog still inherits text styles from where it sits in the DOM. */
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: left;
 }
 
 .modal--lg {
-  width: min(720px, calc(100vw - var(--space-6) * 2));
+  width: min(45rem, calc(100vw - var(--space-5) * 2));
 }
 
 .modal::backdrop {
-  background: color-mix(in srgb, var(--neutral-1000) 60%, transparent);
+  background: color-mix(in srgb, var(--charcoal) 28%, transparent);
 }
 
 .modal[open] {
@@ -33,14 +43,8 @@
 }
 
 @keyframes modal-in {
-  from {
-    opacity: 0;
-    transform: translateY(8px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  from { opacity: 0; transform: translateY(0.5rem); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes modal-backdrop-in {
@@ -48,100 +52,106 @@
   to { opacity: 1; }
 }
 
-.modal-label-rail {
-  display: flex;
-  align-items: center;
-  min-height: 2.875rem;
-  padding: var(--space-2) var(--space-3) var(--space-2) var(--space-5);
-  border-radius: var(--radius-modal) var(--radius-modal) 0 0;
-  background: var(--editorial-accent);
-  color: var(--editorial-accent-text);
-}
-
-.modal-content {
-  display: flex;
-  flex-direction: column;
-  padding: var(--space-6);
+.modal-card {
+  position: relative;
+  max-height: inherit;
   overflow-y: auto;
-}
-
-.modal-eyebrow {
-  color: inherit;
-}
-
-.modal-title {
-  margin: 0 0 var(--space-2);
-  color: var(--editorial-heading);
-  font-family: var(--font-heading);
-  font-size: var(--text-xl);
-  font-weight: var(--font-bold);
-  line-height: 1.15;
-}
-
-.modal-description {
-  margin: 0;
-  color: var(--charcoal);
-  font-size: var(--text-sm);
-  line-height: var(--leading-normal);
-}
-
-.modal-body {
-  margin-top: var(--space-5);
+  padding: var(--space-6) var(--space-5) var(--space-5);
 }
 
 .modal-close {
-  --focus-ring-color: var(--editorial-accent);
   position: absolute;
-  z-index: 1;
-  top: calc(var(--space-2) * -1.5);
-  right: calc(var(--space-2) * -1.5);
+  top: var(--space-3);
+  right: var(--space-3);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 2rem;
   height: 2rem;
   padding: 0;
-  border: var(--border-md) solid var(--editorial-accent);
-  border-radius: var(--radius-pill);
-  background: var(--editorial-surface);
-  color: var(--editorial-accent);
-  box-shadow: var(--shadow-sm);
+  border: 0;
+  border-radius: var(--radius-xs);
+  background: none;
+  color: var(--charcoal);
   cursor: pointer;
-  line-height: 1;
-  transition:
-    box-shadow var(--motion-hover-duration) var(--motion-hover-ease),
-    transform var(--motion-hover-duration) var(--motion-hover-ease);
+  transition: background-color var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+.modal-close svg {
+  width: 0.75rem;
+  height: 0.75rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
 }
 
 .modal-close:hover {
-  background: var(--editorial-surface);
-  color: var(--editorial-accent);
-  box-shadow: var(--shadow-md);
-  transform: rotate(12deg) scale(1.05);
+  background: color-mix(in srgb, var(--charcoal) 8%, transparent);
 }
 
-.modal-close:active {
-  transform: rotate(12deg) scale(0.96);
+.modal-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding-right: var(--space-7);
+  font-size: 11px;
+  font-weight: var(--font-semibold);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
 }
 
-.modal-close-icon {
-  width: 1rem;
-  height: 1rem;
-  stroke-width: 3;
+.modal-eyebrow::before {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 11px;
+  background: var(--modal-marker);
+}
+
+.modal-title {
+  margin: var(--space-3) 0 0;
+  color: var(--charcoal);
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  font-weight: var(--font-regular);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.modal-description,
+.modal-body {
+  margin-top: var(--space-4);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.modal-description > :first-child,
+.modal-body > :first-child {
+  margin-top: 0;
+}
+
+.modal-description > :last-child,
+.modal-body > :last-child {
+  margin-bottom: 0;
+}
+
+.modal-body p + p {
+  margin-top: var(--space-3);
+}
+
+.modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3) var(--space-5);
+  margin-top: var(--space-6);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .modal[open],
   .modal[open]::backdrop {
     animation: none;
-  }
-
-  .modal-close {
-    transition: none;
-  }
-
-  .modal-close:hover,
-  .modal-close:active {
-    transform: none;
   }
 }

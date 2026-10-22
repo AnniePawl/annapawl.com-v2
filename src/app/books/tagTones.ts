@@ -6,21 +6,22 @@ import type { PaletteColor } from "../../components/ui/colorTokens";
  * stats modal). Tags without an entry fall back to DEFAULT_TAG_TONE.
  */
 export const TAG_TONES: Record<string, PaletteColor> = {
-  Adventure: "orange-bold",
-  "Book Club": "cherry-bold",
-  Dystopian: "steel-bold",
-  Fantasy: "indigo-bold",
-  Favorites: "red-bold",
-  "Historical Fiction": "ochre-bold",
-  History: "taupe-bold",
-  "LGBTQ+": "pink-bold",
+  // Genre
   "Literary Fiction": "emerald-bold",
-  "Made me cry": "sky-bold",
-  Memoir: "clay-bold",
-  Nonfiction: "sage-bold",
-  Romance: "plum-soft",
+  "Historical Fiction": "ochre-bold",
   "Science Fiction": "blue-bold",
+  Fantasy: "indigo-bold",
+  Romance: "plum-soft",
+  Nonfiction: "sage-bold",
+  // Theme
+  Dystopian: "steel-bold",
+  Adventure: "orange-bold",
   Survival: "moss-bold",
+  "LGBTQ+": "pink-bold",
+  // Personal
+  Favorites: "red-bold",
+  "Made Me Cry": "sky-bold",
+  "Book Club": "cherry-bold",
 };
 
 export const DEFAULT_TAG_TONE: PaletteColor = "taupe-soft";

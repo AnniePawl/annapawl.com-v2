@@ -1,56 +1,114 @@
-/* ---- Editorial links ----
-   Opt-in rather than global so navigation, logos, and clickable cards can
-   keep their own interaction treatment. */
+/* ---- Links ----
+   Link text stays in the body voice (charcoal, regular weight); the color
+   lives in the underline, taken from the page accent so links follow each
+   page like buttons do. Two styles with clear jobs:
+
+     .text-link            — default. A 1.5px accent underline that thickens
+                             on hover. For links in body and article text.
+     .text-link--quiet     — a dotted charcoal underline that turns solid
+                             accent (with the text) on hover. For small,
+                             low-stakes links: meta and captions.
+
+   The underline is a background image so its thickness can ease on hover
+   (text-decoration-thickness doesn't animate reliably). Opt-in rather than
+   global, so navigation and clickable cards keep their own treatment.
+   `[data-state]` exists only for the Sedge docs' side-by-side states. */
 
 .text-link {
-  --focus-ring-color: var(--link-decoration);
-  color: var(--link-color);
-  font-weight: var(--font-medium);
-  text-decoration-line: underline;
-  text-decoration-color: var(--link-decoration);
-  text-decoration-thickness: 1px;
-  text-decoration-skip-ink: none;
-  text-underline-offset: 0.3em;
-  transition:
-    color var(--motion-hover-duration) var(--motion-hover-ease),
-    text-decoration-color var(--motion-hover-duration) var(--motion-hover-ease);
+  /* Declared here (not on :root) so it picks up each page's accent. */
+  --link-accent: var(--page-accent);
+  --link-line: var(--link-accent);
+  --link-transition: 250ms var(--motion-ease-standard);
+  --focus-ring-color: var(--text-primary);
+
+  color: var(--text-primary);
+  font-weight: inherit;
+  text-decoration: none;
+  background-image: linear-gradient(var(--link-line), var(--link-line));
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 1.5px;
+  padding-bottom: 1px;
 }
 
+/* .focus-ring rounds corners (for its outline), which would also clip the
+   underline's ends — links keep square corners so the line spans the word. */
+.text-link,
+.text-link.focus-ring {
+  border-radius: 0;
+  transition:
+    background-size var(--link-transition),
+    color var(--link-transition),
+    text-decoration-color var(--link-transition);
+}
+
+.text-link:hover,
+.text-link[data-state="hover"] {
+  background-size: 100% 3px;
+}
+
+/* Visited: the underline fades rather than changing hue. */
 .text-link:visited,
 .text-link[data-state="visited"] {
-  color: var(--link-color-visited);
-  text-decoration-color: var(--link-decoration-visited);
+  --link-line: color-mix(in srgb, var(--link-accent) 40%, transparent);
 }
 
 /* Docs-only forced default keeps the comparison stable even after its
    fragment link has been visited in the current browser session. */
 .text-link[data-state="default"] {
-  color: var(--link-color);
-  text-decoration-color: var(--link-decoration);
+  --link-line: var(--link-accent);
 }
 
-.text-link:hover,
-.text-link[data-state="hover"] {
-  color: var(--link-color-hover);
-  text-decoration-color: currentColor;
+/* Quiet — dotted charcoal at rest, solid accent on hover. */
+.text-link--quiet {
+  background-image: none;
+  padding-bottom: 0;
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: color-mix(in srgb, var(--text-primary) 55%, transparent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.25em;
 }
 
+.text-link--quiet:hover,
+.text-link--quiet[data-state="hover"] {
+  color: var(--link-accent);
+  text-decoration-style: solid;
+  text-decoration-color: var(--link-accent);
+}
+
+.text-link--quiet:visited,
+.text-link--quiet[data-state="visited"] {
+  text-decoration-color: color-mix(in srgb, var(--text-primary) 30%, transparent);
+}
+
+.text-link--quiet[data-state="default"] {
+  text-decoration-color: color-mix(in srgb, var(--text-primary) 55%, transparent);
+}
+
+/* Standalone links (with an arrow or external icon) */
 .text-link--standalone {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: var(--space-1);
   width: fit-content;
 }
 
 .text-link-icon {
-  width: var(--icon-sm);
-  height: var(--icon-sm);
+  width: 0.875em;
+  height: 0.875em;
   flex-shrink: 0;
-  transition: transform var(--motion-hover-duration) var(--motion-hover-ease);
+  transition: transform var(--link-transition, 250ms ease);
+}
+
+.text-link:hover .text-link-icon,
+.text-link[data-state="hover"] .text-link-icon {
+  transform: translateX(3px);
 }
 
 .text-link--external:hover .text-link-icon,
-.text-link--external:focus-visible .text-link-icon {
+.text-link--external:focus-visible .text-link-icon,
+.text-link--external[data-state="hover"] .text-link-icon {
   transform: translate(2px, -2px);
 }
 
@@ -58,5 +116,10 @@
   .text-link,
   .text-link-icon {
     transition: none;
+  }
+
+  .text-link:hover .text-link-icon,
+  .text-link--external:hover .text-link-icon {
+    transform: none;
   }
 }

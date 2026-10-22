@@ -1,21 +1,26 @@
+/* ---- Badge component ----
+   Same anatomy as the bookshelf tags: a small upright marker in a palette
+   color (page accent by default) beside charcoal text. No pill, border,
+   or fill. The marker is sized in em so it scales with the text. */
+
 .badge {
-  --badge-bg: var(--cream);
-  --badge-foreground: var(--charcoal);
+  --badge-marker: var(--page-accent);
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-1);
-  min-height: var(--space-5);
-  padding: var(--space-1) var(--space-3);
-  border: var(--border-default) solid var(--badge-foreground);
-  border-radius: var(--radius-pill);
-  background: var(--badge-bg);
-  color: var(--badge-foreground);
+  align-items: baseline;
+  gap: 0.5em;
+  color: var(--text-primary);
   font-family: var(--font-sans);
   font-size: var(--type-supporting-size);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-regular);
   line-height: var(--leading-snug);
-  letter-spacing: var(--tracking-normal);
   white-space: nowrap;
-  vertical-align: middle;
+}
+
+.badge::before {
+  content: "";
+  flex: none;
+  align-self: center;
+  width: 0.55em;
+  height: 0.8em;
+  background: var(--badge-marker);
 }

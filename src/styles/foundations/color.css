@@ -153,6 +153,14 @@
      Backgrounds + Surfaces
   ========================== */
 
+  /* ---- Page accent ----
+     Each page sets these once on its wrapper; components (buttons,
+     markers) read them, so color follows the page instead of being
+     picked per component. Default = soft pink + cherry. */
+  --page-accent: var(--cherry-bold);      /* bold fill, icons */
+  --page-accent-tint: color-mix(in srgb, var(--cherry-bold) 12%, var(--cream)); /* soft background — dusty rose */
+  --page-accent-ink: var(--cream);        /* text on the bold fill */
+
   --bg-default: var(--cream);
   --bg-subtle: var(--neutral-50);
   --surface: var(--neutral-0);
@@ -201,11 +209,6 @@
   );
 
   /* Editorial links */
-  --link-color: var(--indigo-bold);
-  --link-color-hover: var(--plum-bold);
-  --link-color-visited: var(--plum-bold);
-  --link-decoration: var(--indigo-bold);
-  --link-decoration-visited: var(--plum-bold);
 
   /* =========================
      Surface washes + one-off surfaces

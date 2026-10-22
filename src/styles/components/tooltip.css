@@ -1,12 +1,25 @@
 /* ---- Tooltip component ----
-   CSS-only: visibility toggles on :hover/:focus-within, no JS needed. */
+   CSS-only: visibility toggles on :hover/:focus-within, no JS needed.
+   Hairline border, 4px corners, and a small marker before the label --
+   the same anatomy as callout labels, card titles, and badges.
+   Colors read the page accent at the element so they follow each page. */
 
 .tooltip-wrapper {
-  --tooltip-bg: var(--cream);
-  --tooltip-foreground: var(--charcoal);
-
   position: relative;
   display: inline-flex;
+}
+
+.tooltip-wrapper--plain {
+  --tooltip-bg: var(--bg-default);
+  --tooltip-marker: var(--page-accent);
+  --tooltip-text: var(--text-primary);
+}
+
+/* Soft page tint + page accent: soft sky and dark cherry on Sedge. */
+.tooltip-wrapper--tinted {
+  --tooltip-bg: var(--page-accent-tint);
+  --tooltip-marker: var(--page-accent);
+  --tooltip-text: var(--charcoal);
 }
 
 .tooltip-trigger {
@@ -18,130 +31,72 @@
 .tooltip {
   position: absolute;
   left: 50%;
-
-  padding: var(--space-2) var(--space-3);
-
-  border: 1.5px solid var(--tooltip-foreground);
-  border-radius: var(--radius-md);
-
+  z-index: 20;
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding: 7px 11px;
+  border: 1px solid color-mix(in srgb, var(--charcoal) 58%, transparent);
+  border-radius: var(--radius-xs);
   background: var(--tooltip-bg);
-  color: var(--tooltip-foreground);
-
+  color: var(--tooltip-text);
   font-family: var(--font-sans);
-  font-size: var(--text-xs);
-  font-weight: var(--font-medium);
+  font-size: 12.5px;
+  font-weight: var(--font-regular);
   line-height: 1.35;
-
   white-space: nowrap;
   pointer-events: none;
-
   opacity: 0;
   visibility: hidden;
-
-  z-index: 20;
-
   transition:
     opacity var(--motion-hover-duration) var(--motion-hover-ease),
     transform var(--motion-hover-duration) var(--motion-hover-ease),
     visibility var(--motion-hover-duration) var(--motion-hover-ease);
 }
 
-/* little speech-bubble pointer */
-
-.tooltip::after {
+.tooltip::before {
   content: "";
-
-  position: absolute;
-  left: 50%;
-
-  width: 0.55rem;
-  height: 0.55rem;
-
-  background: var(--tooltip-bg);
-
-  border-right: 1.5px solid var(--tooltip-foreground);
-  border-bottom: 1.5px solid var(--tooltip-foreground);
+  flex: none;
+  align-self: center;
+  width: 5px;
+  height: 9px;
+  background: var(--tooltip-marker);
 }
 
-
-/* ---- Top ---- */
-
+/* ---- Sides ---- */
 .tooltip--top {
-  bottom: calc(100% + var(--space-3));
-
-  transform:
-    translateX(-50%)
-    translateY(4px);
+  bottom: calc(100% + var(--space-2));
+  transform: translateX(-50%) translateY(4px);
 }
-
-.tooltip--top::after {
-  bottom: -0.33rem;
-
-  transform:
-    translateX(-50%)
-    rotate(45deg);
-}
-
-
-/* ---- Bottom ---- */
 
 .tooltip--bottom {
-  top: calc(100% + var(--space-3));
-
-  transform:
-    translateX(-50%)
-    translateY(-4px);
+  top: calc(100% + var(--space-2));
+  transform: translateX(-50%) translateY(-4px);
 }
-
-.tooltip--bottom::after {
-  top: -0.33rem;
-
-  transform:
-    translateX(-50%)
-    rotate(225deg);
-}
-
 
 /* ---- Reveal ---- */
-
 .tooltip-wrapper:hover .tooltip,
 .tooltip-wrapper:focus-within .tooltip {
   opacity: 1;
   visibility: visible;
-}
-
-.tooltip-wrapper:hover .tooltip--top,
-.tooltip-wrapper:focus-within .tooltip--top {
   transform: translateX(-50%);
 }
-
-.tooltip-wrapper:hover .tooltip--bottom,
-.tooltip-wrapper:focus-within .tooltip--bottom {
-  transform: translateX(-50%);
-}
-
 
 /* ---- Keyboard focus ---- */
-
 .tooltip-trigger:focus-visible {
   outline: var(--focus-ring-width) solid var(--focus-ring-color);
   outline-offset: var(--focus-ring-offset);
-
   border-radius: var(--radius-xs);
 }
 
-
 /* ---- Reduced motion ---- */
-
 @media (prefers-reduced-motion: reduce) {
   .tooltip {
     transition: none;
   }
 
   .tooltip--top,
-  .tooltip--bottom,
-  .tooltip-wrapper:hover .tooltip,
-  .tooltip-wrapper:focus-within .tooltip {
+  .tooltip--bottom {
     transform: translateX(-50%);
   }
 }

@@ -1,50 +1,19 @@
-import {
-  CSSProperties,
-  HTMLAttributes,
-  forwardRef,
-} from "react";
+import { HTMLAttributes, forwardRef } from "react";
 import { cx } from "../../lib/cx";
-import type { PaletteColor } from "./colorTokens";
 
-type CardVariant = "outline" | "filled";
+export type CardProps = HTMLAttributes<HTMLDivElement>;
 
-export type CardTone = {
-  background?: PaletteColor;
-  foreground?: PaletteColor;
-  border?: PaletteColor;
-};
-
-export interface CardProps extends HTMLAttributes<HTMLDivElement> {
-  variant?: CardVariant;
-  tone?: CardTone;
-}
-
+/**
+ * A plain, self-contained surface: cream, hairline border, 4px corners.
+ * Matches the callout; the only color is the title marker (page accent).
+ */
 const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
-  { variant = "outline", tone, className, children, style, ...rest },
+  { className, children, ...rest },
   ref
 ) {
-  const toneStyle = tone
-    ? ({
-        ...(tone.background && {
-          "--card-background": `var(--${tone.background})`,
-        }),
-        ...(tone.foreground && {
-          "--card-foreground": `var(--${tone.foreground})`,
-        }),
-        ...(tone.border && {
-          "--card-border": `var(--${tone.border})`,
-        }),
-      } as CSSProperties)
-    : undefined;
-
   return (
-    <div
-      ref={ref}
-      className={cx("card", `card--${variant}`, className)}
-      style={{ ...toneStyle, ...style }}
-      {...rest}
-    >
-      <div className="card-content">{children}</div>
+    <div ref={ref} className={cx("card", className)} {...rest}>
+      {children}
     </div>
   );
 });

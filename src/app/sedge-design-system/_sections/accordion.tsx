@@ -11,7 +11,7 @@ export default function AccordionSection() {
       heading={meta.title}
       icon={meta.icon}
       lede="A single-open FAQ pattern for grouping related questions without the visual weight of separate cards."
-      description="Thin dividers keep each row distinct, while one tone prop coordinates the divider, number, and control colors to suit each page."
+      description="It sits directly on the cream page with no container: hairline rules frame and separate the rows, and a thin plus/minus opens each one. Every number carries the same small marker as callout and card labels, in the soft page tint; when an item opens, its marker turns the full page accent."
     >
       <AccordionExamples />
     </Section>

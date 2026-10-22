@@ -4,8 +4,12 @@
    rail beside the year-by-year cover grid (BookshelfBrowser.tsx). */
 
 .bookshelf-page.page-shell {
-  --bookshelf-accent: var(--cherry-bold);
+  --bookshelf-accent: var(--blue-bold);
   --bookshelf-rule: color-mix(in srgb, var(--charcoal) 58%, transparent);
+  /* Buttons: cherry accents on a dusty-rose tint. */
+  --page-accent: var(--cherry-bold);
+  --page-accent-tint: color-mix(in srgb, var(--cherry-bold) 12%, var(--cream));
+  --page-accent-ink: var(--cream);
 
   padding: 0;
   color: var(--charcoal);
@@ -33,34 +37,8 @@
   gap: var(--space-2) var(--space-5);
 }
 
-.bookshelf-stats-trigger {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  min-height: 1.75rem;
-  padding: 0 0.625rem;
-  border: 1px solid var(--charcoal);
-  border-radius: 0;
-  background: var(--cream);
-  color: var(--charcoal);
-  font: inherit;
-  font-size: 0.75rem;
-  font-weight: var(--font-semibold);
-  cursor: pointer;
-  transition:
-    background-color var(--motion-hover-duration) var(--motion-hover-ease),
-    color var(--motion-hover-duration) var(--motion-hover-ease);
-}
 
-.bookshelf-stats-trigger svg {
-  width: 0.875rem;
-  height: 0.875rem;
-}
 
-.bookshelf-stats-trigger:hover {
-  background: var(--charcoal);
-  color: var(--cream);
-}
 
 /* ---- Body layout ----
    One grid: row 1 = rail label + first year heading (shared rule),
@@ -236,6 +214,47 @@
   font-size: 0.75rem;
 }
 
+/* ---- Stats drawer: fiction / nonfiction split ---- */
+.bookshelf-split {
+  display: flex;
+  gap: 2px;
+  height: 0.875rem;
+}
+
+.bookshelf-split-fiction {
+  background: var(--emerald-bold);
+}
+
+.bookshelf-split-nonfiction {
+  background: var(--sage-bold);
+}
+
+.bookshelf-split-legend {
+  display: flex;
+  gap: var(--space-5);
+  margin-top: var(--space-2);
+  font-size: 0.8125rem;
+}
+
+.bookshelf-split-legend > span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.bookshelf-split-key {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.75rem;
+}
+
+.bookshelf-stat-sentence {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
 /* ---- Stats drawer: tag breakdown bars ---- */
 .bookshelf-tag-bars {
   display: flex;
@@ -280,7 +299,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .bookshelf-stats-trigger,
   .bookshelf-rail-tag,
   .bookshelf-rail-mark {
     transition: none;
@@ -371,7 +389,4 @@
     gap: 1.75rem 0.875rem;
   }
 
-  .bookshelf-stats-trigger {
-    min-height: 2rem;
-  }
 }

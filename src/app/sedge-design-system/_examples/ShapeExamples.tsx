@@ -7,18 +7,19 @@ import "./ShapeExamples.css";
 // moments. Keep this honest as components change.
 const RADIUS_SCALE = [
   { token: "--radius-none", px: "0", usedFor: "The default — page surfaces, covers, swatches, drawer, rules" },
-  { token: "--radius-xs", px: "4", usedFor: "Tooltips" },
+  { token: "--radius-xs", px: "4", usedFor: "Buttons, tooltips" },
   { token: "--radius-sm", px: "8", usedFor: "Code blocks" },
   { token: "--radius-md", px: "12", usedFor: "Focus rings, mobile section switcher" },
   { token: "--radius-lg", px: "16", usedFor: "Callouts, code-art demos" },
   { token: "--radius-xl", px: "20", usedFor: "Post layout on phones" },
   { token: "--radius-2xl", px: "24", usedFor: "Cards" },
-  { token: "--radius-pill", px: "9999", usedFor: "Badges, buttons, toggles" },
+  { token: "--radius-pill", px: "9999", usedFor: "Pill buttons, badges, toggles" },
 ];
 
 const ALIASES = [
   { token: "--radius-card", value: "→ 2xl · 24px" },
-  { token: "--radius-button", value: "→ pill" },
+  { token: "--radius-button", value: "→ xs · 4px" },
+  { token: "--radius-button-pill", value: "→ pill" },
   { token: "--radius-modal", value: "→ lg · 16px" },
   { token: "--radius-input", value: "→ lg · 16px" },
 ];

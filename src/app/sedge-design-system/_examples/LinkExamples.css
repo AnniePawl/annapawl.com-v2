@@ -1,3 +1,15 @@
+.link-sample {
+  max-width: 40rem;
+  margin: 0 0 var(--space-6);
+  color: var(--text-primary);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+.link-sample--small {
+  font-size: var(--text-sm);
+}
+
 .link-state-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -27,12 +39,6 @@
   color: var(--text-primary);
   font-size: var(--text-xs);
   list-style: none;
-}
-
-.link-breadcrumbs .text-link {
-  --focus-ring-color: var(--text-primary);
-  color: var(--text-primary);
-  text-decoration-color: currentColor;
 }
 
 .link-breadcrumb-separator {

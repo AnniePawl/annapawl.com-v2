@@ -1,8 +1,7 @@
 "use client";
 
-import { CSSProperties, useState } from "react";
+import { useState } from "react";
 import { cx } from "../../lib/cx";
-import type { PaletteColor } from "./colorTokens";
 
 /**
  * A single question/answer entry. `id` is optional -- when omitted, the
@@ -17,8 +16,6 @@ export type AccordionItem = {
 
 export interface AccordionProps {
   items: AccordionItem[];
-  /** Sets the divider, item number, and expand/collapse control color. */
-  tone?: PaletteColor;
   /** id (or index, as a string) of the item open on first render.
    * Nothing is open by default. */
   defaultOpenId?: string;
@@ -30,29 +27,23 @@ function resolveId(item: AccordionItem, index: number): string {
 }
 
 /**
- * Soft-editorial, single-open FAQ accordion. One continuous pale-lavender
- * container (see foundations/../components/accordion.css) rather than a
- * card per row -- rows are separated by thin dividers, not their own
- * background/radius. Deliberately stays in its own fixed light palette
- * regardless of the surrounding page's theme; see accordion.css.
+ * Single-open FAQ accordion on cream. Hairline rules separate the rows;
+ * each number carries a small marker that turns the page accent when
+ * its item is open. No container box -- it sits directly on the page.
  */
 export default function Accordion({
   items,
-  tone,
   defaultOpenId,
   className,
 }: AccordionProps) {
   const [openId, setOpenId] = useState<string | null>(defaultOpenId ?? null);
-  const toneStyle = tone
-    ? ({ "--accordion-tone": `var(--${tone})` } as CSSProperties)
-    : undefined;
 
   function toggle(id: string) {
     setOpenId((current) => (current === id ? null : id));
   }
 
   return (
-    <div className={cx("accordion", className)} style={toneStyle}>
+    <div className={cx("accordion", className)}>
       {items.map((item, index) => {
         const id = resolveId(item, index);
         const isOpen = openId === id;

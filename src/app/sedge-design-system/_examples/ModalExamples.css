@@ -1,28 +1,14 @@
-.colorway-trigger.btn--secondary {
-  min-width: 12.5rem;
-  border-color: var(--editorial-accent);
-  background: var(--editorial-surface);
-  color: var(--charcoal);
-  box-shadow: none;
-}
-
-.colorway-trigger.btn--secondary:hover,
-.colorway-trigger.btn--secondary[data-state="hover"] {
-  border-color: var(--editorial-accent);
-  background: var(--editorial-accent);
-  color: var(--editorial-accent-text);
-}
-
-.colorway-trigger.btn--secondary:active,
-.colorway-trigger.btn--secondary[data-state="pressed"] {
-  border-color: var(--editorial-accent);
-  background: var(--editorial-accent-hover);
-  color: var(--editorial-accent-text);
-  box-shadow: none;
-}
-
-.modal-colorway-buttons {
+.modal-demo-row {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.modal-guidance {
+  max-width: 40rem;
+}
+
+.modal-guidance-name {
+  font-weight: var(--font-semibold);
 }

@@ -1,56 +1,42 @@
 /* ---- Card component ----
-   Two static surfaces: an indigo outline and a bold indigo fill. */
+   Same vibe as the callout: cream surface, hairline charcoal border,
+   4px corners. The one touch of color is the title marker, which reads
+   the page accent at the element so it follows each page. */
 
 .card {
-  --card-background: var(--bg-default);
-  --card-foreground: var(--text-primary);
-  --card-border: transparent;
-
-  position: relative;
+  --card-marker: var(--page-accent);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  padding: var(--space-6);
-  border: var(--border-md) solid var(--card-border);
-  border-radius: var(--radius-card);
-  background: var(--card-background);
-  color: var(--card-foreground);
-  box-shadow: none;
+  padding: var(--space-5);
+  border: 1px solid color-mix(in srgb, var(--text-primary) 58%, transparent);
+  border-radius: var(--radius-xs);
+  background: var(--bg-default);
+  color: var(--text-primary);
 }
 
-.card--outline {
-  --card-border: var(--indigo-bold);
-}
-
-.card--filled {
-  --card-background: var(--indigo-bold);
-  --card-foreground: var(--charcoal);
-}
-
-.card-content {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  min-height: 0;
-}
-
-/* ---- Card sub-components ---- */
 .card-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
   margin: 0 0 var(--space-3);
-  color: var(--card-foreground);
-  font-family: var(--type-eyebrow-family);
-  font-size: var(--type-eyebrow-size);
-  font-weight: var(--type-eyebrow-weight);
-  line-height: var(--type-eyebrow-leading);
-  letter-spacing: var(--type-eyebrow-tracking);
+  color: inherit;
+  font-size: 11px;
+  font-weight: var(--font-semibold);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-wider);
   text-transform: uppercase;
+}
+
+.card-title::before {
+  content: "";
+  flex-shrink: 0;
+  width: 6px;
+  height: 10px;
+  background: var(--card-marker);
 }
 
 .card-body {
   margin: 0;
-  color: color-mix(in srgb, var(--card-foreground) 78%, transparent);
-  font-size: var(--text-sm);
-  line-height: var(--leading-normal);
+  font-size: 15px;
+  line-height: 1.6;
 }

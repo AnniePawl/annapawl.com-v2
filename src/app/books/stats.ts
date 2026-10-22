@@ -15,6 +15,13 @@ export interface ReadingStats {
   totalAuthors: number;
   longest: { title: string; pages: number } | null;
   shortest: { title: string; pages: number } | null;
+  /** Oldest + newest books by first-publication year. */
+  oldest: { title: string; year: number } | null;
+  newest: { title: string; year: number } | null;
+  /** Authors with more than one book on the shelf, most-read first. */
+  repeatAuthors: { author: string; count: number }[];
+  fiction: number;
+  nonfiction: number;
 }
 
 /** Resolves the same title/author display logic used on the book tiles,
@@ -28,8 +35,40 @@ function resolveDisplay(entry: BookStatEntry) {
   };
 }
 
+/** First-publication year: the manual override wins, else Google's date. */
+function publishedYear({ lookup, info }: BookStatEntry): number | null {
+  if (lookup.firstPublished) return lookup.firstPublished;
+  const match = info?.publishedDate?.match(/^\d{4}/);
+  return match ? Number(match[0]) : null;
+}
+
 export function computeStats(entries: BookStatEntry[]): ReadingStats {
   const books = entries.map(resolveDisplay);
+
+  // Time traveled — uses the short title from data.ts, since Google's
+  // titles can carry marketing subtitles ("…: A GMA Book Club Pick").
+  const dated = entries
+    .map((entry) => ({ title: entry.lookup.title, year: publishedYear(entry) }))
+    .filter((b): b is { title: string; year: number } => b.year != null);
+  const oldest = dated.length
+    ? dated.reduce((min, b) => (b.year < min.year ? b : min))
+    : null;
+  const newest = dated.length
+    ? dated.reduce((max, b) => (b.year > max.year ? b : max))
+    : null;
+
+  // Authors you came back to — grouped by the author written in data.ts.
+  const authorCounts = new Map<string, number>();
+  for (const { lookup, info } of entries) {
+    const name = lookup.author ?? info?.authors?.[0];
+    if (name) authorCounts.set(name, (authorCounts.get(name) ?? 0) + 1);
+  }
+  const repeatAuthors = [...authorCounts.entries()]
+    .filter(([, count]) => count > 1)
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .map(([author, count]) => ({ author, count }));
+
+  const nonfiction = entries.filter((e) => e.lookup.tags?.includes("Nonfiction")).length;
 
   const withPages = books.filter(
     (b): b is typeof b & { pages: number } => b.pages != null && b.pages > 0
@@ -57,5 +96,10 @@ export function computeStats(entries: BookStatEntry[]): ReadingStats {
     totalAuthors: authorSet.size,
     longest: longest ? { title: longest.title, pages: longest.pages } : null,
     shortest: shortest ? { title: shortest.title, pages: shortest.pages } : null,
+    oldest,
+    newest,
+    repeatAuthors,
+    fiction: entries.length - nonfiction,
+    nonfiction,
   };
 }

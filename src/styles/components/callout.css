@@ -1,34 +1,41 @@
 /* ---- Callout component ----
-   Inline, non-blocking companion to the modal. Both share a two-tone
-   surface and top label rail, while callouts omit dialog controls. */
+   A plain, non-blocking aside. Cream surface, hairline charcoal border,
+   4px corners. The one touch of color is the label marker, which reads
+   the page accent at the element so it follows each page. */
 
 .callout {
-  overflow: hidden;
-  border-radius: var(--radius-lg);
-  background: var(--callout-surface);
-  color: var(--callout-body-text);
+  --callout-marker: var(--page-accent);
+  max-width: 40rem;
+  padding: var(--space-5) var(--space-5) var(--space-5);
+  border: 1px solid color-mix(in srgb, var(--text-primary) 58%, transparent);
+  border-radius: var(--radius-xs);
+  background: var(--bg-default);
+  color: var(--text-primary);
 }
 
-.callout-label-rail {
-  display: flex;
+.callout-label {
+  display: inline-flex;
   align-items: center;
-  min-height: 2.75rem;
-  padding: var(--space-2) var(--space-5);
-  background: var(--callout-accent);
-  color: var(--callout-surface);
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+  font-size: 11px;
+  font-weight: var(--font-semibold);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
 }
 
-.callout-eyebrow {
-  color: inherit;
-}
-
-.callout-content {
-  padding: var(--space-5);
+.callout-label::before {
+  content: "";
+  flex-shrink: 0;
+  width: 6px;
+  height: 10px;
+  background: var(--callout-marker);
 }
 
 .callout-description {
-  color: var(--callout-body-text);
-  line-height: var(--leading-normal);
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 .callout-description > :first-child {
@@ -40,34 +47,7 @@
 }
 
 .callout-action {
-  --focus-ring-color: var(--callout-accent);
   display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  margin-top: var(--space-4);
-  color: var(--callout-accent);
-  font-weight: var(--font-semibold);
-  text-decoration-line: underline;
-  text-decoration-color: var(--callout-accent);
-  text-decoration-thickness: 1px;
-  text-decoration-skip-ink: none;
-  text-underline-offset: 0.3em;
-}
-
-.callout-action-icon {
-  width: var(--icon-sm);
-  height: var(--icon-sm);
-  flex-shrink: 0;
-  transition: transform var(--motion-hover-duration) var(--motion-hover-ease);
-}
-
-.callout-action:hover .callout-action-icon,
-.callout-action:focus-visible .callout-action-icon {
-  transform: translateX(var(--space-1));
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .callout-action-icon {
-    transition: none;
-  }
+  margin-top: var(--space-3);
+  font-size: 14px;
 }

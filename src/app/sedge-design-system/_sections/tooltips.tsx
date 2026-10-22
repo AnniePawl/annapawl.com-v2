@@ -11,7 +11,7 @@ export default function TooltipsSection() {
       heading={meta.title}
       icon={meta.icon}
       lede="Tooltips provide a little extra context without cluttering the interface."
-      description="They use cream and charcoal by default, while optional background and foreground colors allow lighter or darker treatments. The foreground color is shared by the text and border."
+      description="They share the callout and badge anatomy: a hairline border, 4px corners, and a small marker before the label. Plain tooltips are cream with a page-accent marker. Tinted ones use the soft page tint behind the same marker, which on Sedge is soft sky with dark cherry. For anything else, pass your own background, marker, and text colors from the palette."
     >
       <TooltipExamples />
     </Section>

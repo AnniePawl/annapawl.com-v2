@@ -7,15 +7,17 @@ import Textarea from "../../../components/ui/Textarea";
 import Select from "../../../components/ui/Select";
 import Checkbox from "../../../components/ui/Checkbox";
 import Radio from "../../../components/ui/Radio";
+import Button from "../../../components/ui/Button";
 import {
   FormField,
   FieldLabel,
+  FieldError,
 } from "../../../components/ui/FormField";
 import CodeBlock from "../_components/CodeBlock";
 import "./FormExamples.css";
 
 const USAGE = `
-import { FormField, FieldLabel, FieldHint } from "@/components/ui/FormField";
+import { FormField, FieldLabel, FieldError } from "@/components/ui/FormField";
 import Input from "@/components/ui/Input";
 import Select from "@/components/ui/Select";
 import Checkbox from "@/components/ui/Checkbox";
@@ -24,6 +26,12 @@ import Radio from "@/components/ui/Radio";
 <FormField>
   <FieldLabel htmlFor="email">Email</FieldLabel>
   <Input id="email" type="email" placeholder="you@example.com" />
+</FormField>
+
+<FormField>
+  <FieldLabel htmlFor="site">Your website</FieldLabel>
+  <Input id="site" error defaultValue="annapawl" />
+  <FieldError>That doesn’t look like a web address yet.</FieldError>
 </FormField>
 
 <FormField>
@@ -78,6 +86,12 @@ export default function FormExamples() {
         </FormField>
 
         <FormField>
+          <FieldLabel htmlFor="website">Your website</FieldLabel>
+          <Input id="website" error defaultValue="annapawl" />
+          <FieldError>That doesn’t look like a web address yet.</FieldError>
+        </FormField>
+
+        <FormField>
           <FieldLabel htmlFor="message">Tell me everything</FieldLabel>
           <Textarea id="message" placeholder="Go Off..." />
         </FormField>
@@ -90,7 +104,11 @@ export default function FormExamples() {
           </div>
         </FormField>
 
-        <Checkbox id="terms" label="I read the tiny words" />
+        <Checkbox id="terms" label="I read the tiny words" defaultChecked />
+
+        <div>
+          <Button type="button">Send it</Button>
+        </div>
       </div>
       <h3 className="sedge-subheading">Usage</h3>
        <CodeBlock code={USAGE} className="mb-8" />

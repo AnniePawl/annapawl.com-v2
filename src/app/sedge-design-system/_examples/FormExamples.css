@@ -1,11 +1,11 @@
 .form-demo-grid {
   display: grid;
-  max-width: 440px;
-  gap: var(--space-5);
+  max-width: 460px;
+  gap: var(--space-6);
 }
 
 .form-demo-row {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-5);
+  gap: var(--space-7);
 }

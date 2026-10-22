@@ -11,7 +11,7 @@ export default function CalloutsSection() {
       heading={meta.title}
       icon={meta.icon}
       lede="Callouts add compact, non-blocking emphasis inside an article or page."
-      description="I use them in posts to highlight a side note, reminder, related idea, or small update. Their two-tone treatment can combine any surface and accent colors from the palette: the surface color carries into the label rail’s text, while the accent connects the rail and optional action link. Body copy can be colored independently to remain readable on lighter or darker surfaces."
+      description="I use them in posts for a side note, reminder, related idea, or small update. They stay plain on purpose: cream surface, a hairline border, and 4px corners, with a short spaced-caps label. The only color is the small marker beside the label, which follows the page accent, so a callout on the Bookshelf and one in Drawing with Code each feel at home. An optional action uses the standard text link."
     >
       <CalloutExamples />
     </Section>

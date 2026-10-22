@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Badge from "../../components/ui/Badge";
-import type { BadgeTone } from "../../components/ui/Badge";
+import { TAG_TONES, DEFAULT_TAG_TONE } from "./tagTones";
 import Modal from "../../components/ui/Modal";
 import BookTile, { type ShelfEntry } from "./BookTile";
 
@@ -10,32 +10,6 @@ interface TagFilterBarProps {
   allTags: string[];
   entries: ShelfEntry[];
 }
-
-const TAG_TONES: Record<string, BadgeTone> = {
-  Adventure: { background: "sky-soft", foreground: "cherry-bold" },
-  "Book Club": { background: "cherry-bold", foreground: "pink-soft" },
-  Dystopian: { background: "cream", foreground: "cherry-soft" },
-  Fantasy: { background: "sky-soft", foreground: "chocolate-bold" },
-  Favorites: { background: "cream", foreground: "mauve-bold" },
-  "Historical Fiction": {
-    background: "mauve-bold",
-    foreground: "pink-soft",
-  },
-  History: { background: "pink-soft", foreground: "cherry-bold" },
-  "LGBTQ+": { background: "sky-soft", foreground: "cherry-bold" },
-  "Literary Fiction": {
-    background: "mauve-soft",
-    foreground: "chocolate-bold",
-  },
-  "Made me cry": { background: "cherry-bold", foreground: "sky-soft" },
-  Romance: { background: "pink-soft", foreground: "cherry-bold" },
-  "Science Fiction": { background: "mauve-soft", foreground: "cherry-bold" },
-};
-
-const DEFAULT_TAG_TONE: BadgeTone = {
-  background: "cream",
-  foreground: "charcoal",
-};
 
 export default function TagFilterBar({ allTags, entries }: TagFilterBarProps) {
   const [selected, setSelected] = useState<string | null>(null);
@@ -63,11 +37,7 @@ export default function TagFilterBar({ allTags, entries }: TagFilterBarProps) {
               }
             >
               <Badge
-                tone={
-                  active
-                    ? { background: "charcoal", foreground: "cream" }
-                    : (TAG_TONES[tag] ?? DEFAULT_TAG_TONE)
-                }
+                tone={active ? "charcoal" : (TAG_TONES[tag] ?? DEFAULT_TAG_TONE)}
               >
                 {tag}
               </Badge>
@@ -82,7 +52,6 @@ export default function TagFilterBar({ allTags, entries }: TagFilterBarProps) {
         eyebrow="Browse by tag"
         title={selected ?? "Books"}
         description={`${matches.length} ${matches.length === 1 ? "book" : "books"} found on the shelf.`}
-        colorway="pink-emerald"
         size="lg"
       >
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">

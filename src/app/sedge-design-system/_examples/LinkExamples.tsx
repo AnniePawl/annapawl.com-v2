@@ -1,59 +1,70 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import CodeBlock from "../_components/CodeBlock";
 import "./LinkExamples.css";
 
 const USAGE = `
-<a className="text-link focus-ring" href="/books">
-  Browse books
+// Default — links in body and article text
+<a className="text-link focus-ring" href="/books">book club picks</a>
+
+// Standalone, with an arrow
+<a className="text-link text-link--standalone focus-ring" href="/books">
+  Browse all books
+  <ArrowRight className="text-link-icon" aria-hidden="true" />
 </a>
 
+// External
 <a
   className="text-link text-link--standalone text-link--external focus-ring"
   href="https://lucide.dev/icons/"
   target="_blank"
   rel="noreferrer"
 >
-  Browse Lucide icons
+  lucide.dev
   <ArrowUpRight className="text-link-icon" aria-hidden="true" />
   <span className="sr-only"> (opens in a new tab)</span>
 </a>
+
+// Quiet — meta and captions
+<a className="text-link text-link--quiet focus-ring" href="https://books.google.com">Google Books</a>
 `;
 
 export default function LinkExamples() {
   return (
     <div>
+      <h3 className="sedge-subheading">Default</h3>
+      <p className="link-sample">
+        I love looking through other people’s bookshelves — mine has{" "}
+        <a className="text-link focus-ring" href="#links" data-state="default">
+          book club picks
+        </a>
+        , finds from the{" "}
+        <a className="text-link focus-ring" href="#links" data-state="default">
+          Little Library
+        </a>
+        , and a few too many fantasy trilogies.
+      </p>
       <div className="link-state-grid">
-        <LinkState label="Default">
+        <LinkState label="Standalone">
           <a
             className="text-link text-link--standalone focus-ring"
-            href="#post-layout"
+            href="#links"
             data-state="default"
           >
-            Learn more
+            Browse all books
+            <ArrowRight className="text-link-icon" aria-hidden="true" />
           </a>
         </LinkState>
-
         <LinkState label="Hover">
-          <a
-            className="text-link text-link--standalone focus-ring"
-            href="#article-layout-hover"
-            data-state="hover"
-          >
-            Learn more
+          <a className="text-link focus-ring" href="#links" data-state="hover">
+            Little Library
           </a>
         </LinkState>
-
         <LinkState label="Visited">
-          <a
-            className="text-link text-link--standalone focus-ring"
-            href="#article-layout-clicked"
-            data-state="visited"
-          >
-            Learn more
+          <a className="text-link focus-ring" href="#links" data-state="visited">
+            Book club picks
           </a>
         </LinkState>
-
         <LinkState label="External">
           <a
             className="text-link text-link--standalone text-link--external focus-ring"
@@ -62,9 +73,43 @@ export default function LinkExamples() {
             rel="noreferrer"
             data-state="default"
           >
-            Learn more
+            lucide.dev
             <ArrowUpRight className="text-link-icon" aria-hidden="true" />
             <span className="sr-only"> (opens in a new tab)</span>
+          </a>
+        </LinkState>
+      </div>
+
+      <h3 className="sedge-subheading">Quiet</h3>
+      <p className="link-sample link-sample--small">
+        Covers and page counts come from{" "}
+        <a
+          className="text-link text-link--quiet focus-ring"
+          href="https://books.google.com"
+          target="_blank"
+          rel="noreferrer"
+          data-state="default"
+        >
+          Google Books
+          <span className="sr-only"> (opens in a new tab)</span>
+        </a>
+        . Small, low-stakes links — meta and captions — use a dotted
+        line that goes solid on hover.
+      </p>
+      <div className="link-state-grid">
+        <LinkState label="Default">
+          <a className="text-link text-link--quiet focus-ring" href="#links" data-state="default">
+            Google Books
+          </a>
+        </LinkState>
+        <LinkState label="Hover">
+          <a className="text-link text-link--quiet focus-ring" href="#links" data-state="hover">
+            Google Books
+          </a>
+        </LinkState>
+        <LinkState label="Visited">
+          <a className="text-link text-link--quiet focus-ring" href="#links" data-state="visited">
+            Google Books
           </a>
         </LinkState>
       </div>

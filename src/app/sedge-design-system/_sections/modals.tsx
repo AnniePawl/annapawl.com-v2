@@ -10,8 +10,8 @@ export default function ModalsSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      lede="Modals create a focused layer above the page for special moments."
-      description="They appear centered against a dimmed backdrop, separating the content from the rest of the screen without taking the user somewhere new. A slim top rail gives the eyebrow a clear home, while the softer surface keeps the title and message easy to scan. Modals can be dismissed with the top-right close control, by clicking outside the dialog, or by pressing Escape. Native dialog behavior, clear labeling, and keyboard focus management help make the pattern accessible."
+      lede="Two dialogs for two jobs: a small centered modal for short moments, and a side drawer for longer content."
+      description="Both share the same voice: cream, charcoal text, a hairline edge, the page-accent marker, and a light charcoal backdrop with no shadows. The modal is a notecard with 4px corners, a spaced-caps label, a modest title, and a plain × in the corner. The drawer slides in from the right like a page margin and keeps a big title for content worth settling into. Both are built on the native dialog element, so focus is trapped, Escape closes them, and so does clicking the backdrop."
     >
       <ModalExamples />
     </Section>

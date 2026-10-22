@@ -11,7 +11,7 @@ export default function FormsSection() {
       heading={meta.title}
       icon={meta.icon}
       lede="Forms should feel clear, familiar, and easy to move through."
-      description="Shared styles for inputs, labels, focus, and feedback keep things consistent while leaving room for a little personality where it fits."
+      description="Fields are drawn as ruled lines rather than boxes, like writing on a ruled page; the textarea becomes a few lines of ruled paper. Labels use spaced caps. Focus thickens the line to 2px in the page accent, and checked radios and checkboxes use the same accent. Red is reserved for errors, shown on the line and in a message with the small marker."
     >
       <h3 className="sedge-subheading">Example</h3>
       <FormExamples />

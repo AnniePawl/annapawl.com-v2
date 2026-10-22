@@ -57,7 +57,7 @@ export function MobileAbout() {
         <strong>General nerdery:</strong> Roller skating,{" "}
         <LegacyLink>CSS art</LegacyLink>, cello,{" "}
         <LegacyLink>forkplay</LegacyLink>, hoarding postage stamps,{" "}
-        <Link href="/embroidery" className="landing-inline-link">
+        <Link href="/fiber-arts" className="landing-inline-link">
           embroidery
         </Link>
         , going down rabbit holes 🐰

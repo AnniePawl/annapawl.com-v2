@@ -1,3 +1,10 @@
+/* Drawing with Code's page accent: red. */
+.dwc-page {
+  --page-accent: var(--red-bold);
+  --page-accent-tint: color-mix(in srgb, var(--red-soft) 55%, var(--cream));
+  --page-accent-ink: var(--charcoal);
+}
+
 /* ---- Drawing with Code page ----
    Ported from the old annapawl.com repo's "dwc" (Drawing With Code) page —
    a CSS-art teaching page with a grid of pure-CSS shapes and a live

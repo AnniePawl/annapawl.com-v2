@@ -2,6 +2,7 @@
 
 import { useState, type CSSProperties } from "react";
 import { ChartColumn } from "lucide-react";
+import Button from "../../components/ui/Button";
 import Drawer from "../../components/ui/Drawer";
 import type { TagCount } from "./BookshelfBrowser";
 import type { ReadingStats } from "./stats";
@@ -27,14 +28,9 @@ export default function StatsButton({ stats, tags }: StatsButtonProps) {
 
   return (
     <>
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        className="bookshelf-stats-trigger focus-ring"
-      >
-        <ChartColumn aria-hidden="true" />
+      <Button size="sm" startIcon={<ChartColumn />} onClick={() => setOpen(true)}>
         Reading stats
-      </button>
+      </Button>
 
       <Drawer
         open={open}
@@ -73,6 +69,61 @@ export default function StatsButton({ stats, tags }: StatsButtonProps) {
             </div>
           ) : null}
         </dl>
+
+        {stats.fiction + stats.nonfiction > 0 ? (
+          <>
+            <span className="drawer-section-label">Fiction vs. nonfiction</span>
+            <div
+              className="bookshelf-split"
+              role="img"
+              aria-label={`${stats.fiction} fiction, ${stats.nonfiction} nonfiction`}
+            >
+              <span
+                className="bookshelf-split-fiction"
+                style={{ flexGrow: stats.fiction }}
+              />
+              <span
+                className="bookshelf-split-nonfiction"
+                style={{ flexGrow: stats.nonfiction }}
+              />
+            </div>
+            <div className="bookshelf-split-legend">
+              <span>
+                <span className="bookshelf-split-key bookshelf-split-fiction" aria-hidden="true" />
+                Fiction · {stats.fiction}
+              </span>
+              <span>
+                <span className="bookshelf-split-key bookshelf-split-nonfiction" aria-hidden="true" />
+                Nonfiction · {stats.nonfiction}
+              </span>
+            </div>
+          </>
+        ) : null}
+
+        {stats.oldest && stats.newest && stats.newest.year > stats.oldest.year ? (
+          <>
+            <span className="drawer-section-label">Time traveled</span>
+            <p className="bookshelf-stat-sentence">
+              From <em>{stats.oldest.title}</em> ({stats.oldest.year}) to{" "}
+              <em>{stats.newest.title}</em> ({stats.newest.year}) —{" "}
+              {stats.newest.year - stats.oldest.year} years of books.
+            </p>
+          </>
+        ) : null}
+
+        {stats.repeatAuthors.length > 0 ? (
+          <>
+            <span className="drawer-section-label">Authors you came back to</span>
+            <dl className="drawer-list drawer-list--tight">
+              {stats.repeatAuthors.map(({ author, count }) => (
+                <div key={author}>
+                  <dt>{author}</dt>
+                  <dd>{count} books</dd>
+                </div>
+              ))}
+            </dl>
+          </>
+        ) : null}
 
         {byCount.length > 0 ? (
           <>

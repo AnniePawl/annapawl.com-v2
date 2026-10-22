@@ -160,6 +160,10 @@
   font-variant-numeric: tabular-nums;
 }
 
+.drawer-list--tight {
+  margin-top: 0;
+}
+
 .drawer-section-label {
   display: block;
   margin: var(--space-7) 0 var(--space-3);

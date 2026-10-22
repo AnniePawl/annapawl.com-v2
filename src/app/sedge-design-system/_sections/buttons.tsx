@@ -9,8 +9,8 @@ export default function ButtonsSection() {
     <Section id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      lede="Buttons use a compact pill shape and come in three sizes."
-      description="The default pairs soft indigo with charcoal and can include an optional icon, such as an arrow. Like other components in the system, buttons can be customized with background and foreground color tokens, offering the flexibility to match the mood of each page or experience.">
+      lede="Soft corners for everyday actions, a pill for the big moment."
+      description="Buttons know their role, not their color: the page sets an accent once and every button follows. Three roles cover everything — no special colors for danger or success.">
       <ButtonStates />
     </Section>
   );

@@ -54,11 +54,11 @@ export default async function BooksPage() {
         utilityStart={
           <HomeLogo
             colors={{
-              northeast: "var(--emerald-bold)",
-              southeast: "var(--cherry-bold)",
-              southwest: "var(--cherry-bold)",
-              northwest: "var(--cherry-bold)",
-              hoverAccent: "var(--indigo-bold)",
+              northeast: "var(--amber-bold)",
+              southeast: "var(--blue-bold)",
+              southwest: "var(--blue-bold)",
+              northwest: "var(--blue-bold)",
+              hoverAccent: "var(--amber-bold)",
             }}
             size="1.75rem"
           />
@@ -67,7 +67,7 @@ export default async function BooksPage() {
         description="Book club picks, Little Library finds, and the occasional summer indulgence."
         eyebrow="Digital garden"
         title="Bookshelf"
-        accent="var(--cherry-bold)"
+        accent="var(--blue-bold)"
         lede={
           <>
             I love looking through other people’s bookshelves — they show what

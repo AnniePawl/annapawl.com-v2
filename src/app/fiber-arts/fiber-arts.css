@@ -1,0 +1,341 @@
+/* ---- Fiber arts page ----
+   Header: the shared PostHeader, same as the Bookshelf. Body: favorites
+   shown big beside a numbered index, then the rest as flat swatches whose
+   color says what kind of piece it is. */
+
+.fiber-page.page-shell {
+  --page-accent: var(--cherry-bold);
+  --page-accent-tint: color-mix(in srgb, var(--cherry-bold) 12%, var(--cream));
+  --page-accent-ink: var(--cream);
+  --fiber-rule: color-mix(in srgb, var(--charcoal) 58%, transparent);
+  --fiber-rule-soft: color-mix(in srgb, var(--charcoal) 18%, transparent);
+
+  /* Swatch color = type. */
+  --fiber-embroidery: var(--sky-soft);
+  --fiber-needlepoint: color-mix(in srgb, var(--cherry-bold) 12%, var(--cream));
+  --fiber-cross-stitch: color-mix(in srgb, var(--sage-soft) 40%, var(--cream));
+
+  padding: 0;
+  color: var(--charcoal);
+  background: var(--cream);
+}
+
+.fiber-page .post-header-title {
+  max-width: none;
+}
+
+[data-type="embroidery"] { --fiber-tone: var(--fiber-embroidery); }
+[data-type="needlepoint"] { --fiber-tone: var(--fiber-needlepoint); }
+[data-type="cross-stitch"] { --fiber-tone: var(--fiber-cross-stitch); }
+
+.fiber-body {
+  padding: var(--space-6) var(--space-5) var(--space-11);
+}
+
+/* ---- Section heads ---- */
+.fiber-section + .fiber-section {
+  margin-top: var(--space-10);
+}
+
+.fiber-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid color-mix(in srgb, var(--charcoal) 30%, transparent);
+}
+
+.fiber-section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: 0;
+  font-size: 11.5px;
+  font-weight: var(--font-semibold);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.fiber-section-label::before {
+  content: "";
+  width: 7px;
+  height: 11px;
+  background: var(--page-accent);
+}
+
+.fiber-section-count {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+/* ---- Favorites: feature + index ---- */
+.fiber-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 26rem);
+  align-items: start;
+  gap: var(--column-gap);
+}
+
+.fiber-feature-image {
+  position: relative;
+  height: min(32rem, 70vw);
+  margin: 0;
+}
+
+.fiber-feature-image img {
+  animation: fiber-fade var(--motion-modal-duration) var(--motion-ease-standard);
+}
+
+@keyframes fiber-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fiber-feature-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 11px;
+  font-weight: var(--font-semibold);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.fiber-feature-label::before {
+  content: "";
+  width: 6px;
+  height: 11px;
+  background: var(--page-accent);
+}
+
+.fiber-feature-title {
+  margin: var(--space-3) 0 0;
+  font-size: 2rem;
+  font-weight: var(--font-regular);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.fiber-feature-story {
+  margin: var(--space-3) 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.fiber-feature-meta {
+  margin: var(--space-3) 0 0;
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+}
+
+.fiber-index {
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--fiber-rule);
+  border-bottom: 1px solid var(--fiber-rule);
+}
+
+.fiber-index li + li {
+  border-top: 1px solid var(--fiber-rule-soft);
+}
+
+.fiber-index-row {
+  display: grid;
+  grid-template-columns: 2.25rem 2.25rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-2) var(--space-1);
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--charcoal);
+  font: inherit;
+  font-size: 0.9375rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+.fiber-index-row[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--sky-soft) 55%, var(--cream));
+}
+
+.fiber-index-number {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: var(--font-medium);
+  letter-spacing: 0.04em;
+}
+
+.fiber-index-number::before {
+  content: "";
+  width: 5px;
+  height: 9px;
+  background: var(--sky-soft);
+  transition: background-color var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+.fiber-index-row[aria-pressed="true"] .fiber-index-number::before {
+  background: var(--page-accent);
+}
+
+.fiber-index-thumb {
+  position: relative;
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.fiber-index-type {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+/* ---- Filter ---- */
+.fiber-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+.fiber-filter-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--charcoal);
+  font: inherit;
+  font-size: 0.9375rem;
+  cursor: pointer;
+}
+
+.fiber-filter-button[aria-pressed="true"] {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.fiber-filter-button:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.fiber-filter-mark {
+  width: 0.5rem;
+  height: 0.75rem;
+  background: var(--fiber-tone);
+  outline: 1px solid var(--fiber-rule-soft);
+}
+
+.fiber-filter-count {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+/* ---- Swatches ---- */
+.fiber-swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: var(--space-7) var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fiber-swatch {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-xs);
+  background: none;
+  color: var(--charcoal);
+  font: inherit;
+  text-align: left;
+  cursor: zoom-in;
+}
+
+.fiber-swatch-image {
+  position: relative;
+  display: block;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-xs);
+  background: var(--fiber-tone);
+  background-clip: content-box;
+  overflow: hidden;
+}
+
+.fiber-swatch-image img {
+  padding: 12%;
+  transition: transform var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+.fiber-swatch:hover .fiber-swatch-image img,
+.fiber-swatch:focus-visible .fiber-swatch-image img {
+  transform: scale(1.04);
+}
+
+.fiber-swatch-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+  font-size: 0.875rem;
+}
+
+.fiber-swatch-year {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+/* ---- Swatch modal ---- */
+.fiber-modal-image {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  max-height: 60vh;
+  margin-inline: auto;
+  border-radius: var(--radius-xs);
+  background: var(--fiber-tone);
+}
+
+.fiber-modal-image img {
+  padding: 8%;
+}
+
+/* ---- Mobile ---- */
+@media (width < 48rem) {
+  .fiber-body {
+    padding: var(--space-5) var(--space-4) var(--space-9);
+  }
+
+  .fiber-feature {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-5);
+  }
+
+  .fiber-feature-image {
+    height: min(22rem, 80vw);
+  }
+
+  .fiber-swatches {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6) var(--space-4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fiber-feature-image img,
+  .fiber-swatch-image img {
+    animation: none;
+    transition: none;
+  }
+}

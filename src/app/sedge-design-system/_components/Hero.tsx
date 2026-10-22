@@ -70,6 +70,9 @@ export default function Hero({ onExplore }: { onExplore: () => void }) {
           <Button
             onClick={onExplore}
             className="mt-8"
+            variant="secondary"
+            shape="pill"
+            size="lg"
             endIcon={<ArrowRight />}
           >
             Explore the system

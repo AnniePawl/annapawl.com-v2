@@ -151,9 +151,7 @@ export default function MotionSection() {
               </p>
             </div>
             <div style={{ textAlign: "center" }}>
-              <Button
-                tone={{ background: "indigo-soft", foreground: "charcoal" }}
-              >
+              <Button>
                 Hover Me
               </Button>
               <p style={{ marginTop: 8, fontSize: 12, color: "var(--text-muted)" }}>

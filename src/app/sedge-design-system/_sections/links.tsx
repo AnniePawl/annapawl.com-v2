@@ -10,8 +10,8 @@ export default function LinksSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      lede="Links pair bold indigo text with a matching underline, shifting to plum on hover while remaining recognizable without relying on color alone."
-      description="Accessibility has been considered throughout: links use semantic anchors, retain a visible keyboard focus state, respect reduced-motion preferences, distinguish previously visited destinations, and announce when an external link opens in a new tab. The pattern remains opt-in so navigation and other complex links can keep their own behavior."
+      lede="Links keep the voice of the text around them — the color lives in the underline."
+      description="Link text stays charcoal and regular weight; a 1.5px underline in the page accent marks it, thickening on hover. Quieter links use a dotted line that goes solid. Accessibility has been considered throughout: links use semantic anchors, retain a visible keyboard focus state, respect reduced-motion preferences, distinguish previously visited destinations, and announce when an external link opens in a new tab. The pattern remains opt-in so navigation and other complex links can keep their own behavior."
     >
       <LinkExamples />
     </Section>

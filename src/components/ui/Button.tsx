@@ -7,19 +7,35 @@ import {
 import { cx } from "../../lib/cx";
 import type { PaletteColor } from "./colorTokens";
 
-type ButtonVariant = "default" | "primary" | "secondary";
+/**
+ * Buttons know their ROLE, never their color — color comes from the
+ * page accent (--page-accent / -tint / -ink), set once per page.
+ *
+ * - primary   — hairline outline + accent dot (or an accent icon);
+ *               fills with ink on hover. The default.
+ * - secondary — soft accent tint + bold accent icon.
+ * - quiet     — underlined text. Low-stakes actions like "Show all".
+ *
+ * Shape: "soft" (4px, default) for buttons that sit inside content;
+ * "pill" for a standalone call to action. Never mix shapes in one group.
+ */
+type ButtonVariant = "primary" | "secondary" | "quiet";
+type ButtonShape = "soft" | "pill";
 type ButtonSize = "sm" | "md" | "lg";
 
+/** One-off color override — the exception, not the system. */
 export type ButtonTone = {
-  background: PaletteColor;
-  foreground: PaletteColor;
+  accent?: PaletteColor;
+  tint?: PaletteColor;
+  ink?: PaletteColor;
 };
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
+  shape?: ButtonShape;
   size?: ButtonSize;
   tone?: ButtonTone;
-  bordered?: boolean;
+  startIcon?: ReactNode;
   endIcon?: ReactNode;
   /**
    * Documentation/demo use only — forces a visual state (hover/focus/
@@ -31,10 +47,11 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   {
-    variant = "default",
+    variant = "primary",
+    shape = "soft",
     size = "md",
     tone,
-    bordered = false,
+    startIcon,
     endIcon,
     type = "button",
     className,
@@ -46,8 +63,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
 ) {
   const toneStyle = tone
     ? ({
-        "--button-background": `var(--${tone.background})`,
-        "--button-foreground": `var(--${tone.foreground})`,
+        ...(tone.accent && { "--page-accent": `var(--${tone.accent})` }),
+        ...(tone.tint && { "--page-accent-tint": `var(--${tone.tint})` }),
+        ...(tone.ink && { "--page-accent-ink": `var(--${tone.ink})` }),
       } as CSSProperties)
     : undefined;
 
@@ -59,13 +77,18 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
         "btn",
         `btn--${variant}`,
         `btn--${size}`,
-        bordered && "btn--bordered",
+        shape === "pill" && "btn--pill",
         "focus-ring",
         className
       )}
       style={{ ...toneStyle, ...style }}
       {...rest}
     >
+      {startIcon ? (
+        <span className="btn-start-icon" aria-hidden="true">
+          {startIcon}
+        </span>
+      ) : null}
       <span className="btn-label">{children}</span>
       {endIcon ? (
         <span className="btn-end-icon" aria-hidden="true">

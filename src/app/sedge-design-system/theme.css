@@ -23,6 +23,14 @@
    both themes -- see the comments on --sidebar-surface below and in
    HeroNav.tsx/Hero.tsx/MobileNav.tsx/SidebarNav.tsx for why. */
 
+/* Sedge's page accent (both themes): dark cherry on soft sky.
+   Buttons + markers read it. */
+[data-sedge-theme] {
+  --page-accent: var(--cherry-bold);
+  --page-accent-tint: var(--sky-soft);
+  --page-accent-ink: var(--cream);
+}
+
 [data-sedge-theme="dark"] {
   /* Backgrounds + surfaces */
   --bg-default: var(--chocolate-bold);
@@ -85,12 +93,6 @@
   --accent-hover: color-mix(in srgb, var(--accent) 85%, black);
   --accent-active: color-mix(in srgb, var(--accent) 70%, black);
 
-  /* Editorial links keep the same indigo behavior on the dark surface. */
-  --link-color: var(--indigo-bold);
-  --link-color-hover: var(--plum-bold);
-  --link-color-visited: var(--lilac-soft);
-  --link-decoration: var(--indigo-bold);
-  --link-decoration-visited: var(--lilac-bold);
 
   /* The tooltip panel wash lifts toward --ivory on the dark page. */
   --surface-wash-soft: color-mix(in srgb, var(--ivory) 10%, transparent);
@@ -196,5 +198,8 @@
 /* Approach label + numbers stay indigo-bold in both themes, matching the
    Intro section-heading block (approach.css). */
 
-
-
+/* Links on the dark page: the cherry underline would vanish on chocolate,
+   so links use the soft sky tint there. */
+[data-sedge-theme="dark"] .text-link {
+  --link-accent: var(--page-accent-tint);
+}

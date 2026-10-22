@@ -1,17 +1,16 @@
 /* =========================================================
    Forms — Sedge
-   Soft by default, expressive on interaction.
+   Ruled lines, no boxes: each field is a hairline underline, like
+   writing on a ruled page. Focus thickens the line to 2px in the page
+   accent. Checked states use the page accent; red is for errors only.
+   Accent colors are read at the element so they follow each page.
 ========================================================= */
 
-/* Anna: "make all border colors for inputs indigo bold" — --field-border
-   (the resting border color) now matches --field-accent (indigo-bold)
-   everywhere instead of the softer indigo-soft it used to rest at.
-   --field-soft stays indigo-soft — that one still drives fills/tints,
-   not borders. */
 .form-field {
-  --field-border: var(--indigo-bold);
-  --field-soft: var(--indigo-soft);
-  --field-accent: var(--indigo-bold);
+  --field-line: color-mix(in srgb, var(--text-primary) 58%, transparent);
+  --field-line-hover: var(--text-primary);
+  --field-accent: var(--page-accent);
+  --field-error: var(--red-bold);
 
   display: flex;
   flex-direction: column;
@@ -25,23 +24,19 @@
 
 .field-label {
   display: block;
-
-  font-family: var(--font-sans);
-  font-size: var(--text-xs);
-  font-weight: var(--font-bold);
-  line-height: 1.2;
-
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-
   color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: var(--font-semibold);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
 }
 
 .field-hint,
 .field-error {
   margin: 0;
-
-  font-size: var(--text-xs);
+  font-size: 13px;
   line-height: 1.4;
 }
 
@@ -49,9 +44,21 @@
   color: var(--text-muted);
 }
 
+/* Same small marker as callout labels and badges, in red. */
 .field-error {
-  color: var(--red-bold);
-  font-weight: var(--font-medium);
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  color: color-mix(in srgb, var(--red-bold) 80%, var(--charcoal));
+}
+
+.field-error::before {
+  content: "";
+  flex: none;
+  align-self: center;
+  width: 5px;
+  height: 9px;
+  background: var(--red-bold);
 }
 
 
@@ -60,88 +67,58 @@
 ========================================================= */
 
 .input {
+  --field-line: color-mix(in srgb, var(--text-primary) 58%, transparent);
+  --field-accent: var(--page-accent);
+
   display: block;
   width: 100%;
-
-  padding: 0.85rem var(--space-4);
-
-  font-family: var(--font-sans);
-  font-size: var(--text-sm);
-  line-height: 1.4;
-
+  min-height: 2.75rem;
+  padding: var(--space-2) 2px;
+  border: 0;
+  border-bottom: 1px solid var(--field-line);
+  border-radius: 0;
+  background: transparent;
   color: var(--text-primary);
-
-  background:
-    color-mix(
-      in srgb,
-      var(--field-soft) 5%,
-      var(--bg-default)
-    );
-
-  border: 1.5px solid var(--field-border);
-  border-radius: var(--radius-input);
-
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.4;
   outline: none;
-
   transition:
-    background-color var(--motion-ui-duration) var(--motion-ui-ease),
-    border-color var(--motion-ui-duration) var(--motion-ui-ease);
+    border-color var(--motion-ui-duration) var(--motion-ui-ease),
+    box-shadow var(--motion-ui-duration) var(--motion-ui-ease);
 }
 
 .input::placeholder {
-  color:
-    color-mix(
-      in srgb,
-      var(--text-primary) 42%,
-      transparent
-    );
+  color: color-mix(in srgb, var(--text-primary) 45%, transparent);
 }
 
 .input:hover:not(:disabled) {
-  border-color:
-    color-mix(
-      in srgb,
-      var(--field-accent) 55%,
-      var(--field-border)
-    );
-
-  background:
-    color-mix(
-      in srgb,
-      var(--field-soft) 12%,
-      var(--bg-default)
-    );
+  border-bottom-color: var(--text-primary);
 }
 
+/* Focus: the line thickens to 2px in the page accent. The extra pixel
+   is a box-shadow so nothing shifts. Overrides the shared .focus-ring
+   outline, which would draw a box around a field that has none. */
 .input:focus,
-.input:focus-visible {
-  border-color: var(--field-accent);
-
-  background:
-    color-mix(
-      in srgb,
-      var(--field-soft) 17%,
-      var(--bg-default)
-    );
+.input.focus-ring:focus-visible {
+  border-bottom-color: var(--field-accent);
+  border-radius: 0;
+  outline: none;
+  box-shadow: 0 1px 0 0 var(--field-accent);
 }
 
 .input:disabled {
   opacity: var(--opacity-disabled);
   cursor: not-allowed;
-
-  background: var(--bg-subtle);
 }
 
-
 /* Red means error — not "password" */
-
 .input--error,
 .input[aria-invalid="true"] {
-  --field-border: var(--red-bold);
+  --field-line: var(--red-bold);
   --field-accent: var(--red-bold);
-  --field-soft: var(--red-soft);
-
-  border-color: var(--red-bold);
+  border-bottom-color: var(--red-bold);
+  box-shadow: 0 1px 0 0 var(--red-bold);
 }
 
 
@@ -153,55 +130,51 @@
 }
 
 .password-wrapper .input {
-  padding-right: var(--space-8);
+  padding-right: var(--space-7);
 }
 
 .password-toggle {
   position: absolute;
   top: 50%;
-  right: var(--space-4);
-
+  right: 2px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
-  transform: translateY(-50%);
-
+  padding: 0;
   border: none;
   background: none;
-  padding: 0;
-
-  color: var(--text-muted);
+  color: var(--text-primary);
   cursor: pointer;
-
+  transform: translateY(-50%);
   transition: color var(--motion-ui-duration) var(--motion-ui-ease);
 }
 
 .password-toggle:hover,
 .password-toggle:focus-visible {
-  color: var(--field-accent, var(--indigo-bold));
+  color: var(--page-accent);
 }
 
 .password-toggle:focus-visible {
   outline: var(--focus-ring-width) solid var(--focus-ring-color);
   outline-offset: var(--focus-ring-offset);
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-xs);
 }
 
 
-/* ---- Textarea ---- */
+/* ---- Textarea: ruled paper ---- */
 
 textarea.input {
-  min-height: 7rem;
+  --rule-gap: 2.25rem;
+  min-height: calc(var(--rule-gap) * 3);
+  padding-top: calc((var(--rule-gap) - 1.4em) / 2);
+  line-height: var(--rule-gap);
   resize: vertical;
-
-  /* intentionally no glow / shadow */
-  box-shadow: none;
-}
-
-textarea.input:focus,
-textarea.input:focus-visible {
-  box-shadow: none;
+  background-image: repeating-linear-gradient(
+    transparent 0 calc(var(--rule-gap) - 1px),
+    color-mix(in srgb, var(--text-primary) 18%, transparent)
+      calc(var(--rule-gap) - 1px) var(--rule-gap)
+  );
+  background-attachment: local;
 }
 
 
@@ -214,208 +187,140 @@ textarea.input:focus-visible {
   display: block;
 }
 
-/* Anna: "remove bg color from dropdown picker" — dropped the solid
-   indigo-soft fill (rest/hover/focus) this used to force; falls back to
-   .input's own near-transparent tint formula like every other field. */
 .select {
   appearance: none;
-
-  padding-right: var(--space-8);
-
+  padding-right: var(--space-7);
   cursor: pointer;
+}
+
+/* An empty first option reads as placeholder text. */
+.select:has(option[value=""]:checked) {
+  color: color-mix(in srgb, var(--text-primary) 45%, transparent);
 }
 
 .select-chevron {
   position: absolute;
   top: 50%;
-  right: var(--space-4);
-
-  transform: translateY(-50%);
-
+  right: 2px;
   color: var(--text-primary);
-
   pointer-events: none;
-
+  transform: translateY(-50%);
   transition:
     color var(--motion-ui-duration) var(--motion-ui-ease),
     transform var(--motion-ui-duration) var(--motion-ui-ease);
 }
 
 .select-wrapper:focus-within .select-chevron {
-  color: var(--indigo-bold);
+  color: var(--page-accent);
   transform: translateY(-50%) rotate(180deg);
 }
 
 
 /* =========================================================
-   Checkbox
+   Checkbox + radio — shared shape
+   Hairline outline at rest; checked fills with the page accent.
 ========================================================= */
 
-.checkbox-wrapper {
-  --field-border: var(--indigo-bold);
-  --field-soft: var(--indigo-soft);
-  --field-accent: var(--indigo-bold);
-
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-
-  cursor: pointer;
-}
-
-.checkbox-box {
-  position: relative;
-
-  display: inline-flex;
-  flex-shrink: 0;
-
-  width: 1.35rem;
-  height: 1.35rem;
-
-  border: 1.5px solid var(--field-border);
-  border-radius: 0.4rem;
-
-  background: var(--bg-default);
-
-  transition:
-    background-color var(--motion-ui-duration) var(--motion-ui-ease),
-    border-color var(--motion-ui-duration) var(--motion-ui-ease),
-    transform var(--motion-ui-duration) var(--motion-ui-ease);
-}
-
-.checkbox-wrapper:hover .checkbox-box {
-  border-color: var(--field-accent);
-
-  background:
-    color-mix(
-      in srgb,
-      var(--field-soft) 28%,
-      var(--bg-default)
-    );
-}
-
-.checkbox-input {
-  position: absolute;
-  inset: 0;
-
-  margin: 0;
-  opacity: 0;
-
-  cursor: pointer;
-}
-
-.checkbox-icon {
-  position: absolute;
-  inset: 0;
-
-  width: 0.85rem;
-  height: 0.85rem;
-  margin: auto;
-
-  color: var(--indigo-bold);
-
-  opacity: 0;
-  transform: scale(0.6) rotate(-8deg);
-
-  transition:
-    opacity var(--motion-hover-duration) var(--motion-hover-ease),
-    transform var(--motion-hover-duration) var(--motion-hover-ease);
-
-  pointer-events: none;
-}
-
-.checkbox-input:checked ~ .checkbox-icon {
-  opacity: 1;
-  transform: scale(1) rotate(0);
-}
-
-.checkbox-box:has(.checkbox-input:checked) {
-  background: var(--field-soft);
-  border-color: var(--field-accent);
-}
-
-.checkbox-box:focus-within {
-  outline: var(--focus-ring-width) solid var(--focus-ring-color);
-  outline-offset: var(--focus-ring-offset);
-}
-
-.checkbox-label {
-  font-size: var(--text-sm);
-  color: var(--text-primary);
-}
-
-
-/* =========================================================
-   Radio
-========================================================= */
-
+.checkbox-wrapper,
 .radio-wrapper {
-  --field-border: var(--indigo-bold);
-  --field-soft: var(--indigo-soft);
-  --field-accent: var(--indigo-bold);
+  --field-line: color-mix(in srgb, var(--text-primary) 58%, transparent);
+  --field-accent: var(--page-accent);
 
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
-
+  gap: var(--space-3);
   cursor: pointer;
 }
 
+.checkbox-box,
 .radio-box {
   position: relative;
-
   display: inline-flex;
   flex-shrink: 0;
-
-  width: 1.35rem;
-  height: 1.35rem;
-
-  border: 1.5px solid var(--field-border);
-  border-radius: var(--radius-full);
-
+  width: 1.125rem;
+  height: 1.125rem;
+  border: 1px solid var(--field-line);
   background: var(--bg-default);
-
   transition:
     background-color var(--motion-ui-duration) var(--motion-ui-ease),
     border-color var(--motion-ui-duration) var(--motion-ui-ease);
 }
 
-.radio-wrapper:hover .radio-box {
-  border-color: var(--field-accent);
-
-  background:
-    color-mix(
-      in srgb,
-      var(--field-soft) 28%,
-      var(--bg-default)
-    );
+.checkbox-box {
+  border-radius: var(--radius-xs);
 }
 
+.radio-box {
+  border-radius: var(--radius-full);
+}
+
+.checkbox-wrapper:hover .checkbox-box,
+.radio-wrapper:hover .radio-box {
+  border-color: var(--text-primary);
+}
+
+.checkbox-input,
 .radio-input {
   position: absolute;
   inset: 0;
-
   margin: 0;
   opacity: 0;
-
   cursor: pointer;
 }
+
+.checkbox-box:focus-within,
+.radio-box:focus-within {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.checkbox-label,
+.radio-label {
+  color: var(--text-primary);
+  font-size: 15px;
+}
+
+
+/* ---- Checkbox ---- */
+
+.checkbox-icon {
+  position: absolute;
+  inset: 0;
+  width: 0.7rem;
+  height: 0.7rem;
+  margin: auto;
+  color: var(--bg-default);
+  opacity: 0;
+  transform: scale(0.6);
+  pointer-events: none;
+  transition:
+    opacity var(--motion-hover-duration) var(--motion-hover-ease),
+    transform var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+.checkbox-input:checked ~ .checkbox-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.checkbox-box:has(.checkbox-input:checked) {
+  border-color: var(--field-accent);
+  background: var(--field-accent);
+}
+
+
+/* ---- Radio ---- */
 
 .radio-dot {
   position: absolute;
   inset: 0;
-
-  width: 0.55rem;
-  height: 0.55rem;
+  width: 0.5rem;
+  height: 0.5rem;
   margin: auto;
-
   border-radius: var(--radius-full);
-
-  background: var(--indigo-bold);
-
+  background: var(--field-accent);
   opacity: 0;
   transform: scale(0.4);
-
   transition:
     opacity var(--motion-hover-duration) var(--motion-hover-ease),
     transform var(--motion-hover-duration) var(--motion-hover-ease);
@@ -427,16 +332,5 @@ textarea.input:focus-visible {
 }
 
 .radio-box:has(.radio-input:checked) {
-  background: var(--field-soft);
-  border-color: var(--field-accent);
-}
-
-.radio-box:focus-within {
-  outline: var(--focus-ring-width) solid var(--focus-ring-color);
-  outline-offset: var(--focus-ring-offset);
-}
-
-.radio-label {
-  font-size: var(--text-sm);
-  color: var(--text-primary);
+  border-color: var(--text-primary);
 }
