@@ -6,7 +6,7 @@ import {
   Target,
   Wand2,
 } from "lucide-react";
-import Shape from "../../../components/ui/Shape";
+import MarkerWeave from "./MarkerWeave";
 import Button from "../../../components/ui/Button";
 import "./section.css";
 
@@ -38,18 +38,19 @@ const AT_A_GLANCE = [
   },
 ];
 
-const BADGE_COLORS = [
-  "var(--pink-soft)",
-  "var(--mint-soft)",
-  "var(--sky-soft)",
-  "var(--lemon-soft)",
-  "var(--lilac-soft)",
+// Each principle's icon color (the bold of its old pill color).
+const ICON_COLORS = [
+  "var(--steel-bold)",
+  "var(--cherry-bold)",
+  "var(--emerald-bold)",
+  "var(--amber-bold)",
+  "var(--plum-bold)",
 ];
 
 export default function Hero({ onExplore }: { onExplore: () => void }) {
   return (
     <section id='top' className="pt-8 relative mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-7xl flex-col justify-center overflow-hidden px-6 py-6">
-      <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[3fr_1.5fr]">
+      <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[3fr_2.2fr]">
         <div className="pt-5">
           <h1 className="h-display sedge-hero-title">
             Sedge
@@ -74,98 +75,30 @@ export default function Hero({ onExplore }: { onExplore: () => void }) {
             shape="pill"
             size="lg"
             endIcon={<ArrowRight />}
+             tone={{ tint: "cherry-bold", text: "sky-soft", accent: "sky-soft", ink: "cream" }}
           >
             Explore the system
           </Button>
         </div>
 
-        {/* Animated Shape Cluster(desktop only) */}
-        <div
-          className="relative hidden h-[420px] lg:block"
-          aria-hidden="true"
-        >
-          <Shape
-            variant="circle"
-            className="hero-float-sm absolute top-4 -left-11 h-28 w-28 text-coral-bold"
-            style={{ animationDuration: "6s", animationDelay: "0s" }}
-          />
-          <Shape
-            variant="scallop"
-            className="hero-float-lg absolute top-2 right-2 h-80 w-80 text-lime-soft"
-            style={{ animationDuration: "7.5s", animationDelay: "0.4s" }}
-          />
-          <Shape
-            variant="flower"
-            className="hero-float-md absolute top-24 -left-14 h-60 w-60 text-indigo-soft"
-            style={{ animationDuration: "6.5s", animationDelay: "1.1s" }}
-          />
-
-          <span
-            className="hero-float-sm absolute top-56 right-2 h-40 w-40 bg-violet-soft"
-            style={{
-              borderRadius: "100% 0 0 0",
-              animationDuration: "5.5s",
-              animationDelay: "0.7s",
-            }}
-          />
-          <Shape
-            variant="clover"
-            className="hero-float-md absolute right-6 bottom-2 h-52 w-52 text-blue-soft"
-            style={{ animationDuration: "6.8s", animationDelay: "1.6s" }}
-          />
-          <Shape
-            variant="arch"
-            preserveAspectRatio="none"
-            className="hero-float-rotated absolute bottom-0 -left-10 h-56 w-20 text-lemon-bold"
-            style={{ animationDuration: "5s", animationDelay: "0.3s" }}
-          />
-          <Shape
-            variant="burst"
-            className="hero-float-sm absolute bottom-6 left-40 h-24 w-24 text-cherry-soft"
-            style={{ animationDuration: "4.8s", animationDelay: "1.2s" }}
-          />
-          <Shape
-            variant="ring"
-            className="hero-float-sm absolute top-7 left-24 h-14 w-14"
-            style={{
-              color: "var(--lilac-soft)",
-              animationDuration: "5.2s",
-              animationDelay: "0.9s",
-            }}
-          />
-          <Shape
-            variant="flower"
-            className="hero-float-sm absolute top-[78px] left-[164px] h-10 w-10 text-emerald-bold"
-            style={{ animationDuration: "4.5s", animationDelay: "0.2s" }}
-          />
-          <Shape
-            variant="circle"
-            className="hero-float-sm absolute top-[360px] left-20 h-10 w-10 text-pink-bold"
-            style={{ animationDuration: "5.8s", animationDelay: "1.4s" }}
-          />
+        {/* Animated marker weave (desktop only) */}
+        <div className="relative hidden items-center lg:flex lg:min-h-[420px]">
+          <MarkerWeave />
         </div>
       </div>
       {/* At a glance section */}
       <div className="">
         <hr className="poster-divider my-4" />
-        <div className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-5">
-          {/* <span className="md:hidden text-lg  font-semibold text-[var(--text-muted)]">At a glance</span> */}
+        <div className="sedge-glance grid grid-cols-1 gap-y-5 sm:grid-cols-2 lg:grid-cols-5 lg:gap-y-0">
           {AT_A_GLANCE.map(({ icon: Icon, title, caption }, i) => (
-            <div
-              key={title}
-              className="flex flex-row items-center gap-3 lg:flex-col lg:gap-2"
-            >
-              <span
-                className="flex h-10 w-24 shrink-0 items-center justify-center rounded-full"
-                style={{ background: BADGE_COLORS[i % BADGE_COLORS.length] }}
-              >
-                <Icon
-                  className="h-6 w-6 text-[var(--charcoal)]"
-                  aria-hidden="true"
-                />
-              </span>
-              <div className="flex flex-col md:items-center">
-                <div className="text-sm font-semibold text-[var(--text-primary)]">
+            <div key={title} className="sedge-glance-item">
+              <Icon
+                className="sedge-glance-icon"
+                style={{ color: ICON_COLORS[i % ICON_COLORS.length] }}
+                aria-hidden="true"
+              />
+              <div className="flex flex-col lg:items-center">
+                <div className="text-sm font-medium text-[var(--text-primary)]">
                   {title}
                 </div>
                 <div className="text-xs text-[var(--text-secondary)]">{caption}</div>

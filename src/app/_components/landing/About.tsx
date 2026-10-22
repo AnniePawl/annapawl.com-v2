@@ -16,55 +16,70 @@
 // Preserved as-is rather than "fixed", since adding content tablet never
 // had would be a bigger change than this port is meant to make; flagged
 // in the report in case that was actually a gap worth closing.
+import type { ReactNode } from "react";
 import Link from "next/link";
-import { Contact } from "./Contact";
 import { LegacyLink } from "./LegacyLink";
+
+// Shared editorial header: eyebrow, name with the accent block, lede,
+// role line. (Social links live in the footer.) Same voice as the PostHeader on every other page.
+function EditorialAbout({
+  className,
+  extra,
+}: {
+  className: string;
+  extra?: ReactNode;
+}) {
+  return (
+    <div className={className}>
+      <span className="landing-eyebrow">Digital garden</span>
+      <h1 className="landing-name">
+        Anna
+        <br />
+        Pawl
+        <span className="landing-name-mark" aria-hidden="true" />
+      </h1>
+      <p className="landing-lede">
+        Hi! Welcome to my little corner of the internet. I’m a software
+        engineer who appreciates delightful UX and a designer who sees
+        creativity in code.
+      </p>
+      <p className="landing-body">
+        I bring thoughtful design to life through intuitive interactions,
+        carefully crafted interfaces, and playful details. From the first
+        sketch to the final implementation, I care as much about how an
+        experience feels as how it works.
+      </p>
+      {extra}
+      <p className="landing-role">Design engineer · Seattle &amp; New York</p>
+    </div>
+  );
+}
 
 export function DesktopAbout() {
   return (
     <div id="landing-about" className="landing-desktop-about">
-      <div className="landing-desktop-about-inner">
-        <h1 className="">Anna</h1>
-        <h1 className="">Pawl</h1>
-        <h2>Design Engineer</h2>
-        <p className="landing-location">Seattle, WA | New York, NY</p>
-        <p className='text-sm leading-4'>
-         Hi! Welcome to my little corner of the internet. I’m a software engineer who appreciates delightful UX and a designer who sees creativity in code. I bring thoughtful design to life through intuitive interactions, carefully crafted interfaces, and playful details. From the first sketch to the final implementation, I care as much about how an experience feels as how it works. ✨
-        </p>
-        <Contact />
-      </div>
+      <EditorialAbout className="landing-desktop-about-inner" />
     </div>
   );
 }
 
 export function MobileAbout() {
   return (
-    <div className="landing-mobile-about">
-      <h1 className="landing-heading">
-        Anna
-        <br />
-        Pawl
-      </h1>
-      <p className='text-xs'>
-        Hi! Welcome to my little corner of the internet. I&apos;m a software
-        engineer that appreciates delightful UX and a designer who sees
-        creativity in code. I specialize in ensuring that aesthetic
-        concepts translate seamlessly into functional interfaces. I bridge
-        development and design to craft intuitive, engaging digital
-        experiences. ✨
-        <br />
-        <br />
-        <strong>General nerdery:</strong> Roller skating,{" "}
-        <LegacyLink>CSS art</LegacyLink>, cello,{" "}
-        <LegacyLink>forkplay</LegacyLink>, hoarding postage stamps,{" "}
-        <Link href="/fiber-arts" className="landing-inline-link">
-          embroidery
-        </Link>
-        , going down rabbit holes 🐰
-      </p>
-      <div className="landing-mobile-contact">
-        <Contact />
-      </div>
-    </div>
+    <EditorialAbout
+      className="landing-mobile-about"
+      extra={
+        <p className="landing-body">
+          <strong>General nerdery:</strong> roller skating,{" "}
+          <Link href="/drawing-with-code" className="text-link focus-ring">
+            CSS art
+          </Link>
+          , cello, <LegacyLink>forkplay</LegacyLink>, hoarding postage stamps,{" "}
+          <Link href="/fiber-arts" className="text-link focus-ring">
+            embroidery
+          </Link>
+          , going down rabbit holes 🐰
+        </p>
+      }
+    />
   );
 }

@@ -28,10 +28,10 @@ export default function SidebarNav({
     <nav className="h-full text-left">
       <ul className="space-y-5">
         {groups.map((group) => (
-          <li key={group.name}>
-            <p className="mb-2 border-b border-[color-mix(in_srgb,var(--text-primary)_20%,transparent)] px-0 pb-2 text-[11px] font-bold tracking-wide text-[var(--text-primary)] uppercase">
-              {group.name}
-            </p>
+          <li key={group.name} data-group={group.name}>
+            {/* Same anatomy as .sedge-subheading inside sections: spaced
+                caps, a marker in the group's tone, a hairline below. */}
+            <p className="sedge-nav-heading">{group.name}</p>
             <ul className="space-y-1 md:space-y-1" data-group={group.name}>
               {group.items.map((section) => {
                 const Icon = section.icon;

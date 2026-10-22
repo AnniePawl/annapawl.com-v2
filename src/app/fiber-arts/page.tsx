@@ -21,7 +21,7 @@ export default function FiberArtsPage() {
   })).filter(({ count }) => count > 0);
 
   return (
-    <PageShell className="fiber-page">
+    <PageShell className="fiber-page" accent="var(--sky-bold)">
       <PostHeader
         utilityStart={
           <HomeLogo
@@ -39,7 +39,7 @@ export default function FiberArtsPage() {
         description="Ornaments, hoops, and small gifts."
         eyebrow="Digital garden"
         title="Fiber arts"
-        accent="var(--cherry-bold)"
+        accent="var(--page-accent)"
         lede={
           <>
             Embroidery, needlepoint, and cross stitch: ornaments, hoops, and

@@ -23,10 +23,17 @@ type ButtonVariant = "primary" | "secondary" | "quiet";
 type ButtonShape = "soft" | "pill";
 type ButtonSize = "sm" | "md" | "lg";
 
-/** One-off color override — the exception, not the system. */
+/**
+ * One-off color override — the exception, not the system.
+ * - tint:   secondary background at rest
+ * - text:   secondary text color at rest (defaults to charcoal)
+ * - accent: hover background, icon color, primary dot
+ * - ink:    text/icon color on hover
+ */
 export type ButtonTone = {
   accent?: PaletteColor;
   tint?: PaletteColor;
+  text?: PaletteColor;
   ink?: PaletteColor;
 };
 
@@ -65,6 +72,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
     ? ({
         ...(tone.accent && { "--page-accent": `var(--${tone.accent})` }),
         ...(tone.tint && { "--page-accent-tint": `var(--${tone.tint})` }),
+        ...(tone.text && { "--btn-text": `var(--${tone.text})` }),
         ...(tone.ink && { "--page-accent-ink": `var(--${tone.ink})` }),
       } as CSSProperties)
     : undefined;

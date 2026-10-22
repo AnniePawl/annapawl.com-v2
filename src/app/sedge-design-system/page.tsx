@@ -41,6 +41,9 @@ const DESKTOP_QUERY = "(min-width: 64rem)";
 
 export default function DesignSystemOverview() {
   const [activeId, setActiveId] = useState(SECTIONS[0].id);
+  // The top nav highlights a group only once the docs are in view: while
+  // the hero fills the screen, nothing is selected yet.
+  const [pastHero, setPastHero] = useState(false);
   // Height of everything sticky above the content (site header, plus the
   // mobile section switcher when it's showing) and the viewport height --
   // both feed the scroll-spy's observation band below.
@@ -165,6 +168,22 @@ export default function DesignSystemOverview() {
 
     return () => observer.disconnect();
   }, [stickyMetrics]);
+  // "Past the hero" = the first section has reached the same band the
+  // section observer uses (top 30% of the viewport).
+  useEffect(() => {
+    const first = document.getElementById(SECTIONS[0].id);
+    if (!first) return;
+    const check = () =>
+      setPastHero(first.getBoundingClientRect().top <= window.innerHeight * 0.3);
+    check();
+    window.addEventListener("scroll", check, { passive: true });
+    window.addEventListener("resize", check);
+    return () => {
+      window.removeEventListener("scroll", check);
+      window.removeEventListener("resize", check);
+    };
+  }, []);
+
   const scrollTo = (id: string) => {
     const el = sectionRefs.current[id];
     if (!el) return;
@@ -216,7 +235,12 @@ export default function DesignSystemOverview() {
 
   return (
     <div ref={rootRef} className="min-h-screen bg-[var(--bg-default)]">
-      <HeroNav sections={SECTIONS} activeId={activeId} onSelect={scrollTo} onScrollToTop={scrollToTop}  />
+      <HeroNav
+        sections={SECTIONS}
+        activeId={pastHero ? activeId : ""}
+        onSelect={scrollTo}
+        onScrollToTop={scrollToTop}
+      />
       <Hero onExplore={() => scrollTo(SECTIONS[0].id)} />
 
       <PageShell>
@@ -224,10 +248,12 @@ export default function DesignSystemOverview() {
             content's min-content width, which left <main> ~800px wide (past
             the viewport) between 1024px and ~1140px. Identical above that. */}
         <div
-          className="grid grid-cols-1 lg:grid-cols-[250px_minmax(0,1fr)]"
+          className="mt-10 grid grid-cols-1 lg:mt-16 lg:grid-cols-[250px_minmax(0,1fr)]"
           style={{ gap: "var(--space-7)" }}
         >
-          <aside className="hidden lg:block">
+          {/* pt-12 matches each section's top padding, so the first nav
+              heading lines up with the first section heading. */}
+          <aside className="hidden lg:block lg:pt-12">
             {/* data-lenis-prevent: this column scrolls independently of
                 the page (its own overflow-y-auto), so Lenis shouldn't
                 hijack wheel input while the pointer is over it -- see

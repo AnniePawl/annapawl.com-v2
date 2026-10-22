@@ -4,8 +4,10 @@
    color says what kind of piece it is. */
 
 .fiber-page.page-shell {
+  /* Fallback only: the accent is set in page.tsx (<PageShell accent>).
+     The tint below is mixed from whichever accent is in effect. */
   --page-accent: var(--cherry-bold);
-  --page-accent-tint: color-mix(in srgb, var(--cherry-bold) 12%, var(--cream));
+  --page-accent-tint: color-mix(in srgb, var(--page-accent) 12%, var(--cream));
   --page-accent-ink: var(--cream);
   --fiber-rule: color-mix(in srgb, var(--charcoal) 58%, transparent);
   --fiber-rule-soft: color-mix(in srgb, var(--charcoal) 18%, transparent);

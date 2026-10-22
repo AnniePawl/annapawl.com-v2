@@ -47,7 +47,7 @@
      at these tokens (post-layout.css, section.css, books.css…). */
 
   /* Page title — PostHeader (Bookshelf, Drawing with Code) */
-  --type-title-size: clamp(4.25rem, 10vw, 9.5rem);
+  --type-title-size: clamp(4rem, 9.25vw, 8.75rem);
   --type-title-weight: var(--font-regular);
   --type-title-leading: 0.82;
   --type-title-tracking: -0.065em;

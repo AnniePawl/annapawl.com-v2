@@ -14,7 +14,7 @@ const SCALE: {
   {
     role: "Page title",
     className: "type-title",
-    spec: "68–152px · 400 · −0.065em · 0.82",
+    spec: "64–140px · 400 · −0.065em · 0.82",
     usedIn: "Bookshelf, Drawing with Code headers",
     sample: "Squirrel",
     mark: true,

@@ -148,7 +148,7 @@
    On hover it deepens to the bold accent. */
 .btn--secondary {
   background: var(--page-accent-tint);
-  color: var(--charcoal);
+  color: var(--btn-text, var(--charcoal));
 }
 
 .btn--secondary:hover,

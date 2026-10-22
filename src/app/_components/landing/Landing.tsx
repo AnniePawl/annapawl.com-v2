@@ -8,44 +8,29 @@
 // render from a missing effect dependency array -- neither of those
 // exist here since there's no window read at all).
 //
-// Montserrat is loaded with next/font (self-hosted, no external
-// stylesheet fetch, unlike the source's Google Fonts + Adobe Typekit
-// <link> imports) and scoped to this component tree only via the
-// --font-montserrat variable it generates -- the sitewide Inter setup
-// in app/layout.tsx is untouched.
-import { Montserrat } from "next/font/google";
+// Restyled to the cream editorial look: cream wall, Inter, an editorial
+// header in the left column, and a page index below the fold. The color
+// slider and invert toggle were removed (their components still live in
+// css-items/shelves/ if you ever want them back).
 import { DesktopAbout, MobileAbout } from "./About";
-import { Contact } from "./Contact";
 import { Footer } from "./Footer";
 import { InfoButton } from "./InfoButton";
-import { ColorSlider } from "./css-items/shelves/ColorSlider";
-import { InvertClrBtn } from "./css-items/shelves/InvertClrBtn";
 import { DesktopShelves } from "./css-items/shelves/DesktopShelves";
 import { MobileShelves } from "./css-items/shelves/MobileShelves";
 import { TabletShelves } from "./css-items/shelves/TabletShelves";
+import { LandingIndex } from "./LandingIndex";
 import "./landing.css";
-
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["300", "400", "600", "700", "800", "900"],
-  display: "swap",
-  variable: "--font-montserrat",
-});
 
 export function Landing() {
   return (
-    <div className={`landing ${montserrat.variable}`}>
+    <div className="landing">
       {/* ---- Desktop (>= 1000px) ---- */}
       <div className="landing-desktop-section">
         <DesktopAbout />
         <div className="landing-desktop-content">
           <div id="landing-home" className="landing-desktop-shelves-container">
-            <InvertClrBtn
-              targets={[{ id: "landing-shelves-bg", className: "invert-wrapper" }]}
-            />
             <InfoButton className="landing-desktop-about-info" />
             <DesktopShelves />
-            <ColorSlider targetId="landing-shelves-bg" />
           </div>
         </div>
       </div>
@@ -56,9 +41,6 @@ export function Landing() {
       <div className="landing-tablet-section">
         <InfoButton className="landing-tablet-info" />
         <TabletShelves />
-        <div className="landing-tablet-contact">
-          <Contact />
-        </div>
       </div>
 
       {/* ---- Mobile (< 600px) ---- */}
@@ -68,6 +50,13 @@ export function Landing() {
           <InfoButton className="landing-mobile-info" />
           <MobileShelves />
         </div>
+      </div>
+
+      {/* ---- Below the fold: the page index (all breakpoints) ----
+          On desktop and tablet the landing above stays pinned, and this
+          panel scrolls up over it, full width. */}
+      <div className="landing-over">
+        <LandingIndex />
         <Footer />
       </div>
     </div>

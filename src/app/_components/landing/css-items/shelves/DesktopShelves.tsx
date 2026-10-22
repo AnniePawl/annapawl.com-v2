@@ -22,7 +22,6 @@ export function DesktopShelves() {
     <div
       id="landing-shelves-bg"
       className="relative w-full"
-      style={{ backgroundColor: "hsl(216, 100%, 95%)" }}
     >
       <div className="desktop-shelves w-full">
         <Shelf

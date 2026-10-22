@@ -186,6 +186,32 @@
   }
 }
 
+/* Sidebar group headings match the in-section subheadings: spaced caps,
+   a marker in the group's tone (data-group, see section.css), hairline. */
+.sedge-nav-heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: 0 0 var(--space-2);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid color-mix(in srgb, var(--text-primary) 30%, transparent);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  line-height: var(--type-label-leading);
+  letter-spacing: var(--type-label-tracking);
+  text-transform: uppercase;
+}
+
+.sedge-nav-heading::before {
+  content: "";
+  flex: none;
+  width: 0.4375rem;
+  height: 0.6875rem;
+  background: var(--section-tone, var(--indigo-bold));
+}
+
 /* Sidebar icons take their group's tone (data-group, see section.css). */
 .sedge-sidebar-icon {
   color: var(--section-tone, var(--indigo-soft));

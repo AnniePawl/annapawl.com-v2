@@ -67,6 +67,39 @@
   }
 }
 
+/* ---- Pinned landing + menu panel that scrolls over it ----
+   Desktop and tablet landings are exactly one screen tall, so they stick
+   to the top while .landing-over (the page index) slides up over them.
+   Mobile's landing is taller than the screen, so it scrolls normally. */
+@media (min-width: 600px) {
+  .landing-desktop-section,
+  .landing-tablet-section {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+  }
+}
+
+.landing-over {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: var(--landing-wall);
+}
+
+@media (min-width: 600px) {
+  .landing-over {
+    min-height: 100vh;
+    border-top: 1px solid color-mix(in srgb, var(--charcoal) 30%, transparent);
+  }
+
+  .landing-over > .landing-index {
+    flex: 1;
+  }
+}
+
 @media (max-width: 599px) {
   .landing-mobile-section {
     display: flex;
@@ -78,9 +111,14 @@
    outer .landing wrapper in Landing.tsx) -- the sitewide Inter setup in
    layout.tsx / typography.css is untouched everywhere else on the site. */
 .landing {
-  --landing-font: var(--font-montserrat), var(--font-sans);
-  --landing-wall: #e8f1ff;
-  --landing-ink: #414141;
+  /* Cream editorial: same wall, ink, and type as the rest of the site. */
+  --landing-font: var(--font-sans);
+  --landing-wall: var(--cream);
+  --landing-ink: var(--charcoal);
+  --landing-accent: var(--indigo-soft);
+  --landing-rule: color-mix(in srgb, var(--charcoal) 58%, transparent);
+  --page-accent: var(--cherry-bold);
+  background: var(--cream);
   font-family: var(--landing-font);
   color: var(--landing-ink);
 }
@@ -118,53 +156,78 @@
 }
 
 .landing-desktop-about {
-  width: 27vw;
-  min-width: 320px;
-  height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center;
+  width: 27vw;
+  min-width: 340px;
+  height: 100vh;
+  padding: var(--space-8) var(--space-7) var(--space-8) var(--space-8);
   overflow: hidden;
-  background-color: var(--bg-default);
-  line-height: 25px;
-  font-size: 13px;
-  padding: 3.5%;
+  border-right: 1px solid color-mix(in srgb, var(--charcoal) 18%, transparent);
+  background-color: var(--landing-wall);
 }
 
 .landing-desktop-about-inner {
   display: flex;
   flex-direction: column;
-  height: fit-content;
+  width: 100%;
 }
 
-.landing-desktop-about h1 {
-  padding-top: var(--space-4, 1rem);
-  font-size: var(--text-3xl, 1.875rem);
-  letter-spacing: 0.05em;
-  font-weight:800;
-
-  /* padding-bottom:10px; */
+/* ---- Editorial header (desktop column + mobile) ---- */
+.landing-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+  font-size: 0.75rem;
+  line-height: 1.3;
 }
 
-.landing-desktop-about h2 {
-  font-size: var(--text-lg, 1.125rem);
-  font-weight: 500;
-  padding-top: 0.25rem;
+.landing-eyebrow::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.875rem;
+  background: var(--landing-accent);
 }
 
-.landing-desktop-about .landing-location {
-  color: #5088ea;
-  font-weight: 500;
-  margin-bottom: 1.5rem;
-  font-family:Montserrat;
-  font-size:14px;
-  padding-top:4px;
+/* Same voice as the menu titles: regular weight, gentle tracking. */
+.landing-name {
+  margin: 0;
+  color: var(--charcoal);
+  font-size: clamp(2.75rem, 4vw, 4rem);
+  font-weight: var(--font-regular);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
 }
 
-.landing-desktop-about p {
-  letter-spacing: 0.02em;
-  line-height: 2;
+.landing-name-mark {
+  display: inline-block;
+  width: 0.42em;
+  height: 0.72em;
+  margin-left: 0.12em;
+  background: var(--landing-accent);
 }
+
+.landing-lede {
+  margin: var(--space-6) 0 0;
+  font-size: 1.125rem;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+}
+
+.landing-body {
+  margin: var(--space-4) 0 0;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.landing-role {
+  margin: var(--space-5) 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
 
 .landing-desktop-shelves-container {
   cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><circle cx='16' cy='16' r='8' fill='%23ff654a'/></svg>")
@@ -212,21 +275,8 @@
 
 .landing-mobile-about {
   display: flex;
-  justify-content: space-between;
-  gap: var(--space-4, 1rem);
-  padding: 4rem 2.5rem 2.5rem;
-}
-
-.landing-mobile-about h1 {
-  padding-bottom: 1.5rem;
-  font-weight: 800;
-  line-height: 21px;
-  flex: none;
-}
-
-.landing-mobile-about p {
-  font-size: 11.2px;
-  line-height: 19px;
+  flex-direction: column;
+  padding: var(--space-9) var(--space-5) var(--space-7);
 }
 
 .landing-mobile-shelves-container {
@@ -236,18 +286,234 @@
   background-color: var(--landing-wall);
 }
 
-.landing-mobile-footer {
-  height: 7vh;
-  min-height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--landing-ink);
-  font-size: 13px;
+/* ---- Footer (Footer.tsx): woven edge + colophon ---- */
+.landing-footer {
+  width: 100%;
+  max-width: 80rem;
+  margin: var(--space-10) auto 0;
+  padding: 0 var(--space-8);
 }
 
-.landing-mobile-footer span {
-  color: #ff6464;
+.landing-footer-weave {
+  display: grid;
+  grid-template-columns: repeat(56, minmax(0, 1fr));
+  gap: 0.375rem;
+}
+
+.landing-footer-weave i {
+  display: block;
+  height: 1rem;
+}
+
+.landing-footer-colophon {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.4fr auto;
+  gap: var(--space-7);
+  margin-top: var(--space-4);
+  padding: var(--space-6) 0 var(--space-7);
+  border-top: 1px solid color-mix(in srgb, var(--charcoal) 30%, transparent);
+}
+
+.landing-footer-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.landing-footer-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-1);
+  font-size: 10.5px;
+  font-weight: var(--font-semibold);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.landing-footer-label::before {
+  content: "";
+  width: 6px;
+  height: 10px;
+  background: var(--landing-accent);
+}
+
+.landing-footer-link {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--charcoal);
+  font: inherit;
+  font-size: 0.8125rem;
+  text-decoration: underline dotted color-mix(in srgb, var(--charcoal) 55%, transparent) 1.5px;
+  text-underline-offset: 0.25em;
+  cursor: pointer;
+  transition: text-decoration-color var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+.landing-footer-link:hover {
+  text-decoration-style: solid;
+  text-decoration-color: var(--landing-accent);
+}
+
+.landing-footer-muted {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.landing-footer-end {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  text-align: right;
+}
+
+@media (max-width: 799px) {
+  .landing-footer {
+    padding: 0 var(--space-5);
+  }
+
+  .landing-footer-weave {
+    grid-template-columns: repeat(28, minmax(0, 1fr));
+  }
+
+  .landing-footer-weave i:nth-child(n + 29) {
+    display: none;
+  }
+
+  .landing-footer-colophon {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6) var(--space-5);
+  }
+
+  .landing-footer-col--wide,
+  .landing-footer-end {
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+}
+
+/* ============================================================
+   Page index (LandingIndex.tsx) — the menu, below the fold
+   ============================================================ */
+
+.landing-index {
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: var(--space-10) var(--space-8) 0;
+}
+
+.landing-index-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: 0;
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid color-mix(in srgb, var(--charcoal) 30%, transparent);
+  font-size: 11.5px;
+  font-weight: var(--font-semibold);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.landing-index-label::before {
+  content: "";
+  width: 7px;
+  height: 11px;
+  background: var(--landing-accent);
+}
+
+.landing-index-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.landing-index-list li {
+  border-bottom: 1px solid color-mix(in srgb, var(--charcoal) 18%, transparent);
+}
+
+.landing-index-row {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, auto) minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: var(--space-5);
+  padding: var(--space-5) var(--space-1);
+  border-radius: 0;
+  color: var(--charcoal);
+  text-decoration: none;
+}
+
+.landing-index-number {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.75rem;
+  font-weight: var(--font-medium);
+  letter-spacing: 0.04em;
+}
+
+.landing-index-number::before {
+  content: "";
+  width: 6px;
+  height: 11px;
+  background: var(--index-accent);
+}
+
+.landing-index-title {
+  font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.landing-index-description {
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+}
+
+.landing-index-arrow {
+  font-size: 1.125rem;
+  transition: transform var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+.landing-index-row:hover .landing-index-title {
+  text-decoration: underline;
+  text-decoration-color: var(--index-accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.12em;
+}
+
+.landing-index-row:hover .landing-index-arrow {
+  transform: translateX(0.25rem);
+}
+
+@media (max-width: 599px) {
+  .landing-index {
+    padding: var(--space-8) var(--space-5) 0;
+  }
+
+  .landing-index-row {
+    grid-template-columns: 2.75rem minmax(0, 1fr) auto;
+    gap: var(--space-1) var(--space-3);
+  }
+
+  .landing-index-description {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .landing-index-arrow {
+    grid-column: 3;
+    grid-row: 1;
+  }
 }
 
 /* ============================================================
@@ -258,14 +524,16 @@
 
 .landing-inline-link,
 .landing-legacy-link {
-  color: #5088ea;
+  color: var(--charcoal);
   text-decoration: underline;
-  text-underline-offset: 1px;
+  text-decoration-color: color-mix(in srgb, var(--charcoal) 55%, transparent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.25em;
 }
 
 .landing-legacy-link {
   cursor: default;
-  text-decoration-style: dashed;
+  text-decoration-style: dotted;
 }
 
 /* ============================================================

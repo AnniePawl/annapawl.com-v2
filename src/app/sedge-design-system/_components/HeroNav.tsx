@@ -27,7 +27,14 @@ export default function HeroNav({
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-3 md:px-6 py-3 md:py-4 sm:gap-6">
         <div className="flex items-center gap-3">
           {/* Logo-->Home */}
-          <HomeLogo />
+          <HomeLogo
+            colors={{
+              northeast: "var(--cherry-bold)",
+              southeast: "var(--sky-bold)",
+              southwest: "var(--sky-bold)",
+              northwest: "var(--sky-bold)",
+              hoverAccent: "var(--sky-bold)",
+            }} />
           {/* Copy-->Top of page */}
           <a
             href="#top"
