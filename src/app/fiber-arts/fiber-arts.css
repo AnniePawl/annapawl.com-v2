@@ -13,7 +13,7 @@
   --fiber-rule-soft: color-mix(in srgb, var(--charcoal) 18%, transparent);
 
   /* Swatch color = type. */
-  --fiber-embroidery: var(--sky-soft);
+  --fiber-embroidery: var(--periwinkle-soft);
   --fiber-needlepoint: color-mix(in srgb, var(--cherry-bold) 12%, var(--cream));
   --fiber-cross-stitch: color-mix(in srgb, var(--sage-soft) 40%, var(--cream));
 
@@ -164,7 +164,7 @@
 }
 
 .fiber-index-row[aria-pressed="true"] {
-  background: color-mix(in srgb, var(--sky-soft) 55%, var(--cream));
+  background: color-mix(in srgb, var(--periwinkle-soft) 55%, var(--cream));
 }
 
 .fiber-index-number {
@@ -180,7 +180,7 @@
   content: "";
   width: 5px;
   height: 9px;
-  background: var(--sky-soft);
+  background: var(--periwinkle-soft);
   transition: background-color var(--motion-hover-duration) var(--motion-hover-ease);
 }
 

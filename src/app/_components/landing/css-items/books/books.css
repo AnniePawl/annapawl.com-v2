@@ -1,5 +1,22 @@
-/* Styles for Books.tsx (same folder). CSS-art conversion notes that
-   apply to every css-items stylesheet live at the top of landing.css. */
+.landing {
+  --pile-pages: var(--cream);
+  --pile-page-lines: color-mix(in srgb, var(--charcoal) 20%, var(--cream));
+  --pile-book1-cover: var(--marigold-bold);
+  --pile-book2-cover: var(--slate-bold);
+  --pile-book2-bookmark: var(--charcoal);
+  --pile-book3-cover: var(--red-soft);
+  --pile-book3-cover-dark: var(--red-bold);
+  --pile-book3-label: var(--blue-soft);
+  --pile-book3-label-dark: var(--blue-bold);
+  --pile-book4-cover: var(--mint-soft);
+  --pile-book4-cover-dark: var(--mint-bold);
+  --pile-book4-lines: var(--charcoal);
+  --pile-book5-cover: var(--emerald-soft);
+  --pile-book5-cover-dark: var(--emerald-bold);
+  --pile-book5-band: var(--lemon-bold);
+  --pile-book5-label: var(--lemon-soft);
+  --pile-book5-label-dark: var(--marigold-bold);
+}
 
 /* ============================================================
    Books (horizontal stack) — src/components/css-items/books
@@ -10,7 +27,7 @@
   --book-height: 22px;
   --book-border-radius: 2px;
   --book-width: calc(var(--book-height) * 4);
-  --book-pages: #fffefa;
+  --book-pages: var(--pile-pages);
 
   display: flex;
   align-items: center;
@@ -46,7 +63,7 @@
   position: relative;
   z-index: 5;
   margin-left: -3px;
-  background-color: #aa90e7;
+  background-color: var(--pile-book1-cover);
   height: calc(var(--book-height) * 0.8);
   width: calc(var(--book-width) * 0.8);
   border-top-left-radius: var(--book-border-radius);
@@ -61,13 +78,13 @@
     margin-left: 4%;
     background-image: repeating-linear-gradient(
       var(--book-pages) 0 2.5px,
-      lightgray 2.5px 4px
+      var(--pile-page-lines) 2.5px 4px
     );
   }
 }
 
 .book--2 {
-  background-color: #5796e9;
+  background-color: var(--pile-book2-cover);
   border-top-left-radius: var(--book-border-radius);
   border-bottom-left-radius: var(--book-border-radius);
   margin-right: 1.25%;
@@ -78,7 +95,7 @@
     content: "";
     background-image: repeating-linear-gradient(
       var(--book-pages) 0 3px,
-      lightgray 3px 4.5px
+      var(--pile-page-lines) 3px 4.5px
     );
     border-top-left-radius: calc(var(--book-border-radius) * 0.5);
     border-bottom-left-radius: calc(var(--book-border-radius) * 0.5);
@@ -92,8 +109,8 @@
     margin-right: 50%;
     height: calc(var(--book-height) * 0.4);
     position: absolute;
-    border-left: 4px solid #414141;
-    border-right: 4px solid #414141;
+    border-left: 4px solid var(--pile-book2-bookmark);
+    border-right: 4px solid var(--pile-book2-bookmark);
     border-bottom: 4px solid transparent;
   }
 }
@@ -104,20 +121,20 @@
   margin-left: 1%;
   width: calc(var(--book-width) * 1.1);
   justify-content: space-around;
-  background-image: linear-gradient(#ffe5aa 0 60%, #ffc876 60% 40%);
+  background-image: linear-gradient(var(--pile-book3-cover) 0 60%, var(--pile-book3-cover-dark) 60% 40%);
 
   &::before {
     content: "";
     height: calc(var(--book-height) * 0.6);
     width: calc(var(--book-width) * 0.3);
-    background-image: linear-gradient(#c4c5ff 0 65%, #9d9ee7 65% 100%);
+    background-image: linear-gradient(var(--pile-book3-label) 0 65%, var(--pile-book3-label-dark) 65% 100%);
   }
 
   &::after {
     content: "";
     height: var(--book-height);
     width: calc(var(--book-width) * 0.2);
-    background-image: linear-gradient(#c4c5ff 0 60%, #9d9ee7 60% 100%);
+    background-image: linear-gradient(var(--pile-book3-label) 0 60%, var(--pile-book3-label-dark) 60% 100%);
     border-top-right-radius: var(--book-border-radius);
     border-bottom-right-radius: var(--book-border-radius);
     margin-right: calc(var(--book-width) * -0.23);
@@ -129,20 +146,20 @@
   z-index: 2;
   width: calc(var(--book-width) * 1.2);
   height: calc(var(--book-height) * 1.15);
-  border-right: 9px double #414141;
-  border-left: 9px double #414141;
-  background-image: linear-gradient(#b4ffdc 0 60%, #7cedb8 60% 100%);
+  border-right: 9px double var(--pile-book4-lines);
+  border-left: 9px double var(--pile-book4-lines);
+  background-image: linear-gradient(var(--pile-book4-cover) 0 60%, var(--pile-book4-cover-dark) 60% 100%);
 
   &::before {
     content: "";
-    border-left: 10px double #414141;
+    border-left: 10px double var(--pile-book4-lines);
     height: calc(var(--book-height) * 1.15);
     padding: 2px;
   }
 
   &::after {
     content: "";
-    border-left: 3px solid #414141;
+    border-left: 3px solid var(--pile-book4-lines);
     height: calc(var(--book-height) * 1.15);
   }
 }
@@ -150,12 +167,12 @@
 .book--5 {
   width: calc(var(--book-width) * 1.4);
   height: calc(var(--book-height) * 1.2);
-  background-image: linear-gradient(#92c1ff 0 65%, #5796e9 65% 100%);
+  background-image: linear-gradient(var(--pile-book5-cover) 0 65%, var(--pile-book5-cover-dark) 65% 100%);
 
   &::before {
     content: "";
     margin-right: calc(var(--book-width) * 0.45);
-    border-right: 14px double #fff67f;
+    border-right: 14px double var(--pile-book5-band);
     height: calc(var(--book-height) * 1.2);
   }
 
@@ -164,7 +181,7 @@
     border-radius: 1px;
     width: calc(var(--book-width) * 0.35);
     height: calc(var(--book-height) * 0.8);
-    background-image: linear-gradient(#fffcd7 0 65%, #fff67f 65% 100%);
+    background-image: linear-gradient(var(--pile-book5-label) 0 65%, var(--pile-book5-label-dark) 65% 100%);
   }
 }
 

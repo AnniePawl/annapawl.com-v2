@@ -16,28 +16,28 @@ export const COLOR_PAIRS: ColorPair[] = [
   // Pinks/Reds
   {
     family: "Pink",
-    soft: { varName: "--pink-soft", hex: "#FFD0EA" },
+    soft: { varName: "--pink-soft", hex: "#FFC6E6" },
     bold: { varName: "--pink-bold", hex: "#F472B6" },
   },
   {
     family: "Red",
-    soft: { varName: "--red-soft", hex: "#FF9999" },
-    bold: { varName: "--red-bold", hex: "#F05454" },
+    soft: { varName: "--red-soft", hex: "#FF6358" },
+    bold: { varName: "--red-bold", hex: "#D91F1F" },
   },
   {
     family: "Cherry",
-    soft: { varName: "--cherry-soft", hex: "#A83B59" },
-    bold: { varName: "--cherry-bold", hex: "#5A1226" },
+    soft: { varName: "--cherry-soft", hex: "#AA3857" },
+    bold: { varName: "--cherry-bold", hex: "#6F1B31" },
   },
   {
     family: "Coral",
-    soft: { varName: "--coral-soft", hex: "#FFBFA6" },
-    bold: { varName: "--coral-bold", hex: "#FF7954" },
+    soft: { varName: "--coral-soft", hex: "#FFBEA3" },
+    bold: { varName: "--coral-bold", hex: "#FE7043" },
   },
   {
     family: "Orange",
-    soft: { varName: "--orange-soft", hex: "#FFC88E" },
-    bold: { varName: "--orange-bold", hex: "#FFA34D" },
+    soft: { varName: "--orange-soft", hex: "#FFCB8C" },
+    bold: { varName: "--orange-bold", hex: "#F28A1B" },
   },
   {
     family: "Clay",
@@ -45,25 +45,20 @@ export const COLOR_PAIRS: ColorPair[] = [
     bold: { varName: "--clay-bold", hex: "#D5764D" },
   },
   {
-    family: "Ochre",
-    soft: { varName: "--ochre-soft", hex: "#E8C077" },
-    bold: { varName: "--ochre-bold", hex: "#C6871E" },
-  },
-  {
-    family: "Amber",
-    soft: { varName: "--amber-soft", hex: "#FFDF8E" },
-    bold: { varName: "--amber-bold", hex: "#F3C144" },
+    family: "Marigold",
+    soft: { varName: "--marigold-soft", hex: "#FFDF90" },
+    bold: { varName: "--marigold-bold", hex: "#F5BF46" },
   },
   {
     family: "Lemon",
-    soft: { varName: "--lemon-soft", hex: "#FFF0A2" },
+    soft: { varName: "--lemon-soft", hex: "#FFF89E" },
     bold: { varName: "--lemon-bold", hex: "#FFE669" },
   },
 
   // Greens
   {
     family: "Lime",
-    soft: { varName: "--lime-soft", hex: "#E1FFA4" },
+    soft: { varName: "--lime-soft", hex: "#D3F392" },
     bold: { varName: "--lime-bold", hex: "#B0D964" },
   },
   {
@@ -82,15 +77,25 @@ export const COLOR_PAIRS: ColorPair[] = [
     bold: { varName: "--mint-bold", hex: "#5CE1B1" },
   },
   {
+    family: "Green",
+    soft: { varName: "--green-soft", hex: "#C4EBD7" },
+    bold: { varName: "--green-bold", hex: "#57BC92" },
+  },
+  {
     family: "Emerald",
     soft: { varName: "--emerald-soft", hex: "#479C6D" },
     bold: { varName: "--emerald-bold", hex: "#2D6144" },
+  },
+  {
+    family: "Teal",
+    soft: { varName: "--teal-soft", hex: "#9FE3DF" },
+    bold: { varName: "--teal-bold", hex: "#2BA3A0" },
   },
 
   // Blues + Purples
   {
     family: "Sky",
-    soft: { varName: "--sky-soft", hex: "#D1E3FF" },
+    soft: { varName: "--sky-soft", hex: "#B1E3FC" },
     bold: { varName: "--sky-bold", hex: "#67CAF8" },
   },
   {
@@ -99,19 +104,24 @@ export const COLOR_PAIRS: ColorPair[] = [
     bold: { varName: "--blue-bold", hex: "#5088EA" },
   },
   {
-    family: "Steel",
-    soft: { varName: "--steel-soft", hex: "#9DADCB" },
-    bold: { varName: "--steel-bold", hex: "#5C77AA" },
+    family: "Periwinkle",
+    soft: { varName: "--periwinkle-soft", hex: "#D1E3FF" },
+    bold: { varName: "--periwinkle-bold", hex: "#7F9BE6" },
+  },
+  {
+    family: "Slate",
+    soft: { varName: "--slate-soft", hex: "#9DADCB" },
+    bold: { varName: "--slate-bold", hex: "#5C77AA" },
   },
   {
     family: "Lilac",
     soft: { varName: "--lilac-soft", hex: "#D7BAFF" },
-    bold: { varName: "--lilac-bold", hex: "#BB73FF" },
+    bold: { varName: "--lilac-bold", hex: "#B985EB" },
   },
   {
-    family: "Indigo",
-    soft: { varName: "--indigo-soft", hex: "#B8B5FF" },
-    bold: { varName: "--indigo-bold", hex: "#8B87F5" },
+    family: "Iris",
+    soft: { varName: "--iris-soft", hex: "#B8B5FF" },
+    bold: { varName: "--iris-bold", hex: "#8B87F5" },
   },
   {
     family: "Plum",
@@ -136,9 +146,9 @@ export const COLOR_PAIRS: ColorPair[] = [
     bold: { varName: "--taupe-bold", hex: "#9D8C81" },
   },
   {
-    family: "Chocolate",
-    soft: { varName: "--chocolate-soft", hex: "#A47F68" },
-    bold: { varName: "--chocolate-bold", hex: "#231F1C" },
+    family: "Cocoa",
+    soft: { varName: "--cocoa-soft", hex: "#A47F68" },
+    bold: { varName: "--cocoa-bold", hex: "#745748" },
   },
 ];
 
@@ -148,5 +158,5 @@ export const PAGE_SWATCHES: (ColorSwatch & { label: string })[] = [
   { label: "Cream — ground", varName: "--cream", hex: "#FFFCF8" },
   { label: "Ivory", varName: "--ivory", hex: "#F2E9D8" },
   { label: "Charcoal — ink", varName: "--charcoal", hex: "#2A2A2E" },
-  { label: "Chocolate", varName: "--chocolate-bold", hex: "#231F1C" },
+  { label: "Espresso — dark mode ground", varName: "--espresso", hex: "#231F1C" },
 ];

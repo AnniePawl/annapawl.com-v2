@@ -3,17 +3,23 @@ import Link from "next/link";
 // The site's menu, below the fold: a ruled, numbered index of pages, in the
 // same voice as the rest of the garden. Each marker uses that page's accent.
 const PAGES = [
+    {
+    href: "/sedge-design-system",
+    title: "Sedge",
+    description: "The design system behind it all",
+    accent: "var(--coral-bold)",
+  },
   {
     href: "/books",
     title: "Bookshelf",
     description: "What I’ve been reading, by year",
-    accent: "var(--blue-bold)",
+    accent: "var(--emerald-soft)",
   },
   {
     href: "/fiber-arts",
     title: "Fiber arts",
     description: "Embroidery, needlepoint, and cross stitch",
-    accent: "var(--cherry-bold)",
+    accent: "var(--sky-bold)",
   },
   {
     href: "/drawing-with-code",
@@ -21,12 +27,7 @@ const PAGES = [
     description: "CSS art, and how I make it",
     accent: "var(--red-bold)",
   },
-  {
-    href: "/sedge-design-system",
-    title: "Sedge",
-    description: "The design system behind it all",
-    accent: "var(--indigo-bold)",
-  },
+
 ];
 
 export function LandingIndex() {

@@ -1,6 +1,16 @@
 /* Styles for NewtonsCradle.tsx (same folder). CSS-art conversion notes that
    apply to every css-items stylesheet live at the top of landing.css. */
 
+.landing {
+  --cradle-frame: var(--cherry-bold);
+  --cradle-frame-fill: var(--mint-soft);
+  --cradle-lines: var(--cherry-bold);
+  --cradle-ball-shine: white;
+  --cradle-ball: var(--lemon-bold);
+  --cradle-ball-shade: var(--clay-bold);
+  --cradle-base: var(--teal-bold);
+}
+
 /* ============================================================
    Newton's cradle — src/components/css-items/newtonsCradle
    ============================================================ */
@@ -40,7 +50,7 @@
   height: var(--frame-height);
   width: var(--frame-width);
   border-radius: 10px 10px 0 0;
-  box-shadow: 0 0 0 3px #5796e9, 0 0 0 8px #bdffd3, 0 0 0 11px #5796e9;
+  box-shadow: 0 0 0 3px var(--cradle-frame), 0 0 0 8px var(--cradle-frame-fill), 0 0 0 11px var(--cradle-frame);
 
   &::before,
   &::after {
@@ -48,9 +58,9 @@
     display: flex;
     height: calc(var(--frame-height) * 0.1);
     width: calc(var(--frame-width) * 0.15);
-    border: 2px solid #5796e9;
+    border: 2px solid var(--cradle-frame);
     border-radius: 2px;
-    background-color: #bdffd3;
+    background-color: var(--cradle-frame-fill);
   }
 
   &::before {
@@ -67,12 +77,12 @@
 .sphere {
   height: calc(var(--frame-width) * 0.15);
   width: calc(var(--frame-width) * 0.15);
-  border: 2px solid #4372d1;
+  border: 2px solid var(--cradle-lines);
   background: radial-gradient(
     circle at 28% 28%,
-    white 0% 20%,
-    #ffe373 20% 60%,
-    #e7ba19 60% 100%
+    var(--cradle-ball-shine) 0% 20%,
+    var(--cradle-ball) 20% 60%,
+    var(--cradle-ball-shade) 60% 100%
   );
   border-radius: 50%;
   transform: translateY(-15px);
@@ -83,7 +93,7 @@
     display: flex;
     height: calc(var(--frame-height) * 0.64);
     width: 2px;
-    background-color: #4372d1;
+    background-color: var(--cradle-lines);
     transform: translateX(calc(var(--frame-width) * 0.055))
       translateY(calc(var(--frame-height) * -0.65));
   }
@@ -96,7 +106,7 @@
   height: calc(var(--frame-height) * 0.15);
   width: calc(var(--frame-width) * 1.35);
   border-radius: 4px 4px 0 0;
-  background-image: linear-gradient(rgb(163, 174, 255) 0 70%, #4372d1 70%);
+  background-image: linear-gradient(var(--cradle-base) 0 70%, var(--cradle-lines) 70%);
 }
 
 @keyframes swing1 {

@@ -1,6 +1,19 @@
 /* Styles for PinCushion.tsx and Pin.tsx (same folder). CSS-art conversion notes that
    apply to every css-items stylesheet live at the top of landing.css. */
 
+.landing {
+  --cushion-base: var(--cream);
+  --cushion-outline: var(--charcoal);
+  --cushion-trim: var(--teal-soft);
+  --cushion-top: var(--red-bold);
+  --pin-needle: color-mix(in srgb, var(--charcoal) 55%, var(--cream));
+  --pin-needle-shine: color-mix(in srgb, var(--charcoal) 25%, var(--cream));
+  --pin-head: var(--teal-soft);
+  --pin-head-edge: var(--teal-bold);
+  --pin-head-alt: color-mix(in srgb, var(--blue-bold) 70%, var(--cream));
+  --pin-head-alt-edge: var(--blue-bold);
+}
+
 /* ---- Pin cushion + pins ---- */
 
 .pin-cushion-container {
@@ -12,17 +25,17 @@
   width: 50px;
   position: relative;
   border-radius: 1px;
-  background-color: #fffefb;
-  box-shadow: 0 3px #414141;
+  background-color: var(--cushion-base);
+  box-shadow: 0 3px var(--cushion-outline);
 
   &::before {
     content: "";
     position: absolute;
     z-index: 1;
     height: 22.5px;
-    box-shadow: 0 4px #ff6e6e;
+    box-shadow: 0 4px var(--cushion-trim);
     width: 45px;
-    background-color: #ffcbe9;
+    background-color: var(--cushion-top);
     border-radius: 10em 10em 0 0;
     transform: translateY(-27px) translateX(2.4px);
   }
@@ -34,7 +47,7 @@
   margin-right: 8.5px;
   height: 20px;
   width: 1px;
-  background-image: linear-gradient(to bottom, gray, #cfcfcf);
+  background-image: linear-gradient(to bottom, var(--pin-needle), var(--pin-needle-shine));
 
   &::before {
     position: absolute;
@@ -43,8 +56,8 @@
     height: 4px;
     width: 4px;
     border-radius: 50%;
-    background-color: #fc93d0;
-    border: 0.1em solid #ff7cc8;
+    background-color: var(--pin-head);
+    border: 0.1em solid var(--pin-head-edge);
     transform: translateX(-1.4px) translateY(-4px);
   }
 }
@@ -86,8 +99,8 @@
 
 @keyframes pin-animation {
   50% {
-    background-color: #7ab1fd;
-    border: 0.1em solid #2165c6;
+    background-color: var(--pin-head-alt);
+    border: 0.1em solid var(--pin-head-alt-edge);
   }
 }
 

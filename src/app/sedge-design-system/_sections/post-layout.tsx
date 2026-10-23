@@ -17,10 +17,10 @@ const USAGE = `<PostLayout
   publishedDate="Oct 3, 2026"
   readingTime="4 min read"
   postTags="CSS, Illustration, Front-end"
-  accent="var(--indigo-bold)"
+  accent="var(--iris-bold)"
   contents={[
     { id: "what-is-it", label: "What is drawing with code?", tone: "red-bold" },
-    { id: "the-div", label: "It’s all about the <div>", tone: "indigo-bold" },
+    { id: "the-div", label: "It’s all about the <div>", tone: "iris-bold" },
   ]}
 >
   <p>CSS art lies at the intersection of vector illustration and front-end development.</p>
@@ -48,7 +48,7 @@ export default function PostLayoutSection() {
           publishedDate="Oct 3, 2026"
           readingTime="4 min read"
           postTags="CSS, Illustration, Front-end"
-          accent="var(--indigo-bold)"
+          accent="var(--iris-bold)"
           headingLevel={3}
           contents={[
             {
@@ -59,7 +59,7 @@ export default function PostLayoutSection() {
             {
               id: "the-div",
               label: "It’s all about the <div>",
-              tone: "indigo-bold",
+              tone: "iris-bold",
             },
             {
               id: "recap",
@@ -71,7 +71,7 @@ export default function PostLayoutSection() {
               label: "Beginner’s CSS toolkit",
               tone: "emerald-bold",
             },
-            { id: "try-it", label: "Try it out", tone: "amber-bold" },
+            { id: "try-it", label: "Try it out", tone: "marigold-bold" },
           ]}
         >
           <p>

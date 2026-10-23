@@ -32,7 +32,7 @@ export default function CodeBlock({
   return (
     <div
       className={cx("relative rounded-[var(--radius-sm)] overflow-hidden bg-zinc-800", className)}
-      style={{ "--cursor-dot-color": "var(--indigo-soft)" } as CSSProperties}
+      style={{ "--cursor-dot-color": "var(--iris-soft)" } as CSSProperties}
     >
       <button
         type="button"
@@ -49,7 +49,7 @@ export default function CodeBlock({
         data-lenis-prevent
       >
         <code className="font-mono text-zinc-100"
-        style={{ color: "var(--indigo-soft)" }}>{code.trim()}</code>
+        style={{ color: "var(--iris-soft)" }}>{code.trim()}</code>
       </pre>
     </div>
   );

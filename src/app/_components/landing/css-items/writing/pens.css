@@ -1,5 +1,33 @@
-/* Styles for Pens.tsx (same folder). CSS-art conversion notes that
-   apply to every css-items stylesheet live at the top of landing.css. */
+/* Pencil cup colors, named by the part they paint. */
+.landing {
+  /* Cup */
+  --cup-outline: color-mix(in srgb, var(--pink-bold) 80%, var(--cream));
+  --cup-left: var(--pink-soft);
+  --cup-right: color-mix(in srgb, var(--pink-soft) 30%, var(--cream));
+  --cup-rim: color-mix(in srgb, var(--pink-soft) 30%, var(--cream));
+
+  /* Ruler */
+  --ruler-face: var(--orange-bold);
+  --ruler-edge: var(--orange-soft);
+  --ruler-marks: color-mix(in srgb, var(--charcoal) 85%, var(--cream));
+  --ruler-hole: var(--cream);
+
+  /* Pen */
+  --pen-barrel: var(--pink-bold);
+  --pen-barrel-light: var(--pink-soft);
+  --pen-cap: var(--charcoal);
+  --pen-cap-light: color-mix(in srgb, var(--charcoal) 40%, var(--cream));
+
+  /* Pencils */
+  --pencil-eraser: var(--red-bold);
+  --pencil-eraser-light: var(--red-soft);
+  --pencil-ferrule: var(--charcoal);
+  --pencil-ferrule-light: color-mix(in srgb, var(--charcoal) 25%, var(--cream));
+  --pencil-yellow: var(--marigold-bold);
+  --pencil-yellow-side: #fff67f;
+  --pencil-blue: var(--blue-bold);
+  --pencil-blue-side: var(--blue-soft);
+}
 
 /* ============================================================
    Pens + cup — src/components/css-items/writing (Pens.js)
@@ -21,12 +49,12 @@
 }
 
 .cup {
-  border: 3px solid #ff9ae1;
+  border: 3px solid var(--cup-outline);
   position: relative;
   height: 55px;
   width: 54px;
   border-radius: 0 0 2px 2px;
-  background-image: linear-gradient(to right, #ffdff0 0 50%, #fff8fa 50%);
+  background-image: linear-gradient(to right, var(--cup-left) 0 50%, var(--cup-right) 50%);
 
   &::before {
     content: "";
@@ -34,7 +62,7 @@
     height: 4.5px;
     width: 59.4px;
     border-radius: 1.5px;
-    background-image: linear-gradient(#ffe9f0 0 50%, #ff9ae1 50%);
+    background-image: linear-gradient(var(--cup-rim) 0 50%, var(--cup-outline) 50%);
     transform: translateY(-4px) translateX(-5px);
   }
 
@@ -43,11 +71,11 @@
     display: flex;
     height: 10.8px;
     width: 43.2px;
-    border-right: 3px solid #ff9ae1;
-    border-left: 3px solid #ff9ae1;
-    border-bottom: 3px solid #ff9ae1;
+    border-right: 3px solid var(--cup-outline);
+    border-left: 3px solid var(--cup-outline);
+    border-bottom: 3px solid var(--cup-outline);
     border-radius: 0 0 1px 1px;
-    background-image: linear-gradient(to right, #ffdff0 0 50%, #fff8fa 50%);
+    background-image: linear-gradient(to right, var(--cup-left) 0 50%, var(--cup-right) 50%);
     transform: translateY(44px) translateX(2.5px);
   }
 }
@@ -60,7 +88,7 @@
   width: 18px;
   border-radius: 1px;
   transform: translateX(-5px) translateY(-15px) rotate(-8deg);
-  background-image: linear-gradient(to right, #ffc061 0 50%, #ffd494 50%);
+  background-image: linear-gradient(to right, var(--ruler-face) 0 50%, var(--ruler-edge) 50%);
 
   &::before {
     content: "";
@@ -72,8 +100,8 @@
       to bottom,
       transparent,
       transparent 7%,
-      #4f4f4f 7%,
-      #4f4f4f 8.5%
+      var(--ruler-marks) 7%,
+      var(--ruler-marks) 8.5%
     );
   }
 
@@ -82,7 +110,7 @@
     height: 4.5px;
     width: 4.5px;
     border-radius: 50%;
-    background-color: #d4e7ff;
+    background-color: var(--ruler-hole);
     transform: translateY(3px) translateX(-4px);
   }
 }
@@ -93,7 +121,7 @@
   height: 65px;
   width: 8px;
   border-radius: 1px;
-  background-image: linear-gradient(to right, #ff92c9 0 50%, #fcbfe9 50%);
+  background-image: linear-gradient(to right, var(--pen-barrel) 0 50%, var(--pen-barrel-light) 50%);
   transform: translateX(-6px) translateY(20px);
 
   &::before {
@@ -102,7 +130,7 @@
     display: flex;
     height: 7.2px;
     width: 5.2px;
-    background-image: linear-gradient(to right, #414141 0 50%, #999999 50%);
+    background-image: linear-gradient(to right, var(--pen-cap) 0 50%, var(--pen-cap-light) 50%);
     transform: translateY(-7px) translateX(1.5px);
     border-radius: 50% 50% 0 0;
   }
@@ -114,7 +142,7 @@
     border-radius: 45%;
     height: 24px;
     width: 4px;
-    background-image: linear-gradient(to right, #414141 0 50%, #999999 50%);
+    background-image: linear-gradient(to right, var(--pen-cap) 0 50%, var(--pen-cap-light) 50%);
     transform: translateY(4px) translateX(2px);
   }
 }
@@ -131,7 +159,7 @@
     width: 6px;
     border-radius: 1.5px 1.5px 0 0;
     transform: translateY(-10px);
-    background-image: linear-gradient(to right, #ff5c4a 0 50%, #ff988d 50%);
+    background-image: linear-gradient(to right, var(--pencil-eraser) 0 50%, var(--pencil-eraser-light) 50%);
   }
 
   &::after {
@@ -139,22 +167,22 @@
     display: flex;
     height: 6px;
     width: 3px;
-    background-color: #414141;
-    box-shadow: 3px 0px #bbbbbb;
+    background-color: var(--pencil-ferrule);
+    box-shadow: 3px 0px var(--pencil-ferrule-light);
     transform: translateY(-10px);
   }
 }
 
 .pencil--1 {
   z-index: 0;
-  background-color: #f3d860;
-  box-shadow: 3px 0 #fff67f;
+  background-color: var(--pencil-yellow);
+  box-shadow: 3px 0 var(--pencil-yellow-side);
   transform: rotate(-3deg) translateX(-6px);
 }
 
 .pencil--2 {
-  background-color: #5796e9;
-  box-shadow: 3px 0 #a3cbff;
+  background-color: var(--pencil-blue);
+  box-shadow: 3px 0 var(--pencil-blue-side);
   transform: rotate(5deg) translatex(-1.5px);
 }
 

@@ -16,10 +16,10 @@ const USAGE = `<EditorialHeader
   description="A personal archive of books I’ve read..."
   colors={{
     barText: "var(--charcoal)",
-    railBackground: "var(--sky-soft)",
+    railBackground: "var(--periwinkle-soft)",
     railText: "var(--charcoal)",
     headingBackground: "var(--cherry-bold)",
-    prefixText: "var(--sky-soft)",
+    prefixText: "var(--periwinkle-soft)",
     titleText: "var(--mauve-soft)",
     descriptionBackground: "var(--mauve-soft)",
     descriptionText: "var(--cherry-bold)",
@@ -65,8 +65,8 @@ export default function EditorialHeaderSection() {
               railText: "var(--charcoal)",
               headingBackground: "var(--emerald-bold)",
               prefixText: "var(--lemon-soft)",
-              titleText: "var(--indigo-soft)",
-              descriptionBackground: "var(--indigo-soft)",
+              titleText: "var(--iris-soft)",
+              descriptionBackground: "var(--iris-soft)",
               descriptionText: "var(--emerald-bold)",
             }}
             headingLevel={3}

@@ -81,9 +81,6 @@ function ColorTile({
     timer.current = setTimeout(() => setStatus(""), 1500);
   };
 
-  // Cream and ivory sit on a cream page — give them a hairline edge.
-  const edged = luminance(hex) > 0.8;
-
   return (
     <button
       type="button"
@@ -92,7 +89,6 @@ function ColorTile({
       data-copied={status ? "" : undefined}
       className={cx(
         "swatch-tile focus-ring",
-        edged && "swatch-tile--edged",
         variant === "ground" && "swatch-tile--ground"
       )}
       style={{

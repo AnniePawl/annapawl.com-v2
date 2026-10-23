@@ -274,7 +274,7 @@ p {
   line-height: var(--type-eyebrow-leading);
   letter-spacing: var(--type-eyebrow-tracking);
   text-transform: uppercase;
-  color: var(--indigo-bold);
+  color: var(--iris-bold);
 }
 
 .type-supporting {

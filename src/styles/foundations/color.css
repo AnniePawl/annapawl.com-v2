@@ -22,39 +22,39 @@
   ========================== */
 
   /* Pink */
-  --pink-soft: #FFD0EA;
+  --pink-soft: #FFC6E6; /* was #FFD0EA */
   --pink-bold: #F472B6;
 
   /* Red */
-  --red-soft: #FF9999;
-  --red-bold: #F05454;
+  --red-soft: #FF6358; /* was #FF9999 */
+  --red-bold: #D91F1F; /* was #F05454 — rgb(217, 31, 31) */
 
   /* Cherry */
-  --cherry-soft: #A83B59;
-  --cherry-bold: #5A1226;
+  --cherry-soft: #AA3857; /* was #A83B59 */
+  --cherry-bold: #6F1B31; /* was #5A1226 */
 
   /* Coral */
-  --coral-soft: #FFBFA6;
-  --coral-bold: #FF7954;
+  --coral-soft: #FFBEA3; /* was #FFBFA6 */
+  --coral-bold: #FE7043; /* was #FF7954 */
 
   /* Orange */
-  --orange-soft: #FFC88E;
-  --orange-bold: #FFA34D;
+  --orange-soft: #FFCB8C; /* was #FFC88E */
+  --orange-bold: #F28A1B; /* was #FFA34D */
 
   /* Lemon */
-  --lemon-soft: #FFF0A2;
+  --lemon-soft: #FFF89E; /* was #FFF0A2 — lighter, brighter, like the original CSS-art yellow */
   --lemon-bold: #FFE669;
 
-  /* Amber */
-  --amber-soft: #FFDF8E;
-  --amber-bold: #F3C144;
+  /* Marigold */
+  --marigold-soft: #FFDF90; /* was #FFDF8E */
+  --marigold-bold: #F5BF46; /* was #F3C144 */
 
   /* =========================
      Greens
   ========================== */
 
   /* Lime */
-  --lime-soft: #E1FFA4;
+  --lime-soft: #D3F392; /* was #E1FFA4 */
   --lime-bold: #B0D964;
 
   /* Sage */
@@ -65,33 +65,45 @@
   --mint-soft: #B5FFDB;
   --mint-bold: #5CE1B1;
 
+  /* Green — a true, fresh green (between mint and emerald) */
+  --green-soft: #C4EBD7;
+  --green-bold: #57BC92;
+
   /* Emerald — logo color */
   --emerald-soft: #479C6D;
   --emerald-bold: #2D6144;
+
+  /* Teal — the blue-green between mint and sky */
+  --teal-soft: #9FE3DF;
+  --teal-bold: #2BA3A0;
 
   /* =========================
      Blues + Purple
   ========================== */
 
   /* Sky */
-  --sky-soft: #D1E3FF;
+  --sky-soft: #B1E3FC; /* was #D1E3FF — now a true light sky that matches sky-bold; the old shade lives on as --periwinkle-soft */
   --sky-bold: #67CAF8;
 
   /* Blue */
   --blue-soft: #98C7FD;
   --blue-bold: #5088EA;
 
-  /* Steel */
-  --steel-soft: #9DADCB;
-  --steel-bold: #5C77AA;
+  /* Periwinkle — between blue and iris (soft was the original --sky-soft) */
+  --periwinkle-soft: #D1E3FF;
+  --periwinkle-bold: #7F9BE6;
+
+  /* Slate */
+  --slate-soft: #9DADCB;
+  --slate-bold: #5C77AA;
 
   /* Lilac */
   --lilac-soft: #D7BAFF;
-  --lilac-bold: #BB73FF;
+  --lilac-bold: #B985EB; /* was #BB73FF */
 
-  /* Indigo */
-  --indigo-soft: #B8B5FF;
-  --indigo-bold: #8B87F5;
+  /* Iris */
+  --iris-soft: #B8B5FF;
+  --iris-bold: #8B87F5;
 
   /* Plum */
   --plum-soft: #D89FD7;
@@ -116,7 +128,7 @@
   /* =========================
      Earth Colors — Extended
      Added for the sedge-design-system dark theme's accent palette
-     (moss/ochre/mauve; sage + clay above are reused as-is). These are
+     (moss/mauve; sage + clay above are reused as-is). These are
      base palette tokens like every other family on this page -- usable
      anywhere, in either theme, regardless of whether dark mode is on.
      Dark-theme-specific *semantic* mappings (which of these apply to
@@ -129,21 +141,19 @@
   --moss-soft: #B7C98A;
   --moss-bold: #7A8F4E;
 
-  /* Ochre */
-  --ochre-soft: #E8C077;
-  --ochre-bold: #C6871E;
-
   /* Dusty mauve — muted, distinct from the more saturated Plum above */
   --mauve-soft: #D8B4C4;
   --mauve-bold: #9C6B85;
 
-  /* Chocolate — a warm brown pair. Bold doubles as the dark-theme page
-     background; soft is available as a lighter editorial surface/accent. */
-  --chocolate-soft: #A47F68;
-  --chocolate-bold: #231F1C;
+  /* Cocoa — a warm brown pair. */
+  --cocoa-soft: #A47F68;
+  --cocoa-bold: #745748; /* was #231F1C (now --espresso) */
 
   /* Warm inverse text for the dark theme. */
   --ivory: #F2E9D8;
+
+  /* Espresso — the near-black brown behind Sedge's dark mode. */
+  --espresso: #231F1C;
 
   /* Neutral component tone */
   --neutral-soft: var(--neutral-50);
@@ -223,7 +233,7 @@
      Tailwind utility). Defaults to the same lime-soft pastel it already
      was; dark mode repoints this to a moss-tinted dark surface instead
      of just leaving a bright pastel green box floating on a dark page. */
-  --sidebar-surface: var(--indigo-soft);
+  --sidebar-surface: var(--iris-soft);
 
   /* =========================
      Focus

@@ -39,11 +39,6 @@
   appearance: none;
 }
 
-/* Light grounds (cream, ivory) need an edge to read against the page. */
-.swatch-tile--edged {
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text-primary) 14%, transparent);
-}
-
 .swatch-tile--ground {
   height: 3.5rem;
 }
@@ -126,7 +121,7 @@
 
 .text-role-box--inverse {
   border-color: transparent;
-  background: var(--chocolate-bold);
+  background: var(--espresso);
   color: var(--text-inverse);
 }
 

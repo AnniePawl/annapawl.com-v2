@@ -10,15 +10,15 @@
    This is deliberately a thin *semantic* layer, not a second palette:
    every rule below just re-points an existing semantic token (defined
    once, for light mode, in foundations/color.css) at one of the earth-
-   tone *base* tokens also defined there (--chocolate-bold/--ivory/--moss/
-   --ochre/--mauve, alongside the existing --sage/--clay). Because
+   tone *base* tokens also defined there (--espresso/--ivory/--moss/
+   --mauve, alongside the existing --sage/--clay). Because
    nearly every component in this codebase (button.css, card.css,
    section.css, etc.) already reads colors through the semantic tokens
    (var(--bg-default), var(--text-primary), var(--border-subtle)...)
    rather than hardcoding hex, re-pointing them here is enough to theme
    the whole page -- components don't need their own dark-mode variants.
    The exceptions (places that render a *base* pastel token like
-   --indigo-soft directly, e.g. active nav pills) are handled at the
+   --iris-soft directly, e.g. active nav pills) are handled at the
    call site instead, since those pastels are meant to stay pastel in
    both themes -- see the comments on --sidebar-surface below and in
    HeroNav.tsx/Hero.tsx/MobileNav.tsx/SidebarNav.tsx for why. */
@@ -27,22 +27,22 @@
    Buttons + markers read it. */
 [data-sedge-theme] {
   --page-accent: var(--cherry-bold);
-  --page-accent-tint: var(--sky-soft);
+  --page-accent-tint: var(--periwinkle-soft);
   --page-accent-ink: var(--cream);
 }
 
 [data-sedge-theme="dark"] {
   /* Backgrounds + surfaces */
-  --bg-default: var(--chocolate-bold);
-  --cursor-dot-color: var(--indigo-soft);
+  --bg-default: var(--espresso);
+  --cursor-dot-color: var(--iris-soft);
   --bg-subtle: color-mix(
     in srgb,
-    var(--chocolate-bold) 88%,
+    var(--espresso) 88%,
     var(--ivory) 12%
   );
   --surface: color-mix(
     in srgb,
-    var(--chocolate-bold) 82%,
+    var(--espresso) 82%,
     var(--ivory) 18%
   );
 
@@ -70,22 +70,22 @@
   --text-secondary: color-mix(
     in srgb,
     var(--text-inverse) 78%,
-    var(--chocolate-bold)
+    var(--espresso)
   );
   --text-muted: color-mix(
     in srgb,
     var(--text-inverse) 60%,
-    var(--chocolate-bold)
+    var(--espresso)
   );
 
   /* Borders */
-  --border-subtle: color-mix(in srgb, var(--ivory) 18%, var(--chocolate-bold) 82%);
-  --border-strong: color-mix(in srgb, var(--ivory) 42%, var(--chocolate-bold) 58%);
+  --border-subtle: color-mix(in srgb, var(--ivory) 18%, var(--espresso) 82%);
+  --border-strong: color-mix(in srgb, var(--ivory) 42%, var(--espresso) 58%);
 
   /* Interactive accent -- swapped from the sitewide blue to a warm
      terracotta (clay) so buttons/links/focus rings (--focus-ring-color
      is aliased to --accent in focus.css) read as part of the same warm
-     earth-tone family instead of a cool blue sitting oddly on a chocolate
+     earth-tone family instead of a cool blue sitting oddly on a cocoa
      page. --accent-hover/-active keep the same "mix toward black"
      formula focus.css/button.css already use for the light-mode blue. */
   --accent: var(--clay-bold);
@@ -103,11 +103,11 @@
   --sidebar-surface: color-mix(
     in srgb,
     var(--moss-bold) 22%,
-    var(--chocolate-bold)
+    var(--espresso)
   );
 
   /* Elevation -- the light-mode shadow scale (elevation.css) is a soft
-     black shadow, which all but disappears against chocolate. A faint
+     black shadow, which all but disappears against cocoa. A faint
      light haze reads as "lifted" on a dark surface the same way a dark
      shadow does on a light one. */
   --shadow-xs: 0 1px 0 rgba(242, 233, 216, 0.05);
@@ -152,7 +152,7 @@
 }
 
 .theme-toggle-btn:hover {
-  color: var(--indigo-bold);
+  color: var(--iris-bold);
 }
 
 /* Thin underline beneath the active icon only. */
@@ -209,22 +209,22 @@
   flex: none;
   width: 0.4375rem;
   height: 0.6875rem;
-  background: var(--section-tone, var(--indigo-bold));
+  background: var(--section-tone, var(--iris-bold));
 }
 
 /* Sidebar icons take their group's tone (data-group, see section.css). */
 .sedge-sidebar-icon {
-  color: var(--section-tone, var(--indigo-soft));
+  color: var(--section-tone, var(--iris-soft));
 }
 
 [data-sedge-theme="dark"] .type-eyebrow {
-  color: var(--indigo-soft);
+  color: var(--iris-soft);
 }
 
-/* Approach label + numbers stay indigo-bold in both themes, matching the
+/* Approach label + numbers stay iris-bold in both themes, matching the
    Intro section-heading block (approach.css). */
 
-/* Links on the dark page: the cherry underline would vanish on chocolate,
+/* Links on the dark page: the cherry underline would vanish on cocoa,
    so links use the soft sky tint there. */
 [data-sedge-theme="dark"] .text-link {
   --link-accent: var(--page-accent-tint);

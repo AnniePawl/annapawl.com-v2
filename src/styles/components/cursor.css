@@ -8,7 +8,7 @@
   height: 8px;
   border: 1px solid transparent;
   border-radius: 50%;
-  background: var(--cc-dot-color, var(--indigo-bold));
+  background: var(--cc-dot-color, var(--iris-bold));
 
   pointer-events: none;
   z-index: 2147483647;

@@ -12,7 +12,7 @@ import Badge from "@/components/ui/Badge";
 // Same tag/color pairs as the bookshelf.
 const TONE_EXAMPLES: { label: string; tone: BadgeTone }[] = [
   { label: "Literary Fiction", tone: "emerald-bold" },
-  { label: "Fantasy", tone: "indigo-bold" },
+  { label: "Fantasy", tone: "iris-bold" },
   { label: "Made Me Cry", tone: "sky-bold" },
   { label: "Favorites", tone: "red-bold" },
 ];

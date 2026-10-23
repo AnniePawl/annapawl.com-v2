@@ -20,7 +20,7 @@ export default function ColorsSection() {
           them... I’m making the rules here{" "}
           <Laugh
             aria-hidden="true"
-            className="icon-sm inline-block align-[-0.125em] text-[var(--indigo-bold)]"
+            className="icon-sm inline-block align-[-0.125em] text-[var(--iris-bold)]"
           />
           <br />I want a whole world of color to pull from as my digital garden
           grows.

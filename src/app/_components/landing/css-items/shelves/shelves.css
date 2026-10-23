@@ -1,6 +1,12 @@
 /* Styles for Shelf.tsx, MobileShelf.tsx and the Desktop/Tablet/MobileShelves layouts (same folder). CSS-art conversion notes that
    apply to every css-items stylesheet live at the top of landing.css. */
 
+.landing {
+  --shelf-wood: var(--sand-soft);
+  --shelf-edge: color-mix(in srgb, var(--cherry-soft) 70%, var(--cream));
+  --shelf-unused-blue: var(--blue-soft);
+}
+
 /* ============================================================
    Shelves — src/components/css-items/shelves/shelves.scss
    The wooden shelf + bracket that every item sits on, and the layout
@@ -11,16 +17,16 @@
   height: 15px;
   width: 63vw;
   display: flex;
-  background-image: linear-gradient(#f1dbc1 0 70%, #7ab1fd 70% 100%);
+  background-image: linear-gradient(var(--shelf-wood) 0 70%, var(--shelf-edge) 70% 100%);
   justify-content: space-around;
-  box-shadow: 0 10px 15px -2px #a6cefc;
+  box-shadow: 0 10px 15px -2px var(--ivory);
   border-radius: 2px;
 
   &::before,
   &::after {
     content: "";
     margin-top: 15px;
-    background-image: linear-gradient(#f1dbc1 0 70%, #7ab1fd 70% 100%);
+    background-image: linear-gradient(var(--shelf-wood) 0 70%, var(--shelf-edge) 70% 100%);
     height: 20px;
     width: 12px;
     border-bottom-right-radius: 2px;

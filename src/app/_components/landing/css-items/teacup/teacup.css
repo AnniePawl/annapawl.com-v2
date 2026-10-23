@@ -1,9 +1,18 @@
-/* Styles for TeaCup.tsx (same folder). CSS-art conversion notes that
-   apply to every css-items stylesheet live at the top of landing.css. */
-
 /* ============================================================
    Teacup — src/components/css-items/teacup
    ============================================================ */
+
+.landing {
+  --teacup-outline: var(--blue-bold);
+  --teacup-cup-left: var(--sky-bold);
+  --teacup-cup-right: var(--sky-soft);
+  --teacup-handle: color-mix(in srgb, var(--sky-soft), var(--cream));
+  --teacup-handle-hole: var(--cream);
+  --teacup-tea-tag: var(--red-bold);
+  --teacup-steam: var(--pink-bold);
+  --teacup-steam-fade: color-mix(in srgb, var(--ivory) 25%, var(--cream));
+}
+
 
 .teacup-container {
   transform: scale(0.95) translateY(-64px);
@@ -17,9 +26,9 @@
   height: 60px;
   width: 58px;
   position: relative;
-  border: 2.5px solid #4890b4;
+  border: 2.5px solid var(--teacup-outline);
   border-radius: 0 0 18px 18px;
-  background-image: linear-gradient(to right, #9adeed 0 50%, #d1fff5 50%);
+  background-image: linear-gradient(to right, var(--teacup-cup-left) 0 50%, var(--teacup-cup-right) 50%);
 
   &::before {
     content: "";
@@ -29,8 +38,8 @@
     height: 37px;
     width: 34px;
     border-radius: 50%;
-    border: 2.5px solid #4890b4;
-    background-image: radial-gradient(#eaf3ff 0% 40%, #4890b4 40% 50%, #d1fff5 50%);
+    border: 2.5px solid var(--teacup-outline);
+    background-image: radial-gradient(var(--teacup-handle-hole) 0% 40%, var(--teacup-outline) 40% 50%, var(--teacup-handle) 50%);
   }
 
   &::after {
@@ -39,17 +48,15 @@
     height: 35px;
     width: 20px;
     transform: translateY(0px) translateX(10px);
-    background-image: linear-gradient(
-        to right,
+    background-image: linear-gradient(to right,
         transparent 0 43%,
-        rgb(255, 141, 128) 43% 55%,
-        transparent 55%
-      ),
-      linear-gradient(to bottom, transparent 0 40%, rgb(255, 141, 128) 40%);
+        var(--teacup-tea-tag) 43% 55%,
+        transparent 55%),
+      linear-gradient(to bottom, transparent 0 40%, var(--teacup-tea-tag) 40%);
   }
 }
 
-.teacup:hover + .steam {
+.teacup:hover+.steam {
   animation: steam 2s ease-in-out;
 }
 
@@ -59,21 +66,17 @@
   height: 60px;
   width: 48px;
   transform: translateY(-75px) translateX(4px);
-  background: linear-gradient(to bottom, #eaf3ff, transparent),
-    repeating-radial-gradient(
-      circle at 25% 30%,
-      rgb(255, 158, 252) 0px,
-      rgb(255, 158, 252) 4px,
+  background: linear-gradient(to bottom, var(--teacup-steam-fade), transparent),
+    repeating-radial-gradient(circle at 25% 30%,
+      var(--teacup-steam) 0px,
+      var(--teacup-steam) 4px,
       transparent 5px,
-      transparent 10px
-    ),
-    repeating-radial-gradient(
-      circle at 75% 50%,
-      rgb(255, 158, 252) 0px,
-      rgb(255, 158, 252) 4px,
+      transparent 10px),
+    repeating-radial-gradient(circle at 75% 50%,
+      var(--teacup-steam) 0px,
+      var(--teacup-steam) 4px,
       transparent 5px,
-      transparent 10px
-    );
+      transparent 10px);
   background-repeat: no-repeat;
   background-size: 100% 100%;
   opacity: 1;
@@ -88,7 +91,7 @@
 /* Reduced motion -- disables this item's animations (hover-triggered
    and autoplay alike). Source (v1) had no reduced-motion handling. */
 @media (prefers-reduced-motion: reduce) {
-  .teacup + .steam {
+  .teacup+.steam {
     animation: none !important;
   }
 }

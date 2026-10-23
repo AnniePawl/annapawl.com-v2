@@ -54,11 +54,11 @@ export default async function BooksPage() {
         utilityStart={
           <HomeLogo
             colors={{
-              northeast: "var(--amber-bold)",
+              northeast: "var(--marigold-bold)",
               southeast: "var(--blue-bold)",
               southwest: "var(--blue-bold)",
               northwest: "var(--blue-bold)",
-              hoverAccent: "var(--amber-bold)",
+              hoverAccent: "var(--marigold-bold)",
             }}
             size="1.75rem"
           />

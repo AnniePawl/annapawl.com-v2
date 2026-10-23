@@ -42,10 +42,10 @@ export default function EditorialHeader({
   const Heading = headingLevel === 2 ? "h2" : headingLevel === 3 ? "h3" : "h1";
   const style = {
     "--editorial-header-bar-text": colors.barText ?? "var(--charcoal)",
-    "--editorial-header-rail-bg": colors.railBackground ?? "var(--sky-soft)",
+    "--editorial-header-rail-bg": colors.railBackground ?? "var(--periwinkle-soft)",
     "--editorial-header-rail-text": colors.railText ?? "var(--charcoal)",
     "--editorial-header-heading-bg": colors.headingBackground ?? "var(--cherry-bold)",
-    "--editorial-header-prefix-text": colors.prefixText ?? "var(--sky-soft)",
+    "--editorial-header-prefix-text": colors.prefixText ?? "var(--periwinkle-soft)",
     "--editorial-header-title-text": colors.titleText ?? "var(--mauve-soft)",
     "--editorial-header-description-bg":
       colors.descriptionBackground ?? "var(--mauve-soft)",

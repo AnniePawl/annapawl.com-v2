@@ -17,7 +17,7 @@ export const EDITORIAL_COLORWAYS: Record<EditorialColorway, CSSProperties> = {
       "color-mix(in srgb, var(--emerald-bold) 88%, var(--charcoal))",
   } as CSSProperties,
   "sky-cherry": {
-    "--editorial-surface": "var(--sky-soft)",
+    "--editorial-surface": "var(--periwinkle-soft)",
     "--editorial-accent": "var(--cherry-bold)",
     "--editorial-heading": "var(--cherry-bold)",
     "--editorial-accent-text": "var(--cream)",
@@ -25,7 +25,7 @@ export const EDITORIAL_COLORWAYS: Record<EditorialColorway, CSSProperties> = {
       "color-mix(in srgb, var(--cherry-bold) 86%, var(--cream))",
   } as CSSProperties,
   "sky-coral": {
-    "--editorial-surface": "var(--sky-soft)",
+    "--editorial-surface": "var(--periwinkle-soft)",
     "--editorial-accent": "var(--coral-bold)",
     "--editorial-heading": "var(--coral-bold)",
     "--editorial-accent-text": "var(--charcoal)",

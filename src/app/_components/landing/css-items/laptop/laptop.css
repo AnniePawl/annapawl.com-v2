@@ -6,6 +6,25 @@
    ============================================================ */
 
 .laptop-container {
+  --laptop-bezel: var(--blue-soft);
+  --laptop-ink: var(--charcoal);
+  --laptop-gap: var(--cream);
+  --laptop-trim: var(--cherry-bold);
+  --laptop-glow: transparent;
+  --laptop-base: var(--cream);
+  --laptop-base-shadow: var(--slate-soft);
+  --laptop-notch: var(--taupe-soft);
+  --laptop-screen: var(--cherry-bold);
+  --laptop-screen-shine: var(--cherry-soft);
+  --laptop-cam-lens: var(--periwinkle-soft);
+  --laptop-cam-ring: var(--slate-soft);
+  --laptop-cam: var(--charcoal);
+  --laptop-terminal: color-mix(in srgb, var(--charcoal) 31%, transparent);
+  --laptop-terminal-bar: var(--marigold-soft);
+  --laptop-terminal-text: var(--cream);
+}
+
+.laptop-container {
   --laptop-height: 125px;
   --laptop-width: 175px;
   --terminal-height: 95px;
@@ -39,10 +58,10 @@
   justify-content: center;
   height: var(--laptop-height);
   width: var(--laptop-width);
-  border-radius: 5px 5px 0 0;
-  background-color: #fcffb3;
-  box-shadow: 0 0 0 1.5px #414141, 0 0 0 6px #ffffff, 0 0 10px black,
-    0 0 0 8px #5796e9;
+  border-radius: 4px 4px 0 0;
+  background-color: var(--laptop-bezel);
+  box-shadow: 0 0 0 1.5px var(--laptop-ink), 0 0 0 6px var(--laptop-gap),
+    0 0 10px var(--laptop-glow), 0 0 0 8px var(--laptop-trim);
   z-index: 0;
   position: relative;
 
@@ -50,15 +69,15 @@
     height: 16px;
     width: 230px;
     border-radius: 2px;
-    border-top: 2px solid #5796e9;
-    border-left: 2px solid #5796e9;
-    border-right: 2px solid #5796e9;
-    border-bottom: 3px solid #414141;
+    border-top: 2px solid var(--laptop-trim);
+    border-left: 2px solid var(--laptop-trim);
+    border-right: 2px solid var(--laptop-trim);
+    border-bottom: 3px solid var(--laptop-ink);
     content: "";
     position: absolute;
-    background-color: #ffffff;
+    background-color: var(--laptop-base);
     transform: translateY(72px);
-    box-shadow: 0px 0px 1px rgb(178, 193, 212);
+    box-shadow: 0px 0px 1px var(--laptop-base-shadow);
   }
 
   &::after {
@@ -67,7 +86,7 @@
     height: 4px;
     width: 45px;
     border-radius: 0 0 1.5px 1.5px;
-    background-image: linear-gradient(#b3b3b3 35%, #414141 10%);
+    background-image: linear-gradient(var(--laptop-notch) 35%, var(--laptop-ink) 10%);
     transform: translateY(65px);
   }
 
@@ -78,7 +97,7 @@
     position: relative;
     height: calc(var(--laptop-height) * 0.86);
     width: calc(var(--laptop-width) * 0.94);
-    background-image: linear-gradient(45deg, #bfc8ff 65%, #aebcf2 65%);
+    background-image: linear-gradient(45deg, var(--laptop-screen) 65%, var(--laptop-screen-shine) 65%);
 
     &::before {
       content: "";
@@ -87,9 +106,9 @@
       width: 7px;
       border-radius: 50%;
       background-image: radial-gradient(
-        #abebff 0 20%,
-        #808080 20% 50%,
-        rgb(58, 58, 58) 50% 90%
+        var(--laptop-cam-lens) 0 20%,
+        var(--laptop-cam-ring) 20% 50%,
+        var(--laptop-cam) 50% 90%
       );
       transform: translateX(-5px) translateY(-58.5px);
     }
@@ -101,10 +120,11 @@
     height: var(--terminal-height);
     width: var(--terminal-width);
     border-radius: 1.5px 1.5px 0 0;
-    background-color: #1111114f;
-    border-top: 7px solid #fdcfff;
+    background-color: var(--laptop-terminal);
+    border-top: 7px solid var(--laptop-terminal-bar);
 
     &::before {
+      color:var(--charcoal);
       content: "🔴\00a0\00a0🟡\00a0\00a0🟢\00a0\00a0\00a0 \00a0\00a0\00a0📂 ~/ code / css-stuff";
       position: absolute;
       font-size: 3.5px;
@@ -113,10 +133,10 @@
 
     p {
       padding: 4px;
-      color: white;
+      color: var(--laptop-terminal-text);
       font-size: 12px;
       font-family: menlo, monaco;
-      border-right: 1px solid white;
+      border-right: 1px solid var(--laptop-terminal-text);
       margin: 0;
       width: 1.5ch;
       overflow: hidden;

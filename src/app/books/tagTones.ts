@@ -8,13 +8,13 @@ import type { PaletteColor } from "../../components/ui/colorTokens";
 export const TAG_TONES: Record<string, PaletteColor> = {
   // Genre
   "Literary Fiction": "emerald-bold",
-  "Historical Fiction": "ochre-bold",
+  "Historical Fiction": "marigold-bold",
   "Science Fiction": "blue-bold",
-  Fantasy: "indigo-bold",
+  Fantasy: "iris-bold",
   Romance: "plum-soft",
   Nonfiction: "sage-bold",
   // Theme
-  Dystopian: "steel-bold",
+  Dystopian: "slate-bold",
   Adventure: "orange-bold",
   Survival: "moss-bold",
   "LGBTQ+": "pink-bold",

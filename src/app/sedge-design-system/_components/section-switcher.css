@@ -6,7 +6,7 @@
    Components).
 
    Nothing here introduces new colors, radii or spacing values -- it only
-   reads the shared tokens (--sidebar-surface, --lime-soft, --indigo-soft,
+   reads the shared tokens (--sidebar-surface, --lime-soft, --iris-soft,
    --radius-*, --space-*, --motion-*), so light/dark theming (theme.css)
    and the reduced-motion durations (foundations/motion.css) come along
    for free. Desktop never sees any of it: the bar is `lg:hidden`
@@ -68,15 +68,15 @@
    tap and would leave the bar tinted after the sheet closes. */
 @media (hover: hover) {
   .section-switcher-trigger:hover {
-    background: color-mix(in srgb, var(--indigo-soft) 30%, transparent);
+    background: color-mix(in srgb, var(--iris-soft) 30%, transparent);
   }
 }
 
-/* Open state. --indigo-soft is a base pastel that stays pastel in both
+/* Open state. --iris-soft is a base pastel that stays pastel in both
    themes (see theme.css), so its text is the fixed --charcoal rather than
    the themed --text-primary -- same rule HeroNav's active pill follows. */
 .section-switcher-trigger[aria-expanded="true"] {
-  background: var(--indigo-soft);
+  background: var(--iris-soft);
   border-color: transparent;
   color: var(--charcoal);
 }

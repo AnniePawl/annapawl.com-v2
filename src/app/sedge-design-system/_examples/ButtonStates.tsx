@@ -52,7 +52,7 @@ const PAGES: { name: string; style: CSSProperties }[] = [
     name: "Sedge · sky + cherry",
     style: {
       "--page-accent": "var(--cherry-bold)",
-      "--page-accent-tint": "var(--sky-soft)",
+      "--page-accent-tint": "var(--periwinkle-soft)",
       "--page-accent-ink": "var(--cream)",
     } as CSSProperties,
   },

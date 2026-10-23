@@ -30,7 +30,7 @@ const ACCENT_SHAPES: { variant: ShapeVariant; color: string }[] = [
   { variant: "scallop", color: "var(--lime-soft)" },
   { variant: "arch", color: "var(--lemon-bold)" },
   { variant: "clover", color: "var(--blue-soft)" },
-  { variant: "flower", color: "var(--indigo-soft)" },
+  { variant: "flower", color: "var(--iris-soft)" },
   { variant: "circle", color: "var(--pink-bold)" },
   { variant: "ring", color: "var(--lilac-soft)" },
 ];

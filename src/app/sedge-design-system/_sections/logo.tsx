@@ -13,7 +13,7 @@ const PETAL_MIXES: HomeLogoColors[] = [
     northeast: "var(--lemon-bold)",
     southwest: "var(--sky-bold)",
     southeast: "var(--mint-bold)",
-    hoverAccent: "var(--indigo-bold)",
+    hoverAccent: "var(--iris-bold)",
   },
   {
     northwest: "var(--coral-bold)",
@@ -50,11 +50,11 @@ const USAGE = `import HomeLogo from "@/components/ui/HomeLogo";
 {/* Optional: give individual petals their own resting colors. */}
 <HomeLogo
   colors={{
-    northeast: "var(--sky-soft)",
+    northeast: "var(--periwinkle-soft)",
     southeast: "var(--moss-soft)",
     southwest: "var(--cherry-soft)",
     northwest: "var(--lemon-bold)",
-    hoverAccent: "var(--indigo-bold)",
+    hoverAccent: "var(--iris-bold)",
   }}
 />`;
 

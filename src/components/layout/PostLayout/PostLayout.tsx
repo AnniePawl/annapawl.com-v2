@@ -39,7 +39,7 @@ export default function PostLayout({
   ...headerProps
 }: PostLayoutProps) {
   const contentsTones = new Map(
-    contents.map((item) => [item.id, item.tone ?? "indigo-bold"]),
+    contents.map((item) => [item.id, item.tone ?? "iris-bold"]),
   );
   const tonedChildren = Children.map(children, (child) => {
     if (!isValidElement<PostSectionProps>(child) || child.type !== PostSection) {
@@ -63,7 +63,7 @@ export default function PostLayout({
                   key={item.id}
                   style={
                     {
-                      "--post-section-tone": `var(--${item.tone ?? "indigo-bold"})`,
+                      "--post-section-tone": `var(--${item.tone ?? "iris-bold"})`,
                     } as CSSProperties
                   }
                 >
@@ -85,7 +85,7 @@ export default function PostLayout({
 export function PostSection({
   id,
   title,
-  tone = "indigo-bold",
+  tone = "iris-bold",
   children,
   className,
 }: PostSectionProps) {

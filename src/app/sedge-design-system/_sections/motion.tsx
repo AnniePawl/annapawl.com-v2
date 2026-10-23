@@ -134,7 +134,7 @@ export default function MotionSection() {
             The cursor stays a compact dot at rest, expands into a small, hollow ring
             over interactive elements, and remains a dot over selectable text.
             Form controls retain their useful native cursors. On dark surfaces,
-            the custom cursor shifts to soft indigo to maintain contrast.
+            the custom cursor shifts to soft iris to maintain contrast.
           </p>
           <div className='mb-8' style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
             <div style={{ textAlign: "center" }}>
@@ -142,7 +142,7 @@ export default function MotionSection() {
                 style={{
                   width: 112,
                   height: 64,
-                  border: "1px dashed var(--indigo-soft)",
+                  border: "1px dashed var(--iris-soft)",
                   borderRadius: "var(--radius-md)",
                 }}
               />
@@ -217,7 +217,7 @@ export default function MotionSection() {
           height: 18px;
           overflow: hidden;
           border-radius: var(--radius-pill);
-          background: color-mix(in srgb, var(--indigo-soft) 30%, transparent);
+          background: color-mix(in srgb, var(--iris-soft) 30%, transparent);
         }
 
         .motion-demo-runner {
@@ -230,7 +230,7 @@ export default function MotionSection() {
           width: 18px;
           height: 18px;
           border-radius: var(--radius-xs);
-          background: var(--indigo-bold);
+          background: var(--iris-bold);
         }
 
         @keyframes motion-demo {

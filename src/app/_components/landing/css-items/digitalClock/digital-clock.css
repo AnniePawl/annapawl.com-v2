@@ -1,4 +1,14 @@
 /* Original shared reset, scoped to the clock */
+.landing {
+  --clock-frame: var(--blue-bold);
+  --clock-digits: var(--cream);
+  --clock-body: var(--lemon-soft);
+  --clock-buttons: var(--pink-bold);
+  --clock-screen: var(--charcoal);
+  --clock-screen-light: color-mix(in srgb, var(--charcoal) 40%, var(--cream));
+  --clock-screen-dark: color-mix(in srgb, var(--charcoal) 85%, var(--cream));
+}
+
 .clock,
 .clock *,
 .clock::before,
@@ -13,12 +23,12 @@
   transform: translateY(-61px);
   height: 55px;
   width: 110px;
-  border: 2px solid #5796e9;
+  border: 2px solid var(--clock-frame);
   font-family: monospace;
-  color: white;
+  color: var(--clock-digits);
   font-size: 1.15em;
   font-weight: bold;
-  background-color: #fff896;
+  background-color: var(--clock-body);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,8 +49,8 @@
   position: absolute;
   transform: translateX(57.894737px);
   background-image: repeating-linear-gradient(
-    #5796e9 0 10%,
-    #fff896 0 15%
+    var(--clock-frame) 0 10%,
+    var(--clock-body) 0 15%
   );
   height: 27.5px;
   width: 6.111111px;
@@ -55,9 +65,9 @@
   width: 27.5px;
   background-image: linear-gradient(
     to right,
-    #ff92e2 0 40%,
+    var(--clock-buttons) 0 40%,
     transparent 0 60%,
-    #ff92e2 0 100%
+    var(--clock-buttons) 0 100%
   );
   transform: translateY(-29.255319px) translateX(-27.5px);
 }
@@ -70,7 +80,7 @@
   width: 95.652174px;
   font-family: Monaco, Consolas, "Liberation Mono", monospace;  
   font-size:14px;
-  border: 5px solid #292929;
+  border: 5px solid var(--clock-screen);
   font-weight:bold;
   border-radius: 2px;
   padding: 3%;
@@ -78,12 +88,12 @@
     linear-gradient(
       to right,
       transparent 0 64%,
-      #292929 0 67%,
+      var(--clock-screen) 0 67%,
       transparent 0 100%
     ),
     linear-gradient(
-      #9b9b9b 0 50%,
-      #4d4d4d 0 100%
+      var(--clock-screen-light) 0 50%,
+      var(--clock-screen-dark) 0 100%
     );
 }
 
@@ -93,7 +103,7 @@
   position: absolute;
   height: 6.111111px;
   width: 91.666667px;
-  background-color: #5796e9;
+  background-color: var(--clock-frame);
   transform: translateY(30.555556px);
 }
 

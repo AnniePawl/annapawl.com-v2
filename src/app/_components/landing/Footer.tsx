@@ -9,10 +9,10 @@ import { Heart } from "lucide-react";
 const EMAIL = "annampawl@gmail.com";
 
 const TONES = [
-  "pink-bold", "mint-bold", "sky-bold", "amber-bold", "lilac-bold",
+  "pink-bold", "mint-bold", "sky-bold", "marigold-bold", "lilac-bold",
   "coral-bold", "cherry-bold", "lime-bold", "blue-soft", "plum-soft",
-  "orange-soft", "emerald-soft", "indigo-soft", "red-bold", "lemon-bold",
-  "sage-soft", "mauve-soft", "steel-soft",
+  "orange-soft", "emerald-soft", "iris-soft", "red-bold", "lemon-bold",
+  "sage-soft", "mauve-soft", "slate-soft",
 ];
 const STRIP_LENGTH = 56;
 

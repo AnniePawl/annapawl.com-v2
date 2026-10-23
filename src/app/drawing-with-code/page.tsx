@@ -25,7 +25,7 @@ export default function DrawingWithCodePage() {
               southeast: "var(--red-bold)",
               southwest: "var(--red-bold)",
               northwest: "var(--red-bold)",
-              hoverAccent: "var(--indigo-bold)",
+              hoverAccent: "var(--iris-bold)",
             }}
             size="1.75rem"
           />
@@ -55,9 +55,9 @@ export default function DrawingWithCodePage() {
           {
             id: "trial-and-error",
             label: "Trial and error",
-            tone: "indigo-bold",
+            tone: "iris-bold",
           },
-          { id: "try-it-out", label: "Try it out", tone: "amber-bold" },
+          { id: "try-it-out", label: "Try it out", tone: "marigold-bold" },
         ]}
       >
         <PostSection

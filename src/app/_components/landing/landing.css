@@ -115,7 +115,7 @@
   --landing-font: var(--font-sans);
   --landing-wall: var(--cream);
   --landing-ink: var(--charcoal);
-  --landing-accent: var(--indigo-soft);
+  --landing-accent: var(--cherry-soft);
   --landing-rule: color-mix(in srgb, var(--charcoal) 58%, transparent);
   --page-accent: var(--cherry-bold);
   background: var(--cream);

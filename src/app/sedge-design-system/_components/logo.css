@@ -1,6 +1,6 @@
 .sedge-wordmark-link {
-  --focus-ring-color: var(--indigo-bold);
-  --wordmark-hover-color: var(--indigo-bold);
+  --focus-ring-color: var(--iris-bold);
+  --wordmark-hover-color: var(--iris-bold);
   border-radius: var(--radius-sm);
 }
 
@@ -35,12 +35,12 @@
 }
 
 [data-sedge-theme="dark"] .sedge-wordmark-link {
-  --focus-ring-color: var(--indigo-soft);
-  --wordmark-hover-color: var(--indigo-soft);
+  --focus-ring-color: var(--iris-soft);
+  --wordmark-hover-color: var(--iris-soft);
 }
 
 .sedge-group-nav-link {
-  --focus-ring-color: var(--indigo-bold);
+  --focus-ring-color: var(--iris-bold);
   padding: var(--space-2) var(--space-4);
   border: 0;
   border-radius: var(--radius-pill);
@@ -51,7 +51,7 @@
 }
 
 .sedge-group-nav-link--active {
-  background: var(--indigo-soft);
+  background: var(--iris-soft);
   color: var(--charcoal);
 }
 
@@ -61,12 +61,12 @@
 }
 
 .sedge-group-nav-link--inactive:hover {
-  background: color-mix(in srgb, var(--indigo-soft) 30%, transparent);
+  background: color-mix(in srgb, var(--iris-soft) 30%, transparent);
   color: var(--text-primary);
 }
 
 [data-sedge-theme="dark"] .sedge-group-nav-link {
-  --focus-ring-color: var(--indigo-soft);
+  --focus-ring-color: var(--iris-soft);
 }
 
 /* Reduced motion: keep only the color change. Transform itself is

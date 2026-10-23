@@ -40,10 +40,10 @@ const AT_A_GLANCE = [
 
 // Each principle's icon color (the bold of its old pill color).
 const ICON_COLORS = [
-  "var(--steel-bold)",
+  "var(--slate-bold)",
   "var(--cherry-bold)",
   "var(--emerald-bold)",
-  "var(--amber-bold)",
+  "var(--marigold-bold)",
   "var(--plum-bold)",
 ];
 
@@ -75,7 +75,7 @@ export default function Hero({ onExplore }: { onExplore: () => void }) {
             shape="pill"
             size="lg"
             endIcon={<ArrowRight />}
-             tone={{ tint: "cherry-bold", text: "sky-soft", accent: "sky-soft", ink: "cream" }}
+             tone={{ tint: "cherry-bold", text: "periwinkle-soft", accent: "periwinkle-soft", ink: "cream" }}
           >
             Explore the system
           </Button>
