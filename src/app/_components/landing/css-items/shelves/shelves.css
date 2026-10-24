@@ -3,7 +3,7 @@
 
 .landing {
   --shelf-wood: var(--sand-soft);
-  --shelf-edge: color-mix(in srgb, var(--cherry-soft) 70%, var(--cream));
+  --shelf-edge: var(--periwinkle-bold);
   --shelf-unused-blue: var(--blue-soft);
 }
 
@@ -71,7 +71,7 @@
 .mobile-shelves {
   position: relative;
   z-index: 0;
-  transform: scale(0.92);
+  transform: scale(0.96);
   height: 1200px;
   display: flex;
   align-items: center;
@@ -80,11 +80,11 @@
   justify-content: space-evenly;
 
   .mobile-shelf {
-    width: 85vw;
+    width: 92vw;
   }
 
   .mobile-shelf-contents {
-    width: 85vw;
+    width: 92vw;
     position: absolute;
     display: flex;
     justify-content: space-evenly;

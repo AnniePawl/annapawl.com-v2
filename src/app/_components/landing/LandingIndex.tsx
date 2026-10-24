@@ -1,33 +1,27 @@
 import Link from "next/link";
+import { WritingRow } from "./WritingRow";
 
 // The site's menu, below the fold: a ruled, numbered index of pages, in the
 // same voice as the rest of the garden. Each marker uses that page's accent.
 const PAGES = [
     {
     href: "/sedge-design-system",
-    title: "Sedge",
-    description: "The design system behind it all",
+    title: "Design System",
+    description: "The design system I built for my garden",
     accent: "var(--coral-bold)",
   },
   {
     href: "/books",
     title: "Bookshelf",
-    description: "What I’ve been reading, by year",
+    description: "A nerdy reading log, stats and all",
     accent: "var(--emerald-soft)",
   },
   {
     href: "/fiber-arts",
-    title: "Fiber arts",
-    description: "Embroidery, needlepoint, and cross stitch",
-    accent: "var(--sky-bold)",
+    title: "Fiber Arts",
+    description: "Embroidery, needlepoint, and cross stitch projects",
+    accent: "var(--pink-bold)",
   },
-  {
-    href: "/drawing-with-code",
-    title: "Drawing with Code",
-    description: "CSS art, and how I make it",
-    accent: "var(--red-bold)",
-  },
-
 ];
 
 export function LandingIndex() {
@@ -55,6 +49,7 @@ export function LandingIndex() {
             </Link>
           </li>
         ))}
+        <WritingRow number={PAGES.length + 1} />
       </ol>
     </nav>
   );

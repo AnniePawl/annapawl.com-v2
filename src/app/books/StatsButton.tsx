@@ -113,7 +113,7 @@ export default function StatsButton({ stats, tags }: StatsButtonProps) {
 
         {stats.repeatAuthors.length > 0 ? (
           <>
-            <span className="drawer-section-label">Authors you came back to</span>
+            <span className="drawer-section-label">Authors I came back to</span>
             <dl className="drawer-list drawer-list--tight">
               {stats.repeatAuthors.map(({ author, count }) => (
                 <div key={author}>

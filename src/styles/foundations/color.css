@@ -12,7 +12,7 @@
   --neutral-900: #2A2A2E;
   --neutral-1000: #09090B;
 
-  --cream: #FFFCF8;
+  --cream: #FEFDFB; /* was #FFFCF8 — softer, nearly neutral white */
   --charcoal: var(--neutral-900);
 
   /* =========================
@@ -34,7 +34,7 @@
   --cherry-bold: #6F1B31; /* was #5A1226 */
 
   /* Coral */
-  --coral-soft: #FFBEA3; /* was #FFBFA6 */
+  --coral-soft: #FFA985; /* was #FFBFA6 */
   --coral-bold: #FE7043; /* was #FF7954 */
 
   /* Orange */
@@ -147,7 +147,7 @@
 
   /* Cocoa — a warm brown pair. */
   --cocoa-soft: #A47F68;
-  --cocoa-bold: #745748; /* was #231F1C (now --espresso) */
+  --cocoa-bold: #644A3D; /* was #231F1C (now --espresso) */
 
   /* Warm inverse text for the dark theme. */
   --ivory: #F2E9D8;

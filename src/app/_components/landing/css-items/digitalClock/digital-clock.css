@@ -1,12 +1,11 @@
-/* Original shared reset, scoped to the clock */
 .landing {
   --clock-frame: var(--blue-bold);
   --clock-digits: var(--cream);
   --clock-body: var(--lemon-soft);
   --clock-buttons: var(--pink-bold);
   --clock-screen: var(--charcoal);
-  --clock-screen-light: color-mix(in srgb, var(--charcoal) 40%, var(--cream));
-  --clock-screen-dark: color-mix(in srgb, var(--charcoal) 85%, var(--cream));
+  --clock-screen-light: color-mix(in srgb, var(--charcoal) 45%, var(--cream));
+  --clock-screen-dark: color-mix(in srgb, var(--charcoal) 90%, var(--cream));
 }
 
 .clock,
@@ -23,7 +22,7 @@
   transform: translateY(-61px);
   height: 55px;
   width: 110px;
-  border: 2px solid var(--clock-frame);
+  border: 2.5px solid var(--clock-frame);
   font-family: monospace;
   color: var(--clock-digits);
   font-size: 1.15em;
@@ -34,9 +33,6 @@
   align-items: center;
   border-radius: 2px;
 
-  /* Optional automatic animation:
-  animation: alarm-mobile 1s infinite;
-  */
 }
 
 .clock:hover {
@@ -61,8 +57,8 @@
 .clock::after {
   content: "";
   position: absolute;
-  height: 3.666667px;
-  width: 27.5px;
+  height: 5px;
+  width: 30px;
   background-image: linear-gradient(
     to right,
     var(--clock-buttons) 0 40%,

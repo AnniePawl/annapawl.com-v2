@@ -1,53 +1,3 @@
-/* ---- Landing page shell ----
-   Ported from v1's App.js -> Main.js -> {Desktop,Tablet,Mobile}.js tree.
-   The source picked one of three React trees at runtime from
-   window.innerWidth (JS breakpoint switching, with a real SSR/hydration
-   risk in Next.js and a couple of live bugs -- an inconsistent mobile
-   threshold between the initial check and the resize handler, and a
-   resize listener re-subscribed on every render from a missing
-   useEffect dependency array).
-
-   This port instead renders all three sections (desktop / tablet /
-   mobile) every time and lets CSS decide which one is visible, the same
-   technique this design system already uses for MobileNav vs SidebarNav
-   in sedge-design-system. There's exactly one visible section at any
-   width (no gap at the boundaries), nothing here depends on
-   window.innerWidth, and resizing across a breakpoint no longer remounts
-   (and resets) whichever section becomes visible -- a small behavior
-   improvement over the source, not a visual one. */
-
-/* ---- CSS-art illustrations: css-items/<item>/ ----
-   Each shelf illustration lives in its own folder under css-items/
-   (books, dessert, digitalClock, laptop, newtonsCradle, radio, sewing,
-   shelves, teacup, writing), mirroring the v1 CRA site's
-   src/components/css-items/ layout: the .tsx component and its
-   stylesheet side by side, one import per component. Every decorative
-   root node is rendered with aria-hidden="true" from the TSX side.
-
-   Conversion notes (apply to every css-items stylesheet):
-   - Sass $variables became CSS custom properties, scoped on each
-     illustration's own root class (rather than :root) so nothing
-     leaks into the rest of the page -- same reasoning as the sedge design
-     system's component-scoped tokens.
-   - Sass arithmetic ($x * n) became calc(var(--x) * n) 1:1, so the
-     original constants stay visible and editable instead of being
-     baked into opaque literals.
-   - Sass's `&` nesting is kept as-is -- native CSS nesting (this repo's
-     Tailwind v4 / Lightning CSS pipeline) supports the same syntax, so no
-     `sass` package is needed.
-   - All three breakpoint trees stay in the DOM and CSS media queries
-     (below) decide which is visible. Because a hidden ancestor is
-     `display: none`, none of the breakpoint-specific item selectors need
-     their own media query: a `.mobile-books-container` never animates or
-     receives pointer events unless `.landing-mobile-section` is showing.
-   - A few genuinely dead rules from the source were dropped rather than
-     translated (they never matched anything, or were always immediately
-     overridden by a higher-specificity rule right below them in the same
-     file) -- noted inline where that happened. Nothing that ever
-     actually rendered was changed.
-   - Selectors are unique per item file (no two css-items stylesheets
-     style the same element), so the order Next.js concatenates them in
-     doesn't affect rendering. Keep it that way when adding rules. */
 
 .landing-desktop-section,
 .landing-tablet-section,
@@ -67,10 +17,7 @@
   }
 }
 
-/* ---- Pinned landing + menu panel that scrolls over it ----
-   Desktop and tablet landings are exactly one screen tall, so they stick
-   to the top while .landing-over (the page index) slides up over them.
-   Mobile's landing is taller than the screen, so it scrolls normally. */
+
 @media (min-width: 600px) {
   .landing-desktop-section,
   .landing-tablet-section {
@@ -106,18 +53,14 @@
   }
 }
 
-/* Landing-specific font stack. Montserrat is scoped to this subtree only
-   (via next/font's generated --font-montserrat variable, applied on the
-   outer .landing wrapper in Landing.tsx) -- the sitewide Inter setup in
-   layout.tsx / typography.css is untouched everywhere else on the site. */
 .landing {
   /* Cream editorial: same wall, ink, and type as the rest of the site. */
   --landing-font: var(--font-sans);
   --landing-wall: var(--cream);
   --landing-ink: var(--charcoal);
-  --landing-accent: var(--cherry-soft);
+  --landing-accent: var(--periwinkle-bold);
   --landing-rule: color-mix(in srgb, var(--charcoal) 58%, transparent);
-  --page-accent: var(--cherry-bold);
+  --page-accent: var(--periwinkle-bold);
   background: var(--cream);
   font-family: var(--landing-font);
   color: var(--landing-ink);
@@ -129,11 +72,7 @@
   color: var(--landing-ink); */
 }
 
-/* Color-mode invert control (InvertClrBtn.js). Applied directly to
-   #landing-home / #landing-about via a toggled class, same technique as
-   the source (which used getElementById + classList.toggle) -- kept as
-   an imperative DOM call in css-items/shelves/InvertClrBtn.tsx since it only ever runs inside
-   a client click handler, never during render, so it stays SSR-safe. */
+
 .invert-wrapper,
 .invert-wrapper2 {
   filter: invert(1) hue-rotate(160deg) contrast(1) saturate(2);
@@ -179,25 +118,24 @@
   align-items: center;
   gap: var(--space-2);
   margin-bottom: var(--space-5);
-  font-size: 0.75rem;
+  font-size: 1rem;
   line-height: 1.3;
 }
 
-.landing-eyebrow::before {
+/* .landing-eyebrow::before {
   content: "";
   width: 0.5rem;
   height: 0.875rem;
   background: var(--landing-accent);
-}
+} */
 
-/* Same voice as the menu titles: regular weight, gentle tracking. */
 .landing-name {
   margin: 0;
   color: var(--charcoal);
-  font-size: clamp(2.75rem, 4vw, 4rem);
+  font-size: clamp(2.75rem, 3vw, 1.5rem);
   font-weight: var(--font-regular);
-  line-height: 0.95;
   letter-spacing: -0.045em;
+  margin-bottom:-20px;
 }
 
 .landing-name-mark {
@@ -209,11 +147,12 @@
 }
 
 .landing-lede {
-  margin: var(--space-6) 0 0;
-  font-size: 1.125rem;
-  line-height: 1.45;
+  margin: var(--space-4) 0 0;
+  font-size: .9rem;
+  line-height: 1.7;
   letter-spacing: -0.01em;
 }
+
 
 .landing-body {
   margin: var(--space-4) 0 0;
@@ -224,8 +163,11 @@
 
 .landing-role {
   margin: var(--space-5) 0 0;
-  font-size: 0.8125rem;
+  font-size: .9rem;
   line-height: 1.5;
+  letter-spacing:.8px;
+  font-weight:500;
+  color:var(--cherry-bold);
 }
 
 
@@ -276,7 +218,11 @@
 .landing-mobile-about {
   display: flex;
   flex-direction: column;
-  padding: var(--space-9) var(--space-5) var(--space-7);
+  padding: var(--space-9) 2.5rem var(--space-7);
+}
+
+.landing-mobile-about .landing-name {
+  font-size: 2.25rem;
 }
 
 .landing-mobile-shelves-container {
@@ -437,7 +383,7 @@
   list-style: none;
 }
 
-.landing-index-list li {
+.landing-index-list > li {
   border-bottom: 1px solid color-mix(in srgb, var(--charcoal) 18%, transparent);
 }
 
@@ -495,6 +441,102 @@
   transform: translateX(0.25rem);
 }
 
+/* ---- Writing: a row that opens to its posts ---- */
+button.landing-index-row {
+  width: 100%;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.landing-index-toggle {
+  display: inline-block;
+}
+
+.landing-index-group[data-open] .landing-index-toggle {
+  transform: rotate(90deg);
+}
+
+.landing-index-group[data-open] .landing-index-row:hover .landing-index-toggle {
+  transform: rotate(90deg) translateX(0.25rem);
+}
+
+.landing-index-sub {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 320ms var(--motion-hover-ease);
+}
+
+.landing-index-group[data-open] .landing-index-sub {
+  grid-template-rows: 1fr;
+}
+
+.landing-index-sub-list {
+  min-height: 0;
+  overflow: hidden;
+  margin: 0;
+  padding: 0 0 0 calc(3.5rem + var(--space-5) + var(--space-1));
+  list-style: none;
+}
+
+.landing-index-group[data-open] .landing-index-sub-list {
+  padding-bottom: var(--space-5);
+}
+
+.landing-index-sub-list li {
+  border-top: 1px solid color-mix(in srgb, var(--charcoal) 12%, transparent);
+}
+
+.landing-index-sub-row {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: var(--space-5);
+  padding: var(--space-3) var(--space-1);
+  color: var(--charcoal);
+  text-decoration: none;
+}
+
+.landing-index-sub-title {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.landing-index-sub-title::before {
+  content: "";
+  width: 5px;
+  height: 9px;
+  background: var(--index-accent);
+}
+
+.landing-index-sub-row:hover .landing-index-sub-title {
+  text-decoration: underline;
+  text-decoration-color: var(--index-accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.15em;
+}
+
+.landing-index-sub-row:hover .landing-index-arrow {
+  transform: translateX(0.25rem);
+}
+
+.landing-index-sub-soon {
+  padding: var(--space-3) var(--space-1);
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-index-sub {
+    transition: none;
+  }
+}
+
 @media (max-width: 599px) {
   .landing-index {
     padding: var(--space-8) var(--space-5) 0;
@@ -512,6 +554,25 @@
 
   .landing-index-arrow {
     grid-column: 3;
+    grid-row: 1;
+  }
+
+  .landing-index-sub-list {
+    padding-left: calc(2.75rem + var(--space-3));
+  }
+
+  .landing-index-sub-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-1) var(--space-3);
+  }
+
+  .landing-index-sub-row .landing-index-description {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .landing-index-sub-row .landing-index-arrow {
+    grid-column: 2;
     grid-row: 1;
   }
 }
@@ -560,15 +621,43 @@
 }
 
 @media (hover: hover) {
+  .landing-info-btn:hover {
+    color: var(--periwinkle-bold);
+  }
+
   .landing-info-btn:hover svg {
-    fill: #5796e9;
-    animation: landing-info-spin 0.5s;
+    fill: var(--periwinkle-bold);
   }
 }
 
-@keyframes landing-info-spin {
+/* While hovered, the icon bobs gently up and down. Motion only for people
+   who haven't asked for reduced motion; everyone gets the color change. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .landing-info-btn:hover svg {
+    animation: landing-info-float 1.4s ease-in-out infinite;
+  }
+}
+
+@keyframes landing-info-float {
+  0%,
   100% {
-    transform: rotate(360deg);
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* "Hover" in the about-this-page modal: periwinkle, and it floats. */
+.landing-float-word {
+  display: inline-block;
+  color: var(--periwinkle-bold);
+  font-weight: var(--font-medium);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .landing-float-word {
+    animation: landing-info-float 1.4s ease-in-out infinite;
   }
 }
 

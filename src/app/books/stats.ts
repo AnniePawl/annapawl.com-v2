@@ -57,7 +57,7 @@ export function computeStats(entries: BookStatEntry[]): ReadingStats {
     ? dated.reduce((max, b) => (b.year > max.year ? b : max))
     : null;
 
-  // Authors you came back to — grouped by the author written in data.ts.
+  // Authors I came back to — grouped by the author written in data.ts.
   const authorCounts = new Map<string, number>();
   for (const { lookup, info } of entries) {
     const name = lookup.author ?? info?.authors?.[0];

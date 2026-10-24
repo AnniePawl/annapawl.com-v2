@@ -6,22 +6,26 @@
    ============================================================ */
 
 .laptop-container {
-  --laptop-bezel: var(--blue-soft);
+  --laptop-bezel: var(--lemon-soft);
   --laptop-ink: var(--charcoal);
-  --laptop-gap: var(--cream);
-  --laptop-trim: var(--cherry-bold);
+  --laptop-gap: var(--periwinkle-soft);
+  --laptop-trim: var(--charcoal);
   --laptop-glow: transparent;
-  --laptop-base: var(--cream);
+  --laptop-base: var(--periwinkle-soft);
   --laptop-base-shadow: var(--slate-soft);
   --laptop-notch: var(--taupe-soft);
-  --laptop-screen: var(--cherry-bold);
-  --laptop-screen-shine: var(--cherry-soft);
-  --laptop-cam-lens: var(--periwinkle-soft);
-  --laptop-cam-ring: var(--slate-soft);
+  --laptop-screen: var(--iris-bold);
+  --laptop-screen-shine: var(--iris-soft);
+  --laptop-cam-lens: var(--cream);
+  --laptop-cam-ring: var(--slate-bold);
   --laptop-cam: var(--charcoal);
   --laptop-terminal: color-mix(in srgb, var(--charcoal) 31%, transparent);
-  --laptop-terminal-bar: var(--marigold-soft);
-  --laptop-terminal-text: var(--cream);
+  --laptop-terminal-bar: var(--teal-soft);
+  --laptop-terminal-text: var(--charcoal);
+  --laptop-prompt-text: var(--cream);
+  --laptop-dot-close: var(--red-bold);
+  --laptop-dot-min: var(--orange-bold);
+  --laptop-dot-max: var(--green-bold);
 }
 
 .laptop-container {
@@ -116,27 +120,49 @@
 
   .laptop__terminal {
     position: relative;
-    transform: translateX(0px) translateY(-2px);
+    transform: translateX(0px);
     height: var(--terminal-height);
     width: var(--terminal-width);
     border-radius: 1.5px 1.5px 0 0;
     background-color: var(--laptop-terminal);
-    border-top: 7px solid var(--laptop-terminal-bar);
-
+    border-top: 10px solid var(--laptop-terminal-bar);
     &::before {
-      color:var(--charcoal);
-      content: "🔴\00a0\00a0🟡\00a0\00a0🟢\00a0\00a0\00a0 \00a0\00a0\00a0📂 ~/ code / css-stuff";
+      content: "~/code/css-stuff";
       position: absolute;
-      font-size: 3.5px;
-      transform: translateX(3px) translateY(-6.5px);
+      top: -10px;
+      left: 0;
+      right: 0;
+      height: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--laptop-terminal-text);
+      font-family: menlo, monaco, monospace;
+      font-size: 5.5px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    /* Window dots: three little circles on the left of the bar */
+    &::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 4px;
+      height: 10px;
+      width: 17px;
+      background:
+        radial-gradient(circle, var(--laptop-dot-close) 0 1.6px, transparent 1.9px) 0 50% / 5.5px 5.5px no-repeat,
+        radial-gradient(circle, var(--laptop-dot-min) 0 1.6px, transparent 1.9px) 5.5px 50% / 5.5px 5.5px no-repeat,
+        radial-gradient(circle, var(--laptop-dot-max) 0 1.6px, transparent 1.9px) 11px 50% / 5.5px 5.5px no-repeat;
     }
 
     p {
       padding: 4px;
-      color: var(--laptop-terminal-text);
       font-size: 12px;
       font-family: menlo, monaco;
-      border-right: 1px solid var(--laptop-terminal-text);
+      color: var(--laptop-prompt-text);
+      border-right: 1px solid var(--laptop-prompt-text);
       margin: 0;
       width: 1.5ch;
       overflow: hidden;

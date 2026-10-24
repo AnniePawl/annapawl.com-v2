@@ -2,14 +2,14 @@
 
 .landing {
   --radio-body: var(--slate-bold);
-  --radio-panel: color-mix(in srgb, var(--blue-soft) 25%, var(--cream));
+  --radio-panel: color-mix(in srgb, var(--sky-soft) 60%, var(--cream));
   --radio-ink: var(--charcoal);
-  --radio-display: color-mix(in srgb, var(--charcoal) 55%, var(--cream));
+  --radio-display: color-mix(in srgb, var(--charcoal) 53%, var(--cream));
   --radio-display-text: var(--cream);
-  --radio-body-mobile: color-mix(in srgb, var(--blue-bold) 70%, var(--cream));
+  --radio-body-mobile: var(--periwinkle-bold);
   --radio-accent-mobile: var(--blue-bold);
   --radio-front-mobile: var(--pink-soft);
-  --radio-button-mobile: var(--lemon-soft);
+  --radio-button-mobile: var(--lime-soft);
 }
 
 .radio-top {

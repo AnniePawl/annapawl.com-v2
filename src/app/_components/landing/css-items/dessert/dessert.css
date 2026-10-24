@@ -1,20 +1,19 @@
-/* Styles for Dessert.tsx (same folder). CSS-art conversion notes that
-   apply to every css-items stylesheet live at the top of landing.css. */
-
 .landing {
-  --cake-accent: var(--cocoa-bold);
-  --stand-glass: color-mix(in srgb, var(--ivory) 71%, transparent);
-  --stand-glass-edge: var(--ivory);
-  --stand-base: var(--blue-bold);
-  --cake-sponge: var(--lemon-soft);
-  --cake-layer: var(--cocoa-soft);
-  --cake-jam: var(--mint-soft);
+  --cake-accent: var(--cherry-bold);
+  --stand-glass: color-mix(in srgb, var(--ivory) 40%, transparent);
+  --stand-glass-edge: rgb(241, 241, 241);
+  --stand-base: var(--coral-bold);
+  --stand-base-light:var(--coral-soft);
+  --cake-sponge: var(--periwinkle-soft);
+  --cake-layer: var(--cherry-bold);
+  --cake-jam: var(--lemon-soft);
   --cake-frosting: color-mix(in srgb, var(--lemon-bold) 71%, transparent);
 }
 
 /* ============================================================
    Dessert stand — src/components/css-items/dessert
    ============================================================ */
+
 
 .dessert-container {
   --glass-height: 80px;
@@ -75,7 +74,7 @@
   align-content: center;
   height: var(--stand-base-height);
   width: var(--stand-base-width);
-  background: linear-gradient(to right, var(--stand-base) 0 50%, var(--stand-base) 50%);
+  background: linear-gradient(to right, var(--stand-base) 0 50%, var(--stand-base-light) 50%);
   transform: translateY(7px);
 
   &::before {
@@ -83,9 +82,8 @@
     position: absolute;
     height: 6px;
     width: 30px;
-    background: linear-gradient(to right, var(--stand-base) 0 50%, var(--stand-base) 50%);
-    transform: translateY(var(--stand-base-height))
-      translateX(calc(var(--stand-base-width) / -2));
+    background: linear-gradient(to right, var(--stand-base) 0 50%, var(--stand-base-light) 50%);
+    transform: translateY(var(--stand-base-height)) translateX(calc(var(--stand-base-width) / -2));
     border-radius: 25px 25px 0 0;
   }
 
@@ -100,9 +98,6 @@
   }
 }
 
-/* Cake — the source's `border: px solid $cake-clr2;` line (missing a
-   numeric value) is invalid CSS and was silently ignored by every
-   browser anyway; dropped rather than translated. */
 .dessert__base {
   z-index: 4;
   transform: scale(0.9) translateY(calc(var(--cake-height) / 1.3));
@@ -113,16 +108,17 @@
   border-left: 2px solid var(--cake-clr3);
   border-top: 2px solid var(--cake-clr3);
   border-radius: 2px 2px 0 0;
-  background: linear-gradient(
-      45deg,
+  background: linear-gradient(45deg,
       var(--cake-clr3) 0 25%,
       transparent 0 75%,
-      var(--cake-clr3) 75%
-    ),
+      var(--cake-clr3) 75%),
     linear-gradient(45deg, var(--cake-clr3) 0 25%, transparent 0 75%, var(--cake-clr3) 75%);
   background-color: var(--cake-sponge);
-  background-size: calc(var(--cake-width) / 3) calc(var(--cake-width) / 3);
-  background-position: 0 0, calc(var(--cake-width) / 6) calc(var(--cake-width) / 6);
+  --base-check: calc((var(--cake-width) - 4px) / 3);
+  --base-nudge: -2px;
+  background-size: var(--base-check) var(--base-check);
+  background-position: 0 var(--base-nudge),
+    calc(var(--base-check) / 2) calc(var(--base-check) / 2 + var(--base-nudge));
 
   &::before {
     content: "";
@@ -131,15 +127,12 @@
     height: calc(var(--cake-height) / 2);
     border-right: 2px solid var(--cake-clr3);
     border-left: 2px solid var(--cake-clr3);
-    background: linear-gradient(
-      var(--cake-layer) 0 20%,
-      var(--cake-jam) 0 40%,
-      var(--cake-layer) 0 60%,
-      var(--cake-jam) 0 80%,
-      var(--cake-layer) 0 80%
-    );
-    transform: translateX(calc(var(--cake-width) * 0.06))
-      translateY(calc(var(--cake-height) / -1.75));
+    background: linear-gradient(var(--cake-layer) 0 20%,
+        var(--cake-jam) 0 40%,
+        var(--cake-layer) 0 60%,
+        var(--cake-jam) 0 80%,
+        var(--cake-layer) 0 80%);
+    transform: translateX(calc(var(--cake-width) * 0.06)) translateY(calc(var(--cake-height) / -1.75));
   }
 
   &::after {
@@ -153,10 +146,32 @@
     height: calc(var(--cake-height) / 1.8);
     background: radial-gradient(circle at 50% 0%, var(--cake-jam) 36%, var(--cake-layer) 3%);
     background-size: calc(var(--cake-width) / 6);
-    transform: translateX(calc(var(--cake-width) * 0.06))
-      translateY(calc(var(--cake-height) / -0.66));
+    transform: translateX(calc(var(--cake-width) * 0.06)) translateY(calc(var(--cake-height) / -0.66));
   }
 }
+
+ .dessert__top {
+    z-index: 4;
+    transform: scale(0.53) translateY(-44px);
+    position: absolute;
+    height: var(--cake-height);
+    width: var(--cake-width);
+    border-right: 3px solid var(--cake-clr3);
+    border-left: 3px solid var(--cake-clr3);
+    border-top: 3px solid var(--cake-clr3);
+    border-radius: 3px 3px 0 0;
+    background: linear-gradient(45deg,
+        var(--cake-clr3) 0 25%,
+        transparent 0 75%,
+        var(--cake-clr3) 75%),
+      linear-gradient(45deg, var(--cake-clr3) 0 25%, transparent 0 75%, var(--cake-clr3) 75%);
+    background-color: var(--cake-sponge);
+    --top-check: 27px;
+    --top-nudge: -1px;
+    background-size: var(--top-check) var(--top-check);
+    background-position: 0 var(--top-nudge),
+      calc(var(--top-check) / 2) calc(var(--top-check) / 2 + var(--top-nudge));
+  }
 
 .dessert__spiral {
   visibility: hidden;
@@ -168,8 +183,7 @@
   width: calc(var(--cake-height) * 4.7);
   z-index: 1;
   background: radial-gradient(transparent, transparent 65%),
-    conic-gradient(
-      transparent 0% 5%,
+    conic-gradient(transparent 0% 5%,
       var(--cake-frosting) 5% 10%,
       transparent 10% 15%,
       var(--cake-frosting) 15% 20%,
@@ -188,8 +202,7 @@
       transparent 80% 85%,
       var(--cake-frosting) 85% 90%,
       transparent 90% 95%,
-      var(--cake-frosting) 95% 100%
-    );
+      var(--cake-frosting) 95% 100%);
 }
 
 .dessert-container:hover .dessert__spiral {

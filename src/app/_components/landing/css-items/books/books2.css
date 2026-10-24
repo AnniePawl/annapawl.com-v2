@@ -5,22 +5,22 @@
 
 .v-books-container {
   /* Books are numbered left to right: 1 tall, 2 slim, 3 double bands, 4 tilted. */
-  --upright-bookend: var(--clay-soft);
-  --upright-bookend-shadow: var(--clay-bold);
+  --upright-bookend: var(--lilac-soft);
+  --upright-bookend-shadow: var(--plum-bold);
   --upright-book1-spine: var(--cherry-bold);
   --upright-book1-spine-light: var(--cherry-soft);
   --upright-book1-bands: var(--periwinkle-soft);
   --upright-book2-spine: var(--marigold-bold);
   --upright-book2-spine-light: var(--marigold-soft);
   --upright-book2-bands: var(--blue-bold);
-  --upright-book3-spine: var(--iris-bold);
-  --upright-book3-spine-light: var(--iris-soft);
-  --upright-book3-bands: var(--lemon-soft);
+  --upright-book3-spine: var(--pink-bold);
+  --upright-book3-spine-light: var(--pink-soft);
+  --upright-book3-bands: var(--charcoal);
   --upright-book4-spine: var(--teal-bold);
   --upright-book4-spine-light: var(--teal-soft);
-  --upright-book4-bands: var(--pink-bold);
-  --upright-book4-cover: var(--pink-bold);
-  --upright-book4-cover-light: color-mix(in srgb, var(--pink-soft) 55%, var(--cream));
+  --upright-book4-bands: var(--coral-bold);
+  --upright-book4-cover: var(--coral-bold);
+  --upright-book4-cover-light: color-mix(in srgb, var(--coral-soft) 55%, var(--cream));
 
   --v-book-height: 83px;
   --v-book-width: calc(var(--v-book-height) * 0.27);
@@ -157,10 +157,6 @@
   }
 }
 
-/* Same desktop-hover / tablet+mobile-autoplay split as Books (books.css), and
-   same by-hand unroll of the source's Sass @for loop (over a 4-entry
-   delay list, used differently for the hover case vs. the autoplay
-   case -- kept faithful to that asymmetry rather than "fixed"). */
 .desktop-books2-container:hover .v-book--1 {
   animation: v-books-animation 1s 0.2s forwards;
 }

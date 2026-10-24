@@ -32,7 +32,7 @@ export function InfoButton({ className }: { className?: string }) {
         open={open}
         onClose={() => setOpen(false)}
         eyebrow="About this page"
-        title="Made with CSS"
+        title="CSS knick-knacks"
         actions={
           <>
             <a
@@ -57,7 +57,7 @@ export function InfoButton({ className }: { className?: string }) {
           illustrations and animations.
         </p>
         <p>
-          Hover over (or tap) the knick-knacks for some mini surprises. I made
+          <span className="landing-float-word">Hover</span> over (or tap) the knick-knacks for some mini surprises. I made
           everything with pure CSS ♥
         </p>
       </Modal>

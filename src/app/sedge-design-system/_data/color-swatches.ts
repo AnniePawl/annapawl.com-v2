@@ -31,7 +31,7 @@ export const COLOR_PAIRS: ColorPair[] = [
   },
   {
     family: "Coral",
-    soft: { varName: "--coral-soft", hex: "#FFBEA3" },
+    soft: { varName: "--coral-soft", hex: "#FFA985" },
     bold: { varName: "--coral-bold", hex: "#FE7043" },
   },
   {
@@ -148,14 +148,14 @@ export const COLOR_PAIRS: ColorPair[] = [
   {
     family: "Cocoa",
     soft: { varName: "--cocoa-soft", hex: "#A47F68" },
-    bold: { varName: "--cocoa-bold", hex: "#745748" },
+    bold: { varName: "--cocoa-bold", hex: "#644A3D" },
   },
 ];
 
 // The colors that hold every page together: the ground everything sits on
 // and the ink everything is written in, plus their dark-mode partners.
 export const PAGE_SWATCHES: (ColorSwatch & { label: string })[] = [
-  { label: "Cream — ground", varName: "--cream", hex: "#FFFCF8" },
+  { label: "Cream — ground", varName: "--cream", hex: "#FEFDFB" },
   { label: "Ivory", varName: "--ivory", hex: "#F2E9D8" },
   { label: "Charcoal — ink", varName: "--charcoal", hex: "#2A2A2E" },
   { label: "Espresso — dark mode ground", varName: "--espresso", hex: "#231F1C" },

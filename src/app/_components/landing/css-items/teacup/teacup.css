@@ -9,10 +9,10 @@
   --teacup-handle: color-mix(in srgb, var(--sky-soft), var(--cream));
   --teacup-handle-hole: var(--cream);
   --teacup-tea-tag: var(--red-bold);
+  --teacup-tea-tag-shadow: color-mix(in srgb, var(--teacup-outline) 75%, var(--charcoal));
+  --teacup-tea-tag-label: var(--cream);
   --teacup-steam: var(--pink-bold);
-  --teacup-steam-fade: color-mix(in srgb, var(--ivory) 25%, var(--cream));
 }
-
 
 .teacup-container {
   transform: scale(0.95) translateY(-64px);
@@ -41,57 +41,92 @@
     border: 2.5px solid var(--teacup-outline);
     background-image: radial-gradient(var(--teacup-handle-hole) 0% 40%, var(--teacup-outline) 40% 50%, var(--teacup-handle) 50%);
   }
-
+  
+  /* Teabag */
   &::after {
     content: "";
     position: absolute;
-    height: 35px;
-    width: 20px;
-    transform: translateY(0px) translateX(10px);
-    background-image: linear-gradient(to right,
-        transparent 0 43%,
-        var(--teacup-tea-tag) 43% 55%,
-        transparent 55%),
-      linear-gradient(to bottom, transparent 0 40%, var(--teacup-tea-tag) 40%);
+    height: 37px;
+    width: 22px;
+    transform: translateX(10px);
+    background:
+      linear-gradient(var(--teacup-tea-tag-label), var(--teacup-tea-tag-label)) 5px 19px / 10px 5px no-repeat,
+      linear-gradient(var(--teacup-tea-tag), var(--teacup-tea-tag)) 0 14px / 20px 21px no-repeat,
+      linear-gradient(var(--teacup-tea-tag-shadow), var(--teacup-tea-tag-shadow)) 3px 18px / 20px 21px no-repeat,
+      linear-gradient(var(--teacup-tea-tag), var(--teacup-tea-tag)) 9px 0 / 2px 14px no-repeat;
   }
 }
 
-.teacup:hover+.steam {
-  animation: steam 2s ease-in-out;
-}
-
+/* Steam squiggles */
 .steam {
-  z-index: -1;
   position: absolute;
-  height: 60px;
-  width: 48px;
-  transform: translateY(-75px) translateX(4px);
-  background: linear-gradient(to bottom, var(--teacup-steam-fade), transparent),
-    repeating-radial-gradient(circle at 25% 30%,
-      var(--teacup-steam) 0px,
-      var(--teacup-steam) 4px,
-      transparent 5px,
-      transparent 10px),
-    repeating-radial-gradient(circle at 75% 50%,
-      var(--teacup-steam) 0px,
-      var(--teacup-steam) 4px,
-      transparent 5px,
-      transparent 10px);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  opacity: 1;
+  top: -30px;
+  left: 5px;
+  display: flex;
+  justify-content: space-between;
+  width: 50px;
+  height: 28px;
+  pointer-events: none;
 }
 
-@keyframes steam {
-  50% {
-    transform: translateY(-95px) translateX(4px);
+.steam__squiggle {
+  width: 8px;
+  height: 24px;
+  overflow: visible;
+  fill: none;
+  stroke: var(--teacup-steam);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  opacity: 0;
+  animation: steam-rise 2.6s ease-in-out infinite;
+}
+
+.steam__squiggle:nth-child(1) { animation-delay: -0.6s; }
+.steam__squiggle:nth-child(2) { animation-delay: -0.3s; margin-top: 4px; }
+.steam__squiggle:nth-child(3) { animation-delay: -0.75s; }
+.steam__squiggle:nth-child(4) { animation-delay: -0.45s; margin-top: 4px; }
+
+@keyframes steam-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scaleY(0.6);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(3px) scaleY(1);
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px) scaleY(1);
   }
 }
 
-/* Reduced motion -- disables this item's animations (hover-triggered
-   and autoplay alike). Source (v1) had no reduced-motion handling. */
+@media (hover: hover) and (min-width: 600px) {
+  .steam {
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .steam__squiggle {
+    animation-play-state: paused;
+  }
+
+  .teacup-container:hover .steam {
+    opacity: 1;
+  }
+
+  .teacup-container:hover .steam__squiggle {
+    animation-play-state: running;
+  }
+}
+
+/* Reduced motion: no drifting, just four still squiggles. */
 @media (prefers-reduced-motion: reduce) {
-  .teacup+.steam {
-    animation: none !important;
+  .steam__squiggle {
+    animation: none;
+    opacity: 1;
   }
 }

@@ -1,13 +1,10 @@
-/* Styles for NewtonsCradle.tsx (same folder). CSS-art conversion notes that
-   apply to every css-items stylesheet live at the top of landing.css. */
-
 .landing {
   --cradle-frame: var(--cherry-bold);
   --cradle-frame-fill: var(--mint-soft);
   --cradle-lines: var(--cherry-bold);
   --cradle-ball-shine: white;
   --cradle-ball: var(--lemon-bold);
-  --cradle-ball-shade: var(--clay-bold);
+  --cradle-ball-shade: var(--coral-bold);
   --cradle-base: var(--teal-bold);
 }
 
@@ -18,7 +15,6 @@
 .newtonsCradle {
   --frame-height: 100px;
   --frame-width: 150px;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -33,10 +29,10 @@
   transform: scale(0.7) translateY(-140px);
 }
 .desktop-newtonsCradle-container:hover .frame > div:first-child {
-  animation: swing1 2s ease infinite;
+  animation: swing1 2s linear infinite;
 }
 .desktop-newtonsCradle-container:hover .frame > div:last-child {
-  animation: swing2 2s infinite;
+  animation: swing2 2s linear infinite;
 }
 
 .mobile-newtonsCradle-container {
@@ -109,12 +105,15 @@
   background-image: linear-gradient(var(--cradle-base) 0 70%, var(--cradle-lines) 70%);
 }
 
+
 @keyframes swing1 {
   0% {
     transform: rotate(0deg) translateY(-15px) translateX(0);
+    animation-timing-function: cubic-bezier(0.25, 0.6, 0.4, 1);
   }
   25% {
     transform: rotate(20deg) translateY(-13px) translateX(-25px);
+    animation-timing-function: cubic-bezier(0.6, 0, 0.75, 0.4);
   }
   50%,
   100% {
@@ -126,9 +125,11 @@
   0%,
   50% {
     transform: rotate(0deg) translateY(-15px) translateX(0);
+    animation-timing-function: cubic-bezier(0.25, 0.6, 0.4, 1);
   }
   75% {
     transform: rotate(-20deg) translateY(-13px) translateX(25px);
+    animation-timing-function: cubic-bezier(0.6, 0, 0.75, 0.4);
   }
   100% {
     transform: rotate(0deg) translateY(-15px) translateX(0);

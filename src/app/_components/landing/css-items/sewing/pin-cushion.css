@@ -2,9 +2,9 @@
    apply to every css-items stylesheet live at the top of landing.css. */
 
 .landing {
-  --cushion-base: var(--cream);
+  --cushion-base: var(--lime-bold);
   --cushion-outline: var(--charcoal);
-  --cushion-trim: var(--teal-soft);
+  --cushion-trim: var(--marigold-soft);
   --cushion-top: var(--red-bold);
   --pin-needle: color-mix(in srgb, var(--charcoal) 55%, var(--cream));
   --pin-needle-shine: color-mix(in srgb, var(--charcoal) 25%, var(--cream));

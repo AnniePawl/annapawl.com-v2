@@ -222,11 +222,11 @@
 }
 
 .bookshelf-split-fiction {
-  background: var(--emerald-bold);
+  background: var(--blue-bold);
 }
 
 .bookshelf-split-nonfiction {
-  background: var(--sage-bold);
+  background: var(--blue-soft);
 }
 
 .bookshelf-split-legend {

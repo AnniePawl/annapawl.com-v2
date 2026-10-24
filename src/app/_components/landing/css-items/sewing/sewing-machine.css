@@ -1,19 +1,16 @@
-/* Styles for SewingMachine.tsx (same folder). CSS-art conversion notes that
-   apply to every css-items stylesheet live at the top of landing.css. */
-
 .landing {
-  --sewing-accent: var(--teal-soft);
+  --sewing-accent: var(--sky-bold);
   --sewing-ink: var(--charcoal);
   --sewing-outline: var(--cherry-bold);
   --sewing-thread: var(--lemon-soft);
-  --sewing-spool: var(--taupe-soft);
-  --sewing-spool-shade: var(--taupe-bold);
+  --sewing-spool: var(--cocoa-soft);
+  --sewing-spool-shade: var(--cocoa-bold);
   --sewing-body: white;
-  --sewing-edge: var(--ivory);
+  --sewing-edge: var(--green-bold);
   --sewing-unused-blue: var(--blue-soft);
-  --sewing-fabric-yellow: color-mix(in srgb, var(--teal-bold) 77%, transparent);
-  --sewing-fabric-blue: color-mix(in srgb, var(--lemon-bold) 50%, transparent);
-  --sewing-fabric-pink: color-mix(in srgb, color-mix(in srgb, var(--pink-bold) 55%, var(--cream)) 90%, transparent);
+  --sewing-fabric-yellow: color-mix(in srgb, var(--blue-bold) 80%, transparent);
+  --sewing-fabric-blue: color-mix(in srgb, var(--lemon-bold) 60%, transparent);
+  --sewing-fabric-pink: color-mix(in srgb, color-mix(in srgb, var(--pink-bold) 60%, var(--cream)) 90%, transparent);
 }
 
 /* ---- Sewing machine ---- */
@@ -27,20 +24,15 @@
 }
 
 .sewing-machine__body {
-  /* A thin ivory edge around the white body only (not the thread, spool,
-     needle or fabric). Four 1.5px drop-shadows trace the combined
-     silhouette, so the body pieces don't get separate outlines where
-     they meet. */
   filter:
-    drop-shadow(1.5px 0 0 var(--sewing-edge))
-    drop-shadow(-1.5px 0 0 var(--sewing-edge))
-    drop-shadow(0 1.5px 0 var(--sewing-edge))
-    drop-shadow(0 -1.5px 0 var(--sewing-edge));
+    drop-shadow(2px 0 0 var(--sewing-edge))
+    drop-shadow(-2px 0 0 var(--sewing-edge))
+    drop-shadow(0 -2px 0 var(--sewing-edge));
 }
 
 .needle {
   position: absolute;
-  z-index: 1; /* above the outlined body, which forms its own layer */
+  z-index: 1; 
   height: 20px;
   width: 3.5px;
   background-color: var(--sewing-accent);
@@ -72,7 +64,13 @@
   height: 25px;
   width: 16px;
   transform: translateX(142px);
-  background-image: repeating-linear-gradient(35deg, var(--sewing-outline), var(--sewing-outline) 0 5%, var(--sewing-thread) 5% 10%);
+  --thread-stripe: 6px;
+  background-image: linear-gradient(45deg,
+      var(--red-bold) 25%,
+      var(--sewing-thread) 25% 50%,
+      var(--red-bold) 50% 75%,
+      var(--sewing-thread) 75%);
+  background-size: var(--thread-stripe) var(--thread-stripe);
 
   &::before {
     content: "";
@@ -80,7 +78,7 @@
     height: 25px;
     width: calc(16px * 1.22);
     border-radius: 2px;
-    transform: translateX(-2px);
+    transform: translateX(-2px) translateY(-2px);
     background-image: linear-gradient(
       to bottom,
       var(--sewing-spool) 0 10%,
@@ -109,22 +107,12 @@
   background-color: var(--sewing-body);
   box-shadow: 0 4px var(--sewing-outline);
 
-  &::before {
-    content: "";
-    height: 11px;
-    width: var(--sm-left-arm-width);
-    position: absolute;
-    border-radius: 0 0 1px 1px;
-    transform: translateY(var(--sm-top-height));
-    box-shadow: 0 3px var(--sewing-outline);
-    background-color: var(--sewing-body);
-  }
-
   &::after {
     content: "";
     background-image: linear-gradient(var(--sewing-accent) 0 80%, var(--sewing-ink) 80%);
-    height: calc(var(--sm-top-height) * 0.3);
-    width: calc(var(--sm-top-height) * 0.8);
+    height: calc(var(--sm-top-height) * 0.35);
+    border-radius:2px;
+    width: calc(var(--sm-top-height) * 0.9);
     transform: translateX(calc(var(--sm-top-height) * 1.5))
       translateY(calc(var(--sm-top-height) / 2.5));
   }
@@ -139,21 +127,11 @@
   transform: translateX(135px);
   position: relative;
 
-  &::before {
-    content: "";
-    height: calc(var(--sm-top-height) / 1.4);
-    width: calc(var(--sm-top-height) / 4);
-    position: absolute;
-    border-radius: 0 25% 25% 0;
-    transform: translateY(-20px) translateX(50px);
-    background-image: linear-gradient(to right, var(--sewing-accent) 0 70%, var(--sewing-ink) 70%);
-  }
-
   &::after {
     content: "";
     display: flex;
     height: calc(var(--sm-top-height) * 0.6);
-    width: 10px;
+    width: 12px;
     background-image: repeating-linear-gradient(
       to bottom,
       var(--sewing-accent) 0 10%,
@@ -162,6 +140,28 @@
     );
     transform: translateX(18px) translateY(10px);
   }
+}
+
+.sewing-machine__arm {
+  position: absolute;
+  top: calc(25px + var(--sm-top-height));
+  left: 0;
+  height: 11px;
+  width: var(--sm-left-arm-width);
+  border-radius: 0 0 1px 1px;
+  /* Left edge sits just outside, like the body's outline above it */
+  box-shadow: -2px 0 0 var(--sewing-edge), 0 3px var(--sewing-outline);
+  background-color: var(--sewing-body);
+}
+
+.sewing-machine__knob {
+  position: absolute;
+  top: calc(25px + var(--sm-top-height) - 20px);
+  left: calc(135px + 50px);
+  height: calc(var(--sm-top-height) / 1.4);
+  width: calc(var(--sm-top-height) / 4);
+  border-radius: 0 25% 25% 0;
+  background-image: linear-gradient(to right, var(--sewing-accent) 0 70%, var(--sewing-ink) 70%);
 }
 
 .sewing-machine__bottom {
@@ -174,8 +174,6 @@
 }
 
 .sewing-machine__fabric {
-  /* Sits where the base starts (below the 25px thread row and the 50px
-     top + 50px right pieces), outside the outlined body so it gets no edge. */
   position: absolute;
   z-index: 1;
   top: calc(25px + var(--sm-top-height) + 50px);
@@ -195,7 +193,7 @@
   animation: needle-animation 0.2s infinite;
 }
 .desktop-sewing-container > .sewing-machine:hover > .thread {
-  animation: thread-animation 1s infinite;
+  animation: thread-animation 0.5s linear infinite;
 }
 .desktop-sewing-container > .sewing-machine:hover > .thread::after {
   animation: thread-animation2 2s infinite;
@@ -210,7 +208,7 @@
 }
 .mobile-sewing-container > .sewing-machine > .thread,
 .tablet-sewing-container > .sewing-machine > .thread {
-  animation: thread-animation 2s infinite;
+  animation: thread-animation 1s linear infinite;
 }
 .mobile-sewing-container > .sewing-machine > .thread::after,
 .tablet-sewing-container > .sewing-machine > .thread::after {
@@ -228,8 +226,11 @@
 }
 
 @keyframes thread-animation {
-  50% {
-    background-image: repeating-linear-gradient(35deg, var(--sewing-outline), var(--sewing-outline) 2% 12%, var(--sewing-thread) 12% 16%);
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 var(--thread-stripe);
   }
 }
 

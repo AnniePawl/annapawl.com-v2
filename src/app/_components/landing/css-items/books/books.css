@@ -1,15 +1,15 @@
 .landing {
   --pile-pages: var(--cream);
   --pile-page-lines: color-mix(in srgb, var(--charcoal) 20%, var(--cream));
-  --pile-book1-cover: var(--marigold-bold);
+  --pile-book1-cover: var(--red-bold);
   --pile-book2-cover: var(--slate-bold);
   --pile-book2-bookmark: var(--charcoal);
-  --pile-book3-cover: var(--red-soft);
-  --pile-book3-cover-dark: var(--red-bold);
-  --pile-book3-label: var(--blue-soft);
-  --pile-book3-label-dark: var(--blue-bold);
-  --pile-book4-cover: var(--mint-soft);
-  --pile-book4-cover-dark: var(--mint-bold);
+  --pile-book3-cover: var(--lime-soft);
+  --pile-book3-cover-dark: var(--lime-bold);
+  --pile-book3-label: var(--cherry-soft);
+  --pile-book3-label-dark: var(--cherry-bold);
+  --pile-book4-cover: var(--iris-soft);
+  --pile-book4-cover-dark: var(--iris-bold);
   --pile-book4-lines: var(--charcoal);
   --pile-book5-cover: var(--emerald-soft);
   --pile-book5-cover-dark: var(--emerald-bold);
@@ -53,12 +53,6 @@
   border-radius: 2px;
 }
 
-/* Book 1 — color set below is the one that's actually visible: the
-   source declared a duller base color per book here, then immediately
-   overrode every one of them with a brighter "desktop" palette via a
-   higher-specificity descendant selector applied to all three
-   breakpoints. Porting straight to the color that always won, rather
-   than keeping two layers where the first never shows. */
 .book--1 {
   position: relative;
   z-index: 5;
@@ -68,7 +62,6 @@
   width: calc(var(--book-width) * 0.8);
   border-top-left-radius: var(--book-border-radius);
   border-bottom-left-radius: var(--book-border-radius);
-
   &::after {
     content: "";
     height: calc(var(--book-height) * 0.5);
@@ -184,13 +177,6 @@
     background-image: linear-gradient(var(--pile-book5-label) 0 65%, var(--pile-book5-label-dark) 65% 100%);
   }
 }
-
-/* Desktop: hover-triggered, one book at a time with a staggered delay.
-   Tablet/mobile: no hover available, so it plays automatically on a
-   loop instead -- same "reuse the illustration, change the trigger for
-   touch" idea used throughout. Source generated these five rules with a
-   Sass @for loop over a 6-entry delay list; unrolled by hand here since
-   the port isn't bringing in a Sass compiler. */
 .books-container:hover .book--1 {
   animation: books-animation 1s 0s forwards;
 }
