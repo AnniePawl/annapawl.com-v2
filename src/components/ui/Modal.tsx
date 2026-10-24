@@ -63,7 +63,6 @@ export default function Modal({
       onClick={handleClick}
       aria-labelledby={titleId}
       aria-describedby={description ? descriptionId : undefined}
-      data-cursor-native
     >
       <div className="modal-card" data-lenis-prevent>
         <button

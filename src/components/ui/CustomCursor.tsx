@@ -79,7 +79,9 @@ export default function CustomCursor() {
     let frame = 0;
 
     function getCursorElements(createDialogMirrors = false) {
-      if (createDialogMirrors && isDocumentation) {
+      // Open <dialog>s render in the top layer, above the root cursor, so
+      // each one gets its own mirror dot (on every page, not just the docs).
+      if (createDialogMirrors) {
         document
           .querySelectorAll<HTMLDialogElement>("dialog[open]")
           .forEach((dialog) => {

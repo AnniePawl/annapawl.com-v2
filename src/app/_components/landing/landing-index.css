@@ -1,0 +1,230 @@
+/* ---- Page index (LandingIndex.tsx + WritingRow.tsx) ----
+   The "General nerdery" menu below the fold. Imported by LandingIndex.tsx. */
+
+.landing-index {
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: var(--space-10) var(--space-8) 0;
+}
+
+.landing-index-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: 0;
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid color-mix(in srgb, var(--charcoal) 30%, transparent);
+  font-size: 11.5px;
+  font-weight: var(--font-semibold);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.landing-index-label::before {
+  content: "";
+  width: 7px;
+  height: 11px;
+  background: var(--landing-accent);
+}
+
+.landing-index-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.landing-index-list > li {
+  border-bottom: 1px solid color-mix(in srgb, var(--charcoal) 18%, transparent);
+}
+
+.landing-index-row {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, auto) minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: var(--space-5);
+  padding: var(--space-5) var(--space-1);
+  border-radius: 0;
+  color: var(--charcoal);
+  text-decoration: none;
+}
+
+.landing-index-number {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.75rem;
+  font-weight: var(--font-medium);
+  letter-spacing: 0.04em;
+}
+
+.landing-index-number::before {
+  content: "";
+  width: 6px;
+  height: 11px;
+  background: var(--index-accent);
+}
+
+.landing-index-title {
+  font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.landing-index-description {
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+}
+
+.landing-index-arrow {
+  font-size: 1.125rem;
+  transition: transform var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+.landing-index-row:hover .landing-index-title {
+  text-decoration: underline;
+  text-decoration-color: var(--index-accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.12em;
+}
+
+.landing-index-row:hover .landing-index-arrow {
+  transform: translateX(0.25rem);
+}
+
+/* ---- Writing: a row that opens to its posts ---- */
+button.landing-index-row {
+  width: 100%;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.landing-index-toggle {
+  display: inline-block;
+}
+
+.landing-index-group[data-open] .landing-index-toggle {
+  transform: rotate(90deg);
+}
+
+.landing-index-group[data-open] .landing-index-row:hover .landing-index-toggle {
+  transform: rotate(90deg) translateX(0.25rem);
+}
+
+.landing-index-sub {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 320ms var(--motion-hover-ease);
+}
+
+.landing-index-group[data-open] .landing-index-sub {
+  grid-template-rows: 1fr;
+}
+
+.landing-index-sub-list {
+  min-height: 0;
+  overflow: hidden;
+  margin: 0;
+  padding: 0 0 0 calc(3.5rem + var(--space-5) + var(--space-1));
+  list-style: none;
+}
+
+.landing-index-group[data-open] .landing-index-sub-list {
+  padding-bottom: var(--space-5);
+}
+
+.landing-index-sub-list li {
+  border-top: 1px solid color-mix(in srgb, var(--charcoal) 12%, transparent);
+}
+
+.landing-index-sub-row {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: var(--space-5);
+  padding: var(--space-3) var(--space-1);
+  color: var(--charcoal);
+  text-decoration: none;
+}
+
+.landing-index-sub-title {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.landing-index-sub-title::before {
+  content: "";
+  width: 5px;
+  height: 9px;
+  background: var(--index-accent);
+}
+
+.landing-index-sub-row:hover .landing-index-sub-title {
+  text-decoration: underline;
+  text-decoration-color: var(--index-accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.15em;
+}
+
+.landing-index-sub-row:hover .landing-index-arrow {
+  transform: translateX(0.25rem);
+}
+
+.landing-index-sub-soon {
+  padding: var(--space-3) var(--space-1);
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-index-sub {
+    transition: none;
+  }
+}
+
+@media (max-width: 599px) {
+  .landing-index {
+    padding: var(--space-7) var(--space-5) 0;
+  }
+
+  .landing-index-row {
+    grid-template-columns: 2.75rem minmax(0, 1fr) auto;
+    gap: var(--space-1) var(--space-3);
+  }
+
+  .landing-index-description {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .landing-index-arrow {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .landing-index-sub-list {
+    padding-left: calc(2.75rem + var(--space-3));
+  }
+
+  .landing-index-sub-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-1) var(--space-3);
+  }
+
+  .landing-index-sub-row .landing-index-description {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .landing-index-sub-row .landing-index-arrow {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}

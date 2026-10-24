@@ -35,6 +35,16 @@
   animation: swing2 2s linear infinite;
 }
 
+/* Tablet and mobile: nothing to hover, so it swings on its own. */
+.tablet-newtonsCradle-container .frame > div:first-child,
+.mobile-newtonsCradle-container .frame > div:first-child {
+  animation: swing1 2s linear infinite;
+}
+.tablet-newtonsCradle-container .frame > div:last-child,
+.mobile-newtonsCradle-container .frame > div:last-child {
+  animation: swing2 2s linear infinite;
+}
+
 .mobile-newtonsCradle-container {
   transform: scale(0.65) translateY(-146px) translateX(-20px);
 }

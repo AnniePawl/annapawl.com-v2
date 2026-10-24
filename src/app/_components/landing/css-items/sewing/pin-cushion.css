@@ -1,5 +1,4 @@
-/* Styles for PinCushion.tsx and Pin.tsx (same folder). CSS-art conversion notes that
-   apply to every css-items stylesheet live at the top of landing.css. */
+/* Styles for PinCushion.tsx and Pin.tsx (same folder). */
 
 .landing {
   --cushion-base: var(--lime-bold);
@@ -8,10 +7,13 @@
   --cushion-top: var(--red-bold);
   --pin-needle: color-mix(in srgb, var(--charcoal) 55%, var(--cream));
   --pin-needle-shine: color-mix(in srgb, var(--charcoal) 25%, var(--cream));
-  --pin-head: var(--teal-soft);
-  --pin-head-edge: var(--teal-bold);
-  --pin-head-alt: color-mix(in srgb, var(--blue-bold) 70%, var(--cream));
-  --pin-head-alt-edge: var(--blue-bold);
+  /* Each pin head has its own color (see .pin:nth-child below) */
+  --pin-head-1: var(--coral-bold);
+  --pin-head-2: var(--marigold-bold);
+  --pin-head-3: var(--teal-bold);
+  --pin-head-4: var(--pink-bold);
+  --pin-head-5: var(--periwinkle-bold);
+  --pin-head-6: var(--lime-bold);
 }
 
 /* ---- Pin cushion + pins ---- */
@@ -57,7 +59,8 @@
     width: 4px;
     border-radius: 50%;
     background-color: var(--pin-head);
-    border: 0.1em solid var(--pin-head-edge);
+    /* A slightly darker ring of the same color */
+    border: 0.1em solid color-mix(in srgb, var(--pin-head) 70%, var(--charcoal));
     transform: translateX(-1.4px) translateY(-4px);
   }
 }
@@ -71,42 +74,89 @@
 }
 
 .pin:nth-child(1) {
+  --pin-head: var(--pin-head-1);
   transform: rotate(-35deg) translateY(5px);
 }
 .pin:nth-child(2) {
+  --pin-head: var(--pin-head-2);
   transform: rotate(-20deg);
 }
 .pin:nth-child(3) {
+  --pin-head: var(--pin-head-3);
   transform: rotate(-9deg) translateY(-3px);
 }
 .pin:nth-child(4) {
+  --pin-head: var(--pin-head-4);
   transform: rotate(3deg) translateY(-3px);
 }
 .pin:nth-child(5) {
+  --pin-head: var(--pin-head-5);
   transform: rotate(20deg) translateY(-1px);
 }
 .pin:nth-child(6) {
+  --pin-head: var(--pin-head-6);
   transform: rotate(35deg) translateY(5px);
 }
 
-.pin-cushion-container:hover .pins .pin::before {
-  animation: pin-animation 0.5s infinite;
+/* ---- Animation: pins pop up one after another, heads brighten ----
+   The lift uses the `translate` property, which stacks on top of each
+   pin's own rotate() transform instead of replacing it. */
+
+/* Desktop: a continuous ripple while hovered */
+.pin-cushion-container:hover .pin {
+  animation: pin-pop 0.9s ease-in-out infinite;
 }
-.mobile-pin-cushion .pins .pin::before,
-.tablet-pin-cushion .pins .pin::before {
-  animation: pin-animation 2s infinite;
+.pin-cushion-container:hover .pin::before {
+  animation: pin-glow 0.9s ease-in-out infinite;
 }
 
-@keyframes pin-animation {
-  50% {
-    background-color: var(--pin-head-alt);
-    border: 0.1em solid var(--pin-head-alt-edge);
-  }
+/* Tablet + mobile: a ripple, then a rest (like the clock's alarm) */
+.mobile-pin-cushion .pin,
+.tablet-pin-cushion .pin {
+  animation: pin-pop-spurt 3s ease-in-out infinite;
+}
+.mobile-pin-cushion .pin::before,
+.tablet-pin-cushion .pin::before {
+  animation: pin-glow-spurt 3s ease-in-out infinite;
+}
+
+/* Stagger: each pin starts a beat after the one before. These come after
+   the animation rules (same specificity) so the shorthand doesn't reset them. */
+.pin-cushion-container .pin:nth-child(2),
+.pin-cushion-container .pin:nth-child(2)::before { animation-delay: 0.08s; }
+.pin-cushion-container .pin:nth-child(3),
+.pin-cushion-container .pin:nth-child(3)::before { animation-delay: 0.16s; }
+.pin-cushion-container .pin:nth-child(4),
+.pin-cushion-container .pin:nth-child(4)::before { animation-delay: 0.24s; }
+.pin-cushion-container .pin:nth-child(5),
+.pin-cushion-container .pin:nth-child(5)::before { animation-delay: 0.32s; }
+.pin-cushion-container .pin:nth-child(6),
+.pin-cushion-container .pin:nth-child(6)::before { animation-delay: 0.4s; }
+
+@keyframes pin-pop {
+  0%, 60%, 100% { translate: 0 0; }
+  25% { translate: 0 -5px; }
+}
+
+@keyframes pin-glow {
+  0%, 60%, 100% { filter: none; scale: 1; }
+  25% { filter: brightness(1.2) saturate(1.2); scale: 1.35; }
+}
+
+@keyframes pin-pop-spurt {
+  0%, 16%, 100% { translate: 0 0; }
+  7% { translate: 0 -5px; }
+}
+
+@keyframes pin-glow-spurt {
+  0%, 16%, 100% { filter: none; scale: 1; }
+  7% { filter: brightness(1.2) saturate(1.2); scale: 1.35; }
 }
 
 /* Reduced motion -- disables this item's animations (hover-triggered
    and autoplay alike). Source (v1) had no reduced-motion handling. */
 @media (prefers-reduced-motion: reduce) {
+  .pins .pin,
   .pins .pin::before {
     animation: none !important;
   }

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { WritingRow } from "./WritingRow";
+import "./landing-index.css";
 
 // The site's menu, below the fold: a ruled, numbered index of pages, in the
 // same voice as the rest of the garden. Each marker uses that page's accent.
@@ -7,7 +8,7 @@ const PAGES = [
     {
     href: "/sedge-design-system",
     title: "Design System",
-    description: "The design system I built for my garden",
+    description: "The design system I built for my digital garden",
     accent: "var(--coral-bold)",
   },
   {
@@ -22,13 +23,19 @@ const PAGES = [
     description: "Embroidery, needlepoint, and cross stitch projects",
     accent: "var(--pink-bold)",
   },
+  //   {
+  //   href: "/fiber-arts",
+  //   title: "Kitchen Mischief",
+  //   description: "Photos of food I’ve made as a highly dedicated eater learning to cook",
+  //   accent: "var(--lilac-bold)",
+  // },
 ];
 
 export function LandingIndex() {
   return (
-    <nav className="landing-index" aria-labelledby="landing-index-label">
+    <nav id="landing-index" className="landing-index" aria-labelledby="landing-index-label">
       <h2 className="landing-index-label" id="landing-index-label">
-        In the garden
+        General nerdery
       </h2>
       <ol className="landing-index-list">
         {PAGES.map((page, i) => (

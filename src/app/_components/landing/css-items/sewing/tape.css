@@ -1,5 +1,4 @@
-/* Styles for Tape.tsx (same folder). CSS-art conversion notes that
-   apply to every css-items stylesheet live at the top of landing.css. */
+/* Styles for Tape.tsx (same folder). */
 
 .landing {
   --tape-body: var(--lemon-soft);

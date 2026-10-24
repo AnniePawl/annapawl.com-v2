@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { NerderyLink } from "./NerderyLink";
 
 // Shared editorial header: eyebrow, name with the accent block, lede,
 // role line. (Social links live in the footer.) Same voice as the PostHeader on every other page.
@@ -19,10 +20,10 @@ function EditorialAbout({
       <p className="landing-role">Seattle | New York</p>
       <p className="landing-lede">
         Welcome to my little corner of the internet. I’m a frontend
-        engineer who appreciates delightful UX and the tiny details that
-        make an experience special.
+     engineer who loves the tiny details that
+        make an experience special. Here you’ll find experiments, projects, and other evidence of my curiosity getting out of hand.
       </p>
-
+{/* 
       <p className="landing-lede">
         I bring ideas to life through thoughtful interactions and carefully
         crafted interfaces. From the first sketch to the final build, I love
@@ -37,8 +38,9 @@ function EditorialAbout({
       <p className="landing-lede">
         Like any garden, it’s always being tended to, and some ideas are
         still taking root.
-      </p>
+      </p> */}
       {extra}
+      <NerderyLink />
     </div>
   );
 }

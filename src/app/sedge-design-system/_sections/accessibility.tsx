@@ -13,7 +13,7 @@ export default function AccessibilitySection() {
       lede="Accessibility is something I’m continuing to learn about and build into the system."
       description="These foundations are a starting point for making the playful parts of the interface work for more people."
     >
-      <div style={{ display: "flex", flexDirection: "column", gap: 32, maxWidth: 640 }}>
+      <div style={{ maxWidth: 640 }}>
         <div>
           <h4 className="sedge-subheading">Focus ring</h4>
           <p style={{ marginBottom: 12, color: "var(--text-secondary)", fontSize: 14 }}>
@@ -26,7 +26,7 @@ export default function AccessibilitySection() {
         <div>
           <h4 className="sedge-subheading">Reduced motion</h4>
           <p style={{ color: "var(--text-secondary)", fontSize: 14 }}>
-            Motion adds personality to the site, but it shouldn’t be required to use it. When reduced motion is preferred, smooth scrolling and decorative animations are disabled, while motion-token durations collapse to remove unnecessary movement.
+            Motion adds personality to the site, but it shouldn’t be required to use it. When reduced motion is preferred, smooth scrolling and decorative animations are disabled, while motion-token durations collapse to remove unnecessary movement. The animated shelf on the landing page follows the same rule: every piece holds still when reduced motion is on.
           </p>
         </div>
 

@@ -1,0 +1,93 @@
+/* ---- Info button (InfoButton.tsx) ----
+   The ⓘ button on each layout and the extras inside its "about this page"
+   pop-up. The pop-up itself is the shared ui/Modal (styles/components/
+   modal.css); this only styles what's specific to the landing one.
+   Imported by InfoButton.tsx. */
+
+.landing-info-btn {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--landing-ink);
+}
+
+.landing-info-btn svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  /* Eases into periwinkle on hover (see the hover rule below) */
+  transition: fill var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+@media (hover: hover) {
+  .landing-info-btn:hover {
+    color: var(--periwinkle-bold);
+  }
+
+  .landing-info-btn:hover svg {
+    fill: var(--periwinkle-bold);
+  }
+}
+
+
+.landing-desktop-about-info {
+  top: 20px;
+  right: 25px;
+  width: 44px;
+  height: 44px;
+  /* Keep the trigger above the positioned shelf background. */
+  z-index: 10;
+}
+
+.landing-desktop-about-info svg {
+  width: 28px;
+  height: 28px;
+}
+
+.landing-tablet-info {
+  top: 16px;
+  right: 16px;
+}
+
+.landing-mobile-info {
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+}
+
+/* ---- Inside the pop-up ---- */
+
+.landing-info-modal {
+  --page-accent: var(--coral-bold);
+}
+
+/* Small print in the about-this-page modal (reduced motion note) */
+.landing-modal-note {
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+}
+
+/* "Hover" in the pop-up: colored, and it floats (keyframes in landing.css). */
+.landing-float-word {
+  display: inline-block;
+  color: var(--coral-bold);
+  font-weight: var(--font-medium);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .landing-float-word {
+    animation: landing-info-float 1.4s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-info-btn svg {
+    transition: none !important;
+  }
+}

@@ -39,6 +39,13 @@
   animation: alarm 0.1s infinite;
 }
 
+/* Tablet and mobile: no hover, so the alarm goes off on its own -- a short
+   buzz, then a rest, instead of shaking nonstop. */
+.tablet-digitalClock-container,
+.mobile-digitalClock-container {
+  animation: alarm-spurt 3s ease-in-out infinite;
+}
+
 /* Side button */
 .clock::before {
   content: "";
@@ -103,14 +110,18 @@
   transform: translateY(30.555556px);
 }
 
-@keyframes alarm-mobile {
-  35% {
-    transform: translateY(-61px) rotate(10deg) scale(0.93);
-  }
-
-  65% {
-    transform: translateY(-61px) rotate(-10deg) scale(0.93);
-  }
+/* About half a second of buzzing (8 quick wiggles), then still until the
+   next ring. Change the 3s on the animation for more or less rest. */
+@keyframes alarm-spurt {
+  0%, 18%, 100% { transform: translateY(-61px) rotate(0deg); }
+  2%  { transform: translateY(-61px) rotate(8deg); }
+  4%  { transform: translateY(-61px) rotate(-8deg); }
+  6%  { transform: translateY(-61px) rotate(8deg); }
+  8%  { transform: translateY(-61px) rotate(-8deg); }
+  10% { transform: translateY(-61px) rotate(8deg); }
+  12% { transform: translateY(-61px) rotate(-8deg); }
+  14% { transform: translateY(-61px) rotate(6deg); }
+  16% { transform: translateY(-61px) rotate(-4deg); }
 }
 
 @keyframes alarm {
@@ -120,5 +131,13 @@
 
   65% {
     transform: translateY(-61px) rotate(-10deg);
+  }
+}
+/* Reduced motion -- no alarm shake, on hover or on its own. */
+@media (prefers-reduced-motion: reduce) {
+  .clock:hover,
+  .tablet-digitalClock-container,
+  .mobile-digitalClock-container {
+    animation: none;
   }
 }

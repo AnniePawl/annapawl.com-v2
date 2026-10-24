@@ -39,7 +39,7 @@ export function Landing() {
           No About/bio here -- the source's Tablet.js never rendered one
           either, see About.tsx for the note. */}
       <div className="landing-tablet-section">
-        <InfoButton className="landing-tablet-info" />
+        <InfoButton className="landing-tablet-info" autoplay />
         <TabletShelves />
       </div>
 
@@ -47,7 +47,7 @@ export function Landing() {
       <div className="landing-mobile-section">
         <MobileAbout />
         <div className="landing-mobile-shelves-container">
-          <InfoButton className="landing-mobile-info" />
+          <InfoButton className="landing-mobile-info" autoplay />
           <MobileShelves />
         </div>
       </div>

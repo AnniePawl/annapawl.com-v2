@@ -54,7 +54,6 @@ export default function Drawer({
       onCancel={onClose}
       onClick={handleClick}
       aria-labelledby={titleId}
-      data-cursor-native
     >
       <div className="drawer-bar">
         <span className="drawer-eyebrow">

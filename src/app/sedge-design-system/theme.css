@@ -213,8 +213,29 @@
 }
 
 /* Sidebar icons take their group's tone (data-group, see section.css). */
+/* Sidebar rows: hover and the current section get a faded wash of their
+   group's tone (iris, emerald, pink, blue -- set by [data-group] in
+   section.css) instead of one lime for everything. The wash is see-through,
+   so it works on cream and on espresso. Icons and text stay neutral:
+   charcoal on light, cream on dark. */
+.sedge-nav-item {
+  color: var(--text-primary);
+}
+
+.sedge-nav-item:hover {
+  background: color-mix(in srgb, var(--section-tone, var(--iris-bold)) 16%, transparent);
+}
+
+.sedge-nav-item.is-active {
+  background: color-mix(in srgb, var(--section-tone, var(--iris-bold)) 28%, transparent);
+}
+
 .sedge-sidebar-icon {
-  color: var(--section-tone, var(--iris-soft));
+  color: var(--charcoal);
+}
+
+[data-sedge-theme="dark"] .sedge-sidebar-icon {
+  color: var(--cream);
 }
 
 [data-sedge-theme="dark"] .type-eyebrow {

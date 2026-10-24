@@ -1,7 +1,7 @@
 .landing {
   --pile-pages: var(--cream);
   --pile-page-lines: color-mix(in srgb, var(--charcoal) 20%, var(--cream));
-  --pile-book1-cover: var(--red-bold);
+  --pile-book1-cover: var(--coral-bold);
   --pile-book2-cover: var(--slate-bold);
   --pile-book2-bookmark: var(--charcoal);
   --pile-book3-cover: var(--lime-soft);

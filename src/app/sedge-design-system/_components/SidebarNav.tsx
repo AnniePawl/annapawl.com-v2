@@ -40,11 +40,11 @@ export default function SidebarNav({
                   <li key={section.id}>
                     <button
                       onClick={() => onSelect(section.id)}
+                      // Hover/active fills are a faded wash of the group's
+                      // tone (.sedge-nav-item in theme.css).
                       className={cx(
-                        "flex w-full items-center justify-start gap-2 rounded-lg px-3 py-2 text-left text-xs md:text-sm transition",
-                        activeId === section.id
-                          ? "bg-lime-soft font-medium text-[var(--charcoal)]"
-                          : "text-[var(--text-primary)] hover:bg-lime-soft/80 hover:text-[var(--charcoal)]"
+                        "sedge-nav-item flex w-full items-center justify-start gap-2 rounded-lg px-3 py-2 text-left text-xs md:text-sm transition",
+                        activeId === section.id && "is-active font-medium"
                       )}
                     >
                       <Icon

@@ -1,11 +1,9 @@
 "use client";
-
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { Heart } from "lucide-react";
+import "./footer.css";
 
-// Site footer: a woven edge (a strip of colored markers, like the Sedge
-// hero weave) above a three-column colophon. Holds the social links that
-// used to sit in the landing's left column.
 const EMAIL = "annampawl@gmail.com";
 
 const TONES = [
@@ -104,9 +102,9 @@ export function Footer() {
         </div>
 
         <div className="landing-footer-col landing-footer-col--wide">
-          <h2 className="landing-footer-label">Colophon</h2>
+          <h2 className="landing-footer-label">Built with</h2>
           <p className="landing-footer-muted">
-            Built with Next.js and a design system called Sedge.
+             Next.js & <br></br> My homegrown <Link href='/sedge-design-system' className='text-link'>design system</Link>
           </p>
         </div>
 

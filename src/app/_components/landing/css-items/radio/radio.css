@@ -321,3 +321,13 @@
     background-image: repeating-linear-gradient(45deg, var(--radio-accent-mobile) 0%, var(--radio-accent-mobile) 4.5%, transparent 4.5%, transparent 13%), repeating-linear-gradient(-45deg, var(--radio-accent-mobile) 0%, var(--radio-accent-mobile) 4.5%, var(--radio-panel) 4.5%, var(--radio-panel) 13%);
   }
 }
+
+/* Reduced motion -- the radio stops bouncing and its antenna stays put. */
+@media (prefers-reduced-motion: reduce) {
+  .radio-container .radio-top,
+  .radio-container .radio-top::before,
+  .radio-container .radio-buttons::before,
+  .radio-container .radio-buttons::after {
+    animation: none !important;
+  }
+}

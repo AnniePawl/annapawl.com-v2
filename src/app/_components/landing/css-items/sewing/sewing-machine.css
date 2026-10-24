@@ -2,7 +2,8 @@
   --sewing-accent: var(--sky-bold);
   --sewing-ink: var(--charcoal);
   --sewing-outline: var(--cherry-bold);
-  --sewing-thread: var(--lemon-soft);
+  --sewing-thread1: var(--lemon-bold);
+  --sewing-thread2:var(--red-bold);
   --sewing-spool: var(--cocoa-soft);
   --sewing-spool-shade: var(--cocoa-bold);
   --sewing-body: white;
@@ -66,10 +67,10 @@
   transform: translateX(142px);
   --thread-stripe: 6px;
   background-image: linear-gradient(45deg,
-      var(--red-bold) 25%,
-      var(--sewing-thread) 25% 50%,
-      var(--red-bold) 50% 75%,
-      var(--sewing-thread) 75%);
+      var(--sewing-thread1) 25%,
+      var(--sewing-thread2) 25% 50%,
+      var(--sewing-thread1) 50% 75%,
+      var(--sewing-thread2) 75%);
   background-size: var(--thread-stripe) var(--thread-stripe);
 
   &::before {

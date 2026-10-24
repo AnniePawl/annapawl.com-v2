@@ -1,27 +1,27 @@
 "use client";
 
-// Ported from src/components/modal/Modal.js plus the three call sites
-// that opened it (DesktopHome.js, Tablet.js, Mobile.js). The source
-// rolled its own portal (document.getElementById("modal-root") +
-// ReactDOM.createPortal) with no dialog semantics at all -- no role, no
-// Escape handling, no focus trap, no focus restore. Swapped for this
-// repo's existing ui/Modal, which is built on the native <dialog>
-// element and gets all of that for free (see components/ui/Modal.tsx).
-//
-// "More on css art" originally pointed at /dwc; it now links to the
-// Drawing with Code page, which is where that content lives on this site.
 import Modal from "../../../components/ui/Modal";
 import { useState } from "react";
 import { InfoIcon } from "./icons";
+import "./info-button.css";
 
-export function InfoButton({ className }: { className?: string }) {
+// `autoplay` is for the mobile and tablet layouts, where the shelf animates
+// on its own -- there's nothing to hover, so the copy skips that part.
+
+export function InfoButton({
+  className,
+  autoplay = false,
+}: {
+  className?: string;
+  autoplay?: boolean;
+}) {
   const [open, setOpen] = useState(false);
 
   return (
     <>
       <button
         type="button"
-        className={`landing-info-btn focus-ring ${className ?? ""}`}
+        className={`landing-info-btn  focus-ring ${className ?? ""}`}
         onClick={() => setOpen(true)}
         aria-label="About this page"
       >
@@ -31,6 +31,7 @@ export function InfoButton({ className }: { className?: string }) {
       <Modal
         open={open}
         onClose={() => setOpen(false)}
+        className='landing-info-modal'
         eyebrow="About this page"
         title="CSS knick-knacks"
         actions={
@@ -56,9 +57,17 @@ export function InfoButton({ className }: { className?: string }) {
           I&apos;ve fallen for CSS and love exploring its potential through
           illustrations and animations.
         </p>
-        <p>
-          <span className="landing-float-word">Hover</span> over (or tap) the knick-knacks for some mini surprises. I made
-          everything with pure CSS ♥
+        {autoplay ? (
+          <p>I made everything on the shelf with pure CSS ♥</p>
+        ) : (
+          <p>
+            <span className="landing-float-word">Hover</span> over (or tap) the knick-knacks for some mini surprises. I made
+            everything with pure CSS ♥
+          </p>
+        )}
+        <p className="landing-modal-note">
+          Prefer less motion? If reduced motion is turned on in your device
+          settings, everything on the shelf stays still.
         </p>
       </Modal>
     </>
