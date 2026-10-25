@@ -1,0 +1,91 @@
+/* ---- Shape cover (ShapeCover.tsx) ----
+   Sits between the post header and the contents/body. Each tile sets
+   --tile-soft (its background) and --tile-bold (its shape) inline; on
+   hover they swap -- the tile fills with the bold color and the shape
+   turns cream, the palette version of the original page's invert. */
+
+.shape-cover {
+  margin: 0;
+  padding: var(--space-7) var(--space-5) 0;
+}
+
+.shape-cover-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.shape-cover .shape-tile {
+  --tile-bg: var(--tile-soft);
+  --shape-fill: var(--tile-bold);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 0; /* square tiles that meet edge to edge */
+  background: var(--tile-bg);
+  color: var(--charcoal);
+  text-decoration: none;
+  transition: background-color var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+.shape-tile:hover,
+.shape-tile:focus-visible {
+  --tile-bg: var(--tile-bold);
+  --shape-fill: var(--cream);
+  color: var(--cream);
+}
+
+.shape-tile-number {
+  position: absolute;
+  z-index: 1; /* stays on top of tall shapes like the rectangle */
+  top: var(--space-3);
+  left: var(--space-3);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.75rem;
+  font-weight: var(--font-medium);
+  letter-spacing: 0.04em;
+}
+
+.shape-tile-number::before {
+  content: "";
+  width: 5px;
+  height: 9px;
+  background: currentColor;
+}
+
+.shape-cover-caption {
+  margin-top: var(--space-2);
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+}
+
+@media (max-width: 1023px) {
+  .shape-cover {
+    padding: var(--space-6) var(--space-4) 0;
+  }
+
+  .shape-cover-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .shape-tile-number {
+    top: var(--space-2);
+    left: var(--space-2);
+  }
+}
+
+/* The rectangle is the tallest shape; keep it clear of the tile number. */
+.shape-cover .shape--rectangle {
+  height: 56%;
+  margin-top: 8%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shape-tile {
+    transition: none;
+  }
+}

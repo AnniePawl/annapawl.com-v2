@@ -18,8 +18,10 @@ export function NerderyLink() {
 
   return (
     <a href="#landing-index" className="landing-cta focus-ring" onClick={handleClick}>
-      General nerdery
-      <span className="landing-cta-arrow" aria-hidden="true">↓</span>
+      <span className="landing-cta-label">
+        General nerdery
+        <span className="landing-cta-arrow" aria-hidden="true">↓</span>
+      </span>
     </a>
   );
 }

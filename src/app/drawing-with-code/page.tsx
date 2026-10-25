@@ -2,7 +2,6 @@ import PostLayout, {
   PostSection,
 } from "../../components/layout/PostLayout/PostLayout";
 import HomeLogo from "../../components/ui/HomeLogo";
-// import ShapesGrid from "./_components/ShapesGrid";
 import CodeSnippet from "./_components/CodeSnippet";
 import Practice from "./_components/Practice";
 import "./drawing-with-code.css";

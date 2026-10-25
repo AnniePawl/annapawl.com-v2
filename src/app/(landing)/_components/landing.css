@@ -240,11 +240,21 @@
   color: var(--landing-accent);
 }
 
-.landing-cta:hover {
-  text-decoration: underline;
-  text-decoration-color: var(--landing-accent);
-  text-decoration-thickness: 1.5px;
-  text-underline-offset: 0.3em;
+.landing-cta-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding-bottom: 3px;
+  margin-bottom: -3px; /* keeps the marker square lined up with the text */
+  /* One continuous underline under the text AND the arrow (a normal
+     text-decoration stops before the arrow). Grows in on hover. */
+  background: linear-gradient(var(--landing-accent), var(--landing-accent))
+    no-repeat left bottom / 0 1.5px;
+  transition: background-size 0.25s ease;
+}
+
+.landing-cta:hover .landing-cta-label {
+  background-size: 100% 1.5px;
 }
 
 /* The arrow bobs gently (landing-info-float, below) */

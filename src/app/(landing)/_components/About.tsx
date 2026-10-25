@@ -17,11 +17,9 @@ function EditorialAbout({
         Anna Pawl
         <span className="landing-name-mark" aria-hidden="true" />
       </h1>
-      <p className="landing-role">Seattle | New York</p>
+      <p className="landing-role">Frontend Engineer</p>
       <p className="landing-lede">
-        Welcome to my little corner of the internet. I’m a frontend
-     engineer who loves the tiny details that
-        make an experience special. Here you’ll find experiments, projects, and other evidence of my curiosity getting out of hand.
+      Welcome to my little corner of the internet. I care a lot about how things look, feel, and work, down to the tiniest details. Here you’ll find experiments, projects, and other evidence of my curiosity getting out of hand.
       </p>
 {/* 
       <p className="landing-lede">

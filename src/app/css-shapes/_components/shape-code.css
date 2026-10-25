@@ -1,0 +1,54 @@
+.shape-code-wrap {
+  /* The custom cursor dot reads this from whatever it's over, so it turns
+     cream on the dark code block instead of disappearing. */
+  --cursor-dot-color: var(--cream);
+  position: relative;
+  margin: var(--space-4) 0 0;
+}
+
+.shape-code {
+  margin: 0;
+  padding: var(--space-4);
+  padding-right: 5.5rem; /* room for the copy button */
+  overflow-x: auto;
+  border-radius: var(--radius-xs);
+  background: var(--charcoal);
+  color: var(--iris-soft);
+  font-family: Monaco, Consolas, monospace;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+/* Copy button: quiet in the corner, brightens on hover */
+.shape-code-copy {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 9px;
+  border: 1px solid color-mix(in srgb, var(--cream) 22%, transparent);
+  border-radius: var(--radius-xs);
+  background: transparent;
+  color: color-mix(in srgb, var(--cream) 70%, transparent);
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: var(--font-medium);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition:
+    color var(--motion-hover-duration) var(--motion-hover-ease),
+    border-color var(--motion-hover-duration) var(--motion-hover-ease),
+    background-color var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+.shape-code-copy:hover {
+  border-color: color-mix(in srgb, var(--cream) 45%, transparent);
+  background: color-mix(in srgb, var(--cream) 8%, transparent);
+  color: var(--cream);
+}
+
+.shape-lesson .shape-code-wrap {
+  margin-top: 0;
+}

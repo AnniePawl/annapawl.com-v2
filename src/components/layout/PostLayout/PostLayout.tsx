@@ -17,6 +17,9 @@ export type PostContentsItem = {
 };
 
 export type PostLayoutProps = PostHeaderProps & {
+  /** Optional full-width feature under the header, before the contents
+      and body (e.g. the CSS Shapes grid). */
+  cover?: ReactNode;
   contents?: PostContentsItem[];
   contentsLabel?: string;
   children: ReactNode;
@@ -32,6 +35,7 @@ export type PostSectionProps = {
 };
 
 export default function PostLayout({
+  cover,
   contents = [],
   contentsLabel = "Contents",
   children,
@@ -53,6 +57,7 @@ export default function PostLayout({
   return (
     <PageShell width="wide" className={cx("post-layout", className)}>
       <PostHeader {...headerProps} />
+      {cover}
       <div className="post-layout-grid">
         {contents.length ? (
           <nav className="post-contents" aria-label={contentsLabel}>

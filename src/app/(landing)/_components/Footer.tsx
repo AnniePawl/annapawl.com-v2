@@ -104,7 +104,7 @@ export function Footer() {
         <div className="landing-footer-col landing-footer-col--wide">
           <h2 className="landing-footer-label">Built with</h2>
           <p className="landing-footer-muted">
-             Next.js & <br></br> My homegrown <Link href='/sedge-design-system' className='text-link'>design system</Link>
+             Next.js & my <Link href='/sedge-design-system' className='text-link'>design system</Link>
           </p>
         </div>
 

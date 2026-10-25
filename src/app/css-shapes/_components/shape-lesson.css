@@ -1,0 +1,133 @@
+/* ---- Shape lesson (ShapeLesson.tsx) ----
+   Step-by-step frames, the anatomy panel, then the code. */
+
+.shape-lesson {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  margin-top: var(--space-5);
+}
+
+.shape-lesson-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+  font-size: 10.5px;
+  font-weight: var(--font-semibold);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.shape-lesson-label::before {
+  content: "";
+  width: 5px;
+  height: 9px;
+  background: var(--demo-fill);
+}
+
+/* A soft tile that centers one demo */
+.shape-frame {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1.25;
+  overflow: hidden;
+  border-radius: var(--radius-xs);
+  background: var(--demo-bg);
+}
+
+/* Demos are drawn small; scale them up to fill the frame (the `scale`
+   property stacks with each demo's own rotate/skew transform). */
+.shape-frame .demo {
+  scale: 1.35;
+}
+
+.shape-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.shape-steps li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.shape-step-number {
+  margin-top: var(--space-2);
+  color: var(--cherry-bold);
+  font-size: 10.5px;
+  font-weight: var(--font-semibold);
+}
+
+.shape-step-caption {
+  font-size: 0.875rem;
+  font-weight: var(--font-medium);
+}
+
+.shape-steps code,
+.shape-anatomy-key code {
+  align-self: flex-start;
+  margin-top: 2px;
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: var(--ivory);
+  font-family: Monaco, Consolas, monospace;
+  font-size: 0.6875rem;
+}
+
+.shape-anatomy {
+  display: grid;
+  grid-template-columns: minmax(0, 13rem) 1fr;
+  gap: var(--space-5);
+  align-items: center;
+}
+
+.shape-anatomy-key {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.shape-anatomy-key li {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.shape-anatomy-swatch {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 1px;
+}
+
+.shape-lesson .shape-code-wrap {
+  margin-top: 0;
+}
+
+@media (max-width: 599px) {
+  .shape-steps {
+    gap: var(--space-2);
+  }
+
+  .shape-step-caption {
+    font-size: 0.75rem;
+  }
+
+  .shape-steps code {
+    font-size: 0.625rem;
+    white-space: normal;
+  }
+
+  .shape-anatomy {
+    grid-template-columns: 1fr;
+  }
+}

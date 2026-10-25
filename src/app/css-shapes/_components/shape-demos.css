@@ -1,0 +1,304 @@
+/* ---- Shape demos (ShapeSteps.tsx + ShapeAnatomy.tsx) ----
+   Small live CSS versions of each shape, one class per step
+   (.demo--circle-1, .demo--circle-2...). They use the same techniques as
+   the code in lessons.ts, at about 60% size. Colors:
+     --demo-fill  the shape's bold color (set per section from shapes.ts)
+     --demo-bg    the frame's soft color (same)
+   Anatomy demos paint each part a different color to match its key. */
+
+.demo,
+.demo::before,
+.demo::after {
+  box-sizing: content-box; /* match how readers' own CSS will behave */
+}
+
+.demo {
+  --part-a: var(--demo-fill);
+  --part-b: var(--demo-fill);
+  --part-c: var(--demo-fill);
+  --part-d: var(--demo-fill);
+  position: relative;
+}
+
+/* ---- Circle ---- */
+.demo--circle-1,
+.demo--circle-2,
+.demo--circle-3 {
+  width: 64px;
+  height: 64px;
+  background: var(--demo-fill);
+}
+.demo--circle-2 { border-radius: 25%; }
+.demo--circle-3 { border-radius: 50%; }
+
+/* ---- Square ---- */
+.demo--square-1 {
+  width: 6px;
+  height: 6px;
+  outline: 1px dashed var(--charcoal);
+}
+.demo--square-2 {
+  width: 60px;
+  height: 60px;
+  outline: 1px dashed var(--charcoal);
+}
+.demo--square-3 {
+  width: 60px;
+  height: 60px;
+  background: var(--demo-fill);
+}
+
+/* ---- Triangle ---- */
+.demo--triangle-1,
+.demo--triangle-2,
+.demo--triangle-3 {
+  width: 0;
+  height: 0;
+}
+.demo--triangle-1 {
+  border-top: 36px solid var(--marigold-bold);
+  border-right: 36px solid var(--coral-bold);
+  border-bottom: 36px solid var(--demo-fill);
+  border-left: 36px solid var(--teal-bold);
+}
+.demo--triangle-2 {
+  border-right: 36px solid var(--coral-bold);
+  border-bottom: 36px solid var(--demo-fill);
+  border-left: 36px solid var(--teal-bold);
+}
+.demo--triangle-3 {
+  border-left: 36px solid transparent;
+  border-right: 36px solid transparent;
+  border-bottom: 60px solid var(--demo-fill);
+}
+
+/* ---- Pentagon ---- */
+.demo--pentagon-1,
+.demo--pentagon-3,
+.demo--pentagon-anatomy {
+  width: 32px;
+  border-style: solid;
+  border-width: 30px 11px 0;
+  border-color: var(--demo-fill) transparent;
+  margin-top: 20px;
+}
+.demo--pentagon-2 {
+  width: 0;
+  border-style: solid;
+  border-width: 0 27px 21px;
+  border-color: transparent transparent var(--demo-fill);
+}
+.demo--pentagon-3::before,
+.demo--pentagon-anatomy::before {
+  content: "";
+  position: absolute;
+  top: -51px;
+  left: -11px;
+  width: 0;
+  border-style: solid;
+  border-width: 0 27px 21px;
+  border-color: transparent transparent var(--part-a);
+}
+.demo--pentagon-anatomy { --part-a: var(--lilac-bold); }
+
+/* ---- Oval ---- */
+.demo--oval-1,
+.demo--oval-2,
+.demo--oval-3 {
+  width: 42px;
+  height: 72px;
+  background: var(--demo-fill);
+}
+.demo--oval-2 { border-radius: 25%; }
+.demo--oval-3 { border-radius: 50%; }
+
+/* ---- Trapezoid ---- */
+.demo--trapezoid-1,
+.demo--trapezoid-2 {
+  width: 48px;
+  height: 0;
+  border-bottom: 42px solid var(--demo-fill);
+}
+.demo--trapezoid-1 {
+  border-left: 24px solid var(--coral-bold);
+  border-right: 24px solid var(--marigold-bold);
+}
+.demo--trapezoid-2 {
+  border-left: 24px solid transparent;
+  border-right: 24px solid transparent;
+}
+
+/* ---- Octagon ---- */
+.demo--octagon-1,
+.demo--octagon-2,
+.demo--octagon-3 {
+  width: 64px;
+  height: 64px;
+  background: var(--demo-fill);
+}
+.demo--octagon-2 { --wedge: var(--coral-bold); }
+.demo--octagon-3 { --wedge: var(--demo-bg); }
+.demo--octagon-2::before,
+.demo--octagon-2::after,
+.demo--octagon-3::before,
+.demo--octagon-3::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 26px; /* 64px minus the two 19px borders */
+  border-left: 19px solid var(--wedge);
+  border-right: 19px solid var(--wedge);
+}
+.demo--octagon-2::before,
+.demo--octagon-3::before {
+  top: 0;
+  border-bottom: 19px solid var(--demo-fill);
+}
+.demo--octagon-2::after,
+.demo--octagon-3::after {
+  bottom: 0;
+  border-top: 19px solid var(--demo-fill);
+}
+
+/* ---- Parallelogram ---- */
+.demo--parallelogram-1,
+.demo--parallelogram-2 {
+  width: 72px;
+  height: 42px;
+  background: var(--demo-fill);
+}
+.demo--parallelogram-2 { transform: skew(20deg); }
+
+/* ---- Rectangle ---- */
+.demo--rectangle-1 {
+  width: 54px;
+  height: 54px;
+  background: var(--demo-fill);
+}
+.demo--rectangle-2 {
+  width: 42px;
+  height: 72px;
+  background: var(--demo-fill);
+}
+
+/* ---- Hexagon ---- */
+.demo--hexagon-1,
+.demo--hexagon-2,
+.demo--hexagon-3,
+.demo--hexagon-anatomy {
+  width: 64px;
+  height: 36px;
+  background: var(--demo-fill);
+}
+.demo--hexagon-2::before,
+.demo--hexagon-3::before,
+.demo--hexagon-3::after,
+.demo--hexagon-anatomy::before,
+.demo--hexagon-anatomy::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 0;
+  border-left: 32px solid transparent;
+  border-right: 32px solid transparent;
+}
+.demo--hexagon-2::before,
+.demo--hexagon-3::before,
+.demo--hexagon-anatomy::before {
+  bottom: 100%;
+  border-bottom: 18px solid var(--part-a);
+}
+.demo--hexagon-3::after,
+.demo--hexagon-anatomy::after {
+  top: 100%;
+  border-top: 18px solid var(--part-b);
+}
+.demo--hexagon-anatomy {
+  --part-a: var(--coral-bold);
+  --part-b: var(--marigold-bold);
+}
+
+/* ---- Star (the classic three-triangle star, at half size) ---- */
+.demo--star-1,
+.demo--star-2,
+.demo--star-3,
+.demo--star-anatomy {
+  width: 0;
+  height: 0;
+  margin: 22px 0 0 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 35px solid var(--demo-fill);
+  transform: rotate(35deg);
+}
+.demo--star-2::after,
+.demo--star-3::after,
+.demo--star-anatomy::after {
+  content: "";
+  position: absolute;
+  top: 1.5px;
+  left: -52.5px;
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 35px solid var(--part-a);
+  transform: rotate(-70deg);
+}
+.demo--star-3::before,
+.demo--star-anatomy::before {
+  content: "";
+  position: absolute;
+  top: -22.5px;
+  left: -32.5px;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 40px solid var(--part-b);
+  transform: rotate(-35deg);
+}
+.demo--star-anatomy {
+  --part-a: var(--coral-bold);
+  --part-b: var(--marigold-bold);
+}
+
+/* ---- Heart ---- */
+.demo--heart-1,
+.demo--heart-2,
+.demo--heart-3,
+.demo--heart-anatomy {
+  width: 40px;
+  height: 40px;
+  margin-top: 16px;
+  background: var(--demo-fill);
+  transform: rotate(-45deg);
+}
+.demo--heart-2::before,
+.demo--heart-3::before,
+.demo--heart-3::after,
+.demo--heart-anatomy::before,
+.demo--heart-anatomy::after {
+  content: "";
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.demo--heart-2::before,
+.demo--heart-3::before,
+.demo--heart-anatomy::before {
+  top: -20px;
+  left: 0;
+  background: var(--part-a);
+}
+.demo--heart-3::after,
+.demo--heart-anatomy::after {
+  top: 0;
+  left: 20px;
+  background: var(--part-b);
+}
+.demo--heart-anatomy {
+  --part-a: var(--pink-bold);
+  --part-b: var(--coral-bold);
+}

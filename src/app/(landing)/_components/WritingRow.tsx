@@ -10,9 +10,16 @@ const POSTS = [
   {
     href: "/drawing-with-code",
     title: "Drawing with Code",
-    description: "CSS art, and how I make it",
+    description: "An intro to CSS art",
     accent: "var(--red-bold)",
   },
+  {
+    href:"/css-shapes", 
+    title:"CSS Shapes", 
+    description:"How to make basic shapes using CSS", 
+    accent:"var(--marigold-bold)"
+  },
+
 ];
 
 export function WritingRow({ number }: { number: number }) {
