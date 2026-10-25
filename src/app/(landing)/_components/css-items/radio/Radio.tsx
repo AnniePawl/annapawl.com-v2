@@ -9,7 +9,7 @@
 import { useState } from "react";
 import "./radio.css";
 
-export default function Radio({ cn }: { cn?: string }) {
+export function Radio({ cn }: { cn?: string }) {
   const [station, setStation] = useState(105.9);
 
   return (

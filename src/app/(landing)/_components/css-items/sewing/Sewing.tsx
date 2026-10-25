@@ -23,5 +23,3 @@ export function Sewing({
     </div>
   );
 }
-
-export default Sewing;

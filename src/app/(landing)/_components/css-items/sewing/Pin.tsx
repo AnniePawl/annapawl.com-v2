@@ -5,5 +5,3 @@ import "./pin-cushion.css";
 export function Pin() {
   return <div className="pin" />;
 }
-
-export default Pin;

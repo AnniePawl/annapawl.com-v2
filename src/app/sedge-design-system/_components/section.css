@@ -229,101 +229,10 @@
   margin: var(--space-6) 0;
 }
 
-.poster-label {
-  display: block;
-  margin-bottom: var(--space-4);
-}
-
 .sedge-hero-title {
   font-weight: var(--font-regular);
   line-height: 0.82;
   letter-spacing: -0.065em;
-}
-
-/* ---- Hero decorative-shape float ----
-   Slow, gentle vertical drift for the hero shapes. Duration/delay are staggered per shape via inline
-   `animationDuration`/`animationDelay` in Hero.tsx */
-@keyframes hero-float-sm {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes hero-float-md {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-16px);
-  }
-}
-
-@keyframes hero-float-lg {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-22px);
-  }
-}
-
-@keyframes hero-float-rotated {
-
-  0%,
-  100% {
-    transform: translateY(0) rotate(-18deg);
-  }
-
-  50% {
-    transform: translateY(-12px) rotate(-18deg);
-  }
-}
-
-.hero-float-sm,
-.hero-float-md,
-.hero-float-lg,
-.hero-float-rotated {
-  animation-timing-function: var(--motion-ease-standard);
-  animation-iteration-count: infinite;
-}
-
-.hero-float-sm {
-  animation-name: hero-float-sm;
-}
-
-.hero-float-md {
-  animation-name: hero-float-md;
-}
-
-.hero-float-lg {
-  animation-name: hero-float-lg;
-}
-
-.hero-float-rotated {
-  animation-name: hero-float-rotated;
-}
-
-/* My reduced-motion convention */
-@media (prefers-reduced-motion: reduce) {
-
-  .hero-float-sm,
-  .hero-float-md,
-  .hero-float-lg,
-  .hero-float-rotated {
-    animation: none;
-  }
 }
 
 /* ---- Hero: marker weave (MarkerWeave.tsx) ----

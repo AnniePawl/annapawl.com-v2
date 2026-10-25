@@ -16,5 +16,3 @@ export function Shelf({
     </div>
   );
 }
-
-export default Shelf;

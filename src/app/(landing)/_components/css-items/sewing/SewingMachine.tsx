@@ -22,5 +22,3 @@ export function SewingMachine() {
     </div>
   );
 }
-
-export default SewingMachine;

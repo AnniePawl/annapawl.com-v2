@@ -17,5 +17,3 @@ export function Pens({ cn }: { cn?: string }) {
     </div>
   );
 }
-
-export default Pens;

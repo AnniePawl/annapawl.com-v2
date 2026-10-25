@@ -13,5 +13,3 @@ export function Books({ cn }: { cn?: string }) {
     </div>
   );
 }
-
-export default Books;

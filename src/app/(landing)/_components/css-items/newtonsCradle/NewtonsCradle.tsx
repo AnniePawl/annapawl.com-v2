@@ -16,5 +16,3 @@ export function NewtonsCradle({ cn }: { cn?: string }) {
     </div>
   );
 }
-
-export default NewtonsCradle;

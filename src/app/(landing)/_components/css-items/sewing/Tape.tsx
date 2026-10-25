@@ -10,5 +10,3 @@ export function Tape({ cn }: { cn?: string }) {
     </div>
   );
 }
-
-export default Tape;

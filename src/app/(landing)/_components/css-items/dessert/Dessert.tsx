@@ -13,5 +13,3 @@ export function Dessert({ cn }: { cn?: string }) {
     </div>
   );
 }
-
-export default Dessert;

@@ -3,10 +3,10 @@
 // landing.css media queries (see DesktopShelves.tsx).
 import { Books } from "../books/Books";
 import { Books2 } from "../books/Books2";
-import DigitalClock from "../digitalClock/DigitalClock";
+import { DigitalClock } from "../digitalClock/DigitalClock";
 import { Laptop } from "../laptop/Laptop";
 import { NewtonsCradle } from "../newtonsCradle/NewtonsCradle";
-import Radio from "../radio/Radio";
+import { Radio } from "../radio/Radio";
 import { Sewing } from "../sewing/Sewing";
 import { TeaCup } from "../teacup/TeaCup";
 import { Pens } from "../writing/Pens";
@@ -47,5 +47,3 @@ export function MobileShelves() {
     </div>
   );
 }
-
-export default MobileShelves;

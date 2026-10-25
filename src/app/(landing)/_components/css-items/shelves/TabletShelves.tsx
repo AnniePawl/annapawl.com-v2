@@ -4,10 +4,10 @@
 import { Books } from "../books/Books";
 import { Books2 } from "../books/Books2";
 import { Dessert } from "../dessert/Dessert";
-import DigitalClock from "../digitalClock/DigitalClock";
+import { DigitalClock } from "../digitalClock/DigitalClock";
 import { Laptop } from "../laptop/Laptop";
 import { NewtonsCradle } from "../newtonsCradle/NewtonsCradle";
-import Radio from "../radio/Radio";
+import { Radio } from "../radio/Radio";
 import { Sewing } from "../sewing/Sewing";
 import { Pens } from "../writing/Pens";
 import { Shelf } from "./Shelf";
@@ -45,5 +45,3 @@ export function TabletShelves() {
     </div>
   );
 }
-
-export default TabletShelves;

@@ -15,5 +15,3 @@ export function Laptop({ cn }: { cn?: string }) {
     </div>
   );
 }
-
-export default Laptop;

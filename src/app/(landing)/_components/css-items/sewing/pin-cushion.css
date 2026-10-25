@@ -111,12 +111,10 @@
 }
 
 /* Tablet + mobile: a ripple, then a rest (like the clock's alarm) */
-.mobile-pin-cushion .pin,
-.tablet-pin-cushion .pin {
+.mobile-pin-cushion .pin {
   animation: pin-pop-spurt 3s ease-in-out infinite;
 }
-.mobile-pin-cushion .pin::before,
-.tablet-pin-cushion .pin::before {
+.mobile-pin-cushion .pin::before {
   animation: pin-glow-spurt 3s ease-in-out infinite;
 }
 

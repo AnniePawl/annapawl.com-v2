@@ -18,5 +18,3 @@ export function PinCushion({ cn }: { cn?: string }) {
     </div>
   );
 }
-
-export default PinCushion;

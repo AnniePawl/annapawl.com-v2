@@ -12,7 +12,7 @@
 import { useEffect, useState } from "react";
 import "./digital-clock.css";
 
-export default function DigitalClock({ cn }: { cn?: string }) {
+export function DigitalClock({ cn }: { cn?: string }) {
   const [time, setTime] = useState("");
 
   useEffect(() => {

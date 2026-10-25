@@ -20,5 +20,3 @@ export function TeaCup({ cn }: { cn?: string }) {
     </div>
   );
 }
-
-export default TeaCup;
