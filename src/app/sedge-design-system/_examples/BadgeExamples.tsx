@@ -1,5 +1,5 @@
 import Badge, { type BadgeTone } from "../../../components/ui/Badge";
-import CodeBlock from "../_components/CodeBlock";
+import CodeBlock from "../../../components/ui/CodeBlock";
 import "./BadgeExamples.css";
 
 const USAGE = `

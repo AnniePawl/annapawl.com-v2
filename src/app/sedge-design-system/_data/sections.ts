@@ -1,6 +1,7 @@
 import type { LucideIcon } from "lucide-react";
 import {
   Palette,
+  SquareCode,
   PanelTop,
   CaseSensitive,
   Ruler,
@@ -91,6 +92,12 @@ export const SECTIONS: NavSection[] = [
     group: "Components",
   },
   { id: "links", title: "Links", icon: Link2, group: "Components" },
+  {
+    id: "code-blocks",
+    title: "Code Blocks",
+    icon: SquareCode,
+    group: "Components",
+  },
   { id: "callouts", title: "Callouts", icon: Info, group: "Components" },
   {
     id: "accordion",

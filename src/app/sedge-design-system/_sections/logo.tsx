@@ -1,5 +1,5 @@
 import HomeLogo, { type HomeLogoColors } from "../../../components/ui/HomeLogo";
-import CodeBlock from "../_components/CodeBlock";
+import CodeBlock from "../../../components/ui/CodeBlock";
 import Section from "../_components/Section";
 import { SECTIONS } from "../_data/sections";
 import "./logo.css";

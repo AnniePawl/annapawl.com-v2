@@ -96,6 +96,18 @@ export default function PostLayout({
   );
 }
 
+// These soft colors are too dark to read on a charcoal code block, so
+// their section soft tone is lightened toward cream.
+const DARK_SOFT_HUES = ["cherry", "emerald", "cocoa"];
+
+function softTone(tone: PaletteColor) {
+  const soft = `var(--${tone.replace(/-bold$/, "-soft")})`;
+  const hue = tone.replace(/-(bold|soft)$/, "");
+  return DARK_SOFT_HUES.includes(hue)
+    ? `color-mix(in srgb, ${soft} 55%, var(--cream))`
+    : soft;
+}
+
 export function PostSection({
   id,
   title,
@@ -105,7 +117,7 @@ export function PostSection({
 }: PostSectionProps) {
   const style = {
     "--post-section-tone": `var(--${tone})`,
-    "--post-section-tone-soft": `var(--${tone.replace(/-bold$/, "-soft")})`,
+    "--post-section-tone-soft": softTone(tone),
   } as CSSProperties;
 
   return (

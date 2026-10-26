@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import { ArrowRight, ChartColumn, Copy } from "lucide-react";
 import Button from "../../../components/ui/Button";
-import CodeBlock from "../_components/CodeBlock";
+import CodeBlock from "../../../components/ui/CodeBlock";
 import "./ButtonStates.css";
 
 const USAGE = `

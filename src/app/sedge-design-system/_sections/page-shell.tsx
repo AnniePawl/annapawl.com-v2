@@ -1,5 +1,5 @@
 import PageShell from "../../../components/layout/PageShell";
-import CodeBlock from "../_components/CodeBlock";
+import CodeBlock from "../../../components/ui/CodeBlock";
 import Section from "../_components/Section";
 import { SECTIONS } from "../_data/sections";
 import "./patterns.css";

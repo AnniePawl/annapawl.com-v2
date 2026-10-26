@@ -3,7 +3,7 @@ import PostLayout, {
   PostSubsection,
 } from "../../components/layout/PostLayout/PostLayout";
 import HomeLogo from "../../components/ui/HomeLogo";
-import CodeSnippet from "./_components/CodeSnippet";
+import CodeBlock from "../../components/ui/CodeBlock";
 import { DemoStrip, DemoTile } from "./_components/DemoStrip";
 import Practice from "./_components/Practice";
 import "./drawing-with-code.css";
@@ -109,7 +109,7 @@ export default function DrawingWithCodePage() {
                 <div className="dwc-circle-example-inner" />
               </div>
             </div>
-            <CodeSnippet
+            <CodeBlock
               code={`<!-- Circle Example -->
 <div class="circle">
   <div class="circle__outer">
@@ -178,7 +178,7 @@ export default function DrawingWithCodePage() {
             braces, which says how it should look.
           </p>
 
-          <CodeSnippet
+          <CodeBlock
             code={`.circle__outer {
   width: 180px;
   height: 180px;
@@ -411,7 +411,7 @@ export default function DrawingWithCodePage() {
               </li>
               <li>
                 <code>overflow: hidden</code>: crops anything that spills
-                outside a shape, like a scene seen through a window.
+                outside a shape.
               </li>
               <li>
                 <code>@keyframes</code>: animation. It&rsquo;s what makes the

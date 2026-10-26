@@ -1,6 +1,6 @@
 import { CircleHelp } from "lucide-react";
 import Tooltip from "../../../components/ui/Tooltip";
-import CodeBlock from "../_components/CodeBlock";
+import CodeBlock from "../../../components/ui/CodeBlock";
 import "./TooltipExamples.css";
 
 const USAGE = `

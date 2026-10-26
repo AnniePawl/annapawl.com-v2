@@ -1,6 +1,6 @@
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import CodeBlock from "../_components/CodeBlock";
+import CodeBlock from "../../../components/ui/CodeBlock";
 import TextLink from "../../../components/ui/TextLink";
 import "./LinkExamples.css";
 

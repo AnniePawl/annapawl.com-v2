@@ -2,7 +2,7 @@
 // Kept so it can be restored: import it in page.tsx and add an
 // "editorial-header" entry back to _data/sections.ts.
 import EditorialHeader from "../../../components/layout/EditorialHeader";
-import CodeBlock from "../_components/CodeBlock";
+import CodeBlock from "../../../components/ui/CodeBlock";
 import Section from "../_components/Section";
 import { SECTIONS } from "../_data/sections";
 import "./patterns.css";

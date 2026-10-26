@@ -1,5 +1,5 @@
 import Card, { CardBody, CardTitle } from "../../../components/ui/Card";
-import CodeBlock from "../_components/CodeBlock";
+import CodeBlock from "../../../components/ui/CodeBlock";
 import "./CardExamples.css";
 
 const USAGE = `

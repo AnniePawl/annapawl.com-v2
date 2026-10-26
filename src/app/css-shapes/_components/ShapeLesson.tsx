@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 import { SHAPES } from "../shapes";
 import { LESSONS } from "../lessons";
 import type { ShapeVariant } from "./GeometricShape";
-import ShapeCode from "./ShapeCode";
+import CodeBlock from "../../../components/ui/CodeBlock";
 import "./shape-demos.css";
 import "./shape-lesson.css";
 
@@ -65,7 +65,7 @@ export default function ShapeLesson({ shape }: { shape: ShapeVariant }) {
 
       <div className="shape-lesson-block">
         <span className="shape-lesson-label">The CSS</span>
-        <ShapeCode code={lesson.code} />
+        <CodeBlock code={lesson.code} />
       </div>
     </div>
   );

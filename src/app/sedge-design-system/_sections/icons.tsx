@@ -7,7 +7,7 @@ import {
   Puzzle,
   TrafficCone,
 } from "lucide-react";
-import CodeBlock from "../_components/CodeBlock";
+import CodeBlock from "../../../components/ui/CodeBlock";
 import Section from "../_components/Section";
 import { SECTIONS } from "../_data/sections";
 import "./icons.css";

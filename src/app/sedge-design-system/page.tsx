@@ -24,6 +24,7 @@ import MotionSection from "./_sections/motion";
 import AccessibilitySection from "./_sections/accessibility";
 import ButtonsSection from "./_sections/buttons";
 import LinksSection from "./_sections/links";
+import CodeBlocksSection from "./_sections/code-blocks";
 import CalloutsSection from "./_sections/callouts";
 import CardsSection from "./_sections/cards";
 import ModalsSection from "./_sections/modals";
@@ -298,6 +299,7 @@ export default function DesignSystemOverview() {
 {/* Components */}
             <ButtonsSection />
             <LinksSection />
+            <CodeBlocksSection />
             <CalloutsSection />
             <CardsSection />
             <ModalsSection />

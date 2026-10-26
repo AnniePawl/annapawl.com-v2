@@ -1,5 +1,5 @@
 import Accordion, { type AccordionItem } from "../../../components/ui/Accordion";
-import CodeBlock from "../_components/CodeBlock";
+import CodeBlock from "../../../components/ui/CodeBlock";
 
 const USAGE = `
 import Accordion from "@/components/ui/Accordion";

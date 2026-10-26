@@ -43,12 +43,12 @@
   margin-top: var(--space-4);
 }
 
-.dwc-page .dwc-code-figure,
+.dwc-page .code-block,
 .dwc-page .dwc-practice {
   margin-top: var(--space-5);
 }
 
-.dwc-page .dwc-code-figure + p {
+.dwc-page .code-block + p {
   margin-top: var(--space-5);
 }
 
@@ -63,7 +63,7 @@
   margin-top: var(--space-5);
 }
 
-.dwc-circle-example .dwc-code-figure {
+.dwc-circle-example .code-block {
   margin-top: 0;
 }
 
@@ -104,28 +104,6 @@
   }
 }
 
-
-.dwc-code-figure {
-  border-radius: var(--radius-xs);
-  overflow: hidden;
-  background: var(--neutral-900);
-}
-
-.dwc-code-figure pre {
-  margin: 0;
-  padding: var(--space-4);
-  overflow-x: auto;
-  font-family: monospace;
-  font-size: var(--text-xs);
-  line-height: var(--leading-relaxed);
-  color: var(--code-tone, var(--post-section-tone-soft, var(--iris-soft)));
-}
-
-@media (min-width: 768px) {
-  .dwc-code-figure pre {
-    font-size: var(--text-sm);
-  }
-}
 
 /* ---- Practice editor ---- */
 

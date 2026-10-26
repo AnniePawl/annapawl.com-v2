@@ -13,3 +13,78 @@
   font-size: 0.88em;
   line-height: 1;
 }
+
+/* ---- Code block (CodeBlock.tsx) ----
+   Charcoal, 4px corners. The code text takes the soft version of its
+   post section's color (--post-section-tone-soft), iris soft elsewhere,
+   or a `tone` override (--code-tone). */
+
+.code-block {
+  /* The custom cursor dot turns cream over the dark block. */
+  --cursor-dot-color: var(--cream);
+  position: relative;
+  border-radius: var(--radius-xs);
+  background: var(--charcoal);
+}
+
+.code-block pre {
+  margin: 0;
+  padding: var(--space-4);
+  overflow-x: auto;
+  color: var(--code-tone, var(--post-section-tone-soft, var(--iris-soft)));
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+.code-block pre code {
+  padding: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+}
+
+.code-block--copyable pre {
+  padding-right: 5.5rem;
+}
+
+.code-block-copy {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 9px;
+  border: 1px solid color-mix(in srgb, var(--cream) 22%, transparent);
+  border-radius: var(--radius-xs);
+  background: var(--charcoal);
+  color: color-mix(in srgb, var(--cream) 70%, transparent);
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: var(--font-medium);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition:
+    color var(--motion-hover-duration) var(--motion-hover-ease),
+    border-color var(--motion-hover-duration) var(--motion-hover-ease),
+    background-color var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+.code-block-copy svg {
+  width: 14px;
+  height: 14px;
+}
+
+.code-block-copy:hover {
+  border-color: color-mix(in srgb, var(--cream) 45%, transparent);
+  background: color-mix(in srgb, var(--cream) 8%, var(--charcoal));
+  color: var(--cream);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .code-block-copy {
+    transition: none;
+  }
+}

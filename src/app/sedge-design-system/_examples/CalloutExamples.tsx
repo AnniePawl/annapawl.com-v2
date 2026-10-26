@@ -1,5 +1,5 @@
 import Callout from "../../../components/ui/Callout";
-import CodeBlock from "../_components/CodeBlock";
+import CodeBlock from "../../../components/ui/CodeBlock";
 import "./CalloutExamples.css";
 
 const USAGE = `

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Section from "../_components/Section";
-import CodeBlock from "../_components/CodeBlock";
+import CodeBlock from "../../../components/ui/CodeBlock";
 import { SECTIONS } from "../_data/sections";
 import Button from "../../../components/ui/Button";
 

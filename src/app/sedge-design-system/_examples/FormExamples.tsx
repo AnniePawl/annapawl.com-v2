@@ -13,7 +13,7 @@ import {
   FieldLabel,
   FieldError,
 } from "../../../components/ui/FormField";
-import CodeBlock from "../_components/CodeBlock";
+import CodeBlock from "../../../components/ui/CodeBlock";
 import "./FormExamples.css";
 
 const USAGE = `

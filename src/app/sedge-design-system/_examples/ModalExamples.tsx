@@ -4,7 +4,7 @@ import { useState } from "react";
 import Button from "../../../components/ui/Button";
 import Modal from "../../../components/ui/Modal";
 import Drawer from "../../../components/ui/Drawer";
-import CodeBlock from "../_components/CodeBlock";
+import CodeBlock from "../../../components/ui/CodeBlock";
 import "./ModalExamples.css";
 
 const MODAL_USAGE = `

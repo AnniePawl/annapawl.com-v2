@@ -1,4 +1,4 @@
-import CodeBlock from "../_components/CodeBlock";
+import CodeBlock from "../../../components/ui/CodeBlock";
 import "./TypographyExamples.css";
 
 // Every role here mirrors the ROLES tokens in foundations/typography.css —

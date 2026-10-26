@@ -1,7 +1,7 @@
 import PageHeader from "../../../components/layout/PageHeader";
 import PageShell from "../../../components/layout/PageShell";
 import HomeLogo from "../../../components/ui/HomeLogo";
-import CodeBlock from "../_components/CodeBlock";
+import CodeBlock from "../../../components/ui/CodeBlock";
 import Section from "../_components/Section";
 import { SECTIONS } from "../_data/sections";
 import "./patterns.css";

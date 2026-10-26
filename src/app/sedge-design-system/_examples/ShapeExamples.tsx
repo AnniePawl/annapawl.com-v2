@@ -1,5 +1,5 @@
 import Shape, { type ShapeVariant } from "../../../components/ui/Shape";
-import CodeBlock from "../_components/CodeBlock";
+import CodeBlock from "../../../components/ui/CodeBlock";
 import "./ShapeExamples.css";
 
 // "Used for" reflects where each radius actually appears today — the
