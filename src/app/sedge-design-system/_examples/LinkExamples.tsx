@@ -124,7 +124,7 @@ export default function LinkExamples() {
 
       <h3 className="sedge-subheading">Tones</h3>
       <p className="link-sample">
-        Links follow the page accent by default. Pass a <code>tone</code>{" "}
+        Links follow their post section&rsquo;s color, or the page accent outside a post. Pass a <code>tone</code>{" "}
         when a section has its own color, like{" "}
         <TextLink href="#links" tone="sky-bold" data-state="default">
           sky

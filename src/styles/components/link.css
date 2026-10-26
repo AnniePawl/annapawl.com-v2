@@ -15,8 +15,10 @@
    `[data-state]` exists only for the Sedge docs' side-by-side states. */
 
 .text-link {
-  /* Declared here (not on :root) so it picks up each page's accent. */
-  --link-accent: var(--page-accent);
+  /* Declared here (not on :root) so it picks up the color around it:
+     the post section's color inside a post, else the page accent.
+     TextLink's tone prop overrides it. */
+  --link-accent: var(--post-section-tone, var(--page-accent));
   --link-line: var(--link-accent);
   --link-transition: 250ms var(--motion-ease-standard);
   --focus-ring-color: var(--text-primary);

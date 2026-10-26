@@ -365,3 +365,11 @@
     font-size: 0.6875rem;
   }
 }
+
+/* ---- Teacup build-along ----
+   The teacup itself is drawn by TeacupDemo from the CSS in teacup.ts. */
+.dwc-demo-stage--teacup {
+  isolation: isolate; /* keeps the handle's z-index: -1 above the tile */
+  min-height: 9.5rem;
+  min-width: 13rem;
+}

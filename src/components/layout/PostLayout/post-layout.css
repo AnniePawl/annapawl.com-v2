@@ -221,6 +221,11 @@
   margin: 0 0 var(--space-2);
 }
 
+/* Text that picks back up after the last subsection */
+.post-subsection + p {
+  margin-top: var(--space-6);
+}
+
 /* label: a smaller echo of the section heading, same marker */
 .post-subsection--label h3 {
   display: flex;

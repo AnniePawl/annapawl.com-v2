@@ -5,10 +5,15 @@ import PostLayout, {
 import HomeLogo from "../../components/ui/HomeLogo";
 import CodeBlock from "../../components/ui/CodeBlock";
 import { DemoStrip, DemoTile } from "./_components/DemoStrip";
+import TeacupDemo from "./_components/TeacupDemo";
+import {
+  TEACUP_CUP,
+  TEACUP_HANDLE,
+  TEACUP_SAUCER,
+} from "./_components/teacup";
 import Practice from "./_components/Practice";
 import "./drawing-with-code.css";
 import TextLink from "../../components/ui/TextLink";
-import Link from 'next/link';
 
 export default function DrawingWithCodePage() {
   return (
@@ -18,8 +23,8 @@ export default function DrawingWithCodePage() {
         description="An introduction to drawing with code—using HTML elements and CSS properties to turn simple shapes into illustrations in the browser."
         eyebrow="Creative Coding"
         title="Drawing with Code"
-        publishedDate="Oct 3, 2026"
-        readingTime="5 min read"
+        publishedDate="Updated Oct 2026"
+        readingTime="10 min read"
         postTags="CSS, Illustration, Creative Coding"
         utilityStart={
           <HomeLogo
@@ -48,7 +53,7 @@ export default function DrawingWithCodePage() {
           {
             id: "css-recap",
             label: "CSS, a little recap",
-            tone: "pink-bold",
+            tone: "plum-bold",
           },
           {
             id: "beginners-css-toolkit",
@@ -75,7 +80,7 @@ export default function DrawingWithCodePage() {
         >
           <p>
             All the knick-knacks on my{" "}
-            <Link href="/" className="text-link">homepage</Link>, from the teacup to
+            <TextLink href="/">homepage</TextLink>, from the teacup to
             the radio, are made of plain old <code>&lt;div&gt;</code>s. No images, no
             SVGs, just CSS. CSS art lies at the intersection of vector illustration
             and frontend development. Instead of drawing with a pen tool, you style
@@ -153,13 +158,13 @@ export default function DrawingWithCodePage() {
               need to be applied to give a div character.
             </p>
             <p>
-              <strong>A little tip:</strong> name each part after the thing it belongs to. On my
+              <strong>A little tip.</strong> Name each part after the thing it belongs to. On my
               homepage, the cake stand&rsquo;s top is{" "}
               <code>dessert__stand-top</code> and each squiggle of tea steam
               is <code>steam__squiggle</code>. The name before the double
               underscore tells me where a piece lives, so I never lose track
               of it. This convention is called{" "}
-              <TextLink href="https://bem.info/en/methodology/naming-convention/" tone="sky-bold">BEM</TextLink>
+              <TextLink href="https://bem.info/en/methodology/naming-convention/">BEM</TextLink>
               .
             </p>
           </PostSubsection>
@@ -172,7 +177,7 @@ export default function DrawingWithCodePage() {
           <p>
             CSS is short for Cascading Style Sheets. It&rsquo;s how you give HTML
             elements their looks, written as a series of <strong>rules</strong>,
-            usually in a separate <code>.css</code> file. Each rule has two parts:
+            usually in a separate <code>.css</code> file. Each rule has two parts,
             a <strong>selector</strong>, which points to the element you want to
             style, and a <strong>declaration block</strong> inside the curly
             braces, which says how it should look.
@@ -203,7 +208,7 @@ export default function DrawingWithCodePage() {
           </p>
           <p>
             An element can also have more than one class. On my homepage, each
-            pencil in the cup has two:{" "}
+            pencil in the cup has two,{" "}
             <code>class=&quot;pens__pencil pens__pencil--2&quot;</code>. The first
             gives every pencil its shared shape, and the second gives this one its
             own color. You might also see <strong>ID selectors</strong>, which start
@@ -257,7 +262,7 @@ export default function DrawingWithCodePage() {
               up to four values to round each corner separately, starting at
               the top left and going clockwise. Mixing values like this is how
               you get{" "}
-              <TextLink tone='teal-bold' href="/css-shapes#oval">ovals</TextLink>, leaves and
+              <TextLink href="/css-shapes#oval">ovals</TextLink>, leaves and
               petals.
             </p>
             <DemoStrip>
@@ -282,9 +287,10 @@ export default function DrawingWithCodePage() {
               parent <code>position: relative</code> and the piece{" "}
               <code>position: absolute</code>, then use <code>top</code>,{" "}
               <code>left</code>, <code>right</code> and <code>bottom</code> to
-              place the piece relative to its parent&rsquo;s edges. My teacup
-              works this way: the cup is <code>relative</code>, so its handle
-              and tea bag can sit exactly where I put them.
+              place the piece relative to its parent&rsquo;s edges. The teacup
+              we&rsquo;ll build below works this way. The cup is{" "}
+              <code>relative</code>, so its handle and saucer can sit exactly
+              where I put them.
             </p>
             <DemoStrip>
               <DemoTile
@@ -350,12 +356,12 @@ export default function DrawingWithCodePage() {
 
           <PostSubsection title="::before / ::after" variant="code">
             <p>
-              Every element comes with two extra shapes for free: its{" "}
+              Every element comes with two extra shapes for free, its{" "}
               <code>::before</code> and <code>::after</code> pseudo-elements.
               Give them <code>content: &quot;&quot;</code>, a size and a
               color, and they behave like extra divs you never had to write.
-              My teacup is a single div: <code>::before</code> draws the handle
-              and <code>::after</code> draws the tea bag.
+              In the teacup we&rsquo;ll build below, <code>::before</code>{" "}
+              draws the handle and <code>::after</code> draws the saucer.
             </p>
             <DemoStrip>
               <DemoTile
@@ -374,9 +380,9 @@ export default function DrawingWithCodePage() {
             </DemoStrip>
             <p>
               Honestly, pseudo-elements took me a while to wrap my head
-              around. Don&rsquo;t worry if this doesn&rsquo;t click yet:
-              we&rsquo;ll use both of them when we{" "}
-              <TextLink tone='teal-bold' href="#lets-build-a-teacup">build a teacup</TextLink>{" "}
+              around. Don&rsquo;t worry if this doesn&rsquo;t click yet.
+              We&rsquo;ll use both of them when we{" "}
+              <TextLink href="#lets-build-a-teacup">build a teacup</TextLink>{" "}
               below.
             </p>
           </PostSubsection>
@@ -387,7 +393,7 @@ export default function DrawingWithCodePage() {
               drawing tool. You can stack as many as you like, separated by
               commas, and a shadow with no blur draws a crisp copy of your
               shape. The{" "}
-              <TextLink tone='teal-bold' href="#try-it-out">rainbow in the playground</TextLink>{" "}
+              <TextLink href="#try-it-out">rainbow in the playground</TextLink>{" "}
               below is one div with seven stacked shadows!
             </p>
             <DemoStrip>
@@ -401,31 +407,87 @@ export default function DrawingWithCodePage() {
           </PostSubsection>
 
           <PostSubsection title="Level up">
-            <p>Once the basics feel comfortable, try these next:</p>
+            <p>Once the basics feel comfortable, try these next.</p>
             <ul className="dwc-list">
               <li>
-                <code>border</code>: outlines, plus the classic trick of
+                <code>border</code> for outlines, plus the classic trick of
                 building{" "}
-                <TextLink tone='teal-bold' href="/css-shapes#triangle">triangles</TextLink>{" "}
+                <TextLink href="/css-shapes#triangle">triangles</TextLink>{" "}
                 out of borders.
               </li>
               <li>
-                <code>overflow: hidden</code>: crops anything that spills
+                <code>overflow: hidden</code> to crop anything that spills
                 outside a shape.
               </li>
               <li>
-                <code>@keyframes</code>: animation. It&rsquo;s what makes the
+                <code>@keyframes</code> for animation. It&rsquo;s what makes the
                 steam rise from the teacup on my{" "}
-                <TextLink  tone='teal-bold' href="/">homepage</TextLink>.
+                <TextLink href="/">homepage</TextLink>.
               </li>
             </ul>
           </PostSubsection>
         </PostSection>
 
-        {/* TODO: build-along in 3–4 stages (cup body, handle, tea bag,
-            steam), each with a snippet + live preview like CSS Shapes */}
         <PostSection id="lets-build-a-teacup" title="Let’s build a teacup">
-          <p>Coming soon.</p>
+          <p>
+            Time to put the toolkit to work. We&rsquo;ll draw a little purple
+            teacup in three steps, and the whole thing is just one div.
+          </p>
+          <CodeBlock code={`<div class="teacup"></div>`} />
+
+          <PostSubsection title="Step 1 · The cup">
+            <p>
+              Give the div a size, a dark outline and a color. Rounding only
+              the bottom two corners with <code>border-radius</code> turns a
+              plain box into a cup. I keep the colors in variables at the top
+              so the whole teacup is easy to recolor later.
+            </p>
+            <DemoStrip>
+              <DemoTile label="A purple cup shape with a dark outline" caption=".teacup">
+                <TeacupDemo step={1} />
+              </DemoTile>
+            </DemoStrip>
+            <CodeBlock code={TEACUP_CUP} />
+          </PostSubsection>
+
+          <PostSubsection title="Step 2 · The handle">
+            <p>
+              The handle is the cup&rsquo;s <code>::before</code>. A thick
+              border with <code>border-radius: 50%</code> makes a ring, and{" "}
+              <code>position: absolute</code> places it on the right side.{" "}
+              <code>z-index: -1</code> tucks it behind the cup so only the
+              outer half shows. The two box-shadows draw its outline, one
+              outside the ring and one inside.
+            </p>
+            <DemoStrip>
+              <DemoTile label="The same cup with a ring-shaped handle on its right side" caption=".teacup::before">
+                <TeacupDemo step={2} />
+              </DemoTile>
+            </DemoStrip>
+            <CodeBlock code={TEACUP_HANDLE} />
+          </PostSubsection>
+
+          <PostSubsection title="Step 3 · The saucer">
+            <p>
+              The saucer is the cup&rsquo;s <code>::after</code>, a long,
+              flat, rounded bar pinned to the bottom. A negative{" "}
+              <code>left</code> value lets it stick out past both sides of
+              the cup.
+            </p>
+            <DemoStrip>
+              <DemoTile label="The finished teacup with a handle and a saucer" caption=".teacup::after">
+                <TeacupDemo step={3} />
+              </DemoTile>
+            </DemoStrip>
+            <CodeBlock code={TEACUP_SAUCER} />
+          </PostSubsection>
+
+          <p>
+            That&rsquo;s it! One div and two pseudo-elements. Try copying the
+            code into the{" "}
+            <TextLink href="#try-it-out">playground below</TextLink> or a new
+            CodePen and giving it your own colors.
+          </p>
         </PostSection>
 
         <PostSection
@@ -433,42 +495,101 @@ export default function DrawingWithCodePage() {
           title="Tips from trial and error"
         >
           <p>
-            Get ready for some serious trial and error. Drawing with code can
-            be a painstaking process that requires patience and perseverance.
-            Unlike creating a vector graphic with illustration software, you
-            can&rsquo;t exactly see what you&rsquo;re working with until your code
-            renders in the browser. Getting a shape in the right spot might
-            involve countless micro-adjustments. Stick with it!
+            Get ready for some serious trial and error. Drawing with code takes <em>a lot</em> of patience. I’ve lost entire evenings to details smaller than my thumbnail... Stick with it! These habits made it hurt much less.
           </p>
-          <p>
-            You might be asking yourself, why would anyone go through the
-            trouble of making illustrations with CSS? While it&rsquo;s not
-            practical for most applications, it&rsquo;s a fun way to develop your
-            skillset and portfolio. If you&rsquo;re an illustrator, CSS art is a
-            perfect introduction to coding. If you&rsquo;re a front-end developer,
-            drawing with code is a creative way to become more familiar with
-            the subtleties of CSS.
-          </p>
-          {/* TODO: tips: outline trick, build big then scale down,
-              palette variables, prefers-reduced-motion */}
+
+          <PostSubsection title="Sketch it first">
+            <p>
+              Before writing any code, draw your idea on paper and break it
+              into simple shapes, like a circle here, a rectangle there and
+              a half-circle on top. Each shape becomes a div. It saves a lot of
+              guesswork once you start coding, and you&rsquo;ll know exactly
+              which piece to build next.
+            </p>
+          </PostSubsection>
+
+          <PostSubsection title="Outline everything">
+            <p>
+              I&rsquo;d constantly lose track of where a shape actually was. Poof! Now
+              I add <code>{"* { outline: 1px solid red; }"}</code> while I build, and
+              every shape shows up. Use <code>outline</code> instead of{" "}
+              <code>border</code>, because an outline doesn&rsquo;t take up space and
+              won&rsquo;t shift anything around.
+            </p>
+          </PostSubsection>
+
+          <PostSubsection title="Make dev tools your best friend">
+            <p>
+              Right-click your drawing in the browser, choose{" "}
+              <strong>Inspect</strong>, and edit values right in the{" "}
+              <strong>Styles</strong> panel. You&rsquo;ll see shapes move as you
+              type. Click a value like <code>180px</code> and press the arrow keys to
+              nudge it by 1, or hold Shift to nudge by 10. Once it looks right, copy
+              the value back into your CSS.
+            </p>
+          </PostSubsection>
+
+          <PostSubsection title="Keep your colors in variables">
+            <p>
+              I change my mind about colors constantly, so I name each one once, like{" "}
+              <code>--handle: #F472B6;</code>, and use <code>var(--handle)</code>{" "}
+              everywhere it shows up. Swapping in a new palette means editing a few
+              lines in one spot instead of hunting through my whole stylesheet.
+              It&rsquo;s how I tried a dozen color combos on my homepage knick-knacks
+              without losing my mind.
+            </p>
+          </PostSubsection>
+
+          <PostSubsection title="Watch out for sneaky borders">
+            <p>
+              By default, a border adds to an element’s size, so a 180px circle with a 3px border is really 186px wide. Add <code>box-sizing: border-box</code> and the border stays inside the size you set.
+            </p>
+          </PostSubsection>
+
         </PostSection>
 
         <PostSection id="try-it-out" title="Try it out">
           <p>
-            Mess around with the CSS in the code editor below to see how you
-            can manipulate the output.
+            Your turn! Change any value in the CSS below and watch the rainbow update as you type.
           </p>
           <Practice />
         </PostSection>
 
-        {/* TODO: links to CSS Shapes, A Single Div, CSS Battle, MDN */}
         <PostSection id="keep-going" title="Keep going">
+          <p>
+            CSS art started as a little side project, and it ended up teaching me more about CSS than anything else I’ve built. Positioning, pseudo-elements, gradients and animation all clicked once I had something I actually wanted to make. It’s made me a better frontend engineer, and it’s still the most fun I have with code.
+          </p>
           <p>
             I hope you enjoy the challenge of bringing your designs to life
             with HTML and CSS. Look out for more CSS art content and share your
-            creations with the front-end community on CodePen. Happy coding!
+            creations with the frontend community on CodePen. Happy coding!
           </p>
+
+          <PostSubsection title="Where to go next">
+            <ul className="dwc-list">
+              <li>
+                <TextLink href="/css-shapes">CSS Shapes</TextLink>, my step-by-step
+                guide to twelve basic shapes, from circles to stars.
+              </li>
+              <li>
+                <TextLink href="https://codepen.io/annampawl">CodePen</TextLink>, for
+                more CSS art and little experiments, with the code right there to poke
+                at.
+              </li>
+              <li>
+                <TextLink href="https://cssbattle.dev">CSS Battle</TextLink>, daily
+                puzzles where you recreate a target image with CSS.
+              </li>
+              <li>
+                <TextLink href="https://developer.mozilla.org/en-US/docs/Web/CSS">
+                  MDN&rsquo;s CSS reference
+                </TextLink>
+                , for looking up any property when you get stuck.
+              </li>
+            </ul>
+          </PostSubsection>
         </PostSection>
+
       </PostLayout>
     </main>
   );
