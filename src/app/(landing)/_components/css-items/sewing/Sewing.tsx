@@ -1,6 +1,3 @@
-// Ported from v1 src/components/css-items/sewing/Sewing.js -- composes
-// Tape + PinCushion + SewingMachine. Decorative, no state -- stays a
-// server component.
 import { PinCushion } from "./PinCushion";
 import { SewingMachine } from "./SewingMachine";
 import { Tape } from "./Tape";

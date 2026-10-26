@@ -1,5 +1,5 @@
 import PageShell from "../../components/layout/PageShell";
-import PostHeader from "../../components/layout/PostLayout/PostHeader";
+import PageHeader from "../../components/layout/PageHeader";
 import HomeLogo from "../../components/ui/HomeLogo";
 import FavoritesFeature from "./FavoritesFeature";
 import SwatchBrowser from "./SwatchBrowser";
@@ -21,16 +21,16 @@ export default function FiberArtsPage() {
   })).filter(({ count }) => count > 0);
 
   return (
-    <PageShell className="fiber-page" accent="var(--sky-bold)">
-      <PostHeader
+    <PageShell className="fiber-page" accent="var(--plum-bold)">
+      <PageHeader
         utilityStart={
           <HomeLogo
             colors={{
-              northeast: "var(--cherry-bold)",
-              southeast: "var(--sky-bold)",
-              southwest: "var(--sky-bold)",
-              northwest: "var(--sky-bold)",
-              hoverAccent: "var(--cherry-bold)",
+              northeast: "var(--marigold-bold)",
+              southeast: "var(--plum-bold)",
+              southwest: "var(--plum-bold)",
+              northwest: "var(--plum-bold)",
+              hoverAccent: "var(--plum-bold)",
             }}
             size="1.75rem"
           />

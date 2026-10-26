@@ -1,5 +1,4 @@
-// Ported from v1 src/components/css-items/books/Books.js. Decorative,
-// no state -- stays a server component.
+// Horizonal book stack
 import "./books.css";
 
 export function Books({ cn }: { cn?: string }) {

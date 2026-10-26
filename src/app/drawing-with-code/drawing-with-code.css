@@ -1,28 +1,13 @@
-/* Drawing with Code's page accent: red. */
 .dwc-page {
   --page-accent: var(--red-bold);
   --page-accent-tint: color-mix(in srgb, var(--red-soft) 55%, var(--cream));
   --page-accent-ink: var(--charcoal);
 }
 
-/* ---- Drawing with Code page ----
-   Ported from the old annapawl.com repo's "dwc" (Drawing With Code) page —
-   a CSS-art teaching page with a grid of pure-CSS shapes and a live
-   HTML/CSS practice editor. The heading + shapes grid below are reverted
-   to the ORIGINAL page's exact design (hardcoded hex colors, original
-   pixel sizes/breakpoints, Tailwind-default heading type) per Anna's
-   request — she wants that part pixel-for-pixel like v1. Everything past
-   the shapes grid (prose, editor) still uses this site's own design
-   tokens (foundations/) as originally restyled. The original palette is
-   also kept as a standalone reference in claude/project-status.md. */
-
 .dwc-page {
   min-height: 100vh;
   background: var(--cream);
 }
-
-/* ---- Prose sections ---- */
-
 
 .dwc-prose {
   width: 100%;
@@ -42,27 +27,19 @@
   }
 }
 
-.dwc-prose-sub {
-  margin-top: var(--space-5);
-  margin-left: var(--space-5);
+.dwc-list {
+  display: grid;
+  gap: var(--space-2);
+  margin: var(--space-3) 0 0;
+  padding-left: 1.25rem;
+  list-style: disc;
 }
 
-@media (min-width: 768px) {
-  .dwc-prose-sub {
-    margin-left: var(--space-8);
-  }
+.dwc-list li::marker {
+  color: var(--post-section-tone);
 }
 
-.dwc-prose-sub h3 {
-  margin: 0 0 var(--space-2);
-  font-family: var(--font-mono);
-  font-size: var(--text-base);
-  font-weight: var(--font-bold);
-  line-height: var(--leading-snug);
-  color: var(--emerald-bold);
-}
-
-.dwc-page .post-section > p + p {
+.dwc-page .post-section>p+p {
   margin-top: var(--space-4);
 }
 
@@ -71,14 +48,8 @@
   margin-top: var(--space-5);
 }
 
-.dwc-page .post-section p code {
-  padding: 0.06em 0.22em;
-  border-radius: 0;
-  background: var(--neutral-100);
-  color: var(--neutral-900);
-  font-family: var(--font-mono);
-  font-size: 0.88em;
-  line-height: 1;
+.dwc-page .dwc-code-figure + p {
+  margin-top: var(--space-5);
 }
 
 .dwc-page .post-section p strong {
@@ -89,7 +60,6 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-4);
-  align-items: stretch;
   margin-top: var(--space-5);
 }
 
@@ -113,14 +83,14 @@
   aspect-ratio: 1;
   place-items: center;
   border-radius: 50%;
-  background: var(--plum-bold);
+  background: var(--sky-bold);
 }
 
 .dwc-circle-example-inner {
   width: 52%;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: var(--marigold-bold);
+  background: var(--lemon-bold);
 }
 
 @media (min-width: 700px) {
@@ -128,19 +98,15 @@
     grid-template-columns: minmax(13rem, 0.75fr) minmax(0, 1.5fr);
   }
 
-  .dwc-circle-example .dwc-code-figure,
-  .dwc-circle-example .dwc-code-figure pre {
-    height: 100%;
-  }
-
-  .dwc-circle-example .dwc-code-figure pre {
-    display: flex;
+  /* Code block hugs its code, centered beside the demo */
+  .dwc-circle-example {
     align-items: center;
   }
 }
 
+
 .dwc-code-figure {
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xs);
   overflow: hidden;
   background: var(--neutral-900);
 }
@@ -152,7 +118,7 @@
   font-family: monospace;
   font-size: var(--text-xs);
   line-height: var(--leading-relaxed);
-  color: var(--iris-soft);
+  color: var(--code-tone, var(--post-section-tone-soft, var(--iris-soft)));
 }
 
 @media (min-width: 768px) {
@@ -169,7 +135,7 @@
   margin-inline: auto;
 
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xs);
   overflow: hidden;
 }
 
@@ -194,7 +160,7 @@
 
 @media (min-width: 640px) {
   .dwc-editor:first-child {
-    border-right: 2px solid var(--periwinkle-soft);
+    border-right: 2px solid var(--marigold-bold);
     border-bottom: none;
   }
 }
@@ -205,7 +171,7 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: var(--space-2) var(--space-3);
-  background: var(--periwinkle-soft);
+  background: var(--marigold-bold);
   color: var(--text-primary);
 }
 
@@ -228,7 +194,196 @@
   width: 100%;
   height: 255px;
   border: none;
-  border-top: 2px solid var(--periwinkle-soft);
+  border-top: 2px solid var(--marigold-bold);
   background: var(--bg-default);
 }
+/* ---- Toolkit demo strips (DemoStrip.tsx) ----
+   Small live drawings under toolkit entries, in the section's colors. */
+.dwc-demo-strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
 
+/* A tile block reads heavier than a line of text, so it gets more room
+   before the next sub-section heading. This margin collapses with that
+   subsection's own 28px top margin, so it sets the total gap: 36px. */
+.dwc-demo-strip:last-child {
+  margin-bottom: 2.25rem;
+}
+
+.dwc-demo-strip + p {
+  margin-top: var(--space-4);
+}
+
+.dwc-demo-tile {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: var(--space-3);
+  min-height: 7.25rem;
+  margin: 0;
+  padding: var(--space-4) var(--space-2);
+  border-radius: var(--radius-xs);
+  background: color-mix(in srgb, var(--post-section-tone-soft) 38%, var(--bg-default));
+}
+
+.dwc-demo-stage {
+  display: grid;
+  place-items: center;
+  min-height: 3.5rem;
+}
+
+.dwc-demo-caption {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+
+/* Shapes */
+.dwc-demo-shape {
+  width: 3.5rem;
+  height: 3.5rem;
+  background: var(--post-section-tone);
+}
+
+.dwc-demo-shape--cup {
+  border-radius: 0 0 18px 18px;
+}
+
+.dwc-demo-shape--circle {
+  border-radius: 50%;
+}
+
+/* position: a cup with an absolutely placed handle */
+.dwc-demo-cup {
+  position: relative;
+  width: 4.875rem;
+  height: 3.875rem;
+  margin-right: 1.25rem;
+  border-radius: 0 0 16px 16px;
+  background: var(--post-section-tone);
+}
+
+.dwc-demo-cup__handle {
+  position: absolute;
+  top: 10px;
+  left: 70px;
+  width: 26px;
+  height: 30px;
+  border: 7px solid var(--charcoal);
+  border-left: 0;
+  border-radius: 0 50% 50% 0;
+}
+
+/* transform: a ghost where it started, the shape where it moved */
+.dwc-demo-move {
+  position: relative;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-right: 1.75rem;
+  border: 1.5px dashed color-mix(in srgb, var(--charcoal) 45%, transparent);
+}
+
+.dwc-demo-move::after {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  background: var(--post-section-tone);
+  transform: translateX(28px);
+}
+
+/* z-index: two overlapping circles */
+.dwc-demo-stack {
+  position: relative;
+  width: 5.25rem;
+  height: 3.5rem;
+}
+
+.dwc-demo-stack i {
+  position: absolute;
+  top: 0;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+}
+
+.dwc-demo-stack i:first-child {
+  left: 0;
+  background: var(--marigold-bold);
+}
+
+.dwc-demo-stack i:last-child {
+  right: 0;
+  background: var(--post-section-tone);
+}
+
+.dwc-demo-stack--front i:first-child {
+  z-index: 2;
+}
+
+/* ::before / ::after: one div, two extra shapes */
+.dwc-demo-pseudo {
+  position: relative;
+  width: 3.5rem;
+  height: 3.5rem;
+  background: var(--post-section-tone);
+}
+
+.dwc-demo-pseudo::before,
+.dwc-demo-pseudo::after {
+  content: "";
+  position: absolute;
+}
+
+.dwc-demo-pseudo::before {
+  top: 14px;
+  left: -14px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--marigold-bold);
+}
+
+.dwc-demo-pseudo::after {
+  right: -14px;
+  bottom: -10px;
+  width: 26px;
+  height: 18px;
+  background: var(--iris-bold);
+}
+
+.dwc-demo-key {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-right: 0.3em;
+  vertical-align: baseline;
+}
+
+.dwc-demo-key--before { background: var(--marigold-bold); border-radius: 50%; }
+.dwc-demo-key--after { background: var(--iris-bold); }
+
+/* box-shadow: stacked, blur-free rings */
+.dwc-demo-rings {
+  width: 1.75rem;
+  height: 1.75rem;
+  margin: 1.5rem;
+  border-radius: 50%;
+  background: var(--post-section-tone);
+  box-shadow:
+    0 0 0 8px var(--post-section-tone-soft),
+    0 0 0 16px var(--iris-bold),
+    0 0 0 24px var(--marigold-bold);
+}
+
+@media (max-width: 480px) {
+  .dwc-demo-caption {
+    font-size: 0.6875rem;
+  }
+}

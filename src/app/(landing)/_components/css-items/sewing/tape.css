@@ -1,13 +1,9 @@
-/* Styles for Tape.tsx (same folder). */
-
 .landing {
   --tape-body: var(--lemon-soft);
   --tape-edge: var(--marigold-bold);
   --tape-marks: var(--charcoal);
   --tape-hook: color-mix(in srgb, var(--charcoal) 25%, var(--cream));
 }
-
-/* ---- Tape ---- */
 
 .tape {
   position: relative;
@@ -30,13 +26,11 @@
   &::before {
     height: 5.5px;
     width: 34px;
-    background-image: repeating-linear-gradient(
-      to right,
-      transparent,
-      transparent 11%,
-      var(--tape-marks) 11%,
-      var(--tape-marks) 16%
-    );
+    background-image: repeating-linear-gradient(to right,
+        transparent,
+        transparent 11%,
+        var(--tape-marks) 11%,
+        var(--tape-marks) 16%);
   }
 
   &::after {
@@ -67,13 +61,11 @@
   &::before {
     height: 47.6px;
     width: 55%;
-    background-image: repeating-linear-gradient(
-      to bottom,
-      transparent,
-      transparent 10%,
-      var(--tape-marks) 10%,
-      var(--tape-marks) 13%
-    );
+    background-image: repeating-linear-gradient(to bottom,
+        transparent,
+        transparent 10%,
+        var(--tape-marks) 10%,
+        var(--tape-marks) 13%);
   }
 
   &::after {
@@ -90,9 +82,11 @@
 .tape:hover .tape__bottom {
   animation: tape-animation1 2s;
 }
+
 .tape:hover .tape__bottom::before {
   animation: tape-animation2 2s;
 }
+
 .tape:hover .tape__bottom::after {
   animation: tape-animation3 2s;
 }
@@ -101,10 +95,12 @@
 .tablet-tape .tape__bottom {
   animation: tape-animation1 6s 1s infinite;
 }
+
 .mobile-tape .tape__bottom::before,
 .tablet-tape .tape__bottom::before {
   animation: tape-animation2 6s 1s infinite;
 }
+
 .mobile-tape .tape__bottom::after,
 .tablet-tape .tape__bottom::after {
   animation: tape-animation3 6s 1s infinite;
@@ -115,27 +111,27 @@
     height: 102px;
   }
 }
+
 @keyframes tape-animation2 {
   50% {
     height: 102px;
-    background-image: repeating-linear-gradient(
-      to bottom,
-      transparent,
-      transparent 6%,
-      var(--tape-marks) 6%,
-      var(--tape-marks) 7.5%
-    );
+    background-image: repeating-linear-gradient(to bottom,
+        transparent,
+        transparent 6%,
+        var(--tape-marks) 6%,
+        var(--tape-marks) 7.5%);
   }
 }
+
 @keyframes tape-animation3 {
   50% {
     transform: translateY(52.7px);
   }
 }
 
-/* Reduced motion -- disables this item's animations (hover-triggered
-   and autoplay alike). Source (v1) had no reduced-motion handling. */
+/* Reduced motion -- disables this item's animations */
 @media (prefers-reduced-motion: reduce) {
+
   .tape__bottom,
   .tape__bottom::before,
   .tape__bottom::after {

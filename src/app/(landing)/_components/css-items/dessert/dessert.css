@@ -1,19 +1,18 @@
+/* ============================================================
+   Layered cake stand — src/components/css-items/dessert
+   ============================================================ */
+
 .landing {
   --cake-accent: var(--cherry-bold);
   --stand-glass: color-mix(in srgb, var(--ivory) 40%, transparent);
   --stand-glass-edge: rgb(241, 241, 241);
   --stand-base: var(--coral-bold);
-  --stand-base-light:var(--coral-soft);
+  --stand-base-light: var(--coral-soft);
   --cake-sponge: var(--periwinkle-soft);
   --cake-layer: var(--cherry-bold);
   --cake-jam: var(--lemon-soft);
   --cake-frosting: color-mix(in srgb, var(--lemon-bold) 71%, transparent);
 }
-
-/* ============================================================
-   Dessert stand — src/components/css-items/dessert
-   ============================================================ */
-
 
 .dessert-container {
   --glass-height: 80px;
@@ -146,28 +145,28 @@
   }
 }
 
- .dessert__top {
-    z-index: 4;
-    transform: scale(0.53) translateY(-44px);
-    position: absolute;
-    height: var(--cake-height);
-    width: var(--cake-width);
-    border-right: 3px solid var(--cake-clr3);
-    border-left: 3px solid var(--cake-clr3);
-    border-top: 3px solid var(--cake-clr3);
-    border-radius: 3px 3px 0 0;
-    background: linear-gradient(45deg,
-        var(--cake-clr3) 0 25%,
-        transparent 0 75%,
-        var(--cake-clr3) 75%),
-      linear-gradient(45deg, var(--cake-clr3) 0 25%, transparent 0 75%, var(--cake-clr3) 75%);
-    background-color: var(--cake-sponge);
-    --top-check: 27px;
-    --top-nudge: -1px;
-    background-size: var(--top-check) var(--top-check);
-    background-position: 0 var(--top-nudge),
-      calc(var(--top-check) / 2) calc(var(--top-check) / 2 + var(--top-nudge));
-  }
+.dessert__top {
+  z-index: 4;
+  transform: scale(0.53) translateY(-44px);
+  position: absolute;
+  height: var(--cake-height);
+  width: var(--cake-width);
+  border-right: 3px solid var(--cake-clr3);
+  border-left: 3px solid var(--cake-clr3);
+  border-top: 3px solid var(--cake-clr3);
+  border-radius: 3px 3px 0 0;
+  background: linear-gradient(45deg,
+      var(--cake-clr3) 0 25%,
+      transparent 0 75%,
+      var(--cake-clr3) 75%),
+    linear-gradient(45deg, var(--cake-clr3) 0 25%, transparent 0 75%, var(--cake-clr3) 75%);
+  background-color: var(--cake-sponge);
+  --top-check: 27px;
+  --top-nudge: -1px;
+  background-size: var(--top-check) var(--top-check);
+  background-position: 0 var(--top-nudge),
+    calc(var(--top-check) / 2) calc(var(--top-check) / 2 + var(--top-nudge));
+}
 
 .dessert__spiral {
   visibility: hidden;
@@ -211,8 +210,7 @@
   }
 }
 
-/* Reduced motion -- disables this item's animations (hover-triggered
-   and autoplay alike). Source (v1) had no reduced-motion handling. */
+/* Reduced motion -- disables this item's animations  */
 @media (prefers-reduced-motion: reduce) {
   .dessert__spiral {
     animation: none !important;

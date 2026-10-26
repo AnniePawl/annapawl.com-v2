@@ -1,11 +1,5 @@
 "use client";
 
-// Ported from src/components/css-items/radio/radio.js. The source
-// already used real <button> elements for the tune controls (good
-// baseline accessibility) -- this just adds accessible names and an
-// aria-live region for the station readout, and keeps everything else
-// (including the station math) unchanged. Decorative frame/body marked
-// aria-hidden; the interactive controls are not.
 import { useState } from "react";
 import "./radio.css";
 
@@ -14,15 +8,15 @@ export function Radio({ cn }: { cn?: string }) {
 
   return (
     <div className={`radio-container ${cn ?? ""}`}>
-      <div className="radio-top" aria-hidden="true" />
-      <div className="radio-bottom">
-        <div className="radio-display-station" aria-live="polite">
+      <div className="radio__top" aria-hidden="true" />
+      <div className="radio__bottom">
+        <div className="radio__display" aria-live="polite">
           {station.toFixed(1)}
         </div>
-        <div className="radio-buttons">
+        <div className="radio__buttons">
           <button
             type="button"
-            className="radio-button1 focus-ring"
+            className="radio__tune-down focus-ring"
             aria-label="Tune station down"
             onClick={() => setStation((s) => Math.round((s - 0.5) * 10) / 10)}
           >
@@ -30,7 +24,7 @@ export function Radio({ cn }: { cn?: string }) {
           </button>
           <button
             type="button"
-            className="radio-button2 focus-ring"
+            className="radio__tune-up focus-ring"
             aria-label="Tune station up"
             onClick={() => setStation((s) => Math.round((s + 0.5) * 10) / 10)}
           >
@@ -38,6 +32,9 @@ export function Radio({ cn }: { cn?: string }) {
           </button>
         </div>
       </div>
+      <span role="tooltip" className="tooltip tooltip--top radio__tooltip">
+        WQXR is my fave station. Try the lil buttons, too!
+      </span>
     </div>
   );
 }

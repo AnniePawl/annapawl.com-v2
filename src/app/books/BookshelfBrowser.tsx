@@ -19,15 +19,6 @@ interface BookshelfBrowserProps {
   tags: TagCount[];
 }
 
-/**
- * The body of the bookshelf: a sticky tag rail on the left and the year-by-
- * year cover grid on the right. Picking a tag filters the grid in place
- * (other tags fade back); picking it again, or "Show all", clears it.
- *
- * Layout is one CSS grid (books.css) so the rail's label row and the first
- * year heading share a rule, and the first tag lines up with the first row
- * of covers. Under 40rem the rail becomes a sticky horizontal strip.
- */
 export default function BookshelfBrowser({ sections, tags }: BookshelfBrowserProps) {
   const [selected, setSelected] = useState<string | null>(null);
 
@@ -57,7 +48,7 @@ export default function BookshelfBrowser({ sections, tags }: BookshelfBrowserPro
   return (
     <div className="bookshelf-browser" data-filtered={selected ? "true" : undefined}>
       <div className="bookshelf-rail-label">
-        <span className="bookshelf-label">Filter by tag</span>
+        <span className="type-note-label">Filter by tag</span>
         {selected ? (
           <button
             type="button"

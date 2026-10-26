@@ -1,6 +1,6 @@
 .shape-code-wrap {
-  /* The custom cursor dot reads this from whatever it's over, so it turns
-     cream on the dark code block instead of disappearing. */
+  /* Custom cursor dot reads this from whatever it's over, so it turns
+     white on dark code block instead of disappearing. */
   --cursor-dot-color: var(--cream);
   position: relative;
   margin: var(--space-4) 0 0;

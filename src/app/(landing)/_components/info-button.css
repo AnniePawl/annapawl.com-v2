@@ -1,9 +1,3 @@
-/* ---- Info button (InfoButton.tsx) ----
-   The ⓘ button on each layout and the extras inside its "about this page"
-   pop-up. The pop-up itself is the shared ui/Modal (styles/components/
-   modal.css); this only styles what's specific to the landing one.
-   Imported by InfoButton.tsx. */
-
 .landing-info-btn {
   position: absolute;
   display: inline-flex;
@@ -21,7 +15,6 @@
 .landing-info-btn svg {
   width: 1.5rem;
   height: 1.5rem;
-  /* Eases into periwinkle on hover (see the hover rule below) */
   transition: fill var(--motion-hover-duration) var(--motion-hover-ease);
 }
 
@@ -35,13 +28,11 @@
   }
 }
 
-
 .landing-desktop-about-info {
   top: 20px;
   right: 25px;
   width: 44px;
   height: 44px;
-  /* Keep the trigger above the positioned shelf background. */
   z-index: 10;
 }
 
@@ -61,19 +52,19 @@
   z-index: 10;
 }
 
-/* ---- Inside the pop-up ---- */
+/* Modal */
 
 .landing-info-modal {
   --page-accent: var(--coral-bold);
 }
 
-/* Small print in the about-this-page modal (reduced motion note) */
+/* reduced motion note */
 .landing-modal-note {
   color: var(--text-muted);
   font-size: 0.8125rem;
 }
 
-/* "Hover" in the pop-up: colored, and it floats (keyframes in landing.css). */
+/* "Hover" color+float */
 .landing-float-word {
   display: inline-block;
   color: var(--coral-bold);

@@ -1,12 +1,8 @@
-/* ---- Bookshelf page ----
-   Header: the shared PostHeader (post-layout.css) with a lede, the same
-   anatomy as article pages like Drawing with Code. Body: a sticky tag
-   rail beside the year-by-year cover grid (BookshelfBrowser.tsx). */
+/* Bookshelf page. Header: the shared PostHeader (post-layout.css) */
 
 .bookshelf-page.page-shell {
   --bookshelf-accent: var(--blue-bold);
   --bookshelf-rule: color-mix(in srgb, var(--charcoal) 58%, transparent);
-  /* Buttons: cherry accents on a dusty-rose tint. */
   --page-accent: var(--cherry-bold);
   --page-accent-tint: color-mix(in srgb, var(--cherry-bold) 12%, var(--cream));
   --page-accent-ink: var(--cream);
@@ -16,16 +12,12 @@
   background: var(--cream);
 }
 
-/* "Bookshelf" + its accent block should stay on one line; the article
-   header's 8ch cap is tuned for multi-word titles. */
 .bookshelf-page .post-header-title {
   max-width: none;
 }
 
-/* ---- Details rule: counts + stats trigger ---- */
 .bookshelf-page .post-header-details {
-  /* The stats button makes the right side taller; keep both sides
-     vertically centered in the bar. */
+  /* stats button makes right side taller. keep both sides centered in the bar. */
   align-items: center;
 }
 
@@ -39,10 +31,7 @@
 
 
 
-
-/* ---- Body layout ----
-   One grid: row 1 = rail label + first year heading (shared rule),
-   row 2 = rail + covers, so the first tag aligns with the first covers. */
+/*  Body layout */
 .bookshelf-browser {
   display: grid;
   grid-template-columns: minmax(12.5rem, 18.75rem) minmax(0, 1fr);
@@ -67,11 +56,6 @@
   align-self: end;
 }
 
-.bookshelf-label {
-  font-size: 0.75rem;
-  font-style: italic;
-  font-weight: var(--font-bold);
-}
 
 .bookshelf-text-button {
   padding: 0;
@@ -83,6 +67,13 @@
   text-decoration: underline;
   text-underline-offset: 0.18em;
   cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+@media (hover: hover) {
+  .bookshelf-text-button:hover {
+    color: var(--blue-bold);
+  }
 }
 
 .bookshelf-year-title {
@@ -111,7 +102,7 @@
   margin-top: var(--space-9);
 }
 
-/* ---- Tag rail ---- */
+/* Tag rail  */
 .bookshelf-rail {
   position: sticky;
   top: var(--space-5);
@@ -140,7 +131,7 @@
   transition: color var(--motion-hover-duration) var(--motion-hover-ease);
 }
 
-/* "All" only exists in the mobile strip; desktop uses "Show all". */
+/* "All" only in mobile strip. desktop uses "Show all". */
 .bookshelf-rail-all {
   display: none;
 }
@@ -165,7 +156,7 @@
   text-underline-offset: 0.18em;
 }
 
-/* While a tag is selected, the others fade back. */
+/* When tag is selected, others tags fade. */
 .bookshelf-browser[data-filtered] .bookshelf-rail-tag:not([aria-pressed="true"]) {
   color: var(--text-muted);
 }
@@ -174,7 +165,7 @@
   opacity: 0.35;
 }
 
-/* ---- Cover grid + tiles ---- */
+/* Cover grid + tiles */
 .bookshelf-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(9.375rem, 1fr));
@@ -186,10 +177,7 @@
   background: var(--bg-subtle);
 }
 
-/* Favorite: a swallowtail bookmark ribbon hanging from the top edge, with
-   a darker fold where it tucks over the cover. The shape is clipped on
-   ::before; the thin cream edge is a drop-shadow on the wrapper (a filter
-   on the clipped element itself would be clipped away too). */
+/* Favorite books have ribbon book mark */
 .bookshelf-ribbon {
   --ribbon-fold: color-mix(in srgb, var(--bookshelf-accent) 75%, var(--charcoal));
   position: absolute;
@@ -229,7 +217,7 @@
   font-size: 0.75rem;
 }
 
-/* ---- Stats drawer: fiction / nonfiction split ---- */
+/* Stats modal: fiction / nonfiction split*/
 .bookshelf-split {
   display: flex;
   gap: 2px;
@@ -270,7 +258,7 @@
   letter-spacing: -0.01em;
 }
 
-/* ---- Stats drawer: tag breakdown bars ---- */
+/* Stats modal: tag breakdown bars  */
 .bookshelf-tag-bars {
   display: flex;
   flex-direction: column;
@@ -320,9 +308,8 @@
   }
 }
 
-/* ---- Mobile: rail becomes a sticky horizontal strip ---- */
+/* Mobile: rail becomes  sticky horizontal strip  */
 @media (width < 40rem) {
-  /* Details rule stacks: collection note on top, counts + stats below. */
   .bookshelf-page .post-header-details {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--space-2);

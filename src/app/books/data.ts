@@ -1,15 +1,11 @@
 import type { BookLookup } from "../../lib/googleBooks";
 
-/**
- * Your reading list, grouped by year. Google Books can usually find a book
- * from title + author alone — only add `isbn` if a search picks the wrong
- * edition or comes back empty.
- *
- * Years render newest-first automatically (src/app/books/page.tsx sorts
- * the keys), so just add a new year object here whenever one starts.
- */
+//  Reading list grouped by year. Google Books can usually find book from title + author but sometimes isbn needed.
+// Years render newest-first (src/app/books/page.tsx sorts
+// the keys). Just add new year object when needed
+
 export const booksByYear: Record<number, BookLookup[]> = {
-2026: [
+  2026: [
     { title: "Open Throat", volumeId: "SZyDEAAAQBAJ", author: "Henry Hoke", tags: ["Literary Fiction", "LGBTQ+", "Book Club"], firstPublished: 2023 },
     { title: "Martyr", volumeId: "uRC7EAAAQBAJ", author: "Kaveh Akbar", tags: ["Literary Fiction", "LGBTQ+", "Book Club"], firstPublished: 2024 },
     { title: "Betty", author: "Tiffany McDaniel", volumeId: "hOO3DwAAQBAJ", tags: ["Historical Fiction", "Favorites", "Made Me Cry", "Book Club"], firstPublished: 2020 },
@@ -46,12 +42,7 @@ export const booksByYear: Record<number, BookLookup[]> = {
 };
 
 
-// firstPublished = the original publication year (original-language
-// edition for translations, e.g. Blindness 1995, Perfection 2022). Reading
-// stats use it instead of Google's date, which is often a later edition.
-//
-// Tag set (keep to these so the rail stays useful — colors in tagTones.ts):
-// Genre (1–2 per book): Literary Fiction, Historical Fiction, Science Fiction,
-//   Fantasy, Romance, Nonfiction
+
+// Genre: Literary Fiction, Historical Fiction, Science Fiction, Fantasy, Romance, Nonfiction
 // Theme: Dystopian, Adventure, Survival, LGBTQ+
 // Personal: Favorites, Made Me Cry, Book Club

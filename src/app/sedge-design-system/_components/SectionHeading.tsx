@@ -3,7 +3,7 @@ import { SECTIONS } from "../_data/sections";
 
 /**
  * Section heading: big title + a solid block in its group's color (the same
- * title mark PostHeader uses across the site), and on the right the
+ * title mark PageHeader uses across the site), and on the right the
  * section's sidebar icon + group label. Group colors live in section.css
  * (keyed by data-group) so every section in a group shares one tone.
  */

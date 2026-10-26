@@ -1,4 +1,7 @@
-/* Pencil cup colors, named by the part they paint. */
+/* ============================================================
+   Pens + cup — src/components/css-items/writing (Pens.js)
+   ============================================================ */
+
 .landing {
   /* Cup */
   --cup-outline: color-mix(in srgb, var(--pink-bold) 80%, var(--cream));
@@ -29,26 +32,24 @@
   --pencil-blue-side: var(--blue-soft);
 }
 
-/* ============================================================
-   Pens + cup — src/components/css-items/writing (Pens.js)
-   ============================================================ */
 
 .desktop-pens-container,
 .tablet-pens-container {
   transform: translateY(-155px) scale(0.98);
 }
+
 .mobile-pens-container {
   transform: translateY(-151px) scale(0.93);
 }
 
-.cup-contents {
+.pens__contents {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   transform: translateY(23px);
 }
 
-.cup {
+.pens__cup {
   border: 3px solid var(--cup-outline);
   position: relative;
   height: 55px;
@@ -80,7 +81,7 @@
   }
 }
 
-.ruler {
+.pens__ruler {
   display: flex;
   position: relative;
   z-index: 0;
@@ -96,13 +97,11 @@
     height: 95px;
     width: 10.8px;
     transform: translateY(5px);
-    background-image: repeating-linear-gradient(
-      to bottom,
-      transparent,
-      transparent 7%,
-      var(--ruler-marks) 7%,
-      var(--ruler-marks) 8.5%
-    );
+    background-image: repeating-linear-gradient(to bottom,
+        transparent,
+        transparent 7%,
+        var(--ruler-marks) 7%,
+        var(--ruler-marks) 8.5%);
   }
 
   &::after {
@@ -115,7 +114,7 @@
   }
 }
 
-.pen {
+.pens__pen {
   position: relative;
   z-index: 1;
   height: 65px;
@@ -147,7 +146,7 @@
   }
 }
 
-.pencil {
+.pens__pencil {
   position: relative;
   height: 80px;
   width: 3px;
@@ -173,14 +172,14 @@
   }
 }
 
-.pencil--1 {
+.pens__pencil--1 {
   z-index: 0;
   background-color: var(--pencil-yellow);
   box-shadow: 3px 0 var(--pencil-yellow-side);
   transform: rotate(-3deg) translateX(-6px);
 }
 
-.pencil--2 {
+.pens__pencil--2 {
   background-color: var(--pencil-blue);
   box-shadow: 3px 0 var(--pencil-blue-side);
   transform: rotate(5deg) translatex(-1.5px);
@@ -191,59 +190,68 @@
     transform: translateX(-5px) translateY(-8px) rotate(-8deg);
   }
 }
+
 @keyframes pen-animation {
   50% {
     transform: translateX(-6px) translateY(7px);
   }
 }
+
 @keyframes pencil1-animation {
   25% {
     transform: rotate(-3deg) translateX(-5px) translateY(7px);
   }
 }
+
 @keyframes pencil2-animation {
   75% {
     transform: rotate(5deg) translateX(-1px) translateY(10px);
   }
 }
 
-.desktop-pens-container:hover .cup-contents .ruler {
+.desktop-pens-container:hover .pens__contents .pens__ruler {
   animation: ruler-animation 3s infinite;
 }
-.desktop-pens-container:hover .cup-contents .pen {
+
+.desktop-pens-container:hover .pens__contents .pens__pen {
   animation: pen-animation 2s infinite;
 }
-.desktop-pens-container:hover .cup-contents .pencil--1 {
+
+.desktop-pens-container:hover .pens__contents .pens__pencil--1 {
   animation: pencil1-animation 2s infinite;
 }
-.desktop-pens-container:hover .cup-contents .pencil--2 {
+
+.desktop-pens-container:hover .pens__contents .pens__pencil--2 {
   animation: pencil2-animation 2s infinite;
 }
 
-.mobile-pens-container .cup-contents .ruler,
-.tablet-pens-container .cup-contents .ruler {
+.mobile-pens-container .pens__contents .pens__ruler,
+.tablet-pens-container .pens__contents .pens__ruler {
   animation: ruler-animation 5.5s infinite;
 }
-.mobile-pens-container .cup-contents .pen,
-.tablet-pens-container .cup-contents .pen {
+
+.mobile-pens-container .pens__contents .pens__pen,
+.tablet-pens-container .pens__contents .pens__pen {
   animation: pen-animation 4.5s infinite;
 }
-.mobile-pens-container .cup-contents .pencil--1,
-.tablet-pens-container .cup-contents .pencil--1 {
+
+.mobile-pens-container .pens__contents .pens__pencil--1,
+.tablet-pens-container .pens__contents .pens__pencil--1 {
   animation: pencil1-animation 4.5s infinite;
 }
-.mobile-pens-container .cup-contents .pencil--2,
-.tablet-pens-container .cup-contents .pencil--2 {
+
+.mobile-pens-container .pens__contents .pens__pencil--2,
+.tablet-pens-container .pens__contents .pens__pencil--2 {
   animation: pencil2-animation 4.5s infinite;
 }
 
-/* Reduced motion -- disables this item's animations (hover-triggered
-   and autoplay alike). Source (v1) had no reduced-motion handling. */
+/* Reduced motion -- disables this item's animations */
 @media (prefers-reduced-motion: reduce) {
-  .cup-contents .ruler,
-  .cup-contents .pen,
-  .cup-contents .pencil--1,
-  .cup-contents .pencil--2 {
+
+  .pens__contents .pens__ruler,
+  .pens__contents .pens__pen,
+  .pens__contents .pens__pencil--1,
+  .pens__contents .pens__pencil--2 {
     animation: none !important;
   }
 }

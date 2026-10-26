@@ -1,5 +1,6 @@
 import PostLayout, {
   PostSection,
+  PostSubsection,
 } from "../../../components/layout/PostLayout/PostLayout";
 import CodeBlock from "../_components/CodeBlock";
 import Section from "../_components/Section";
@@ -23,9 +24,17 @@ const USAGE = `<PostLayout
     { id: "the-div", label: "It’s all about the <div>", tone: "iris-bold" },
   ]}
 >
-  <p>CSS art lies at the intersection of vector illustration and front-end development.</p>
   <PostSection id="what-is-it" title="What is drawing with code?">
     <p>Post copy...</p>
+
+    {/* Subsections take the section's color. "label" (default) is a small
+        heading with a marker; "code" keeps code headings lowercase + mono. */}
+    <PostSubsection title="Parent <div>">
+      <p>Every CSS composition starts with a parent div.</p>
+    </PostSubsection>
+    <PostSubsection title="border-radius" variant="code">
+      <p>This rounds your element’s corners.</p>
+    </PostSubsection>
   </PostSection>
 </PostLayout>`;
 
@@ -36,7 +45,7 @@ export default function PostLayoutSection() {
       heading={meta.title}
       icon={meta.icon}
       lede="The complete structure for long-form posts."
-      description="It keeps the post header, publishing details, contents rail, reading column, and colored section markers together so they cannot be assembled in mismatched combinations."
+      description="One component for every long-form post: the header, publishing details, contents rail and reading column all come together, so every post is built the same way. Each section gets a color, and that color flows through everything: its marker in the contents list, the square beside its heading, its subheading markers, and even the text in its code blocks (in the soft version). Change a section’s color once and the whole section follows."
     >
       <div className="pattern-preview pattern-preview--post">
         <PostLayout
@@ -74,11 +83,6 @@ export default function PostLayoutSection() {
             { id: "try-it", label: "Try it out", tone: "marigold-bold" },
           ]}
         >
-          <p>
-            CSS art lies at the intersection of vector illustration and
-            front-end development. It involves manipulating &lt;div&gt; HTML
-            elements with CSS to render shapes in the browser.
-          </p>
           <PostSection
             id="what-is-it"
             title="What is drawing with code?"
@@ -97,6 +101,18 @@ export default function PostLayoutSection() {
               composition. A div is simply an empty container used to house
               other elements and create structure on a web page.
             </p>
+            <PostSubsection title="Parent <div>">
+              <p>
+                Every CSS composition starts with a parent div. Think of it as
+                your canvas.
+              </p>
+            </PostSubsection>
+            <PostSubsection title="border-radius" variant="code">
+              <p>
+                This rounds your element&rsquo;s corners. One value rounds all
+                four, and 50% turns a square into a circle.
+              </p>
+            </PostSubsection>
           </PostSection>
         </PostLayout>
       </div>

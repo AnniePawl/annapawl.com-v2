@@ -72,7 +72,7 @@ export default function StatsButton({ stats, tags }: StatsButtonProps) {
 
         {stats.fiction + stats.nonfiction > 0 ? (
           <>
-            <span className="drawer-section-label">Fiction vs. nonfiction</span>
+            <span className="drawer-section-label type-note-label">Fiction vs. nonfiction</span>
             <div
               className="bookshelf-split"
               role="img"
@@ -102,7 +102,7 @@ export default function StatsButton({ stats, tags }: StatsButtonProps) {
 
         {stats.oldest && stats.newest && stats.newest.year > stats.oldest.year ? (
           <>
-            <span className="drawer-section-label">Time traveled</span>
+            <span className="drawer-section-label type-note-label">Time traveled</span>
             <p className="bookshelf-stat-sentence">
               From <em>{stats.oldest.title}</em> ({stats.oldest.year}) to{" "}
               <em>{stats.newest.title}</em> ({stats.newest.year}) —{" "}
@@ -113,7 +113,7 @@ export default function StatsButton({ stats, tags }: StatsButtonProps) {
 
         {stats.repeatAuthors.length > 0 ? (
           <>
-            <span className="drawer-section-label">Authors I came back to</span>
+            <span className="drawer-section-label type-note-label">Authors I came back to</span>
             <dl className="drawer-list drawer-list--tight">
               {stats.repeatAuthors.map(({ author, count }) => (
                 <div key={author}>
@@ -127,7 +127,7 @@ export default function StatsButton({ stats, tags }: StatsButtonProps) {
 
         {byCount.length > 0 ? (
           <>
-            <span className="drawer-section-label">By tag</span>
+            <span className="drawer-section-label type-note-label">By tag</span>
             <ul className="bookshelf-tag-bars">
               {byCount.map(({ name, count }) => (
                 <li
@@ -151,7 +151,7 @@ export default function StatsButton({ stats, tags }: StatsButtonProps) {
         ) : null}
 
         {missingPageData > 0 ? (
-          <p className="drawer-note">
+          <p className="drawer-note type-note">
             Page counts come from Google Books, which has none on file for{" "}
             {missingPageData} {missingPageData === 1 ? "book" : "books"} here, so
             pages turned (and longest/shortest) reflect the rest.

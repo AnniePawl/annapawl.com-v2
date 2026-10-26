@@ -3,9 +3,8 @@
 import { useId, useState } from "react";
 import Link from "next/link";
 
-// "Writing" in the garden menu: a row that opens to list the posts under it
-// instead of linking to one page. Add new posts to POSTS; while there's only
-// one, the "More soon" line keeps the list from looking unfinished.
+// "Writing" row in menu opens to list the posts under it
+// All other menu items in LandingIndex.tsx
 const POSTS = [
   {
     href: "/drawing-with-code",
@@ -30,7 +29,7 @@ export function WritingRow({ number }: { number: number }) {
     <li
       className="landing-index-group"
       data-open={open || undefined}
-      style={{ "--index-accent": "var(--sky-bold)" } as React.CSSProperties}
+      style={{ "--index-accent": "var(--mint-bold)" } as React.CSSProperties}
     >
       <button
         type="button"

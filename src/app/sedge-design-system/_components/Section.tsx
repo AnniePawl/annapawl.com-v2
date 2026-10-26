@@ -12,7 +12,7 @@ export default function Section({
   id: string;
   heading: string;
   icon: LucideIcon;
-  /** A sentence or two set large under the heading, like the PostHeader lede. */
+  /** A sentence or two set large under the heading, like the PageHeader lede. */
   lede?: ReactNode;
   description?: string;
   children: ReactNode;

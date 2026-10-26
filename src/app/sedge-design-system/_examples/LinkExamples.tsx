@@ -1,9 +1,17 @@
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import CodeBlock from "../_components/CodeBlock";
+import TextLink from "../../../components/ui/TextLink";
 import "./LinkExamples.css";
 
 const USAGE = `
+// TextLink component (preferred) — internal links use next/link,
+// http(s) links open in a new tab and announce it
+<TextLink href="/books">book club picks</TextLink>
+<TextLink href="https://getbem.com/naming/" tone="sky-bold">BEM</TextLink>
+<TextLink href="https://books.google.com" variant="quiet">Google Books</TextLink>
+
+// Or the classes directly
 // Default — links in body and article text
 <a className="text-link focus-ring" href="/books">book club picks</a>
 
@@ -113,6 +121,24 @@ export default function LinkExamples() {
           </a>
         </LinkState>
       </div>
+
+      <h3 className="sedge-subheading">Tones</h3>
+      <p className="link-sample">
+        Links follow the page accent by default. Pass a <code>tone</code>{" "}
+        when a section has its own color, like{" "}
+        <TextLink href="#links" tone="sky-bold" data-state="default">
+          sky
+        </TextLink>
+        ,{" "}
+        <TextLink href="#links" tone="plum-bold" data-state="default">
+          plum
+        </TextLink>{" "}
+        or{" "}
+        <TextLink href="#links" tone="marigold-bold" data-state="default">
+          marigold
+        </TextLink>
+        .
+      </p>
 
       <h3 className="sedge-subheading">Breadcrumbs</h3>
 

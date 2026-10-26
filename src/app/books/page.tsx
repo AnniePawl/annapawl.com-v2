@@ -1,5 +1,5 @@
 import PageShell from "../../components/layout/PageShell";
-import PostHeader from "../../components/layout/PostLayout/PostHeader";
+import PageHeader from "../../components/layout/PageHeader";
 import HomeLogo from "../../components/ui/HomeLogo";
 import BookshelfBrowser, { type TagCount, type YearSection } from "./BookshelfBrowser";
 import StatsButton from "./StatsButton";
@@ -35,8 +35,8 @@ export default async function BooksPage() {
   const allEntries = sections.flatMap((section) => section.books);
   const stats = computeStats(allEntries);
 
-  // Every distinct tag in use across the shelf, alphabetized, with how many
-  // books carry it — the rail shows the count beside each tag.
+  // Distinct tags in use, alphabetized with how many books in it.
+  // Rail shows the count beside each tag.
   const tags: TagCount[] = Array.from(
     new Set(allEntries.flatMap((entry) => entry.lookup.tags ?? []))
   )
@@ -50,7 +50,7 @@ export default async function BooksPage() {
 
   return (
     <PageShell className="bookshelf-page">
-      <PostHeader
+      <PageHeader
         utilityStart={
           <HomeLogo
             colors={{

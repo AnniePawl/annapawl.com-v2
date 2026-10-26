@@ -14,7 +14,7 @@ const TONES = [
 ];
 const STRIP_LENGTH = 56;
 
-// Fixed seed so server and client render the same strip.
+// Woven Edge
 function seeded(seed: number) {
   return () => {
     seed |= 0;
@@ -101,19 +101,21 @@ export function Footer() {
           <span className="landing-footer-muted">Seattle · New York</span>
         </div>
 
-        <div className="landing-footer-col landing-footer-col--wide">
+        <div className="landing-footer-col">
           <h2 className="landing-footer-label">Built with</h2>
-          <p className="landing-footer-muted">
-             Next.js & my <Link href='/sedge-design-system' className='text-link'>design system</Link>
-          </p>
+          <span className="landing-footer-muted">Next.js</span>
+          <Link href="/sedge-design-system" className="landing-footer-link focus-ring">
+            My design system
+          </Link>
         </div>
 
-        <p className="landing-footer-end">
-         
-          <span className='flex'>Made with <Heart className="icon-sm text-pink-400 ml-2" aria-hidden="true"/></span>
-          <span className="sr-only">love</span>
-           © {new Date().getFullYear()} Anna Pawl
-        </p>
+        <div className="landing-footer-bottom">
+          <span className="landing-footer-love">
+            Made with <Heart className="icon-sm text-pink-400" aria-hidden="true" />
+            <span className="sr-only">love</span>
+          </span>
+          <span>© {new Date().getFullYear()} Anna Pawl</span>
+        </div>
       </div>
     </footer>
   );

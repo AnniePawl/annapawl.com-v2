@@ -58,10 +58,11 @@ body {
   box-sizing: border-box;
 }
 
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
+/* Jump links (like a post's Contents) glide instead of snapping.
+   Regular scrolling is untouched; reduced motion keeps instant jumps. */
+@media (prefers-reduced-motion: no-preference) {
   html {
-    scroll-behavior: auto;
+    scroll-behavior: smooth;
   }
 }
 

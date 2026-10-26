@@ -1,9 +1,3 @@
-// Ported from v1 src/components/css-items/shelves/DesktopShelves.js. Item
-// compositions (which illustration sits on which shelf, in which order)
-// are copied 1:1 from the source. Desktop, tablet and mobile each arrange
-// the same illustration components differently; Landing.tsx renders all
-// three and landing.css's media queries decide which one is visible (no
-// window.innerWidth in JS).
 import { Books } from "../books/Books";
 import { Books2 } from "../books/Books2";
 import { Dessert } from "../dessert/Dessert";

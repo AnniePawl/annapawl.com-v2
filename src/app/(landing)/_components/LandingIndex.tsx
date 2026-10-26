@@ -2,26 +2,26 @@ import Link from "next/link";
 import { WritingRow } from "./WritingRow";
 import "./landing-index.css";
 
-// The site's menu, below the fold: a ruled, numbered index of pages, in the
-// same voice as the rest of the garden. Each marker uses that page's accent.
+// Site menu below the fold. Numbered index of pages
+// Writing posts in WritingRow.tsx
 const PAGES = [
     {
     href: "/sedge-design-system",
     title: "Design System",
     description: "The design system I built for my digital garden",
-    accent: "var(--coral-bold)",
+    accent: "var(--marigold-bold)",
   },
   {
     href: "/books",
     title: "Bookshelf",
     description: "A nerdy reading log, stats and all",
-    accent: "var(--emerald-soft)",
+    accent: "var(--blue-bold)",
   },
   {
     href: "/fiber-arts",
     title: "Fiber Arts",
     description: "Embroidery, needlepoint, and cross stitch projects",
-    accent: "var(--pink-bold)",
+    accent: "var(--plum-bold)",
   },
   //   {
   //   href: "/fiber-arts",

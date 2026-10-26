@@ -1,5 +1,4 @@
-/* ---- Page index (LandingIndex.tsx + WritingRow.tsx) ----
-   The "General nerdery" menu below the fold. Imported by LandingIndex.tsx. */
+/* General Nerdery Site Menu */
 
 .landing-index {
   width: 100%;
@@ -35,7 +34,7 @@
   list-style: none;
 }
 
-.landing-index-list > li {
+.landing-index-list>li {
   border-bottom: 1px solid color-mix(in srgb, var(--charcoal) 18%, transparent);
 }
 
@@ -93,7 +92,7 @@
   transform: translateX(0.25rem);
 }
 
-/* ---- Writing: a row that opens to its posts ---- */
+/* Writing: a row that opens to its posts */
 button.landing-index-row {
   width: 100%;
   border: 0;

@@ -1,14 +1,4 @@
-/* ---- Geometric shapes (GeometricShape.tsx) ----
-   Twelve one-div shapes made with borders, radii and transforms --
-   moved here from Drawing with Code. Colors come from two variables set
-   by whatever holds the shape (ShapeCover.tsx sets them per tile):
-     --shape-fill  the shape's color
-     --tile-bg     the color behind it. The octagon's corner wedges are
-                   painted this color, which is what makes the corners
-                   look cut away.
-   Sizes step up at the same breakpoints as the original page. */
-
-
+/* 12 Geometric Shapes for shapes grid */
 .shape--circle {
   width: 65%;
   height: 65%;

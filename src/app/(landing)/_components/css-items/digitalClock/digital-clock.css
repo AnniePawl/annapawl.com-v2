@@ -39,7 +39,7 @@
   animation: alarm 0.1s infinite;
 }
 
-/* Tablet and mobile: no hover, so the alarm goes off on its own -- a short
+/* Tablet and mobile: no hover, so the alarm goes off on its own. Short
    buzz, then a rest, instead of shaking nonstop. */
 .tablet-digitalClock-container,
 .mobile-digitalClock-container {
@@ -110,8 +110,6 @@
   transform: translateY(30.555556px);
 }
 
-/* About half a second of buzzing (8 quick wiggles), then still until the
-   next ring. Change the 3s on the animation for more or less rest. */
 @keyframes alarm-spurt {
   0%, 18%, 100% { transform: translateY(-61px) rotate(0deg); }
   2%  { transform: translateY(-61px) rotate(8deg); }

@@ -4,11 +4,8 @@ import { useEffect, useState } from "react";
 import Editor from "./Editor";
 
 /**
- * Live HTML/CSS playground — same shape as the old page's Practice.js
- * (two editor panes + a debounced iframe preview), rebuilt on the
- * modernized Editor below. Same rainbow-ring default example, since it's
- * a nice one to land on and doubles as a mini demo of border-radius +
- * box-shadow the "Beginner's CSS toolkit" section above talks about.
+ * Live HTML/CSS playground 
+ * (two editor panes + a debounced iframe preview)
  */
 
 const DEFAULT_HTML = `<div class="rainbow"></div>`;
@@ -29,13 +26,13 @@ const DEFAULT_CSS = `body {
   border-radius: 50%;
   background-color: var(--periwinkle-soft);
   box-shadow:
-    0 0 0 1.5em #dac5ff,
-    0 0 0 3.5em #bcc2ff,
-    0 0 0 5.5em #caecff,
-    0 0 0 7.5em #d9ffa7,
-    0 0 0 9.5em #fffb89,
-    0 0 0 11.5em #ffd190,
-    0 0 0 13.5em #ff8e8e;
+    0 0 0 1.5em #B985EB,
+    0 0 0 3.5em #8B87F5,
+    0 0 0 5.5em #67CAF8,
+    0 0 0 7.5em #D3F392,
+    0 0 0 9.5em #FFE669,
+    0 0 0 11.5em #ff9f4cff,
+    0 0 0 13.5em #FF6358;
 }`;
 
 export default function Practice() {

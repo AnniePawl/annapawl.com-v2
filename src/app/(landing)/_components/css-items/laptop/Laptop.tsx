@@ -1,5 +1,3 @@
-// Ported from v1 src/components/css-items/laptop/Laptop.js. Decorative,
-// no state -- stays a server component.
 import "./laptop.css";
 
 export function Laptop({ cn }: { cn?: string }) {

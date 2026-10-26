@@ -8,9 +8,7 @@ export interface BookStatEntry {
 export interface ReadingStats {
   totalBooks: number;
   totalPages: number;
-  /** How many of totalBooks actually had a page count to add up — Google
-   *  doesn't have one on file for every edition, so totalPages can be an
-   *  undercount. Surfaced so the UI can be honest about that. */
+  // Total pages can be an undercount based on Google Books data
   booksWithPageData: number;
   totalAuthors: number;
   longest: { title: string; pages: number } | null;
@@ -29,13 +27,13 @@ export interface ReadingStats {
 function resolveDisplay(entry: BookStatEntry) {
   const { lookup, info } = entry;
   return {
-    title: info?.title ?? lookup.title,
+    title: lookup.title,
     author: info?.authors?.join(", ") || lookup.author || "Unknown author",
     pages: info?.pageCount ?? null,
   };
 }
 
-/** First-publication year: the manual override wins, else Google's date. */
+/** First-publication year:  manual override wins, else Google's date. */
 function publishedYear({ lookup, info }: BookStatEntry): number | null {
   if (lookup.firstPublished) return lookup.firstPublished;
   const match = info?.publishedDate?.match(/^\d{4}/);
@@ -76,8 +74,8 @@ export function computeStats(entries: BookStatEntry[]): ReadingStats {
 
   const totalPages = withPages.reduce((sum, b) => sum + b.pages, 0);
 
-  // Dedupe authors by display string, so a writer who shows up on
-  // multiple books (three N. K. Jemisin novels, say) counts once.
+  // Dedupe authors by display string so a writer who shows up on
+  // multiple books (3 N. K. Jemisin novels, say) counts once.
   const authorSet = new Set(books.map((b) => b.author));
 
   const longest =

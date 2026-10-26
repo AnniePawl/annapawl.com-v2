@@ -1,3 +1,7 @@
+/* ============================================================
+   Newton's cradle — src/components/css-items/newtonsCradle
+   ============================================================ */
+
 .landing {
   --cradle-frame: var(--cherry-bold);
   --cradle-frame-fill: var(--mint-soft);
@@ -8,11 +12,7 @@
   --cradle-base: var(--teal-bold);
 }
 
-/* ============================================================
-   Newton's cradle — src/components/css-items/newtonsCradle
-   ============================================================ */
-
-.newtonsCradle {
+.newtons-cradle {
   --frame-height: 100px;
   --frame-width: 150px;
   display: flex;
@@ -28,20 +28,23 @@
 .desktop-newtonsCradle-container {
   transform: scale(0.7) translateY(-140px);
 }
-.desktop-newtonsCradle-container:hover .frame > div:first-child {
+
+.desktop-newtonsCradle-container:hover .newtons-cradle__frame>div:first-child {
   animation: swing1 2s linear infinite;
 }
-.desktop-newtonsCradle-container:hover .frame > div:last-child {
+
+.desktop-newtonsCradle-container:hover .newtons-cradle__frame>div:last-child {
   animation: swing2 2s linear infinite;
 }
 
 /* Tablet and mobile: nothing to hover, so it swings on its own. */
-.tablet-newtonsCradle-container .frame > div:first-child,
-.mobile-newtonsCradle-container .frame > div:first-child {
+.tablet-newtonsCradle-container .newtons-cradle__frame>div:first-child,
+.mobile-newtonsCradle-container .newtons-cradle__frame>div:first-child {
   animation: swing1 2s linear infinite;
 }
-.tablet-newtonsCradle-container .frame > div:last-child,
-.mobile-newtonsCradle-container .frame > div:last-child {
+
+.tablet-newtonsCradle-container .newtons-cradle__frame>div:last-child,
+.mobile-newtonsCradle-container .newtons-cradle__frame>div:last-child {
   animation: swing2 2s linear infinite;
 }
 
@@ -49,7 +52,7 @@
   transform: scale(0.65) translateY(-146px) translateX(-20px);
 }
 
-.frame {
+.newtons-cradle__frame {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -70,26 +73,22 @@
   }
 
   &::before {
-    transform: translateX(calc(var(--frame-width) * -0.1))
-      translateY(calc(var(--frame-width) * 0.01));
+    transform: translateX(calc(var(--frame-width) * -0.1)) translateY(calc(var(--frame-width) * 0.01));
   }
 
   &::after {
-    transform: translateX(calc(var(--frame-width) * 0.1))
-      translateY(calc(var(--frame-width) * 0.01));
+    transform: translateX(calc(var(--frame-width) * 0.1)) translateY(calc(var(--frame-width) * 0.01));
   }
 }
 
-.sphere {
+.newtons-cradle__ball {
   height: calc(var(--frame-width) * 0.15);
   width: calc(var(--frame-width) * 0.15);
   border: 2px solid var(--cradle-lines);
-  background: radial-gradient(
-    circle at 28% 28%,
-    var(--cradle-ball-shine) 0% 20%,
-    var(--cradle-ball) 20% 60%,
-    var(--cradle-ball-shade) 60% 100%
-  );
+  background: radial-gradient(circle at 28% 28%,
+      var(--cradle-ball-shine) 0% 20%,
+      var(--cradle-ball) 20% 60%,
+      var(--cradle-ball-shade) 60% 100%);
   border-radius: 50%;
   transform: translateY(-15px);
   position: relative;
@@ -100,12 +99,11 @@
     height: calc(var(--frame-height) * 0.64);
     width: 2px;
     background-color: var(--cradle-lines);
-    transform: translateX(calc(var(--frame-width) * 0.055))
-      translateY(calc(var(--frame-height) * -0.65));
+    transform: translateX(calc(var(--frame-width) * 0.055)) translateY(calc(var(--frame-height) * -0.65));
   }
 }
 
-.base {
+.newtons-cradle__base {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -121,10 +119,12 @@
     transform: rotate(0deg) translateY(-15px) translateX(0);
     animation-timing-function: cubic-bezier(0.25, 0.6, 0.4, 1);
   }
+
   25% {
     transform: rotate(20deg) translateY(-13px) translateX(-25px);
     animation-timing-function: cubic-bezier(0.6, 0, 0.75, 0.4);
   }
+
   50%,
   100% {
     transform: rotate(0deg) translateY(-15px) translateX(0);
@@ -132,25 +132,28 @@
 }
 
 @keyframes swing2 {
+
   0%,
   50% {
     transform: rotate(0deg) translateY(-15px) translateX(0);
     animation-timing-function: cubic-bezier(0.25, 0.6, 0.4, 1);
   }
+
   75% {
     transform: rotate(-20deg) translateY(-13px) translateX(25px);
     animation-timing-function: cubic-bezier(0.6, 0, 0.75, 0.4);
   }
+
   100% {
     transform: rotate(0deg) translateY(-15px) translateX(0);
   }
 }
 
-/* Reduced motion -- disables this item's animations (hover-triggered
-   and autoplay alike). Source (v1) had no reduced-motion handling. */
+/* Reduced motion -- disables this item's animations */
 @media (prefers-reduced-motion: reduce) {
-  .frame > div:first-child,
-  .frame > div:last-child {
+
+  .newtons-cradle__frame>div:first-child,
+  .newtons-cradle__frame>div:last-child {
     animation: none !important;
   }
 }

@@ -1,4 +1,3 @@
-/* Styles for Shelf.tsx, MobileShelf.tsx and the Desktop/Tablet/MobileShelves layouts (same folder). */
 
 .landing {
   --shelf-wood: var(--sand-soft);
@@ -8,7 +7,7 @@
 
 /* ============================================================
    Shelves — src/components/css-items/shelves/shelves.scss
-   The wooden shelf + bracket that every item sits on, and the layout
+   The wooden shelf that every item sits on, and the layout
    containers for each breakpoint's set of shelves.
    ============================================================ */
 
@@ -53,7 +52,6 @@
   }
 }
 
-/* Optical centering: the illustrations extend above each shelf plank. */
 .desktop-shelves {
   transform: translateY(40px) scale(0.9);
 }
@@ -71,10 +69,8 @@
   position: relative;
   z-index: 0;
   transform: scale(0.96);
-  /* 1200px + the extra room given to shelves 2 and 3 below */
+  /* extra room for shelves 2+3 with taller items*/
   height: 1264px;
-  /* space-evenly leaves a tall empty band under the last shelf; pull the
-     menu up into it so it doesn't feel detached. */
   margin-bottom: -112px;
   display: flex;
   align-items: center;
@@ -93,8 +89,8 @@
     justify-content: space-evenly;
   }
 
-  /* Shelves 2 (sewing machine) and 3 (laptop + books) hold taller items,
-     so they get extra breathing room above them. */
+  /* Shelves 2 (sewing machine) + 3 (laptop + books) hold taller items,
+     so they get extra room above them. */
   .mobile-shelf-container:nth-child(2) {
     margin-top: 40px;
   }

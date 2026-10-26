@@ -1,11 +1,3 @@
-/* ---- Landing page (Landing.tsx) ----
-   Page layout and the about column. The other pieces keep their styles
-   next to their components:
-     landing-index.css  -- the "General nerdery" menu (+ Writing row)
-     footer.css         -- woven strip + footer columns
-     info-button.css    -- the ⓘ button and its pop-up extras
-     css-items/<item>/  -- each piece of shelf art */
-
 .landing-desktop-section,
 .landing-tablet-section,
 .landing-mobile-section {
@@ -49,7 +41,7 @@
     border-top: 1px solid color-mix(in srgb, var(--charcoal) 30%, transparent);
   }
 
-  .landing-over > .landing-index {
+  .landing-over>.landing-index {
     flex: 1;
   }
 }
@@ -61,7 +53,6 @@
 }
 
 .landing {
-  /* Cream editorial: same wall, ink, and type as the rest of the site. */
   --landing-font: var(--font-sans);
   --landing-wall: var(--cream);
   --landing-ink: var(--charcoal);
@@ -107,7 +98,6 @@
   width: 100%;
 }
 
-/* ---- Editorial header (desktop column + mobile) ---- */
 .landing-eyebrow {
   display: inline-flex;
   align-items: center;
@@ -117,20 +107,13 @@
   line-height: 1.3;
 }
 
-/* .landing-eyebrow::before {
-  content: "";
-  width: 0.5rem;
-  height: 0.875rem;
-  background: var(--landing-accent);
-} */
-
 .landing-name {
   margin: 0;
   color: var(--charcoal);
   font-size: clamp(2.75rem, 3vw, 1.5rem);
   font-weight: var(--font-regular);
   letter-spacing: -0.045em;
-  margin-bottom:-20px;
+  margin-bottom: -20px;
 }
 
 .landing-name-mark {
@@ -150,7 +133,6 @@
 
 .landing-role {
   margin: var(--space-5) 0 0;
-  /* Same type as the "General nerdery" link (.landing-cta), no marker */
   font-size: 11.5px;
   font-weight: var(--font-semibold);
   line-height: 1.5;
@@ -158,7 +140,6 @@
   text-transform: uppercase;
   color: var(--coral-bold);
 }
-
 
 .landing-desktop-shelves-container {
   position: relative;
@@ -198,11 +179,19 @@
 .landing-mobile-about {
   display: flex;
   flex-direction: column;
-  padding: var(--space-9) 2.5rem var(--space-7);
+  padding: var(--space-9) 2.5rem var(--space-5);
 }
 
 .landing-mobile-about .landing-name {
   font-size: 2.25rem;
+}
+
+.landing-mobile-about .landing-lede {
+  margin: var(--space-6) 0;
+}
+
+.landing-mobile-about .landing-cta {
+  margin-top: 0;
 }
 
 .landing-mobile-shelves-container {
@@ -212,7 +201,7 @@
   background-color: var(--landing-wall);
 }
 
-/* ---- "General nerdery ↓" link under the about copy (NerderyLink.tsx) ---- */
+/* "General nerdery ↓" link under the about copy (NerderyLink.tsx) */
 .landing-cta {
   display: inline-flex;
   align-items: center;
@@ -245,11 +234,8 @@
   align-items: center;
   gap: var(--space-2);
   padding-bottom: 3px;
-  margin-bottom: -3px; /* keeps the marker square lined up with the text */
-  /* One continuous underline under the text AND the arrow (a normal
-     text-decoration stops before the arrow). Grows in on hover. */
-  background: linear-gradient(var(--landing-accent), var(--landing-accent))
-    no-repeat left bottom / 0 1.5px;
+  margin-bottom: -3px;
+  background: linear-gradient(var(--landing-accent), var(--landing-accent)) no-repeat left bottom / 0 1.5px;
   transition: background-size 0.25s ease;
 }
 
@@ -257,39 +243,36 @@
   background-size: 100% 1.5px;
 }
 
-/* The arrow bobs gently (landing-info-float, below) */
+/* Bobing arrow */
 @media (prefers-reduced-motion: no-preference) {
   .landing-cta-arrow {
     animation: landing-info-float 1.4s ease-in-out infinite;
   }
 }
 
-/* The menu heading takes focus after the link is used; no outline box */
 .landing-index-label:focus {
   outline: none;
 }
 
-/* Shared gentle float: the CTA arrow here, and the "Hover" word in the
-   info pop-up (info-button.css). */
+/* Gentle float style for CTA arrow + "Hover" in modal */
 @keyframes landing-info-float {
   0%,
   100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-5px);
   }
 }
 
 /* ============================================================
-   Reduced motion
-   (each illustration's own reduced-motion block lives in its
-   css-items/<item>/*.css file, next to the keyframes it disables)
+   Reduced motion. All CSS items own reduced-motion block next to the keyframes it disables)
    ============================================================ */
 
 /* Safety net: if reduced motion is on, nothing on the landing page moves,
    including any future css-item that forgets its own reduced-motion block.
-   (Each item's own block is still the place to set a nice still pose.) */
+   */
 @media (prefers-reduced-motion: reduce) {
   .landing *,
   .landing *::before,

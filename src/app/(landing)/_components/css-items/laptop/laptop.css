@@ -1,5 +1,3 @@
-/* Styles for Laptop.tsx (same folder). */
-
 /* ============================================================
    Laptop — src/components/css-items/laptop
    ============================================================ */
@@ -37,6 +35,7 @@
 .desktop-laptop-container {
   transform: scale(0.97) translateY(-145px);
 }
+
 .desktop-laptop-container:hover .laptop__terminal p {
   animation: typing-animation 5s steps(15) forwards, blink 1s infinite;
 }
@@ -44,6 +43,7 @@
 .mobile-laptop-container {
   transform: scale(0.78) translateY(-160px);
 }
+
 .mobile-laptop-container .laptop__terminal p {
   animation: typing-animation 4s steps(15) infinite, blink 1s infinite;
 }
@@ -51,6 +51,7 @@
 .tablet-laptop-container {
   transform: scale(0.85) translateY(-154px);
 }
+
 .tablet-laptop-container .laptop__terminal p {
   animation: typing-animation 4s steps(15) infinite, blink 1s infinite;
 }
@@ -108,11 +109,9 @@
       height: 7px;
       width: 7px;
       border-radius: 50%;
-      background-image: radial-gradient(
-        var(--laptop-cam-lens) 0 20%,
-        var(--laptop-cam-ring) 20% 50%,
-        var(--laptop-cam) 50% 90%
-      );
+      background-image: radial-gradient(var(--laptop-cam-lens) 0 20%,
+          var(--laptop-cam-ring) 20% 50%,
+          var(--laptop-cam) 50% 90%);
       transform: translateX(-5px) translateY(-58.5px);
     }
   }
@@ -125,6 +124,7 @@
     border-radius: 1.5px 1.5px 0 0;
     background-color: var(--laptop-terminal);
     border-top: 10px solid var(--laptop-terminal-bar);
+
     &::before {
       content: "~/code/css-stuff";
       position: absolute;
@@ -183,8 +183,7 @@
   }
 }
 
-/* Reduced motion -- disables this item's animations (hover-triggered
-   and autoplay alike). Source (v1) had no reduced-motion handling. */
+/* Reduced motion -- disables this item's animations  */
 @media (prefers-reduced-motion: reduce) {
   .laptop__terminal p {
     animation: none !important;

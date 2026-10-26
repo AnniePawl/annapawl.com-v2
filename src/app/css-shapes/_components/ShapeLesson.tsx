@@ -7,9 +7,9 @@ import "./shape-demos.css";
 import "./shape-lesson.css";
 
 /**
- * The teaching part of a shape's section: step-by-step frames, an anatomy
- * panel for the trickier shapes, then the finished CSS. Content comes from
- * lessons.ts; colors from shapes.ts. Your own paragraph goes above it in
+ * Lesson part: step-by-step frames, anatomy
+ * panel for the trickier shapes, finished CSS. Content comes from
+ * lessons.ts; colors from shapes.ts. Paragraph goes above it in
  * page.tsx.
  */
 export default function ShapeLesson({ shape }: { shape: ShapeVariant }) {

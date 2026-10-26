@@ -1,5 +1,3 @@
-// Ported from v1 src/components/css-items/dessert/Dessert.js. Decorative,
-// no state -- stays a server component.
 import "./dessert.css";
 
 export function Dessert({ cn }: { cn?: string }) {

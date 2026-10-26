@@ -72,7 +72,7 @@ function ColorTile({
     if (timer.current !== null) clearTimeout(timer.current);
 
     try {
-      await navigator.clipboard.writeText(`var(${varName})`);
+      await navigator.clipboard.writeText(hex);
       setStatus("Copied");
     } catch {
       setStatus("Couldn't copy");
@@ -85,7 +85,7 @@ function ColorTile({
     <button
       type="button"
       onClick={handleCopy}
-      aria-label={`Copy var(${varName}), ${hex}`}
+      aria-label={`Copy ${hex} (${varName})`}
       data-copied={status ? "" : undefined}
       className={cx(
         "swatch-tile focus-ring",

@@ -3,7 +3,7 @@
   --sewing-ink: var(--charcoal);
   --sewing-outline: var(--cherry-bold);
   --sewing-thread1: var(--lemon-bold);
-  --sewing-thread2:var(--red-bold);
+  --sewing-thread2: var(--red-bold);
   --sewing-spool: var(--cocoa-soft);
   --sewing-spool-shade: var(--cocoa-bold);
   --sewing-body: white;
@@ -15,7 +15,6 @@
 }
 
 /* ---- Sewing machine ---- */
-
 .sewing-machine {
   --sm-top-height: 50px;
   --sm-top-width: 185px;
@@ -26,19 +25,16 @@
 
 .sewing-machine__body {
   filter:
-    drop-shadow(2px 0 0 var(--sewing-edge))
-    drop-shadow(-2px 0 0 var(--sewing-edge))
-    drop-shadow(0 -2px 0 var(--sewing-edge));
+    drop-shadow(2px 0 0 var(--sewing-edge)) drop-shadow(-2px 0 0 var(--sewing-edge)) drop-shadow(0 -2px 0 var(--sewing-edge));
 }
 
-.needle {
+.sewing-machine__needle {
   position: absolute;
-  z-index: 1; 
+  z-index: 1;
   height: 20px;
   width: 3.5px;
   background-color: var(--sewing-accent);
-  transform: translateY(calc(var(--sm-top-height) + 11px))
-    translateX(calc(var(--sm-left-arm-width) / 2.2));
+  transform: translateY(calc(var(--sm-top-height) + 11px)) translateX(calc(var(--sm-left-arm-width) / 2.2));
 
   &::before {
     content: "";
@@ -61,7 +57,7 @@
   }
 }
 
-.thread {
+.sewing-machine__thread {
   height: 25px;
   width: 16px;
   transform: translateX(142px);
@@ -80,14 +76,12 @@
     width: calc(16px * 1.22);
     border-radius: 2px;
     transform: translateX(-2px) translateY(-2px);
-    background-image: linear-gradient(
-      to bottom,
-      var(--sewing-spool) 0 10%,
-      var(--sewing-spool-shade) 10% 20%,
-      transparent 20% 80%,
-      var(--sewing-spool) 80% 90%,
-      var(--sewing-spool-shade) 90%
-    );
+    background-image: linear-gradient(to bottom,
+        var(--sewing-spool) 0 10%,
+        var(--sewing-spool-shade) 10% 20%,
+        transparent 20% 80%,
+        var(--sewing-spool) 80% 90%,
+        var(--sewing-spool-shade) 90%);
   }
 
   &::after {
@@ -112,10 +106,9 @@
     content: "";
     background-image: linear-gradient(var(--sewing-accent) 0 80%, var(--sewing-ink) 80%);
     height: calc(var(--sm-top-height) * 0.35);
-    border-radius:2px;
+    border-radius: 2px;
     width: calc(var(--sm-top-height) * 0.9);
-    transform: translateX(calc(var(--sm-top-height) * 1.5))
-      translateY(calc(var(--sm-top-height) / 2.5));
+    transform: translateX(calc(var(--sm-top-height) * 1.5)) translateY(calc(var(--sm-top-height) / 2.5));
   }
 }
 
@@ -133,12 +126,10 @@
     display: flex;
     height: calc(var(--sm-top-height) * 0.6);
     width: 12px;
-    background-image: repeating-linear-gradient(
-      to bottom,
-      var(--sewing-accent) 0 10%,
-      var(--sewing-ink) 10% 20%,
-      transparent 20% 40%
-    );
+    background-image: repeating-linear-gradient(to bottom,
+        var(--sewing-accent) 0 10%,
+        var(--sewing-ink) 10% 20%,
+        transparent 20% 40%);
     transform: translateX(18px) translateY(10px);
   }
 }
@@ -181,42 +172,46 @@
   left: -15px;
   height: 85px;
   width: 125px;
-  background-image: repeating-linear-gradient(
-      var(--sewing-fabric-yellow),
+  background-image: repeating-linear-gradient(var(--sewing-fabric-yellow),
       var(--sewing-fabric-yellow) 5%,
-      var(--sewing-fabric-blue) 5% 10%
-    ),
+      var(--sewing-fabric-blue) 5% 10%),
     repeating-linear-gradient(90deg, var(--sewing-fabric-pink), var(--sewing-fabric-pink) 5%, transparent 5% 10%);
   clip-path: polygon(30% 0%, 90% 0%, 90% 20%, 30% 45%);
 }
 
-.desktop-sewing-container > .sewing-machine:hover > .needle::after {
+.desktop-sewing-container>.sewing-machine:hover>.sewing-machine__needle::after {
   animation: needle-animation 0.2s infinite;
 }
-.desktop-sewing-container > .sewing-machine:hover > .thread {
+
+.desktop-sewing-container>.sewing-machine:hover>.sewing-machine__thread {
   animation: thread-animation 0.5s linear infinite;
 }
-.desktop-sewing-container > .sewing-machine:hover > .thread::after {
+
+.desktop-sewing-container>.sewing-machine:hover>.sewing-machine__thread::after {
   animation: thread-animation2 2s infinite;
 }
-.desktop-sewing-container > .sewing-machine:hover > .sewing-machine__fabric {
+
+.desktop-sewing-container>.sewing-machine:hover>.sewing-machine__fabric {
   animation: fabric-animation 5s forwards;
 }
 
-.mobile-sewing-container > .sewing-machine > .needle::after,
-.tablet-sewing-container > .sewing-machine > .needle::after {
+.mobile-sewing-container>.sewing-machine>.sewing-machine__needle::after,
+.tablet-sewing-container>.sewing-machine>.sewing-machine__needle::after {
   animation: needle-animation 0.2s infinite;
 }
-.mobile-sewing-container > .sewing-machine > .thread,
-.tablet-sewing-container > .sewing-machine > .thread {
+
+.mobile-sewing-container>.sewing-machine>.sewing-machine__thread,
+.tablet-sewing-container>.sewing-machine>.sewing-machine__thread {
   animation: thread-animation 1s linear infinite;
 }
-.mobile-sewing-container > .sewing-machine > .thread::after,
-.tablet-sewing-container > .sewing-machine > .thread::after {
+
+.mobile-sewing-container>.sewing-machine>.sewing-machine__thread::after,
+.tablet-sewing-container>.sewing-machine>.sewing-machine__thread::after {
   animation: thread-animation2 2s infinite;
 }
-.mobile-sewing-container > .sewing-machine > .sewing-machine__fabric,
-.tablet-sewing-container > .sewing-machine > .sewing-machine__fabric {
+
+.mobile-sewing-container>.sewing-machine>.sewing-machine__fabric,
+.tablet-sewing-container>.sewing-machine>.sewing-machine__fabric {
   animation: fabric-animation 7s infinite;
 }
 
@@ -230,6 +225,7 @@
   from {
     background-position: 0 0;
   }
+
   to {
     background-position: 0 var(--thread-stripe);
   }
@@ -249,12 +245,12 @@
   }
 }
 
-/* Reduced motion -- disables this item's animations (hover-triggered
-   and autoplay alike). Source (v1) had no reduced-motion handling. */
+/* Reduced motion -- disables this item's animations  */
 @media (prefers-reduced-motion: reduce) {
-  .needle::after,
-  .thread,
-  .thread::after,
+
+  .sewing-machine__needle::after,
+  .sewing-machine__thread,
+  .sewing-machine__thread::after,
   .sewing-machine__fabric {
     animation: none !important;
   }

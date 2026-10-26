@@ -8,7 +8,7 @@ import {
 import { cx } from "../../../lib/cx";
 import type { PaletteColor } from "../../ui/colorTokens";
 import PageShell from "../PageShell";
-import PostHeader, { type PostHeaderProps } from "./PostHeader";
+import PageHeader, { type PageHeaderProps } from "../PageHeader";
 
 export type PostContentsItem = {
   id: string;
@@ -16,12 +16,21 @@ export type PostContentsItem = {
   tone?: PaletteColor;
 };
 
-export type PostLayoutProps = PostHeaderProps & {
+export type PostLayoutProps = PageHeaderProps & {
   /** Optional full-width feature under the header, before the contents
       and body (e.g. the CSS Shapes grid). */
   cover?: ReactNode;
   contents?: PostContentsItem[];
   contentsLabel?: string;
+  children: ReactNode;
+  className?: string;
+};
+
+export type PostSubsectionProps = {
+  title: ReactNode;
+  /** label: sentence-case heading with a marker in the section color (default).
+   *  code: lowercase monospace, for headings that are code (property names). */
+  variant?: "label" | "code";
   children: ReactNode;
   className?: string;
 };
@@ -56,12 +65,12 @@ export default function PostLayout({
 
   return (
     <PageShell width="wide" className={cx("post-layout", className)}>
-      <PostHeader {...headerProps} />
+      <PageHeader {...headerProps} />
       {cover}
       <div className="post-layout-grid">
         {contents.length ? (
           <nav className="post-contents" aria-label={contentsLabel}>
-            <span className="post-contents-label">{contentsLabel}</span>
+            <span className="post-contents-label type-note-label">{contentsLabel}</span>
             <ol>
               {contents.map((item) => (
                 <li
@@ -96,6 +105,7 @@ export function PostSection({
 }: PostSectionProps) {
   const style = {
     "--post-section-tone": `var(--${tone})`,
+    "--post-section-tone-soft": `var(--${tone.replace(/-bold$/, "-soft")})`,
   } as CSSProperties;
 
   return (
@@ -106,5 +116,20 @@ export function PostSection({
       </h2>
       {children}
     </section>
+  );
+}
+
+/** A titled block inside a PostSection. Takes the section's color. */
+export function PostSubsection({
+  title,
+  variant = "label",
+  children,
+  className,
+}: PostSubsectionProps) {
+  return (
+    <div className={cx("post-subsection", `post-subsection--${variant}`, className)}>
+      <h3>{title}</h3>
+      {children}
+    </div>
   );
 }

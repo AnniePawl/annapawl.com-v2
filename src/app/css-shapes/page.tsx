@@ -2,7 +2,6 @@ import PostLayout, { PostSection } from "../../components/layout/PostLayout/Post
 import HomeLogo from "../../components/ui/HomeLogo";
 import ShapeCover from "./_components/ShapeCover";
 import { SHAPES } from "./shapes";
-import "./css-shapes.css";
 import ShapeLesson from "./_components/ShapeLesson";
 
 export default function CssShapesPage() {

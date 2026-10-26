@@ -1,6 +1,7 @@
 import type { LucideIcon } from "lucide-react";
 import {
   Palette,
+  PanelTop,
   CaseSensitive,
   Ruler,
   LayoutTemplate,
@@ -121,15 +122,15 @@ export const SECTIONS: NavSection[] = [
     group: "Patterns",
   },
   {
-    id: "post-layout",
-    title: "Post Layout",
-    icon: FileText,
+    id: "page-header",
+    title: "Page Header",
+    icon: PanelTop,
     group: "Patterns",
   },
   {
-    id: "editorial-header",
-    title: "Editorial Header",
-    icon: CaseSensitive,
+    id: "post-layout",
+    title: "Post Layout",
+    icon: FileText,
     group: "Patterns",
   },
 ];

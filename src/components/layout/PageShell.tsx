@@ -11,7 +11,7 @@ export default function PageShell({
   width?: "wide" | "reading";
   /**
    * The page's accent color, e.g. "var(--cherry-bold)". Sets --page-accent
-   * for everything inside: the header title block (when PostHeader's accent
+   * for everything inside: the header title block (when PageHeader's accent
    * is var(--page-accent)), markers, buttons, links. Leave it out to use the
    * value from the page's CSS.
    */

@@ -2,8 +2,7 @@ import type { PaletteColor } from "../../components/ui/colorTokens";
 import type { ShapeVariant } from "./_components/GeometricShape";
 
 /**
- * What each shape's section shows. Every visual is a real CSS demo
- * (classes in _components/shape-demos.css):
+ * Individual shape section
  *   steps   -- how the shape gets built, one property at a time
  *   anatomy -- (trickier shapes only) the finished shape with each part
  *              in its own color, plus a key

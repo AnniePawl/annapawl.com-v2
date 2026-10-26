@@ -63,10 +63,6 @@
   font-size: clamp(3.5rem, 18cqi, 5rem);
 }
 
-.pattern-preview--post .post-section h2 {
-  font-size: 1.35rem;
-}
-
 .pattern-preview .article-layout {
   padding-block: var(--space-6);
 }
@@ -81,4 +77,77 @@
   .pattern-preview--editorial-header {
     overflow: visible;
   }
+}
+
+/* ---- Page header anatomy: numbered badges on the live preview ---- */
+.page-header-anatomy .post-header-utility-start,
+.page-header-anatomy .post-header-utility-end,
+.page-header-anatomy .post-header-eyebrow,
+.page-header-anatomy .post-header-title,
+.page-header-anatomy .post-header-lede,
+.page-header-anatomy .post-header-publishing-details,
+.page-header-anatomy .post-header-tags {
+  position: relative;
+}
+
+.page-header-anatomy .post-header-utility-start::after,
+.page-header-anatomy .post-header-utility-end::after,
+.page-header-anatomy .post-header-eyebrow::after,
+.page-header-anatomy .post-header-title::after,
+.page-header-anatomy .post-header-lede::after,
+.page-header-anatomy .post-header-publishing-details::after,
+.page-header-anatomy .post-header-tags::after {
+  position: absolute;
+  top: -0.5rem;
+  left: -0.75rem;
+  display: grid;
+  place-items: center;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 50%;
+  background: var(--charcoal);
+  color: var(--cream);
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-style: normal;
+  font-weight: var(--font-semibold);
+  letter-spacing: 0;
+  line-height: 1;
+  text-transform: none;
+}
+
+.page-header-anatomy .post-header-utility-start::after { content: "1"; }
+.page-header-anatomy .post-header-utility-end::after { content: "2"; left: auto; right: -0.75rem; }
+.page-header-anatomy .post-header-eyebrow::after { content: "3"; }
+.page-header-anatomy .post-header-title::after { content: "4"; top: 0; }
+.page-header-anatomy .post-header-lede::after { content: "5"; }
+.page-header-anatomy .post-header-publishing-details::after { content: "6"; }
+.page-header-anatomy .post-header-tags::after { content: "7"; left: auto; right: -0.75rem; }
+
+.page-header-key {
+  display: grid;
+  gap: var(--space-2);
+  margin: var(--space-5) 0 var(--space-7);
+  padding: 0;
+  list-style: none;
+}
+
+.page-header-key li {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+}
+
+.page-header-key-n {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 50%;
+  background: var(--charcoal);
+  color: var(--cream);
+  font-size: 0.6875rem;
+  font-weight: var(--font-semibold);
+  transform: translateY(-1px);
 }

@@ -12,7 +12,7 @@
   --radio-button-mobile: var(--lime-soft);
 }
 
-.radio-top {
+.radio__top {
   height: 30px;
   width: 145px;
   border-right: 6px solid var(--radio-body);
@@ -23,12 +23,12 @@
   background-image: repeating-linear-gradient(45deg, var(--radio-body) 0%, var(--radio-body) 1%, transparent 1%, transparent 5%), repeating-linear-gradient(-45deg, var(--radio-body) 0%, var(--radio-body) 1%, var(--radio-panel) 1%, var(--radio-panel) 5%);
 }
 
-.radio-top::before,
-.radio-top::after {
+.radio__top::before,
+.radio__top::after {
   content: "";
 }
 
-.radio-top::before {
+.radio__top::before {
   position: absolute;
   height: 2px;
   width: 116px;
@@ -38,7 +38,7 @@
   transform: translateY(-21px) translateX(4.5px) rotate(-14deg);
 }
 
-.radio-top::after {
+.radio__top::after {
   height: 9px;
   width: 14px;
   display: flex;
@@ -47,7 +47,7 @@
   transform: translateY(-9px) translateX(6px);
 }
 
-.radio-bottom {
+.radio__bottom {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,7 +59,7 @@
   border-left: 6px solid var(--radio-body);
   border-bottom: 6px solid var(--radio-body);
 }
-.radio-bottom .radio-display-station {
+.radio__bottom .radio__display {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,7 +71,7 @@
   font-family: "Roboto Mono", monospace;
   font-size: 0.7em;
 }
-.radio-bottom .radio-buttons {
+.radio__bottom .radio__buttons {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -79,8 +79,8 @@
   transform: translateY(3px);
   width: 33%;
 }
-.radio-bottom .radio-button1,
-.radio-bottom .radio-button2 {
+.radio__bottom .radio__tune-down,
+.radio__bottom .radio__tune-up {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -94,14 +94,14 @@
   width: 15px;
   border: 1px solid var(--radio-body);
 }
-.radio-bottom .radio-button1:hover,
-.radio-bottom .radio-button2:hover {
+.radio__bottom .radio__tune-down:hover,
+.radio__bottom .radio__tune-up:hover {
   background-color: var(--radio-body);
   color: var(--radio-panel);
 }
 
-.radio-buttons::before,
-.radio-buttons::after {
+.radio__buttons::before,
+.radio__buttons::after {
   content: "";
   position: absolute;
   height: 33px;
@@ -112,16 +112,16 @@
   background-image: repeating-linear-gradient(45deg, var(--radio-ink) 0%, var(--radio-ink) 2.5%, transparent 2.5%, transparent 10%), repeating-linear-gradient(-45deg, var(--radio-body) 0%, var(--radio-body) 2.5%, var(--radio-panel) 2.5%, var(--radio-panel) 10%);
 }
 
-.radio-buttons::before {
+.radio__buttons::before {
   right: 50px;
 }
 
-.radio-buttons::after {
+.radio__buttons::after {
   left: 50px;
 }
 
-.radio-button1::before,
-.radio-button2::before {
+.radio__tune-down::before,
+.radio__tune-up::before {
   content: "";
   position: absolute;
   height: 6px;
@@ -131,16 +131,16 @@
   background-image: linear-gradient(to right, var(--radio-body) 0 80%, var(--radio-ink) 80%);
 }
 
-.radio-button1::before {
+.radio__tune-down::before {
   left: -35px;
 }
 
-.radio-button2::before {
+.radio__tune-up::before {
   right: -35px;
 }
 
-.radio-button1::after,
-.radio-button2::after {
+.radio__tune-down::after,
+.radio__tune-up::after {
   content: "";
   position: absolute;
   height: 4.5px;
@@ -159,139 +159,137 @@
   transform: scale(0.95) translateY(-91px);
 }
 
-.desktop-radio-container .radio-top,
-.tablet-radio-container .radio-top,
-.mobile-radio-container .radio-top {
+.desktop-radio-container .radio__top,
+.tablet-radio-container .radio__top,
+.mobile-radio-container .radio__top {
   border-right: 6px solid var(--radio-body-mobile);
   border-left: 6px solid var(--radio-body-mobile);
   border-top: 6px solid var(--radio-body-mobile);
   border-bottom: 3px solid var(--radio-body-mobile);
   background-image: repeating-linear-gradient(45deg, var(--radio-accent-mobile) 0%, var(--radio-accent-mobile) 1%, transparent 1%, transparent 5%), repeating-linear-gradient(-45deg, var(--radio-accent-mobile) 0%, var(--radio-accent-mobile) 1%, var(--radio-panel) 1%, var(--radio-panel) 5%);
 }
-.desktop-radio-container .radio-top::before,
-.tablet-radio-container .radio-top::before,
-.mobile-radio-container .radio-top::before {
+.desktop-radio-container .radio__top::before,
+.tablet-radio-container .radio__top::before,
+.mobile-radio-container .radio__top::before {
   background-color: var(--radio-body-mobile);
   box-shadow: 0px 1px var(--radio-display);
 }
-.desktop-radio-container .radio-top::after,
-.tablet-radio-container .radio-top::after,
-.mobile-radio-container .radio-top::after {
+.desktop-radio-container .radio__top::after,
+.tablet-radio-container .radio__top::after,
+.mobile-radio-container .radio__top::after {
   background-color: var(--radio-body-mobile);
 }
-.desktop-radio-container .radio-bottom,
-.tablet-radio-container .radio-bottom,
-.mobile-radio-container .radio-bottom {
+.desktop-radio-container .radio__bottom,
+.tablet-radio-container .radio__bottom,
+.mobile-radio-container .radio__bottom {
   background-color: var(--radio-front-mobile);
   border-right: 6px solid var(--radio-body-mobile);
   border-left: 6px solid var(--radio-body-mobile);
   border-bottom: 6px solid var(--radio-body-mobile);
 }
-.desktop-radio-container .radio-bottom .radio-display-station,
-.tablet-radio-container .radio-bottom .radio-display-station,
-.mobile-radio-container .radio-bottom .radio-display-station {
+.desktop-radio-container .radio__bottom .radio__display,
+.tablet-radio-container .radio__bottom .radio__display,
+.mobile-radio-container .radio__bottom .radio__display {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--radio-body-mobile);
   background-color: var(--radio-display);
 }
-.desktop-radio-container .radio-bottom .radio-button1,
-.desktop-radio-container .radio-bottom .radio-button2,
-.tablet-radio-container .radio-bottom .radio-button1,
-.tablet-radio-container .radio-bottom .radio-button2,
-.mobile-radio-container .radio-bottom .radio-button1,
-.mobile-radio-container .radio-bottom .radio-button2 {
+.desktop-radio-container .radio__bottom .radio__tune-down,
+.desktop-radio-container .radio__bottom .radio__tune-up,
+.tablet-radio-container .radio__bottom .radio__tune-down,
+.tablet-radio-container .radio__bottom .radio__tune-up,
+.mobile-radio-container .radio__bottom .radio__tune-down,
+.mobile-radio-container .radio__bottom .radio__tune-up {
   background-color: var(--radio-accent-mobile);
   background-color: var(--radio-button-mobile);
   font-family: "Roboto Mono", monospace;
   font-weight: 900;
   color: var(--radio-accent-mobile);
   color: var(--radio-ink);
-  border: 1px solid var(--radio-ink);
   border: 1.5px solid var(--radio-accent-mobile);
+  transition: background-color 0.25s ease;
 }
-.desktop-radio-container .radio-bottom .radio-button1:hover,
-.desktop-radio-container .radio-bottom .radio-button2:hover,
-.tablet-radio-container .radio-bottom .radio-button1:hover,
-.tablet-radio-container .radio-bottom .radio-button2:hover,
-.mobile-radio-container .radio-bottom .radio-button1:hover,
-.mobile-radio-container .radio-bottom .radio-button2:hover {
-  background-color: var(--radio-front-mobile);
-  border: 1px solid var(--radio-accent-mobile);
-  color: var(--radio-accent-mobile);
+.desktop-radio-container .radio__bottom .radio__tune-down:hover,
+.desktop-radio-container .radio__bottom .radio__tune-up:hover,
+.tablet-radio-container .radio__bottom .radio__tune-down:hover,
+.tablet-radio-container .radio__bottom .radio__tune-up:hover,
+.mobile-radio-container .radio__bottom .radio__tune-down:hover,
+.mobile-radio-container .radio__bottom .radio__tune-up:hover {
+  background-color: var(--lime-bold);
 }
-.desktop-radio-container .radio-bottom .radio-button1::after,
-.desktop-radio-container .radio-bottom .radio-button2::after,
-.tablet-radio-container .radio-bottom .radio-button1::after,
-.tablet-radio-container .radio-bottom .radio-button2::after,
-.mobile-radio-container .radio-bottom .radio-button1::after,
-.mobile-radio-container .radio-bottom .radio-button2::after {
+.desktop-radio-container .radio__bottom .radio__tune-down::after,
+.desktop-radio-container .radio__bottom .radio__tune-up::after,
+.tablet-radio-container .radio__bottom .radio__tune-down::after,
+.tablet-radio-container .radio__bottom .radio__tune-up::after,
+.mobile-radio-container .radio__bottom .radio__tune-down::after,
+.mobile-radio-container .radio__bottom .radio__tune-up::after {
   background-image: linear-gradient(to right, var(--radio-body-mobile) 0 80%, var(--radio-ink) 80%);
 }
-.desktop-radio-container .radio-bottom .radio-buttons::before,
-.desktop-radio-container .radio-bottom .radio-buttons::after,
-.tablet-radio-container .radio-bottom .radio-buttons::before,
-.tablet-radio-container .radio-bottom .radio-buttons::after,
-.mobile-radio-container .radio-bottom .radio-buttons::before,
-.mobile-radio-container .radio-bottom .radio-buttons::after {
+.desktop-radio-container .radio__bottom .radio__buttons::before,
+.desktop-radio-container .radio__bottom .radio__buttons::after,
+.tablet-radio-container .radio__bottom .radio__buttons::before,
+.tablet-radio-container .radio__bottom .radio__buttons::after,
+.mobile-radio-container .radio__bottom .radio__buttons::before,
+.mobile-radio-container .radio__bottom .radio__buttons::after {
   border: 2px solid var(--radio-accent-mobile);
   background-image: repeating-linear-gradient(45deg, var(--radio-accent-mobile) 0%, var(--radio-accent-mobile) 2.5%, transparent 2.5%, transparent 10%), repeating-linear-gradient(-45deg, var(--radio-accent-mobile) 0%, var(--radio-accent-mobile) 2.5%, var(--radio-panel) 2.5%, var(--radio-panel) 10%);
 }
-.desktop-radio-container .radio-bottom .radio-button1::before,
-.desktop-radio-container .radio-bottom .radio-button2::before,
-.tablet-radio-container .radio-bottom .radio-button1::before,
-.tablet-radio-container .radio-bottom .radio-button2::before,
-.mobile-radio-container .radio-bottom .radio-button1::before,
-.mobile-radio-container .radio-bottom .radio-button2::before {
+.desktop-radio-container .radio__bottom .radio__tune-down::before,
+.desktop-radio-container .radio__bottom .radio__tune-up::before,
+.tablet-radio-container .radio__bottom .radio__tune-down::before,
+.tablet-radio-container .radio__bottom .radio__tune-up::before,
+.mobile-radio-container .radio__bottom .radio__tune-down::before,
+.mobile-radio-container .radio__bottom .radio__tune-up::before {
   background-image: linear-gradient(to right, var(--radio-body-mobile) 0 80%, var(--radio-ink) 80%);
 }
 
-.mobile-radio-container > .radio-top {
+.mobile-radio-container > .radio__top {
   animation: desktop-speaker-animation1 3s ease infinite;
 }
 
-.mobile-radio-container > .radio-bottom > .radio-buttons::before {
+.mobile-radio-container > .radio__bottom > .radio__buttons::before {
   animation: desktop-speaker-animation2 3s ease infinite;
 }
 
-.mobile-radio-container > .radio-bottom > .radio-buttons::after {
+.mobile-radio-container > .radio__bottom > .radio__buttons::after {
   animation: desktop-speaker-animation2 3s ease infinite;
 }
 
-.mobile-radio-container > .radio-top::before {
+.mobile-radio-container > .radio__top::before {
   animation: antena-animation 5s infinite;
 }
 
-.tablet-radio-container > .radio-top {
+.tablet-radio-container > .radio__top {
   animation: desktop-speaker-animation1 3s ease infinite;
 }
 
-.tablet-radio-container > .radio-bottom > .radio-buttons::before {
+.tablet-radio-container > .radio__bottom > .radio__buttons::before {
   animation: desktop-speaker-animation2 3s ease infinite;
 }
 
-.tablet-radio-container > .radio-bottom > .radio-buttons::after {
+.tablet-radio-container > .radio__bottom > .radio__buttons::after {
   animation: desktop-speaker-animation2 3s ease infinite;
 }
 
-.tablet-radio-container > .radio-top::before {
+.tablet-radio-container > .radio__top::before {
   animation: antena-animation 5s infinite;
 }
 
-.desktop-radio-container:hover > .radio-top {
+.desktop-radio-container:hover > .radio__top {
   animation: desktop-speaker-animation1 1s ease infinite;
 }
 
-.desktop-radio-container:hover > .radio-bottom > .radio-buttons::before {
+.desktop-radio-container:hover > .radio__bottom > .radio__buttons::before {
   animation: desktop-speaker-animation2 1s ease infinite;
 }
 
-.desktop-radio-container:hover > .radio-bottom > .radio-buttons::after {
+.desktop-radio-container:hover > .radio__bottom > .radio__buttons::after {
   animation: desktop-speaker-animation2 1s ease infinite;
 }
 
-.desktop-radio-container:hover > .radio-top::before {
+.desktop-radio-container:hover > .radio__top::before {
   animation: antena-animation 3s infinite;
 }
 
@@ -324,10 +322,46 @@
 
 /* Reduced motion -- the radio stops bouncing and its antenna stays put. */
 @media (prefers-reduced-motion: reduce) {
-  .radio-container .radio-top,
-  .radio-container .radio-top::before,
-  .radio-container .radio-buttons::before,
-  .radio-container .radio-buttons::after {
+  .radio-container .radio__top,
+  .radio-container .radio__top::before,
+  .radio-container .radio__buttons::before,
+  .radio-container .radio__buttons::after {
     animation: none !important;
   }
+}
+
+/* Desktop only: tablet and mobile have no hover */
+.radio__tooltip {
+  --tooltip-bg: var(--cream);
+  --tooltip-marker: var(--periwinkle-bold);
+  --tooltip-text: var(--charcoal);
+  font-size:11px;
+  display: none;
+  width: max-content;
+  max-width: 8rem;
+  white-space: normal;
+}
+
+.desktop-radio-container {
+  position: relative;
+}
+
+/* Up and to the left, above the antenna tip so it never covers the radio */
+.desktop-radio-container .radio__tooltip.tooltip--top {
+  display: inline-flex;
+  right: 40%;
+  bottom: calc(100% + 2rem);
+  left: auto;
+  transform: translateY(0px);
+  transition: none;
+}
+
+/* Little tooltip. Fades in and dissapears */
+.desktop-radio-container:is(:hover, :has(:focus-visible)) .radio__tooltip.tooltip--top {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    opacity var(--motion-hover-duration) var(--motion-hover-ease),
+    transform var(--motion-hover-duration) var(--motion-hover-ease);
 }

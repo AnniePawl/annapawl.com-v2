@@ -1,15 +1,13 @@
-// Ported from v1 src/components/css-items/teacup/teacup.js. Decorative,
-// no state -- stays a server component.
 import "./teacup.css";
 
-// Four little steam squiggles that drift up out of the cup, one after
-// another (see .steam__squiggle in teacup.css).
+// Steam squiggles that drift out of the cup
+// see .steam__squiggle in teacup.css
 const SQUIGGLES = [0, 1, 2, 3];
 
 export function TeaCup({ cn }: { cn?: string }) {
   return (
     <div className={`teacup-container ${cn ?? ""}`} aria-hidden="true">
-      <div className="teacup" />
+      <div className="teacup__cup" />
       <div className="steam">
         {SQUIGGLES.map((i) => (
           <svg key={i} className="steam__squiggle" viewBox="0 0 8 24">

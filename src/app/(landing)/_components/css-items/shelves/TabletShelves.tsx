@@ -1,6 +1,3 @@
-// Ported from v1 src/components/css-items/shelves/TabletShelves.js. Item
-// compositions copied 1:1 from the source; visibility is switched by
-// landing.css media queries (see DesktopShelves.tsx).
 import { Books } from "../books/Books";
 import { Books2 } from "../books/Books2";
 import { Dessert } from "../dessert/Dessert";

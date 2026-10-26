@@ -26,7 +26,7 @@
   background: var(--demo-fill);
 }
 
-/* A soft tile that centers one demo */
+/* Tile centers demo */
 .shape-frame {
   display: grid;
   place-items: center;

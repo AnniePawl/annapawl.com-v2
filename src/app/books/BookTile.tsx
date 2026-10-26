@@ -6,16 +6,11 @@ export interface ShelfEntry {
   info: BookInfo | null;
 }
 
-/**
- * A single book cover tile — used both in the main year-by-year grid
- * (page.tsx) and inside the tag-filter modal (TagFilterBar.tsx), so the
- * filtered view looks and behaves identically to the shelf itself.
- */
+
 export default function BookTile({ lookup, info }: ShelfEntry) {
-  const title = info?.title ?? lookup.title;
+  const title = lookup.title;
   const author = info?.authors?.join(", ") || lookup.author || "Unknown author";
-  // A manual coverUrl in data.ts always wins over whatever Google Books
-  // returned — see the field's doc comment in lib/googleBooks.ts.
+  // manual coverUrl in data.ts wins over whatever Google Books returned
   const thumbnail = lookup.coverUrl ?? info?.thumbnail ?? null;
 
   const cover = (
@@ -26,11 +21,6 @@ export default function BookTile({ lookup, info }: ShelfEntry) {
           alt={`Cover of ${title}`}
           fill
           sizes="(min-width: 1024px) 20vw, (min-width: 640px) 25vw, 33vw"
-          // object-contain (not object-cover) so covers are never
-          // cropped — Google's thumbnails don't all come back at a
-          // clean 2:3 ratio, and cover art (unlike a photo) reads badly
-          // with the top/bottom or a corner sliced off. Any mismatch
-          // just letterboxes against the container's --bg-subtle.
           className="object-contain"
         />
       ) : (
@@ -40,7 +30,7 @@ export default function BookTile({ lookup, info }: ShelfEntry) {
       )}
 
       {lookup.tags?.includes(FAVORITE_TAG) && (
-        // Favorites get a small ribbon tab in the page accent.
+        // Favorites get a small ribbon book mark in  page accent.
         <span className="bookshelf-ribbon" title="Favorite">
           <span className="sr-only">Favorite</span>
         </span>

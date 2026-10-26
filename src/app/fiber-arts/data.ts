@@ -1,13 +1,3 @@
-/**
- * Fiber arts collection. One entry per piece. Photos are trimmed web
- * copies in public/fiber-arts/<type>/ (originals stay in public/embroidery);
- * add needlepoint and cross stitch photos under public/fiber-arts/ too.
- *
- * TODO(Anna): titles below are placeholders guessed from the photos.
- * Replace them, add `year` where you know it, pick your real favorites,
- * and give each favorite a short `story` + `materials`.
- */
-
 export type FiberType = "embroidery" | "needlepoint" | "cross-stitch";
 
 export interface FiberPiece {
@@ -42,7 +32,7 @@ const embroidery = (n: number, title: string, extra: Partial<FiberPiece> = {}): 
 });
 
 export const PIECES: FiberPiece[] = [
-  // Favorites (placeholder picks)
+  // Favorites 
   embroidery(17, "Beetle"),
   embroidery(13, "Hamsa"),
   embroidery(6, "Rose under glass"),

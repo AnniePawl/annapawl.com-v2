@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Check, Copy } from "lucide-react";
 import "./shape-code.css";
 
-// A code block with a copy button in the corner. "use client" because the
+// Code block w/ copy button in the corner. "use client" because the
 // button uses state (the copied ✓) and the browser clipboard.
 export default function ShapeCode({ code }: { code: string }) {
   const [copied, setCopied] = useState(false);

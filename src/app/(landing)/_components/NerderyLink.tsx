@@ -1,9 +1,7 @@
 "use client";
 
-// "General nerdery ↓" under the about copy: scrolls down to the menu
-// (LandingIndex, id="landing-index"). Smooth unless the visitor prefers
-// reduced motion. Focus moves to the menu heading so keyboard and screen
-// reader users land in the same place. Without JS it's a plain anchor.
+// "General nerdery ↓" link scrolls down to menu
+// Smooth unless  visitor prefers reduced motion. 
 export function NerderyLink() {
   function handleClick(e: React.MouseEvent<HTMLAnchorElement>) {
     const menu = document.getElementById("landing-index");

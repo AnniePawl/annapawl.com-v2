@@ -1,14 +1,20 @@
-/**
- * Static code figure for the explainer copy below. The old page used two
- * screenshots (circle-snippet.jpeg, css-rule.jpeg) of code shown in its
- * own dark editor theme — replaced with real formatted text here instead
- * of porting stale images that would've clashed with the restyled page
- * (and would've meant shipping two more raster images for what's really
- * just a few lines of text).
- */
-export default function CodeSnippet({ code }: { code: string }) {
+import type { CSSProperties } from "react";
+import type { PaletteColor } from "../../../components/ui/colorTokens";
+
+/** Code text uses the soft version of the section's color; pass `tone` to override it. */
+export default function CodeSnippet({
+  code,
+  tone,
+}: {
+  code: string;
+  tone?: PaletteColor;
+}) {
+  const style = tone
+    ? ({ "--code-tone": `var(--${tone})` } as CSSProperties)
+    : undefined;
+
   return (
-    <div className="dwc-code-figure">
+    <div className="dwc-code-figure" style={style}>
       <pre>
         <code>{code.trim()}</code>
       </pre>

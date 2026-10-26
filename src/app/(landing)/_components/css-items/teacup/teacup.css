@@ -22,7 +22,7 @@
   transform: scale(0.95) translateY(-63px);
 }
 
-.teacup {
+.teacup__cup {
   height: 60px;
   width: 58px;
   position: relative;
@@ -123,7 +123,7 @@
   }
 }
 
-/* Reduced motion: no drifting, just four still squiggles. */
+/* Reduced motion: no animation just four still squiggles. */
 @media (prefers-reduced-motion: reduce) {
   .steam__squiggle {
     animation: none;

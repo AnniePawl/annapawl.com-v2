@@ -31,8 +31,8 @@ import BadgesSection from "./_sections/badges";
 import TooltipsSection from "./_sections/tooltips";
 import FormsSection from "./_sections/forms";
 import PageShellSection from "./_sections/page-shell";
+import PageHeaderSection from "./_sections/page-header";
 import PostLayoutSection from "./_sections/post-layout";
-import EditorialHeaderSection from "./_sections/editorial-header";
 
 // Tailwind's `lg` (64rem) -- the point where the sidebar takes over from
 // MobileNav (section-switcher.css). Below it the page has a second sticky
@@ -308,8 +308,8 @@ export default function DesignSystemOverview() {
 
 {/* Patterns */}
             <PageShellSection />
+            <PageHeaderSection />
             <PostLayoutSection />
-            <EditorialHeaderSection />
           </main>
         </div>
       </PageShell>

@@ -1,3 +1,7 @@
+/* ============================================================
+   Books (horizontal stack) — src/components/css-items/books
+   ============================================================ */
+
 .landing {
   --pile-pages: var(--cream);
   --pile-page-lines: color-mix(in srgb, var(--charcoal) 20%, var(--cream));
@@ -18,9 +22,6 @@
   --pile-book5-label-dark: var(--marigold-bold);
 }
 
-/* ============================================================
-   Books (horizontal stack) — src/components/css-items/books
-   ============================================================ */
 
 .books-container {
   /* Base constants, shared by every .book--N below. */
@@ -226,8 +227,7 @@
   }
 }
 
-/* Reduced motion -- disables this item's animations (hover-triggered
-   and autoplay alike). Source (v1) had no reduced-motion handling. */
+/* Reduced motion -- disables this item's animations */
 @media (prefers-reduced-motion: reduce) {
   .book--1,
   .book--2,

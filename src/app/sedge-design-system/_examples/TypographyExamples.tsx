@@ -42,6 +42,13 @@ const SCALE: {
     sample: "Seriously saucy squirrel",
   },
   {
+    role: "Subheading",
+    className: "type-subheading",
+    spec: "17–19px · 500 · −0.015em · 1.3",
+    usedIn: "Post subsections (with a marker)",
+    sample: "Squirrel sightings",
+  },
+  {
     role: "Body",
     className: "type-body",
     spec: "16px · 400 · 1.7",
@@ -67,9 +74,23 @@ const SCALE: {
   {
     role: "Meta",
     className: "type-meta",
-    spec: "12px · 400 · 1.35 · italic variant",
+    spec: "12px · 400 · 1.35",
     usedIn: "Details rules, captions, counts",
     sample: "Oct 3, 2026 · 5 min read · 18 books",
+  },
+  {
+    role: "Note",
+    className: "type-note",
+    spec: "13px · 400 · italic · 1.35",
+    usedIn: "Header descriptions, drawer notes",
+    sample: "Last seen near the bird feeder, possibly plotting.",
+  },
+  {
+    role: "Note label",
+    className: "type-note-label",
+    spec: "13px · 700 · italic · 1.35",
+    usedIn: "Contents, Filter by tag, drawer sections",
+    sample: "Known accomplices",
   },
   {
     role: "Code",
@@ -111,10 +132,14 @@ const USAGE = `
 <h2 className="type-section">Colors</h2>
 <p className="type-lede">These are the colors that make me happy.</p>
 <h3 className="type-heading">Playful, with purpose</h3>
+<h4 className="type-subheading">Parent div</h4>
 <p className="type-body">Body copy</p>
 <p className="type-supporting">A small explanation</p>
 <span className="type-label">Usage</span>
 <span className="type-meta">Oct 3, 2026 · 5 min read</span>
+<span className="type-note-label">Contents</span>
+<p className="type-note">A small italic aside</p>
+<code className="inline-code">border-radius</code>
 `;
 
 export default function TypographyExamples() {
@@ -172,15 +197,20 @@ export default function TypographyExamples() {
                   {mark ? <span className="typo-scale-mark" aria-hidden="true" /> : null}
                 </p>
               )}
-              {className === "type-meta" ? (
-                <p className="type-meta typo-scale-sample typo-italic">
-                  Last seen near the bird feeder, possibly plotting.
-                </p>
-              ) : null}
             </div>
           </div>
         ))}
       </div>
+
+      {/* Inline code */}
+      <h3 className="sedge-subheading">Inline code</h3>
+      <p className="type-body typo-inline-code-sample">
+        Property and class names in running text, like{" "}
+        <code className="inline-code">border-radius</code> or{" "}
+        <code className="inline-code">circle__inner</code>. Automatic inside
+        post bodies; add <code className="inline-code">.inline-code</code>{" "}
+        anywhere else.
+      </p>
 
       {/* Tracking */}
       <h3 className="sedge-subheading">Tracking · size sets the spacing</h3>

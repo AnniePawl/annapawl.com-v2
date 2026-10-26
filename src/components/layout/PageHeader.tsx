@@ -1,6 +1,12 @@
+/**
+ * The header every page shares: home logo, description, eyebrow, title,
+ * optional lede, and a details rule. Articles get it through PostLayout;
+ * collection pages (Bookshelf, Fiber Arts) use it on its own.
+ * Styles live in PostLayout/post-layout.css (.post-header-*).
+ */
 import type { CSSProperties, ReactNode } from "react";
 
-export type PostHeaderProps = {
+export type PageHeaderProps = {
   descriptionTitle?: string;
   backLabel?: string;
   eyebrow?: ReactNode;
@@ -18,7 +24,7 @@ export type PostHeaderProps = {
   headingLevel?: 1 | 2 | 3;
 };
 
-export default function PostHeader({
+export default function PageHeader({
   descriptionTitle = "Digital garden",
   backLabel = "Garden archive",
   eyebrow,
@@ -32,7 +38,7 @@ export default function PostHeader({
   utilityStart,
   accent = "var(--red-bold)",
   headingLevel = 1,
-}: PostHeaderProps) {
+}: PageHeaderProps) {
   const Heading = headingLevel === 2 ? "h2" : headingLevel === 3 ? "h3" : "h1";
   const style = { "--post-accent": accent } as CSSProperties;
 
@@ -44,14 +50,14 @@ export default function PostHeader({
             <div className="post-header-utility-start">{utilityStart}</div>
             <div className="post-header-utility-end">
               <span className="post-header-description-title">{descriptionTitle}</span>
-              {description ? <p className="post-header-description">{description}</p> : null}
+              {description ? <p className="post-header-description type-note">{description}</p> : null}
             </div>
           </>
         ) : (
           <>
             <div>
               <span className="post-header-description-title">{descriptionTitle}</span>
-              {description ? <p className="post-header-description">{description}</p> : null}
+              {description ? <p className="post-header-description type-note">{description}</p> : null}
             </div>
             <span className="post-header-back">{backLabel}</span>
           </>

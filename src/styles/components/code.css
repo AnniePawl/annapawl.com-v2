@@ -1,0 +1,15 @@
+/* ---- Inline code ----
+   Property, tag, and class names in running text. Automatic inside post
+   bodies (PostLayout); anywhere else, opt in with .inline-code.
+   Mixed from the theme's text + ground so it works in dark mode too. */
+
+.inline-code,
+.post-body :not(pre) > code {
+  padding: 0.06em 0.22em;
+  border-radius: 0;
+  background: color-mix(in srgb, var(--text-primary) 9%, var(--bg-default));
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  line-height: 1;
+}

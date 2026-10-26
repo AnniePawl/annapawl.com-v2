@@ -1,8 +1,4 @@
-/* ---- Shape cover (ShapeCover.tsx) ----
-   Sits between the post header and the contents/body. Each tile sets
-   --tile-soft (its background) and --tile-bold (its shape) inline; on
-   hover they swap -- the tile fills with the bold color and the shape
-   turns cream, the palette version of the original page's invert. */
+/* Shape grid styles */
 
 .shape-cover {
   margin: 0;
@@ -23,7 +19,7 @@
   justify-content: center;
   aspect-ratio: 1;
   overflow: hidden;
-  border-radius: 0; /* square tiles that meet edge to edge */
+  border-radius: 0; 
   background: var(--tile-bg);
   color: var(--charcoal);
   text-decoration: none;
@@ -39,7 +35,7 @@
 
 .shape-tile-number {
   position: absolute;
-  z-index: 1; /* stays on top of tall shapes like the rectangle */
+  z-index: 1; 
   top: var(--space-3);
   left: var(--space-3);
   display: inline-flex;
@@ -78,7 +74,7 @@
   }
 }
 
-/* The rectangle is the tallest shape; keep it clear of the tile number. */
+/* Rectangle is tall, keep it clear of the tile number. */
 .shape-cover .shape--rectangle {
   height: 56%;
   margin-top: 8%;

@@ -1,12 +1,10 @@
-// Ported from v1 src/components/css-items/sewing/PinCushion.js. Rendered
-// inside Sewing.tsx, whose root is aria-hidden.
 import { Pin } from "./Pin";
 import "./pin-cushion.css";
 
 export function PinCushion({ cn }: { cn?: string }) {
   return (
     <div className={`pin-cushion-container ${cn ?? ""}`}>
-      <div className="pins">
+      <div className="pin-cushion__pins">
         <Pin />
         <Pin />
         <Pin />
@@ -14,7 +12,7 @@ export function PinCushion({ cn }: { cn?: string }) {
         <Pin />
         <Pin />
       </div>
-      <div className="pin-cushion" />
+      <div className="pin-cushion__cushion" />
     </div>
   );
 }
