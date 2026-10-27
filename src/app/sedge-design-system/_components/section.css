@@ -229,6 +229,10 @@
   margin: var(--space-6) 0;
 }
 
+.poster-divider--end {
+  margin-bottom: 0;
+}
+
 .sedge-hero-title {
   font-weight: var(--font-regular);
   line-height: 0.82;

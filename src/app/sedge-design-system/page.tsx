@@ -130,11 +130,8 @@ export default function DesignSystemOverview() {
       rootMargin = `-${top}px 0px -${bottom}px 0px`;
     }
 
-    // root: null (the browser viewport) — the page now scrolls normally
-    // instead of the old fixed-height, internally-scrolling <main>, now
-    // that the hero + its sticky nav sit above the docs app. The extra
-    // -120px of top margin accounts for that sticky nav's height so a
-    // section isn't marked "active" while it's still hidden underneath it.
+    // The -120px top margin keeps a section from being marked active while
+    // it's still hidden under the sticky nav.
     //
     // A callback only carries the entries that *changed*, so the sections
     // currently inside the band are tracked across callbacks: picking the
@@ -226,18 +223,13 @@ export default function DesignSystemOverview() {
     }
   };
 
-  // Scroll to top 
-
   const scrollToTop = () => {
     if (lenis) {
       lenis.scrollTo(0);
+    } else {
+      window.scrollTo({ top: 0, behavior: "instant" });
     }
-    else {
-      window.scrollTo({ top: 0, behavior: "instant" })
-    }
-  }
-
-
+  };
 
   return (
     <div ref={rootRef} className="min-h-screen bg-[var(--bg-default)]">
@@ -266,7 +258,7 @@ export default function DesignSystemOverview() {
             content's min-content width, which left <main> ~800px wide (past
             the viewport) between 1024px and ~1140px. Identical above that. */}
         <div
-          className="mt-10 grid grid-cols-1 lg:mt-16 lg:grid-cols-[250px_minmax(0,1fr)]"
+          className="mt-6 grid grid-cols-1 lg:mt-0 lg:grid-cols-[250px_minmax(0,1fr)]"
           style={{ gap: "var(--space-7)" }}
         >
           {/* pt-12 matches each section's top padding, so the first nav

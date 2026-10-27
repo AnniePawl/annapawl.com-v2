@@ -94,8 +94,8 @@ export default function LayoutSection() {
             <span className="layout-caption-title">Sidebar + content</span>
             <span>
               Sedge. Grouped section links on the left, long scrolling content
-              on the right. Under 40rem the sidebar becomes a section switcher
-              at the top.
+              on the right. Under 64rem (1024px) the sidebar becomes a section
+              switcher at the top.
             </span>
           </figcaption>
         </figure>

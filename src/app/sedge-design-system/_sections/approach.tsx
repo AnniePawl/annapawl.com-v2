@@ -33,10 +33,7 @@ export default function ApproachSection() {
     >
       <div className="sedge-section-intro">
         <p>
-          I love playfulness, color, and unexpected moments that give an interface a sense of character and charm.
-        </p>
-        <p>
-          For this project, my design system is a foundation rather than a strict set of rules: structured enough to create consistency, but flexible enough to experiment, try something funky, or break a rule when it makes the experience better. The goal isn’t to smooth out every irregularity, but to create a system where personality and precision can comfortably coexist.
+          I like interfaces with personality—the kind that feel expressive and human without losing sight of the details. My design system is a foundation, not a rulebook. It creates enough consistency to hold things together, with room to experiment, try something funky, or break a rule when the experience calls for it.
         </p>
       </div>
       <div className="approach-principles">

@@ -45,18 +45,10 @@ export type NavSection = {
   group: SectionGroup;
 };
 
-// Order: Intro (the "why" before the specifics), then Foundations (the
-// token-level building blocks — color, type, spacing, layout, shape,
-// elevation, motion, accessibility), then Components (the component
-// library), then Patterns (repeatable page structures composed from both).
-// Sidebar/mobile nav and the section headings in the main column read this
-// same grouping —
-// keep new sections declared inside the right block rather than appended
-// at the end.
+// Sidebar, mobile nav and section headings all read this list, in this
+// order, so keep it matching the order sections render in page.tsx.
 export const SECTIONS: NavSection[] = [
-  // Intro — Overview used to live here as its own section; its copy and
-  // "At a glance" card now live in the Hero instead (see Hero.tsx), so
-  // Approach is the first real Intro section in the flow.
+  // Intro
   { id: "approach", title: "Approach", icon: Brain, group: "Intro" },
   { id: "logo", title: "Logo", icon: Clover, group: "Intro" },
 
@@ -101,17 +93,17 @@ export const SECTIONS: NavSection[] = [
     group: "Components",
   },
   { id: "callouts", title: "Callouts", icon: Info, group: "Components" },
-  {
-    id: "accordion",
-    title: "Accordion",
-    icon: ListChevronsUpDown,
-    group: "Components",
-  },
   { id: "cards", title: "Cards", icon: CreditCard, group: "Components" },
   {
     id: "modals",
     title: "Modals",
     icon: PanelsTopLeft,
+    group: "Components",
+  },
+  {
+    id: "accordion",
+    title: "Accordion",
+    icon: ListChevronsUpDown,
     group: "Components",
   },
   { id: "badges", title: "Badges", icon: BadgeCheck, group: "Components" },

@@ -29,8 +29,8 @@ export default function MotionSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      lede="Motion adds personality and helps make interactions feel responsive and intuitive."
-      description="A small set of durations and easing curves keeps motion consistent across the system. Faster transitions handle lightweight interactions like hover states, while slower, more expressive motion is reserved for larger UI changes. Motion is reduced automatically when a user prefers less movement."
+      lede="Motion adds personality, but it also has a job: showing what changed and making interactions feel responsive."
+      description="Fast transitions handle lightweight interactions like hover states. Slower, more expressive motion is saved for larger changes, while shared durations and easing curves keep everything feeling related. When someone prefers less movement, the system quiets itself automatically."
     >
       <div className="motion-section-block">
         <div className='mb-6'>

@@ -6,11 +6,10 @@ import { ArrowUp, ChevronDown } from "lucide-react";
 import type { NavSection } from "../_data/sections";
 import "./section-switcher.css";
 
-// The real sidebar is `hidden lg:block` — below that breakpoint there's
-// currently no other way to jump between sections. This is the mobile
-// equivalent: a compact bar, sticky under the site header, that names the
-// current section and opens a bottom sheet listing all of them (grouped
-// like the sidebar). All of the styling lives in section-switcher.css.
+// The sidebar is `hidden lg:block`. Below that breakpoint this bar takes
+// its place: it pins to the top once the hero scrolls away, names the
+// current section, and opens a dropdown listing every section (grouped
+// like the sidebar) plus Back to top. Styles live in section-switcher.css.
 //
 // The sheet is a native <dialog> opened with showModal(), the same
 // approach as ui/Modal.tsx: focus is trapped inside it, Escape closes it

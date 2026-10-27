@@ -59,6 +59,10 @@
   width: 100%;
 }
 
+.pattern-preview--post .post-layout.page-shell {
+  border-radius: 0;
+}
+
 /* The preview's own phone contents bar would pin to the real screen. */
 .pattern-preview .mobile-contents {
   display: none;

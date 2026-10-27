@@ -49,8 +49,8 @@ const ICON_COLORS = [
 
 export default function Hero({ onExplore }: { onExplore: () => void }) {
   return (
-    <section id='top' className="relative mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-7xl flex-col justify-center overflow-hidden px-6 py-6">
-      <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[3fr_2.6fr]">
+    <section id='top' className="relative mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-7xl flex-col overflow-hidden px-6 pt-10 pb-4 lg:pt-16">
+      <div className="my-auto grid grid-cols-1 items-start gap-12 lg:grid-cols-[3fr_2.6fr]">
         <div className="">
           <h1 className="pt-2 h-display sedge-hero-title">
             Sedge
@@ -63,9 +63,7 @@ export default function Hero({ onExplore }: { onExplore: () => void }) {
           </p>
 
           <p className="mt-5 max-w-xl text-base leading-normal text-[var(--text-secondary)]">
-            As a frontend developer with a soft spot for design, I&apos;m always exploring the space
-            between structure and experimentation. Sedge is where those ideas take shape - thoughtful at its core, playful around the
-            edges, and designed to evolve as I do.
+            As a frontend developer with a soft spot for design, I’m drawn to the space between structure and experimentation. This is where those ideas take shape—thoughtful at its core, playful around the edges, and designed to evolve as I do.
           </p>
 
           <Button
@@ -75,7 +73,7 @@ export default function Hero({ onExplore }: { onExplore: () => void }) {
             shape="pill"
             size="lg"
             endIcon={<ArrowRight />}
-             tone={{ tint: "cherry-bold", text: "cream", accent: "sky-soft", ink: "charcoal" }}
+            tone={{ tint: "cherry-bold", text: "cream", accent: "sky-soft", ink: "charcoal" }}
           >
             Explore the system
           </Button>
@@ -106,6 +104,7 @@ export default function Hero({ onExplore }: { onExplore: () => void }) {
             </div>
           ))}
         </div>
+        <hr className="poster-divider poster-divider--end" />
       </div>
     </section>
   );

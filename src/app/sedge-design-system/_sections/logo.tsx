@@ -82,7 +82,7 @@ export default function LogoSection() {
       <h3 className="sedge-subheading">Across the garden</h3>
       <p>
         The silhouette always stays the same, but the petals are totally
-        customizable — each page can dress the clover in colors that match its
+        customizable. Each page can dress the clover in colors that match its
         own palette and vibe.
       </p>
       <div className="logo-variant-grid">

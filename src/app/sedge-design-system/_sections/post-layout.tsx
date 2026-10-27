@@ -3,6 +3,7 @@ import PostLayout, {
   PostSubsection,
 } from "../../../components/layout/PostLayout/PostLayout";
 import CodeBlock from "../../../components/ui/CodeBlock";
+import HomeLogo from "../../../components/ui/HomeLogo";
 import Section from "../_components/Section";
 import { SECTIONS } from "../_data/sections";
 import "./patterns.css";
@@ -10,22 +11,24 @@ import "./patterns.css";
 const meta = SECTIONS.find((section) => section.id === "post-layout")!;
 
 const USAGE = `<PostLayout
-  descriptionTitle="The Bookshelf"
-  backLabel="← All notes"
-  eyebrow="Notes, CSS art"
+  utilityStart={<HomeLogo colors={…} size="1.75rem" />}
+  descriptionTitle="CSS Art"
+  description="An introduction to drawing with code…"
+  shortDescription="How I draw little illustrations with nothing but HTML and CSS."
+  eyebrow="Creative Coding"
   title="Drawing with Code"
-  description="A record of what I’ve read and what stayed with me."
-  publishedDate="Oct 3, 2026"
-  readingTime="4 min read"
-  postTags="CSS, Illustration, Front-end"
-  accent="var(--iris-bold)"
+  publishedDate="Updated Oct 2026"
+  readingTime="10 min read"
+  postTags="CSS, Illustration, Creative Coding"
+  accent="var(--red-bold)"
   next={{ href: "/css-shapes", label: "CSS Shapes" }}
   contents={[
-    { id: "what-is-it", label: "What is drawing with code?", tone: "red-bold" },
-    { id: "the-div", label: "It’s all about the <div>", tone: "iris-bold" },
+    { id: "what-is-drawing-with-code", label: "What is drawing with code?", tone: "red-bold" },
+    { id: "the-div", label: "It’s all about the <div>", tone: "sky-bold" },
+    …
   ]}
 >
-  <PostSection id="what-is-it" title="What is drawing with code?">
+  <PostSection id="the-div" title="It’s all about the <div>">
     <p>Post copy...</p>
 
     {/* Subsections take the section's color. "label" (default) is a small
@@ -46,19 +49,31 @@ export default function PostLayoutSection() {
       heading={meta.title}
       icon={meta.icon}
       lede="The complete structure for long-form posts."
-      description="One component for every long-form post: the header, publishing details, contents rail and reading column all come together, so every post is built the same way. Each section gets a color, and that color flows through everything: its marker in the contents list, the square beside its heading, its subheading markers, and even the text in its code blocks (in the soft version). Change a section’s color once and the whole section follows. Every post ends with a “Back to top” link, an optional link to the next post, and the site footer."
+      description="Post Layout brings the header, publishing details, contents rail, reading column, and footer into one repeatable structure. Each section sets one color that flows through its navigation marker, heading, subheadings, and code blocks—change it once and the whole section follows. Every post ends with a Back to top link and can point readers toward what comes next."
     >
       <div className="pattern-preview pattern-preview--post">
         <PostLayout
-          descriptionTitle="The Bookshelf"
-          backLabel="← All notes"
-          eyebrow="Notes, CSS art"
+          utilityStart={
+            <HomeLogo
+              colors={{
+                northeast: "var(--sky-bold)",
+                southeast: "var(--red-bold)",
+                southwest: "var(--red-bold)",
+                northwest: "var(--red-bold)",
+                hoverAccent: "var(--iris-bold)",
+              }}
+              size="1.75rem"
+            />
+          }
+          descriptionTitle="CSS Art"
+          description="An introduction to drawing with code—using HTML elements and CSS properties to turn simple shapes into illustrations in the browser."
+          shortDescription="How I draw little illustrations with nothing but HTML and CSS."
+          eyebrow="Creative Coding"
           title="Drawing with Code"
-          description="A record of what I’ve read, what stayed with me, and what I’d happily press into someone else’s hands."
-          publishedDate="Oct 3, 2026"
-          readingTime="4 min read"
-          postTags="CSS, Illustration, Front-end"
-          accent="var(--iris-bold)"
+          publishedDate="Updated Oct 2026"
+          readingTime="10 min read"
+          postTags="CSS, Illustration, Creative Coding"
+          accent="var(--red-bold)"
           headingLevel={3}
           footer={false}
           contents={[
@@ -70,17 +85,23 @@ export default function PostLayoutSection() {
             {
               id: "the-div",
               label: "It’s all about the <div>",
-              tone: "iris-bold",
+              tone: "sky-bold",
             },
-            {
-              id: "recap",
-              label: "CSS, a little recap",
-              tone: "lilac-soft",
-            },
+            { id: "recap", label: "CSS, a little recap", tone: "plum-bold" },
             {
               id: "toolkit",
               label: "Beginner’s CSS toolkit",
-              tone: "emerald-bold",
+              tone: "teal-bold",
+            },
+            {
+              id: "teacup",
+              label: "Let’s build a teacup",
+              tone: "iris-bold",
+            },
+            {
+              id: "tips",
+              label: "Tips from trial and error",
+              tone: "coral-bold",
             },
             { id: "try-it", label: "Try it out", tone: "marigold-bold" },
           ]}
