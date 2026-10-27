@@ -21,6 +21,7 @@ export default function DrawingWithCodePage() {
       <PostLayout
         descriptionTitle="CSS Art"
         description="An introduction to drawing with code—using HTML elements and CSS properties to turn simple shapes into illustrations in the browser."
+        shortDescription="How I draw little illustrations with nothing but HTML and CSS."
         eyebrow="Creative Coding"
         title="Drawing with Code"
         next={{ href: "/css-shapes", label: "CSS Shapes" }}

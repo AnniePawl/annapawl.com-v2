@@ -12,6 +12,8 @@ export type PageHeaderProps = {
   eyebrow?: ReactNode;
   title: string;
   description?: string;
+  /** Optional shorter description, shown instead on phones. */
+  shortDescription?: string;
   publishedDate?: string;
   readingTime?: string;
   postTags?: ReactNode;
@@ -24,12 +26,32 @@ export type PageHeaderProps = {
   headingLevel?: 1 | 2 | 3;
 };
 
+// Both versions are rendered and CSS shows one, so the server and the
+// browser agree (no flash of the wrong text). See post-layout.css.
+function Description({ text, short }: { text?: string; short?: string }) {
+  if (!text) return null;
+
+  return (
+    <p className="post-header-description type-note">
+      {short ? (
+        <>
+          <span className="post-header-description-full">{text}</span>
+          <span className="post-header-description-short">{short}</span>
+        </>
+      ) : (
+        text
+      )}
+    </p>
+  );
+}
+
 export default function PageHeader({
   descriptionTitle = "Digital garden",
   backLabel = "Garden archive",
   eyebrow,
   title,
   description,
+  shortDescription,
   publishedDate,
   readingTime,
   postTags,
@@ -50,14 +72,14 @@ export default function PageHeader({
             <div className="post-header-utility-start">{utilityStart}</div>
             <div className="post-header-utility-end">
               <span className="post-header-description-title">{descriptionTitle}</span>
-              {description ? <p className="post-header-description type-note">{description}</p> : null}
+              <Description text={description} short={shortDescription} />
             </div>
           </>
         ) : (
           <>
             <div>
               <span className="post-header-description-title">{descriptionTitle}</span>
-              {description ? <p className="post-header-description type-note">{description}</p> : null}
+              <Description text={description} short={shortDescription} />
             </div>
             <span className="post-header-back">{backLabel}</span>
           </>
@@ -88,7 +110,15 @@ export default function PageHeader({
             </>
           )}
         </span>
-        <span className="post-header-tags">{postTags}</span>
+        <span
+          className={
+            typeof postTags === "string"
+              ? "post-header-tags post-header-tags--text"
+              : "post-header-tags"
+          }
+        >
+          {postTags}
+        </span>
       </div>
     </header>
   );

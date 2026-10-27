@@ -11,6 +11,7 @@ import PageShell from "../PageShell";
 import PageHeader, { type PageHeaderProps } from "../PageHeader";
 import SiteFooter from "../SiteFooter/SiteFooter";
 import PostEnd, { type PostNext } from "./PostEnd";
+import MobileContents from "./MobileContents";
 
 export type PostContentsItem = {
   id: string;
@@ -101,6 +102,9 @@ export default function PostLayout({
               ))}
             </ol>
           </nav>
+        ) : null}
+        {contents.length ? (
+          <MobileContents items={contents} label={contentsLabel} />
         ) : null}
         <div className="post-body">
           {tonedChildren}

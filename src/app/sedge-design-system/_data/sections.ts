@@ -4,6 +4,7 @@ import {
   SquareCode,
   PanelTop,
   PanelBottom,
+  Compass,
   CaseSensitive,
   Ruler,
   LayoutTemplate,
@@ -139,6 +140,12 @@ export const SECTIONS: NavSection[] = [
     id: "post-layout",
     title: "Post Layout",
     icon: FileText,
+    group: "Patterns",
+  },
+  {
+    id: "navigation",
+    title: "Navigation",
+    icon: Compass,
     group: "Patterns",
   },
   {

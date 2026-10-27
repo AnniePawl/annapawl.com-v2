@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import type { MouseEvent } from "react";
-import { Check, ChevronDown, X } from "lucide-react";
+import type { CSSProperties, MouseEvent } from "react";
+import { ChevronDown } from "lucide-react";
 import type { NavSection } from "../_data/sections";
 import "./section-switcher.css";
 
@@ -30,6 +30,39 @@ export default function MobileNav({
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = useState(false);
+  // Strip segments: one per section, sized by its height, filled as you read.
+  const [segments, setSegments] = useState(
+    sections.map((section) => ({ id: section.id, weight: 1, progress: 0 })),
+  );
+
+  useEffect(() => {
+    let frame = 0;
+    const measure = () => {
+      frame = 0;
+      const line = window.scrollY + window.innerHeight * 0.3;
+      setSegments(
+        sections.map((section) => {
+          const el = document.getElementById(section.id);
+          if (!el) return { id: section.id, weight: 1, progress: 0 };
+          const top = el.getBoundingClientRect().top + window.scrollY;
+          const height = el.offsetHeight || 1;
+          const progress = Math.min(1, Math.max(0, (line - top) / height));
+          return { id: section.id, weight: height, progress };
+        }),
+      );
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(measure);
+    };
+    measure();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, [sections]);
 
   const active = sections.find((s) => s.id === activeId) ?? sections[0];
 
@@ -119,6 +152,21 @@ export default function MobileNav({
       className="section-switcher lg:hidden"
       data-section-switcher
     >
+      <div className="section-switcher-strip" aria-hidden="true">
+        {segments.map((seg, i) => (
+          <span
+            key={seg.id}
+            data-group={sections[i].group}
+            style={
+              {
+                flexGrow: seg.weight,
+                "--seg-fill": `${seg.progress * 100}%`,
+              } as CSSProperties
+            }
+          />
+        ))}
+      </div>
+
       <button
         ref={triggerRef}
         type="button"
@@ -128,6 +176,11 @@ export default function MobileNav({
         aria-controls={sheetId}
         onClick={openSheet}
       >
+        <span
+          className="section-switcher-mark"
+          data-group={active.group}
+          aria-hidden="true"
+        />
         <span className="section-switcher-label">
           <span className="sr-only">Contents: </span>
           {active.title}
@@ -149,17 +202,43 @@ export default function MobileNav({
         data-cursor-native
       >
         <div className="section-sheet-panel">
+          {/* The bar again, inside the sheet: the modal layer covers the
+              real one, so this copy keeps the strip and current section in
+              view and closes the list when tapped. */}
           <div className="section-sheet-header">
-            <h2 id={titleId} className="section-sheet-title">
+            <h2 id={titleId} className="sr-only">
               Contents
             </h2>
+            <div className="section-switcher-strip" aria-hidden="true">
+              {segments.map((seg, i) => (
+                <span
+                  key={seg.id}
+                  data-group={sections[i].group}
+                  style={
+                    {
+                      flexGrow: seg.weight,
+                      "--seg-fill": `${seg.progress * 100}%`,
+                    } as CSSProperties
+                  }
+                />
+              ))}
+            </div>
             <button
               type="button"
-              className="section-sheet-close focus-ring"
+              className="section-switcher-trigger section-sheet-close focus-ring"
               onClick={closeSheet}
               aria-label="Close contents"
             >
-              <X aria-hidden="true" />
+              <span
+                className="section-switcher-mark"
+                data-group={active.group}
+                aria-hidden="true"
+              />
+              <span className="section-switcher-label">{active.title}</span>
+              <ChevronDown
+                className="section-switcher-chevron section-sheet-chevron"
+                aria-hidden="true"
+              />
             </button>
           </div>
 
@@ -170,12 +249,11 @@ export default function MobileNav({
 
                 return (
                   <li key={group.name}>
-                    <p id={groupId} className="section-sheet-group">
+                    <p id={groupId} className="section-sheet-group" data-group={group.name}>
                       {group.name}
                     </p>
                     <ul className="section-sheet-items" aria-labelledby={groupId}>
                       {group.items.map((section) => {
-                        const Icon = section.icon;
                         const isActive = section.id === activeId;
 
                         return (
@@ -186,12 +264,18 @@ export default function MobileNav({
                               aria-current={isActive ? "location" : undefined}
                               onClick={() => handleSelect(section.id)}
                             >
-                              <Icon aria-hidden="true" />
+                              <span
+                                className="section-sheet-item-mark"
+                                data-group={section.group}
+                                aria-hidden="true"
+                              />
                               <span className="section-sheet-item-label">
                                 {section.title}
                               </span>
                               {isActive ? (
-                                <Check aria-hidden="true" />
+                                <em className="section-sheet-here">
+                                  You&rsquo;re here
+                                </em>
                               ) : null}
                             </button>
                           </li>

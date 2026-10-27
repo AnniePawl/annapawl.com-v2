@@ -58,7 +58,7 @@
 
 .dwc-circle-example {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-4);
   margin-top: var(--space-5);
 }
@@ -119,12 +119,12 @@
 
 .dwc-practice-panes {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
 }
 
 @media (min-width: 640px) {
   .dwc-practice-panes {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -138,7 +138,7 @@
 
 @media (min-width: 640px) {
   .dwc-editor:first-child {
-    border-right: 2px solid var(--marigold-bold);
+    border-right: 2px solid var(--marigold-soft);
     border-bottom: none;
   }
 }
@@ -149,7 +149,7 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: var(--space-2) var(--space-3);
-  background: var(--marigold-bold);
+  background: var(--marigold-soft);
   color: var(--text-primary);
 }
 

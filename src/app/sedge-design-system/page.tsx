@@ -35,6 +35,7 @@ import FormsSection from "./_sections/forms";
 import PageShellSection from "./_sections/page-shell";
 import PageHeaderSection from "./_sections/page-header";
 import PostLayoutSection from "./_sections/post-layout";
+import NavigationSection from "./_sections/navigation";
 import SiteFooterSection from "./_sections/site-footer";
 
 // Tailwind's `lg` (64rem) -- the point where the sidebar takes over from
@@ -314,6 +315,7 @@ export default function DesignSystemOverview() {
             <PageShellSection />
             <PageHeaderSection />
             <PostLayoutSection />
+            <NavigationSection />
             <SiteFooterSection />
           </main>
         </div>

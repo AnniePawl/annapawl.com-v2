@@ -1,5 +1,4 @@
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import Link from "next/link";
 import CodeBlock from "../../../components/ui/CodeBlock";
 import TextLink from "../../../components/ui/TextLink";
 import "./LinkExamples.css";
@@ -139,42 +138,6 @@ export default function LinkExamples() {
         </TextLink>
         .
       </p>
-
-      <h3 className="sedge-subheading">Breadcrumbs</h3>
-
-      <nav aria-label="Breadcrumb">
-        <ol className="link-breadcrumbs">
-          <li>
-            <Link
-              className="text-link focus-ring"
-              href="/"
-              data-state="default"
-            >
-              Home
-            </Link>
-          </li>
-          <li className="link-breadcrumb-separator" aria-hidden="true">
-            /
-          </li>
-          <li>
-            <Link
-              className="text-link focus-ring"
-              href="/sedge-design-system"
-              data-state="default"
-            >
-              Design system
-            </Link>
-          </li>
-          <li className="link-breadcrumb-separator" aria-hidden="true">
-            /
-          </li>
-          <li>
-            <span className="link-breadcrumb-current" aria-current="page">
-              Links
-            </span>
-          </li>
-        </ol>
-      </nav>
 
       <h3 className="sedge-subheading">Usage</h3>
       <CodeBlock code={USAGE} className="mb-8" />

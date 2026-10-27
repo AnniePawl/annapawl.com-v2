@@ -119,6 +119,11 @@ export default function PostLayoutSection() {
         </PostLayout>
       </div>
 
+      <p className="sedge-section-description post-phone-note">
+        Navigation comes built in: the Contents list, a color strip on
+        phones, and Back to top at the end. See Navigation for details.
+      </p>
+
       <h3 className="sedge-subheading">
         Usage
       </h3>
