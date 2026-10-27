@@ -151,3 +151,15 @@
   font-weight: var(--font-semibold);
   transform: translateY(-1px);
 }
+
+/* ---- Site footer preview ---- */
+.pattern-preview--footer {
+  margin-bottom: var(--space-7);
+  border: 0;
+  border-radius: 0;
+  background: var(--cream);
+}
+
+.pattern-preview--footer .site-footer {
+  margin-top: var(--space-6);
+}

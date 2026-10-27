@@ -19,6 +19,7 @@ const USAGE = `<PostLayout
   readingTime="4 min read"
   postTags="CSS, Illustration, Front-end"
   accent="var(--iris-bold)"
+  next={{ href: "/css-shapes", label: "CSS Shapes" }}
   contents={[
     { id: "what-is-it", label: "What is drawing with code?", tone: "red-bold" },
     { id: "the-div", label: "It’s all about the <div>", tone: "iris-bold" },
@@ -45,7 +46,7 @@ export default function PostLayoutSection() {
       heading={meta.title}
       icon={meta.icon}
       lede="The complete structure for long-form posts."
-      description="One component for every long-form post: the header, publishing details, contents rail and reading column all come together, so every post is built the same way. Each section gets a color, and that color flows through everything: its marker in the contents list, the square beside its heading, its subheading markers, and even the text in its code blocks (in the soft version). Change a section’s color once and the whole section follows."
+      description="One component for every long-form post: the header, publishing details, contents rail and reading column all come together, so every post is built the same way. Each section gets a color, and that color flows through everything: its marker in the contents list, the square beside its heading, its subheading markers, and even the text in its code blocks (in the soft version). Change a section’s color once and the whole section follows. Every post ends with a “Back to top” link, an optional link to the next post, and the site footer."
     >
       <div className="pattern-preview pattern-preview--post">
         <PostLayout
@@ -59,6 +60,7 @@ export default function PostLayoutSection() {
           postTags="CSS, Illustration, Front-end"
           accent="var(--iris-bold)"
           headingLevel={3}
+          footer={false}
           contents={[
             {
               id: "what-is-it",

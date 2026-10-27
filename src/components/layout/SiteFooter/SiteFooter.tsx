@@ -1,16 +1,19 @@
 "use client";
+
+// The footer on every page: a woven color strip, then the colophon.
+// Its markers and link hovers use the page accent.
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Heart } from "lucide-react";
-import "./footer.css";
+import "./site-footer.css";
 
 const EMAIL = "annampawl@gmail.com";
 
 const TONES = [
   "pink-bold", "mint-bold", "sky-bold", "marigold-bold", "lilac-bold",
-  "coral-bold", "cherry-bold", "lime-bold", "blue-soft", "plum-soft",
+  "coral-bold", "cherry-bold", "lime-bold", "lemon-green", "plum-soft",
   "orange-soft", "emerald-soft", "iris-soft", "red-bold", "lemon-bold",
-  "sage-soft", "mauve-soft", "slate-soft",
+  "sage-soft", "mauve-soft", "blue-bold", "teal-soft", 
 ];
 const STRIP_LENGTH = 56;
 
@@ -55,7 +58,7 @@ function CopyEmail() {
 
   return (
     <>
-      <button type="button" className="landing-footer-link focus-ring" onClick={copy}>
+      <button type="button" className="site-footer-link focus-ring" onClick={copy}>
         {copied ? "Email copied!" : "Copy my email"}
       </button>
       <span className="sr-only" role="status" aria-live="polite">
@@ -65,23 +68,32 @@ function CopyEmail() {
   );
 }
 
-export function Footer() {
+/** `accent` sets the marker color when the footer sits outside the
+ *  page's shell (which normally provides the page accent). */
+export default function SiteFooter({ accent }: { accent?: string }) {
   return (
-    <footer className="landing-footer">
-      <div className="landing-footer-weave" aria-hidden="true">
+    <footer
+      className="site-footer"
+      style={
+        accent
+          ? ({ "--site-footer-accent": accent } as React.CSSProperties)
+          : undefined
+      }
+    >
+      <div className="site-footer-weave" aria-hidden="true">
         {STRIP.map((tone, i) => (
           <i key={i} style={tone ? { background: `var(--${tone})` } : undefined} />
         ))}
       </div>
 
-      <div className="landing-footer-colophon">
-        <div className="landing-footer-col">
-          <h2 className="landing-footer-label">Elsewhere</h2>
+      <div className="site-footer-colophon">
+        <div className="site-footer-col">
+          <h2 className="site-footer-label">Elsewhere</h2>
           <a
             href="https://github.com/AnniePawl"
             target="_blank"
             rel="noopener noreferrer"
-            className="landing-footer-link focus-ring"
+            className="site-footer-link focus-ring"
           >
             GitHub ↗
           </a>
@@ -89,28 +101,28 @@ export function Footer() {
             href="https://codepen.io/annampawl"
             target="_blank"
             rel="noopener noreferrer"
-            className="landing-footer-link focus-ring"
+            className="site-footer-link focus-ring"
           >
             CodePen ↗
           </a>
         </div>
 
-        <div className="landing-footer-col">
-          <h2 className="landing-footer-label">Get in touch</h2>
+        <div className="site-footer-col">
+          <h2 className="site-footer-label">Get in touch</h2>
           <CopyEmail />
-          <span className="landing-footer-muted">Seattle · New York</span>
+          <span className="site-footer-muted">Seattle · New York</span>
         </div>
 
-        <div className="landing-footer-col">
-          <h2 className="landing-footer-label">Built with</h2>
-          <span className="landing-footer-muted">Next.js</span>
-          <Link href="/sedge-design-system" className="landing-footer-link focus-ring">
+        <div className="site-footer-col">
+          <h2 className="site-footer-label">Built with</h2>
+          <span className="site-footer-muted">Next.js</span>
+          <Link href="/sedge-design-system" className="site-footer-link focus-ring">
             My design system
           </Link>
         </div>
 
-        <div className="landing-footer-bottom">
-          <span className="landing-footer-love">
+        <div className="site-footer-bottom">
+          <span className="site-footer-love">
             Made with <Heart className="icon-sm text-pink-400" aria-hidden="true" />
             <span className="sr-only">love</span>
           </span>

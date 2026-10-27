@@ -2,7 +2,7 @@
 
 import Modal from "../../../components/ui/Modal";
 import { useState, type SVGProps } from "react";
-import "./info-button.css";
+import "./info-modal.css";
 
 function InfoIcon(props: SVGProps<SVGSVGElement>) {
   return (
@@ -15,7 +15,7 @@ function InfoIcon(props: SVGProps<SVGSVGElement>) {
 // `autoplay` for the mobile and tablet layouts where the shelf animates
 // on its own 
 
-export function InfoButton({
+export function InfoModal({
   className,
   autoplay = false,
 }: {
@@ -61,18 +61,17 @@ export function InfoButton({
         }
       >
         <p>
-          I&apos;ve fallen for CSS and love exploring its potential through
-          illustrations and animations.
+          I’ve fallen for CSS, and I love seeing how far I can push it with tiny illustrations and animations.
         </p>
         {autoplay ? (
           <p>I made everything on the shelf with pure CSS ♥</p>
         ) : (
           <p>
-            <span className="landing-float-word">Hover</span> over (or tap) the knick-knacks for some mini surprises. I made
+            <span className="landing-float-word">Hover</span> over the knick-knacks for some mini surprises. I made
             everything with pure CSS ♥
           </p>
         )}
-        <p className="landing-modal-note">
+        <p className="landing-modal-note type-note">
           Prefer less motion? If reduced motion is turned on in your device
           settings, everything on the shelf stays still.
         </p>

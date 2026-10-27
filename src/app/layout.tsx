@@ -27,7 +27,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html
+      lang="en"
+      className={inter.variable}
+      // Tells Next to skip the smooth scroll when changing pages, so a new
+      // page opens at the top. Jump links in a page still glide.
+      data-scroll-behavior="smooth"
+    >
       <body className="font-sans">
         {children}
         <CustomCursor />

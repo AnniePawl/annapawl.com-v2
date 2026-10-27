@@ -23,6 +23,7 @@ export default function DrawingWithCodePage() {
         description="An introduction to drawing with code—using HTML elements and CSS properties to turn simple shapes into illustrations in the browser."
         eyebrow="Creative Coding"
         title="Drawing with Code"
+        next={{ href: "/css-shapes", label: "CSS Shapes" }}
         publishedDate="Updated Oct 2026"
         readingTime="10 min read"
         postTags="CSS, Illustration, Creative Coding"

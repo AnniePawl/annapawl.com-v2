@@ -1,6 +1,6 @@
 import { DesktopAbout, MobileAbout } from "./About";
-import { Footer } from "./Footer";
-import { InfoButton } from "./InfoButton";
+import SiteFooter from "../../../components/layout/SiteFooter/SiteFooter";
+import { InfoModal } from "./InfoModal";
 import { DesktopShelves } from "./css-items/shelves/DesktopShelves";
 import { MobileShelves } from "./css-items/shelves/MobileShelves";
 import { TabletShelves } from "./css-items/shelves/TabletShelves";
@@ -15,7 +15,7 @@ export function Landing() {
         <DesktopAbout />
         <div className="landing-desktop-content">
           <div id="landing-home" className="landing-desktop-shelves-container">
-            <InfoButton className="landing-desktop-about-info" />
+            <InfoModal className="landing-desktop-about-info" />
             <DesktopShelves />
           </div>
         </div>
@@ -23,7 +23,7 @@ export function Landing() {
 
       {/* Tablet (600px - 999px)- no about section here */}
       <div className="landing-tablet-section">
-        <InfoButton className="landing-tablet-info" autoplay />
+        <InfoModal className="landing-tablet-info" autoplay />
         <TabletShelves />
       </div>
 
@@ -31,14 +31,14 @@ export function Landing() {
       <div className="landing-mobile-section">
         <MobileAbout />
         <div className="landing-mobile-shelves-container">
-          <InfoButton className="landing-mobile-info" autoplay />
+          <InfoModal className="landing-mobile-info" autoplay />
           <MobileShelves />
         </div>
       </div>
 
       <div className="landing-over">
         <LandingIndex />
-        <Footer />
+        <SiteFooter />
       </div>
     </div>
   );

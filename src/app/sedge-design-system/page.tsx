@@ -7,6 +7,7 @@ import Hero from "./_components/Hero";
 import SidebarNav from "./_components/SidebarNav";
 import MobileNav from "./_components/MobileNav";
 import { SECTIONS } from "./_data/sections";
+import SiteFooter from "../../components/layout/SiteFooter/SiteFooter";
 import PageShell from "../../components/layout/PageShell";
 
 // Sections
@@ -34,6 +35,7 @@ import FormsSection from "./_sections/forms";
 import PageShellSection from "./_sections/page-shell";
 import PageHeaderSection from "./_sections/page-header";
 import PostLayoutSection from "./_sections/post-layout";
+import SiteFooterSection from "./_sections/site-footer";
 
 // Tailwind's `lg` (64rem) -- the point where the sidebar takes over from
 // MobileNav (section-switcher.css). Below it the page has a second sticky
@@ -312,9 +314,11 @@ export default function DesignSystemOverview() {
             <PageShellSection />
             <PageHeaderSection />
             <PostLayoutSection />
+            <SiteFooterSection />
           </main>
         </div>
       </PageShell>
+      <SiteFooter />
     </div>
   );
 }

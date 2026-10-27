@@ -3,6 +3,7 @@ import {
   Palette,
   SquareCode,
   PanelTop,
+  PanelBottom,
   CaseSensitive,
   Ruler,
   LayoutTemplate,
@@ -138,6 +139,12 @@ export const SECTIONS: NavSection[] = [
     id: "post-layout",
     title: "Post Layout",
     icon: FileText,
+    group: "Patterns",
+  },
+  {
+    id: "site-footer",
+    title: "Site Footer",
+    icon: PanelBottom,
     group: "Patterns",
   },
 ];

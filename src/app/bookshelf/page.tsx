@@ -1,4 +1,5 @@
 import PageShell from "../../components/layout/PageShell";
+import SiteFooter from "../../components/layout/SiteFooter/SiteFooter";
 import PageHeader from "../../components/layout/PageHeader";
 import HomeLogo from "../../components/ui/HomeLogo";
 import BookshelfBrowser, { type TagCount, type YearSection } from "./BookshelfBrowser";
@@ -49,45 +50,48 @@ export default async function BooksPage() {
   const favorites = tags.find((tag) => tag.name === FAVORITE_TAG)?.count ?? 0;
 
   return (
-    <PageShell className="bookshelf-page">
-      <PageHeader
-        utilityStart={
-          <HomeLogo
-            colors={{
-              northeast: "var(--marigold-bold)",
-              southeast: "var(--blue-bold)",
-              southwest: "var(--blue-bold)",
-              northwest: "var(--blue-bold)",
-              hoverAccent: "var(--marigold-bold)",
-            }}
-            size="1.75rem"
-          />
-        }
-        descriptionTitle="Reading archive"
-        description="Book club picks, Little Library finds, and the occasional summer indulgence."
-        eyebrow="Digital garden"
-        title="Bookshelf"
-        accent="var(--blue-bold)"
-        lede={
-          <>
-            I love looking through other people’s bookshelves — they show what
-            someone is curious about, drawn to, or trying to understand.{" "}
-            <span className="post-header-lede-muted">This is mine.</span>
-          </>
-        }
-        detailsStart="Ongoing collection · Since Jan 2026"
-        postTags={
-          <span className="bookshelf-details-end">
-            <span>
-              {stats.totalBooks} books · {stats.totalAuthors} authors · {favorites}{" "}
-              favorites
+    <>
+      <PageShell className="bookshelf-page">
+        <PageHeader
+          utilityStart={
+            <HomeLogo
+              colors={{
+                northeast: "var(--marigold-bold)",
+                southeast: "var(--blue-bold)",
+                southwest: "var(--blue-bold)",
+                northwest: "var(--blue-bold)",
+                hoverAccent: "var(--marigold-bold)",
+              }}
+              size="1.75rem"
+            />
+          }
+          descriptionTitle="Reading archive"
+          description="Book club picks, Little Library finds, and the occasional summer indulgence."
+          eyebrow="Digital garden"
+          title="Bookshelf"
+          accent="var(--blue-bold)"
+          lede={
+            <>
+              I love looking through other people’s bookshelves — they show what
+              someone is curious about, drawn to, or trying to understand.{" "}
+              <span className="post-header-lede-muted">This is mine.</span>
+            </>
+          }
+          detailsStart="Ongoing collection · Since Jan 2026"
+          postTags={
+            <span className="bookshelf-details-end">
+              <span>
+                {stats.totalBooks} books · {stats.totalAuthors} authors · {favorites}{" "}
+                favorites
+              </span>
+              <StatsButton stats={stats} tags={tags} />
             </span>
-            <StatsButton stats={stats} tags={tags} />
-          </span>
-        }
-      />
+          }
+        />
 
-      <BookshelfBrowser sections={sections} tags={tags} />
-    </PageShell>
+        <BookshelfBrowser sections={sections} tags={tags} />
+      </PageShell>
+      <SiteFooter accent="var(--blue-bold)" />
+    </>
   );
 }

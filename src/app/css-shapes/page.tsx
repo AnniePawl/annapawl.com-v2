@@ -12,7 +12,8 @@ export default function CssShapesPage() {
         description="Every CSS illustration starts with a few basic shapes. Here’s how to build a dozen of them, one property at a time."
         eyebrow="Creative Coding"
         title="CSS Shapes"
-        publishedDate="Oct 24, 2026"
+        next={{ href: "/drawing-with-code", label: "Drawing with Code" }}
+        publishedDate="Updated Oct 2026"
         readingTime="6 min read"
         postTags="CSS, Illustration"
         accent="var(--marigold-bold)"

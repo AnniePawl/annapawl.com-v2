@@ -9,6 +9,8 @@ import { cx } from "../../../lib/cx";
 import type { PaletteColor } from "../../ui/colorTokens";
 import PageShell from "../PageShell";
 import PageHeader, { type PageHeaderProps } from "../PageHeader";
+import SiteFooter from "../SiteFooter/SiteFooter";
+import PostEnd, { type PostNext } from "./PostEnd";
 
 export type PostContentsItem = {
   id: string;
@@ -22,6 +24,10 @@ export type PostLayoutProps = PageHeaderProps & {
   cover?: ReactNode;
   contents?: PostContentsItem[];
   contentsLabel?: string;
+  /** Optional link to another post, shown beside "Back to top". */
+  next?: PostNext;
+  /** The site footer under the post (default true). */
+  footer?: boolean;
   children: ReactNode;
   className?: string;
 };
@@ -49,6 +55,8 @@ export default function PostLayout({
   contentsLabel = "Contents",
   children,
   className,
+  next,
+  footer = true,
   ...headerProps
 }: PostLayoutProps) {
   const contentsTones = new Map(
@@ -64,7 +72,11 @@ export default function PostLayout({
   });
 
   return (
-    <PageShell width="wide" className={cx("post-layout", className)}>
+    <PageShell
+      width="wide"
+      accent={headerProps.accent}
+      className={cx("post-layout", className)}
+    >
       <PageHeader {...headerProps} />
       {cover}
       <div className="post-layout-grid">
@@ -90,8 +102,12 @@ export default function PostLayout({
             </ol>
           </nav>
         ) : null}
-        <div className="post-body">{tonedChildren}</div>
+        <div className="post-body">
+          {tonedChildren}
+          <PostEnd next={next} />
+        </div>
       </div>
+      {footer ? <SiteFooter /> : null}
     </PageShell>
   );
 }
