@@ -1,27 +1,9 @@
 /* ---- Sedge design-system theme scope ----
-   Everything in this file is scoped under [data-sedge-theme="dark"],
-   an attribute set on a wrapper <div> that ThemeProvider.tsx renders
-   around this route's whole subtree (see
-   sedge-design-system/layout.tsx). That's the only place this
-   attribute exists in the app, so nothing here can ever leak onto the
-   rest of the site, and the rest of the site is free to define its own
-   surfaces independently.
-
-   This is deliberately a thin *semantic* layer, not a second palette:
+   - Everything in this file is scoped under [data-sedge-theme="dark"]
+   - This is the only place this attribute exists in the app
+   - Deliberately a thin *semantic* layer, not a second palette:
    every rule below just re-points an existing semantic token (defined
-   once, for light mode, in foundations/color.css) at one of the earth-
-   tone *base* tokens also defined there (--espresso/--ivory/--moss/
-   --mauve, alongside the existing --sage/--clay). Because
-   nearly every component in this codebase (button.css, card.css,
-   section.css, etc.) already reads colors through the semantic tokens
-   (var(--bg-default), var(--text-primary), var(--border-subtle)...)
-   rather than hardcoding hex, re-pointing them here is enough to theme
-   the whole page -- components don't need their own dark-mode variants.
-   The exceptions (places that render a *base* pastel token like
-   --iris-soft directly, e.g. active nav pills) are handled at the
-   call site instead, since those pastels are meant to stay pastel in
-   both themes -- see the comments on --sidebar-surface below and in
-   HeroNav.tsx/Hero.tsx/MobileNav.tsx/SidebarNav.tsx for why. */
+   once, for light mode, in foundations/color.css) 
 
 /* Sedge's page accent (both themes): dark cherry on soft sky.
    Buttons + markers read it. */
@@ -34,7 +16,7 @@
 [data-sedge-theme="dark"] {
   /* Backgrounds + surfaces */
   --bg-default: var(--espresso);
-  --cursor-dot-color: var(--iris-soft);
+  --cursor-dot-color: var(--cream);
   --bg-subtle: color-mix(
     in srgb,
     var(--espresso) 88%,

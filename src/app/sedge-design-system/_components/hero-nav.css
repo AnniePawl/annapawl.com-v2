@@ -51,7 +51,7 @@
 }
 
 .sedge-group-nav-link--active {
-  background: var(--iris-soft);
+  background: var(--sky-soft);
   color: var(--charcoal);
 }
 
@@ -61,12 +61,12 @@
 }
 
 .sedge-group-nav-link--inactive:hover {
-  background: color-mix(in srgb, var(--iris-soft) 30%, transparent);
+  background: color-mix(in srgb, var(--sky-soft) 40%, transparent);
   color: var(--text-primary);
 }
 
 [data-sedge-theme="dark"] .sedge-group-nav-link {
-  --focus-ring-color: var(--iris-soft);
+  --focus-ring-color: var(--sky-soft);
 }
 
 /* Reduced motion: keep only the color change. Transform itself is

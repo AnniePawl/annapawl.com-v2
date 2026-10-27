@@ -12,10 +12,18 @@ export interface HomeLogoColors {
   northwest?: string;
 }
 
+export const DEFAULT_HOME_LOGO_COLORS: HomeLogoColors = {
+  northeast: "var(--cherry-bold)",
+  southeast: "var(--sky-bold)",
+  southwest: "var(--sky-bold)",
+  northwest: "var(--sky-bold)",
+  hoverAccent: "var(--sky-bold)",
+};
+
 export default function HomeLogo({
   href = "/",
   label = "Return home",
-  colors = {},
+  colors = DEFAULT_HOME_LOGO_COLORS,
   size = "2rem",
   previewState,
   className,

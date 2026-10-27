@@ -99,7 +99,8 @@
 
 .post-header-lede {
   max-width: 55rem;
-  margin: var(--space-7) 0 0;
+  /* Bottom margin matches the title-to-rule gap on pages without a lede. */
+  margin: var(--space-5) 0 0.75rem;
   color: var(--charcoal);
   font-size: var(--type-lede-size);
   line-height: var(--type-lede-leading);
@@ -309,7 +310,7 @@
   }
 
   .post-header-lede {
-    margin-top: var(--space-6);
+    margin-block: var(--space-4) var(--space-1);
     font-size: 1.25rem;
     line-height: 1.18;
   }

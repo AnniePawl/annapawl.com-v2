@@ -39,7 +39,7 @@ const USAGE = `// An article: PostLayout includes the header
     eyebrow="Digital garden"
     title="Bookshelf"
     accent="var(--blue-bold)"
-    lede={<>I love looking through other people’s bookshelves…</>}
+    lede={<>A running list of everything I’ve read lately…</>}
     detailsStart="Ongoing collection · Since Jan 2026"
     postTags={<StatsButton />}
   />
@@ -79,8 +79,8 @@ export default function PageHeaderSection() {
             accent="var(--blue-bold)"
             lede={
               <>
-                I love looking through other people’s bookshelves.{" "}
-                <span className="post-header-lede-muted">This is mine.</span>
+                A running list of everything I’ve read lately, the good, the great and the “why did I finish that.”{" "}
+                <span className="post-header-lede-muted">Pull up a chair.</span>
               </>
             }
             detailsStart="Ongoing collection · Since Jan 2026"

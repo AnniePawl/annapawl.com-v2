@@ -35,19 +35,19 @@
    icons (anything with data-group). Tones read on both cream and cocoa,
    so no dark-mode overrides are needed. */
 [data-group="Intro"] {
-  --section-tone: var(--iris-bold);
+  --section-tone: var(--sky-bold);
 }
 
 [data-group="Foundations"] {
-  --section-tone: var(--emerald-soft);
-}
-
-[data-group="Components"] {
   --section-tone: var(--pink-bold);
 }
 
+[data-group="Components"] {
+  --section-tone: var(--green-bold);
+}
+
 [data-group="Patterns"] {
-  --section-tone: var(--blue-soft);
+  --section-tone: var(--coral-bold);
 }
 
 .sedge-section-heading-title {

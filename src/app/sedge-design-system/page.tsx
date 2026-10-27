@@ -78,7 +78,9 @@ export default function DesignSystemOverview() {
     const switcher = root.querySelector<HTMLElement>("[data-section-switcher]");
 
     const sync = () => {
-      const headerHeight = header?.offsetHeight ?? 0;
+      const isDesktop = window.matchMedia(DESKTOP_QUERY).matches;
+      // Below lg the header scrolls away and the section switcher takes the top.
+      const headerHeight = isDesktop ? header?.offsetHeight ?? 0 : 0;
       const switcherHeight = switcher?.offsetHeight ?? 0;
       root.style.setProperty("--sedge-header-h", `${headerHeight}px`);
       root.style.setProperty("--sedge-switcher-h", `${switcherHeight}px`);
@@ -86,12 +88,12 @@ export default function DesignSystemOverview() {
       const next = {
         inset: headerHeight + switcherHeight,
         viewportHeight: window.innerHeight,
-        isDesktop: window.matchMedia(DESKTOP_QUERY).matches,
+        isDesktop,
       };
       setStickyMetrics((prev) =>
         prev.inset === next.inset &&
-        prev.viewportHeight === next.viewportHeight &&
-        prev.isDesktop === next.isDesktop
+          prev.viewportHeight === next.viewportHeight &&
+          prev.isDesktop === next.isDesktop
           ? prev
           : next
       );
@@ -227,11 +229,11 @@ export default function DesignSystemOverview() {
   // Scroll to top 
 
   const scrollToTop = () => {
-    if(lenis){
+    if (lenis) {
       lenis.scrollTo(0);
     }
-    else{
-      window.scrollTo({top:0, behavior:"instant"})
+    else {
+      window.scrollTo({ top: 0, behavior: "instant" })
     }
   }
 
@@ -239,13 +241,25 @@ export default function DesignSystemOverview() {
 
   return (
     <div ref={rootRef} className="min-h-screen bg-[var(--bg-default)]">
-      <HeroNav
+      {/* Below lg the header only sticks within the hero, so the section
+          bar right after it takes over the top. lg:contents drops the
+          wrapper on desktop, where the header sticks for the whole page. */}
+      <div className="lg:contents">
+        <HeroNav
+          sections={SECTIONS}
+          activeId={pastHero ? activeId : ""}
+          onSelect={scrollTo}
+          onScrollToTop={scrollToTop}
+        />
+        <Hero onExplore={() => scrollTo(SECTIONS[0].id)} />
+      </div>
+
+      <MobileNav
         sections={SECTIONS}
-        activeId={pastHero ? activeId : ""}
+        activeId={activeId}
         onSelect={scrollTo}
-        onScrollToTop={scrollToTop}
+        onBackToTop={scrollToTop}
       />
-      <Hero onExplore={() => scrollTo(SECTIONS[0].id)} />
 
       <PageShell>
         {/* minmax(0, 1fr) rather than a bare 1fr: a 1fr track's minimum is its
@@ -280,14 +294,8 @@ export default function DesignSystemOverview() {
             className="flex min-w-0 flex-col"
             style={{ gap: "var(--section-gap)" }}
           >
-            <MobileNav
-              sections={SECTIONS}
-              activeId={activeId}
-              onSelect={scrollTo}
-            />
-
             <ApproachSection />
-{/* Foundations */}
+            {/* Foundations */}
             <LogoSection />
             <ColorsSection />
             <TypographySection />
@@ -299,7 +307,7 @@ export default function DesignSystemOverview() {
             <MotionSection />
             <AccessibilitySection />
 
-{/* Components */}
+            {/* Components */}
             <ButtonsSection />
             <LinksSection />
             <CodeBlocksSection />
@@ -311,7 +319,7 @@ export default function DesignSystemOverview() {
             <TooltipsSection />
             <FormsSection />
 
-{/* Patterns */}
+            {/* Patterns */}
             <PageShellSection />
             <PageHeaderSection />
             <PostLayoutSection />

@@ -4,13 +4,8 @@ import { Sun, Moon } from "lucide-react";
 import { useSedgeTheme } from "./ThemeProvider";
 
 /**
- * Sun / Moon theme selector for HeroNav -- two icon-only buttons and a
- * "/" between them, no pill background/fill/shadow. Active icon reads
- * --text-primary with a thin underline; inactive reads the quieter
- * --text-muted (see theme.css's .theme-toggle-* rules for all of the
- * actual styling -- this component is just markup + state).
- *
- * Real toggle buttons, not radio inputs: `aria-pressed` exposes which
+ * Sun / Moon theme selector for HeroNav
+ * Real toggle buttons, `aria-pressed` exposes which
  * one is selected, each has its own accessible name ("Light theme" /
  * "Dark theme"), `.focus-ring` gives both a visible keyboard-focus
  * indicator, and the 40px box (set in CSS) gives each a comfortable

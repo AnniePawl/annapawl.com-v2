@@ -17,7 +17,6 @@ const TONES = [
   "cherry-bold",
   "cherry-soft",
   "coral-bold",
-  "coral-soft",
   "orange-bold",
   "orange-soft",
   "marigold-bold",
@@ -35,6 +34,7 @@ const TONES = [
   "emerald-bold",
   "emerald-soft",
   "sky-bold",
+  "sky-soft",
   "periwinkle-soft",
   "blue-bold",
   "blue-soft",
@@ -45,18 +45,14 @@ const TONES = [
   "lilac-bold",
   "lilac-soft",
   "plum-bold",
-  "plum-soft",
-  "mauve-bold",
   "mauve-soft",
   "clay-bold",
-  "clay-soft",
 ];
 
-const COLUMNS = 10;
+const COLUMNS = 11;
 const ROWS = 11;
 const DENSITY = 0.7;
 
-// Small deterministic PRNG (mulberry32).
 function seeded(seed: number) {
   return () => {
     seed |= 0;

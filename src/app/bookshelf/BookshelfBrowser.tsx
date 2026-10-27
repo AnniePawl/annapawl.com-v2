@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import BookTile, { type ShelfEntry } from "./BookTile";
 import { tagTone } from "./tagTones";
 
@@ -21,6 +21,22 @@ interface BookshelfBrowserProps {
 
 export default function BookshelfBrowser({ sections, tags }: BookshelfBrowserProps) {
   const [selected, setSelected] = useState<string | null>(null);
+  const browserRef = useRef<HTMLDivElement>(null);
+  const isFirstRender = useRef(true);
+
+  // After a filter change, jump back to the first book if you've scrolled past it.
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    const browser = browserRef.current;
+    if (!browser) return;
+    const top = browser.getBoundingClientRect().top;
+    if (top < 0) {
+      window.scrollTo({ top: window.scrollY + top, behavior: "instant" });
+    }
+  }, [selected]);
 
   const total = sections.reduce((sum, section) => sum + section.books.length, 0);
   const visible = sections
@@ -46,7 +62,7 @@ export default function BookshelfBrowser({ sections, tags }: BookshelfBrowserPro
   };
 
   return (
-    <div className="bookshelf-browser" data-filtered={selected ? "true" : undefined}>
+    <div ref={browserRef} className="bookshelf-browser" data-filtered={selected ? "true" : undefined}>
       <div className="bookshelf-rail-label">
         <span className="type-note-label">Filter by tag</span>
         {selected ? (

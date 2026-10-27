@@ -26,11 +26,8 @@
   top: var(--sedge-header-h, 4.5rem);
   /* Below HeroNav (z-20) so the header always wins where they touch. */
   z-index: 10;
-  /* Bleed to the viewport edges by cancelling the page container's
-     horizontal padding (px-6 in page.tsx = --space-5), so content
-     scrolling underneath can't peek out at the sides of the bar. */
-  margin-inline: calc(var(--space-5) * -1);
-  margin-block-end: var(--space-5);
+  margin-inline: 0;
+  margin-block-end: 0;
   /* --space-2 top/bottom leaves room for the 2px focus ring + 2px offset
      + 4px glow (foundations/focus.css) without it being clipped by the
      header above. */
@@ -545,4 +542,30 @@
   .section-sheet[open] .section-sheet-panel {
     animation: none;
   }
+}
+
+.section-sheet-top {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0;
+  border: 0;
+  border-bottom: var(--border-thin) solid
+    color-mix(in srgb, var(--text-primary) 10%, transparent);
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.75rem;
+  font-weight: var(--font-semibold);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.section-sheet-top-icon {
+  flex: none;
+  width: 0.875rem;
+  height: 0.875rem;
 }

@@ -72,17 +72,17 @@ export default async function BooksPage() {
           accent="var(--blue-bold)"
           lede={
             <>
-              I love looking through other people’s bookshelves — they show what
-              someone is curious about, drawn to, or trying to understand.{" "}
-              <span className="post-header-lede-muted">This is mine.</span>
+              A running list of everything I’ve read lately, the good, the great and the “why did I finish that.” 
+              {/* <span className="post-header-lede-muted">Pull up a chair.</span> */}
             </>
           }
           detailsStart="Ongoing collection · Since Jan 2026"
           postTags={
             <span className="bookshelf-details-end">
               <span>
-                {stats.totalBooks} books · {stats.totalAuthors} authors · {favorites}{" "}
-                favorites
+                {stats.totalBooks} books
+                <span className="bookshelf-stat-authors"> · {stats.totalAuthors} authors</span>
+                {" "}· {favorites} favorites
               </span>
               <StatsButton stats={stats} tags={tags} />
             </span>

@@ -40,30 +40,30 @@ const AT_A_GLANCE = [
 
 // Each principle's icon color (the bold of its old pill color).
 const ICON_COLORS = [
-  "var(--slate-bold)",
-  "var(--cherry-bold)",
-  "var(--emerald-bold)",
+  "var(--sky-bold)",
+  "var(--cherry-soft)",
   "var(--marigold-bold)",
-  "var(--plum-bold)",
+  "var(--iris-bold)",
+  "var(--lime-bold)",
 ];
 
 export default function Hero({ onExplore }: { onExplore: () => void }) {
   return (
-    <section id='top' className="pt-8 relative mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-7xl flex-col justify-center overflow-hidden px-6 py-6">
-      <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[3fr_2.2fr]">
-        <div className="pt-5">
-          <h1 className="h-display sedge-hero-title">
+    <section id='top' className="relative mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-7xl flex-col justify-center overflow-hidden px-6 py-6">
+      <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[3fr_2.6fr]">
+        <div className="">
+          <h1 className="pt-2 h-display sedge-hero-title">
             Sedge
           </h1>
 
-          <p className="mt-8 max-w-2xl text-[22px] leading-snug text-[var(--text-primary)] md:text-2xl">
+          <p className="mt-8 max-w-xl text-[22px] leading-snug text-[var(--text-primary)] md:text-2xl">
             A living record of the UI decisions behind my digital garden and
-            a playground for developing a visual language that feels
+            a playground for shaping a visual language that feels
             distinctly <b>me</b>.
           </p>
 
           <p className="mt-5 max-w-xl text-base leading-normal text-[var(--text-secondary)]">
-            As a frontend developer with a deep love of design, I&apos;m always exploring the space
+            As a frontend developer with a soft spot for design, I&apos;m always exploring the space
             between structure and experimentation. Sedge is where those ideas take shape - thoughtful at its core, playful around the
             edges, and designed to evolve as I do.
           </p>
@@ -75,7 +75,7 @@ export default function Hero({ onExplore }: { onExplore: () => void }) {
             shape="pill"
             size="lg"
             endIcon={<ArrowRight />}
-             tone={{ tint: "cherry-bold", text: "periwinkle-soft", accent: "periwinkle-soft", ink: "cream" }}
+             tone={{ tint: "cherry-bold", text: "cream", accent: "sky-soft", ink: "charcoal" }}
           >
             Explore the system
           </Button>
@@ -87,7 +87,7 @@ export default function Hero({ onExplore }: { onExplore: () => void }) {
         </div>
       </div>
       {/* At a glance section */}
-      <div className="">
+      <div className="pt-4">
         <hr className="poster-divider my-4" />
         <div className="sedge-glance grid grid-cols-1 gap-y-5 sm:grid-cols-2 lg:grid-cols-5 lg:gap-y-0">
           {AT_A_GLANCE.map(({ icon: Icon, title, caption }, i) => (

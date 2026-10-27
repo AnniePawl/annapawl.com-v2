@@ -12,7 +12,7 @@ const PAGES = [
     accent: "var(--marigold-bold)",
   },
   {
-    href: "/books",
+    href: "/bookshelf",
     title: "Bookshelf",
     description: "A nerdy reading log, stats and all",
     accent: "var(--blue-bold)",

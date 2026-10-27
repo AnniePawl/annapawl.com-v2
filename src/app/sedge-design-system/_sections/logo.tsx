@@ -10,17 +10,17 @@ const meta = SECTIONS.find((section) => section.id === "logo")!;
 const PETAL_MIXES: HomeLogoColors[] = [
   {
     northwest: "var(--pink-bold)",
-    northeast: "var(--lemon-bold)",
-    southwest: "var(--sky-bold)",
-    southeast: "var(--mint-bold)",
-    hoverAccent: "var(--iris-bold)",
+    northeast: "var(--marigold-bold)",
+    southwest: "var(--pink-bold)",
+    southeast: "var(--pink-bold)",
+    hoverAccent: "var(--pink-bold)",
   },
   {
-    northwest: "var(--coral-bold)",
-    northeast: "var(--orange-soft)",
-    southwest: "var(--plum-bold)",
-    southeast: "var(--lilac-soft)",
-    hoverAccent: "var(--lemon-bold)",
+    northwest: "var(--charcoal)",
+    northeast: "var(--cocoa-bold)",
+    southeast: "var(--cocoa-soft)",
+    southwest: "var(--sand-bold)",
+    hoverAccent: "var(--cherry-bold)",
   },
   {
     northwest: "var(--emerald-bold)",

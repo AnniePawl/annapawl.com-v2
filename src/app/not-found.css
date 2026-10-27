@@ -1,0 +1,75 @@
+/* The whole page, footer included, fits in one screen. */
+.not-found {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.not-found-page {
+  flex: 1 0 auto;
+  padding-bottom: 0;
+}
+
+.not-found .site-footer {
+  margin-top: var(--space-6);
+}
+
+.not-found-page .post-header-details {
+  align-items: center;
+}
+
+.not-found-page .post-header-title {
+  max-width: none;
+  font-size: min(var(--type-title-size), 11vh);
+}
+
+@media (width < 40rem) {
+  .not-found-page .post-header-publishing-details {
+    display: none;
+  }
+
+  .not-found-page .post-header-details {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .not-found-page .post-header-tags {
+    text-align: left;
+  }
+
+  /* Back to the garden already covers the way home. */
+  .not-found-page .post-header-utility {
+    display: none;
+  }
+
+  .not-found-page .post-header-stage {
+    padding-top: 0;
+  }
+
+  .not-found-page .post-header-title {
+    font-size: 3rem;
+  }
+
+  .not-found .site-footer-colophon {
+    padding-block: var(--space-6) 0;
+    row-gap: var(--space-6);
+  }
+
+  /* Equal space above the header, between the details rule and the weave,
+     and below the footer. space-evenly shares any leftover height the same
+     way, so the three gaps stay equal on taller phones too. */
+  .not-found {
+    justify-content: space-evenly;
+    row-gap: var(--space-5);
+    padding-block: var(--space-5);
+  }
+
+  .not-found-page {
+    flex: none;
+    padding-top: 0;
+  }
+
+  .not-found .site-footer {
+    margin-top: 0;
+  }
+}

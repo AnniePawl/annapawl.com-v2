@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import type { CSSProperties, MouseEvent } from "react";
-import { ChevronDown } from "lucide-react";
+import { ArrowUp, ChevronDown } from "lucide-react";
 import type { NavSection } from "../_data/sections";
 import "./section-switcher.css";
 
@@ -20,10 +20,12 @@ export default function MobileNav({
   sections,
   activeId,
   onSelect,
+  onBackToTop,
 }: {
   sections: NavSection[];
   activeId: string;
   onSelect: (id: string) => void;
+  onBackToTop: () => void;
 }) {
   const sheetId = useId();
   const titleId = `${sheetId}-title`;
@@ -87,7 +89,10 @@ export default function MobileNav({
     // showModal() focuses the first control (the close button). Start on
     // the current section instead, so keyboard and screen-reader users
     // land where they already are in the list.
-    dialog.querySelector<HTMLElement>('[aria-current="location"]')?.focus();
+    // preventScroll keeps the list open at the top, where Back to top sits.
+    dialog
+      .querySelector<HTMLElement>('[aria-current="location"]')
+      ?.focus({ preventScroll: true });
   };
 
   const closeSheet = () => dialogRef.current?.close();
@@ -106,6 +111,11 @@ export default function MobileNav({
   const handleSelect = (id: string) => {
     closeSheet();
     onSelect(id);
+  };
+
+  const handleBackToTop = () => {
+    closeSheet();
+    onBackToTop();
   };
 
   // The dialog is a transparent full-viewport layer with the panel inside
@@ -243,6 +253,14 @@ export default function MobileNav({
           </div>
 
           <div className="section-sheet-body">
+            <button
+              type="button"
+              className="section-sheet-top focus-ring"
+              onClick={handleBackToTop}
+            >
+              Back to top
+              <ArrowUp className="section-sheet-top-icon" aria-hidden="true" />
+            </button>
             <ul className="section-sheet-groups">
               {groups.map((group) => {
                 const groupId = `${sheetId}-${group.name}`;
