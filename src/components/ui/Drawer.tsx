@@ -3,6 +3,7 @@
 import { MouseEvent, ReactNode, useEffect, useId, useRef } from "react";
 import type { CSSProperties } from "react";
 import { cx } from "../../lib/cx";
+import { markerColor, toneShades, type PaletteColor, type PaletteHue } from "./colorTokens";
 
 export interface DrawerProps {
   open: boolean;
@@ -11,8 +12,11 @@ export interface DrawerProps {
   eyebrow: string;
   title: string;
   children?: ReactNode;
-  /** Page accent for the eyebrow mark and title block. */
+  /** Page accent for the eyebrow mark and title block, as any CSS color. */
   accent?: string;
+  /** Palette shortcut for accent: a hue ("green") uses its bold shade,
+   *  with the soft one as the tint for buttons inside. Wins over accent. */
+  tone?: PaletteHue | PaletteColor;
   className?: string;
 }
 
@@ -28,8 +32,17 @@ export default function Drawer({
   title,
   children,
   accent = "var(--charcoal)",
+  tone,
   className,
 }: DrawerProps) {
+  const shades = tone ? toneShades(tone) : undefined;
+  const style = shades
+    ? ({
+        "--drawer-accent": markerColor(tone!.endsWith("-soft") ? shades.bold : tone!),
+        "--page-accent": markerColor(tone!.endsWith("-soft") ? shades.bold : tone!),
+        "--page-accent-tint": `var(--${shades.soft})`,
+      } as CSSProperties)
+    : ({ "--drawer-accent": accent } as CSSProperties);
   const ref = useRef<HTMLDialogElement>(null);
   const titleId = useId();
 
@@ -49,7 +62,7 @@ export default function Drawer({
     <dialog
       ref={ref}
       className={cx("drawer", className)}
-      style={{ "--drawer-accent": accent } as CSSProperties}
+      style={style}
       onClose={onClose}
       onCancel={onClose}
       onClick={handleClick}

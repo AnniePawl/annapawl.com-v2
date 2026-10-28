@@ -5,6 +5,11 @@
   --shelf-unused-blue: var(--blue-soft);
 }
 
+#landing-shelves-bg{
+  background-color: mintcream;
+  /* background-color: #9bb6ff21; */
+}
+
 /* ============================================================
    Shelves — src/components/css-items/shelves/shelves.scss
    The wooden shelf that every item sits on, and the layout

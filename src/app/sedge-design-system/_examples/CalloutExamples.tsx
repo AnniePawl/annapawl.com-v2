@@ -12,14 +12,17 @@ import Callout from "@/components/ui/Callout";
 >
   Helpful extra context, without interrupting the main idea.
 </Callout>
+
+// The marker follows the page accent. Pass a tone to change it.
+<Callout eyebrow="Good to know" tone="green">…</Callout>
 `;
 
 export default function CalloutExamples() {
   return (
     <div>
-      <span className="sedge-subheading">Examples</span>
+      <h3 className="sedge-subheading">Examples</h3>
       <div className="callout-demo-grid">
-        <Callout eyebrow="Good to know">
+        <Callout eyebrow="Good to know" tone="green-bold">
           Browsers draw <code>box-shadow</code> outside an element’s box, so you
           can stack several on one div to build extra shapes without adding
           markup.
@@ -27,6 +30,7 @@ export default function CalloutExamples() {
 
         <Callout
           eyebrow="Worth a detour"
+          tone="green-bold"
           actionLabel="Check it out"
           actionHref="#post-layout"
         >
@@ -35,7 +39,7 @@ export default function CalloutExamples() {
         </Callout>
       </div>
       <h3 className="sedge-subheading">Usage</h3>
-      <CodeBlock code={USAGE} className="mb-8" />
+      <CodeBlock tone='green' code={USAGE} className="mb-8" />
     </div>
   );
 }

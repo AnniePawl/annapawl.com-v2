@@ -4,41 +4,22 @@ import TextLink from "../../../components/ui/TextLink";
 import "./LinkExamples.css";
 
 const USAGE = `
-// TextLink component (preferred) — internal links use next/link,
-// http(s) links open in a new tab and announce it
+// TextLink: internal links use next/link; http(s) links open in a
+// new tab and announce it
 <TextLink href="/books">book club picks</TextLink>
 <TextLink href="https://getbem.com/naming/" tone="sky-bold">BEM</TextLink>
 <TextLink href="https://books.google.com" variant="quiet">Google Books</TextLink>
 
-// Or the classes directly
-// Default — links in body and article text
-<a className="text-link focus-ring" href="/books">book club picks</a>
-
-// Standalone, with an arrow
+// Standalone, with an arrow (classes directly)
 <a className="text-link text-link--standalone focus-ring" href="/books">
   Browse all books
   <ArrowRight className="text-link-icon" aria-hidden="true" />
 </a>
-
-// External
-<a
-  className="text-link text-link--standalone text-link--external focus-ring"
-  href="https://lucide.dev/icons/"
-  target="_blank"
-  rel="noreferrer"
->
-  lucide.dev
-  <ArrowUpRight className="text-link-icon" aria-hidden="true" />
-  <span className="sr-only"> (opens in a new tab)</span>
-</a>
-
-// Quiet — meta and captions
-<a className="text-link text-link--quiet focus-ring" href="https://books.google.com">Google Books</a>
 `;
 
 export default function LinkExamples() {
   return (
-    <div>
+    <div className="link-demo">
       <h3 className="sedge-subheading">Default</h3>
       <p className="link-sample">
         I love looking through other people’s bookshelves — mine has{" "}
@@ -64,6 +45,11 @@ export default function LinkExamples() {
         </LinkState>
         <LinkState label="Hover">
           <a className="text-link focus-ring" href="#links" data-state="hover">
+            Little Library
+          </a>
+        </LinkState>
+        <LinkState label="Pressed">
+          <a className="text-link focus-ring" href="#links" data-state="pressed">
             Little Library
           </a>
         </LinkState>
@@ -114,6 +100,11 @@ export default function LinkExamples() {
             Google Books
           </a>
         </LinkState>
+        <LinkState label="Pressed">
+          <a className="text-link text-link--quiet focus-ring" href="#links" data-state="pressed">
+            Google Books
+          </a>
+        </LinkState>
         <LinkState label="Visited">
           <a className="text-link text-link--quiet focus-ring" href="#links" data-state="visited">
             Google Books
@@ -140,7 +131,7 @@ export default function LinkExamples() {
       </p>
 
       <h3 className="sedge-subheading">Usage</h3>
-      <CodeBlock code={USAGE} className="mb-8" />
+      <CodeBlock tone='green' code={USAGE} className="mb-8" />
     </div>
   );
 }

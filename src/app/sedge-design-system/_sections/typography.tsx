@@ -10,8 +10,8 @@ export default function TypographySection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      lede="After auditioning more fonts than strictly necessary, I landed on Inter across the whole system."
-      description="One typeface, mostly at regular weight. Hierarchy comes from size and spacing rather than boldness: big type gets tighter, small labels get airier, and each role has its own token so every page uses type the same way."
+      lede="One typeface across the whole system."
+      description="After auditioning more fonts than strictly necessary, I landed on Inter, used mostly at regular weight. Hierarchy comes from size and spacing rather than boldness. Big type gets tighter, small labels get airier, and each role has its own token so every page uses type the same way."
     >
       <TypographyExamples />
     </Section>

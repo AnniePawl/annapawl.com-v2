@@ -1,3 +1,14 @@
+/* Links follow the page accent. Here it's the Components green. */
+.link-demo {
+  --page-accent: light-dark(var(--green-bold), var(--green-soft));
+}
+
+/* Beats the dark-mode link override in theme.css, so the demo links
+   keep the section green. */
+[data-sedge-theme] .link-demo .text-link {
+  --link-accent: var(--page-accent);
+}
+
 .link-sample {
   max-width: 40rem;
   margin: 0 0 var(--space-6);
@@ -12,7 +23,7 @@
 
 .link-state-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
   gap: var(--space-5);
 }
 

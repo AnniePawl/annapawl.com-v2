@@ -1,3 +1,10 @@
+/* Forms follow the page accent. Here it's the Components green. */
+.form-demo {
+  --page-accent: light-dark(var(--green-bold), var(--green-soft));
+  --page-accent-tint: var(--green-soft);
+  max-width: 45rem;
+}
+
 .form-demo-grid {
   display: grid;
   max-width: 460px;

@@ -25,14 +25,14 @@ const ALIASES = [
 ];
 
 const ACCENT_SHAPES: { variant: ShapeVariant; color: string }[] = [
-  { variant: "blob", color: "var(--coral-bold)" },
-  { variant: "burst", color: "var(--cherry-soft)" },
-  { variant: "scallop", color: "var(--lime-soft)" },
-  { variant: "arch", color: "var(--lemon-bold)" },
-  { variant: "clover", color: "var(--blue-soft)" },
-  { variant: "flower", color: "var(--iris-soft)" },
-  { variant: "circle", color: "var(--pink-bold)" },
-  { variant: "ring", color: "var(--lilac-soft)" },
+  { variant: "blob", color: "var(--pink-soft)" },
+  { variant: "burst", color: "var(--pink-soft)" },
+  { variant: "scallop", color: "var(--pink-soft)" },
+  { variant: "arch", color: "var(--pink-soft)" },
+  { variant: "clover", color: "var(--pink-soft)" },
+  { variant: "flower", color: "var(--pink-soft)" },
+  { variant: "circle", color: "var(--pink-soft)" },
+  { variant: "ring", color: "var(--pink-soft)" },
 ];
 
 const USAGE = `
@@ -92,7 +92,7 @@ export default function ShapeExamples() {
       </div>
 
       <h3 className="sedge-subheading">Usage</h3>
-      <CodeBlock code={USAGE} />
+      <CodeBlock tone='pink' code={USAGE} />
     </>
   );
 }

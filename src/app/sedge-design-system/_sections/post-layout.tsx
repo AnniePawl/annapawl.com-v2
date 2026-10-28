@@ -148,7 +148,7 @@ export default function PostLayoutSection() {
       <h3 className="sedge-subheading">
         Usage
       </h3>
-      <CodeBlock code={USAGE} />
+      <CodeBlock tone="coral" code={USAGE} />
     </Section>
   );
 }

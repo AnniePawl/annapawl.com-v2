@@ -11,10 +11,10 @@ import Badge from "@/components/ui/Badge";
 
 // Same tag/color pairs as the bookshelf.
 const TONE_EXAMPLES: { label: string; tone: BadgeTone }[] = [
-  { label: "Literary Fiction", tone: "emerald-bold" },
-  { label: "Fantasy", tone: "iris-bold" },
+  { label: "Literary Fiction", tone: "plum-bold" },
+  { label: "Fantasy", tone: "coral-bold" },
   { label: "Made Me Cry", tone: "sky-bold" },
-  { label: "Favorites", tone: "red-bold" },
+  { label: "Favorites", tone: "marigold-bold" },
 ];
 
 export default function BadgeExamples() {
@@ -30,7 +30,7 @@ export default function BadgeExamples() {
         ))}
       </div>
       <h3 className="sedge-subheading">Usage</h3>
-      <CodeBlock code={USAGE} className="mb-8" />
+      <CodeBlock tone='green' code={USAGE} className="mb-8" />
     </section>
   );
 }

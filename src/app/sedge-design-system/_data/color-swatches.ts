@@ -158,5 +158,5 @@ export const PAGE_SWATCHES: (ColorSwatch & { label: string })[] = [
   { label: "Cream — ground", varName: "--cream", hex: "#FEFDFB" },
   { label: "Ivory", varName: "--ivory", hex: "#F2E9D8" },
   { label: "Charcoal — ink", varName: "--charcoal", hex: "#2A2A2E" },
-  { label: "Espresso — dark mode ground", varName: "--espresso", hex: "#231F1C" },
+  { label: "Espresso — dark mode ground", varName: "--espresso", hex: "#1D1814" },
 ];

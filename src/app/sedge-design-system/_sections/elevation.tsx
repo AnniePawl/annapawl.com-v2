@@ -11,24 +11,6 @@ const TOKENS = [
     usedFor: "Side drawers (Reading stats)",
     preview: "var(--shadow-drawer)",
   },
-  {
-    token: "--shadow-overlay",
-    value: "0 24px 60px · 14%",
-    usedFor: "Centered dialogs (modals)",
-    preview: "var(--shadow-overlay)",
-  },
-  {
-    token: "--shadow-card · pill · button",
-    value: "none",
-    usedFor: "Resting surfaces stay flat",
-    preview: "none",
-  },
-  {
-    token: "--shadow-xs → lg",
-    value: "raw scale",
-    usedFor: "Still available — avoid on anything that sits on the page",
-    preview: "var(--shadow-md)",
-  },
 ];
 
 export default function ElevationSection() {
@@ -38,7 +20,7 @@ export default function ElevationSection() {
       heading={meta.title}
       icon={meta.icon}
       lede="Flat by default. Shadows are for things that float."
-      description="On the page, rules, color, and space do the separating — cards, covers, and buttons sit flat. A shadow only appears when something genuinely lifts above the page, like a drawer or a dialog, so it means something when you see one."
+      description="On the page, rules, color, and space do the separating, so cards, covers, and buttons sit flat. The drawer is the one surface with a shadow, because it slides over the page. Modals float too, but a dimmed backdrop does that job instead."
     >
       <h3 className="sedge-subheading">On the page</h3>
       <div className="elev-grid">
@@ -104,7 +86,7 @@ export default function ElevationSection() {
           <figcaption>
             <span className="elev-label">Dialog</span>
             <span className="elev-note">
-              <code>--shadow-overlay</code> · over a dimmed page
+              No shadow · a dimmed page does the lifting
             </span>
           </figcaption>
         </figure>

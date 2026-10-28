@@ -10,7 +10,7 @@ export default function RadiusDocsSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      lede="Square by default, soft where it counts."
+      lede="Square by default, with a soft side."
       description="Shape works in two layers: a small corner-radius scale for the few functional moments that need softening, and a set of custom accent shapes that add character where structure matters less."
     >
       <ShapeExamples />

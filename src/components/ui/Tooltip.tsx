@@ -1,6 +1,6 @@
 import { CSSProperties, ReactNode, useId } from "react";
 import { cx } from "../../lib/cx";
-import type { PaletteColor } from "./colorTokens";
+import { markerColor, type PaletteColor } from "./colorTokens";
 
 /** Custom colors. Any key left out falls back to the variant's default. */
 export type TooltipTone = {
@@ -41,7 +41,7 @@ export default function Tooltip({
   const toneStyle = tone
     ? ({
         ...(tone.background && { "--tooltip-bg": `var(--${tone.background})` }),
-        ...(tone.marker && { "--tooltip-marker": `var(--${tone.marker})` }),
+        ...(tone.marker && { "--tooltip-marker": markerColor(tone.marker) }),
         ...(tone.text && { "--tooltip-text": `var(--${tone.text})` }),
       } as CSSProperties)
     : undefined;

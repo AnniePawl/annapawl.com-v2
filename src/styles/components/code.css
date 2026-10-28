@@ -37,6 +37,11 @@
   line-height: 1.6;
 }
 
+/* Comments in cream so they stand apart from the tinted code. */
+.code-block .code-comment {
+  color: var(--cream);
+}
+
 .code-block pre code {
   padding: 0;
   background: none;

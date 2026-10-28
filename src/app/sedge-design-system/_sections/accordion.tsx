@@ -10,8 +10,8 @@ export default function AccordionSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      lede="A single-open FAQ pattern for grouping related questions without the visual weight of separate cards."
-      description="It sits directly on the cream page with no container: hairline rules frame and separate the rows, and a thin plus/minus opens each one. Every number carries the same small marker as callout and card labels, in the soft page tint; when an item opens, its marker turns the full page accent."
+      lede="Answers, revealed as needed."
+      description="A single-open FAQ pattern that groups questions without the visual weight of separate cards. It sits directly on the cream page with no container. Hairline rules frame and separate the rows, and a thin plus/minus opens each one. Each question number gets a bold marker and each answer a soft one, the same shape as callout and card labels. They follow the color of the section the accordion sits in, falling back to the page accent, or you can pass in a tone."
     >
       <AccordionExamples />
     </Section>

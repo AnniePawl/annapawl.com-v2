@@ -192,3 +192,17 @@
     grid-column: 1 / -1;
   }
 }
+
+/* Dark mode: stronger washes so the section pink reads on the dark page. */
+[data-sedge-theme="dark"] .layout-gutter,
+[data-sedge-theme="dark"] .layout-wire-gap {
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--section-tone) 0 1px,
+    transparent 1px 6px
+  );
+}
+
+[data-sedge-theme="dark"] .layout-wire-rail {
+  background: color-mix(in srgb, var(--section-tone) 45%, transparent);
+}

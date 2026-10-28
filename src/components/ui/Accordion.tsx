@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import { cx } from "../../lib/cx";
+import { markerColor, toneShades, type PaletteColor, type PaletteHue } from "./colorTokens";
 
 /**
  * A single question/answer entry. `id` is optional -- when omitted, the
@@ -19,7 +20,20 @@ export interface AccordionProps {
   /** id (or index, as a string) of the item open on first render.
    * Nothing is open by default. */
   defaultOpenId?: string;
+  /** Marker color. Questions get the hue's bold shade, answers its soft
+   *  shade ("green", "green-bold" and "green-soft" all mean green).
+   *  Defaults to the section color, then the page accent. */
+  tone?: PaletteHue | PaletteColor;
   className?: string;
+}
+
+function toneStyle(tone: AccordionProps["tone"]): CSSProperties | undefined {
+  if (!tone) return undefined;
+  const { bold, soft } = toneShades(tone);
+  return {
+    "--accordion-marker": markerColor(tone.endsWith("-soft") ? bold : tone),
+    "--accordion-marker-soft": `var(--${soft})`,
+  } as CSSProperties;
 }
 
 function resolveId(item: AccordionItem, index: number): string {
@@ -27,13 +41,14 @@ function resolveId(item: AccordionItem, index: number): string {
 }
 
 /**
- * Single-open FAQ accordion on cream. Hairline rules separate the rows;
- * each number carries a small marker that turns the page accent when
- * its item is open. No container box -- it sits directly on the page.
+ * Single-open FAQ accordion on cream. Hairline rules separate the rows.
+ * Each question number has a bold marker and each answer a soft one, in
+ * the section color by default. No container box; it sits on the page.
  */
 export default function Accordion({
   items,
   defaultOpenId,
+  tone,
   className,
 }: AccordionProps) {
   const [openId, setOpenId] = useState<string | null>(defaultOpenId ?? null);
@@ -43,7 +58,7 @@ export default function Accordion({
   }
 
   return (
-    <div className={cx("accordion", className)}>
+    <div className={cx("accordion", className)} style={toneStyle(tone)}>
       {items.map((item, index) => {
         const id = resolveId(item, index);
         const isOpen = openId === id;

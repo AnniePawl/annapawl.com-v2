@@ -10,7 +10,10 @@ const USAGE = `import SiteFooter from "@/components/layout/SiteFooter/SiteFooter
 
 // Posts get it automatically from PostLayout (footer={false} to hide it).
 // Anywhere else, add it at the end of the page:
-<SiteFooter />`;
+<SiteFooter />
+
+// Markers and link hovers follow the page accent, or pass one in:
+<SiteFooter accent="var(--coral-bold)" />`;
 
 export default function SiteFooterSection() {
   return (
@@ -22,11 +25,11 @@ export default function SiteFooterSection() {
       description="A woven strip of palette colors marks the end of the page, followed by the colophon: where else to find me, how to get in touch, and what the site is built with. Its markers and link hovers take the page accent, so it matches whichever page it ends."
     >
       <div className="pattern-preview pattern-preview--footer">
-        <SiteFooter />
+        <SiteFooter accent="light-dark(var(--coral-bold), var(--coral-soft))" />
       </div>
 
       <h3 className="sedge-subheading">Usage</h3>
-      <CodeBlock code={USAGE} className="mb-8" />
+      <CodeBlock tone="coral" code={USAGE} className="mb-8" />
     </Section>
   );
 }

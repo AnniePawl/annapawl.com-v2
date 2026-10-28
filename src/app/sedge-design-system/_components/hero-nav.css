@@ -1,6 +1,6 @@
 .sedge-wordmark-link {
-  --focus-ring-color: var(--iris-bold);
-  --wordmark-hover-color: var(--iris-bold);
+  --focus-ring-color: var(--sky-bold);
+  --wordmark-hover-color: var(--sky-bold);
   border-radius: var(--radius-sm);
 }
 
@@ -35,12 +35,12 @@
 }
 
 [data-sedge-theme="dark"] .sedge-wordmark-link {
-  --focus-ring-color: var(--iris-soft);
-  --wordmark-hover-color: var(--iris-soft);
+  --focus-ring-color: var(--sky-soft);
+  --wordmark-hover-color: var(--sky-soft);
 }
 
 .sedge-group-nav-link {
-  --focus-ring-color: var(--iris-bold);
+  --focus-ring-color: var(--sky-bold);
   padding: var(--space-2) var(--space-4);
   border: 0;
   border-radius: var(--radius-pill);
@@ -67,6 +67,11 @@
 
 [data-sedge-theme="dark"] .sedge-group-nav-link {
   --focus-ring-color: var(--sky-soft);
+}
+
+[data-sedge-theme="dark"] .sedge-group-nav-link--inactive:hover {
+  background: var(--sky-soft);
+  color: var(--charcoal);
 }
 
 /* Reduced motion: keep only the color change. Transform itself is

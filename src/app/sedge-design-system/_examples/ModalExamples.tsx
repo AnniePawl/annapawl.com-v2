@@ -19,6 +19,7 @@ const [open, setOpen] = useState(false);
   onClose={() => setOpen(false)}
   eyebrow="About this page"
   title="Made with CSS"
+  tone="green"
   actions={<Button onClick={() => setOpen(false)}>Got it</Button>}
 >
   <p>Hover over the knick-knacks for some mini surprises.</p>
@@ -32,8 +33,8 @@ import Drawer from "@/components/ui/Drawer";
   open={open}
   onClose={() => setOpen(false)}
   eyebrow="Reading stats"
-  title="The shelf, in numbers"
-  accent="var(--page-accent)"
+  title="By the numbers"
+  tone="green"
 >
   <dl className="drawer-list">
     <div><dt>Books</dt><dd>18</dd></div>
@@ -67,21 +68,22 @@ export default function ModalExamples() {
 
       <h3 className="sedge-subheading">Modal</h3>
       <div className="modal-demo-row">
-        <Button onClick={() => setModalOpen(true)}>Open the modal</Button>
+        <Button tone='green' onClick={() => setModalOpen(true)}>Open the modal</Button>
       </div>
-      <CodeBlock code={MODAL_USAGE} className="mb-8" />
+      <CodeBlock tone='green' code={MODAL_USAGE} className="mb-8" />
 
       <h3 className="sedge-subheading">Drawer</h3>
       <div className="modal-demo-row">
-        <Button onClick={() => setDrawerOpen(true)}>Open the drawer</Button>
+        <Button tone='green' onClick={() => setDrawerOpen(true)}>Open the drawer</Button>
       </div>
-      <CodeBlock code={DRAWER_USAGE} className="mb-8" />
+      <CodeBlock tone='green' code={DRAWER_USAGE} className="mb-8" />
 
       <Modal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
         eyebrow="About this page"
         title="Made with CSS"
+        tone="green-bold"
         actions={
           <>
             <a href="#modals" className="text-link text-link--quiet focus-ring">
@@ -104,8 +106,8 @@ export default function ModalExamples() {
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
         eyebrow="Reading stats"
-        title="The shelf, in numbers"
-        accent="var(--page-accent)"
+        title="By the numbers"
+        tone="green"
       >
         <dl className="drawer-list">
           <div><dt>Books</dt><dd>18</dd></div>

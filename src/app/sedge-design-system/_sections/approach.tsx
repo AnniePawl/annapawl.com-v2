@@ -29,7 +29,7 @@ export default function ApproachSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      lede="I’m drawn to the balance between personality and precision — work that feels expressive and human, while still considered in every detail."
+      lede="A balance of personality and precision."
     >
       <div className="sedge-section-intro">
         <p>

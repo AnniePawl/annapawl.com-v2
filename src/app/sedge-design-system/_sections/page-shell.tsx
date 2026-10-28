@@ -24,11 +24,11 @@ export default function PageShellSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      lede="The page shell is invisible layout scaffolding: no border, radius, or background."
-      description="It keeps content centered inside a shared maximum width, adds responsive side gutters, and provides equal spacing at the top and bottom of the page."
+      lede="Invisible layout scaffolding."
+      description="It has no border, radius, or background. It keeps content centered inside a shared maximum width, adds responsive side gutters, and provides equal spacing at the top and bottom of the page."
     >
       <PageShell>
-        <span className="type-eyebrow">Inside the page shell</span>
+        <span className="type-eyebrow page-shell-example-label">Inside the page shell</span>
         <p className="page-shell-example-copy">
           The side gutters adjust with the screen while the content stays
           centered inside a consistent maximum width.
@@ -36,7 +36,7 @@ export default function PageShellSection() {
       </PageShell>
 
       <h3 className="sedge-subheading">Usage</h3>
-      <CodeBlock code={USAGE} />
+      <CodeBlock tone="coral" code={USAGE} />
     </Section>
   );
 }

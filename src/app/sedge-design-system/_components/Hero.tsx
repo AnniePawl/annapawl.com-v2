@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import MarkerWeave from "./MarkerWeave";
 import Button from "../../../components/ui/Button";
-import "./section.css";
+import "./hero.css";
 
 const AT_A_GLANCE = [
   {
@@ -38,15 +38,6 @@ const AT_A_GLANCE = [
   },
 ];
 
-// Each principle's icon color (the bold of its old pill color).
-const ICON_COLORS = [
-  "var(--sky-bold)",
-  "var(--cherry-soft)",
-  "var(--marigold-bold)",
-  "var(--iris-bold)",
-  "var(--lime-bold)",
-];
-
 export default function Hero({ onExplore }: { onExplore: () => void }) {
   return (
     <section id='top' className="relative mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-7xl flex-col overflow-hidden px-6 pt-10 pb-4 lg:pt-16">
@@ -73,7 +64,7 @@ export default function Hero({ onExplore }: { onExplore: () => void }) {
             shape="pill"
             size="lg"
             endIcon={<ArrowRight />}
-            tone={{ tint: "cherry-bold", text: "cream", accent: "sky-soft", ink: "charcoal" }}
+            tone={{ bg: "cherry-bold", text: "cream", icon: "sky-soft", hoverBg: "sky-soft", hoverText: "charcoal" }}
           >
             Explore the system
           </Button>
@@ -88,11 +79,10 @@ export default function Hero({ onExplore }: { onExplore: () => void }) {
       <div className="pt-4">
         <hr className="poster-divider my-4" />
         <div className="sedge-glance grid grid-cols-1 gap-y-5 sm:grid-cols-2 lg:grid-cols-5 lg:gap-y-0">
-          {AT_A_GLANCE.map(({ icon: Icon, title, caption }, i) => (
+          {AT_A_GLANCE.map(({ icon: Icon, title, caption }) => (
             <div key={title} className="sedge-glance-item">
               <Icon
                 className="sedge-glance-icon"
-                style={{ color: ICON_COLORS[i % ICON_COLORS.length] }}
                 aria-hidden="true"
               />
               <div className="flex flex-col lg:items-center">

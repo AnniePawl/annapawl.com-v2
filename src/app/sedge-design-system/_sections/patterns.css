@@ -7,6 +7,10 @@
   background: var(--bg-subtle);
 }
 
+[data-sedge-theme] .page-shell-example-label {
+  color: light-dark(var(--coral-bold), var(--coral-soft));
+}
+
 .page-shell-example-copy {
   max-width: var(--measure-sm);
   margin: var(--space-2) 0 0;
@@ -90,7 +94,7 @@
 
 /* ---- Page header anatomy: numbered badges on the live preview ---- */
 .page-header-anatomy {
-  --anatomy-badge-bg: var(--blue-soft);
+  --anatomy-badge-bg: var(--coral-soft);
   --anatomy-badge-text: var(--charcoal);
 }
 
@@ -168,7 +172,7 @@
   width: 1.125rem;
   height: 1.125rem;
   border-radius: 50%;
-  background: var(--blue-soft);
+  background: var(--anatomy-badge-bg, var(--coral-soft));
   color: var(--charcoal);
   font-size: 0.6875rem;
   font-weight: var(--font-semibold);
@@ -233,6 +237,7 @@
 }
 
 .nav-doc-end {
+  --page-accent: light-dark(var(--coral-bold), var(--coral-soft));
   margin-bottom: var(--space-7);
 }
 
@@ -266,3 +271,17 @@
   font-weight: var(--font-medium);
 }
 
+/* Dark mode: the nav demos sit on the dark page, so their text is cream.
+   The footer preview keeps its cream plate, so its text stays charcoal. */
+[data-sedge-theme="dark"] .nav-doc-contents .post-contents a,
+[data-sedge-theme="dark"] .nav-doc-contents .post-contents-label,
+[data-sedge-theme="dark"] .nav-doc-end .post-end-link {
+  color: var(--cream);
+}
+
+[data-sedge-theme="dark"] .pattern-preview--footer {
+  --text-primary: var(--charcoal);
+  --text-secondary: color-mix(in srgb, var(--charcoal) 70%, transparent);
+  --text-muted: color-mix(in srgb, var(--charcoal) 55%, transparent);
+  color: var(--charcoal);
+}

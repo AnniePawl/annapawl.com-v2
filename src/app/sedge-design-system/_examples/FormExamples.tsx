@@ -50,7 +50,7 @@ export default function FormExamples() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <section style={{ maxWidth: 720 }}>
+    <section className="form-demo">
       <div className="form-demo-grid">
         <FormField>
           <FieldLabel htmlFor="email">Identify yourself</FieldLabel>
@@ -111,7 +111,7 @@ export default function FormExamples() {
         </div>
       </div>
       <h3 className="sedge-subheading">Usage</h3>
-       <CodeBlock code={USAGE} className="mb-8" />
+       <CodeBlock tone='green' code={USAGE} className="mb-8" />
 
     </section>
   );

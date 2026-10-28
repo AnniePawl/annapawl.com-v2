@@ -9,8 +9,8 @@ export default function ButtonsSection() {
     <Section id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      lede="Soft corners for everyday actions, a pill for the big moment."
-      description="Buttons know their role, not their color: the page sets an accent once and every button follows. Three roles cover everything — no special colors for danger or success.">
+      lede="Soft corners for the everyday, pill shapes for emphasis."
+      description="By default, buttons inherit the page accent and use one of three roles, without separate colors for danger or success. Primary and secondary buttons don’t add a pressed style: hover already signals interactivity, and the interface responds immediately after a click, making another visual state unnecessary. Quiet buttons and links have no fill to shift, so they dim briefly when pressed. Every part of a button can also be customized when the default system isn’t the right fit.">
       <ButtonStates />
     </Section>
   );

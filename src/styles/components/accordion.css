@@ -3,14 +3,21 @@
    See components/ui/Accordion.tsx for the component this styles.
 
    No container: hairline rules frame and separate the rows. Each
-   number has a small marker (same as the callout and card labels)
-   in the page accent tint, which turns the full page accent when
-   its item is open. The plus/minus is a thin charcoal glyph.
+   question number has a bold marker and each answer a soft one (same
+   shape as the callout and card labels). They follow the post or Sedge
+   section color, then the page accent, unless a tone is passed.
+   The plus/minus is a thin charcoal glyph.
 ========================================================= */
 
 .accordion {
-  --accordion-marker: var(--page-accent-tint);
-  --accordion-marker-open: var(--page-accent);
+  --accordion-marker: var(
+    --post-section-tone,
+    var(--section-tone, var(--page-accent))
+  );
+  --accordion-marker-soft: var(
+    --post-section-tone-soft,
+    var(--section-tone-soft, var(--page-accent-tint))
+  );
   --accordion-line: color-mix(in srgb, var(--text-primary) 20%, transparent);
   --accordion-text: var(--text-primary);
   border-top: 1px solid var(--accordion-line);
@@ -55,13 +62,6 @@
   width: 6px;
   height: 10px;
   background: var(--accordion-marker);
-  transition: background-color var(--motion-hover-duration)
-    var(--motion-ease-standard);
-}
-
-.accordion-row:hover .accordion-number::before,
-.accordion-item.is-open .accordion-number::before {
-  background: var(--accordion-marker-open);
 }
 
 .accordion-question {
@@ -126,6 +126,7 @@
 }
 
 .accordion-answer {
+  position: relative;
   margin: 0;
   /* Lines the answer up with the question text, clear of the control. */
   padding: 0 calc(14px + var(--space-4)) var(--space-5)
@@ -135,4 +136,15 @@
   font-weight: var(--font-regular);
   line-height: 1.6;
   color: var(--accordion-text);
+}
+
+/* Soft marker in the number column, beside the answer's first line. */
+.accordion-answer::before {
+  content: "";
+  position: absolute;
+  top: 0.55em;
+  left: 0;
+  width: 6px;
+  height: 10px;
+  background: var(--accordion-marker-soft);
 }

@@ -1,6 +1,6 @@
 import { CSSProperties, HTMLAttributes } from "react";
 import { cx } from "../../lib/cx";
-import type { PaletteColor } from "./colorTokens";
+import { markerColor, type PaletteColor } from "./colorTokens";
 
 /** Marker color. Any palette token; defaults to the page accent. */
 export type BadgeTone = PaletteColor;
@@ -21,7 +21,7 @@ export default function Badge({
   ...rest
 }: BadgeProps) {
   const toneStyle = tone
-    ? ({ "--badge-marker": `var(--${tone})` } as CSSProperties)
+    ? ({ "--badge-marker": markerColor(tone) } as CSSProperties)
     : undefined;
 
   return (

@@ -9,6 +9,10 @@
    Shapes: soft 4px (default) or pill. No shadows (see elevation.css).
    Every color change eases (--btn-transition), never snaps.
 
+   Primary and secondary have no pressed state: hover already shows the
+   change and the page responds right after a click. Quiet buttons have no
+   fill to hover into, so they dim when pressed.
+
    `[data-state="hover"|"pressed"]` exist only so the Sedge docs can force-
    preview a state side by side. */
 
@@ -40,11 +44,6 @@
     color var(--btn-transition),
     text-decoration-color var(--btn-transition),
     transform var(--motion-hover-duration) var(--motion-hover-ease);
-}
-
-.btn:active,
-.btn[data-state="pressed"] {
-  transform: translateY(1px);
 }
 
 .btn--pill {
@@ -84,7 +83,7 @@
 
 .btn-start-icon,
 .btn-end-icon {
-  color: var(--page-accent);
+  color: var(--btn-icon, var(--page-accent));
   transition:
     color var(--btn-transition),
     transform var(--motion-hover-duration) var(--motion-hover-ease);
@@ -129,7 +128,7 @@
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 50%;
-  background: var(--page-accent);
+  background: var(--btn-icon, var(--page-accent));
   transition: background-color var(--btn-transition);
 }
 
@@ -147,14 +146,14 @@
 /* Secondary — soft tint, charcoal label, bold accent icon.
    On hover it deepens to the bold accent. */
 .btn--secondary {
-  background: var(--page-accent-tint);
+  background: var(--btn-bg, var(--page-accent-tint));
   color: var(--btn-text, var(--charcoal));
 }
 
 .btn--secondary:hover,
 .btn--secondary[data-state="hover"] {
-  background: var(--page-accent);
-  color: var(--page-accent-ink);
+  background: var(--btn-hover-bg, var(--page-accent));
+  color: var(--btn-hover-text, var(--page-accent-ink));
 }
 
 /* Quiet — underlined text, no fill. */
@@ -178,7 +177,9 @@
 
 .btn--quiet:active,
 .btn--quiet[data-state="pressed"] {
-  transform: none;
+  color: var(--text-secondary);
+  text-decoration-color: var(--page-accent);
+  text-decoration-thickness: 2px;
 }
 
 .btn:disabled {
@@ -196,9 +197,7 @@
   }
 
   .btn:hover .btn-end-icon,
-  .btn[data-state="hover"] .btn-end-icon,
-  .btn:active,
-  .btn[data-state="pressed"] {
+  .btn[data-state="hover"] .btn-end-icon {
     transform: none;
   }
 }

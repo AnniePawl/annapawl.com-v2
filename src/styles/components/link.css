@@ -49,6 +49,13 @@
   background-size: 100% 3px;
 }
 
+/* Pressed: the text dims to gray while the thick underline stays. */
+.text-link:active,
+.text-link[data-state="pressed"] {
+  background-size: 100% 3px;
+  color: var(--text-secondary);
+}
+
 /* Visited: the underline fades rather than changing hue. */
 .text-link:visited,
 .text-link[data-state="visited"] {
@@ -75,6 +82,13 @@
 .text-link--quiet:hover,
 .text-link--quiet[data-state="hover"] {
   color: var(--link-accent);
+  text-decoration-style: solid;
+  text-decoration-color: var(--link-accent);
+}
+
+.text-link--quiet:active,
+.text-link--quiet[data-state="pressed"] {
+  color: var(--text-secondary);
   text-decoration-style: solid;
   text-decoration-color: var(--link-accent);
 }

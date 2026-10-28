@@ -1,0 +1,14 @@
+.a11y-blocks {
+  max-width: 40rem;
+}
+
+.a11y-copy {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+.a11y-demo {
+  margin-top: var(--space-3);
+}
+  

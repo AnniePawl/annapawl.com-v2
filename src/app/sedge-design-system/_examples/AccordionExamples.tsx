@@ -9,7 +9,11 @@ const items = [
   { question: "What's your favorite food?", answer: "A bao bun!" },
 ];
 
+// Markers follow the section color: bold for questions, soft for answers
 <Accordion items={items} />
+
+// Or pick a hue yourself
+<Accordion items={items} tone="pink" />
 `;
 
 // Anna's original sample questions.
@@ -26,7 +30,7 @@ export default function AccordionExamples() {
       <Accordion items={FAQ_ITEMS} defaultOpenId="1" />
 
       <h3 className="sedge-subheading">Usage</h3>
-      <CodeBlock code={USAGE} className="mb-8" />
+      <CodeBlock tone='green' code={USAGE} className="mb-8" />
     </div>
   );
 }

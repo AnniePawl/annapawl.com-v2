@@ -5,7 +5,7 @@ import {
   forwardRef,
 } from "react";
 import { cx } from "../../lib/cx";
-import type { PaletteColor } from "./colorTokens";
+import { markerColor, type PaletteColor, type PaletteHue } from "./colorTokens";
 
 /**
  * Buttons know their ROLE, never their color — color comes from the
@@ -25,23 +25,71 @@ type ButtonSize = "sm" | "md" | "lg";
 
 /**
  * One-off color override — the exception, not the system.
- * - tint:   secondary background at rest
- * - text:   secondary text color at rest (defaults to charcoal)
- * - accent: hover background, icon color, primary dot
- * - ink:    text/icon color on hover
+ *
+ * Shorthand: a palette color like "pink-bold" (or just "pink") uses that
+ * hue's bold for the accent (dot, icons, hover fill), its soft for the
+ * secondary background, and cream or charcoal hover text, whichever reads
+ * better on that bold.
+ *
+ * Object form, for full control. Each value is a palette name ("cream")
+ * or any CSS color ("#fff", "var(--x)", "color-mix(…)"):
+ * - bg:        secondary background
+ * - text:      secondary text (defaults to charcoal)
+ * - icon:      icon color, and primary's dot
+ * - hoverBg:   secondary background on hover
+ * - hoverText: secondary text and icon on hover
  */
+type ToneColor = PaletteColor | (string & {});
+
 export type ButtonTone = {
-  accent?: PaletteColor;
-  tint?: PaletteColor;
-  text?: PaletteColor;
-  ink?: PaletteColor;
+  bg?: ToneColor;
+  text?: ToneColor;
+  icon?: ToneColor;
+  hoverBg?: ToneColor;
+  hoverText?: ToneColor;
 };
+
+/** Palette names become var(--name); anything else is already a CSS color. */
+function toCss(color: ToneColor) {
+  return /^[a-z]+(-[a-z]+)?$/.test(color) ? `var(--${color})` : color;
+}
+
+const NEUTRALS: PaletteColor[] = ["cream", "charcoal", "ivory", "espresso"];
+
+// Bold shades dark enough that cream text reads best on the hover fill.
+// Every other bold gets charcoal (each pick has the higher WCAG contrast).
+const CREAM_INK_HUES = ["red", "cherry", "emerald", "slate", "plum", "mauve", "cocoa"];
+
+function resolveTone(tone: PaletteColor | PaletteHue): CSSProperties {
+  if (NEUTRALS.includes(tone as PaletteColor)) {
+    return { "--page-accent": `var(--${tone})` } as CSSProperties;
+  }
+  const hue = tone.replace(/-(soft|bold)$/, "");
+  const ink = CREAM_INK_HUES.includes(hue) ? "cream" : "charcoal";
+  return {
+    "--page-accent": `var(--${hue}-bold)`,
+    "--page-accent-tint": `var(--${hue}-soft)`,
+    "--page-accent-ink": `var(--${ink})`,
+    // Dot and icons: a bare hue switches to its soft shade in dark mode.
+    "--btn-icon": markerColor(tone),
+  } as CSSProperties;
+}
+
+function toneObjectStyle(tone: ButtonTone): CSSProperties {
+  return {
+    ...(tone.bg && { "--btn-bg": toCss(tone.bg) }),
+    ...(tone.text && { "--btn-text": toCss(tone.text) }),
+    ...(tone.icon && { "--btn-icon": toCss(tone.icon) }),
+    ...(tone.hoverBg && { "--btn-hover-bg": toCss(tone.hoverBg) }),
+    ...(tone.hoverText && { "--btn-hover-text": toCss(tone.hoverText) }),
+  } as CSSProperties;
+}
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   shape?: ButtonShape;
   size?: ButtonSize;
-  tone?: ButtonTone;
+  tone?: ButtonTone | PaletteColor | PaletteHue;
   startIcon?: ReactNode;
   endIcon?: ReactNode;
   /**
@@ -68,14 +116,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   },
   ref
 ) {
-  const toneStyle = tone
-    ? ({
-        ...(tone.accent && { "--page-accent": `var(--${tone.accent})` }),
-        ...(tone.tint && { "--page-accent-tint": `var(--${tone.tint})` }),
-        ...(tone.text && { "--btn-text": `var(--${tone.text})` }),
-        ...(tone.ink && { "--page-accent-ink": `var(--${tone.ink})` }),
-      } as CSSProperties)
-    : undefined;
+  const toneStyle = !tone
+    ? undefined
+    : typeof tone === "string"
+      ? resolveTone(tone)
+      : toneObjectStyle(tone);
 
   return (
     <button

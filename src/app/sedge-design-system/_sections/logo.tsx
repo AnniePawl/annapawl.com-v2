@@ -16,9 +16,9 @@ const PETAL_MIXES: HomeLogoColors[] = [
     hoverAccent: "var(--pink-bold)",
   },
   {
-    northwest: "var(--charcoal)",
-    northeast: "var(--cocoa-bold)",
-    southeast: "var(--cocoa-soft)",
+    northwest: "light-dark(var(--charcoal), var(--sand-soft))",
+    northeast: "light-dark(var(--cocoa-bold), var(--clay-soft))",
+    southeast: "light-dark(var(--cocoa-soft), var(--taupe-soft))",
     southwest: "var(--sand-bold)",
     hoverAccent: "var(--cherry-bold)",
   },
@@ -64,7 +64,7 @@ export default function LogoSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      lede="The clover is a persistent route home from anywhere in the garden."
+      lede="A persistent route home from anywhere in the garden."
       description="Its silhouette, placement, and motion stay consistent, while its resting and hover colors can adapt to the personality of each page."
     >
       <h3 className="sedge-subheading">States</h3>
@@ -81,8 +81,8 @@ export default function LogoSection() {
 
       <h3 className="sedge-subheading">Across the garden</h3>
       <p>
-        The silhouette always stays the same, but the petals are totally
-        customizable. Each page can dress the clover in colors that match its
+        The clover silhouette always stays the same, but the petals are totally
+        customizable. Each page can dress the logo in colors that match its
         own palette and vibe.
       </p>
       <div className="logo-variant-grid">
@@ -102,7 +102,7 @@ export default function LogoSection() {
       </ol>
 
       <h3 className="sedge-subheading">Usage</h3>
-      <CodeBlock code={USAGE} />
+      <CodeBlock tone='sky' code={USAGE} />
     </Section>
   );
 }

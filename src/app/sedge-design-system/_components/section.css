@@ -36,18 +36,39 @@
    so no dark-mode overrides are needed. */
 [data-group="Intro"] {
   --section-tone: var(--sky-bold);
+  --section-tone-soft: var(--sky-soft);
 }
 
 [data-group="Foundations"] {
   --section-tone: var(--pink-bold);
+  --section-tone-soft: var(--pink-soft);
 }
 
 [data-group="Components"] {
   --section-tone: var(--green-bold);
+  --section-tone-soft: var(--green-soft);
 }
 
 [data-group="Patterns"] {
   --section-tone: var(--coral-bold);
+  --section-tone-soft: var(--coral-soft);
+}
+
+/* Dark mode: every group marker uses its soft shade. */
+[data-sedge-theme="dark"] [data-group="Intro"] {
+  --section-tone: var(--sky-soft);
+}
+
+[data-sedge-theme="dark"] [data-group="Foundations"] {
+  --section-tone: var(--pink-soft);
+}
+
+[data-sedge-theme="dark"] [data-group="Components"] {
+  --section-tone: var(--green-soft);
+}
+
+[data-sedge-theme="dark"] [data-group="Patterns"] {
+  --section-tone: var(--coral-soft);
 }
 
 .sedge-section-heading-title {
@@ -188,6 +209,27 @@
   }
 }
 
+/* The first subheading sits closer to the description above it, so the
+   intro and the first examples read as one block. Also matches when the
+   subheading is the first thing inside a wrapper or two. */
+.sedge-section-content > .sedge-subheading:first-child,
+.sedge-section-content > :first-child > .sedge-subheading:first-child,
+.sedge-section-content > :first-child > :first-child > .sedge-subheading:first-child,
+.sedge-section-intro + .sedge-subheading,
+.sedge-section-intro + * > .sedge-subheading:first-child {
+  margin-top: var(--space-7);
+}
+
+@media (width < 40rem) {
+  .sedge-section-content > .sedge-subheading:first-child,
+  .sedge-section-content > :first-child > .sedge-subheading:first-child,
+  .sedge-section-content > :first-child > :first-child > .sedge-subheading:first-child,
+  .sedge-section-intro + .sedge-subheading,
+  .sedge-section-intro + * > .sedge-subheading:first-child {
+    margin-top: var(--space-6);
+  }
+}
+
 /* ---- Numbered list ----
    Ruled rows with a number in the section tone, the same rhythm as the
    Approach principles. */
@@ -221,99 +263,4 @@
 
 .sedge-numbered-list > li:first-child {
   padding-top: 0;
-}
-
-.poster-divider {
-  border: none;
-  border-top: 1px solid color-mix(in srgb, var(--text-primary) 20%, transparent);
-  margin: var(--space-6) 0;
-}
-
-.poster-divider--end {
-  margin-bottom: 0;
-}
-
-.sedge-hero-title {
-  font-weight: var(--font-regular);
-  line-height: 0.82;
-  letter-spacing: -0.065em;
-}
-
-/* ---- Hero: marker weave (MarkerWeave.tsx) ----
-   Upright markers in a loose grid, each floating on its own rhythm.
-   Hovering a marker lifts its cell a little further. */
-.marker-weave {
-  display: grid;
-  gap: 0.625rem 0.5rem;
-  width: 100%;
-  padding: var(--space-2) 0;
-}
-
-.marker-weave-cell {
-  display: flex;
-  justify-content: center;
-  height: 1.625rem;
-  transition: transform var(--motion-hover-duration) var(--motion-ease-standard);
-}
-
-.marker-weave-cell:hover {
-  transform: translateY(-0.375rem);
-}
-
-.marker-weave-marker {
-  display: block;
-  width: 1rem;
-  height: 1.625rem;
-  animation-name: marker-weave-float;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-}
-
-@keyframes marker-weave-float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-0.3125rem);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marker-weave-marker {
-    animation: none;
-  }
-
-  .marker-weave-cell {
-    transition: none;
-  }
-}
-
-/* ---- Hero: at-a-glance row ----
-   Icons in each principle's color, no pills. On desktop the five sit in
-   columns split by thin rules; on smaller screens icon sits beside text. */
-.sedge-glance-item {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-}
-
-.sedge-glance-icon {
-  width: 1.375rem;
-  height: 1.375rem;
-  flex-shrink: 0;
-}
-
-@media (width >= 64rem) {
-  .sedge-glance-item {
-    flex-direction: column;
-    gap: var(--space-2);
-    padding: var(--space-1) var(--space-3);
-    text-align: center;
-  }
-
-  .sedge-glance-item + .sedge-glance-item {
-    border-left: 1px solid color-mix(in srgb, var(--text-primary) 18%, transparent);
-  }
 }

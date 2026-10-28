@@ -226,7 +226,7 @@ export default function TypographyExamples() {
 
       {/* Usage */}
       <h3 className="sedge-subheading">Usage</h3>
-      <CodeBlock code={USAGE} />
+      <CodeBlock tone='pink' code={USAGE} />
     </>
   );
 }

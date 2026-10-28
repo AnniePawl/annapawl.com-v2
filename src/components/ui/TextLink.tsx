@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { AnchorHTMLAttributes, CSSProperties } from "react";
 import { cx } from "../../lib/cx";
-import type { PaletteColor } from "./colorTokens";
+import { markerColor, type PaletteColor } from "./colorTokens";
 
 export interface TextLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;
@@ -30,7 +30,7 @@ export default function TextLink({
     className
   );
   const toneStyle = tone
-    ? ({ "--link-accent": `var(--${tone})` } as CSSProperties)
+    ? ({ "--link-accent": markerColor(tone) } as CSSProperties)
     : undefined;
   const mergedStyle = { ...toneStyle, ...style };
 

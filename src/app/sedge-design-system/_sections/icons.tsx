@@ -36,8 +36,8 @@ export default function IconsSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      lede="Icons come from Lucide: simple, friendly, and consistent without asking me to draw hundreds of tiny pictures."
-      description="They inherit the color around them and use three shared sizes to stay aligned across labels, buttons, and controls."
+      lede="Simple, friendly icons from Lucide."
+      description="Lucide keeps things consistent without asking me to draw hundreds of tiny pictures. Icons inherit the color around them and use three shared sizes to stay aligned across labels, buttons, and controls."
     >
       <h3 className="sedge-subheading">Sizes</h3>
       <div className="icon-table">
@@ -101,7 +101,7 @@ export default function IconsSection() {
       </div>
 
       <h3 className="sedge-subheading">Usage</h3>
-      <CodeBlock code={USAGE} />
+      <CodeBlock tone='pink' code={USAGE} />
     </Section>
   );
 }

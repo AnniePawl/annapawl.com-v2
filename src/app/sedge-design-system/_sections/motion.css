@@ -1,0 +1,129 @@
+/* Motion section: token lists, live demo tracks, and the cursor examples. */
+
+/* ---- Token lists ---- */
+.motion-token-group {
+  margin-bottom: var(--space-5);
+}
+
+.motion-token-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.motion-token-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.motion-token-name {
+  width: 11.875rem;
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+}
+
+.motion-token-value {
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+}
+
+/* ---- Live demo ---- */
+.motion-demo-group {
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+  max-width: 520px;
+}
+
+.motion-demo-title {
+  margin: 0;
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+}
+
+.motion-demo-note {
+  margin: 2px 0 0;
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+}
+
+.motion-demo-rows {
+  display: grid;
+  gap: 8px;
+}
+
+.motion-demo-row {
+  display: grid;
+  grid-template-columns: 8rem minmax(8rem, 1fr);
+  align-items: center;
+  gap: 12px;
+}
+
+.motion-demo-row code {
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+}
+
+.motion-demo-track {
+  height: 18px;
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--pink-soft) 30%, transparent);
+}
+
+.motion-demo-runner {
+  width: calc(100% - 18px);
+  height: 18px;
+}
+
+.motion-demo-box {
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-xs);
+  background: light-dark(var(--pink-bold), var(--pink-soft));
+}
+
+@keyframes motion-demo {
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); }
+}
+
+@media (width < 40rem) {
+  .motion-demo-row {
+    grid-template-columns: 6.5rem minmax(7rem, 1fr);
+    gap: 8px;
+  }
+}
+
+/* ---- Cursor ---- */
+.motion-cursor-copy {
+  margin: 0 0 var(--space-6);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+.motion-cursor-examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.motion-cursor-example {
+  text-align: center;
+}
+
+.motion-cursor-area {
+  width: 7rem;
+  height: 4rem;
+  border: 1px dashed var(--pink-soft);
+  border-radius: var(--radius-md);
+}
+
+.motion-cursor-caption {
+  margin-top: var(--space-2);
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+}

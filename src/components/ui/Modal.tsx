@@ -1,7 +1,9 @@
 "use client";
 
 import { MouseEvent, ReactNode, useEffect, useId, useRef } from "react";
+import type { CSSProperties } from "react";
 import { cx } from "../../lib/cx";
+import { markerColor, toneShades, type PaletteColor, type PaletteHue } from "./colorTokens";
 
 type ModalSize = "default" | "lg";
 
@@ -17,7 +19,21 @@ export interface ModalProps {
   /** Buttons/links shown bottom-right, e.g. a quiet link + a primary Button. */
   actions?: ReactNode;
   size?: ModalSize;
+  /** Accent for this modal: the marker, plus buttons and links inside it.
+   *  A hue ("green") uses its bold shade, with the soft one as the tint.
+   *  Defaults to the page accent. */
+  tone?: PaletteHue | PaletteColor;
   className?: string;
+}
+
+function toneStyle(tone: ModalProps["tone"]): CSSProperties | undefined {
+  if (!tone) return undefined;
+  const { bold, soft } = toneShades(tone);
+  return {
+    "--modal-marker": markerColor(tone.endsWith("-soft") ? bold : tone),
+    "--page-accent": markerColor(tone.endsWith("-soft") ? bold : tone),
+    "--page-accent-tint": `var(--${soft})`,
+  } as CSSProperties;
 }
 
 /**
@@ -36,6 +52,7 @@ export default function Modal({
   children,
   actions,
   size = "default",
+  tone,
   className,
 }: ModalProps) {
   const ref = useRef<HTMLDialogElement>(null);
@@ -58,6 +75,7 @@ export default function Modal({
     <dialog
       ref={ref}
       className={cx("modal", size === "lg" && "modal--lg", className)}
+      style={toneStyle(tone)}
       onClose={onClose}
       onCancel={onClose}
       onClick={handleClick}

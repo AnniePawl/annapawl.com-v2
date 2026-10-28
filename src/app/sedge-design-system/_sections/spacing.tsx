@@ -54,8 +54,8 @@ export default function SpacingSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      lede="Spacing is one of those quiet things that makes everything feel more intentional."
-      description="Five everyday steps (8–32px) handle almost everything inside components. The larger steps are saved for layout: the top and end of a page, the gap beside a rail, and the air above a subheading."
+      lede="Quiet spacing makes everything feel intentional."
+      description="Five everyday steps (8–32px) handle almost everything inside components. The larger steps are saved for layout, like the top and end of a page, the gap beside a rail, and the air above a subheading."
     >
       <h3 className="sedge-subheading">Scale</h3>
       <div className="spacing-table" role="table" aria-label="Spacing scale">

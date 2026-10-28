@@ -34,8 +34,8 @@ export default function LayoutSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      lede="Every page sits in the same frame, and almost every page uses one of two shapes inside it."
-      description="The page shell sets the outer width and gutters. Inside, a full-width header comes first, then either a sticky rail beside a main column or a sidebar beside content. Measures keep text at a comfortable reading width."
+      lede="One frame, two shapes."
+      description="Every page sits in the same frame, and almost every page uses one of two shapes inside it. The page shell sets the outer width and gutters. Inside, a full-width header comes first, then either a sticky rail beside a main column or a sidebar beside content. Measures keep text at a comfortable reading width."
     >
       {/* Page frame */}
       <h3 className="sedge-subheading">Page frame</h3>

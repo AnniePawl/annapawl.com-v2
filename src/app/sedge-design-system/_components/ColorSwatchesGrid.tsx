@@ -43,12 +43,6 @@ function swatchTextColor(hex: string): string {
 
   const whiteContrast = 1.05 / (background + 0.05);
 
-  // Fixed --charcoal/--neutral-0 here on purpose, not the themed
-  // --text-primary/--text-inverse aliases: this is answering "what's
-  // readable against this swatch's exact hex", which doesn't change
-  // just because the design system is in dark mode -- the swatch tiles
-  // themselves are rendered straight from each token's own fixed hex
-  // (see ColorTile below), so the text on them needs to stay fixed too.
   return whiteContrast > charcoalContrast
     ? "var(--neutral-0)"
     : "var(--charcoal)";
@@ -120,21 +114,6 @@ function ColorTile({
 export default function ColorSwatchesGrid() {
   return (
     <div>
-      <h3 className="sedge-subheading">Ground &amp; ink</h3>
-      <div className="swatch-grid">
-        {PAGE_SWATCHES.map((swatch) => (
-          <div key={swatch.varName} className="min-w-0">
-            <ColorTile {...swatch} variant="ground" />
-            <span className="swatch-name">{swatch.label}</span>
-            <span className="swatch-values swatch-values--single">
-              <code>
-                {swatch.varName} · {swatch.hex}
-              </code>
-            </span>
-          </div>
-        ))}
-      </div>
-
       <h3 className="sedge-subheading">Palette · soft / bold</h3>
       <div className="swatch-grid">
         {COLOR_PAIRS.map(({ family, soft, bold }) => (
@@ -181,6 +160,21 @@ export default function ColorSwatchesGrid() {
             <code>--text-inverse</code>
           </div>
         </div>
+      </div>
+
+      <h3 className="sedge-subheading">Ground &amp; ink</h3>
+      <div className="swatch-grid">
+        {PAGE_SWATCHES.map((swatch) => (
+          <div key={swatch.varName} className="min-w-0">
+            <ColorTile {...swatch} variant="ground" />
+            <span className="swatch-name">{swatch.label}</span>
+            <span className="swatch-values swatch-values--single">
+              <code>
+                {swatch.varName} · {swatch.hex}
+              </code>
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );

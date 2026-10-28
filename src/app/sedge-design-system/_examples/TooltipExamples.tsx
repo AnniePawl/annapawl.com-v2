@@ -23,7 +23,7 @@ import Tooltip from "@/components/ui/Tooltip";
 // Make your own: any palette colors
 <Tooltip
   label="Every book I’ve rated five stars"
-  tone={{ background: "pink-soft", marker: "emerald-bold" }}
+  tone={{ background: "pink-soft", marker: "emerald-bold", text: "charcoal" }}
 >
   <span>Favorites</span>
 </Tooltip>
@@ -64,7 +64,7 @@ export default function TooltipExamples() {
         <div className="tooltip-demo-cell">
           <Tooltip
             label="Every book I’ve rated five stars"
-            tone={{ background: "pink-soft", marker: "emerald-bold" }}
+            tone={{ background: "green-soft", marker: "emerald-bold", text: "charcoal" }}
             className="tooltip-wrapper--static"
           >
             <span className="tooltip-info-trigger">Favorites</span>
@@ -74,7 +74,7 @@ export default function TooltipExamples() {
       </div>
 
       <h3 className="sedge-subheading">Usage</h3>
-      <CodeBlock code={USAGE} className="mb-8" />
+      <CodeBlock tone='green' code={USAGE} className="mb-8" />
     </section>
   );
 }

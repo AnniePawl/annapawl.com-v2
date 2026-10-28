@@ -10,8 +10,8 @@ export default function LinksSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      lede="Links keep the voice of the text around them — the color lives in the underline."
-      description="Link text stays charcoal and regular weight; the color lives in a 1.5px underline that thickens on hover. Quieter links use a dotted line that turns solid. Semantic anchors, visible focus, visited states, and external-link announcements keep the pattern useful beyond its appearance. It remains opt-in so navigation and other complex links can keep their own behavior."
+      lede="The underline carries the color."
+      description="Links keep the voice of the text around them. Link text stays charcoal and regular weight, and a 1.5px underline carries the color, thickening on hover. Quieter links use a dotted line that turns solid. Semantic anchors, visible focus, visited states, and external-link announcements keep the pattern useful beyond its appearance. It remains opt-in so navigation and other complex links can keep their own behavior."
     >
       <LinkExamples />
     </Section>

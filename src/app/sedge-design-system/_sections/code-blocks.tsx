@@ -13,9 +13,9 @@ const SAMPLE = `.circle__outer {
 
 // Stand-ins for post sections: a PostSection sets this variable for you.
 const SECTION_SAMPLES = [
-  { label: "In a sky section", soft: "var(--sky-soft)" },
-  { label: "In a coral section", soft: "var(--coral-soft)" },
-  { label: "In a teal section", soft: "var(--teal-soft)" },
+  { label: "In a blue section", soft: "var(--sky-soft)" },
+  { label: "In a yellow section", soft: "var(--lemon-soft)" },
+  { label: "In a pink section", soft: "var(--pink-soft)" },
 ];
 
 const USAGE = `import CodeBlock from "@/components/ui/CodeBlock";
@@ -23,8 +23,8 @@ const USAGE = `import CodeBlock from "@/components/ui/CodeBlock";
 // Inside a PostSection: text takes the section's soft color
 <CodeBlock code={\`.circle { border-radius: 50%; }\`} />
 
-// Pick a color yourself (soft colors read best on charcoal)
-<CodeBlock code={…} tone="marigold-soft" />
+// Pick a hue yourself. It always uses the soft version.
+<CodeBlock code={…} tone="marigold" />
 
 // No copy button
 <CodeBlock code={…} copyable={false} />
@@ -38,8 +38,8 @@ export default function CodeBlocksSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      lede="Code blocks pick up the color of the section they’re in."
-      description="One charcoal block with 4px corners and a copy button, used for every snippet on the site. Inside a post section, the code text takes the soft version of that section’s color, so each block matches the heading and markers around it. Outside a section it falls back to iris soft, and a tone prop picks any color by hand. The darkest soft colors (cherry, emerald and cocoa) are lightened automatically so they stay readable."
+      lede="Code blocks match their section color."
+      description="One charcoal block with 4px corners and a copy button, used for every snippet on the site. Inside a post section, the code text takes the soft version of that section’s color, so each block matches the heading and markers around it. Outside a section it falls back to iris soft, and a tone prop picks any color by hand. The darkest soft colors (cherry, emerald and cocoa) are lightened automatically so they stay readable. Comments are always cream, whatever the tone, so they stand apart from the code around them."
     >
       <h3 className="sedge-subheading">Follows its section</h3>
       <div className="code-blocks-grid">
@@ -62,13 +62,13 @@ export default function CodeBlocksSection() {
           <CodeBlock code={SAMPLE} />
         </div>
         <div className="code-blocks-sample">
-          <span className="type-note-label">tone=&quot;marigold-soft&quot;</span>
-          <CodeBlock code={SAMPLE} tone="marigold-soft" />
+          <span className="type-note-label">tone=&quot;mint&quot;</span>
+          <CodeBlock code={SAMPLE} tone="mint" />
         </div>
       </div>
 
       <h3 className="sedge-subheading">Usage</h3>
-      <CodeBlock code={USAGE} className="mb-8" />
+      <CodeBlock tone='green' code={USAGE} className="mb-8" />
     </Section>
   );
 }

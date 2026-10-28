@@ -13,7 +13,7 @@ export interface HomeLogoColors {
 }
 
 export const DEFAULT_HOME_LOGO_COLORS: HomeLogoColors = {
-  northeast: "var(--cherry-bold)",
+  northeast: "light-dark(var(--cherry-bold), var(--cherry-soft))",
   southeast: "var(--sky-bold)",
   southwest: "var(--sky-bold)",
   northwest: "var(--sky-bold)",

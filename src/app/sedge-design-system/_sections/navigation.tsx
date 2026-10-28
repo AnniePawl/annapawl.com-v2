@@ -140,7 +140,7 @@ export default function NavigationSection() {
       </nav>
 
       <h3 className="sedge-subheading">Usage</h3>
-      <CodeBlock code={USAGE} className="mb-8" />
+      <CodeBlock tone="coral" code={USAGE} className="mb-8" />
     </Section>
   );
 }

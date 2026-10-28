@@ -10,10 +10,9 @@ export default function BadgesSection() {
       id={meta.id}
       heading={meta.title}
       icon={meta.icon}
-      lede="Badges are compact labels for topics, categories, and small bits of garden metadata."
-      description="They share the bookshelf tag anatomy: a small upright marker beside charcoal text, with no pill, border, or fill. The marker follows the page accent by default, or takes any palette color when a set of labels needs to be told apart, like the bookshelf genres."
+      lede="Labels for quick context."
+      description="Badges are compact labels for topics, categories, and garden metadata. Each pairs a small marker with charcoal text. The marker uses the page accent by default, but can take on any palette color when labels need to be distinguished, like the genre tags on the bookshelf page."
     >
-
       <BadgeExamples />
     </Section>
   );

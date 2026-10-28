@@ -1,18 +1,41 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { Check, Copy } from "lucide-react";
 import { cx } from "../../lib/cx";
-import type { PaletteColor } from "./colorTokens";
+import type { PaletteHue } from "./colorTokens";
 
 export interface CodeBlockProps {
   code: string;
-  /** Code text color. Defaults to the soft version of the post section
-   *  it sits in, or iris soft outside a section. */
-  tone?: PaletteColor;
+  /** Code text color, as a hue ("pink", "green"). Always uses its soft
+   *  version. Defaults to the soft version of the post section it sits
+   *  in, or iris soft outside a section. */
+  tone?: PaletteHue;
   /** Show the copy button (default true). */
   copyable?: boolean;
   className?: string;
+}
+
+// Block comments (/* */, {/* */}), HTML comments, and // line comments.
+// The lookbehind skips the // inside URLs like https://.
+const COMMENT = /\/\*[\s\S]*?\*\/|<!--[\s\S]*?-->|(?<![:"'\w/])\/\/[^\n]*/g;
+
+/** Wraps comments in a span so they read apart from the code. */
+function markComments(text: string): ReactNode[] {
+  const parts: ReactNode[] = [];
+  let last = 0;
+  for (const match of text.matchAll(COMMENT)) {
+    const start = match.index ?? 0;
+    if (start > last) parts.push(text.slice(last, start));
+    parts.push(
+      <span className="code-comment" key={start}>
+        {match[0]}
+      </span>
+    );
+    last = start + match[0].length;
+  }
+  if (last < text.length) parts.push(text.slice(last));
+  return parts;
 }
 
 /** Charcoal code block whose text takes its section's soft color. */
@@ -52,7 +75,7 @@ export default function CodeBlock({
   }
 
   const style = tone
-    ? ({ "--code-tone": `var(--${tone})` } as CSSProperties)
+    ? ({ "--code-tone": `var(--${tone}-soft)` } as CSSProperties)
     : undefined;
 
   return (
@@ -79,7 +102,7 @@ export default function CodeBlock({
       {/* data-lenis-prevent: on Sedge, sideways code scrolling stays
           independent of the smooth-scrolled page. */}
       <pre data-lenis-prevent>
-        <code>{text}</code>
+        <code>{markComments(text)}</code>
       </pre>
     </div>
   );

@@ -13,7 +13,17 @@
   --page-accent-ink: var(--cream);
 }
 
+/* color-scheme lets light-dark() pick the soft shade of a tone in dark
+   mode (see markerColor in colorTokens.ts), and gives native controls
+   and scrollbars the matching theme. */
+[data-sedge-theme="light"] {
+  color-scheme: light;
+}
+
 [data-sedge-theme="dark"] {
+  color-scheme: dark;
+  /* Markers and accents use soft shades on the dark page. */
+  --page-accent: var(--cherry-soft);
   /* Backgrounds + surfaces */
   --bg-default: var(--espresso);
   --cursor-dot-color: var(--cream);
@@ -87,15 +97,6 @@
     var(--moss-bold) 22%,
     var(--espresso)
   );
-
-  /* Elevation -- the light-mode shadow scale (elevation.css) is a soft
-     black shadow, which all but disappears against cocoa. A faint
-     light haze reads as "lifted" on a dark surface the same way a dark
-     shadow does on a light one. */
-  --shadow-xs: 0 1px 0 rgba(242, 233, 216, 0.05);
-  --shadow-sm: 0 1px 2px rgba(242, 233, 216, 0.08);
-  --shadow-md: 0 8px 20px rgba(242, 233, 216, 0.10);
-  --shadow-lg: 0 16px 40px rgba(242, 233, 216, 0.14);
 }
 
 /* Sections share the page background in both themes. */
@@ -134,7 +135,7 @@
 }
 
 .theme-toggle-btn:hover {
-  color: var(--iris-bold);
+  color: var(--sky-bold);
 }
 
 /* Thin underline beneath the active icon only. */
@@ -195,11 +196,10 @@
 }
 
 /* Sidebar icons take their group's tone (data-group, see section.css). */
-/* Sidebar rows: hover and the current section get a faded wash of their
-   group's tone (iris, emerald, pink, blue -- set by [data-group] in
-   section.css) instead of one lime for everything. The wash is see-through,
-   so it works on cream and on espresso. Icons and text stay neutral:
-   charcoal on light, cream on dark. */
+/* Sidebar rows: hover and the current section get a wash of their group's
+   tone (set by [data-group] in section.css). On light it's see-through;
+   on dark it's the bright soft shade with charcoal text, like the top nav
+   pill. */
 .sedge-nav-item {
   color: var(--text-primary);
 }
@@ -210,6 +210,21 @@
 
 .sedge-nav-item.is-active {
   background: color-mix(in srgb, var(--section-tone, var(--iris-bold)) 28%, transparent);
+}
+
+[data-sedge-theme="dark"] .sedge-nav-item:hover {
+  background: color-mix(in srgb, var(--section-tone) 75%, var(--bg-default));
+  color: var(--charcoal);
+}
+
+[data-sedge-theme="dark"] .sedge-nav-item.is-active {
+  background: var(--section-tone);
+  color: var(--charcoal);
+}
+
+[data-sedge-theme="dark"] .sedge-nav-item:hover .sedge-sidebar-icon,
+[data-sedge-theme="dark"] .sedge-nav-item.is-active .sedge-sidebar-icon {
+  color: var(--charcoal);
 }
 
 .sedge-sidebar-icon {

@@ -33,6 +33,11 @@
   background: var(--callout-marker);
 }
 
+/* The action link's underline matches the marker. */
+.callout .callout-action {
+  --link-accent: var(--callout-marker);
+}
+
 .callout-description {
   font-size: 15px;
   line-height: 1.6;
