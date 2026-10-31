@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { WritingRow } from "./WritingRow";
+import { GroupRow, type GroupItem } from "./GroupRow";
 import "./landing-index.css";
 
-// Site menu below the fold. Numbered index of pages
-// Writing posts in WritingRow.tsx
+// Site menu below the fold. Numbered index of pages, then rows that
+// open to list their posts (GroupRow.tsx).
 const PAGES = [
     {
     href: "/sedge-design-system",
@@ -28,6 +28,40 @@ const PAGES = [
   //   title: "Kitchen Mischief",
   //   description: "Photos of food I’ve made as a highly dedicated eater learning to cook",
   //   accent: "var(--lilac-bold)",
+  // },
+];
+
+const CREATIVE_CODING: GroupItem[] = [
+  {
+    href: "/drawing-with-code",
+    title: "Drawing with Code",
+    description: "An intro to CSS art",
+    accent: "var(--red-bold)",
+  },
+  {
+    href: "/css-shapes",
+    title: "CSS Shapes",
+    description: "How to make basic shapes using CSS",
+    accent: "var(--marigold-bold)",
+  },
+];
+
+const BUILDING_BLOCKS: GroupItem[] = [
+  {
+    href: "/accordion",
+    title: "Accordion",
+    description: "An accessible accordion, in vanilla JS and React",
+    accent: "var(--teal-bold)",
+  },
+  {
+    title: "Tabs",
+    description: "Keyboard-friendly tabs and a clean component API",
+    accent: "var(--coral-bold)",
+  },
+  // {
+  //   title: "Modal",
+  //   description: "A dialog that handles focus on its own",
+  //   accent: "var(--coral-bold)",
   // },
 ];
 
@@ -56,7 +90,20 @@ export function LandingIndex() {
             </Link>
           </li>
         ))}
-        <WritingRow number={PAGES.length + 1} />
+        <GroupRow
+          number={PAGES.length + 1}
+          title="Creative Coding"
+          description="Playful CSS experiments, how-tos, and mini projects"
+          accent="var(--mint-bold)"
+          items={CREATIVE_CODING}
+        />
+        <GroupRow
+          number={PAGES.length + 2}
+          title="Building Blocks"
+          description="Accessible components, built from scratch"
+          accent="var(--pink-bold)"
+          items={BUILDING_BLOCKS}
+        />
       </ol>
     </nav>
   );
