@@ -20,11 +20,37 @@
   );
   --accordion-line: color-mix(in srgb, var(--text-primary) 20%, transparent);
   --accordion-text: var(--text-primary);
-  border-top: 1px solid var(--accordion-line);
   border-bottom: 1px solid var(--accordion-line);
 }
 
-.accordion-item + .accordion-item {
+/* Optional title, in the accordion's tone. Uses the section-heading
+   type tokens (regular weight), so it reads as a heading, not a label. */
+.accordion .accordion-title {
+  margin: 0 0 var(--space-4);
+  font-family: var(--font-sans);
+  font-size: var(--type-heading-size);
+  font-weight: var(--type-heading-weight);
+  line-height: var(--type-heading-leading);
+  letter-spacing: var(--type-heading-tracking);
+  color: var(--accordion-marker);
+}
+
+/* Each item's button is wrapped in a heading for the page outline.
+   Reset it completely so it adds no size, weight, spacing or color;
+   the button inside carries all the styling. The extra .accordion in
+   the selector outranks page rules like `.post-section h2`. */
+.accordion .accordion-heading {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  text-transform: none;
+}
+
+/* The top rule sits on the first row (not the container), so it lands
+   under the title instead of above it. */
+.accordion-item {
   border-top: 1px solid var(--accordion-line);
 }
 
@@ -129,7 +155,7 @@
   position: relative;
   margin: 0;
   /* Lines the answer up with the question text, clear of the control. */
-  padding: 0 calc(14px + var(--space-4)) var(--space-5)
+  padding: var(--space-4) calc(14px + var(--space-4)) var(--space-5)
     calc(2.5rem + var(--space-4));
   font-family: var(--font-sans);
   font-size: 15px;
@@ -138,11 +164,24 @@
   color: var(--accordion-text);
 }
 
+/* Colored hairline between question and answer, full width like the
+   row rules but in the accent color. It lives inside the panel, so it
+   opens and closes with it. */
+.accordion-answer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--accordion-marker);
+}
+
 /* Soft marker in the number column, beside the answer's first line. */
 .accordion-answer::before {
   content: "";
   position: absolute;
-  top: 0.55em;
+  top: calc(var(--space-4) + 0.55em);
   left: 0;
   width: 6px;
   height: 10px;

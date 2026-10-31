@@ -1,0 +1,110 @@
+/* Accordion anatomy: the real Accordion, full width, plus a list of its
+   parts. Hovering or focusing a part outlines it in the example with a
+   dashed soft-coral box. */
+
+.anatomy {
+  --anatomy-badge-bg: var(--charcoal);
+  --anatomy-badge-text: white;
+  --anatomy-outline: var(--coral-soft);
+  margin-top: var(--space-7);
+}
+
+.anatomy-figure {
+  position: relative;
+  margin: 0;
+}
+
+/* It's a picture, not a control: no pointer cursor on the frozen row. */
+.anatomy-figure .accordion-row { cursor: default; }
+
+/* A little extra room inside the example, so outlines around nearby
+   parts don't run into each other. Only affects this example. */
+.anatomy-figure .accordion .accordion-title {
+  margin-bottom: var(--space-5);
+}
+
+.anatomy-figure .accordion-row {
+  padding: var(--space-6) 0;
+}
+
+.anatomy-figure .accordion-answer {
+  padding-top: var(--space-5);
+  padding-bottom: var(--space-6);
+}
+
+.anatomy-figure .accordion-answer::before {
+  top: calc(var(--space-5) + 0.55em);
+}
+
+/* The outline around the highlighted part. */
+.anatomy-highlight {
+  position: absolute;
+  border: 2px dashed var(--anatomy-outline);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--anatomy-outline) 14%, transparent);
+  pointer-events: none;
+}
+
+.anatomy-hint {
+  margin-top: var(--space-6);
+  font-size: var(--type-note-size);
+  font-style: italic;
+  color: var(--text-primary);
+}
+
+/* The parts list: badge, then the part name in bold with its
+   description on the same line, at the normal reading size. */
+.anatomy-list {
+  display: grid;
+  gap: var(--space-1);
+  /* Pulled out by the rows' side padding, so the badges line up with
+     the paragraphs above while the hover tint still has room. */
+  margin: var(--space-3) calc(var(--space-3) * -1) var(--space-7);
+  padding: 0;
+  list-style: none;
+}
+
+.anatomy-part {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  width: 100%;
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: var(--charcoal);
+  font: inherit;
+  font-size: var(--text-md);
+  line-height: var(--leading-relaxed);
+  text-align: left;
+  cursor: default;
+  transition: background var(--motion-hover-duration) var(--motion-ease-standard);
+}
+
+.anatomy-part.is-active {
+  background: color-mix(in srgb, var(--anatomy-outline) 25%, transparent);
+}
+
+.anatomy-tag {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--anatomy-badge-bg);
+  color: var(--anatomy-badge-text);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: var(--font-semibold);
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+/* Extra note under a part (the Header one), lined up with the text. */
+.anatomy .anatomy-detail {
+  margin: 0 0 var(--space-2);
+  padding-left: calc(var(--space-3) * 2 + 1.25rem);
+}

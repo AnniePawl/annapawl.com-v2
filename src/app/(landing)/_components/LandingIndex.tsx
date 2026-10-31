@@ -21,7 +21,7 @@ const PAGES = [
     href: "/fiber-arts",
     title: "Fiber Arts",
     description: "Embroidery, needlepoint, and cross stitch projects",
-    accent: "var(--plum-bold)",
+    accent: "var(--red-bold)",
   },
   //   {
   //   href: "/fiber-arts",

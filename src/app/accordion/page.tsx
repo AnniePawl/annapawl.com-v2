@@ -4,6 +4,7 @@ import PostLayout, {
 } from "../../components/layout/PostLayout/PostLayout";
 import HomeLogo from "../../components/ui/HomeLogo";
 import TextLink from "../../components/ui/TextLink";
+import AccordionAnatomy from "./_components/anatomy/AccordionAnatomy";
 
 export const metadata = {
   title: "Building an accessible accordion — Anna Pawl",
@@ -11,8 +12,6 @@ export const metadata = {
     "How to build an accordion everyone can use, first in vanilla JavaScript, then in React with my own design system component as the example.",
 };
 
-// Draft scaffold. Each section lists what it will cover; replace the
-// notes with real copy, code blocks and demos as the tutorial comes together.
 export default function AccordionTutorial() {
   return (
     <main>
@@ -21,28 +20,28 @@ export default function AccordionTutorial() {
         description="How to build an accordion everyone can use, first in vanilla JavaScript, then in React with my own design system component as the example."
         shortDescription="Building an accordion that works for everyone."
         eyebrow="Building Blocks"
-        title="Accessible Accordion"
-        publishedDate="Draft"
+        title="Accordion"
+        publishedDate="Updated Oct 2026"
         readingTime="TBD"
-        postTags="Accessibility, JavaScript, React"
+        postTags="Components, JavaScript, React, Accessibility,"
         utilityStart={
           <HomeLogo
             colors={{
-              northeast: "var(--marigold-bold)",
+              northeast: "var(--coral-bold)",
               southeast: "var(--teal-bold)",
               southwest: "var(--teal-bold)",
               northwest: "var(--teal-bold)",
-              hoverAccent: "var(--marigold-bold)",
+              hoverAccent: "var(--teal-bold)",
             }}
             size="1.75rem"
           />
         }
         accent="var(--teal-bold)"
         contents={[
-          { id: "what-is-an-accordion", label: "What is an accordion?", tone: "teal-bold" },
-          { id: "anatomy", label: "The anatomy", tone: "sky-bold" },
-          { id: "vanilla-js", label: "Build it in vanilla JavaScript", tone: "marigold-bold" },
-          { id: "keyboard-and-focus", label: "Keyboard and focus", tone: "coral-bold" },
+          { id: "what-is-an-accordion", label: "What is an accordion?", tone: "sky-bold" },
+          { id: "anatomy", label: "The anatomy", tone: "coral-bold" },
+          { id: "vanilla-js", label: "Build it in vanilla JavaScript", tone: "teal-bold" },
+          { id: "keyboard-and-focus", label: "Keyboard and focus", tone: "marigold-bold" },
           { id: "react", label: "Rebuild it in React", tone: "iris-bold" },
           { id: "my-accordion", label: "My Sedge accordion", tone: "green-bold" },
           { id: "test-it", label: "Test it", tone: "pink-bold" },
@@ -51,29 +50,35 @@ export default function AccordionTutorial() {
       >
         <PostSection id="what-is-an-accordion" title="What is an accordion?">
           <p>
-            Draft notes: what an accordion is (stacked headings that show or hide
-            their content), when it helps (FAQs, long reference pages, settings),
-            and when it doesn&rsquo;t (content most people need to read, or only
-            two or three short sections). Mention that it comes up a lot in
-            frontend interviews.
+            An accordion is a stack of clickable headers that expand and collapse to show or hide the content underneath. I think of it as a set of drawers: you only open the ones you need, and the rest stay tucked away until you’re curious. It’s a tidy way to keep a page calm while still letting people dig into the details they care about.
+          </p>
+          <p>
+            You’ve probably seen them most in FAQs, but they’re also handy for settings panels, product specs, filters in a sidebar, step-by-step instructions, or anywhere a page might otherwise turn into a wall of text. The trade-off is that hidden content is easy to miss, so accordions work best when people already know what they’re looking for.
+          </p>
+          <p>
+            Under the hood, each header is a real <code>button</code>, which does a lot of quiet accessibiity work for free. We’ll dig into what that means, and how to make the accordion work just as well with a keyboard or screen reader, in the Keyboard & focus section below.
+          </p>
+          <p>
+            Now that we know what it does, let’s look at the pieces that make it work.
           </p>
         </PostSection>
 
         <PostSection id="anatomy" title="The anatomy">
           <p>
+            An accordion begins with a container and an optional title. Inside, each item pairs a clickable header with a content panel. The header can include a number, label, and visual indicator, such as a plus, minus, or chevron, that communicates whether the item is open or closed. In this design, a colored divider adds visual separation when the panel opens. Behind the scenes, unique IDs and ARIA attributes connect each button to the panel it controls.
+          </p>
+          <AccordionAnatomy />
+          <p>
             Draft notes: break one item into its parts before writing any code.
           </p>
-          <PostSubsection title="Heading and button">
-            <p>Draft notes: why the trigger is a real button, and why it sits inside a heading.</p>
-          </PostSubsection>
           <PostSubsection title="aria-expanded" variant="code">
             <p>Draft notes: how it tells screen readers whether a section is open.</p>
           </PostSubsection>
           <PostSubsection title="aria-controls" variant="code">
             <p>Draft notes: connecting each button to its panel, and keeping ids unique.</p>
           </PostSubsection>
-          <PostSubsection title="The panel">
-            <p>Draft notes: hiding closed content so it can&rsquo;t be read or tabbed into.</p>
+          <PostSubsection title="aria-labelledby" variant="code">
+            <p>Draft notes: pointing each panel back at its button, so screen readers announce which question the panel answers.</p>
           </PostSubsection>
         </PostSection>
 
