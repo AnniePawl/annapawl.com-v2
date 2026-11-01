@@ -6,12 +6,37 @@
   --anatomy-badge-bg: var(--charcoal);
   --anatomy-badge-text: white;
   --anatomy-outline: var(--coral-soft);
-  margin-top: var(--space-7);
+  /* 30px above: a touch more than a code block's 24px, since the
+     example has no box of its own to set it apart from the text. */
+  margin-top: 1.875rem;
 }
 
 .anatomy-figure {
   position: relative;
   margin: 0;
+}
+
+/* On screens wide and tall enough, the example sticks to the top while
+   the list scrolls past, so it stays in view as you highlight parts
+   further down. It sticks only within .anatomy, so it scrolls away with
+   the list at the end. The cream background keeps list rows from
+   showing through underneath it. */
+@media (width >= 40rem) and (height >= 40rem) {
+  /* The sticky example's own top padding provides the 30px gap here. */
+  .anatomy {
+    margin-top: 0;
+  }
+
+  .anatomy-figure {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    /* Widened by the list rows' side overhang (and back in with padding)
+       so their hover tint can't peek out past the edges. */
+    margin-inline: calc(var(--space-3) * -1);
+    padding: 1.875rem var(--space-3) var(--space-3);
+    background: var(--cream);
+  }
 }
 
 /* It's a picture, not a control: no pointer cursor on the frozen row. */
@@ -46,17 +71,26 @@
 }
 
 .anatomy-hint {
-  margin-top: var(--space-6);
+  margin-top: var(--space-4);
   font-size: var(--type-note-size);
   font-style: italic;
   color: var(--text-primary);
+}
+
+/* Only one version of the hint shows: "hover" where the device can
+   hover, "click" on touch screens. */
+.anatomy-hint--touch { display: none; }
+
+@media (hover: none) {
+  .anatomy-hint--hover { display: none; }
+  .anatomy-hint--touch { display: inline; }
 }
 
 /* The parts list: badge, then the part name in bold with its
    description on the same line, at the normal reading size. */
 .anatomy-list {
   display: grid;
-  gap: var(--space-1);
+  gap: 0;
   /* Pulled out by the rows' side padding, so the badges line up with
      the paragraphs above while the hover tint still has room. */
   margin: var(--space-3) calc(var(--space-3) * -1) var(--space-7);
@@ -70,14 +104,14 @@
   gap: var(--space-3);
   width: 100%;
   margin: 0;
-  padding: var(--space-2) var(--space-3);
+  padding: var(--space-1) var(--space-3);
   border: 0;
   border-radius: 6px;
   background: none;
   color: var(--charcoal);
   font: inherit;
   font-size: var(--text-md);
-  line-height: var(--leading-relaxed);
+  line-height: var(--leading-normal);
   text-align: left;
   cursor: default;
   transition: background var(--motion-hover-duration) var(--motion-ease-standard);
@@ -101,6 +135,21 @@
   font-weight: var(--font-semibold);
   line-height: 1;
   transform: translateY(-1px);
+}
+
+/* Marks parts that are features of this design, not essential anatomy. */
+.anatomy-optional {
+  display: inline-block;
+  margin-left: var(--space-2);
+  padding: 0.0625rem 0.4375rem;
+  border: 1px solid color-mix(in srgb, var(--charcoal) 25%, transparent);
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: var(--font-medium);
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  vertical-align: 0.15em;
 }
 
 /* Extra note under a part (the Header one), lined up with the text. */

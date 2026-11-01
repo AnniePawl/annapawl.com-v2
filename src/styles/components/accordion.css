@@ -35,6 +35,20 @@
   color: var(--accordion-marker);
 }
 
+/* Optional icon after the title text. */
+.accordion .accordion-title:has(.accordion-title-icon) {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.accordion-title-icon {
+  flex: none;
+  width: 1em;
+  height: 1em;
+  stroke-width: 1.75;
+}
+
 /* Each item's button is wrapped in a heading for the page outline.
    Reset it completely so it adds no size, weight, spacing or color;
    the button inside carries all the styling. The extra .accordion in
@@ -131,9 +145,9 @@
 
 /* Smooth open/close without measuring heights: the 0fr/1fr grid-row
    trick needs the panel always in the DOM (Accordion.tsx never
-   conditionally unmounts it), which is also what lets aria-hidden --
-   not the `hidden` attribute, which would fight the transition --
-   correctly pull it from the accessibility tree while collapsed.
+   conditionally unmounts it). While collapsed it's `inert` -- not
+   `hidden`, which would fight the transition -- so it's out of the
+   accessibility tree and the Tab order.
    --motion-duration-base (and --motion-hover-duration above) already
    collapse to 0ms under prefers-reduced-motion via foundations/
    motion.css, so reduced motion is respected here for free. */
@@ -186,4 +200,14 @@
   width: 6px;
   height: 10px;
   background: var(--accordion-marker-soft);
+}
+
+/* Windows High Contrast and other forced-colors modes drop background
+   colors, which would erase the plus/minus (it's drawn with
+   backgrounds). Paint it in the system text color instead. */
+@media (forced-colors: active) {
+  .accordion-control::before,
+  .accordion-control::after {
+    background: CanvasText;
+  }
 }

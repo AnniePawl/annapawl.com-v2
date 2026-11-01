@@ -1,6 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useRef, useState } from "react";
+import { Squirrel } from "lucide-react";
 import Accordion, { type AccordionItem } from "../../../../components/ui/Accordion";
 import "./anatomy.css";
 
@@ -25,32 +26,79 @@ type Part = {
   line?: boolean;
   /** Optional extra copy shown under the description. */
   detail?: React.ReactNode;
+  /** A feature of this design rather than essential accordion anatomy.
+   *  Shown with an "Optional" badge in the list. */
+  optional?: boolean;
 }
 
 const PARTS: Part[] = [
-  { n: 1, name: "Container", desc: "The wrapper that groups everything together.", el: ".accordion" },
-  { n: 2, name: "Title", desc: "An optional heading, in the section color.", el: ".accordion-title" },
-  { n: 3, name: "Item", desc: "One header plus its panel, the \"drawer.\"", el: ".accordion-item" },
+  {
+    n: 1,
+    name: "Container",
+    desc: "Groups the accordion items and optional title.",
+    el: ".accordion",
+  },
+  {
+    n: 2,
+    name: "Title",
+    desc: "Introduces the accordion and its contents.",
+    el: ".accordion-title",
+    optional: true,
+  },
+  {
+    n: 3,
+    name: "Item",
+    desc: "Pairs one header with its associated panel.",
+    el: ".accordion-item",
+  },
   {
     n: 4,
     name: "Header",
-    desc: "The clickable button that toggles the item.",
-    el: ".accordion-row",
+    desc: "Contains the button that expands or collapses its panel.",
+    // The heading that wraps the button, not the button itself.
+    el: ".accordion-heading",
     detail: (
       <>
-        For an accordion, it is generally best practice to wrap each trigger
-        button in a heading element such as <code>&lt;h2&gt;</code> or{" "}
-        <code>&lt;h3&gt;</code>. This gives the page a meaningful outline and
-        lets screen-reader users navigate between accordion sections by
-        heading. Use the heading level that fits the page hierarchy.
+        Wrap the button in a heading, like <code>&lt;h3&gt;</code>, so
+        screen-reader users can jump between items. Pick the level that fits
+        the page.
       </>
     ),
   },
-  { n: 5, name: "Number", desc: "Counts the items, with a marker in the section color.", el: ".accordion-number" },
-  { n: 6, name: "Label", desc: "Tells people what's inside the drawer.", el: ".accordion-question" },
-  { n: 7, name: "Icon", desc: "Turns from a plus into a minus to show open or closed.", el: ".accordion-control" },
-  { n: 8, name: "Divider", desc: "A colored line between question and answer, only when open.", el: ".accordion-answer", line: true },
-  { n: 9, name: "Panel", desc: "The content revealed when the item is open.", el: ".accordion-panel" },
+  {
+    n: 5,
+    name: "Number",
+    desc: "Identifies the item with an index and section-colored marker.",
+    el: ".accordion-number",
+    optional: true,
+  },
+  {
+    n: 6,
+    name: "Label",
+    desc: "Names the section and describes what its panel contains.",
+    el: ".accordion-question",
+  },
+  {
+    n: 7,
+    name: "Icon",
+    desc: "Changes from a plus to a minus to reflect the item’s state.",
+    el: ".accordion-control",
+    optional: true,
+  },
+  {
+    n: 8,
+    name: "Divider",
+    desc: "Adds visual separation between the header and expanded panel.",
+    el: ".accordion-answer",
+    line: true,
+    optional: true,
+  },
+  {
+    n: 9,
+    name: "Panel",
+    desc: "Contains the content revealed when its trigger is expanded.",
+    el: ".accordion-panel",
+  },
 ]
 
 // The part highlighted when nothing is hovered or focused: Container.
@@ -78,7 +126,6 @@ function boxFor(part: Part, figure: HTMLElement): Box | null {
 function Tag({ n }: { n: number }) {
   return <span className='anatomy-tag' aria-hidden='true'>{n}</span>
 }
-
 // Renders the real Accordion, so any change to the component shows up
 // here too. Hover or focus a part in the list to outline it.
 export default function AccordionAnatomy() {
@@ -121,7 +168,7 @@ export default function AccordionAnatomy() {
         {/* not clickable, not focusable, hidden from screen readers.
         It's a picture of an accordion, not a working one. */}
         <div inert>
-          <Accordion title="Squirrel Secrets" items={ITEMS} defaultOpenId="0" />
+          <Accordion title="Squirrel Secrets" titleIcon={Squirrel} items={ITEMS} defaultOpenId="0" />
         </div>
         <span ref={highlightRef} className="anatomy-highlight" aria-hidden="true" hidden />
         <figcaption className="sr-only">
@@ -129,8 +176,15 @@ export default function AccordionAnatomy() {
         </figcaption>
       </figure>
 
+      {/* Mouse users hover; on touch screens there's no hover, so the
+          hint asks for a click instead (see .anatomy-hint in anatomy.css). */}
       <p className="anatomy-hint">
-        Hover over a part below, or tab to it, to highlight it in the example.
+        <span className="anatomy-hint--hover">
+          Hover over a part below, or tab to it, to highlight it in the example.
+        </span>
+        <span className="anatomy-hint--touch">
+          Click a part below to highlight it in the example.
+        </span>
       </p>
 
       {/* Description of parts */}
@@ -140,14 +194,21 @@ export default function AccordionAnatomy() {
             <button
               type="button"
               className={`anatomy-part focus-ring${active === p.n ? " is-active" : ""}`}
+              // Tells screen readers which part is currently highlighted.
+              aria-pressed={active === p.n}
               onMouseEnter={() => setActive(p.n)}
               onMouseLeave={() => setActive(DEFAULT_PART)}
               onFocus={() => setActive(p.n)}
+              // Touch screens don't always focus a tapped button (iOS
+              // Safari doesn't), so a click selects the part too.
+              onClick={() => setActive(p.n)}
               onBlur={() => setActive(DEFAULT_PART)}
             >
               <Tag n={p.n} />
               <span>
-                <strong>{p.name}</strong> {p.desc}
+                <strong>{p.name}</strong>
+                {p.optional && <span className="anatomy-optional">Optional</span>}{" "}
+                {p.desc}
               </span>
             </button>
             {p.detail && <p className="anatomy-detail">{p.detail}</p>}

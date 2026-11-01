@@ -1,3 +1,4 @@
+import { Squirrel } from "lucide-react";
 import Accordion, { type AccordionItem } from "../../../components/ui/Accordion";
 import CodeBlock from "../../../components/ui/CodeBlock";
 
@@ -38,7 +39,7 @@ export default function AccordionExamples() {
   return (
     <div style={{ width: "100%", maxWidth: 640, marginRight: "auto" }}>
       <h3 className="sedge-subheading">Example</h3>
-      <Accordion title="Squirrel Secrets" items={FAQ_ITEMS} defaultOpenId="1" />
+      <Accordion title="Squirrel Secrets" titleIcon={Squirrel} items={FAQ_ITEMS} defaultOpenId="1" />
 
       <h3 className="sedge-subheading">Usage</h3>
       <CodeBlock tone='green' code={USAGE} className="mb-8" />
