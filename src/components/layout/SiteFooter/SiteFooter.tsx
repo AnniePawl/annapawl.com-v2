@@ -121,6 +121,14 @@ export default function SiteFooter({ accent }: { accent?: string }) {
           </Link>
         </div>
 
+        <div className="site-footer-col">
+          <h2 className="site-footer-label">Learning</h2>
+          <Link href="/field-notes" className="site-footer-link focus-ring">
+            Field Notes
+          </Link>
+          <span className="site-footer-muted">My bite-sized web reference</span>
+        </div>
+
         <div className="site-footer-bottom">
           <span className="site-footer-love">
             Made with <Heart className="icon-sm text-pink-400" aria-hidden="true" />

@@ -1,0 +1,204 @@
+/* =========================================================
+   Field Notes page. Header: the shared PageHeader
+   (post-layout.css). Everything below is .field-notes.
+========================================================= */
+
+.field-notes-page.page-shell {
+  --page-accent: var(--sage-bold);
+  --fn-line: color-mix(in srgb, var(--charcoal) 25%, transparent);
+
+  padding: 0;
+  color: var(--charcoal);
+  background: var(--cream);
+}
+
+/* Compact header: same title as every page, but the stage hugs it
+   (no tall minimum height), so search and the first cards sit closer
+   to the top. */
+.field-notes-page .post-header-title {
+  max-width: none;
+}
+
+.field-notes-page .post-header-stage {
+  min-height: 0;
+  padding-top: var(--space-5);
+}
+
+.field-notes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: var(--space-6) var(--space-5) var(--space-11);
+}
+
+/* ---- Search + topic filters ---- */
+.fn-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4) var(--space-5);
+}
+
+.fn-search {
+  display: flex;
+  flex: 0 1 22rem;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.fn-search label {
+  font-size: 13px;
+  font-weight: var(--font-semibold);
+}
+
+.fn-search input {
+  min-height: 44px;
+  padding: 0 var(--space-3);
+  border: 1px solid color-mix(in srgb, var(--charcoal) 35%, transparent);
+  border-radius: var(--radius-xs);
+  background: #ffffff;
+  color: var(--charcoal);
+  font: inherit;
+  font-size: 14px;
+}
+
+.fn-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.fn-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--fn-line);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--charcoal);
+  font: inherit;
+  font-size: 14px;
+  font-weight: var(--font-medium);
+  cursor: pointer;
+}
+
+.fn-chip::before {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 12px;
+  background: var(--fn-marker, var(--page-accent));
+}
+
+.fn-chip[aria-pressed="true"] {
+  border-color: var(--charcoal);
+  background: var(--charcoal);
+  color: var(--cream);
+}
+
+.fn-count,
+.fn-empty {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.fn-empty {
+  font-size: var(--text-md);
+}
+
+/* ---- Cards ----
+   grid-auto-rows: 1fr makes every row as tall as the tallest card, so
+   all cards share one height. The note sits at the bottom (margin-top:
+   auto) so cards line up even when their text is different lengths. */
+.fn-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+  grid-auto-rows: 1fr;
+  gap: var(--space-5);
+}
+
+.fn-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+  padding: 1.375rem;
+  border: 1px solid var(--fn-line);
+  border-radius: var(--radius-xs);
+  background: #ffffff;
+  scroll-margin-top: var(--space-6);
+}
+
+.fn-topic {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 12px;
+  font-weight: var(--font-semibold);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.fn-topic::before {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 10px;
+  background: var(--fn-marker);
+}
+
+.fn-name {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: var(--font-semibold);
+  line-height: 1.3;
+}
+
+.fn-model {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* Cards space their parts with gap, so drop the code block's own
+   spacing (code.css adds space around it after text). */
+.fn-card .code-block {
+  margin: 0;
+}
+
+.fn-card .code-block pre {
+  font-size: 12px;
+}
+
+.fn-note {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-top: auto;
+  padding: var(--space-3) 0.875rem;
+  border-radius: var(--radius-xs);
+  background: color-mix(in srgb, var(--fn-soft) 40%, transparent);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.fn-note strong {
+  font-size: 11px;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.fn-note p {
+  margin: 0;
+}
+
+@media (width < 40rem) {
+  .field-notes {
+    padding: var(--space-6) var(--space-4) var(--space-9);
+  }
+}
