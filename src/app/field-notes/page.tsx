@@ -3,7 +3,6 @@ import PageHeader from "../../components/layout/PageHeader";
 import SiteFooter from "../../components/layout/SiteFooter/SiteFooter";
 import HomeLogo from "../../components/ui/HomeLogo";
 import FieldNotes from "./_components/FieldNotes";
-import { NOTES } from "./_data/notes";
 import "./field-notes.css";
 
 export const metadata = {
@@ -13,8 +12,6 @@ export const metadata = {
 };
 
 export default function FieldNotesPage() {
-  const topicCount = new Set(NOTES.map((note) => note.topic)).size;
-
   return (
     <>
       <PageShell className="field-notes-page">
@@ -32,13 +29,11 @@ export default function FieldNotesPage() {
             />
           }
           descriptionTitle="My Tiny Web Reference"
-          description="A log of helpful frontend bits for those moments my brain blanks on syntax mid-keystroke. Quick examples, plus little notes to self from the mistakes that made things stick."
+          description="A log of helpful frontend bits for those moments my brain blanks on syntax mid-keystroke. Organized my way: Quick examples, plus little notes to self from the mistakes that made things stick."
           shortDescription="Wee notes for when my brain blanks on syntax."
           eyebrow="Frontend"
           title="Field Notes"
           accent="var(--pink-bold)"
-          detailsStart="Growing collection · Started Nov 2026"
-          postTags={`${NOTES.length} notes · ${topicCount} topics`}
         />
 
         <FieldNotes />

@@ -12,6 +12,12 @@ const PAGES = [
     accent: "var(--marigold-bold)",
   },
   {
+    href: "/field-notes",
+    title: "Field Notes",
+    description: "Helpful frontend bits for those moments my brain blanks on syntax mid-keystroke. Organized my way",
+    accent: "var(--sky-bold)",
+  },
+  {
     href: "/bookshelf",
     title: "Bookshelf",
     description: "A nerdy reading log, stats and all",
