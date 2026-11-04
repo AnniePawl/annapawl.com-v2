@@ -255,7 +255,12 @@
   margin: 0;
 }
 
+/* Caps the code at 4 lines (the pre's own padding is var(--space-4),
+   line-height 1.6), so a long example scrolls inside its card instead
+   of making every card in the group taller. */
 .fn-card .code-block pre {
+  max-height: calc(4 * 1.6em + 2 * var(--space-4));
+  overflow: auto;
   font-size: 12px;
 }
 
