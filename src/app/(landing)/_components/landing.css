@@ -18,6 +18,7 @@
 
 
 @media (min-width: 600px) {
+
   .landing-desktop-section,
   .landing-tablet-section {
     position: sticky;
@@ -121,7 +122,14 @@
   width: 0.42em;
   height: 0.72em;
   margin-left: 0.12em;
-  background: var(--landing-accent);
+  background: var(--cherry-bold);
+}
+
+@media (width < 40rem) {
+  .landing-name-mark {
+    background: var(--periwinkle-bold);
+  }
+
 }
 
 .landing-lede {
@@ -129,16 +137,32 @@
   font-size: 1rem;
   line-height: 2;
   letter-spacing: -0.01em;
+  padding-bottom: 5px;
 }
 
 .landing-role {
-  margin: var(--space-5) 0 0;
+  margin: var(--space-4) 0 0;
   font-size: 11.5px;
   font-weight: var(--font-semibold);
   line-height: 1.5;
   letter-spacing: var(--tracking-wider);
   text-transform: uppercase;
-  color: var(--coral-bold);
+  color: var(--text-secondary);
+  padding-bottom: 10px;
+}
+@media (width < 40rem) {
+
+  .landing-role{
+    color:var(--coral-bold)
+  }
+}
+
+@media (width < 40rem) {
+
+  .landing-lede,
+  .landing-role {
+    padding-bottom: 0;
+  }
 }
 
 .landing-desktop-shelves-container {
@@ -256,6 +280,7 @@
 
 /* Gentle float style for CTA arrow + "Hover" in modal */
 @keyframes landing-info-float {
+
   0%,
   100% {
     transform: translateY(0);
@@ -274,6 +299,7 @@
    including any future css-item that forgets its own reduced-motion block.
    */
 @media (prefers-reduced-motion: reduce) {
+
   .landing *,
   .landing *::before,
   .landing *::after {

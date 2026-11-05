@@ -30,11 +30,11 @@ export type FieldNote = {
  *  each topic's groups (groups not listed come after, in note order). Each hue's bold shade is the marker,
  *  its soft shade the code text and note tint. */
 export const TOPICS: { name: Topic; hue: PaletteHue; groups?: string[] }[] = [
-  { name: "JavaScript", hue: "marigold", groups: ["Strings", "Regex", "Arrays", "Functions", "Async"] },
+  { name: "JavaScript", hue: "marigold", groups: ["Strings", "Regex", "Arrays", "Functions", "Async", "APIs"] },
   {
     name: "DOM",
     hue: "pink",
-    groups: ["Finding elements", "Changing elements", "Adding & removing", "Events"],
+    groups: ["Finding elements", "Changing elements", "Adding & removing", "Events", "Forms"],
   },
   { name: "React", hue: "sky", groups: ["Hooks"] },
   {
@@ -62,7 +62,8 @@ export const NOTES: FieldNote[] = [
     model:
       "Grabs the first element that matches a CSS selector. querySelectorAll grabs all of them.",
     example: `document.querySelector(".card");
-document.querySelectorAll(".card");`,
+document.querySelectorAll(".card");
+document.getElementById("cart"); // ids only, a touch faster`,
     note: "querySelectorAll gives a NodeList, not an array. forEach is fine, but spread it ([...list]) before map or filter.",
   },
   {
@@ -128,6 +129,17 @@ list.append(li);`,
   },
   {
     topic: "DOM",
+    name: "DocumentFragment",
+    group: "Adding & removing",
+    model:
+      "Gather all your yarn before casting on. Build elements in a fragment off the page, then add them in one go: one reflow, not many.",
+    example: `const basket = document.createDocumentFragment();
+yarns.forEach((yarn) => basket.append(makeSkein(yarn)));
+shelf.append(basket); // one reflow, not one per skein`,
+    note: "The basket empties itself once it’s appended. el.append(a, b, c) also adds a bunch at once, no fragment needed.",
+  },
+  {
+    topic: "DOM",
     name: "remove() and replaceWith()",
     group: "Adding & removing",
     model:
@@ -145,6 +157,17 @@ oldCard.replaceWith(newCard);`,
     example: `button.addEventListener("click", handleClick);
 button.addEventListener("click", handleClick, { once: true });`,
     note: "handleClick, not handleClick(). With the parentheses it runs right away and passes its result instead.",
+  },
+  {
+    topic: "DOM",
+    name: "Removing listeners",
+    group: "Events",
+    model:
+      "Take listeners off when you’re done so old handlers don’t pile up. removeEventListener needs the exact same function you added.",
+    example: `btn.addEventListener("click", save);
+btn.removeEventListener("click", save); // same function!
+btn.addEventListener("click", celebrate, { once: true });`,
+    note: "An inline arrow can’t be removed, since there’s nothing to pass back. In React, this is what a useEffect cleanup is for.",
   },
   {
     topic: "DOM",
@@ -212,6 +235,72 @@ item.addEventListener("click", () => log("item"));
 }));
 list.addEventListener("card:saved", (e) => e.detail.id);`,
     note: "Custom events don’t bubble by default, so add bubbles: true. Data always goes in detail.",
+  },
+  {
+    topic: "DOM",
+    name: "submit event",
+    group: "Forms",
+    model:
+      "Listen on the form, not the button. It fires on a button click and when someone presses Enter.",
+    example: `form.addEventListener("submit", (event) => {
+  event.preventDefault(); // stay on the page
+  // read the fields here
+});`,
+    note: "Without preventDefault() the page reloads and your JavaScript starts over.",
+  },
+  {
+    topic: "DOM",
+    name: "Reading one field",
+    group: "Forms",
+    model: "Grab the input, then read .value. It’s always a string, even from a number input.",
+    example: `const speedInput = document.querySelector('[name="maxSpeed"]');
+const speed = Number(speedInput.value); // "55" → 55
+speedInput.valueAsNumber; // number inputs: already a number`,
+    note: "Read .value inside your handler, not at the top of the file, or you get whatever it said on page load.",
+  },
+  {
+    topic: "DOM",
+    name: "Checkboxes and radios",
+    group: "Forms",
+    model:
+      "Checkboxes use .checked (true or false). For radios, find the one that’s checked, then read its value.",
+    example: `const agreed = form.querySelector('[name="terms"]').checked;
+const size = form.querySelector('[name="size"]:checked')?.value;`,
+    note: "A checkbox’s .value doesn’t change when you tick it. Check .checked instead.",
+  },
+  {
+    topic: "DOM",
+    name: "FormData",
+    group: "Forms",
+    model: "Grabs every named field in a form at once, so you don’t have to query each input.",
+    example: `const data = new FormData(form);
+data.get("maxSpeed"); // "55", still a string
+const values = Object.fromEntries(data);`,
+    note: "Only fields with a name are included, and unchecked checkboxes are left out entirely.",
+  },
+  {
+    topic: "DOM",
+    name: "Form validation attributes",
+    group: "Forms",
+    model:
+      "The browser checks input before submitting: required, the right type, length with minlength/maxlength, range with min/max.",
+    example: `<input type="password" name="password" required
+  minlength="8" maxlength="20"
+  title="8–20 characters">
+<input type="number" min="1" max="10">`,
+    note: "title is only a hover tooltip, so phones and screen readers can miss it. Put hints in visible text, linked with aria-describedby.",
+  },
+  {
+    topic: "DOM",
+    name: "pattern",
+    group: "Forms",
+    model:
+      "A regex the whole value must match. No slashes, and it’s anchored for you, as if wrapped in ^ and $.",
+    example: `<label for="phone">Phone</label>
+<input id="phone" type="tel" pattern="[0-9]{3}-[0-9]{4}"
+  aria-describedby="phone-hint">
+<p id="phone-hint">Format: 555-1234</p>`,
+    note: "An empty field still passes, so add required too. A dash inside [ ] now needs escaping, like [\\w\\-].",
   },
   {
     topic: "Accessibility",
@@ -380,7 +469,7 @@ name.length > 20; // too long?`,
     group: "Strings",
     model:
       "Makes a new string by repeating the original string a certain number of times.",
-    example:`"moss".repeat(3); // "mossmossmoss"
+    example: `"moss".repeat(3); // "mossmossmoss"
 "✿".repeat(5);    // "✿✿✿✿✿"`,
     note: "repeat(0) makes an empty string. A negative number throws an error. No un-repeating allowed.",
   },
@@ -457,35 +546,86 @@ btn.addEventListener("click", handleClick); // no ()`,
     name: "setTimeout()",
     group: "Async",
     model:
-      "Runs a callback once after a delay in milliseconds. It returns an id you can use to cancel it.",
-    example: `const id = setTimeout(() => save(), 500);
-clearTimeout(id); // cancel before it runs
-setInterval(tick, 1000); // repeats until clearInterval`,
-    note: "The delay is a minimum, not a promise. Even setTimeout(fn, 0) waits until the current code finishes.",
+      "Like an alarm: Set it and keep moving. When it rings, the callback gets in line to run.",
+    example: `console.log("plant");
+setTimeout(() => console.log("sprout"), 0);
+console.log("water");
+// plant → water → sprout`,
+    note:
+      "It schedules; it doesn’t pause. Even a delay of 0 waits until the current code finishes.",
   },
   {
     topic: "JavaScript",
     name: "Promises",
     group: "Async",
     model:
-      "A placeholder for a value that arrives later. It starts pending, then settles once: fulfilled with resolve, or rejected with reject.",
-    example: `const wait = (ms) => new Promise((resolve, reject) => {
-  ms >= 0 ? setTimeout(resolve, ms) : reject("Bad delay");
-});
-wait(500).then(() => save()).catch(console.error);`,
-    note: "It settles only once, so any later resolve or reject is ignored. End a chain with .catch() or errors slip by.",
+      "Like a claim ticket: It isn’t the result, it’s your connection to a result that’s still pending. Fulfilled with a value or rejected with an error.",
+    example: `const wait = (ms) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
+
+wait(500).then(() => console.log("sprouted"));`,
+    note:
+      ".then() says what to do when it fulfills. .catch() handles rejection. The rest of your code keeps going.",
   },
   {
     topic: "JavaScript",
     name: "async / await",
     group: "Async",
     model:
-      "A nicer way to use promises. await pauses the async function until the promise settles, so the code reads top to bottom.",
-    example: `async function autosave() {
-  try { await wait(500); save(); }
-  catch (error) { console.error(error); }
+      "Like a bookmark: JavaScript marks this function’s place, leaves it for now, and returns when the Promise settles.",
+    example: `async function grow() {
+  await wait(500);
+  console.log("sprouted");
 }`,
-    note: "await only works inside an async function (or at a module’s top level). An async function always returns a promise.",
+    note:
+      "async always returns a promise. If an awaited promise rejects, it throws—catch it with try/catch.",
+  },
+  {
+    topic: "JavaScript",
+    name: "JSON.stringify / parse",
+    group: "APIs",
+    model:
+      "stringify packs an object into text so it can travel or be saved. parse unpacks it back into an object.",
+    example: `const text = JSON.stringify({ name: "mohair" }); // send or save
+const yarn = JSON.parse(text);                   // back to an object
+JSON.stringify(yarn, null, 2);                   // pretty, for logging`,
+    note: "Functions and undefined vanish, Dates come back as strings, and Maps or Sets turn into {}.",
+  },
+  {
+    topic: "JavaScript",
+    name: "fetch()",
+    group: "APIs",
+    model:
+      "Asks a server for data and gives back a promise. Two waits: one for the response, then one to read its body.",
+    example: `fetch("https://api.example.com/yarns")
+  .then((response) => response.json()) // read the body
+  .then((yarns) => console.log(yarns))
+  .catch(console.error);`,
+    note: "fetch only fails on network errors. A 404 or 500 still resolves, so check response.ok before .json().",
+  },
+  {
+    topic: "JavaScript",
+    name: "API error handling",
+    group: "APIs",
+    model:
+      "Two ways to fail: the network breaks (fetch rejects) or the server says no (response.ok is false). Catch both in one place.",
+    example: `try {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error("Status " + response.status);
+} catch (error) { console.error(error); }`,
+    note: "Forget the await and response is a promise, so response.ok is undefined and this throws every time.",
+  },
+  {
+    topic: "JavaScript",
+    name: "HTTP methods",
+    group: "APIs",
+    model:
+      "The verb on a request. GET reads, POST creates, PUT replaces, PATCH changes part of something, DELETE removes.",
+    example: `fetch("/api/yarns"); // GET is the default
+fetch("/api/yarns", {
+  method: "POST", body: JSON.stringify({ name: "mohair" }),
+  headers: { "Content-Type": "application/json" } });`,
+    note: "PUT replaces the whole thing. To change just one field, PATCH is the usual choice.",
   },
   {
     topic: "React",
@@ -543,6 +683,18 @@ wait(500).then(() => save()).catch(console.error);`,
   outline-offset: 2px;
 }`,
     note: "Never just remove outlines. Swap :focus for :focus-visible instead.",
+  },
+  {
+    topic: "CSS",
+    name: "Input :focus",
+    group: "Selectors",
+    model:
+      "Styles a field while someone is typing in it. On text inputs, :focus and :focus-visible both match, even on click.",
+    example: `input:focus {
+  outline: 3px solid blue; /* no layout shift */
+  outline-offset: 1px;
+}`,
+    note: "A thicker border on focus makes the field jump. Use outline, or keep the width and change only border-color.",
   },
   {
     topic: "CSS",
@@ -830,7 +982,19 @@ body {
     example: `.btn {
   transition: background-color 150ms ease;
 }`,
-    note: "List the properties instead of all, which can animate things you didn’t mean to.",
+    note: "Put transition on the base element, not :hover, to animate both ways. On :hover alone it eases in, then snaps back.",
+  },
+  {
+    topic: "CSS",
+    name: "Timing functions",
+    group: "Motion",
+    model:
+      "How speed changes over a transition. ease is the default. ease-in starts slow, ease-out ends slow, ease-in-out does both, linear stays steady.",
+    example: `transition: opacity 200ms ease-out; /* appearing */
+transition: opacity 150ms ease-in;  /* leaving */
+transition: rotate 1s linear;       /* spinners */
+transition: scale 300ms cubic-bezier(.3, 1.5, .6, 1); /* bounce */`,
+    note: "ease-out feels the most responsive for UI. Anything custom is cubic-bezier(), which you can drag around in DevTools.",
   },
   {
     topic: "CSS",
@@ -841,6 +1005,17 @@ body {
   transform: translateY(-4px) scale(1.02);
 }`,
     note: "Order matters: rotate then translate moves along the rotated axis. Cheap to animate, unlike top or width.",
+  },
+  {
+    topic: "CSS",
+    name: "scale, rotate, translate",
+    group: "Motion",
+    model:
+      "Standalone versions of the transform functions. Each is its own property, so you can change one without retyping the rest.",
+    example: `.card:hover { scale: 1.05; }
+.icon       { rotate: 45deg; }
+.toast      { translate: 0 -8px; }`,
+    note: "They always apply in the order translate, rotate, scale (then transform), no matter how you write them.",
   },
   {
     topic: "CSS",
