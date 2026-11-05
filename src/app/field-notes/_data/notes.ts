@@ -30,7 +30,7 @@ export type FieldNote = {
  *  each topic's groups (groups not listed come after, in note order). Each hue's bold shade is the marker,
  *  its soft shade the code text and note tint. */
 export const TOPICS: { name: Topic; hue: PaletteHue; groups?: string[] }[] = [
-  { name: "JavaScript", hue: "marigold", groups: ["Strings", "Regex", "Arrays"] },
+  { name: "JavaScript", hue: "marigold", groups: ["Strings", "Regex", "Arrays", "Functions", "Async"] },
   {
     name: "DOM",
     hue: "pink",
@@ -134,7 +134,7 @@ list.append(li);`,
       "Take an element off the page, or swap it for another. No need to go through its parent anymore.",
     example: `card.remove();
 oldCard.replaceWith(newCard);`,
-    note: "A removed element still lives in your variable, so you can add it back later.",
+    note: "Older versions: parent.removeChild(el) and parent.replaceChild(new, old). Note the new-then-old order. A removed element still lives in your variable.",
   },
   {
     topic: "DOM",
@@ -160,6 +160,27 @@ button.addEventListener("click", handleClick, { once: true });`,
   },
   {
     topic: "DOM",
+    name: "Event bubbling",
+    group: "Events",
+    model:
+      "An event fires on the element you clicked, then travels up through each parent. That’s why delegation works.",
+    example: `list.addEventListener("click", () => log("list"));
+item.addEventListener("click", () => log("item"));
+// click item → "item", then "list"`,
+    note: "Not every event bubbles. focus and blur don’t, but focusin and focusout do.",
+  },
+  {
+    topic: "DOM",
+    name: "stopPropagation()",
+    group: "Events",
+    model: "Stops the event from traveling any further up to parent elements.",
+    example: `menu.addEventListener("click", (event) => {
+  event.stopPropagation(); // the page never hears it
+});`,
+    note: "Not the same as preventDefault(). Use it sparingly, since it breaks delegation and click-outside-to-close listeners higher up.",
+  },
+  {
+    topic: "DOM",
     name: "Event delegation",
     group: "Events",
     model:
@@ -180,6 +201,17 @@ button.addEventListener("click", handleClick, { once: true });`,
   event.preventDefault();
 });`,
     note: "Easy to mix up with stopPropagation(), which stops the event from bubbling up to parent elements.",
+  },
+  {
+    topic: "DOM",
+    name: "CustomEvent + dispatchEvent",
+    group: "Events",
+    model: "Make your own named event, send data with it, and listen for it like a click.",
+    example: `card.dispatchEvent(new CustomEvent("card:saved", {
+  bubbles: true, detail: { id: 7 },
+}));
+list.addEventListener("card:saved", (e) => e.detail.id);`,
+    note: "Custom events don’t bubble by default, so add bubbles: true. Data always goes in detail.",
   },
   {
     topic: "Accessibility",
@@ -385,6 +417,75 @@ name.length > 20; // too long?`,
 "2026-11-03".replace(/-/g, "/");  // "2026/11/03"
 "hello".match(/l/g);              // ["l", "l"]`,
     note: "replaceAll() with a regex needs the g flag, or it throws an error.",
+  },
+  {
+    topic: "JavaScript",
+    name: "Arrow vs regular function",
+    group: "Functions",
+    model:
+      "Same job, shorter syntax. Arrows can skip the braces and return on their own, and they borrow this from where they’re written.",
+    example: `function add(a, b) { return a + b; }
+const add2 = (a, b) => a + b;   // implicit return
+const make = (id) => ({ id });  // object? wrap in ( )`,
+    note: "Regular functions are hoisted, so you can call them before they’re written. Arrows aren’t. Object methods that need this: use a regular function.",
+  },
+  {
+    topic: "JavaScript",
+    name: "this: arrow vs regular",
+    group: "Functions",
+    model:
+      "A regular function’s this is whatever called it, like the button in a listener. An arrow has no this of its own, so it uses the one outside it.",
+    example: `btn.addEventListener("click", function () {
+  this.textContent = "Hi!"; // this = the button
+});
+btn.addEventListener("click", () => this); // not the button`,
+    note: "In an arrow listener, reach for event.currentTarget instead. It works in both kinds and says what it means.",
+  },
+  {
+    topic: "JavaScript",
+    name: "Callbacks",
+    group: "Functions",
+    model:
+      "A function you hand to another function so it can call it later, when it’s ready. Pass the function itself, don’t call it.",
+    example: `function greet(name, done) { done("Hi, " + name); }
+greet("Anna", (msg) => console.log(msg));
+btn.addEventListener("click", handleClick); // no ()`,
+    note: "handleClick() with parentheses runs it right away and passes its result. Leave them off to pass the function.",
+  },
+  {
+    topic: "JavaScript",
+    name: "setTimeout()",
+    group: "Async",
+    model:
+      "Runs a callback once after a delay in milliseconds. It returns an id you can use to cancel it.",
+    example: `const id = setTimeout(() => save(), 500);
+clearTimeout(id); // cancel before it runs
+setInterval(tick, 1000); // repeats until clearInterval`,
+    note: "The delay is a minimum, not a promise. Even setTimeout(fn, 0) waits until the current code finishes.",
+  },
+  {
+    topic: "JavaScript",
+    name: "Promises",
+    group: "Async",
+    model:
+      "A placeholder for a value that arrives later. It starts pending, then settles once: fulfilled with resolve, or rejected with reject.",
+    example: `const wait = (ms) => new Promise((resolve, reject) => {
+  ms >= 0 ? setTimeout(resolve, ms) : reject("Bad delay");
+});
+wait(500).then(() => save()).catch(console.error);`,
+    note: "It settles only once, so any later resolve or reject is ignored. End a chain with .catch() or errors slip by.",
+  },
+  {
+    topic: "JavaScript",
+    name: "async / await",
+    group: "Async",
+    model:
+      "A nicer way to use promises. await pauses the async function until the promise settles, so the code reads top to bottom.",
+    example: `async function autosave() {
+  try { await wait(500); save(); }
+  catch (error) { console.error(error); }
+}`,
+    note: "await only works inside an async function (or at a module’s top level). An async function always returns a promise.",
   },
   {
     topic: "React",
