@@ -30,13 +30,13 @@ export type FieldNote = {
  *  each topic's groups (groups not listed come after, in note order). Each hue's bold shade is the marker,
  *  its soft shade the code text and note tint. */
 export const TOPICS: { name: Topic; hue: PaletteHue; groups?: string[] }[] = [
-  { name: "JavaScript", hue: "marigold", groups: ["Strings", "Regex", "Arrays", "Functions", "Async", "APIs"] },
+  { name: "JavaScript", hue: "marigold", groups: ["Strings", "Regex", "Arrays", "Functions", "Operators", "Async", "APIs"] },
   {
     name: "DOM",
     hue: "pink",
     groups: ["Finding elements", "Changing elements", "Adding & removing", "Events", "Forms"],
   },
-  { name: "React", hue: "sky", groups: ["Hooks"] },
+  { name: "React", hue: "sky", groups: ["JSX", "Hooks"] },
   {
     name: "CSS",
     hue: "green",
@@ -334,6 +334,28 @@ books.find((b) => b.year === 2026);`,
   },
   {
     topic: "JavaScript",
+    name: "forEach()",
+    group: "Arrays",
+    model:
+      "Runs a function once for each item, for side effects: logging, adding to the page. It doesn’t return anything.",
+    example: `books.forEach((b) => console.log(b.title));
+yarns.forEach((y) => basket.append(makeSkein(y)));`,
+    note: "It always returns undefined, so you can’t chain .map() after it. Need a new array? Use map.",
+  },
+  {
+    topic: "JavaScript",
+    name: "reduce()",
+    group: "Arrays",
+    model:
+      "Boils an array down to one value: a total, a count, an object. Each step gets the running result and the next item.",
+    example: `const pages = books.reduce(
+  (total, b) => total + b.pages, // running total + this book
+  0                              // where the total starts
+);`,
+    note: "Always pass the starting value (the 0). Without it, reduce starts from the first item, and an empty array throws.",
+  },
+  {
+    topic: "JavaScript",
     name: "Template literals",
     group: "Strings",
     model:
@@ -398,6 +420,16 @@ books.find((b) => b.year === 2026);`,
 nuts.slice(0, 2);  // ["acorn", "pecan"], nuts unchanged
 nuts.splice(1, 1); // removes "pecan" from nuts`,
     note: "slice works on strings and arrays; splice is arrays only. slice’s end index isn’t included.",
+  },
+  {
+    topic: "JavaScript",
+    name: "...spread",
+    group: "Arrays",
+    model:
+      "Unpacks an array or object into a new one. Copies the outside layer only: nested objects are still shared.",
+    example: `const more = [...nums, 4];
+const next = { ...user, name: "Anna" };`,
+    note: "Later keys win. { ...user, name } changes name; { name, ...user } gets overwritten by user’s name.",
   },
   {
     topic: "JavaScript",
@@ -543,6 +575,26 @@ btn.addEventListener("click", handleClick); // no ()`,
   },
   {
     topic: "JavaScript",
+    name: "...rest",
+    group: "Functions",
+    model:
+      "Gathers whatever’s left into one array or object. Same dots as spread, opposite job: collecting, not unpacking.",
+    example: `function sum(...nums) { }
+const { id, ...others } = props;`,
+    note: "Rest has to come last. ({ ...others, id }) is a syntax error.",
+  },
+  {
+    topic: "JavaScript",
+    name: "Ternary ? :",
+    group: "Operators",
+    model:
+      "An if/else that gives back a value, so it fits inside an expression. condition ? ifTrue : ifFalse.",
+    example: `const label = count === 1 ? "book" : "books";
+const tone = isDone ? "green" : "marigold";`,
+    note: "Perfect for picking between two things. Nested ternaries get hard to read fast: for three or more choices, use if/else.",
+  },
+  {
+    topic: "JavaScript",
     name: "setTimeout()",
     group: "Async",
     model:
@@ -636,6 +688,27 @@ fetch("/api/yarns", {
     example: `const id = useId();
 <div id={\`\${id}-panel\`} />`,
     note: "Not for list keys. Keys come from the data.",
+  },
+  {
+    topic: "React",
+    name: "Conditional styles",
+    group: "JSX",
+    model:
+      "A ternary picks a class or style based on a condition. Use && when there’s no “else”: show it or skip it.",
+    example: `<div className={open ? "card card--open" : "card"} />
+<div style={{ border: selected ? "2px solid" : "none" }} />
+{error && <p>{error}</p>}`,
+    note: "&& with a number can render a stray 0. {count && <Badge />} shows “0” when count is 0. Use {count > 0 && …}.",
+  },
+  {
+    topic: "React",
+    name: "Update state with spread",
+    group: "Hooks",
+    model:
+      "React re-renders when state is a new object. Spread copies the old one so you can change one key without mutating it.",
+    example: `setUser({ ...user, name: "Anna" });
+setItems([...items, newItem]);`,
+    note: "user.name = \"Anna\" changes the object but React doesn’t notice, so nothing re-renders.",
   },
   {
     topic: "CSS",
