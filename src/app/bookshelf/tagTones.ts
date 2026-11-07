@@ -9,19 +9,20 @@ export const TAG_TONES: Record<string, PaletteColor> = {
   // Genre
   "Literary Fiction": "emerald-bold",
   "Historical Fiction": "marigold-bold",
-  "Science Fiction": "blue-bold",
-  Fantasy: "iris-bold",
-  Romance: "plum-soft",
-  Nonfiction: "sage-bold",
+  "Science Fiction": "cherry-bold",
+  Fantasy: "lilac-bold",
+  Romance: "iris-bold",
+  Nonfiction: "coral-bold",
+  "Popular Science": "mint-bold",
   // Theme
-  Dystopian: "slate-bold",
-  Adventure: "orange-bold",
+  Dystopian: "lime-bold",
+  Adventure: "blue-bold",
   Survival: "moss-bold",
   "LGBTQ+": "pink-bold",
   // Personal
   Favorites: "red-bold",
   "Made Me Cry": "sky-bold",
-  "Book Club": "cherry-bold",
+  "Book Club": "cherry-soft",
 };
 
 export const DEFAULT_TAG_TONE: PaletteColor = "taupe-soft";

@@ -29,6 +29,28 @@
   gap: var(--space-2) var(--space-5);
 }
 
+/* Reading stats button: filled so it stands out. Charcoal with a cream
+   label and icon by default; on hover it fills with the bookshelf blue,
+   with a charcoal label and icon (charcoal reads better on blue-bold). */
+.bookshelf-stats-button.btn--primary {
+  background: var(--text-primary);
+  color: var(--bg-default);
+}
+
+.bookshelf-stats-button.btn--primary .btn-start-icon {
+  color: var(--bg-default);
+}
+
+.bookshelf-stats-button.btn--primary:hover {
+  border-color: var(--blue-bold);
+  background: var(--blue-bold);
+  color: var(--charcoal);
+}
+
+.bookshelf-stats-button.btn--primary:hover .btn-start-icon {
+  color: var(--charcoal);
+}
+
 
 
 /*  Body layout */
@@ -37,7 +59,7 @@
   grid-template-columns: minmax(12.5rem, 18.75rem) minmax(0, 1fr);
   align-items: start;
   column-gap: var(--column-gap);
-  padding: var(--space-8) var(--space-5) var(--space-11);
+  padding: var(--space-7) var(--space-5) var(--space-11);
 }
 
 .bookshelf-rail-label,
