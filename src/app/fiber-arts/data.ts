@@ -8,6 +8,10 @@ export interface FiberPiece {
   year?: number;
   /** Favorites are shown big at the top of the page. */
   favorite?: boolean;
+  /** Photo of the piece held in a hand. In the swatch grid it fills the
+   *  square, anchored to the bottom, so the hand runs off the edge
+   *  instead of floating in the middle. */
+  bleed?: boolean;
   story?: string;
   materials?: string;
 }
@@ -40,10 +44,10 @@ export const PIECES: FiberPiece[] = [
   embroidery(3, "Cortez sneaker"),
 
   // The rest of the pile
-  embroidery(1, "Cow in a hoop"),
+  embroidery(1, "Cow"),
   embroidery(2, "Christmas pudding",  { favorite: true }),
   embroidery(4, "Stand mixer"),
-  embroidery(5, "Cat heart"),
+  embroidery(5, "Kitty heart"),
   embroidery(7, "Cactus garden"),
   embroidery(8, "Jellyfish"),
   embroidery(9, "Little red car", { favorite: true }) ,
@@ -52,23 +56,23 @@ export const PIECES: FiberPiece[] = [
   embroidery(12, "Polar bear", { favorite: true }),
   embroidery(14, "Mermaid", { favorite: true }),
   embroidery(15, "Guitar"),
-  embroidery(16, "Cookie tin"),
+  embroidery(16, "Klimt Crab"),
   embroidery(18, "Mittens"),
   embroidery(20, "Pink convertible", { favorite: true }),
   embroidery(21, "Donut & popsicle"),
-  embroidery(22, "Droid"),
+  embroidery(22, "R2D2"),
   embroidery(23, "Ghost"),
   embroidery(24, "Pumpkin cozy"),
-  embroidery(25, "Frog"),
+  embroidery(25, "Kermit"),
   embroidery(26, "Gingerbread house"),
   embroidery(27, "Mushroom", { favorite: true }),
   embroidery(28, "Otters"),
-  embroidery(29, "Eye charm"),
+  embroidery(29, "Owl"),
   embroidery(30, "Golden Gate"),
-  embroidery(31, "Monster"),
-  embroidery(32, "Pino"),
-  embroidery(33, "Moth"),
+  embroidery(31, "Monster", { bleed: true }),
+  embroidery(32, "Dog Bone"),
+  embroidery(33, "Moth", { bleed: true }),
   embroidery(34, "Lavender"),
-  embroidery(35, "Fried egg"),
-  embroidery(36, "Patchwork"),
+  embroidery(35, "Fried egg", { bleed: true }),
+  embroidery(36, "Patchwork", { bleed: true }),
 ];

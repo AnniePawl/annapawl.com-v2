@@ -80,6 +80,11 @@
 .post-header-title {
   max-width: 8ch;
   margin: 0;
+  /* Optical alignment: big letters carry built-in space on their left
+     (about 0.06–0.09em for B, C, F), so the title looked indented next
+     to the eyebrow and lede. Pull it back so the ink lines up. In em, so
+     it scales with the title on every screen size. */
+  margin-left: -0.06em;
   color: var(--charcoal);
   font-family: var(--font-sans);
   font-size: var(--type-title-size);
@@ -317,8 +322,11 @@
     max-width: 100%;
   }
 
+  /* Stage and details bar share the page's 16px phone edge
+     (--space-4) with the top row and the body below, instead of 24px. */
   .post-header-stage {
     min-height: 11rem;
+    padding-inline: var(--space-4);
     padding-top: var(--space-5);
     padding-bottom: var(--space-6);
   }
@@ -335,6 +343,7 @@
 
   .post-header-details {
     grid-template-columns: 1fr auto;
+    padding-inline: var(--space-4);
   }
 
   .post-layout-grid {

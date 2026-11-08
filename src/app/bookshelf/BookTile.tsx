@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Heart } from "lucide-react";
 import { FAVORITE_TAG, type BookInfo, type BookLookup } from "../../lib/googleBooks";
 
 export interface ShelfEntry {
@@ -29,18 +30,23 @@ export default function BookTile({ lookup, info }: ShelfEntry) {
         </div>
       )}
 
-      {lookup.tags?.includes(FAVORITE_TAG) && (
-        // Favorites get a small ribbon book mark in  page accent.
-        <span className="bookshelf-ribbon" title="Favorite">
-          <span className="sr-only">Favorite</span>
-        </span>
-      )}
     </div>
   );
 
+  const isFavorite = lookup.tags?.includes(FAVORITE_TAG) ?? false;
+
   const meta = (
     <div className="bookshelf-tile-meta">
-      <p className="bookshelf-tile-title">{title}</p>
+      <p className="bookshelf-tile-title">
+        {title}
+        {isFavorite && (
+          // Favorites get a small red heart after the title.
+          <span className="bookshelf-favorite" title="Favorite">
+            <Heart aria-hidden="true" fill="currentColor" strokeWidth={0} />
+            <span className="sr-only">Favorite</span>
+          </span>
+        )}
+      </p>
       <p className="bookshelf-tile-author">{author}</p>
       {lookup.tags && lookup.tags.length > 0 && (
         <div className="mt-1 flex flex-wrap gap-1">

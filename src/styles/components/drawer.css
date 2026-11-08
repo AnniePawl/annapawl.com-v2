@@ -117,6 +117,12 @@
   letter-spacing: -0.055em;
 }
 
+/* The title takes focus when the drawer opens (Drawer.tsx). It's not
+   interactive, so it never shows a ring. */
+.drawer-title:focus {
+  outline: none;
+}
+
 .drawer-title > span {
   display: inline-block;
   width: 0.42em;
@@ -181,6 +187,12 @@
 
   .drawer-bar {
     padding-left: var(--space-4);
+  }
+
+  /* Bar padding (--space-2) + this (--space-2) puts "Close" 16px from
+     the right edge, matching the eyebrow marker's 16px on the left. */
+  .drawer-close {
+    padding-right: var(--space-2);
   }
 
   .drawer-content {

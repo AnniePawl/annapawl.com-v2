@@ -71,13 +71,17 @@ export default function SwatchBrowser({ pieces }: { pieces: FiberPiece[] }) {
               data-type={piece.type}
               onClick={() => setOpen(piece)}
             >
-              <span className="fiber-swatch-image">
+              <span
+                className="fiber-swatch-image"
+                data-bleed={piece.bleed ? "true" : undefined}
+              >
                 <Image
                   src={piece.src}
                   alt={piece.title}
                   fill
                   sizes="(min-width: 64rem) 18vw, (min-width: 40rem) 30vw, 45vw"
-                  className="object-contain"
+                  // Hand photos fill the square from the bottom edge.
+                  className={piece.bleed ? "object-cover object-bottom" : "object-contain"}
                 />
               </span>
               <span className="fiber-swatch-caption">
