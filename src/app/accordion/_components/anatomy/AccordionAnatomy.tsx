@@ -53,40 +53,46 @@ const PARTS: Part[] = [
   },
   {
     n: 4,
-    name: "Header",
-    desc: "Contains the button that expands or collapses its panel.",
+    name: "Heading",
+    desc: "Gives each item a place in the page outline and holds its button.",
     // The heading that wraps the button, not the button itself.
     el: ".accordion-heading",
     detail: (
       <>
         Wrap the button in a heading, like <code>&lt;h3&gt;</code>, so
         screen-reader users can jump between items. Pick the level that fits
-        the page.
+        the page, and keep the button as the only thing inside it.
       </>
     ),
   },
   {
     n: 5,
+    name: "Button",
+    desc: "The trigger. Expands or collapses its panel, and holds the number, label and icon.",
+    el: ".accordion-row",
+  },
+  {
+    n: 6,
     name: "Number",
     desc: "Identifies the item with an index and section-colored marker.",
     el: ".accordion-number",
     optional: true,
   },
   {
-    n: 6,
+    n: 7,
     name: "Label",
-    desc: "Names the section and describes what its panel contains.",
+    desc: "Names the button and describes what its panel contains.",
     el: ".accordion-question",
   },
   {
-    n: 7,
+    n: 8,
     name: "Icon",
     desc: "Changes from a plus to a minus to reflect the item’s state.",
     el: ".accordion-control",
     optional: true,
   },
   {
-    n: 8,
+    n: 9,
     name: "Divider",
     desc: "Adds visual separation between the header and expanded panel.",
     el: ".accordion-answer",
@@ -94,9 +100,9 @@ const PARTS: Part[] = [
     optional: true,
   },
   {
-    n: 9,
+    n: 10,
     name: "Panel",
-    desc: "Contains the content revealed when its trigger is expanded.",
+    desc: "Contains the content revealed when its button is expanded.",
     el: ".accordion-panel",
   },
 ]

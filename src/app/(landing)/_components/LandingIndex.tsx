@@ -35,7 +35,7 @@ const CREATIVE_CODING: GroupItem[] = [
   {
     href: "/drawing-with-code",
     title: "Drawing with Code",
-    description: "An intro to CSS art",
+    description: "An intro to CSS art with a live code playground",
     accent: "var(--red-bold)",
   },
   {

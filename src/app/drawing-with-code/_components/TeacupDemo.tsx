@@ -9,7 +9,7 @@ const STEPS = [TEACUP_CUP, TEACUP_HANDLE, TEACUP_SAUCER];
 export default function TeacupDemo({ step }: { step: 1 | 2 | 3 }) {
   const scope = `[data-teacup-step="${step}"]`;
   const css = [
-    // The site uses border-box; readers' pages default to content-box.
+    // Site uses border-box. Readers' pages default to content-box.
     `${scope} .teacup, ${scope} .teacup::before, ${scope} .teacup::after { box-sizing: content-box; }`,
     ...STEPS.slice(0, step),
   ]

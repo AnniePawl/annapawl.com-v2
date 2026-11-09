@@ -64,67 +64,71 @@ const VANILLA_CSS = `.accordion-button {
   content: "−" / "";
 }`;
 
-const VANILLA_JS = `// Select: find every accordion button
-const buttons = document.querySelectorAll(".accordion-button");
+const VANILLA_JS = `// Select: find each accordion, then only the buttons inside it
+document.querySelectorAll(".accordion").forEach((accordion) => {
+  const buttons = accordion.querySelectorAll(".accordion-button");
 
-buttons.forEach((button) => {
-  // Listen: run this when the button is clicked
-  button.addEventListener("click", () => {
-    // Locate panel: aria-controls holds the panel's id
-    const panel = document.getElementById(button.getAttribute("aria-controls"));
+  buttons.forEach((button) => {
+    // Listen: run this when the button is clicked
+    button.addEventListener("click", () => {
+      // Locate panel: aria-controls holds the panel's id
+      const panel = document.getElementById(button.getAttribute("aria-controls"));
 
-    // Read state: attributes are text, so compare with "true"
-    const isOpen = button.getAttribute("aria-expanded") === "true";
+      // Read state: attributes are text, so compare with "true"
+      const isOpen = button.getAttribute("aria-expanded") === "true";
 
-    // Update both: set the opposite state, and hide or show the panel to match
-    button.setAttribute("aria-expanded", String(!isOpen));
-    panel.hidden = isOpen;
+      // Update both: set the opposite state, and hide or show the panel to match
+      button.setAttribute("aria-expanded", String(!isOpen));
+      panel.hidden = isOpen;
+    });
   });
 });`;
 
-const VANILLA_SINGLE_OPEN = `const buttons = document.querySelectorAll(".accordion-button");
-
-function setOpen(button, open) {
+const VANILLA_SINGLE_OPEN = `function setOpen(button, open) {
   button.setAttribute("aria-expanded", String(open));
   document.getElementById(button.getAttribute("aria-controls")).hidden = !open;
 }
 
-buttons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const isOpen = button.getAttribute("aria-expanded") === "true";
+document.querySelectorAll(".accordion").forEach((accordion) => {
+  const buttons = accordion.querySelectorAll(".accordion-button");
 
-    // Close every other item first
-    buttons.forEach((other) => {
-      if (other !== button) setOpen(other, false);
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const isOpen = button.getAttribute("aria-expanded") === "true";
+
+      // Close every other item in this accordion first
+      buttons.forEach((other) => {
+        if (other !== button) setOpen(other, false);
+      });
+
+      // Then open or close the one that was clicked
+      setOpen(button, !isOpen);
     });
-
-    // Then open or close the one that was clicked
-    setOpen(button, !isOpen);
   });
 });`;
 
 // ---- Keyboard and focus snippets ----
 
-const KEYBOARD_JS = `const accordion = document.querySelector(".accordion");
+const KEYBOARD_JS = `document.querySelectorAll(".accordion").forEach((accordion) => {
+  // One listener per accordion handles every header inside it
+  accordion.addEventListener("keydown", (event) => {
+    const keys = ["ArrowDown", "ArrowUp", "Home", "End"];
+    if (!keys.includes(event.key)) return;
 
-// One listener on the whole accordion handles every header
-accordion.addEventListener("keydown", (event) => {
-  const keys = ["ArrowDown", "ArrowUp", "Home", "End"];
-  if (!keys.includes(event.key)) return;
+    const buttons = [...accordion.querySelectorAll(".accordion-button")];
+    const index = buttons.indexOf(document.activeElement);
+    if (index === -1) return; // focus isn't on a header button
 
-  const buttons = [...accordion.querySelectorAll(".accordion-button")];
-  const index = buttons.indexOf(document.activeElement);
-  if (index === -1) return; // focus isn't on a header
+    const last = buttons.length - 1;
+    let next;
+    if (event.key === "ArrowDown") next = index === last ? 0 : index + 1;
+    if (event.key === "ArrowUp") next = index === 0 ? last : index - 1;
+    if (event.key === "Home") next = 0;
+    if (event.key === "End") next = last;
 
-  const last = buttons.length - 1;
-  let next;
-  if (event.key === "ArrowDown") next = index === last ? 0 : index + 1;
-  if (event.key === "ArrowUp") next = index === 0 ? last : index - 1;
-  if (event.key === "Home") next = 0;
-  if (event.key === "End") next = last;
-
-  event.preventDefault(); // stop the page from scrolling
-  buttons[next].focus();
+    event.preventDefault(); // stop the page from scrolling
+    buttons[next].focus();
+  });
 });`;
 
 const FOCUS_CSS = `.accordion-button:focus-visible {
@@ -180,7 +184,7 @@ const REACT_STATE = `const [openId, setOpenId] = useState(null);
 
 function toggle(id) {
   // Clicking the open item closes it; any other item opens instead
-  setOpenId(openId === id ? null : id);
+  setOpenId((current) => (current === id ? null : id));
 }`;
 
 const REACT_RENDER = `{items.map((item) => {
@@ -218,7 +222,7 @@ export default function Accordion({ items }) {
   const baseId = useId();
 
   function toggle(id) {
-    setOpenId(openId === id ? null : id);
+    setOpenId((current) => (current === id ? null : id));
   }
 
   return (
@@ -257,10 +261,10 @@ export default function Accordion({ items }) {
 const REACT_MULTIPLE = `const [openIds, setOpenIds] = useState([]);
 
 function toggle(id) {
-  setOpenIds(
-    openIds.includes(id)
-      ? openIds.filter((openId) => openId !== id) // close it
-      : [...openIds, id] // open it, leave the others alone
+  setOpenIds((current) =>
+    current.includes(id)
+      ? current.filter((openId) => openId !== id) // close it
+      : [...current, id] // open it, leave the others alone
   );
 }
 
@@ -270,7 +274,7 @@ const isOpen = openIds.includes(item.id);`;
 export const metadata = {
   title: "Building an accessible accordion — Anna Pawl",
   description:
-    "How to build an accordion everyone can use, first in vanilla JavaScript, then in React with my own design system component as the example.",
+    "How to build an accordion that works with a mouse, keyboard or screen reader, first in vanilla JavaScript, then in React with my design system component as the example.",
 };
 
 export default function AccordionTutorial() {
@@ -278,13 +282,13 @@ export default function AccordionTutorial() {
     <main>
       <PostLayout
         descriptionTitle="Frontend fundamentals"
-        description="How to build an accordion everyone can use, first in vanilla JavaScript, then in React with my design system component as the example."
-        shortDescription="Building an accordion that works for everyone."
+        description="How to build an accordion that works with a mouse, keyboard or screen reader, first in vanilla JavaScript, then in React with my design system component as the example."
+        shortDescription="Building an accordion that works with a keyboard and screen reader."
         eyebrow="Building Blocks"
         title="Accordion"
         publishedDate="Updated Oct 2026"
         readingTime="12 min read"
-        postTags="Components, JavaScript, React, Accessibility,"
+        postTags="Components, JavaScript, React, Accessibility"
         utilityStart={
           <HomeLogo
             colors={{
@@ -317,7 +321,7 @@ export default function AccordionTutorial() {
             You’ve probably seen them most in FAQs, but they’re also handy for settings panels, product specs, filters in a sidebar, step-by-step instructions, or anywhere a page might turn into a wall of text. The trade-off is that hidden content is easy to miss, so accordions work best when people already know what they’re looking for.
           </p>
           <p>
-            Under the hood, each header is a real <code>button</code>, which does a lot of quiet accessibiity work for free. We’ll dig into what that means, and how to make the accordion work just as well with a keyboard or screen reader, in the <TextLink href='#keyboard-and-focus'>Keyboard & focus</TextLink> section below.
+            Under the hood, each header holds a real <code>button</code>, which does a lot of quiet accessibility work for free. We’ll dig into what that means, and how to make the accordion work just as well with a keyboard or screen reader, in the <TextLink href='#keyboard-and-focus'>Keyboard & focus</TextLink> section below.
           </p>
           <p>
             Now that we know what it does, let’s look at the pieces that make it work.
@@ -326,7 +330,7 @@ export default function AccordionTutorial() {
 
         <PostSection id="anatomy" title="The anatomy">
           <p>
-            An accordion begins with a container and an optional title. Inside, each item pairs a clickable header with a content panel. The header can include a number, label, and visual indicator, like a plus, minus, or chevron, that communicates whether the item is open or closed. Behind the scenes, unique IDs and ARIA attributes connect each button to the panel it controls.
+            An accordion begins with a container and an optional title. Inside, each item pairs a header with a content panel. The header is a heading with a button inside it, and the button can hold a number, label, and visual indicator, like a plus, minus, or chevron, that communicates whether the item is open or closed. Behind the scenes, unique IDs and ARIA attributes connect each button to the panel it controls.
           </p>
           <AccordionAnatomy />
         </PostSection>
@@ -334,7 +338,7 @@ export default function AccordionTutorial() {
         <PostSection id="behind-the-buttons" title="Behind the Buttons">
           <p>
             An accordion has an invisible layer of structure. Unique IDs and ARIA
-            attributes connect each button/header to its panel and communicates whether the
+            attributes connect each header button to its panel and communicate whether the
             content is open or closed. These attributes do not create the interaction themselves. JavaScript still handles opening and closing the panel, while the ARIA values keep its state understandable to assistive technology.
           </p>
           <CodeBlock code={`<div class="accordion-item">
@@ -378,10 +382,12 @@ export default function AccordionTutorial() {
             <p>
               <code>aria-labelledby</code> sits on the panel and points back to
               the button&rsquo;s <code>id</code>, so the panel takes the question
-              as its name. It only works paired with{" "}
+              as its name. If you give the panel{" "}
               <code>role=&quot;region&quot;</code>, which turns the open panel
-              into a landmark screen-reader users can jump to. That helps with
-              long panels but for short answers like these, you can skip both.
+              into a landmark screen-reader users can jump to, use{" "}
+              <code>aria-labelledby</code> to name that region after its
+              button. That helps with long panels but for short answers like
+              these, you can skip both.
             </p>
           </PostSubsection>
         </PostSection>
@@ -389,7 +395,7 @@ export default function AccordionTutorial() {
         <PostSection id="vanilla-js" title="Build it in vanilla JavaScript">
           <p>
             Before any framework, here&rsquo;s the accordion in plain HTML,
-            a little CSS and a few lines of JS. This little mental model/ cheat sheet helps me remember its structure and how each piece fits together.
+            a little CSS and a few lines of JS. This little mental model and cheat sheet helps me remember its structure and how each piece fits together.
           </p>
           <Callout eyebrow="Mental model" className="mt-6">
             <ul className="m-0 grid list-none gap-2 p-0">
@@ -452,10 +458,12 @@ export default function AccordionTutorial() {
           </PostSubsection>
 
           <PostSubsection title="Wire it up with JavaScript">
-            <p>The script follows the mental model/cheat sheet step by step:</p>
+            <p>The script follows the mental model and cheat sheet step by step:</p>
             <ol className="my-4 grid list-decimal gap-2 pl-5 text-[length:var(--text-md)] leading-[var(--leading-relaxed)]">
               <li>
-                <strong>Select:</strong> find every accordion button on the page.
+                <strong>Select:</strong> find each accordion on the page, then the
+                buttons inside it. Keeping each accordion to its own buttons
+                means two accordions on one page never interfere.
               </li>
               <li>
                 <strong>Listen:</strong> run some code whenever one is clicked.
@@ -477,7 +485,15 @@ export default function AccordionTutorial() {
               </li>
             </ol>
             <p>That&rsquo;s the whole script:</p>
-            <CodeBlock code={VANILLA_JS} />
+            <CodeBlock code={VANILLA_JS} highlight={['accordion.querySelectorAll(".accordion-button")']} />
+            <p>
+              The script needs the accordion to exist before it runs, so load
+              it with <code>defer</code> (or <code>type=&quot;module&quot;</code>),
+              or put it at the end of the <code>&lt;body&gt;</code>. And if a
+              page has more than one accordion, give every panel its own id,
+              like <code>faq-panel-1</code> and <code>shipping-panel-1</code>,
+              so each <code>aria-controls</code> points at the right one.
+            </p>
           </PostSubsection>
 
           <PostSubsection title="Keep ARIA in sync">
@@ -495,8 +511,9 @@ export default function AccordionTutorial() {
             <p>
               In the example above, several items can be open at once. Many
               accordions, especially FAQs, keep just one open at a time instead,
-              so the page stays short and focused. To do that, close all the
-              others first, then open or close the one that was clicked. A small{" "}
+              so the page stays short and focused. To do that, close the other
+              items in the same accordion first, then open or close the one
+              that was clicked. A small{" "}
               <code>setOpen</code> helper updates a button and its panel
               together, so they always change as a pair.
             </p>
@@ -506,7 +523,7 @@ export default function AccordionTutorial() {
 
         <PostSection id="keyboard-and-focus" title="Keyboard and focus">
           <p>
-            Because each header is a real <code>&lt;button&gt;</code>, Tab,
+            Because each header holds a real <code>&lt;button&gt;</code>, Tab,
             Enter and Space already work, with no extra code (see{" "}
             <TextLink href="#behind-the-buttons">Behind the Buttons</TextLink>).
             This section covers what happens next: moving between headers,
@@ -516,11 +533,12 @@ export default function AccordionTutorial() {
 
           <PostSubsection title="Arrow keys, Home and End" tag="Optional">
             <p>
-              The WAI-ARIA accordion pattern suggests a few shortcuts on top of
+              For longer accordions, you can add a few shortcuts on top of
               Tab: Up and Down move between headers, and Home and End jump to
-              the first and last. They&rsquo;re a nice touch for long
-              accordions. A single listener on the whole accordion handles
-              them, so it works for any number of items.
+              the first and last. They aren&rsquo;t part of the current
+              WAI-ARIA accordion pattern, but they&rsquo;re a nice touch. A
+              single listener on each accordion handles them, so it works for
+              any number of items.
             </p>
             <CodeBlock code={KEYBOARD_JS} highlight={["event.preventDefault()", "buttons[next].focus()"]} />
             <p>
@@ -553,7 +571,10 @@ export default function AccordionTutorial() {
             <p>
               The fix is <code>inert</code>. It keeps a closed panel out of the
               Tab order and away from screen readers, while CSS handles the
-              animation. Switching takes three changes:
+              animation. Like <code>hidden</code>, it also keeps a closed
+              panel&rsquo;s text out of the browser&rsquo;s find-in-page
+              (Cmd+F) and stops it from being selected, which is worth knowing
+              for long, reference-style panels. Switching takes three changes:
             </p>
             <ol className="my-4 grid list-decimal gap-2 pl-5 text-[length:var(--text-md)] leading-[var(--leading-relaxed)]">
               <li>
@@ -637,9 +658,11 @@ export default function AccordionTutorial() {
               The only thing that changes is which item is open, so that&rsquo;s
               all we store: one <code>openId</code>, or <code>null</code> when
               everything is closed. Storing a single id also gives us
-              single-open behavior for free, because only one id fits.
+              single-open behavior for free, because only one id fits. Passing
+              a function to <code>setOpenId</code> hands you the current value,
+              so the toggle always works from the latest state.
             </p>
-            <CodeBlock code={REACT_STATE} highlight={["setOpenId(openId === id ? null : id)"]} />
+            <CodeBlock code={REACT_STATE} highlight={["setOpenId((current) => (current === id ? null : id))"]} />
           </PostSubsection>
 
           <PostSubsection title="Render ARIA from state">
@@ -691,8 +714,8 @@ export default function AccordionTutorial() {
         <PostSection id="test-it" title="Test it">
           <p>
             You don&rsquo;t need special tools to check your accordion. A Mac
-            and a browser cover all of it. Run through these once you&rsquo;ve
-            built it:
+            and a browser cover the essentials, so run through these as a
+            strong first pass once you&rsquo;ve built it:
           </p>
           <ol className="my-4 grid list-decimal gap-3 pl-5 text-[length:var(--text-md)] leading-[var(--leading-relaxed)]">
             <li>
@@ -741,8 +764,8 @@ export default function AccordionTutorial() {
             An accordion looks simple, but most of it is invisible: a real
             button inside a heading, one attribute that keeps everything in
             sync, and panels that stay out of reach until they&rsquo;re open.
-            Get those right and it works for everyone, whether they use a mouse,
-            a keyboard or a screen reader.
+            Get those right and you have a strong, accessible foundation,
+            whether people use a mouse, a keyboard or a screen reader.
           </p>
           <p>Want to go deeper? These are the references I lean on most:</p>
           <ul className="my-4 grid list-disc gap-2 pl-5 text-[length:var(--text-md)] leading-[var(--leading-relaxed)]">
@@ -750,7 +773,7 @@ export default function AccordionTutorial() {
               <TextLink href="https://www.w3.org/WAI/ARIA/apg/patterns/accordion/">
                 WAI-ARIA accordion pattern
               </TextLink>
-              , the full spec, including keyboard support.
+              , the reference pattern, including keyboard support.
             </li>
             <li>
               <TextLink href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-expanded">
