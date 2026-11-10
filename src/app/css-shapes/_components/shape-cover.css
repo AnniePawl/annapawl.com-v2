@@ -85,3 +85,30 @@
     transition: none;
   }
 }
+
+
+@media (width >= 40rem) {
+  .shapes-page .post-header-title {
+    max-width: none;
+  }
+
+
+  .shapes-page .post-header-stage {
+    min-height: 0;
+    padding-top: var(--space-2);
+  }
+}
+
+/* A few code samples get a lighter tone than their section's own soft
+   color, which reads too heavy on the charcoal code blocks. */
+.shapes-page #octagon {
+  --code-tone: var(--pink-soft);
+}
+
+.shapes-page #star {
+  --code-tone: var(--mint-soft);
+}
+
+.shapes-page #heart {
+  --code-tone: var(--pink-soft);
+}
