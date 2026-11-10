@@ -15,6 +15,12 @@ import Practice from "./_components/Practice";
 import "./drawing-with-code.css";
 import TextLink from "../../components/ui/TextLink";
 
+const OUTLINE_EVERYTHING = `*,
+*::before,
+*::after {
+  outline: 1px solid red;
+}`;
+
 export default function DrawingWithCodePage() {
   return (
     <main className="dwc-page">
@@ -26,16 +32,16 @@ export default function DrawingWithCodePage() {
         title="Drawing with Code"
         next={{ href: "/css-shapes", label: "CSS Shapes" }}
         publishedDate="Updated Oct 2026"
-        readingTime="10 min read"
+        readingTime="12 min read"
         postTags="CSS, Illustration, Creative Coding"
         utilityStart={
           <HomeLogo
             colors={{
-              northeast: "var(--sky-bold)",
+              northeast: "var(--blue-bold)",
               southeast: "var(--red-bold)",
               southwest: "var(--red-bold)",
               northwest: "var(--red-bold)",
-              hoverAccent: "var(--iris-bold)",
+              hoverAccent: "var(--red-bold)",
             }}
             size="1.75rem"
           />
@@ -291,16 +297,17 @@ export default function DrawingWithCodePage() {
               <code>left</code>, <code>right</code> and <code>bottom</code> to
               place the piece relative to its parent&rsquo;s edges. The teacup
               we&rsquo;ll build below works this way. The cup is{" "}
-              <code>relative</code>, so its handle and saucer can sit exactly
-              where I put them.
+              <code>relative</code>, so its handle can sit exactly where I put
+              it: 6px down from the cup&rsquo;s top edge and 54px in from its
+              left edge.
             </p>
             <DemoStrip>
               <DemoTile
                 label="A cup with a handle placed on its right side"
-                caption="top: 10px; left: 70px;"
+                caption="handle: top: 6px; left: 54px;"
               >
-                <div className="dwc-demo-cup">
-                  <div className="dwc-demo-cup__handle" />
+                <div className="dwc-demo-zcup dwc-demo-zcup--tucked">
+                  <div className="dwc-demo-zcup__cup" />
                 </div>
               </DemoTile>
             </DemoStrip>
@@ -336,21 +343,19 @@ export default function DrawingWithCodePage() {
             </p>
             <DemoStrip>
               <DemoTile
-                label="Two overlapping circles, the teal one in front"
-                caption="no z-index: last one wins"
+                label="A teacup whose ring-shaped handle is drawn over the cup, so the handle's inner edge shows across the cup's side"
+                caption="no z-index: handle on top"
               >
-                <div className="dwc-demo-stack">
-                  <i />
-                  <i />
+                <div className="dwc-demo-zcup">
+                  <div className="dwc-demo-zcup__cup" />
                 </div>
               </DemoTile>
               <DemoTile
-                label="The same circles, the yellow one brought to the front"
-                caption="yellow: z-index: 2"
+                label="The same teacup with the handle tucked behind the cup, so only the outer curve of the handle shows"
+                caption="handle: z-index: -1"
               >
-                <div className="dwc-demo-stack dwc-demo-stack--front">
-                  <i />
-                  <i />
+                <div className="dwc-demo-zcup dwc-demo-zcup--tucked">
+                  <div className="dwc-demo-zcup__cup" />
                 </div>
               </DemoTile>
             </DemoStrip>
@@ -367,17 +372,19 @@ export default function DrawingWithCodePage() {
             </p>
             <DemoStrip>
               <DemoTile
-                label="One teal square with a yellow circle and a purple rectangle drawn by its pseudo-elements"
+                label="A teacup drawn from one div: its ::before pseudo-element draws the ring handle and its ::after draws the saucer"
                 caption={
                   <>
                     <i className="dwc-demo-key dwc-demo-key--before" />
-                    ::before{"\u00a0\u00a0"}
+                    ::before handle{"\u00a0\u00a0"}
                     <i className="dwc-demo-key dwc-demo-key--after" />
-                    ::after
+                    ::after saucer
                   </>
                 }
               >
-                <div className="dwc-demo-pseudo" />
+                <div className="dwc-demo-zcup dwc-demo-zcup--tucked dwc-demo-zcup--saucer">
+                  <div className="dwc-demo-zcup__cup" />
+                </div>
               </DemoTile>
             </DemoStrip>
             <p>
@@ -412,18 +419,23 @@ export default function DrawingWithCodePage() {
             <p>Once the basics feel comfortable, try these next.</p>
             <ul className="dwc-list">
               <li>
-                <code>border</code> for outlines, plus the classic trick of
-                building{" "}
+                <code>linear-gradient()</code> and{" "}
+                <code>radial-gradient()</code> for highlights, stripes,
+                shading, and even extra shapes.
+              </li>
+              <li>
+                <code>clip-path</code> for custom silhouettes, or the classic
+                trick of building{" "}
                 <TextLink href="/css-shapes#triangle">triangles</TextLink>{" "}
-                out of borders.
+                from borders.
               </li>
               <li>
-                <code>overflow: hidden</code> to crop anything that spills
-                outside a shape.
+                <code>overflow: hidden</code> to crop pieces that extend beyond
+                a shape. Just remember that it will clip shadows too.
               </li>
               <li>
-                <code>@keyframes</code> for animation. It&rsquo;s what makes the
-                steam rise from the teacup on my{" "}
+                <code>@keyframes</code> to bring your drawings to life.
+                It&rsquo;s what makes the steam rise from the teacup on my{" "}
                 <TextLink href="/">homepage</TextLink>.
               </li>
             </ul>
@@ -432,17 +444,16 @@ export default function DrawingWithCodePage() {
 
         <PostSection id="lets-build-a-teacup" title="Let’s build a teacup">
           <p>
-            Time to put the toolkit to work. We&rsquo;ll draw a little purple
-            teacup in three steps, and the whole thing is just one div.
+            Okay, time to put the CSS toolkit to work. We’ll draw a cute little teacup in three steps using just a single div!
           </p>
-          <CodeBlock code={`<div class="teacup"></div>`} />
 
           <PostSubsection title="Step 1 · The cup">
+            <CodeBlock code={`<div class="teacup"></div>`} />
             <p>
-              Give the div a size, a dark outline and a color. Rounding only
+              Give the div a size, a dark outline and a background color. Rounding only
               the bottom two corners with <code>border-radius</code> turns a
               plain box into a cup. I keep the colors in variables at the top
-              so the whole teacup is easy to recolor later.
+              of my CSS file so the whole teacup is easy to recolor later.
             </p>
             <DemoStrip>
               <DemoTile label="A purple cup shape with a dark outline" caption=".teacup">
@@ -454,12 +465,14 @@ export default function DrawingWithCodePage() {
 
           <PostSubsection title="Step 2 · The handle">
             <p>
-              The handle is the cup&rsquo;s <code>::before</code>. A thick
-              border with <code>border-radius: 50%</code> makes a ring, and{" "}
-              <code>position: absolute</code> places it on the right side.{" "}
-              <code>z-index: -1</code> tucks it behind the cup so only the
-              outer half shows. The two box-shadows draw its outline, one
-              outside the ring and one inside.
+              The cup&rsquo;s <code>::before</code> pseudo-element draws the
+              handle. It starts as a circle, and a thick yellow border turns it
+              into a ring. Absolute positioning moves the ring to the
+              cup&rsquo;s right side, while <code>z-index: -1</code> places it
+              behind the cup. The cup then covers the ring&rsquo;s left side, so
+              you only see the outer curve. Two box shadows add the purple
+              outline: a regular shadow traces the outside edge, and an{" "}
+              <code>inset</code> shadow traces the inner edge.
             </p>
             <DemoStrip>
               <DemoTile label="The same cup with a ring-shaped handle on its right side" caption=".teacup::before">
@@ -497,7 +510,7 @@ export default function DrawingWithCodePage() {
           title="Tips from trial and error"
         >
           <p>
-            Get ready for some serious trial and error. Drawing with code takes <em>a lot</em> of patience. I’ve lost entire evenings to details smaller than my thumbnail... Stick with it! These habits made it hurt much less.
+            Get ready for some serious trial and error. Drawing with code takes <em>a lot</em> of patience. I’ve lost entire evenings to details smaller than my thumbnail... These tricks made it hurt much less.
           </p>
 
           <PostSubsection title="Sketch it first">
@@ -512,11 +525,15 @@ export default function DrawingWithCodePage() {
 
           <PostSubsection title="Outline everything">
             <p>
-              I&rsquo;d constantly lose track of where a shape actually was. Poof! Now
-              I add <code>{"* { outline: 1px solid red; }"}</code> while I build, and
-              every shape shows up. Use <code>outline</code> instead of{" "}
-              <code>border</code>, because an outline doesn&rsquo;t take up space and
-              won&rsquo;t shift anything around.
+              I&rsquo;d constantly lose track of where a shape actually was. Poof!
+              Now I add this to the top of my CSS file while I build so every element&rsquo;s box becomes
+              visible:
+            </p>
+            <CodeBlock code={OUTLINE_EVERYTHING} />
+            <p>
+              I use an <code>outline</code> instead of a <code>border</code> because
+              outlines don&rsquo;t take up space in the box model, so they show you
+              an element&rsquo;s boundaries without shifting the layout.
             </p>
           </PostSubsection>
 
@@ -524,7 +541,7 @@ export default function DrawingWithCodePage() {
             <p>
               Right-click your drawing in the browser, choose{" "}
               <strong>Inspect</strong>, and edit values right in the{" "}
-              <strong>Styles</strong> panel. You&rsquo;ll see shapes move as you
+              <strong>Styles</strong> panel. You&rsquo;ll see shapes adjust in real time as you
               type. Click a value like <code>180px</code> and press the arrow keys to
               nudge it by 1, or hold Shift to nudge by 10. Once it looks right, copy
               the value back into your CSS.
@@ -533,12 +550,12 @@ export default function DrawingWithCodePage() {
 
           <PostSubsection title="Keep your colors in variables">
             <p>
-              I change my mind about colors constantly, so I name each one once, like{" "}
-              <code>--handle: #F472B6;</code>, and use <code>var(--handle)</code>{" "}
-              everywhere it shows up. Swapping in a new palette means editing a few
-              lines in one spot instead of hunting through my whole stylesheet.
-              It&rsquo;s how I tried a dozen color combos on my homepage knick-knacks
-              without losing my mind.
+              I change my mind about colors constantly, so I define each one as a
+              custom property, like <code>--handle: #ffe669;</code>, and use{" "}
+              <code>var(--handle)</code> everywhere it appears. Swapping in a new
+              palette means changing a few lines in one place instead of hunting
+              through my whole stylesheet. It&rsquo;s how I tried a dozen color
+              combinations on my homepage knick-knacks without losing my mind.
             </p>
           </PostSubsection>
 
@@ -552,19 +569,14 @@ export default function DrawingWithCodePage() {
 
         <PostSection id="try-it-out" title="Try it out">
           <p>
-            Your turn! Change any value in the CSS below and watch the rainbow update as you type.
+            Your turn! Edit the HTML or CSS below and watch the preview update as you type. Play with the rainbow, paste in the teacup code, or clear everything and make something completely your own.
           </p>
           <Practice />
         </PostSection>
 
         <PostSection id="keep-going" title="Keep going">
           <p>
-            CSS art started as a little side project, and it ended up teaching me more about CSS than anything else I’ve built. Positioning, pseudo-elements, gradients and animation all clicked once I had something I actually wanted to make. It’s made me a better frontend engineer, and it’s still the most fun I have with code.
-          </p>
-          <p>
-            I hope you enjoy the challenge of bringing your designs to life
-            with HTML and CSS. Look out for more CSS art content and share your
-            creations with the frontend community on CodePen. Happy coding!
+            CSS art started as a little side project, but it ended up teaching me more about CSS than almost anything else I’ve built. Positioning, pseudo-elements, gradients, and animation all clicked once I had something I genuinely wanted to make. It’s made me a better frontend engineer, and it’s still some of the most fun I have with code. I’ll be sharing more CSS art experiments, and if you make something of your own, I’d love to see it on CodePen.
           </p>
 
           <PostSubsection title="Where to go next">
@@ -580,7 +592,7 @@ export default function DrawingWithCodePage() {
               </li>
               <li>
                 <TextLink href="https://cssbattle.dev">CSS Battle</TextLink>, daily
-                puzzles where you recreate a target image with CSS.
+                puzzles where you can practice recreating a target image with CSS.
               </li>
               <li>
                 <TextLink href="https://developer.mozilla.org/en-US/docs/Web/CSS">

@@ -38,6 +38,8 @@ export type PostSubsectionProps = {
   /** label: sentence-case heading with a marker in the section color (default).
    *  code: lowercase monospace, for headings that are code (property names). */
   variant?: "label" | "code";
+  /** Small pill after the title, like "Optional". */
+  tag?: string;
   children: ReactNode;
   className?: string;
 };
@@ -154,13 +156,17 @@ export function PostSection({
 /** A titled block inside a PostSection. Takes the section's color. */
 export function PostSubsection({
   title,
+  tag,
   variant = "label",
   children,
   className,
 }: PostSubsectionProps) {
   return (
     <div className={cx("post-subsection", `post-subsection--${variant}`, className)}>
-      <h3>{title}</h3>
+      <h3>
+        {title}
+        {tag && <span className="post-subsection-tag">{tag}</span>}
+      </h3>
       {children}
     </div>
   );

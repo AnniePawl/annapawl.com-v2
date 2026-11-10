@@ -1,9 +1,5 @@
 /* ---- Shape demos (ShapeSteps.tsx + ShapeAnatomy.tsx) ----
-   Small live CSS versions of each shape, one class per step
-   (.demo--circle-1, .demo--circle-2...). They use the same techniques as
-   the code in lessons.ts, at about 60% size. Colors:
-     --demo-fill  the shape's bold color (set per section from shapes.ts)
-     --demo-bg    the frame's soft color (same)
+   Small live CSS versions of each shape. 
    Anatomy demos paint each part a different color to match its key. */
 
 .demo,
@@ -59,12 +55,12 @@
   border-top: 36px solid var(--marigold-bold);
   border-right: 36px solid var(--coral-bold);
   border-bottom: 36px solid var(--demo-fill);
-  border-left: 36px solid var(--teal-bold);
+  border-left: 36px solid var(--periwinkle-bold);
 }
 .demo--triangle-2 {
   border-right: 36px solid var(--coral-bold);
   border-bottom: 36px solid var(--demo-fill);
-  border-left: 36px solid var(--teal-bold);
+  border-left: 36px solid var(--periwinkle-bold);
 }
 .demo--triangle-3 {
   border-left: 36px solid transparent;

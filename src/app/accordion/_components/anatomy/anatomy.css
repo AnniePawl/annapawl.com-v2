@@ -1,0 +1,146 @@
+/* Accordion anatomy: the real Accordion, full width, plus a list of its
+   parts. Hovering or focusing a part outlines it in the example */
+
+.anatomy {
+  --anatomy-badge-bg: var(--charcoal);
+  --anatomy-badge-text: white;
+  --anatomy-outline: var(--coral-soft);
+  margin-top: 1.875rem;
+}
+
+.anatomy-figure {
+  position: relative;
+  margin: 0;
+}
+
+/* On screens wide and tall enough, the example sticks to the top while
+   the list scrolls past, so it stays in view as you highlight parts
+   further down.*/
+@media (width >= 40rem) and (height >= 40rem) {
+  /* The sticky example's own top padding provides the 30px gap here. */
+  .anatomy {
+    margin-top: 0;
+  }
+
+  .anatomy-figure {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    margin-inline: calc(var(--space-3) * -1);
+    padding: 1.875rem var(--space-3) var(--space-3);
+    background: var(--cream);
+  }
+}
+
+/* It's a picture, not a control. no pointer cursor on the frozen row. */
+.anatomy-figure .accordion-row { cursor: default; }
+
+.anatomy-figure .accordion .accordion-title {
+  margin-bottom: var(--space-5);
+}
+
+.anatomy-figure .accordion-row {
+  padding: var(--space-6) 0;
+}
+
+.anatomy-figure .accordion-answer {
+  padding-top: var(--space-5);
+  padding-bottom: var(--space-6);
+}
+
+.anatomy-figure .accordion-answer::before {
+  top: calc(var(--space-5) + 0.55em);
+}
+
+/* The outline around the highlighted part. */
+.anatomy-highlight {
+  position: absolute;
+  border: 2px dashed var(--anatomy-outline);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--anatomy-outline) 14%, transparent);
+  pointer-events: none;
+}
+
+.anatomy-hint {
+  margin-top: var(--space-4);
+  font-size: var(--type-note-size);
+  font-style: italic;
+  color: var(--text-primary);
+}
+
+/* Only one version of the hint shows. "hover" on dekstop and "click" on touch screens. */
+.anatomy-hint--touch { display: none; }
+
+@media (hover: none) {
+  .anatomy-hint--hover { display: none; }
+  .anatomy-hint--touch { display: inline; }
+}
+
+/* Anatomy list */
+.anatomy-list {
+  display: grid;
+  gap: 0;
+  margin: var(--space-3) calc(var(--space-3) * -1) var(--space-7);
+  padding: 0;
+  list-style: none;
+}
+
+.anatomy-part {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  width: 100%;
+  margin: 0;
+  padding: var(--space-1) var(--space-3);
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: var(--charcoal);
+  font: inherit;
+  font-size: var(--text-md);
+  line-height: var(--leading-normal);
+  text-align: left;
+  cursor: default;
+  transition: background var(--motion-hover-duration) var(--motion-ease-standard);
+}
+
+.anatomy-part.is-active {
+  background: color-mix(in srgb, var(--anatomy-outline) 25%, transparent);
+}
+
+.anatomy-tag {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--anatomy-badge-bg);
+  color: var(--anatomy-badge-text);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: var(--font-semibold);
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+/* Optional badge for non-essential features*/
+.anatomy-optional {
+  display: inline-block;
+  margin-left: var(--space-2);
+  padding: 0.0625rem 0.4375rem;
+  border: 1px solid color-mix(in srgb, var(--charcoal) 25%, transparent);
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: var(--font-medium);
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  vertical-align: 0.15em;
+}
+
+/* Extra note */
+.anatomy .anatomy-detail {
+  margin: 0 0 var(--space-2);
+  padding-left: calc(var(--space-3) * 2 + 1.25rem);
+}

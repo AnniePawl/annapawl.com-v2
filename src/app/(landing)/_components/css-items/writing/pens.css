@@ -22,7 +22,7 @@
   --pen-cap-light: color-mix(in srgb, var(--charcoal) 40%, var(--cream));
 
   /* Pencils */
-  --pencil-eraser: var(--red-bold);
+  --pencil-eraser: var(--cherry-bold);
   --pencil-eraser-light: var(--red-soft);
   --pencil-ferrule: var(--charcoal);
   --pencil-ferrule-light: color-mix(in srgb, var(--charcoal) 25%, var(--cream));

@@ -13,6 +13,9 @@ export interface CodeBlockProps {
   tone?: PaletteHue;
   /** Show the copy button (default true). */
   copyable?: boolean;
+  /** Exact pieces of the code to highlight, like `aria-expanded="true"`.
+   *  Every match is marked, so a reader's eye goes straight to them. */
+  highlight?: string[];
   className?: string;
 }
 
@@ -20,13 +23,43 @@ export interface CodeBlockProps {
 // The lookbehind skips the // inside URLs like https://.
 const COMMENT = /\/\*[\s\S]*?\*\/|<!--[\s\S]*?-->|(?<![:"'\w/])\/\/[^\n]*/g;
 
-/** Wraps comments in a span so they read apart from the code. */
-function markComments(text: string): ReactNode[] {
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+/** Wraps each highlighted piece of a plain (non-comment) run in <mark>. */
+function markHighlights(text: string, highlight: string[], keyPrefix: number): ReactNode[] {
+  const pieces = highlight.filter(Boolean);
+  if (pieces.length === 0) return [text];
+  // Longest first, so `aria-labelledby="x"` wins over a shorter overlap.
+  const pattern = new RegExp(
+    pieces.sort((a, b) => b.length - a.length).map(escapeRegExp).join("|"),
+    "g"
+  );
+  const parts: ReactNode[] = [];
+  let last = 0;
+  for (const match of text.matchAll(pattern)) {
+    const start = match.index ?? 0;
+    if (start > last) parts.push(text.slice(last, start));
+    parts.push(
+      <mark className="code-highlight" key={`${keyPrefix}-${start}`}>
+        {match[0]}
+      </mark>
+    );
+    last = start + match[0].length;
+  }
+  if (last < text.length) parts.push(text.slice(last));
+  return parts;
+}
+
+/** Wraps comments in a span so they read apart from the code, and marks
+ *  any highlighted pieces in the code around them. */
+function markComments(text: string, highlight: string[] = []): ReactNode[] {
   const parts: ReactNode[] = [];
   let last = 0;
   for (const match of text.matchAll(COMMENT)) {
     const start = match.index ?? 0;
-    if (start > last) parts.push(text.slice(last, start));
+    if (start > last) parts.push(...markHighlights(text.slice(last, start), highlight, last));
     parts.push(
       <span className="code-comment" key={start}>
         {match[0]}
@@ -34,7 +67,7 @@ function markComments(text: string): ReactNode[] {
     );
     last = start + match[0].length;
   }
-  if (last < text.length) parts.push(text.slice(last));
+  if (last < text.length) parts.push(...markHighlights(text.slice(last), highlight, last));
   return parts;
 }
 
@@ -43,6 +76,7 @@ export default function CodeBlock({
   code,
   tone,
   copyable = true,
+  highlight,
   className,
 }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
@@ -102,7 +136,7 @@ export default function CodeBlock({
       {/* data-lenis-prevent: on Sedge, sideways code scrolling stays
           independent of the smooth-scrolled page. */}
       <pre data-lenis-prevent>
-        <code>{markComments(text)}</code>
+        <code>{markComments(text, highlight)}</code>
       </pre>
     </div>
   );

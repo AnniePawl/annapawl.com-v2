@@ -5,11 +5,15 @@ import { useState } from "react";
 import { FIBER_TYPES, type FiberPiece } from "./data";
 
 /**
- * The proudest pieces, shown big. A numbered index beside the feature
- * swaps it on hover, focus, or tap.
+ * The proudest pieces, shown big. A numbered index beside the feature:
+ * hovering a row previews it, clicking (or tapping, or focusing) a row
+ * selects it. The selected piece stays when the pointer leaves the
+ * list, so you can move to the big image without it changing.
  */
 export default function FavoritesFeature({ pieces }: { pieces: FiberPiece[] }) {
-  const [active, setActive] = useState(0);
+  const [selected, setSelected] = useState(0);
+  const [preview, setPreview] = useState<number | null>(null);
+  const active = preview ?? selected;
   const piece = pieces[active];
   if (!piece) return null;
 
@@ -51,16 +55,19 @@ export default function FavoritesFeature({ pieces }: { pieces: FiberPiece[] }) {
             <p className="fiber-feature-meta">{piece.materials}</p>
           ) : null}
 
-          <ol className="fiber-index">
+          <ol className="fiber-index" onMouseLeave={() => setPreview(null)}>
             {pieces.map((item, i) => (
               <li key={item.src}>
                 <button
                   type="button"
                   className="fiber-index-row focus-ring"
-                  aria-pressed={i === active}
-                  onMouseEnter={() => setActive(i)}
-                  onFocus={() => setActive(i)}
-                  onClick={() => setActive(i)}
+                  aria-pressed={i === selected}
+                  onMouseEnter={() => setPreview(i)}
+                  onFocus={() => setSelected(i)}
+                  onClick={() => {
+                    setSelected(i);
+                    setPreview(null);
+                  }}
                 >
                   <span className="fiber-index-number">
                     {String(i + 1).padStart(2, "0")}

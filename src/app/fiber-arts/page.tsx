@@ -23,16 +23,16 @@ export default function FiberArtsPage() {
 
   return (
     <>
-      <PageShell className="fiber-page" accent="var(--plum-bold)">
+      <PageShell className="fiber-page" accent="var(--red-bold)">
         <PageHeader
           utilityStart={
             <HomeLogo
               colors={{
-                northeast: "var(--marigold-bold)",
-                southeast: "var(--plum-bold)",
-                southwest: "var(--plum-bold)",
-                northwest: "var(--plum-bold)",
-                hoverAccent: "var(--plum-bold)",
+                northeast: "var(--iris-bold)",
+                southeast: "var(--red-bold)",
+                southwest: "var(--red-bold)",
+                northwest: "var(--red-bold)",
+                hoverAccent: "var(--red-bold)",
               }}
               size="1.75rem"
             />

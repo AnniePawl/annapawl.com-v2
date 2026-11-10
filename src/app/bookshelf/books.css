@@ -29,6 +29,24 @@
   gap: var(--space-2) var(--space-5);
 }
 
+/* Reading stats button: filled charcoal so it stands out, with a cream
+   label and icon. On hover the button stays charcoal and only the chart
+   icon turns the bookshelf blue. */
+.bookshelf-stats-button.btn--primary,
+.bookshelf-stats-button.btn--primary:hover {
+  border-color: var(--text-primary);
+  background: var(--text-primary);
+  color: var(--bg-default);
+}
+
+.bookshelf-stats-button.btn--primary .btn-start-icon {
+  color: var(--bg-default);
+}
+
+.bookshelf-stats-button.btn--primary:hover .btn-start-icon {
+  color: var(--bookshelf-accent);
+}
+
 
 
 /*  Body layout */
@@ -37,7 +55,7 @@
   grid-template-columns: minmax(12.5rem, 18.75rem) minmax(0, 1fr);
   align-items: start;
   column-gap: var(--column-gap);
-  padding: var(--space-8) var(--space-5) var(--space-11);
+  padding: var(--space-7) var(--space-5) var(--space-11);
 }
 
 .bookshelf-rail-label,
@@ -178,25 +196,20 @@
 }
 
 /* Favorite books have ribbon book mark */
-.bookshelf-ribbon {
-  --ribbon-fold: color-mix(in srgb, var(--bookshelf-accent) 75%, var(--charcoal));
-  position: absolute;
-  top: 0;
-  right: 0.625rem;
-  width: 0.9375rem;
-  height: 2.375rem;
-  filter:
-    drop-shadow(1px 0 0 var(--cream))
-    drop-shadow(-1px 0 0 var(--cream))
-    drop-shadow(0 1px 0 var(--cream));
+/* Favorite: a small red heart right after the title. Inline, so on a
+   two-line title it follows the last word. */
+.bookshelf-favorite {
+  display: inline-flex;
+  margin-left: 0.3em;
+  color: var(--red-bold);
+  /* Centers the 0.8em heart on the middle of the capitals (about 0.36em
+     above the baseline) instead of letting it hang toward the bottom. */
+  vertical-align: -0.05em;
 }
 
-.bookshelf-ribbon::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(var(--ribbon-fold) 0 0.375rem, var(--bookshelf-accent) 0.375rem);
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%);
+.bookshelf-favorite svg {
+  width: 0.8em;
+  height: 0.8em;
 }
 
 .bookshelf-tile-meta {
@@ -310,28 +323,36 @@
 
 /* Mobile: rail becomes  sticky horizontal strip  */
 @media (width < 40rem) {
+  /* Tighter gap under the header. min-height: 0 so the smaller bottom
+     padding can't push the title down and add space above it. */
+  .bookshelf-page .post-header-stage {
+    min-height: 0;
+    margin-bottom: 0;
+    padding-bottom: var(--space-4);
+  }
+
+  /* No details bar on phones: the rules, the date and the book counts
+     go, and the Reading stats button sits alone on the right, just above
+     the tag strip. */
   .bookshelf-page .post-header-details {
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-2);
+    display: flex;
+    justify-content: flex-end;
+    /* Same side padding as the top row (--space-4), so the button's right
+       edge lines up with the right edge of the "Reading archive" text.
+       Top and bottom padding sit it a little higher, away from the tag
+       strip. */
+    padding: var(--space-1) var(--space-4) var(--space-4);
+    border: 0;
   }
 
-  .bookshelf-page .post-header-details > :first-child {
-    display: none;
-  }
-
-  .bookshelf-page .post-header-details > :last-child {
-    text-align: left;
-  }
-
-  .bookshelf-stat-authors {
+  .bookshelf-page .post-header-details > :first-child,
+  .bookshelf-details-end > span:first-child {
     display: none;
   }
 
   .bookshelf-details-end {
     display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    gap: var(--space-4);
+    justify-content: flex-end;
   }
 
   .bookshelf-browser {
@@ -353,6 +374,7 @@
     margin-bottom: var(--space-5);
     padding: 0 var(--space-4);
     overflow-x: auto;
+    border-top: 1px solid var(--bookshelf-rule);
     border-bottom: 1px solid var(--bookshelf-rule);
     background: var(--cream);
     white-space: nowrap;
@@ -368,7 +390,8 @@
     flex: none;
     align-items: center;
     gap: 0.4375rem;
-    min-height: 2.75rem;
+    /* 50px tall: a little more room above and below the tags. */
+    min-height: 3.125rem;
     border-bottom: 2px solid transparent;
     font-size: 0.9375rem;
   }

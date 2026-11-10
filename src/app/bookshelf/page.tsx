@@ -72,7 +72,7 @@ export default async function BooksPage() {
           accent="var(--blue-bold)"
           lede={
             <>
-              A running list of everything I’ve read lately, the good, the great and the “why did I finish that.” 
+              A running list of everything I’ve read lately — the good, the great and the “why did I finish that.” 
               {/* <span className="post-header-lede-muted">Pull up a chair.</span> */}
             </>
           }

@@ -17,7 +17,9 @@
    preview a state side by side. */
 
 .btn {
-  --btn-transition: 250ms var(--motion-ease-standard);
+  /* Every hover change (fill, text, icon, nudge) shares one timing so they
+     move together. Decelerate easing starts quick and settles softly. */
+  --btn-transition: 220ms var(--motion-ease-decelerate);
 
   display: inline-flex;
   align-items: center;
@@ -43,7 +45,7 @@
     border-color var(--btn-transition),
     color var(--btn-transition),
     text-decoration-color var(--btn-transition),
-    transform var(--motion-hover-duration) var(--motion-hover-ease);
+    transform var(--btn-transition);
 }
 
 .btn--pill {
@@ -86,7 +88,7 @@
   color: var(--btn-icon, var(--page-accent));
   transition:
     color var(--btn-transition),
-    transform var(--motion-hover-duration) var(--motion-hover-ease);
+    transform var(--btn-transition);
 }
 
 .btn-start-icon > svg,
@@ -106,11 +108,29 @@
   transform: translateX(0.25rem);
 }
 
-.btn:hover .btn-start-icon,
-.btn:hover .btn-end-icon,
-.btn[data-state="hover"] .btn-start-icon,
-.btn[data-state="hover"] .btn-end-icon {
-  color: inherit;
+/* On hover the icon takes the label's hover color. Each role names that
+   color directly instead of using `inherit`: inheriting a color that is
+   itself mid-transition makes the icon restart its own transition every
+   frame, so it trails behind the label and finishes late. */
+.btn--primary:hover .btn-start-icon,
+.btn--primary:hover .btn-end-icon,
+.btn--primary[data-state="hover"] .btn-start-icon,
+.btn--primary[data-state="hover"] .btn-end-icon {
+  color: var(--bg-default);
+}
+
+.btn--secondary:hover .btn-start-icon,
+.btn--secondary:hover .btn-end-icon,
+.btn--secondary[data-state="hover"] .btn-start-icon,
+.btn--secondary[data-state="hover"] .btn-end-icon {
+  color: var(--btn-hover-text, var(--page-accent-ink));
+}
+
+.btn--quiet:hover .btn-start-icon,
+.btn--quiet:hover .btn-end-icon,
+.btn--quiet[data-state="hover"] .btn-start-icon,
+.btn--quiet[data-state="hover"] .btn-end-icon {
+  color: var(--text-primary);
 }
 
 /* Primary — hairline outline. Shows a small accent dot before the label

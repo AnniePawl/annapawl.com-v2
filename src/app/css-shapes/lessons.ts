@@ -4,8 +4,7 @@ import type { ShapeVariant } from "./_components/GeometricShape";
 /**
  * Individual shape section
  *   steps   -- how the shape gets built, one property at a time
- *   anatomy -- (trickier shapes only) the finished shape with each part
- *              in its own color, plus a key
+ *   anatomy -- for trickier shapes only
  *   code    -- the finished CSS, simplified for readers
  */
 export type LessonStep = { demo: string; caption: string; property: string };
@@ -29,7 +28,7 @@ export const LESSONS: Record<ShapeVariant, Lesson> = {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: #F472B6;
+  background: #7F9BE6;
 }`,
   },
 
@@ -43,7 +42,7 @@ export const LESSONS: Record<ShapeVariant, Lesson> = {
 .square {
   width: 100px;
   height: 100px;
-  background: #57BC92;
+  background: #F472B6;
 }`,
   },
 
@@ -59,7 +58,7 @@ export const LESSONS: Record<ShapeVariant, Lesson> = {
         { color: "marigold-bold", label: "border-top" },
         { color: "coral-bold", label: "border-right" },
         { color: "fill", label: "border-bottom (the triangle)" },
-        { color: "teal-bold", label: "border-left" },
+        { color: "periwinkle-bold", label: "border-left" },
       ],
     },
     code: `
@@ -68,7 +67,7 @@ export const LESSONS: Record<ShapeVariant, Lesson> = {
   height: 0;
   border-left: 60px solid transparent;
   border-right: 60px solid transparent;
-  border-bottom: 100px solid #7F9BE6;
+  border-bottom: 100px solid #2BA3A0;
 }`,
   },
 
@@ -88,10 +87,11 @@ export const LESSONS: Record<ShapeVariant, Lesson> = {
     code: `
 .pentagon {
   position: relative;
+  box-sizing: content-box; /* borders add to the width */
   width: 54px;
   border-style: solid;
   border-width: 50px 18px 0;
-  border-color: #F5BF46 transparent;
+  border-color: #5088EA transparent;
 }
 
 .pentagon::before {
@@ -101,7 +101,7 @@ export const LESSONS: Record<ShapeVariant, Lesson> = {
   left: -18px;
   border-style: solid;
   border-width: 0 45px 35px;
-  border-color: transparent transparent #F5BF46;
+  border-color: transparent transparent #5088EA;
 }`,
   },
 
@@ -116,7 +116,7 @@ export const LESSONS: Record<ShapeVariant, Lesson> = {
   width: 70px;
   height: 120px;
   border-radius: 50%;
-  background: #FE7043;
+  background: #F5BF46;
 }`,
   },
 
@@ -135,9 +135,10 @@ export const LESSONS: Record<ShapeVariant, Lesson> = {
     },
     code: `
 .trapezoid {
+  box-sizing: content-box; /* borders add to the width */
   width: 80px;
   height: 0;
-  border-bottom: 70px solid #2BA3A0;
+  border-bottom: 70px solid #B985EB;
   border-left: 40px solid transparent;
   border-right: 40px solid transparent;
 }`,
@@ -161,7 +162,7 @@ export const LESSONS: Record<ShapeVariant, Lesson> = {
   position: relative;
   width: 100px;
   height: 100px;
-  background: #B985EB;
+  background: #D91F1F;
 }
 
 .octagon::before,
@@ -169,19 +170,20 @@ export const LESSONS: Record<ShapeVariant, Lesson> = {
   content: "";
   position: absolute;
   left: 0;
+  box-sizing: content-box; /* borders add to the width */
   width: 42px;  /* 100px minus the two 29px borders */
-  border-left: 29px solid #C4EBD7;  /* background color */
-  border-right: 29px solid #C4EBD7;
+  border-left: 29px solid #FFC6E6;  /* background color */
+  border-right: 29px solid #FFC6E6;
 }
 
 .octagon::before {
   top: 0;
-  border-bottom: 29px solid #B985EB;
+  border-bottom: 29px solid #D91F1F;
 }
 
 .octagon::after {
   bottom: 0;
-  border-top: 29px solid #B985EB;
+  border-top: 29px solid #D91F1F;
 }`,
   },
 
@@ -194,7 +196,7 @@ export const LESSONS: Record<ShapeVariant, Lesson> = {
 .parallelogram {
   width: 120px;
   height: 70px;
-  background: #5088EA;
+  background: #FE7043;
   transform: skew(20deg);
 }`,
   },
@@ -208,7 +210,7 @@ export const LESSONS: Record<ShapeVariant, Lesson> = {
 .rectangle {
   width: 70px;
   height: 120px;
-  background: #2D6144;
+  background: #57BC92;
 }`,
   },
 
@@ -231,7 +233,7 @@ export const LESSONS: Record<ShapeVariant, Lesson> = {
   position: relative;
   width: 104px;
   height: 60px;
-  background: #D91F1F;
+  background: #2D6144;
 }
 
 .hexagon::before,
@@ -245,12 +247,12 @@ export const LESSONS: Record<ShapeVariant, Lesson> = {
 
 .hexagon::before {
   bottom: 100%;
-  border-bottom: 30px solid #D91F1F;
+  border-bottom: 30px solid #2D6144;
 }
 
 .hexagon::after {
   top: 100%;
-  border-top: 30px solid #D91F1F;
+  border-top: 30px solid #2D6144;
 }`,
   },
 
@@ -273,7 +275,7 @@ export const LESSONS: Record<ShapeVariant, Lesson> = {
   position: relative;
   width: 0;
   height: 0;
-  margin: 50px 0;
+  margin: 50px 0; /* just makes room for the points, not part of the star */
   border-left: 100px solid transparent;
   border-right: 100px solid transparent;
   border-bottom: 70px solid #8B87F5;
