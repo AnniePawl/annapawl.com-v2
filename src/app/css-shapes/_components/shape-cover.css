@@ -92,11 +92,6 @@
     max-width: none;
   }
 
-
-  .shapes-page .post-header-stage {
-    min-height: 0;
-    padding-top: var(--space-2);
-  }
 }
 
 /* A few code samples get a lighter tone than their section's own soft

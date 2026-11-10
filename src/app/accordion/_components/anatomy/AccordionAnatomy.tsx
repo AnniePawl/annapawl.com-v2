@@ -5,7 +5,7 @@ import { Squirrel } from "lucide-react";
 import Accordion, { type AccordionItem } from "../../../../components/ui/Accordion";
 import "./anatomy.css";
 
-// Just one item, open, so every part is easy to see.
+// one item open
 const ITEMS: AccordionItem[] = [
   {
     question: "Are squirrels secretly tiny gardeners?",
@@ -13,8 +13,8 @@ const ITEMS: AccordionItem[] = [
   },
 ]
 
-// Each part points at an element in the real accordion (`el`, a CSS
-// selector; the first match is used). Hovering or focusing a part in
+// Each part of demo points at an element in the real accordion
+// Hovering or focusing a part in
 // the list outlines that element in the example. `line: true` outlines
 // just the element's top edge, for the divider, which is drawn with CSS
 // and can't be selected on its own.
@@ -26,8 +26,7 @@ type Part = {
   line?: boolean;
   /** Optional extra copy shown under the description. */
   detail?: React.ReactNode;
-  /** A feature of this design rather than essential accordion anatomy.
-   *  Shown with an "Optional" badge in the list. */
+  /** optional bage */
   optional?: boolean;
 }
 
@@ -107,10 +106,10 @@ const PARTS: Part[] = [
   },
 ]
 
-// The part highlighted when nothing is hovered or focused: Container.
+// Container highlighed by default.
 const DEFAULT_PART = 1;
 
-// How far the outline sits outside the part it highlights (px).
+// Outline padding.
 const PAD = 6;
 
 type Box = { left: number; top: number; width: number; height: number }
@@ -133,7 +132,7 @@ function Tag({ n }: { n: number }) {
   return <span className='anatomy-tag' aria-hidden='true'>{n}</span>
 }
 // Renders the real Accordion, so any change to the component shows up
-// here too. Hover or focus a part in the list to outline it.
+// here too.
 export default function AccordionAnatomy() {
   const figureRef = useRef<HTMLElement>(null);
   const highlightRef = useRef<HTMLSpanElement>(null);
@@ -182,8 +181,7 @@ export default function AccordionAnatomy() {
         </figcaption>
       </figure>
 
-      {/* Mouse users hover; on touch screens there's no hover, so the
-          hint asks for a click instead (see .anatomy-hint in anatomy.css). */}
+      {/* Mouse users hover; on touch screens there's no hover, so says click */}
       <p className="anatomy-hint">
         <span className="anatomy-hint--hover">
           Hover over a part below, or tab to it, to highlight it in the example.

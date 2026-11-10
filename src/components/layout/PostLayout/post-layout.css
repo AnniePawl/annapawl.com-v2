@@ -53,8 +53,11 @@
 
 .post-header-stage {
   display: flex;
-  min-height: clamp(9rem, 18vw, 14rem);
-  padding: var(--space-4) var(--space-5);
+  /* Sized by its content, with a small gap under the top row, so the
+     title sits close to the top and more of the page shows above the
+     fold. Phones set their own spacing below. */
+  min-height: 0;
+  padding: var(--space-2) var(--space-5) var(--space-4);
   align-items: flex-start;
   flex-direction: column;
   justify-content: flex-end;

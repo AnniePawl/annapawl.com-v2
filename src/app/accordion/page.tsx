@@ -14,6 +14,7 @@ const VANILLA_MARKUP = `<div class="accordion">
   <div class="accordion-item">
     <h3>
       <button
+        type="button"
         class="accordion-button"
         aria-expanded="true"
         aria-controls="panel-1"
@@ -29,6 +30,7 @@ const VANILLA_MARKUP = `<div class="accordion">
   <div class="accordion-item">
     <h3>
       <button
+        type="button"
         class="accordion-button"
         aria-expanded="false"
         aria-controls="panel-2"
@@ -315,35 +317,31 @@ export default function AccordionTutorial() {
       >
         <PostSection id="what-is-an-accordion" title="What is an accordion?">
           <p>
-            An accordion is a stack of clickable headers that expand and collapse to show or hide the content underneath. I think of it as a set of drawers: you only open the ones you need, and the rest stay tucked away until you’re curious. It’s a tidy way to keep a page calm while still letting people dig into the details they care about.
+            I think of an accordion as a set of drawers. Each heading gives you a glimpse of what’s tucked underneath. You open the ones you need and leave the rest closed until you want to dig into the details. That’s handy when you’re looking up one question in an FAQ or jumping to a step in a guide.
           </p>
           <p>
-            You’ve probably seen them most in FAQs, but they’re also handy for settings panels, product specs, filters in a sidebar, step-by-step instructions, or anywhere a page might turn into a wall of text. The trade-off is that hidden content is easy to miss, so accordions work best when people already know what they’re looking for.
+            I wrote this to slow down and really understand what happens in a single click. How does the button know which panel to open? What makes the plus turn into a minus? How does a screen reader know the panel is open? Let’s take one apart and see how those pieces fit together.
           </p>
-          <p>
-            Under the hood, each header holds a real <code>button</code>, which does a lot of quiet accessibility work for free. We’ll dig into what that means, and how to make the accordion work just as well with a keyboard or screen reader, in the <TextLink href='#keyboard-and-focus'>Keyboard & focus</TextLink> section below.
-          </p>
-          <p>
-            Now that we know what it does, let’s look at the pieces that make it work.
-          </p>
+
         </PostSection>
 
         <PostSection id="anatomy" title="The anatomy">
           <p>
-            An accordion begins with a container and an optional title. Inside, each item pairs a header with a content panel. The header is a heading with a button inside it, and the button can hold a number, label, and visual indicator, like a plus, minus, or chevron, that communicates whether the item is open or closed. Behind the scenes, unique IDs and ARIA attributes connect each button to the panel it controls.
+            Each accordion item pairs a question with the panel it opens. The heading gives the question a place in the page’s outline and the real <code>button</code> inside it does a lot quiet work for us. You can Tab to it and press Enter or Space to open the panel.
+          </p>
+          <p>
+            Try highlighting <b>Button</b> and then <b>Panel</b> below. You can see which pieces go together. In the code, an ID and an ARIA attribute connect them. In the Behind the Buttons section, we’ll look at how the button points to its panel and tells a screen reader whether it’s open.
           </p>
           <AccordionAnatomy />
         </PostSection>
 
         <PostSection id="behind-the-buttons" title="Behind the Buttons">
           <p>
-            An accordion has an invisible layer of structure. Unique IDs and ARIA
-            attributes connect each header button to its panel and communicate whether the
-            content is open or closed. These attributes do not create the interaction themselves. JavaScript still handles opening and closing the panel, while the ARIA values keep its state understandable to assistive technology.
+            An accordion has an invisible layer of structure. Let’s look at the HTML for the squirrel question. The button has two little bits of information tucked into it. They’re called ARIA attributes. One tells a screen reader whether the panel is open and the other points to the panel this button controls. JavaScript does the opening and closing, and the attributes describe what’s going on.
           </p>
           <CodeBlock code={`<div class="accordion-item">
   <h3>
-    <button aria-expanded="true" aria-controls="panel-1">
+    <button type="button" aria-expanded="true" aria-controls="panel-1">
       Are squirrels secretly tiny gardeners?
     </button>
   </h3>
@@ -358,44 +356,39 @@ export default function AccordionTutorial() {
           />
           <PostSubsection title="aria-expanded" variant="code">
             <p>
-              <code>aria-expanded</code> sits on the button and tells assistive
-              technology whether its panel is open. <code>false</code> means
-              closed, <code>true</code> means open. A screen reader may announce
-              something like &ldquo;Are squirrels secretly tiny gardeners?,
-              button, collapsed,&rdquo; though the exact wording and order vary
-              between screen readers and browsers. JavaScript updates the value every time
-              the panel opens or closes. The plus-and-minus icon is only a visual
-              cue; <code>aria-expanded</code> is what carries the state.
+              <b>Is it open?</b> Here, <code>aria-expanded=&quot;true&quot;</code> tells
+              a screen reader the button is expanded. You might hear something
+              like &ldquo;Are squirrels secretly tiny gardeners? Button,
+              expanded.&rdquo; When we close the panel, JavaScript changes the
+              value to <code>false</code>. The plus and minus give you a visual
+              clue, and <code>aria-expanded</code> makes that same information
+              available to a screen reader.
             </p>
           </PostSubsection>
           <PostSubsection title="aria-controls" variant="code">
             <p>
-              <code>aria-controls</code> also sits on the button, and points to
-              the panel it opens. Its value must exactly match the panel&rsquo;s{" "}
-              <code>id</code>. It&rsquo;s a programmatic link more than an
-              announced one, since support varies and most screen readers say
-              nothing about it, but it&rsquo;s part of the recommended pattern
-              and costs nothing to include.
+              <b>Which panel goes with this button?</b> Follow{" "}
+              <code>aria-controls=&quot;panel-1&quot;</code> down a few lines and
+              you&rsquo;ll find <code>id=&quot;panel-1&quot;</code> on the panel.
+              Those values have to match. In the next section, we&rsquo;ll use
+              that same ID to find the panel in JavaScript.
             </p>
           </PostSubsection>
           <PostSubsection title="aria-labelledby" variant="code" tag="Optional">
             <p>
-              <code>aria-labelledby</code> sits on the panel and points back to
-              the button&rsquo;s <code>id</code>, so the panel takes the question
-              as its name. If you give the panel{" "}
-              <code>role=&quot;region&quot;</code>, which turns the open panel
-              into a landmark screen-reader users can jump to, use{" "}
-              <code>aria-labelledby</code> to name that region after its
-              button. That helps with long panels but for short answers like
-              these, you can skip both.
+              Sometimes a panel has enough content that it helps to make it a
+              landmark people can jump to with a screen reader. If you give the
+              panel <code>role=&quot;region&quot;</code>, use{" "}
+              <code>aria-labelledby</code> to point back to the button&rsquo;s{" "}
+              <code>id</code>. That way the region gets its name from the
+              question. For a short answer about squirrels, I&rsquo;d skip both.
             </p>
           </PostSubsection>
         </PostSection>
 
         <PostSection id="vanilla-js" title="Build it in vanilla JavaScript">
           <p>
-            Before any framework, here&rsquo;s the accordion in plain HTML,
-            a little CSS and a few lines of JS. This little mental model and cheat sheet helps me remember its structure and how each piece fits together.
+            We’ve seen how a button points to its panel. Now let’s give it something to do. I’m starting with plain HTML, CSS, and JavaScript so we can follow one click all the way through before we rebuild it in React.
           </p>
           <Callout eyebrow="Mental model" className="mt-6">
             <ul className="m-0 grid list-none gap-2 p-0">
@@ -429,14 +422,11 @@ export default function AccordionTutorial() {
 
           <PostSubsection title="Start with the markup">
             <p>
-              Here&rsquo;s an accordion with two items. Every button carries
-              its state and target (<code>aria-expanded</code>,{" "}
-              <code>aria-controls</code>), and every panel carries its identity
-              and visibility (<code>id</code>, <code>hidden</code>). The button
-              doesn&rsquo;t need an <code>id</code> of its own: it only needs one
-              when something points back to it, like{" "}
-              <code>aria-labelledby</code>. The one new piece is{" "}
-              <code>hidden</code>, which hides a closed panel with no CSS needed.
+              The first squirrel question starts open. The second one starts closed. Look at what&rsquo;s different
+              in the HTML. The second button has{" "}
+              <code>aria-expanded=&quot;false&quot;</code>, and its panel has{" "}
+              <code>hidden</code>. One describes the state of the button, and
+              the other keeps the panel out of view.
             </p>
             <CodeBlock
               code={VANILLA_MARKUP}
@@ -452,51 +442,40 @@ export default function AccordionTutorial() {
 
           <PostSubsection title="Add a little CSS">
             <p>
-              Just enough CSS to look like an accordion. The plus and minus come from the button’s <code>aria-expanded</code> attribute. When it’s true, the CSS swaps the plus for a minus. Since the JavaScript already updates that attribute, the icon always matches the real state, with no extra code.
+              Just enough CSS to look like an accordion. The bits to watch here are the plus and minus icons, which come from the button’s <code>aria-expanded</code> attribute. When it’s true, the CSS swaps the plus for a minus. Since the JavaScript already updates that attribute, the icon always matches the real state, with no extra code.
             </p>
             <CodeBlock code={VANILLA_CSS} highlight={['[aria-expanded="true"]']} />
           </PostSubsection>
 
           <PostSubsection title="Wire it up with JavaScript">
-            <p>The script follows the mental model and cheat sheet step by step:</p>
+            <p>The script follows the mental model above, step by step. The first two steps set up the buttons. The last three happen every time you click one.</p>
             <ol className="my-4 grid list-decimal gap-2 pl-5 text-[length:var(--text-md)] leading-[var(--leading-relaxed)]">
               <li>
-                <strong>Select:</strong> find each accordion on the page, then the
-                buttons inside it. Keeping each accordion to its own buttons
-                means two accordions on one page never interfere.
+                <strong>Select:</strong> the buttons inside each accordion.
               </li>
               <li>
-                <strong>Listen:</strong> run some code whenever one is clicked.
+                <strong>Listen:</strong> for a click on each button.
               </li>
               <li>
-                <strong>Locate panel:</strong> read the button&rsquo;s{" "}
-                <code>aria-controls</code> to find the panel it opens.
+                <strong>Locate panel:</strong> by matching the button&rsquo;s{" "}
+                <code>aria-controls</code> to the panel&rsquo;s <code>id</code>.
               </li>
               <li>
-                <strong>Read state:</strong> check <code>aria-expanded</code> to
-                see whether it&rsquo;s open right now. Attributes are always
-                text, so we compare against the string <code>&quot;true&quot;</code>.
+                <strong>Read state:</strong> by comparing <code>aria-expanded</code> to
+                the string <code>&quot;true&quot;</code>.
               </li>
               <li>
-                <strong>Update both:</strong> set <code>aria-expanded</code> to the
-                opposite, and hide or show the panel to match. If it was open,{" "}
-                <code>hidden</code> becomes <code>true</code>. If it was closed,{" "}
-                <code>hidden</code> becomes <code>false</code>.
+                <strong>Update both:</strong> the button’s <code>aria-expanded</code> and the panel’s <code>hidden</code> property.
               </li>
             </ol>
             <p>That&rsquo;s the whole script:</p>
             <CodeBlock code={VANILLA_JS} highlight={['accordion.querySelectorAll(".accordion-button")']} />
             <p>
-              The script needs the accordion to exist before it runs, so load
-              it with <code>defer</code> (or <code>type=&quot;module&quot;</code>),
-              or put it at the end of the <code>&lt;body&gt;</code>. And if a
-              page has more than one accordion, give every panel its own id,
-              like <code>faq-panel-1</code> and <code>shipping-panel-1</code>,
-              so each <code>aria-controls</code> points at the right one.
+              That last step is worth reading slowly. If the second panel starts closed, <code>isOpen</code> is <code>false</code>. After the click, the button gets <code>aria-expanded=&quot;true&quot;</code> and the panel gets <code>hidden = false</code>. Both lines are working from what was true before the click.
             </p>
           </PostSubsection>
 
-          <PostSubsection title="Keep ARIA in sync">
+          <PostSubsection title="Keep the button + panel sync">
             <p>
               <code>aria-expanded</code> is the single source of truth. The
               JavaScript checks it to decide whether to open or close an item,
@@ -509,13 +488,7 @@ export default function AccordionTutorial() {
 
           <PostSubsection title="Make it single-open">
             <p>
-              In the example above, several items can be open at once. Many
-              accordions, especially FAQs, keep just one open at a time instead,
-              so the page stays short and focused. To do that, close the other
-              items in the same accordion first, then open or close the one
-              that was clicked. A small{" "}
-              <code>setOpen</code> helper updates a button and its panel
-              together, so they always change as a pair.
+              In the example above, several items can be open at once. If you want opening one to close the other, a little <code>setOpen</code> helper lets you update a button and its panel together. Use it to close the other items first, then toggle the one you clicked. Click an open question again and you can close them all.
             </p>
             <CodeBlock code={VANILLA_SINGLE_OPEN} highlight={["setOpen(other, false)"]} />
           </PostSubsection>
@@ -531,31 +504,21 @@ export default function AccordionTutorial() {
             it shouldn&rsquo;t.
           </p>
 
-          <PostSubsection title="Arrow keys, Home and End" tag="Optional">
-            <p>
-              For longer accordions, you can add a few shortcuts on top of
-              Tab: Up and Down move between headers, and Home and End jump to
-              the first and last. They aren&rsquo;t part of the current
-              WAI-ARIA accordion pattern, but they&rsquo;re a nice touch. A
-              single listener on each accordion handles them, so it works for
-              any number of items.
-            </p>
-            <CodeBlock code={KEYBOARD_JS} highlight={["event.preventDefault()", "buttons[next].focus()"]} />
-            <p>
-              <code>preventDefault()</code> matters here because without it, the arrow
-              keys would also scroll the page.
-            </p>
-          </PostSubsection>
-
           <PostSubsection title="Make focus visible">
             <p>
-              The CSS earlier resets the button&rsquo;s border and background.
-              It&rsquo;s tempting to remove the outline too, but that&rsquo;s
-              how keyboard users see where they are. Style it instead.{" "}
-              <code>:focus-visible</code> shows the outline when someone
-              tabs to a button, but not when they click it with a mouse.
+              When you Tab to a question, can you tell which one you’re on? That’s what the focus ring is for. I’m using <code>:focus-visible</code> to give the button a clear outline when the browser decides focus should be visible, like when you Tab to it.
             </p>
             <CodeBlock code={FOCUS_CSS} highlight={[":focus-visible"]} />
+          </PostSubsection>
+
+          <PostSubsection title="Leave focus on the button">
+            <p>
+              After someone opens an item, keep focus on its button. It can be
+              tempting to move focus into the panel, but that pulls keyboard and
+              screen-reader users somewhere they didn&rsquo;t ask to go. From
+              the button, they can keep reading into the panel when they&rsquo;re
+              ready, or close it again with Enter or Space.
+            </p>
           </PostSubsection>
 
           <PostSubsection title="Keep hidden content out of reach">
@@ -585,8 +548,11 @@ export default function AccordionTutorial() {
                 for the animation to work on.
               </li>
               <li>
-                <strong>Script:</strong> swap <code>panel.hidden = isOpen</code>{" "}
-                for <code>panel.inert = isOpen</code>.
+                <strong>JavaScript:</strong> in the first script, swap{" "}
+                <code>panel.hidden = isOpen</code> for{" "}
+                <code>panel.inert = isOpen</code>. In the single-open
+                version&rsquo;s <code>setOpen</code> helper, swap{" "}
+                <code>.hidden = !open</code> for <code>.inert = !open</code>.
               </li>
               <li>
                 <strong>CSS:</strong> open the panel whenever its button says{" "}
@@ -597,28 +563,34 @@ export default function AccordionTutorial() {
             <CodeBlock code={ANIMATED_CSS} highlight={[':has([aria-expanded="true"])']} />
           </PostSubsection>
 
-          <PostSubsection title="Leave focus where it is">
+          <PostSubsection title="Arrow keys, Home and End" tag="Optional">
             <p>
-              After someone opens an item, keep focus on its button. It can be
-              tempting to move focus into the panel, but that pulls keyboard and
-              screen-reader users somewhere they didn&rsquo;t ask to go. From
-              the button, they can keep reading into the panel when they&rsquo;re
-              ready, or close it again with Enter or Space.
+              For longer accordions, you can add a few shortcuts on top of
+              Tab: Up and Down move between headers, and Home and End jump to
+              the first and last. They aren&rsquo;t part of the current
+              WAI-ARIA accordion pattern, but they&rsquo;re a nice touch. A
+              single listener on each accordion handles them, so it works for
+              any number of items.
+            </p>
+            <CodeBlock code={KEYBOARD_JS} highlight={["event.preventDefault()", "buttons[next].focus()"]} />
+            <p>
+              <code>preventDefault()</code> matters here because without it, the arrow
+              keys would also scroll the page.
             </p>
           </PostSubsection>
+
         </PostSection>
 
         <PostSection id="react" title="Rebuild it in React">
           <p>
             Same accordion, same mental model, now as a React component. The
-            big change is where the truth lives. In the vanilla version, the
-            script read <code>aria-expanded</code> straight from the page and
-            wrote it back. In React, the open item lives in state, and the
+            big change is where the source of truth lives. In the vanilla version, the
+            script read <code>aria-expanded</code> from the button to figure out what was open. In React, the open item lives in state, and the
             attributes are drawn from that state every time the component
-            renders. You never call <code>setAttribute</code>, and ARIA
-            can&rsquo;t fall out of sync.
+            renders. You never call <code>setAttribute</code>, and both
+            attributes come from the same <code>isOpen</code> value.
           </p>
-          <Callout eyebrow="Vanilla to React" className="mt-6">
+          <Callout eyebrow="Vanilla to React" tone="iris-bold" className="mt-6">
             <ul className="m-0 grid list-none gap-2 p-0">
               <li>
                 <strong className="mr-2">Select</strong>
@@ -626,7 +598,7 @@ export default function AccordionTutorial() {
               </li>
               <li>
                 <strong className="mr-2">Listen</strong>
-                <code>onClick</code> on each button
+                Each button gets an <code>onClick</code> handler
               </li>
               <li>
                 <strong className="mr-2">Locate panel</strong>
@@ -634,11 +606,11 @@ export default function AccordionTutorial() {
               </li>
               <li>
                 <strong className="mr-2">Read state</strong>
-                <code>openId === item.id</code>
+                <code>Compare openId === item.id</code>
               </li>
               <li>
                 <strong className="mr-2">Update both</strong>
-                <code>setOpenId()</code>, and React redraws the attributes
+                Call <code>setOpenId()</code>, and React updates the button and panel from the new state.
               </li>
             </ul>
           </Callout>
@@ -646,7 +618,7 @@ export default function AccordionTutorial() {
           <PostSubsection title="Start with the data">
             <p>
               Instead of writing each item by hand, keep the questions and
-              answers in an array. Each item gets a short, stable{" "}
+              answers in an array. Each item gets a short
               <code>id</code>, which React uses to tell items apart and which
               we&rsquo;ll use to connect each button to its panel.
             </p>
@@ -655,8 +627,7 @@ export default function AccordionTutorial() {
 
           <PostSubsection title="Choosing the state">
             <p>
-              The only thing that changes is which item is open, so that&rsquo;s
-              all we store: one <code>openId</code>, or <code>null</code> when
+              What does the accordion actually need to remember? Here, it’s just which question is open. So we store <code>openId</code> or <code>null</code> when
               everything is closed. Storing a single id also gives us
               single-open behavior for free, because only one id fits. Passing
               a function to <code>setOpenId</code> hands you the current value,
@@ -679,7 +650,7 @@ export default function AccordionTutorial() {
             />
           </PostSubsection>
 
-          <PostSubsection title="Unique ids">
+          <PostSubsection title="Give each panel a unique ID">
             <p>
               Ids like <code>panel-gardeners</code> work until two accordions
               share a page and both use the same item ids. Then{" "}
@@ -714,8 +685,7 @@ export default function AccordionTutorial() {
         <PostSection id="test-it" title="Test it">
           <p>
             You don&rsquo;t need special tools to check your accordion. A Mac
-            and a browser cover the essentials, so run through these as a
-            strong first pass once you&rsquo;ve built it:
+            and a browser cover the essentials, so run through these to see if the accordion behaves the way we expect.
           </p>
           <ol className="my-4 grid list-decimal gap-3 pl-5 text-[length:var(--text-md)] leading-[var(--leading-relaxed)]">
             <li>
@@ -733,8 +703,7 @@ export default function AccordionTutorial() {
             <li>
               <strong>Listen with a screen reader.</strong> Press Cmd+F5 to turn
               on VoiceOver, then Tab to a header. You should hear its question,
-              that it&rsquo;s a button, and that it&rsquo;s collapsed (the exact
-              wording varies). Press Space and it should tell you it&rsquo;s now
+              that it&rsquo;s a button, and that it&rsquo;s collapsed. Press Space and it should tell you it&rsquo;s now
               expanded. Press Ctrl+Option+U to open the
               rotor, and your questions should appear in its Headings list. Press
               Cmd+F5 again to turn it off.
@@ -745,27 +714,19 @@ export default function AccordionTutorial() {
               scrolling. Cmd+0 resets it.
             </li>
             <li>
-              <strong>Turn on reduced motion.</strong> In System Settings
+              <strong>Try on reduced motion.</strong> In System Settings
               &rarr; Accessibility &rarr; Display, switch on Reduce motion. Items
               should open and close without animating.
             </li>
             <li>
-              <strong>Run an automated check.</strong> In Chrome, open DevTools,
-              go to the Lighthouse tab and run an Accessibility audit, or try the
-              free axe DevTools extension. They catch missing labels and low
-              contrast in seconds, but not whether it feels right to use, so do
-              the manual checks too.
+              <strong>Run an automated check.</strong> Lighthouse’s Accessibility audit can flag things you might miss, like low contrast. I’d still start with the keyboard. That’s how you find out what happens when you actually try to use the accordion.
             </li>
           </ol>
         </PostSection>
 
         <PostSection id="keep-going" title="Keep going">
           <p>
-            An accordion looks simple, but most of it is invisible: a real
-            button inside a heading, one attribute that keeps everything in
-            sync, and panels that stay out of reach until they&rsquo;re open.
-            Get those right and you have a strong, accessible foundation,
-            whether people use a mouse, a keyboard or a screen reader.
+            An accordion looks simple, but most of it is invisible. What helped me was taking one question and following it all the way through. Which panel opens? What changes on the button? Where does focus stay? Once I could answer those, I knew where to look if something felt off.
           </p>
           <p>Want to go deeper? These are the references I lean on most:</p>
           <ul className="my-4 grid list-disc gap-2 pl-5 text-[length:var(--text-md)] leading-[var(--leading-relaxed)]">
@@ -792,8 +753,8 @@ export default function AccordionTutorial() {
             Want to see the finished version? My accordion, with its title,
             markers and open-and-close animation, lives in my{" "}
             <TextLink href="/sedge-design-system#accordion">Sedge design system</TextLink>.
-            More Building Blocks are on the way. 🌱
           </p>
+          <p>More Building Blocks are on the way. 🌱</p>
         </PostSection>
       </PostLayout>
     </main>

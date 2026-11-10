@@ -32,7 +32,7 @@ export default function DrawingWithCodePage() {
         title="Drawing with Code"
         next={{ href: "/css-shapes", label: "CSS Shapes" }}
         publishedDate="Updated Oct 2026"
-        readingTime="10 min read"
+        readingTime="12 min read"
         postTags="CSS, Illustration, Creative Coding"
         utilityStart={
           <HomeLogo

@@ -32,7 +32,7 @@ export default function CssShapesPage() {
         title="CSS Shapes"
         next={{ href: "/drawing-with-code", label: "Drawing with Code" }}
         publishedDate="Updated Oct 2026"
-        readingTime="6 min read"
+        readingTime="8 min read"
         postTags="CSS, Illustration"
         accent="var(--marigold-bold)"
         utilityStart={
