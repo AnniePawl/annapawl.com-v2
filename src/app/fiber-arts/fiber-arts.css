@@ -161,6 +161,14 @@
   background: color-mix(in srgb, var(--periwinkle-soft) 55%, var(--cream));
 }
 
+/* Hover previews a piece without selecting it: a lighter tint than the
+   selected row, so you can tell which one will stay. */
+@media (hover: hover) {
+  .fiber-index-row:hover:not([aria-pressed="true"]) {
+    background: color-mix(in srgb, var(--periwinkle-soft) 25%, var(--cream));
+  }
+}
+
 .fiber-index-number {
   display: inline-flex;
   align-items: center;
@@ -273,6 +281,11 @@
 .fiber-swatch-image img {
   padding: 12%;
   transition: transform var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+/* Hand photos (bleed in data.ts) fill the whole square, no inset. */
+.fiber-swatch-image[data-bleed] img {
+  padding: 0;
 }
 
 .fiber-swatch:hover .fiber-swatch-image img,

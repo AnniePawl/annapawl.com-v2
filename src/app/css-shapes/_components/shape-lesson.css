@@ -118,6 +118,16 @@
     gap: var(--space-2);
   }
 
+  /* Step frames are about half their desktop size on phones. The star is the widest, so it gets
+     its own smaller scale. */
+  .shape-steps .shape-frame .demo {
+    scale: 0.85;
+  }
+
+  .shape-steps .shape-frame .demo[class*="demo--star"] {
+    scale: 0.62;
+  }
+
   .shape-step-caption {
     font-size: 0.75rem;
   }

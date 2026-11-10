@@ -12,16 +12,16 @@
   background: var(--cream);
 }
 
-/* Compact header: same title as every page, but the stage hugs it
+/* Compact header: one-line title, and the stage hugs it on phones too
    (no tall minimum height), so search and the first cards sit closer
-   to the top. */
+   to the top. The spacing above the title comes from the shared
+   header, so it matches every other page. */
 .field-notes-page .post-header-title {
   max-width: none;
 }
 
 .field-notes-page .post-header-stage {
   min-height: 0;
-  padding-top: var(--space-5);
 }
 
 /* No details bar on this page (no date or tags), just one rule under

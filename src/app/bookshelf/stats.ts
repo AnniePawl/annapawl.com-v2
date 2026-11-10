@@ -43,7 +43,7 @@ function publishedYear({ lookup, info }: BookStatEntry): number | null {
 export function computeStats(entries: BookStatEntry[]): ReadingStats {
   const books = entries.map(resolveDisplay);
 
-  // Time traveled — uses the short title from data.ts, since Google's
+  // Publication span — uses the short title from data.ts, since Google's
   // titles can carry marketing subtitles ("…: A GMA Book Club Pick").
   const dated = entries
     .map((entry) => ({ title: entry.lookup.title, year: publishedYear(entry) }))

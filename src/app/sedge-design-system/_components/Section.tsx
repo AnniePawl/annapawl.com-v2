@@ -14,7 +14,9 @@ export default function Section({
   icon: LucideIcon;
   /** A sentence or two set large under the heading, like the PageHeader lede. */
   lede?: ReactNode;
-  description?: string;
+  /** Body copy under the lede. Pass an array for several paragraphs;
+   *  items can include links (any ReactNode). */
+  description?: ReactNode | ReactNode[];
   children: ReactNode;
   className?: string;
 }) {
@@ -26,7 +28,12 @@ export default function Section({
     >
       <SectionHeading id={id} heading={heading} icon={icon} />
       {lede && <p className="sedge-section-lede">{lede}</p>}
-      {description && <p className="sedge-section-description">{description}</p>}
+      {description &&
+        (Array.isArray(description) ? description : [description]).map((paragraph, i) => (
+          <p key={i} className="sedge-section-description">
+            {paragraph}
+          </p>
+        ))}
       <div className="sedge-section-content">{children}</div>
     </section>
   );

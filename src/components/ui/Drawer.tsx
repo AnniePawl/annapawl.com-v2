@@ -44,12 +44,20 @@ export default function Drawer({
       } as CSSProperties)
     : ({ "--drawer-accent": accent } as CSSProperties);
   const ref = useRef<HTMLDialogElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
   const titleId = useId();
 
   useEffect(() => {
     const dialog = ref.current;
     if (!dialog) return;
-    if (open && !dialog.open) dialog.showModal();
+    if (open && !dialog.open) {
+      dialog.showModal();
+      // showModal() focuses the first button (Close), and browsers show
+      // its focus ring even after a tap. Start on the title instead: no
+      // ring, and screen readers announce the drawer's name first.
+      // Keyboard users still Tab to Close, and Escape closes it.
+      titleRef.current?.focus();
+    }
     if (!open && dialog.open) dialog.close();
   }, [open]);
 
@@ -82,7 +90,7 @@ export default function Drawer({
       </div>
 
       <div className="drawer-content" data-lenis-prevent>
-        <h2 className="drawer-title" id={titleId}>
+        <h2 className="drawer-title" id={titleId} ref={titleRef} tabIndex={-1}>
           {title}
           <span aria-hidden="true" />
         </h2>

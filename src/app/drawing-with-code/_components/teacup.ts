@@ -1,11 +1,11 @@
-// The teacup build-along's CSS, one string per step. The post shows
+// The teacup build-along's CSS. The post shows
 // these in its code blocks, and TeacupDemo draws from the same strings,
 // so editing a value here updates both.
 
 export const TEACUP_CUP = `.teacup {
   --cup: #B8B5FF;
-  --cup-dark: #8B87F5;
-  --saucer: #D7BAFF;
+  --handle: #FFE669;
+  --saucer: #B5FFDB;
   --outline: #8884f4ff;
 
   position: relative;
@@ -24,7 +24,7 @@ export const TEACUP_HANDLE = `.teacup::before {
   z-index: -1;
   width: 40px;
   height: 40px;
-  border: 10px solid var(--cup);
+  border: 10px solid var(--handle);
   border-radius: 50%;
   box-shadow:
     0 0 0 3px var(--outline),

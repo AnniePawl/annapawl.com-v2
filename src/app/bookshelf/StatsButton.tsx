@@ -28,7 +28,12 @@ export default function StatsButton({ stats, tags }: StatsButtonProps) {
 
   return (
     <>
-      <Button size="sm" startIcon={<ChartColumn />} onClick={() => setOpen(true)}>
+      <Button
+        size="sm"
+        startIcon={<ChartColumn />}
+        className="bookshelf-stats-button"
+        onClick={() => setOpen(true)}
+      >
         Reading stats
       </Button>
 
@@ -37,7 +42,7 @@ export default function StatsButton({ stats, tags }: StatsButtonProps) {
         onClose={() => setOpen(false)}
         eyebrow="Reading archive"
         title="Reading stats"
-        accent="var(--cherry-bold)"
+        accent="var(--red-bold)"
       >
         <dl className="drawer-list">
           <div>
@@ -102,7 +107,7 @@ export default function StatsButton({ stats, tags }: StatsButtonProps) {
 
         {stats.oldest && stats.newest && stats.newest.year > stats.oldest.year ? (
           <>
-            <span className="drawer-section-label type-note-label">Time traveled</span>
+            <span className="drawer-section-label type-note-label">Publication span</span>
             <p className="bookshelf-stat-sentence">
               From <em>{stats.oldest.title}</em> ({stats.oldest.year}) to{" "}
               <em>{stats.newest.title}</em> ({stats.newest.year}) —{" "}

@@ -26,11 +26,11 @@ const DEFAULT_CSS = `body {
   border-radius: 50%;
   background-color: var(--periwinkle-soft);
   box-shadow:
-    0 0 0 1.5em #B985EB,
+    0 0 0 1.5em #D7BAFF,
     0 0 0 3.5em #8B87F5,
     0 0 0 5.5em #67CAF8,
-    0 0 0 7.5em #D3F392,
-    0 0 0 9.5em #FFE669,
+    0 0 0 7.5em #B0D964,
+    0 0 0 9.5em #FFF89E,
     0 0 0 11.5em #ff9f4cff,
     0 0 0 13.5em #FF6358;
 }`;

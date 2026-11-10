@@ -27,6 +27,25 @@
   background: var(--charcoal);
 }
 
+/* Space above a code block that follows text, so it never sits right
+   up against the paragraph or list before it. Pages can still override
+   it (a more specific rule wins). */
+:where(p, ul, ol, blockquote) + .code-block {
+  margin-top: var(--space-5);
+}
+
+/* Two code blocks in a row get a smaller gap, so they read as a pair. */
+.code-block + .code-block {
+  margin-top: var(--space-3);
+}
+
+/* And the same space below, when text follows a code block. It sits on
+   the code block itself, since page styles often zero out paragraph
+   margins. */
+.code-block:has(+ :where(p, ul, ol, blockquote)) {
+  margin-bottom: var(--space-5);
+}
+
 .code-block pre {
   margin: 0;
   padding: var(--space-4);
@@ -39,6 +58,19 @@
 
 /* Comments in cream so they stand apart from the tinted code. */
 .code-block .code-comment {
+  color: var(--cream);
+}
+
+/* Highlighted pieces (the `highlight` prop): cream text on a wash of
+   the code's own tone, so they pop without leaving the palette. */
+.code-block .code-highlight {
+  padding: 0.05em 0.2em;
+  border-radius: 2px;
+  background: color-mix(
+    in srgb,
+    var(--code-tone, var(--post-section-tone-soft, var(--iris-soft))) 28%,
+    transparent
+  );
   color: var(--cream);
 }
 

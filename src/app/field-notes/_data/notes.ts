@@ -36,7 +36,7 @@ export const TOPICS: { name: Topic; hue: PaletteHue; groups?: string[] }[] = [
     hue: "pink",
     groups: ["Finding elements", "Changing elements", "Adding & removing", "Events", "Forms"],
   },
-  { name: "React", hue: "sky", groups: ["JSX", "Hooks"] },
+  { name: "React", hue: "sky", groups: ["Components", "JSX", "Hooks"] },
   {
     name: "CSS",
     hue: "green",
@@ -608,6 +608,17 @@ console.log("water");
   },
   {
     topic: "JavaScript",
+    name: "setInterval()",
+    group: "Async",
+    model:
+      "setTimeout on repeat: runs the callback every so many milliseconds until you stop it with clearInterval.",
+    example: `const id = setInterval(() => console.log("tick"), 2000);
+clearInterval(id); // stops it`,
+    note:
+      "Save the id or you can’t stop it. In React, clear it in useEffect’s cleanup so it doesn’t keep ticking.",
+  },
+  {
+    topic: "JavaScript",
     name: "Promises",
     group: "Async",
     model:
@@ -678,6 +689,30 @@ fetch("/api/yarns", {
   method: "POST", body: JSON.stringify({ name: "mohair" }),
   headers: { "Content-Type": "application/json" } });`,
     note: "PUT replaces the whole thing. To change just one field, PATCH is the usual choice.",
+  },
+  {
+    topic: "React",
+    name: "Props",
+    group: "Components",
+    model:
+      "Props pass data from a parent to a child. Strings go in quotes; numbers, booleans and everything else go in {curly braces}.",
+    example: `function Welcome({ name = "Galactic Traveler" }) {
+  return <h1>Hello, {name}</h1>;
+}
+<Welcome name="Anna" age={30} isAdmin={true} />`,
+    note: "Props are read-only: a child can read them, never change them. Set defaults in the parameters; defaultProps no longer works in React 19.",
+  },
+  {
+    topic: "React",
+    name: "Passing functions as props",
+    group: "Components",
+    model:
+      "A parent can pass a function down as a prop. The child calls it when something happens; the parent decides what to do, like update its state.",
+    example: `<Counter onAdd={() => setCount(count + 1)} /> // parent
+function Counter({ onAdd }) {
+  return <button onClick={onAdd}>Add one</button>;
+}`,
+    note: "Pass the function, don’t call it: onAdd={handleAdd}, not onAdd={handleAdd()}. By habit, props start with on and handlers with handle.",
   },
   {
     topic: "React",

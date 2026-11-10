@@ -5,8 +5,7 @@ import "./shape-cover.css";
 
 /**
  * The CSS Shapes cover: all 12 shapes as a grid of colored tiles under the
- * post header. Each tile is numbered and links to that shape's section
- * (#circle, #square...), so the cover doubles as the post's contents.
+ * post header. Each tile is numbered and links to that shape's section so the cover doubles as the post's contents.
  * Tile colors live in ../shapes.ts.
  */
 export default function ShapeCover() {
