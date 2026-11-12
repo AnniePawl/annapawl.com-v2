@@ -326,33 +326,35 @@ const values = Object.fromEntries(data);`,
     name: "map / filter / find",
     group: "Arrays",
     model:
-      "map changes every item, filter keeps some, find returns the first match. The original array stays the same.",
-    example: `books.map((b) => b.title);
-books.filter((b) => b.favorite);
-books.find((b) => b.year === 2026);`,
-    note: "find gives undefined when nothing matches. Check before using it.",
+      "map turns each item into something, filter keeps some, find returns the first match. The original array stays the same.",
+    example: `books.map((book) => book.title);          // all the titles
+books.filter((book) => book.favorite);    // favorite books
+books.find((book) => book.title === "Piranesi"); // first match`,
+    note: "filter powers the tag buttons on my bookshelf and hides empty year sections afterward. Map and filter return new array. find returns one item, or undefined.",
   },
   {
     topic: "JavaScript",
     name: "forEach()",
     group: "Arrays",
     model:
-      "Runs a function once for each item, for side effects: logging, adding to the page. It doesn’t return anything.",
-    example: `books.forEach((b) => console.log(b.title));
-yarns.forEach((y) => basket.append(makeSkein(y)));`,
-    note: "It always returns undefined, so you can’t chain .map() after it. Need a new array? Use map.",
+      "Kind of like map. Runs a function for each item but doesn’t return a new array",
+    example: `const books = ["Piranesi", "Betty", "Martyr!"];
+books.forEach((title) => console.log(title))
+numbers.forEach((n) => n * 2); // undefined;
+`,
+    note: "Easy to mix up with map. forEach returns undefined. If I want to keep the results in a new array, use map.",
   },
   {
     topic: "JavaScript",
     name: "reduce()",
     group: "Arrays",
     model:
-      "Boils an array down to one value: a total, a count, an object. Each step gets the running result and the next item.",
-    example: `const pages = books.reduce(
-  (total, b) => total + b.pages, // running total + this book
-  0                              // where the total starts
-);`,
-    note: "Always pass the starting value (the 0). Without it, reduce starts from the first item, and an empty array throws.",
+      "Boils an array down to one value, carrying a running result from one item to the next.",
+    example: `const books = [{ pages: 200 }, { pages: 300 }];
+
+books.reduce((total, book) => total + book.pages, 0);
+// 500`,
+    note: "Remember to give it a starting value. Starting at 0 means an empty bookshelf totals 0 instead of throwing an error.",
   },
   {
     topic: "JavaScript",
@@ -363,7 +365,7 @@ yarns.forEach((y) => basket.append(makeSkein(y)));`,
     example: `const name = "Nutasha";
 \`Hi \${name}, you have \${3 + 1} acorns\`;
 // "Hi Nutasha, you have 4 acorns"`,
-    note: "Whatever is inside ${} runs first and then becomes text. If value is missing, 'undefined' will wander into sentence.",
+    note: "Whatever is inside ${} runs first and then becomes text. If value is missing, 'undefined' will wander into the sentence.",
   },
   {
     topic: "JavaScript",
@@ -375,7 +377,7 @@ yarns.forEach((y) => basket.append(makeSkein(y)));`,
 "Line one\\nLine two"; // Line one
                       // Line two
 "C:\\\\Users";          // C:\\Users`,
-    note: "I dodge escaped quotes by mixing quote styles: 'She said \"absolutely not\"'. For one actual backslash, write two: \\\\.",
+    note: "Dodge escaped quotes by mixing quote styles: 'She said \"absolutely not\"'. For one actual backslash, write two: \\\\.",
   },
   {
     topic: "JavaScript",
@@ -415,21 +417,21 @@ yarns.forEach((y) => basket.append(makeSkein(y)));`,
     name: "slice() vs splice()",
     group: "Arrays",
     model:
-      "slice copies a piece and leaves the original alone. splice cuts items out of an array and changes it.",
-    example: `const nuts = ["acorn", "pecan", "walnut"];
-nuts.slice(0, 2);  // ["acorn", "pecan"], nuts unchanged
-nuts.splice(1, 1); // removes "pecan" from nuts`,
-    note: "slice works on strings and arrays; splice is arrays only. slice’s end index isn’t included.",
+      "slice copies a piece out of an array. splice edits the original: remove items, insert new ones, or swap them out.",
+    example: `const books = ["Piranesi", "Betty", "Martyr!"];
+books.slice(0, 2);  // ["Piranesi", "Betty"]; books unchanged
+books.splice(1, 1); // removes "Betty"; books is now ["Piranesi", "Martyr!"]`,
+    note: "Second num trips me up: slice(start, end) stops before end. splice(start, count) removes that many items. slice works on strings too. splice is arrays only.",
   },
   {
     topic: "JavaScript",
     name: "...spread",
     group: "Arrays",
     model:
-      "Unpacks an array or object into a new one. Copies the outside layer only: nested objects are still shared.",
-    example: `const more = [...nums, 4];
-const next = { ...user, name: "Anna" };`,
-    note: "Later keys win. { ...user, name } changes name; { name, ...user } gets overwritten by user’s name.",
+      "Unpacks the contents of an array or object. Handy for adding another book to the pile, or copying an object with a few changes.",
+    example: `const nextBooks = [...books, newBook];
+const favorite = { ...book, favorite: true };`,
+    note: "Order matters. If the same key appears twice, the last value wins. Spread only copies the outside layer, so nested objects are still shared.",
   },
   {
     topic: "JavaScript",
@@ -511,9 +513,10 @@ name.length > 20; // too long?`,
     group: "Regex",
     model:
       "A regex is a pattern between slashes. test() checks whether a string matches it and gives back true or false.",
-    example: `/^\\d+$/.test("123");    // true
-/^\\d+$/.test("12a");    // false
-/acorn/i.test("ACORN"); // true (i = ignore case)`,
+    example: `/moss/.test("mossy");   // true: contains "moss"
+/moss$/.test("mossy");  // false: $ doesn't end with "moss"
+/moss/.test("MOSS");    // false: capitalization matters
+/moss/i.test("MOSS");   // true: i ignores capitalization`,
     note: "Without ^ and $, it only checks the pattern appears somewhere, not that the whole string matches.",
   },
   {
@@ -522,11 +525,11 @@ name.length > 20; // too long?`,
     group: "Regex",
     model:
       "The handful I actually use: \\d digit, \\w letter, number or _, \\s space, . any character, + one or more, * zero or more, ? optional, ^ start, $ end.",
-    example: `/\\d{3}/    // three digits in a row
-/^\\w+$/    // only letters, numbers or _
-/colou?r/  // color or colour
-/\\.png$/   // ends in .png`,
-    note: "To match a real . or ? or +, escape it with a backslash: \\. matches an actual dot.",
+    example: `/\d{3}/.test("123");       // true: three digits
+/^✨+$/.test("✨✨");       // true: one or more sparkles
+/colou?r/.test("color");   // true: the u is optional
+/\.png$/.test("doggo.png"); // true: ends with literal ".png"`,
+    note: "+, *, and ? apply to the thing immediately before them. Escape punctuation when you mean the actual character: \\. means a dot.",
   },
   {
     topic: "JavaScript",
@@ -534,21 +537,20 @@ name.length > 20; // too long?`,
     group: "Regex",
     model:
       "Pass a regex to replace() to match a pattern instead of exact text. Add the g flag to change every match.",
-    example: `"a  b   c".replace(/\\s+/g, " ");  // "a b c"
-"2026-11-03".replace(/-/g, "/");  // "2026/11/03"
-"hello".match(/l/g);              // ["l", "l"]`,
-    note: "replaceAll() with a regex needs the g flag, or it throws an error.",
+    example: `"oops oops".replace(/oops/, "whoops");  // "whoops oops"
+"oops oops".replace(/oops/g, "whoops"); // "whoops whoops"
+"moss   &   fern".replace(/\s+/g, " "); // "moss & fern"`,
+    note: "g = global: replace every match. The original string stays unchanged, so save the result. Using a regex with replaceAll()? It still needs g, or it throws.",
   },
   {
     topic: "JavaScript",
     name: "Arrow vs regular function",
     group: "Functions",
     model:
-      "Same job, shorter syntax. Arrows can skip the braces and return on their own, and they borrow this from where they’re written.",
-    example: `function add(a, b) { return a + b; }
-const add2 = (a, b) => a + b;   // implicit return
-const make = (id) => ({ id });  // object? wrap in ( )`,
-    note: "Regular functions are hoisted, so you can call them before they’re written. Arrows aren’t. Object methods that need this: use a regular function.",
+      "Same job, shorter syntax. No function keyword, and without curly braces, the result returns automatically.",
+    example: `function double(n) { return n * 2; }
+const double = (n) => n * 2; // same result`,
+    note: "Function declarations can be called before they’re written but const arrows can’t. For object methods that need this, use a regular function.",
   },
   {
     topic: "JavaScript",
@@ -557,78 +559,81 @@ const make = (id) => ({ id });  // object? wrap in ( )`,
     model:
       "A regular function’s this is whatever called it, like the button in a listener. An arrow has no this of its own, so it uses the one outside it.",
     example: `btn.addEventListener("click", function () {
-  this.textContent = "Hi!"; // this = the button
+  this.textContent = "Omg, hi!"; // this = the button
 });
 btn.addEventListener("click", () => this); // not the button`,
-    note: "In an arrow listener, reach for event.currentTarget instead. It works in both kinds and says what it means.",
+    note: "Use event.currentTarget to get the element the listener is attached to. It works in both arrow and regular functions.",
   },
   {
     topic: "JavaScript",
     name: "Callbacks",
     group: "Functions",
     model:
-      "A function you hand to another function so it can call it later, when it’s ready. Pass the function itself, don’t call it.",
-    example: `function greet(name, done) { done("Hi, " + name); }
-greet("Anna", (msg) => console.log(msg));
-btn.addEventListener("click", handleClick); // no ()`,
-    note: "handleClick() with parentheses runs it right away and passes its result. Leave them off to pass the function.",
+      "A function I hand to another function to run when needed, like what to do when a button gets clicked.",
+    example: `function celebrate() { console.log("Oh happy day!"); }
+button.addEventListener("click", celebrate);`,
+    note: "Pass celebrate, not celebrate(). Parentheses run it right away but without them, I’m handing over the function to run when needed.",
   },
   {
     topic: "JavaScript",
     name: "...rest",
     group: "Functions",
     model:
-      "Gathers whatever’s left into one array or object. Same dots as spread, opposite job: collecting, not unpacking.",
-    example: `function sum(...nums) { }
-const { id, ...others } = props;`,
-    note: "Rest has to come last. ({ ...others, id }) is a syntax error.",
+      "Gathers the remaining items into an array, or leftover properties into an object. Same dots as spread but opposite job.",
+    example: `function pack(...books) { return books; }
+pack("Piranesi", "Betty"); // ["Piranesi", "Betty"]
+
+const { title, ...details } = book; // everything except title`,
+    note: "Spread unpacks. Rest gathers. Rest always goes last: (first, ...others), never (...others, first).",
   },
   {
     topic: "JavaScript",
     name: "Ternary ? :",
     group: "Operators",
     model:
-      "An if/else that gives back a value, so it fits inside an expression. condition ? ifTrue : ifFalse.",
+      "A little if/else that picks a value: condition ? thisIfTrue : thisIfFalse.",
     example: `const label = count === 1 ? "book" : "books";
-const tone = isDone ? "green" : "marigold";`,
-    note: "Perfect for picking between two things. Nested ternaries get hard to read fast: for three or more choices, use if/else.",
+const buttonText = isSaved ? "Saved!" : "Save for later";`,
+    note: "Perfect for picking between two things. But if I’m nesting ternaries inside ternaries, it’s probably time for an if/else.",
   },
   {
     topic: "JavaScript",
     name: "setTimeout()",
     group: "Async",
     model:
-      "Like an alarm: Set it and keep moving. When it rings, the callback gets in line to run.",
-    example: `console.log("plant");
-setTimeout(() => console.log("sprout"), 0);
-console.log("water");
-// plant → water → sprout`,
+      "Kind of like an alarm. Sets a timer to run a function later. The rest of my code keeps going while it waits.",
+    example: `cconsole.log("Put the kettle on");
+setTimeout(() => console.log("Tea time!"), 2000);
+console.log("Find my favorite mug");
+// kettle → mug → tea (after at least 2 seconds)`,
     note:
-      "It schedules; it doesn’t pause. Even a delay of 0 waits until the current code finishes.",
+      "The delay is in milliseconds. 1000 = 1 second. Even 0 waits until the current code finishes so it doesn’t run immediately.",
   },
   {
     topic: "JavaScript",
     name: "setInterval()",
     group: "Async",
     model:
-      "setTimeout on repeat: runs the callback every so many milliseconds until you stop it with clearInterval.",
-    example: `const id = setInterval(() => console.log("tick"), 2000);
-clearInterval(id); // stops it`,
+      "Runs a function repeatedly, with a delay between calls. Keeps going until I stop it with clearInterval.",
+    example: `const StetchTimer = setInterval(() => {
+  console.log("Time for a little stretch");
+}, 60000); // every minute
+clearInterval(timer); // stop when I’m done`,
     note:
-      "Save the id or you can’t stop it. In React, clear it in useEffect’s cleanup so it doesn’t keep ticking.",
+      "Save the id or you can’t stop it. In React, clear it in useEffect’s cleanup so old timers don’t pile up.",
   },
   {
     topic: "JavaScript",
     name: "Promises",
     group: "Async",
     model:
-      "Like a claim ticket: It isn’t the result, it’s your connection to a result that’s still pending. Fulfilled with a value or rejected with an error.",
-    example: `const wait = (ms) =>
-  new Promise((resolve) => setTimeout(resolve, ms));
-
-wait(500).then(() => console.log("sprouted"));`,
+      "A placeholder for a result. Starts pending and then either fulfills with a value or rejects with an error. The rest of my code keeps going.",
+    example: `const tea = new Promise((resolve) => {
+  setTimeout(() => resolve("Tea’s ready!"), 2000);
+});
+tea.then((message) => console.log(message));`,
     note:
-      ".then() says what to do when it fulfills. .catch() handles rejection. The rest of your code keeps going.",
+      "I only need new Promise when creating one myself. Functions like fetch already return a promise, ready for then/catch or await.",
   },
   {
     topic: "JavaScript",
@@ -641,54 +646,58 @@ wait(500).then(() => console.log("sprouted"));`,
   console.log("sprouted");
 }`,
     note:
-      "async always returns a promise. If an awaited promise rejects, it throws—catch it with try/catch.",
+      "async always returns a promise. If an awaited promise rejects, await throws an error. Handle it with try/catch.",
   },
   {
     topic: "JavaScript",
     name: "JSON.stringify / parse",
     group: "APIs",
     model:
-      "stringify packs an object into text so it can travel or be saved. parse unpacks it back into an object.",
-    example: `const text = JSON.stringify({ name: "mohair" }); // send or save
-const yarn = JSON.parse(text);                   // back to an object
-JSON.stringify(yarn, null, 2);                   // pretty, for logging`,
-    note: "Functions and undefined vanish, Dates come back as strings, and Maps or Sets turn into {}.",
+      "stringify turns data into JSON text for saving or sending. parse turns that text back into data.",
+    example: `const text = JSON.stringify({ yarn: "mohair" }); // send or save {"yarn":"mohair"}
+const skein = JSON.parse(text) // back to an object;
+skein.yarn; // "mohair"`,
+    note: "Good for saving objects in localStorage, which only stores strings. Invalid JSON makes parse throw so wrap it in try/catch if I’m unsure.",
   },
   {
     topic: "JavaScript",
     name: "fetch()",
     group: "APIs",
     model:
-      "Asks a server for data and gives back a promise. Two waits: one for the response, then one to read its body.",
-    example: `fetch("https://api.example.com/yarns")
-  .then((response) => response.json()) // read the body
-  .then((yarns) => console.log(yarns))
-  .catch(console.error);`,
-    note: "fetch only fails on network errors. A 404 or 500 still resolves, so check response.ok before .json().",
+      "Asks a server for data and gives back a promise. Two waits: one for the response, then another to read its data.",
+    example: `async function loadYarns() {
+  const response = await fetch("/api/yarns");
+  if (!response.ok) throw new Error("Couldn’t load yarns");
+  return await response.json();
+}`,
+    note: "A 404 or 500 still counts as a response, so check response.ok. The second await reads the body: response.json() turns JSON text into usable data.",
   },
   {
     topic: "JavaScript",
     name: "API error handling",
     group: "APIs",
     model:
-      "Two ways to fail: the network breaks (fetch rejects) or the server says no (response.ok is false). Catch both in one place.",
+      "The network can fail (fetch rejects), the server says no (response.ok is false), or the response can be unreadable. You can catch all in one place. ",
     example: `try {
-  const response = await fetch(url);
+  const response = await fetch("/api/yarns");
   if (!response.ok) throw new Error("Status " + response.status);
-} catch (error) { console.error(error); }`,
-    note: "Forget the await and response is a promise, so response.ok is undefined and this throws every time.",
+  const yarns = await response.json();
+} catch (error) { console.error("Yarn stash trouble:", error); }`,
+    note: "Don’t forget await otherwise I’m checking a promise, not the response. Also good to show helpful message to site user.",
   },
   {
     topic: "JavaScript",
     name: "HTTP methods",
     group: "APIs",
     model:
-      "The verb on a request. GET reads, POST creates, PUT replaces, PATCH changes part of something, DELETE removes.",
-    example: `fetch("/api/yarns"); // GET is the default
+      "The request’s verb: GET reads, POST usually creates, PUT replaces, PATCH updates part, and DELETE removes.",
+    example: `fetch("/api/yarns"); // GET by default
 fetch("/api/yarns", {
-  method: "POST", body: JSON.stringify({ name: "mohair" }),
-  headers: { "Content-Type": "application/json" } });`,
-    note: "PUT replaces the whole thing. To change just one field, PATCH is the usual choice.",
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ yarn: "mohair", color: "moss" }),
+});`,
+    note: "Adding a skein? POST. Changing just its color? PATCH. PUT sends the full replacement. Check the API’s docs for what it expects.",
   },
   {
     topic: "React",
@@ -713,6 +722,17 @@ function Counter({ onAdd }) {
   return <button onClick={onAdd}>Add one</button>;
 }`,
     note: "Pass the function, don’t call it: onAdd={handleAdd}, not onAdd={handleAdd()}. By habit, props start with on and handlers with handle.",
+  },
+  {
+    topic: "React",
+    name: "useState",
+    group: "Hooks",
+    model:
+      "Gives a component a value it remembers between renders, plus a function to change it. Calling the setter updates the value and re-renders.",
+    example: `import { useState } from "react";
+const [count, setCount] = useState(0); // 0 = starting value
+<button onClick={() => setCount(count + 1)}>{count}</button>`,
+    note: "Import it first: import { useState } from 'react'. Never change the value directly (count++); use the setter, or React won’t re-render.",
   },
   {
     topic: "React",

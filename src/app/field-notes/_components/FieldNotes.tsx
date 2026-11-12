@@ -2,6 +2,7 @@
 
 import { useId, useState, type CSSProperties } from "react";
 import CodeBlock from "../../../components/ui/CodeBlock";
+import TextLink from "../../../components/ui/TextLink";
 import { NOTES, TOPICS, noteId, type FieldNote, type Topic } from "../_data/notes";
 
 type Filter = Topic | "All";
@@ -165,6 +166,18 @@ export default function FieldNotes() {
           Nothing matches that yet. Sounds like something to look up, then write down.
         </p>
       )}
+
+      {/* General references for the whole page. Cards don't cite
+          individually: they're my own notes, in my own words. */}
+      <footer className="fn-sources">
+        <h2 className="fn-sources-label">Where I learn</h2>
+        <p>
+          These are my own notes, written my way, but the knowledge comes
+          from lots of generous places. The ones I lean on most are the
+          official <TextLink href="https://react.dev">React docs</TextLink>{" "}
+          and <TextLink href="https://developer.mozilla.org">MDN Web Docs</TextLink>.
+        </p>
+      </footer>
     </div>
   );
 }
