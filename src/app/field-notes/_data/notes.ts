@@ -929,45 +929,49 @@ fetch("/api/yarns", {
     name: "Props",
     group: "Components",
     model:
-      "Props pass data from a parent to a child. Strings go in quotes; numbers, booleans and everything else go in {curly braces}.",
-    example: `function Welcome({ name = "Galactic Traveler" }) {
-  return <h1>Hello, {name}</h1>;
+      "Props pass info from parent component to child. The child reads them to decide what to display + shouldn’t change its props directly.",
+    example: `function Snack({ name = "Mystery cheese" }) {
+  return <p>Today’s emotional support snack: {name}</p>;
 }
-<Welcome name="Anna" age={30} isAdmin={true} />`,
-    note: "Props are read-only: a child can read them, never change them. Set defaults in the parameters; defaultProps no longer works in React 19.",
+<Snack name="Brie" />`,
+    note: "Strings go in quotes, JS values go in curly braces. A parameter default handles a missing or undefined prop.",
   },
   {
     topic: "React",
     name: "Passing functions as props",
     group: "Components",
     model:
-      "A parent can pass a function down as a prop. The child calls it when something happens; the parent decides what to do, like update its state.",
-    example: `<Counter onAdd={() => setCount(count + 1)} /> // parent
-function Counter({ onAdd }) {
-  return <button onClick={onAdd}>Add one</button>;
+      "A parent passes a function to a child. The child calls it when something happens. The parent decides what to do, like update state.",
+    example: `// Parent passes the function
+<SnackButton onSnack={revealCheese} />
+// Child connects it to a click:
+function SnackButton({ onSnack }) {
+  return <button onClick={onSnack}>Emergency cheese</button>;
 }`,
-    note: "Pass the function, don’t call it: onAdd={handleAdd}, not onAdd={handleAdd()}. By habit, props start with on and handlers with handle.",
+    note: "Pass revealCheese, not revealCheese() so function isn't called immediatly. Event props start with on and handler functions start with handle.",
   },
   {
     topic: "React",
     name: "useState",
     group: "Hooks",
     model:
-      "Gives a component a value it remembers between renders, plus a function to change it. Calling the setter updates the value and re-renders.",
-    example: `import { useState } from "react";
-const [count, setCount] = useState(0); // 0 = starting value
-<button onClick={() => setCount(count + 1)}>{count}</button>`,
-    note: "Import it first: import { useState } from 'react'. Never change the value directly (count++); use the setter, or React won’t re-render.",
+      "Gives a component a value it remembers between renders, plus a setter to update it and refresh what’s displayed.",
+    example: `const [isCozy, setIsCozy] = useState(false);
+<button onClick={() => setIsCozy((prev) => !prev)}>
+  {isCozy ? "Cozy mode on" : "Activate cozy mode"}
+</button>`,
+    note: "Gotta import {useState} first. Use the setter to change state and when the next value depends on the previous one, use prev => ",
   },
   {
     topic: "React",
     name: "useId",
     group: "Hooks",
     model:
-      "An id that’s unique to each component and matches on the server and in the browser.",
+      "Makes a unique ID for connecting elements, like a label and input. Each copy of the component gets its own ID.",
     example: `const id = useId();
-<div id={\`\${id}-panel\`} />`,
-    note: "Not for list keys. Keys come from the data.",
+<label htmlFor={id}>Current craft obsession</label>
+<input id={id} />`,
+    note: "Gotta import useId first. Handy for reusable form fields. List keys should come from the data instead.",
   },
   {
     topic: "React",
@@ -975,20 +979,21 @@ const [count, setCount] = useState(0); // 0 = starting value
     group: "JSX",
     model:
       "A ternary picks a class or style based on a condition. Use && when there’s no “else”: show it or skip it.",
-    example: `<div className={open ? "card card--open" : "card"} />
-<div style={{ border: selected ? "2px solid" : "none" }} />
-{error && <p>{error}</p>}`,
-    note: "&& with a number can render a stray 0. {count && <Badge />} shows “0” when count is 0. Use {count > 0 && …}.",
+    example: `<div className={isSelected ? "swatch selected" : "swatch"} />
+<div style={{ backgroundColor: isSelected ? "plum" : "linen" }} />
+{isSelected && <span>Selected!</span>}`,
+    note: "Keep the base class either way and add extra classes when needed. Use && to show something only when a condition is true.",
   },
   {
     topic: "React",
     name: "Update state with spread",
     group: "Hooks",
     model:
-      "React re-renders when state is a new object. Spread copies the old one so you can change one key without mutating it.",
-    example: `setUser({ ...user, name: "Anna" });
-setItems([...items, newItem]);`,
-    note: "user.name = \"Anna\" changes the object but React doesn’t notice, so nothing re-renders.",
+      "React re-renders when state is a new object. Spread lets me update objects and arrays without changing the originals.",
+    example: `project.finished = true; // changes the object, but won’t trigger a render
+setProject((prev) => ({ ...prev, finished: true }));
+// makes a new object and tells React to update the screen`,
+    note: "Use setProject so React knows to update the screen. Spread keeps the existing properties while letting me change the ones I need.",
   },
   {
     topic: "CSS",
