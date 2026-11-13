@@ -1312,54 +1312,57 @@ input:focus { /* click or Tab into the field */
   // ---- CSS: Sizing & units ----
   {
     topic: "CSS",
-    name: "clamp()",
-    group: "Sizing & units",
-    model: "A value that scales between a floor and a ceiling: clamp(min, preferred, max).",
-    example: `h1 {
-  font-size: clamp(2rem, 1rem + 4vw, 4rem);
-}`,
-    note: "Mix rem into the middle value so text still grows when someone zooms.",
-  },
-  {
-    topic: "CSS",
     name: "rem vs em",
     group: "Sizing & units",
     model: "rem is relative to the root font size. em is relative to the element’s own font size.",
-    example: `.card   { font-size: 1.25rem; } /* 20px */
-.card p { padding: 1em; }       /* 20px */
-.card p { margin: 1rem; }       /* 16px */`,
-    note: "em compounds when nested. rem for font sizes, em for spacing that should scale with its text.",
-  },
-  {
-    topic: "CSS",
-    name: "dvh",
-    group: "Sizing & units",
-    model: "Dynamic viewport height. It adjusts as mobile browser bars show and hide.",
-    example: `.hero {
-  min-height: 100vh; /* fallback */
-  min-height: 100dvh;
+    example: `.spellbook { font-size: 20px; }
+.spellbook p {
+  padding: 1em; /* 20px, using its inherited font size */
+  margin: 1rem; /* 16px if the root font size is 16px */
 }`,
-    note: "100vh is taller than the visible screen on mobile, so content hides under the URL bar.",
+    note: "rem for consistent sizing and em when spacing should grow with the text. Nested font-size vals in em can multiply so 1.5em inside 1.5em becomes 2.25×.",
   },
   {
     topic: "CSS",
     name: "min() / max()",
     group: "Sizing & units",
     model: "min() picks the smallest of its values, max() the largest. Caps without a media query.",
-    example: `.prose { width: min(100%, 65ch); }
-.btn   { padding: max(0.5rem, 1vw); }`,
-    note: "min() is how you set a max width. Feels backwards, but it picks the smaller value.",
+    example: `.spellbook { width: min(100%, 40rem); } /* never wider than either */
+.potion-label { padding: max(0.5rem, 1vw); } /* at least 0.5rem */`,
+    note: "I use these a lot, but the names still feel backwards... min can cap a width, while max can set a minimum. Think about which value wins.",
+  },
+  {
+    topic: "CSS",
+    name: "clamp()",
+    group: "Sizing & units",
+    model: "Lets a value grow with the screen. (min, preferred, max).",
+    example: `.spellbook-title {
+  font-size: clamp(2rem, 1rem + 4vw, 4rem);
+}`,
+    note: "Mix rem into the middle value so text still grows when someone zooms.",
+  },
+  {
+    topic: "CSS",
+    name: "dvh",
+    group: "Sizing & units",
+    model: "Dynamic viewport height. It adjusts as mobile browser bars show and hide.",
+    example: `.cookie-shop {
+  min-height: 100vh; /* fallback */
+  min-height: 100dvh;
+}`,
+    note: "Haven’t needed this much yet. Worth trying when a full-height mobile layout hides behind browser bars.",
   },
   {
     topic: "CSS",
     name: "aspect-ratio",
     group: "Sizing & units",
-    model: "Keeps a box at a set width-to-height ratio as it resizes.",
-    example: `img {
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
+    model: "Keeps a box at a set width-to-height ratio as it resizes. Good for consistently shaped images and cards.",
+    example: `.tarot-card {
+  width: 12rem;
+  aspect-ratio: 2 / 3;
+  object-fit: cover; /* crop the image to fit */
 }`,
-    note: "Pair with object-fit: cover so images crop instead of squish.",
+    note: "Set the width and let the ratio work out the height, or vice versa. For images, cover crops to fit; contain keeps the whole image visible.",
   },
 
   // ---- CSS: Custom properties ----
@@ -1367,55 +1370,54 @@ input:focus { /* click or Tab into the field */
     topic: "CSS",
     name: "var()",
     group: "Custom properties",
-    model: "Variables you define once and reuse. They cascade and inherit like any other property.",
-    example: `:root { --accent: #67caf8; }
-.btn  { color: var(--accent); }
-.link { color: var(--brand, blue); } /* fallback */`,
-    note: "The fallback only kicks in when the variable isn’t defined, not when its value is invalid.",
+    model: "Variables you define once and reuse. Change one value to update every part that uses it.",
+    example: `.teacup { background: var(--ceramic); }
+.handle { border: 6px solid var(--ceramic); }`,
+    note: "I use this ALL the time in my CSS art. One line recolors the cup and handle so I don't need to hunt thru every little piece.",
   },
   {
     topic: "CSS",
     name: "Inline styles",
     group: "Custom properties",
     model:
-      "In HTML, style is a string. In React it’s an object with camelCase names, and custom properties keep their dashes.",
-    example: `<p style="color: red">       <!-- HTML -->
-<p style={{ color: "red" }}> {/* React */}
-<p style={{ "--accent": c } as
-  React.CSSProperties}>`,
-    note: "Inline beats stylesheets on specificity. Best for one-off dynamic values, like a color handed to a custom property.",
+      "Styles written directly on an element. HTML uses a string. React uses an object with camelCase property names.",
+    example: `<div style="background-color: lightpink">Teacup</div> //HTML
+<div style={{ backgroundColor: "lightpink" }}>Teacup</div> //React`,
+    note: "Best for one-off dynamic values, like a color handed to a custom property. Inline beats stylesheets on specificity.",
   },
   {
     topic: "CSS",
     name: "currentColor",
     group: "Custom properties",
-    model: "Whatever the element’s text color is. Icons and borders can follow it automatically.",
-    example: `.icon {
-  fill: currentColor;
-  border: 1px solid currentColor;
+    model: "Uses the element’s text color for other properties, so borders, shapes, and icons can follow along.",
+    example: `.magic-wand {
+  color: darkorchid;
+  border: 2px solid currentColor;
 }`,
-    note: "Change color on the parent and everything using currentColor updates with it.",
+    note: "Helpful shorhand. Change color on the parent and everything using currentColor updates with it.",
   },
   {
     topic: "CSS",
     name: "color-mix()",
     group: "Custom properties",
     model: "Blends two colors by percentage. Tints and transparency from a single token.",
-    example: `border-color: color-mix(
-  in srgb, var(--charcoal) 25%, transparent
-);`,
-    note: "Mixing with transparent gives an alpha version of a token, no new variable needed.",
+    example: `.teacup {
+  background: color-mix(in srgb, pink 30%, white);
+  border: 2px solid color-mix(in srgb, purple 25%, transparent);
+}`,
+    note: "I use this a lot for softer variations without adding more color tokens. Mixing with white lightens, mixing with transparent makes it see-through.",
   },
   {
     topic: "CSS",
     name: "light-dark()",
     group: "Custom properties",
-    model: "Picks the first color in light mode and the second in dark mode.",
+    model: "Picks the first color in light mode and the second in dark mode based on the element’s color-scheme.",
     example: `:root { color-scheme: light dark; }
-body {
-  background: light-dark(#fff, #222);
+.spellbook {
+  background: light-dark(linen, midnightblue);
+  color: light-dark(midnightblue, linen);
 }`,
-    note: "Does nothing without color-scheme set. Colors only, not other values.",
+    note: "Still learning about themeing. Does nothing without color-scheme set, it won’t create a theme toggle by itself. Colors only, not whole sets of styles.",
   },
 
   // ---- CSS: Motion ----
