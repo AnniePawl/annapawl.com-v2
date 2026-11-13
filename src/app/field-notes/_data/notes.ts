@@ -45,7 +45,7 @@ export const TOPICS: { name: Topic; hue: PaletteHue; groups?: string[] }[] = [
       "Layout",
       "Box model",
       "Sizing & units",
-      "Custom properties",
+      "Variables & color",
       "Motion",
       "Stacking",
       "Handy one-liners",
@@ -172,6 +172,17 @@ button.dataset.snackId = "8";                // updates data-snack-id`,
 snackDrawer.classList.toggle("is-open", true);  // add the class
 snackDrawer.classList.toggle("is-open", false); // remove the class`,
     note: "A class doesn’t update ARIA. Keep aria-expanded in sync, or style straight from it. 	In React, choose className from state instead of toggling classes manually.",
+  },
+  {
+    topic: "DOM",
+    name: "Styles in JavaScript",
+    group: "Changing elements",
+    model:
+      "Changes an element’s inline styles from JavaScript. Regular properties use camelCase; custom properties use setProperty.",
+    example: `cup.style.backgroundColor = "pink";          // one inline style
+cup.style.setProperty("--ceramic", "plum");  // custom property
+cup.style.removeProperty("--ceramic");       // back to the CSS value`,
+    note: "Handy for interactive colors and sizes. Use classes for whole visual states and custom properties for single values.",
   },
   {
     topic: "DOM",
@@ -1324,6 +1335,16 @@ input:focus { /* click or Tab into the field */
   },
   {
     topic: "CSS",
+    name: "calc()",
+    group: "Sizing & units",
+    model:
+      "Does math on sizes, even mixing units like % and rem. Great for sizing one piece off another.",
+    example: `.sidebar { width: calc(100% - 2rem); }
+.eye { width: calc(var(--face) * 0.2); } /* scales with the face */`,
+    note: "Remember spaces around + and -! I use calc to keep my CSS art’s little pieces in proportion. min, max, and clamp can do math inside them too.",
+  },
+  {
+    topic: "CSS",
     name: "min() / max()",
     group: "Sizing & units",
     model: "min() picks the smallest of its values, max() the largest. Caps without a media query.",
@@ -1365,11 +1386,11 @@ input:focus { /* click or Tab into the field */
     note: "Set the width and let the ratio work out the height, or vice versa. For images, cover crops to fit; contain keeps the whole image visible.",
   },
 
-  // ---- CSS: Custom properties ----
+  // ---- CSS: Variables & color ----
   {
     topic: "CSS",
     name: "var()",
-    group: "Custom properties",
+    group: "Variables & color",
     model: "Variables you define once and reuse. Change one value to update every part that uses it.",
     example: `.teacup { background: var(--ceramic); }
 .handle { border: 6px solid var(--ceramic); }`,
@@ -1378,7 +1399,7 @@ input:focus { /* click or Tab into the field */
   {
     topic: "CSS",
     name: "Inline styles",
-    group: "Custom properties",
+    group: "Variables & color",
     model:
       "Styles written directly on an element. HTML uses a string. React uses an object with camelCase property names.",
     example: `<div style="background-color: lightpink">Teacup</div> //HTML
@@ -1388,7 +1409,7 @@ input:focus { /* click or Tab into the field */
   {
     topic: "CSS",
     name: "currentColor",
-    group: "Custom properties",
+    group: "Variables & color",
     model: "Uses the element’s text color for other properties, so borders, shapes, and icons can follow along.",
     example: `.magic-wand {
   color: darkorchid;
@@ -1399,7 +1420,7 @@ input:focus { /* click or Tab into the field */
   {
     topic: "CSS",
     name: "color-mix()",
-    group: "Custom properties",
+    group: "Variables & color",
     model: "Blends two colors by percentage. Tints and transparency from a single token.",
     example: `.teacup {
   background: color-mix(in srgb, pink 30%, white);
@@ -1410,7 +1431,7 @@ input:focus { /* click or Tab into the field */
   {
     topic: "CSS",
     name: "light-dark()",
-    group: "Custom properties",
+    group: "Variables & color",
     model: "Picks the first color in light mode and the second in dark mode based on the element’s color-scheme.",
     example: `:root { color-scheme: light dark; }
 .spellbook {
@@ -1425,8 +1446,8 @@ input:focus { /* click or Tab into the field */
     topic: "CSS",
     name: "transition",
     group: "Motion",
-    model: "Animates between two states, like a hover, instead of snapping.",
-    example: `.btn {
+    model: "Smooths change between two states instead of snapping. Tell it which property to animate, how long, and how the speed should feel.",
+    example: `.mushroom {
   transition: background-color 150ms ease;
 }`,
     note: "Put transition on the base element, not :hover, to animate both ways. On :hover alone it eases in, then snaps back.",
@@ -1441,61 +1462,78 @@ input:focus { /* click or Tab into the field */
 transition: opacity 150ms ease-in;  /* leaving */
 transition: rotate 1s linear;       /* spinners */
 transition: scale 300ms cubic-bezier(.3, 1.5, .6, 1); /* bounce */`,
-    note: "ease-out feels the most responsive for UI. Anything custom is cubic-bezier(), which you can drag around in DevTools.",
+    note: "Anything custom is cubic-bezier(), which you can drag around in DevTools.",
   },
   {
     topic: "CSS",
     name: "transform",
     group: "Motion",
-    model: "Moves, scales or rotates an element visually without shifting the layout around it.",
-    example: `.card:hover {
-  transform: translateY(-4px) scale(1.02);
+    model: "Moves, scales or rotates an element visually without shifting the layout around it. You can combine several changes in one transform.",
+    example: `.teacup-handle {
+  transform: translateX(4px) rotate(-15deg) scale(0.9);
 }`,
-    note: "Order matters: rotate then translate moves along the rotated axis. Cheap to animate, unlike top or width.",
+    note: "I use this constantly in my CSS art. Order matters: rotate then translate moves along the rotated axes.",
   },
   {
     topic: "CSS",
-    name: "scale, rotate, translate",
+    name: "translate, rotate, scale",
     group: "Motion",
     model:
-      "Standalone versions of the transform functions. Each is its own property, so you can change one without retyping the rest.",
-    example: `.card:hover { scale: 1.05; }
-.icon       { rotate: 45deg; }
-.toast      { translate: 0 -8px; }`,
+      "Standalone versions of the transform functions.",
+    example: `/* Still applies translate → rotate → scale, regardless of line order */
+.little.-leaf {
+  scale: 0.9;
+  rotate: -15deg;
+  translate: 4px -2px;
+}
+`,
     note: "They always apply in the order translate, rotate, scale (then transform), no matter how you write them.",
   },
   {
     topic: "CSS",
     name: "@keyframes",
     group: "Motion",
-    model: "Named steps of an animation, played with the animation property.",
-    example: `@keyframes pop { from { scale: 0.8; } }
-.badge {
-  animation: pop 300ms ease-out both;
+    model: "Set how something looks at different points, then play those steps with animation.",
+    example: `@keyframes float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -6px; }
+}
+.cloud { animation: float 3s ease-in-out infinite; }`,
+    note: "Percentages mark moments in time, not distance. Here, the cloud reaches its highest point halfway through, then drifts back.",
+  },
+  {
+    topic: "CSS",
+    name: "animation",
+    group: "Motion",
+    model:
+      "Plays a set of keyframes. Controls the duration, timing, delay, repeats, direction, and whether styles stay afterward.",
+    example: `/* Uses the float keyframes from the previous card */
+.cloud {
+  animation: float 3s ease-in-out infinite alternate;
 }`,
-    note: "Leave out from or to and that end uses the element’s normal styles.",
+    note: "infinite keeps it looping, alternate plays each repeat backward, then forward. Float e.g already goes up/down so alternate isn’t needed. Use it for one-way keyframes.",
   },
   {
     topic: "CSS",
     name: "prefers-reduced-motion",
     group: "Motion",
-    model: "A media query for people who’ve asked their device for less motion.",
+    model: "A media query for people who’ve asked their device for less motion. Keep playful movement optional.",
     example: `@media (prefers-reduced-motion: no-preference) {
-  .card { transition: transform 200ms; }
+  .cloud { animation: float 3s ease-in-out infinite; }
 }`,
-    note: "Opting in with no-preference is safer than switching motion off later. Reduce means less, not always none.",
+    note: "My love of wiggly little things isn’t universal... My CSS knick knacks become still when reduced motion is requested.",
   },
   {
     topic: "CSS",
     name: "@starting-style",
     group: "Motion",
     model:
-      "Sets where an element animates from when it first appears, even coming out of display: none.",
-    example: `.toast { transition: opacity 200ms; }
+      "Sets the starting styles for an element’s entrance transition, like fading in something newly added to the page.",
+    example: `.cloud { transition: opacity 300ms; }
 @starting-style {
-  .toast { opacity: 0; }
+  .cloud { opacity: 0; }
 }`,
-    note: "Animating out of display: none also needs transition-behavior: allow-discrete.",
+    note: "New to me. I haven’t used this yet! Curious to try it for entrance effects.",
   },
 
   // ---- CSS: Stacking ----
@@ -1504,23 +1542,23 @@ transition: scale 300ms cubic-bezier(.3, 1.5, .6, 1); /* bounce */`,
     name: "z-index",
     group: "Stacking",
     model:
-      "Sets which element sits on top, but only for positioned elements and flex or grid children.",
-    example: `.modal {
-  position: relative;
-  z-index: 10;
-}`,
-    note: "No position, no effect. Still stuck? Look for a stacking context above it.",
+      "Controls which overlapping element sits in front. Higher numbers win within the same stacking context.",
+    example: `.mushroom { position: relative; }
+.stem { position: absolute; z-index: 1; }
+.cap  { position: absolute; z-index: 2; }`,
+    note: "Works on positioned elements and flex/grid items. If 9999 won’t help, check the parents before adding another nine.",
   },
   {
     topic: "CSS",
     name: "Stacking context",
     group: "Stacking",
     model:
-      "A layer that contains its children’s z-index. A child can’t rise above its context’s siblings.",
-    example: `.card { isolation: isolate; } /* new context */
-/* also made by: transform, opacity < 1,
-   filter, z-index on a positioned box */`,
-    note: "z-index: 9999 not working? An ancestor with a transform probably trapped it.",
+      "A group whose layers stay together. Children can move in front of each other, but can’t escape their group’s position behind another group.",
+    example: `.back-group  { position: relative; z-index: 1; }
+.front-group { position: relative; z-index: 2; }
+.back-group .mushroom { position: absolute; z-index: 9999; }
+/* Mushroom still sits behind front-group */`,
+    note: "Think of two folders of layers. You can rearrange layers inside each folder, but if folder A sits behind folder B, everything inside A stays behind B.",
   },
 
   // ---- CSS: Handy one-liners ----
