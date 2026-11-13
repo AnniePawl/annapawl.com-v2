@@ -36,13 +36,13 @@ export default function CssBattle() {
           </>
         }
         accent="var(--moss-soft)"
-        cover={<BattleCover challenges={CHALLENGES} />}
+        cover={<BattleCover challenges={CHALLENGES.filter((c) => c.cover)} />}
         contents={CHALLENGES.map((c) => ({ id: c.key, label: c.title, tone: c.tone }))}
       >
         {CHALLENGES.map((c) => (
           <PostSection key={c.key} id={c.key} title={c.title} tone={c.tone}>
             <BattleArt challenge={c} />
-            <CodeBlock code={`<div></div>\n\n${c.css}`} />
+            <CodeBlock code={`${c.html ?? "<div></div>"}\n\n${c.css}`} />
             <p>
               <TextLink href={`https://codepen.io/annampawl/pen/${c.slug}`} variant="quiet">
                 Open on CodePen

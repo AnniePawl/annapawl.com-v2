@@ -1,4 +1,4 @@
-import { scopeCss, type Challenge } from "../_data/challenges";
+import { divClass, scopeCss, type Challenge } from "../_data/challenges";
 import "../css-battle.css";
 
 type BattleArtProps = {
@@ -14,7 +14,7 @@ export default function BattleArt({ challenge, variant = "framed" }: BattleArtPr
     <div className={variant === "tile" ? "cb-tile" : "cb-frame"}>
       <style dangerouslySetInnerHTML={{ __html: scopeCss(challenge) }} />
       <div className={`cb-stage cb-stage--${challenge.key}`} role="img" aria-label={challenge.title}>
-        <div />
+        <div className={divClass(challenge)} />
       </div>
     </div>
   );
