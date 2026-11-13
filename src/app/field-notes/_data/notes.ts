@@ -60,52 +60,97 @@ export const NOTES: FieldNote[] = [
     name: "querySelector",
     group: "Finding elements",
     model:
-      "Grabs the first element that matches a CSS selector. querySelectorAll grabs all of them.",
-    example: `document.querySelector(".card");
-document.querySelectorAll(".card");
-document.getElementById("cart"); // ids only, a touch faster`,
-    note: "querySelectorAll gives a NodeList, not an array. forEach is fine, but spread it ([...list]) before map or filter.",
+      "Grabs the first element matching a CSS selector. querySelectorAll grabs all of them.",
+    example: `document.querySelector(".ingredient");    // first match
+document.querySelectorAll(".ingredient"); // all matches`,
+    note: "No matches? querySelector returns null. querySelectorAll returns an empty NodeList. forEach works on a NodeList, but map and filter need an array.",
+  },
+  {
+    topic: "DOM",
+    name: "getElementById",
+    group: "Finding elements",
+    model:
+      "Finds the one element with that id. Ids are unique on a page, so there’s no “all” version.",
+    example: `document.getElementById("emergency-snack"); // no #
+document.querySelector("#emergency-snack"); // needs #
+// both find id="emergency-snack"`,
+    note: "No # needed, just the id name. Returns null if nothing matches. IDs should be unique, even if I have several emergency snacks.",
+  },
+  {
+    topic: "DOM",
+    name: "Searching within an element",
+    group: "Finding elements",
+    model:
+      "Call querySelector or querySelectorAll on an element instead of document to search only inside it.",
+    example: `const recipe = document.querySelector(".recipe");
+recipe.querySelectorAll(".ingredient"); // ingredients in this recipe
+recipe.querySelector(":scope > h2");     // first h2 directly inside it`,
+    note: 'recipe.querySelector only searches inside recipe. Use ":scope > h2" to find a heading directly inside it, rather than one nested deeper.',
   },
   {
     topic: "DOM",
     name: "closest()",
     group: "Finding elements",
     model:
-      "Walks up from an element to the nearest ancestor (or itself) that matches. “Which drawer am I in?”",
-    example: `button.closest(".accordion-item");`,
-    note: "Only elements have it. event.target can be window, so check target instanceof Element first. (This one crashed my color playground.)",
+      "Checks the element itself, then walks up through its parents until it finds a match. “Which recipe do I belong to?”",
+    example: `ingredient.closest(".recipe"); // nearest matching recipe, or null`,
+    note: "Handy when I click an icon inside a button but need the button itself. With event.target, check instanceof Element before calling closest().",
+  },
+  {
+    topic: "DOM",
+    name: "matches()",
+    group: "Finding elements",
+    model: "Asks “does this element match this CSS selector?” and answers true or false.",
+    example: `ingredient.matches(".optional"); // is it optional?
+ingredient.matches("li");        // is it an <li>?
+button.matches("button, [role=button]"); // matches either selector`,
+    note: "Only checks the element itself, not its parents. If the click might land on an icon inside the button, use closest().",
   },
   {
     topic: "DOM",
     name: "Moving around the DOM",
     group: "Finding elements",
     model:
-      "parentElement, children, nextElementSibling and previousElementSibling. The “Element” versions skip text and whitespace.",
-    example: `item.parentElement;
-list.children;          // HTMLCollection
-item.nextElementSibling;`,
-    note: "childNodes and nextSibling include whitespace text nodes. Reach for the Element versions.",
+      "Move up to a parent, down to its children, or sideways to the next or previous sibling.",
+    example: `ingredient.parentElement;          // parent
+recipe.children;                  // child elements
+ingredient.nextElementSibling;    // next ingredient
+ingredient.previousElementSibling; // previous ingredient`,
+    note: "The Element versions skip text nodes including whitespace between tags. children gives an HTMLCollection. childNodes includes text and comments too.",
   },
   {
     topic: "DOM",
-    name: "textContent vs innerHTML",
+    name: "textContent",
     group: "Changing elements",
     model:
-      "textContent sets plain text. innerHTML reads the string as HTML and builds elements from it.",
-    example: `title.textContent = "Squirrel Secrets";
-list.innerHTML = "<li>Acorns</li>";`,
-    note: "innerHTML runs whatever HTML it’s given, so never feed it text people typed. Plain text goes in textContent.",
+      "Sets plain text. Anything that looks like HTML appears as literal text, tags and all.",
+    example: `title.textContent = "<em>Emergency snacks</em>";
+// shows: <em>Emergency snacks</em>`,
+    note: "My go-to for text someone typed. Remember that tags are treated as text, so they cannot create HTML elements. React renders text with {value}.",
+  },
+  {
+    topic: "DOM",
+    name: "innerHTML",
+    group: "Changing elements",
+    model:
+      "Reads the string as HTML and builds elements from it. Tags become markup instead of showing as text.",
+    example: `title.innerHTML = "<strong>Snackage</strong>"; // bold text
+list.innerHTML = "<li>Cheese</li>";    // list now has only Cheese
+list.innerHTML += "<li>Crackers</li>"; // list now has Cheese + Crackers
+list.innerHTML = "";                  // list is now empty`,
+    note: "+= rebuilds all the HTML inside, including existing elements, so their event listeners can be lost. Use append when I want to keep them.",
   },
   {
     topic: "DOM",
     name: "Attributes and dataset",
     group: "Changing elements",
     model:
-      "getAttribute and setAttribute read and write any attribute. data-* attributes also show up on dataset.",
-    example: `// <button data-squirrel-id="7">
-button.dataset.squirrelId;       // "7"
-button.setAttribute("aria-expanded", "true");`,
-    note: "data-squirrel-id becomes dataset.squirrelId (kebab-case to camelCase), and the value is always a string.",
+      "An attribute is extra info on HTML tag, like id, class, or aria-expanded. data-* attributes are ones you create to store your own info. dataset is a shortcut for accessing those.",
+    example: `button.getAttribute("aria-expanded");         // "false"
+button.setAttribute("aria-expanded", "true"); // change it
+button.dataset.snackId;                      // "7"
+button.dataset.snackId = "8";                // updates data-snack-id`,
+    note: "data-snack-id becomes dataset.snackId: drop data- and switch to camelCase. Values are strings, so that 7 comes back as text.",
   },
   {
     topic: "DOM",
@@ -113,30 +158,33 @@ button.setAttribute("aria-expanded", "true");`,
     group: "Changing elements",
     model:
       "Adds a class if it’s missing, removes it if it’s there. A second argument forces it on or off.",
-    example: `card.classList.toggle("is-open", isOpen);`,
-    note: "A class doesn’t update ARIA. Keep aria-expanded in sync, or style straight from it.",
+    example: `snackDrawer.classList.toggle("is-open");        // flip on/off
+snackDrawer.classList.toggle("is-open", true);  // add the class
+snackDrawer.classList.toggle("is-open", false); // remove the class`,
+    note: "A class doesn’t update ARIA. Keep aria-expanded in sync, or style straight from it. 	In React, choose className from state instead of toggling classes manually.",
   },
   {
     topic: "DOM",
-    name: "createElement + append",
+    name: "createElement()",
     group: "Adding & removing",
     model:
-      "Make an element, fill it in, then add it to the page. Nothing shows up until you append it.",
-    example: `const li = document.createElement("li");
-li.textContent = "Acorn";
-list.append(li);`,
-    note: "append takes several things at once, text included. appendChild takes one node. prepend adds to the start.",
+      "Makes a new HTML element. Add text, classes, or attributes before putting it on the page.",
+    example: `const snack = document.createElement("li");
+snack.textContent = "Emotional support cheese";
+snack.className = "snack";
+snack.dataset.flavor = "brie";`,
+    note: "It won’t appear until you add it somewhere. Pass just the tag name: \"li\", not \"<li>\".",
   },
   {
     topic: "DOM",
-    name: "DocumentFragment",
+    name: "append() and prepend()",
     group: "Adding & removing",
     model:
-      "Gather all your yarn before casting on. Build elements in a fragment off the page, then add them in one go: one reflow, not many.",
-    example: `const basket = document.createDocumentFragment();
-yarns.forEach((yarn) => basket.append(makeSkein(yarn)));
-shelf.append(basket); // one reflow, not one per skein`,
-    note: "The basket empties itself once it’s appended. el.append(a, b, c) also adds a bunch at once, no fragment needed.",
+      "append adds to the end of an element, prepend to the start.",
+    example: `snackList.append(snack);       // snack becomes the last child
+snackList.prepend(snack);      // same snack moves to the start
+snackList.append("More brie"); // can add plain text too`,
+    note: "Moves existing elements rather than copying them. Both accept several items at once. appendChild accepts just one node. In React, update state and let JSX describe what appears.",
   },
   {
     topic: "DOM",
@@ -144,40 +192,46 @@ shelf.append(basket); // one reflow, not one per skein`,
     group: "Adding & removing",
     model:
       "Take an element off the page, or swap it for another. No need to go through its parent anymore.",
-    example: `card.remove();
-oldCard.replaceWith(newCard);`,
-    note: "Older versions: parent.removeChild(el) and parent.replaceChild(new, old). Note the new-then-old order. A removed element still lives in your variable.",
+    example: `sadSnack.remove();                  // take it off the page
+sadSnack = document.createElement("li");
+sadSnack.textContent = "Rice cake";
+snackList.append(sadSnack);
+sadSnack.replaceWith(emotionalSupportCheese); // cheese takes its place`,
+    note: "Removing an element doesn’t erase my variable—it still points to that element. I can append it again later.",
   },
   {
     topic: "DOM",
     name: "addEventListener",
     group: "Events",
     model:
-      "Runs a function when something happens, like a click or a key press. Hand it the function; don’t call it.",
-    example: `button.addEventListener("click", handleClick);
-button.addEventListener("click", handleClick, { once: true });`,
-    note: "handleClick, not handleClick(). With the parentheses it runs right away and passes its result instead.",
+      "Runs a function when something happens, like a click or a key press. Hand it the function, don’t call it.",
+    example: `function revealCheese() {
+  snackDrawer.classList.toggle("is-open");
+}
+button.addEventListener("click", revealCheese);`,
+    note: "Pass revealCheese, not revealCheese() so it doesn't run right away. Add { once: true } as the third argument if it should run just once. 	In React, usually pass onClick or onChange in JSX.",
   },
   {
     topic: "DOM",
     name: "Removing listeners",
     group: "Events",
     model:
-      "Take listeners off when you’re done so old handlers don’t pile up. removeEventListener needs the exact same function you added.",
-    example: `btn.addEventListener("click", save);
-btn.removeEventListener("click", save); // same function!
-btn.addEventListener("click", celebrate, { once: true });`,
-    note: "An inline arrow can’t be removed, since there’s nothing to pass back. In React, this is what a useEffect cleanup is for.",
+      "Stops a function from responding to an event. Pass the same function I used when adding the listener",
+    example: `button.addEventListener("click", revealCheese);
+button.removeEventListener("click", revealCheese);
+// future clicks won’t call revealCheese`,
+    note: "An inline arrow can’t be removed since there’s nothing to pass back. In React, this is what a useEffect cleanup is for. In React, listeners added manually in useEffect need cleanup. JSX event handlers don’t.",
   },
   {
     topic: "DOM",
     name: "target vs currentTarget",
     group: "Events",
     model:
-      "target is what was actually clicked. currentTarget is the element the listener lives on.",
-    example: `list.addEventListener("click", (event) => {
-  event.target;        // maybe a <span> inside a button
-  event.currentTarget; // always the list
+      "target is where the event started, like the icon I clicked. currentTarget is the element the listener is attached to.",
+    example: `// <button><span>🧀</span> Get cheese</button>
+button.addEventListener("click", (event) => {
+  event.target;        // span if I click the cheese
+  event.currentTarget; // always the button
 });`,
     note: "target can be a child of what you meant, like an icon inside a button. closest() fixes that.",
   },
@@ -186,77 +240,103 @@ btn.addEventListener("click", celebrate, { once: true });`,
     name: "Event bubbling",
     group: "Events",
     model:
-      "An event fires on the element you clicked, then travels up through each parent. That’s why delegation works.",
-    example: `list.addEventListener("click", () => log("list"));
-item.addEventListener("click", () => log("item"));
-// click item → "item", then "list"`,
-    note: "Not every event bubbles. focus and blur don’t, but focusin and focusout do.",
+      "A click starts on the element I clicked, then travels up through its parents. Listeners along the way can respond to that same click.",
+    example: `// <div id="drawer"><button>Get cheese</button></div>
+button.addEventListener("click", () => console.log("button"));
+drawer.addEventListener("click", () => console.log("drawer"));
+// click button → logs "button", then "drawer"`,
+    note: "The drawer hears clicks from inside it too. target stays where the event started; currentTarget changes to whichever element’s listener is running.",
   },
   {
     topic: "DOM",
     name: "stopPropagation()",
     group: "Events",
     model: "Stops the event from traveling any further up to parent elements.",
-    example: `menu.addEventListener("click", (event) => {
-  event.stopPropagation(); // the page never hears it
+    example: `favoriteButton.addEventListener("click", (event) => {
+  event.stopPropagation();
+  saveFavorite();
 });`,
-    note: "Not the same as preventDefault(). Use it sparingly, since it breaks delegation and click-outside-to-close listeners higher up.",
+    note: "Use sparingly b/c parent listeners may need that click too. Handy when a button inside a clickable card should act without triggering the card",
   },
   {
     topic: "DOM",
     name: "Event delegation",
     group: "Events",
     model:
-      "One listener on a parent handles clicks for all its children, even ones added later.",
-    example: `list.addEventListener("click", (event) => {
-  const button = event.target.closest(".remove");
-  if (button) button.closest("li").remove();
+      "One listener on a parent handles clicks for all its children. Their clicks bubble up, so I don’t need a listener on every button.",
+    example: `snackList.addEventListener("click", (e) => {
+  if (!(e.target instanceof Element)) return;
+  e.target.closest(".remove-snack")?.closest("li")?.remove();
 });`,
-    note: "matches() only checks the element itself. closest() checks it and walks up, which is usually what you want.",
+    note: "Works for children added later too.",
   },
   {
     topic: "DOM",
     name: "preventDefault()",
     group: "Events",
     model:
-      "Stops the browser’s built-in behavior, like a form reloading the page or a link navigating away.",
+      "Stops the browser’s default action, like following a link or submitting a form, so I can handle it myself.",
     example: `form.addEventListener("submit", (event) => {
-  event.preventDefault();
+  event.preventDefault(); // stop the form navigating away
+  saveSnackOrder();
 });`,
-    note: "Easy to mix up with stopPropagation(), which stops the event from bubbling up to parent elements.",
-  },
-  {
-    topic: "DOM",
-    name: "CustomEvent + dispatchEvent",
-    group: "Events",
-    model: "Make your own named event, send data with it, and listen for it like a click.",
-    example: `card.dispatchEvent(new CustomEvent("card:saved", {
-  bubbles: true, detail: { id: 7 },
-}));
-list.addEventListener("card:saved", (e) => e.detail.id);`,
-    note: "Custom events don’t bubble by default, so add bubbles: true. Data always goes in detail.",
+    note: "Easy to mix up with stopPropagation(), which stops the event from bubbling up to parent elements. This stops the browser’s action.",
   },
   {
     topic: "DOM",
     name: "submit event",
     group: "Forms",
     model:
-      "Listen on the form, not the button. It fires on a button click and when someone presses Enter.",
-    example: `form.addEventListener("submit", (event) => {
-  event.preventDefault(); // stay on the page
-  // read the fields here
+      "Fires when a form is submitted, whether I click its submit button or press Enter in a field.",
+    example: `snackForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  saveSnackOrder();
 });`,
-    note: "Without preventDefault() the page reloads and your JavaScript starts over.",
+    note: "Without preventDefault() the page reloads and your JavaScript starts over. Listen on the form, not the button, so keyboard submission works too. Note - React uses onSubmit on the form.",
+  },
+  {
+    topic: "DOM",
+    name: "Button types",
+    group: "Forms",
+    model:
+      "Inside a form, a button with no type submits it. Use type=\"button\" for anything that isn’t sending the form.",
+    example: `<form id="snack-form">
+  <button type="button">Add another snack</button>
+  <button type="submit">Place order</button>
+</form>`,
+    note: "Always set the type inside forms. Adding another snack shouldn’t accidentally place my order.",
   },
   {
     topic: "DOM",
     name: "Reading one field",
     group: "Forms",
     model: "Grab the input, then read .value. It’s always a string, even from a number input.",
-    example: `const speedInput = document.querySelector('[name="maxSpeed"]');
-const speed = Number(speedInput.value); // "55" → 55
-speedInput.valueAsNumber; // number inputs: already a number`,
-    note: "Read .value inside your handler, not at the top of the file, or you get whatever it said on page load.",
+    example: `const input = snackForm.querySelector('[name="quantity"]');
+const quantity = Number(input.value); // "3" → 3
+// For type="number": input.valueAsNumber also works`,
+    note: "Read .value inside the event handler to get the latest input, or you get whatever it said on page load.",
+  },
+  {
+    topic: "DOM",
+    name: "input vs change",
+    group: "Forms",
+    model:
+      "input responds as I edit. change waits until I finish: leaving a text field, ticking a checkbox, or choosing a dropdown option.",
+    example: `snackInput.addEventListener("input", previewFeast);    // typing or pasting
+snackInput.addEventListener("change", saveSnackDream); // leave after editing
+cheeseCheckbox.addEventListener("change", addCheese); // tick or untick`,
+    note: "input for live search and previews, change for saving or anything slow. Setting .value in code fires neither. In React, onChange responds as I type, like the native input event.",
+  },
+  {
+    topic: "DOM",
+    name: "form.elements",
+    group: "Forms",
+    model: "Gets a form’s fields directly by name without writing a selector for each one.",
+    example: `snackForm.elements["snack"].value;       // "Brie"
+snackForm.elements["quantity"].value;    // "3", still a string
+Number(snackForm.elements["quantity"].value); // 3
+snackForm.elements["size"].value;        // checked radio’s value`,
+    note: "Use the field’s name, not its label text. Reading .value gives its current input. A missing field returns null from namedItem.",
   },
   {
     topic: "DOM",
@@ -264,43 +344,32 @@ speedInput.valueAsNumber; // number inputs: already a number`,
     group: "Forms",
     model:
       "Checkboxes use .checked (true or false). For radios, find the one that’s checked, then read its value.",
-    example: `const agreed = form.querySelector('[name="terms"]').checked;
-const size = form.querySelector('[name="size"]:checked')?.value;`,
-    note: "A checkbox’s .value doesn’t change when you tick it. Check .checked instead.",
+    example: `snackForm.elements["extraCheese"].checked; // true or false
+snackForm.elements["size"].value;         // e.g. "large"
+// Radio buttons share name="size", with different values`,
+    note: "A checkbox’s .value doesn’t change when you tick it. Check .checked instead. A radio group’s value is an empty string if nothing is selected.",
   },
   {
     topic: "DOM",
     name: "FormData",
     group: "Forms",
-    model: "Grabs every named field in a form at once, so you don’t have to query each input.",
-    example: `const data = new FormData(form);
-data.get("maxSpeed"); // "55", still a string
-const values = Object.fromEntries(data);`,
-    note: "Only fields with a name are included, and unchecked checkboxes are left out entirely.",
+    model: "Collects a form’s current values together, so I don’t have to read each field separately.",
+    example: `const order = new FormData(snackForm);
+order.get("snack");       // "Emergency brie"
+order.get("quantity");    // "3", still a string
+order.getAll("toppings"); // ["honey", "fig jam"]`,
+    note: "Fields need a name. Disabled fields and unchecked boxes are skipped. get reads the first value; getAll collects all values with the same name.",
   },
   {
     topic: "DOM",
     name: "Form validation attributes",
     group: "Forms",
     model:
-      "The browser checks input before submitting: required, the right type, length with minlength/maxlength, range with min/max.",
-    example: `<input type="password" name="password" required
-  minlength="8" maxlength="20"
-  title="8–20 characters">
-<input type="number" min="1" max="10">`,
-    note: "title is only a hover tooltip, so phones and screen readers can miss it. Put hints in visible text, linked with aria-describedby.",
-  },
-  {
-    topic: "DOM",
-    name: "pattern",
-    group: "Forms",
-    model:
-      "A regex the whole value must match. No slashes, and it’s anchored for you, as if wrapped in ^ and $.",
-    example: `<label for="phone">Phone</label>
-<input id="phone" type="tel" pattern="[0-9]{3}-[0-9]{4}"
-  aria-describedby="phone-hint">
-<p id="phone-hint">Format: 555-1234</p>`,
-    note: "An empty field still passes, so add required too. A dash inside [ ] now needs escaping, like [\\w\\-].",
+      "Built-in rules the browser checks before submitting: required, input type, text length, and number limits.",
+    example: `<input name="email" type="email" required>
+<input name="snackNickname" minlength="2" maxlength="30">
+<input name="cheeseWheels" type="number" min="1" max="10">`,
+    note: "A field can be empty unless I add required. Put instructions beside the field so people know the rules before submitting.",
   },
   {
     topic: "Accessibility",
