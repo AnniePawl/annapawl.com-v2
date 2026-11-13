@@ -1111,76 +1111,78 @@ input:focus { /* click or Tab into the field */
   // ---- CSS: Layout ----
   {
     topic: "CSS",
+    name: "Flex vs Grid",
+    group: "Layout",
+    model:
+      "Flex lays things out in one direction and lets each item size itself. Grid lines things up in rows and columns at once.",
+    example: `.craft-tags { display: flex; }     /* one row, sized by content */
+.tiny-masterpieces { display: grid; }  /* rows and columns line up */`,
+    note: "Tags can flow wherever they fit; gallery columns should line up. I can use both: Grid for the collection, Flex for the bits inside each card.",
+  },
+  {
+    topic: "CSS",
     name: "Flex axes",
     group: "Layout",
     model:
-      "justify-content works along the main axis (the flex-direction). align-items works across it.",
-    example: `.row { display: flex;
+      "justify-content arranges items along the main axis; align-items works across it. If you change flex-direction and the axes change too.",
+    example: `.craft-supplies { display: flex;
   justify-content: space-between; /* ↔ */
   align-items: center;            /* ↕ */
 }`,
-    note: "With flex-direction: column the axes swap, so justify-content goes vertical.",
+    note: "I still have to picture the axes. Row: justify goes sideways, align goes vertically. Column: swap them.",
   },
   {
     topic: "CSS",
     name: "flex: 1",
     group: "Layout",
-    model: "Lets an item grow to fill the leftover space. Items with flex: 1 split it evenly.",
-    example: `.sidebar { flex: 0 0 16rem; } /* fixed */
-.main    { flex: 1; }          /* fills */`,
-    note: "Long text won’t shrink? Add min-width: 0. Flex items default to min-width: auto.",
+    model: "Lets an item grow to fill the leftover space. Useful when one part should take whatever room is left.",
+    example: `.project-row { display: flex; gap: 1rem; }
+.tiny-masterpiece { flex: 0 0 5rem; } /* fixed pic */
+.desc { flex: 1; min-width: 0; } /* remaining room */`,
+    note: "flex: 1 means grow and shrink from a zero basis. If text refusing to fit, min-width: 0 lets the item shrink below its content’s default minimum.",
   },
   {
     topic: "CSS",
     name: "flex-wrap",
     group: "Layout",
     model: "Lets flex items move onto a new line when they run out of room.",
-    example: `.tags {
+    example: `.craft-tags {
   display: flex;
   flex-wrap: wrap;
+  gap: 0.5rem;
 }`,
-    note: "Without it, items squish onto one line, then overflow.",
+    note: "The default is nowrap so w/o it, items squish onto one line, then overflow. I use Grid if I want columns to line up across rows.",
+  },
+  {
+    topic: "CSS",
+    name: "Grid basics",
+    group: "Layout",
+    model:
+      "Define columns on a grid container and its children fill them in order. fr shares the available space + repeat saves me typing the same size again.",
+    example: `.tiny-museum {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* three equal columns */
+  gap: 1rem;
+}`,
+    note: "repeat(3, 1fr) means 1fr 1fr 1fr. With 2fr 1fr, the first column gets twice the space. Extra items start another row.",
   },
   {
     topic: "CSS",
     name: "gap",
     group: "Layout",
-    model: "Space between flex or grid items, never on the outside edges.",
-    example: `.stack {
-  display: flex; flex-direction: column;
-  gap: 1rem;
+    model: "Adds breathing room between flex or grid items w/o adding space around the outside.",
+    example: `.tiny-treasures {
+  display: grid;
+  gap: 1rem 2rem; /* between rows, then columns */
 }`,
-    note: "Retires the old margin-on-every-child-but-the-last trick.",
-  },
-  {
-    topic: "CSS",
-    name: "auto-fit + minmax()",
-    group: "Layout",
-    model:
-      "Fits as many columns as there’s room for, each at least a minimum width. No media queries needed.",
-    example: `.cards {
-  grid-template-columns:
-    repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
-}`,
-    note: "auto-fill keeps empty columns, auto-fit stretches items into them. min(100%, …) stops overflow on small screens.",
-  },
-  {
-    topic: "CSS",
-    name: "grid-template-areas",
-    group: "Layout",
-    model: "Names areas of the grid, then places items by name. The layout reads like a little map.",
-    example: `.page { grid-template-areas:
-  "head head"
-  "side main"; }
-.side { grid-area: side; }`,
-    note: "Every row needs the same number of cells. A . marks an empty one.",
+    note: "One value spaces both directions. Two values mean row gap, then column gap.",
   },
   {
     topic: "CSS",
     name: "place-items: center",
     group: "Layout",
     model: "Shorthand for align-items and justify-items. On a grid, it centers children both ways.",
-    example: `.center {
+    example: `.display-case {
   display: grid;
   place-items: center;
 }`,
@@ -1188,15 +1190,62 @@ input:focus { /* click or Tab into the field */
   },
   {
     topic: "CSS",
+    name: "auto-fit + minmax()",
+    group: "Layout",
+    model:
+      "Fits as many columns as there’s room for, each at least a min width. No media queries needed.",
+    example: `.tiny-museum {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}`,
+    note: "	No breakpoint math! Use min(100%, 14rem) for narrow containers. auto-fit collapses empty columns so items stretch.",
+  },
+  {
+    topic: "CSS",
+    name: "grid-template-areas",
+    group: "Layout",
+    model: "Names parts of a grid so I can arrange the layout like a little floor plan. Each element goes in its matching area.",
+    example: `.room { display: grid;
+  grid-template-areas: "shelf shelf" "yarn .";
+}
+.shelf { grid-area: shelf; }
+.yarn  { grid-area: yarn; }`,
+    note: "Each quoted string is a row. Repeating shelf spans both columns. Dot leaves an empty cell beside yarn. grid-area connects each element to its named spot.",
+  },
+  {
+    topic: "CSS",
+    name: "Positioning",
+    group: "Layout",
+    model:
+      "relative keeps an element’s place and becomes the anchor for absolute children. absolute leaves the normal layout. fixed sticks to screen.",
+    example: `.face  { position: relative; } /* the anchor */
+.eye   { position: absolute; top: 30%; left: 20%; }
+.toast { position: fixed; bottom: 1rem; right: 1rem; }`,
+    note: "My CSS art runs on relative parents and absolute little pieces. Without a positioned ancestor, an absolute piece may anchor somewhere weird.",
+  },
+  {
+    topic: "CSS",
     name: "position: sticky",
     group: "Layout",
     model:
       "Scrolls normally until it reaches its offset, then sticks there while its parent is on screen.",
-    example: `.toolbar {
+    example: `.craft-instructions {
   position: sticky;
-  top: 0;
+  top: 1rem; /* stay a little below the screen’s top */
 }`,
-    note: "Not sticking? It needs top (or bottom), and any ancestor with overflow: hidden breaks it.",
+    note: "Remember the offset! My bookshelf’s tag rail uses sticky to keep its filters visible. If it misbehaves, check whether a parent has overflow set.",
+  },
+  {
+    topic: "CSS",
+    name: "Media queries",
+    group: "Layout",
+    model:
+      "Apply styles only when the screen is a certain size. Start with mobile styles, then use min-width queries to adapt for larger screens.",
+    example: `.gallery { grid-template-columns: 1fr; }
+@media (width >= 40rem) {
+  .gallery { grid-template-columns: repeat(3, 1fr); }
+}`,
+    note: "min-width means this size and up; max-width means this size and down. I add a breakpoint when the layout starts feeling cramped, not because it’s a particular device.",
   },
   {
     topic: "CSS",
@@ -1204,11 +1253,13 @@ input:focus { /* click or Tab into the field */
     group: "Layout",
     model:
       "Like a media query, but responds to the size of a parent container instead of the window.",
-    example: `.card-wrap { container-type: inline-size; }
-@container (width > 30rem) {
-  .card { flex-direction: row; }
+    example: `.project-slot { container-type: inline-size; }
+.project-card { display: flex; flex-direction: column; }
+
+@container (min-width: 30rem) {
+  .project-card { flex-direction: row; }
 }`,
-    note: "An element can’t query itself. Put container-type on a wrapper.",
+    note: "	Put container-type on a wrapper. The card responds to its available space, not the whole window.",
   },
 
   // ---- CSS: Box model ----
@@ -1220,26 +1271,27 @@ input:focus { /* click or Tab into the field */
     example: `*, *::before, *::after {
   box-sizing: border-box;
 }`,
-    note: "The default, content-box, adds padding on top of the width. That’s the mystery overflow.",
+    note: "One of my set-it-and-forget-it defaults, especially for my CSS art where every pixel counts. Padding and borders stay inside the width + margins still sit outside.",
   },
   {
     topic: "CSS",
     name: "Margin collapse",
     group: "Box model",
     model: "Vertical margins between blocks overlap instead of adding up. The bigger one wins.",
-    example: `h2 { margin-bottom: 2rem; }
-p  { margin-top: 1rem; }
-/* space between them: 2rem, not 3rem */`,
-    note: "Doesn’t happen in flex or grid. One more reason to space with gap.",
+    example: `.title { margin-bottom: 2rem; }
+.desc { margin-top: 1rem; }
+/* Between these neighboring blocks: 2rem, not 3rem */`,
+    note: "When spacing math feels sus, check for collapsing margins. Doesn’t happen in flex or grid. One more reason to space with gap.",
   },
   {
     topic: "CSS",
     name: "inset",
     group: "Box model",
     model: "Shorthand for top, right, bottom and left, in the same order as margin.",
-    example: `.overlay {
+    example: `.crystal-ball { position: relative; }
+.mystical-glow {
   position: absolute;
-  inset: 0; /* fills the parent */
+  inset: 0; /* reach all four edges */
 }`,
     note: "The parent needs a position (usually relative) to be the anchor.",
   },
@@ -1248,11 +1300,13 @@ p  { margin-top: 1rem; }
     name: "Logical properties",
     group: "Box model",
     model:
-      "Sides named by text flow. Inline runs the reading direction, block runs top to bottom.",
-    example: `margin-inline: auto;  /* left + right */
-padding-block: 1rem;  /* top + bottom */
-border-inline-start: 2px solid;`,
-    note: "They flip on their own for right-to-left languages.",
+      "Sides named by text flow instead of left of right. Inline runs the reading direction, block runs top to bottom.",
+    example: `.spellbook {
+  margin-inline: auto; /* center horizontally */
+  padding-block: 1rem; /* top and bottom */
+  border-inline-start: 2px solid darkorchid;
+}`,
+    note: "They flip on their own for right-to-left languages like Arabic.",
   },
 
   // ---- CSS: Sizing & units ----
