@@ -1,21 +1,12 @@
 import type { PaletteColor } from "../../../components/ui/colorTokens";
 
-/**
- * My CSS Battle solutions, copied as I wrote them for the battle: one div,
- * styled through body and body div. scopeCss() turns them into page-safe
- * CSS so they can sit side by side here.
- */
 export type Challenge = {
-  /** Used for the section id and the class that scopes the CSS. */
   key: string;
   title: string;
   tone: PaletteColor;
-  /** The CodePen pen, codepen.io/annampawl/pen/<slug>. */
   slug: string;
-  /** The pen's HTML, when it isn't a plain <div></div> (e.g. a class the CSS targets). */
   html?: string;
   css: string;
-  /** Shown in the cover grid at the top of the page. */
   cover?: boolean;
 };
 
@@ -454,12 +445,7 @@ body div::after {
   },
 ];
 
-/**
- * Rewrites a solution so it only styles its own stage: "body" becomes the
- * stage and "body div" the div inside it. The stage plays the part of the
- * battle's body, so the original layout tricks still work, and its height
- * is fixed at 400 × 300 instead of the full viewport.
- */
+/** Points the battle's body / body div selectors at this solution's stage. */
 export function scopeCss({ key, css }: Challenge): string {
   const stage = `.cb-stage--${key}`;
   return css
@@ -468,7 +454,6 @@ export function scopeCss({ key, css }: Challenge): string {
     .replace(/\bbody\b/g, stage);
 }
 
-/** The class on the pen's div, if its HTML has one (some CSS targets it). */
 export function divClass({ html }: Challenge): string | undefined {
   return html?.match(/class=['"]([^'"]+)['"]/)?.[1];
 }

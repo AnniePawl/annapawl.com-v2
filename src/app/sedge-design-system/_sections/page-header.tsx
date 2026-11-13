@@ -10,10 +10,10 @@ const meta = SECTIONS.find((section) => section.id === "page-header")!;
 
 const ANATOMY = [
   { n: 1, part: "Home logo", note: "Top left, petals colored per page (utilityStart)." },
-  { n: 2, part: "Description", note: "A short title and one italic line, top right (descriptionTitle, description)." },
-  { n: 3, part: "Eyebrow", note: "A small label with a marker, like “Digital garden” or “Creative Coding”." },
-  { n: 4, part: "Title", note: "Big, with the page’s accent square (title, accent)." },
-  { n: 5, part: "Lede", note: "Optional intro line under the title, like Bookshelf’s." },
+  { n: 2, part: "Description", note: "A short title and about two italic lines, top right (descriptionTitle, description). The title below starts at the same height either way." },
+  { n: 3, part: "Eyebrow", note: "A small label with a marker naming the home page group it lives in, like “General nerdery” or “Creative Coding”." },
+  { n: 4, part: "Title", note: "Big, with the page’s accent square (title, accent). Stays on one line when it fits." },
+  { n: 5, part: "Lede", note: "Two lines under the title: a main sentence, then a lighter one (lede, post-header-lede-muted)." },
   { n: 6, part: "Details, left", note: "Date · reading time for posts, or custom text (detailsStart)." },
   { n: 7, part: "Details, right", note: "Tags, or anything custom like a stats button (postTags)." },
 ];
@@ -35,11 +35,16 @@ const USAGE = `// An article: PostLayout includes the header
   <PageHeader
     utilityStart={<HomeLogo … />}
     descriptionTitle="Reading archive"
-    description="Book club picks, Little Library finds…"
-    eyebrow="Digital garden"
+    description="Book club picks, Little Library finds, and the occasional summer indulgence…"
+    eyebrow="General nerdery"
     title="Bookshelf"
     accent="var(--blue-bold)"
-    lede={<>A running list of everything I’ve read lately…</>}
+    lede={
+      <>
+        Everything I’ve read lately…{" "}
+        <span className="post-header-lede-muted">Pull up a chair.</span>
+      </>
+    }
     detailsStart="Ongoing collection · Since Jan 2026"
     postTags={<StatsButton />}
   />
@@ -73,13 +78,13 @@ export default function PageHeaderSection() {
               />
             }
             descriptionTitle="Reading archive"
-            description="Book club picks, Little Library finds, and the occasional summer indulgence."
-            eyebrow="Digital garden"
+            description="Book club picks, Little Library finds, and the occasional summer indulgence, all in one running list."
+            eyebrow="General nerdery"
             title="Bookshelf"
             accent="var(--blue-bold)"
             lede={
               <>
-                A running list of everything I’ve read lately, the good, the great and the “why did I finish that.”{" "}
+                Everything I’ve read lately — the good, the great and the “why did I finish that.”{" "}
                 <span className="post-header-lede-muted">Pull up a chair.</span>
               </>
             }

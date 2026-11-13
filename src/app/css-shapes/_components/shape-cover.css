@@ -87,11 +87,11 @@
 }
 
 
-@media (width >= 40rem) {
+@media (width < 40rem) {
+  /* Fits "Shapes" + square, not "CSS Shapes", so the square never wraps alone. */
   .shapes-page .post-header-title {
-    max-width: none;
+    max-width: 4.2em;
   }
-
 }
 
 /* A few code samples get a lighter tone than their section's own soft

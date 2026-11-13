@@ -1,5 +1,3 @@
-/* CSS Battle page: each solution drawn on a 400 × 300 stage. */
-
 .cb-frame {
   display: flex;
   justify-content: center;
@@ -8,8 +6,7 @@
   background: var(--bg-subtle);
 }
 
-/* Stands in for the battle's <body>. isolation keeps negative z-index
-   pieces inside the stage instead of slipping behind the page. */
+/* Stands in for the battle's body; isolation keeps negative z-index inside. */
 .cb-stage {
   position: relative;
   isolation: isolate;
@@ -18,16 +15,13 @@
   overflow: hidden;
 }
 
-/* Battles are a fixed 400 × 300, so shrink the whole drawing on phones. */
 @media (max-width: 479px) {
   .cb-stage {
     zoom: 0.75;
   }
 }
 
-/* Tile version for the cover grid: fills its box and scales the 400 × 300
-   drawing to the box's width. tan(atan2(a, b)) is a / b as a plain number,
-   so this is 100cqw ÷ 400px without any JavaScript. */
+/* tan(atan2(a, b)) = a ÷ b, so this scales 400px to the tile's width. */
 .cb-tile {
   position: relative;
   container-type: inline-size;
@@ -42,4 +36,10 @@
   zoom: 1;
   transform-origin: 0 0;
   transform: scale(tan(atan2(100cqw, 400px)));
+}
+
+@media (width < 40rem) {
+  .css-battle-page .post-header-lede br {
+    display: none;
+  }
 }

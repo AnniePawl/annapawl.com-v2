@@ -27,9 +27,18 @@ export default function CssShapesPage() {
     <main className="shapes-page">
       <PostLayout
         descriptionTitle="CSS Art"
-        description="Every CSS illustration starts with a few basic shapes. Here’s how to build a dozen of them, one property at a time."
+        description="A few boxes, some weird borders, and suddenly there’s a heart. These are the little building blocks behind my CSS illustrations."
+        shortDescription="These are the little building blocks behind my CSS illustrations."
         eyebrow="Creative Coding"
         title="CSS Shapes"
+        lede={
+          <>
+            Twelve shapes made with HTML and CSS, from squares and circles to stars and hearts.{" "}
+            <span className="post-header-lede-muted">
+              A small toolkit for drawing bigger things.
+            </span>
+          </>
+        }
         next={{ href: "/drawing-with-code", label: "Drawing with Code" }}
         publishedDate="Updated Oct 2026"
         readingTime="8 min read"

@@ -428,3 +428,9 @@
 
 
 
+
+@media (width < 40rem) {
+  .bookshelf-page .post-header-lede br {
+    display: none;
+  }
+}

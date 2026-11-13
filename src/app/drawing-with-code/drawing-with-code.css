@@ -352,3 +352,7 @@
   min-height: 9.5rem;
   min-width: 13rem;
 }
+
+.dwc-page .post-header-title {
+  max-width: 8ch;
+}

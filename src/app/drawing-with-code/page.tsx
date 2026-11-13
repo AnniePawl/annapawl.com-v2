@@ -26,10 +26,18 @@ export default function DrawingWithCodePage() {
     <main className="dwc-page">
       <PostLayout
         descriptionTitle="CSS Art"
-        description="An introduction to drawing with code—using HTML elements and CSS properties to turn simple shapes into illustrations in the browser."
+        description="Every knick-knack on my homepage started as a lil div. A beginner’s toolkit, a step-by-step tutorial, and lessons learned through fiddling and failing."
         shortDescription="How I draw little illustrations with nothing but HTML and CSS."
         eyebrow="Creative Coding"
         title="Drawing with Code"
+        lede={
+          <>
+            A little HTML, a lot of CSS,{" "}
+            <span className="post-header-lede-muted">
+              and the satisfying business of turning a bunch of divs into something recognizable.
+            </span>
+          </>
+        }
         next={{ href: "/css-shapes", label: "CSS Shapes" }}
         publishedDate="Updated Oct 2026"
         readingTime="12 min read"

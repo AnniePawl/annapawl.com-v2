@@ -17,6 +17,12 @@ const USAGE = `<PostLayout
   shortDescription="How I draw little illustrations with nothing but HTML and CSS."
   eyebrow="Creative Coding"
   title="Drawing with Code"
+  lede={
+    <>
+      Every knick-knack on my homepage is just a stack of divs.{" "}
+      <span className="post-header-lede-muted">Here’s how to make your own…</span>
+    </>
+  }
   publishedDate="Updated Oct 2026"
   readingTime="10 min read"
   postTags="CSS, Illustration, Creative Coding"
@@ -70,6 +76,14 @@ export default function PostLayoutSection() {
           shortDescription="How I draw little illustrations with nothing but HTML and CSS."
           eyebrow="Creative Coding"
           title="Drawing with Code"
+          lede={
+            <>
+              Every knick-knack on my homepage is just a stack of divs.{" "}
+              <span className="post-header-lede-muted">
+                Here’s how to make your own, starting with a teacup.
+              </span>
+            </>
+          }
           publishedDate="Updated Oct 2026"
           readingTime="10 min read"
           postTags="CSS, Illustration, Creative Coding"

@@ -138,9 +138,10 @@
   max-width: none;
 }
 
-/* Keep the giant sample inside the column. */
-.typo-scale-sample.type-title {
-  font-size: clamp(3.5rem, 9vw, 7.5rem);
+@media (width < 40rem) {
+  .typo-scale-sample.type-title {
+    font-size: clamp(3.5rem, 18vw, 5rem);
+  }
 }
 
 .typo-scale-sample + .typo-scale-sample {

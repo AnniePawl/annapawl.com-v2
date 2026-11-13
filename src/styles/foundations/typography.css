@@ -46,8 +46,8 @@
      tighter the tracking; small labels get spaced out. Components point
      at these tokens (post-layout.css, section.css, books.css…). */
 
-  /* Page title — PostHeader (Bookshelf, Drawing with Code) */
-  --type-title-size: clamp(4rem, 9.25vw, 8.75rem);
+  /* Page title — every page header */
+  --type-title-size: clamp(4rem, 9.25vw, 7rem);
   --type-title-weight: var(--font-regular);
   --type-title-leading: 0.82;
   --type-title-tracking: -0.065em;
@@ -59,9 +59,9 @@
   --type-section-tracking: -0.055em;
 
   /* Lede — the bigger intro line under page + section headings */
-  --type-lede-size: clamp(1.375rem, 2.5vw, 2rem);
+  --type-lede-size: var(--type-heading-size);
   --type-lede-weight: var(--font-regular);
-  --type-lede-leading: 1.12;
+  --type-lede-leading: 1.2;
   --type-lede-tracking: -0.03em;
 
   /* Heading — article sections, bookshelf years, principle titles */
