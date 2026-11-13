@@ -51,8 +51,18 @@ export const TOPICS: { name: Topic; hue: PaletteHue; groups?: string[] }[] = [
       "Handy one-liners",
     ],
   },
-  { name: "Accessibility", hue: "lilac", groups: ["ARIA", "Hiding content"] },
+  {
+    name: "Accessibility",
+    hue: "lilac",
+    groups: ["Choosing the right element", "Names & labels", "Keyboard", "Color", "Structure", "ARIA", "Hiding content"],
+  },
 ];
+
+/** Shorter names for the label on each card, for groups whose heading is
+ *  too long to fit there. The grid heading still shows the full name. */
+export const GROUP_CARD_LABELS: Record<string, string> = {
+  "Choosing the right element": "Right element",
+};
 
 export const NOTES: FieldNote[] = [
   {
@@ -373,22 +383,168 @@ order.getAll("toppings"); // ["honey", "fig jam"]`,
   },
   {
     topic: "Accessibility",
+    name: "Buttons vs links",
+    group: "Choosing the right element",
+    model:
+      "Links take me somewhere. Buttons do something, like opening a drawer, saving a favorite, or submitting a form.",
+    example: `<a href="/bookshelf">Visit my bookshelf</a>
+<button type="button">Reveal emergency snacks</button>`,
+    note: "Choose by behavior, not appearance. A link can look like a button and still be a link.",
+  },
+  {
+    topic: "Accessibility",
+    name: "HTML before ARIA",
+    group: "Choosing the right element",
+    model:
+      "Start with an HTML element that already does the job. ARIA describes what something is, it doesn’t add behavior. A real button already comes with keyboard support.",
+    example: `<button type="button">More cheese, please</button>
+<!-- Built-in focus and Enter/Space activation -->`,
+    note: "My modal uses a native dialog for built-in keyboard behavior, with aria-labelledby pointing to its heading for a name.",
+  },
+  {
+    topic: "Accessibility",
+    name: "Accessible names",
+    group: "Names & labels",
+    model:
+      "An element’s name for assistive technology. Usually comes from visible text, a form label, or image alt text.",
+    example: `<button>Save snack</button>          <!-- name: Save snack -->
+<button aria-label="Close">×</button> <!-- name: Close -->
+<img src="cat.jpg" alt="Sleepy cat">  <!-- name: Sleepy cat -->`,
+    note: "aria-label overrides a button’s text as its name. Keep visible wording in the name. You can check the result in DevTools Accessibility pane.",
+  },
+  {
+    topic: "Accessibility",
+    name: "Form labels",
+    group: "Names & labels",
+    model:
+      "Connects a field to its name. Clicking the label focuses the input, and screen readers use it to identify the field.",
+    example: `<label for="cheese">Favorite cheese</label>
+<input id="cheese" aria-describedby="cheese-hint">
+<p id="cheese-hint">Soft cheeses count.</p>`,
+    note: "'for' matches the input’s id. A placeholder isn’t a label and vanishes as I type. aria-describedby points to hint text by its id. In React, use 'htmlFor' instead.",
+  },
+  {
+    topic: "Accessibility",
+    name: "Form errors",
+    group: "Names & labels",
+    model:
+      "Say what went wrong and how to fix it, tie the message to its field, and mark the field as invalid.",
+    example: `<label for="qty">Cheese wheels</label>
+<input id="qty" type="number" aria-invalid="true"
+  aria-describedby="qty-error">
+<p id="qty-error">Choose 1–10 wheels. Leave some for everyone else.</p>`,
+    note: "aria-invalid marks the field as having an error; aria-describedby points to the explanation. Clear the error state and message once it’s fixed.",
+  },
+  {
+    topic: "Accessibility",
+    name: "Icon buttons",
+    group: "Names & labels",
+    model:
+      "A button with only an icon has no name, so a screen reader just says “button.” Add aria-label so screen readers can announce what it does.",
+    example: `<button type="button" aria-label="Delete snack">
+  <svg aria-hidden="true">…</svg>
+</button>`,
+    note: "aria-hidden on the icon keeps it from being read too. Name the action (“Delete snack”), not the picture (“trash can”).",
+  },
+  {
+    topic: "Accessibility",
+    name: "Alt text",
+    group: "Names & labels",
+    model:
+      "Describes an image for anyone who can’t see it. Say what it shows or why it’s there. Skip “image of.”",
+    example: `<img src="brie.jpg" alt="A wedge of brie on a board">
+<img src="squiggle.svg" alt="">  <!-- decoration -->`,
+    note: "alt=\"\" means decorative, so it’s skipped. Missing alt may get the filename read aloud. If an image is the only content in a link, describe where the link goes.",
+  },
+  {
+    topic: "Accessibility",
+    name: "Tab order and tabindex",
+    group: "Keyboard",
+    model:
+      "Tab moves focus through links, buttons, and fields, usually in HTML order. tabindex controls whether other elements join that order.",
+    example: `<<div tabindex="0">Tab can reach me</div>
+<div tabindex="-1">JavaScript can focus me</div>
+<button>Already keyboard-ready</button>`,
+    note: "0 joins the normal Tab order, -1 stays out but allows focus with JS. Avoid positive nums bc they jump the queue and scramble the order. If the order feels wrong, fix the HTML order instead.",
+  },
+  {
+    topic: "Accessibility",
+    name: "Visible focus",
+    group: "Keyboard",
+    model:
+      "Keyboard users need to see where they are. Don't remove the focus outline without adding a style back.",
+    example: `button:focus-visible {
+  outline: 2px solid var(--plum);
+  outline-offset: 2px;
+}`,
+    note: ":focus-visible shows the ring for keyboard users but usually not mouse clicks. You can check links, buttons, and fields by tabbing through the page.",
+  },
+  {
+    topic: "Accessibility",
+    name: "Color contrast",
+    group: "Color",
+    model:
+      "Text should have enough contrast against its background. At least 4.5:1 for normal text and 3:1 for large text.",
+    example: `/* Both on a white background */
+.readable { color: #767676; } /* about 4.54:1: passes */
+.too-faint { color: #aaaaaa; } /* about 2.32:1: fails */`,
+    note: "WIP for me... odd color combos have my heart. Using DevTools more often to check constrast instead of just trusting my eyes... ",
+  },
+  {
+    topic: "Accessibility",
+    name: "Don’t rely on color alone",
+    group: "Color",
+    model:
+      "Color can be fun + reinforce meaning, but shouldn’t be the only clue. Add words, icons, or shapes so the message survives without it.",
+    example: `<p class="error">Out of brie. Choose another cheese.</p>
+<button aria-pressed="true">✓ Extra cheese selected</button>`,
+    note: "A reminder for my color-loving brain! My bookshelf marks favorites with a heart, not just color, plus hidden Favorite text for screen readers.",
+  },
+  {
+    topic: "Accessibility",
+    name: "Headings",
+    group: "Structure",
+    model:
+      "Headings give a page an outline and creen reader users can jump between them to find the section they want.",
+    example: `<h1>Snack Reviews</h1>
+  <h2>Cheeses</h2>
+    <h3>Brie</h3>
+  <h2>Crackers</h2>`,
+    note: "Choose heading levels by structure, not font size. One h1 per page, h2 for main sections and h3 for sections inside them. Don't skip levels (h2->h4).",
+  },
+  {
+    topic: "Accessibility",
+    name: "Landmarks",
+    group: "Structure",
+    model:
+      "Landmarks mark the main regions of a page, like nav, footer, etc. This helps screen reader users jump straight to there.",
+    example: `<<header>My little corner of the internet</header>
+<nav aria-label="Main">…</nav>
+<main>…</main>
+<footer>Made with excessive CSS</footer>`,
+    note: "One main per page. If there’s more than one nav, give each an aria-label, like “Main” and “Footer”.",
+  },
+  {
+    topic: "Accessibility",
     name: "hidden vs inert",
     group: "Hiding content",
     model:
-      "hidden: gone for everyone. inert: still on screen, but no clicks, no Tab, silent to screen readers.",
-    example: `<div hidden>Gone</div>
-<div inert>Out of reach</div>`,
-    note: "Animating a panel? Use inert. hidden is display: none, so there’s nothing to transition.",
+      "hidden hides an element. inert leaves its appearance alone but prevents clicks, keyboard focus, and screen reader access.",
+    example: `<div hidden>Secret snack stash</div>
+<div inert>Visible, but no snacking yet</div>`,
+    note: "inert doesn’t change how something looks so if a panel is unavailable, you should make that clear visually too.",
   },
   {
     topic: "Accessibility",
     name: "aria-expanded",
     group: "ARIA",
     model:
-      "Tells screen readers whether the thing a button controls is open. Also a great hook for CSS and JS.",
-    example: `const isOpen = btn.getAttribute("aria-expanded") === "true";`,
-    note: "Attributes are strings, and \"false\" is truthy. Always compare with === \"true\".",
+      "Tells screen readers whether a button’s panel is open or closed. Put it on the button that controls the panel. Also a handy hook for CSS and JS.",
+    example: `c<button aria-expanded="false" aria-controls="snacks">
+  Emergency snacks
+</button>
+<div id="snacks" hidden>Brie lives here</div>`,
+    note: "aria-expanded describes the state but it doesn’t actually open anything. Update it when showing or hiding the panel.",
   },
   {
     topic: "JavaScript",

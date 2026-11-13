@@ -3,7 +3,7 @@
 import { useId, useState, type CSSProperties } from "react";
 import CodeBlock from "../../../components/ui/CodeBlock";
 import TextLink from "../../../components/ui/TextLink";
-import { NOTES, TOPICS, noteId, type FieldNote, type Topic } from "../_data/notes";
+import { GROUP_CARD_LABELS, NOTES, TOPICS, noteId, type FieldNote, type Topic } from "../_data/notes";
 
 type Filter = Topic | "All";
 
@@ -61,7 +61,9 @@ function NoteCard({ note }: { note: FieldNote }) {
     <article id={noteId(note.name)} className="fn-card" style={topicStyle(note.topic)}>
       <span className="fn-topic">
         {note.topic}
-        {note.group && <span className="fn-topic-group">· {note.group}</span>}
+        {note.group && (
+          <span className="fn-topic-group">· {GROUP_CARD_LABELS[note.group] ?? note.group}</span>
+        )}
       </span>
       <h4 className="fn-name">{note.name}</h4>
       <p className="fn-model">{note.model}</p>
