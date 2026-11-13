@@ -995,17 +995,6 @@ setProject((prev) => ({ ...prev, finished: true }));
 // makes a new object and tells React to update the screen`,
     note: "Use setProject so React knows to update the screen. Spread keeps the existing properties while letting me change the ones I need.",
   },
-  {
-    topic: "CSS",
-    name: ":has()",
-    group: "Selectors",
-    model:
-      "Styles an element based on what’s inside it. The parent selector CSS finally has.",
-    example: `.item:has([aria-expanded="true"]) {
-  background: var(--cream);
-}`,
-    note: "Keep it narrow. A broad body:has(…) makes the browser re-check more of the page.",
-  },
 
   // ---- CSS: Selectors ----
   {
@@ -1013,67 +1002,111 @@ setProject((prev) => ({ ...prev, finished: true }));
     name: "::before / ::after",
     group: "Selectors",
     model:
-      "Adds a decorative box as the first or last child of an element, styled entirely from CSS.",
-    example: `.tag::before {
+      "A freebie element before or after an element’s contents! You can add text, symbols, images, or an empty box to style into a shape.",
+    example: `.snack-label::before {
+  content: "🧀 ";
+}
+.snack-label::after {
   content: "";
-  width: 6px; height: 12px;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: gold;
 }`,
-    note: "Nothing shows without content, even an empty one. No luck on <img> or <input> either, since they can’t hold children.",
+    note: 'One of my faves! I use these ALL the time, especially in my CSS art. Remember content! Even a shape needs content: "" to appear.',
+  },
+    {
+    topic: "CSS",
+    name: "Combinators",
+    group: "Selectors",
+    model:
+      "Describes how two elements are related. Just a space between them: anywhere inside. >: directly inside. +: right after. ~: anywhere after.",
+    example: `.basket .snack {}   /* in the basket, even inside a lunchbox */
+.basket > .snack {} /* loose in the basket, not in a lunchbox */
+.apple + .snack {}  /* the one snack right after the apple */
+.apple ~ .snack {}  /* every snack after the apple */`,
+    note: "The element on the right is the one that gets styled. + and ~ only match siblings that come after it in the HTML, never before.",
   },
   {
     topic: "CSS",
-    name: ":is() vs :where()",
+    name: "Attribute selectors",
     group: "Selectors",
     model:
-      "Both match anything in their list. :where() adds zero specificity, so anything can override it.",
-    example: `:is(h1, h2, h3) { margin: 0; }
-:where(ul, ol) { padding: 0; }`,
-    note: ":is() takes the specificity of its most specific selector. Reach for :where() in resets.",
+      "Selects elements by their HTML attributes. Use [attribute] to check it exists, or [attribute=\"value\"] to match a specific value.",
+    example: `/* Any element with a snack label */
+[data-snack] { border: 1px solid plum; }
+
+/* Only the brie */
+[data-snack="brie"] { background: lemonchiffon; }`,
+    note: "I use data-state in my design system to preview hover styles. Styling straight from aria-expanded keeps the look and what screen readers hear in sync. ",
   },
   {
     topic: "CSS",
-    name: ":focus-visible",
+    name: ":has()",
     group: "Selectors",
     model:
-      "Shows focus styles when the browser thinks they’re needed, like keyboard use, but not on a mouse click.",
-    example: `button:focus-visible {
-  outline: 2px solid var(--charcoal);
-  outline-offset: 2px;
+      "Styles an element when something inside it matches a selector.",
+    example: `/* Recipe with a warning gets a red border */
+.recipe:has(.allergy-warning) {
+  border: 2px solid red;
 }`,
-    note: "Never just remove outlines. Swap :focus for :focus-visible instead.",
+    note: ":has(.allergy-warning) finds a warning anywhere inside the recipe. :has(> .allergy-warning) only finds one directly inside it, not inside another wrapper.",
   },
-  {
-    topic: "CSS",
-    name: "Input :focus",
-    group: "Selectors",
-    model:
-      "Styles a field while someone is typing in it. On text inputs, :focus and :focus-visible both match, even on click.",
-    example: `input:focus {
-  outline: 3px solid blue; /* no layout shift */
-  outline-offset: 1px;
-}`,
-    note: "A thicker border on focus makes the field jump. Use outline, or keep the width and change only border-color.",
-  },
-  {
+    {
     topic: "CSS",
     name: ":not()",
     group: "Selectors",
     model: "Matches everything except what’s in the parentheses.",
-    example: `li:not(:last-child) {
-  border-bottom: 1px solid;
+    example: `/* Dividers between snacks, but none after the last one */
+.snack-list li:not(:last-child) {
+  border-bottom: 1px solid plum;
 }`,
-    note: "Dividers between items, with no extra one hanging off the end.",
+    note: "The part before :not says what to style; the part inside says what to leave out. Here, every list item except the last gets a divider.",
   },
-  {
+    {
     topic: "CSS",
     name: ":nth-child()",
     group: "Selectors",
-    model: "Picks children by position. Takes a number, odd or even, or a formula like 3n.",
-    example: `tr:nth-child(odd) { background: var(--cream); }
+    model: "Picks elements by their position among siblings. Use a number, odd or even, or a pattern like 3n.",
+    example: `/* Shade every other row in my yarn inventory */
+.yarn-table tbody tr:nth-child(even) {
+  background: lavender;
+} }
+
 li:nth-child(3n) { color: red; }  /* 3, 6, 9… */
 li:nth-child(-n + 3) { font-weight: 600; } /* first 3 */`,
-    note: "It counts every sibling, not just matching ones. :nth-child(2 of .item) counts only .item.",
+    note: "Counting starts at 1, not 0. -n + 3 selects the first 3 items: the formula counts down through 3, 2, 1, then stops matching.",
   },
+
+  {
+    topic: "CSS",
+    name: ":focus vs :focus-visible",
+    group: "Selectors",
+    model:
+      ":focus matches any focused element. :focus-visible matches when the browser thinks focus needs a visible indicator, usually during keyboard use.",
+    example: `button:focus-visible { /* usually keyboard focus */
+  outline: 2px solid deeppink;
+}
+input:focus { /* click or Tab into the field */
+  outline: 3px solid darkorchid;
+}`,
+    note: "Text inputs can match focus-visible even when clicked. I use outline for a little drama without the layout shift a thicker border can cause.",
+  },
+    {
+    topic: "CSS",
+    name: ":is() vs :where()",
+    group: "Selectors",
+    model:
+      "Groups selectors to style several things at once. :is uses the strongest selector’s specificity. :where counts as zero, so other rules can override it more easily.",
+    example: `:is(.cheese, .crackers) {
+  padding: 1rem;
+}
+:where(ul, ol) {
+  padding: 0; /* easy-to-override default */
+}`,
+    note: "Haven’t reached for these much yet... Curious to try.",
+  },
+
 
   // ---- CSS: Layout ----
   {
