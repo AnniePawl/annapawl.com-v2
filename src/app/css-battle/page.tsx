@@ -4,7 +4,7 @@ import HomeLogo from "../../components/ui/HomeLogo";
 import TextLink from "../../components/ui/TextLink";
 import BattleArt from "./_components/BattleArt";
 import BattleCover from "./_components/BattleCover";
-import { CHALLENGES } from "./_data/challenges";
+import { CHALLENGES, techniques } from "./_data/challenges";
 
 export default function CssBattle() {
   return (
@@ -15,16 +15,16 @@ export default function CssBattle() {
         shortDescription="An ongoing collection of little challenges to stretch my CSS brain."
         eyebrow="Creative Coding"
         title="CSS Battle"
-        publishedDate="Updated Nov 2026"
-        postTags="CSS, CSS Art"
+        detailsStart="Ongoing collection · Updated Nov 2026"
+        postTags="Code golf, Single div, CSS art"
         utilityStart={
           <HomeLogo
             colors={{
-              northeast: "var(--charcoal)",
-              southeast: "var(--charcoal)",
-              southwest: "var(--charcoal)",
-              northwest: "var(--charcoal)",
-              hoverAccent: "var(--marigold-bold)",
+              northeast: "var(--clay-bold)",
+              southeast: "var(--moss-bold)",
+              southwest: "var(--moss-bold)",
+              northwest: "var(--moss-bold)",
+              hoverAccent: "var(--charcoal)",
             }}
             size="1.75rem"
           />
@@ -47,9 +47,11 @@ export default function CssBattle() {
       > 
         <PostSection id="intro" title="Intro">
           <p>
-            CSS Battle gives you a target image and asks you to rebuild it with HTML and CSS. To make
-            it harder, I gave myself one rule: a single div per challenge. With only one element to
-            work with, I had to lean on everything CSS can draw by itself.
+            <TextLink href="https://cssbattle.dev/">CSS Battle</TextLink> is a game of code golf: you
+            get a target image and rebuild it with HTML and CSS, and the shorter your code, the better
+            your score. I played by a different rule. Instead of chasing the fewest characters, I gave
+            myself one div per challenge. With only one element to work with, I had to lean on
+            everything CSS can draw by itself.
           </p>
           <p>
             <code>::before</code> and <code>::after</code> turned one div into three shapes.{" "}
@@ -60,14 +62,31 @@ export default function CssBattle() {
           </p>
         </PostSection>
         {CHALLENGES.map((c) => (
-          <PostSection key={c.key} id={c.key} title={c.title} tone={c.tone}>
+          <PostSection key={c.key} id={c.key} title={c.title} tone={c.tone} className="cb-section">
+            <div className="cb-meta">
+              <ul className="cb-tags" aria-label="Techniques">
+                {techniques(c).map((t) => (
+                  <li key={t}>{t}</li>
+                ))}
+              </ul>
+              <a
+                className="cb-target focus-ring"
+                href={`https://cssbattle.dev/play/${c.target}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View target <span aria-hidden="true">↗</span>
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            </div>
             <BattleArt challenge={c} />
-            <CodeBlock code={`${c.html ?? "<div></div>"}\n\n${c.css}`} />
-            <p>
-              <TextLink href={`https://codepen.io/annampawl/pen/${c.slug}`} variant="quiet">
-                Open on CodePen
-              </TextLink>
-            </p>
+            <details className="cb-code">
+              <summary className="focus-ring">
+                <span className="cb-code-show">Show the CSS</span>
+                <span className="cb-code-hide">Hide the CSS</span>
+              </summary>
+              <CodeBlock code={`${c.html ?? "<div></div>"}\n\n${c.css}`} />
+            </details>
           </PostSection>
         ))}
       </PostLayout>

@@ -4,7 +4,7 @@ export type Challenge = {
   key: string;
   title: string;
   tone: PaletteColor;
-  slug: string;
+  target: string;
   html?: string;
   css: string;
   cover?: boolean;
@@ -16,7 +16,7 @@ export const CHALLENGES: Challenge[] = [
     cover: true,
     title: "Battle #4",
     tone: "pink-bold",
-    slug: "zYgLqXY",
+    target: "4",
     css: `body {
   height: 100vh;
   display: flex;
@@ -55,7 +55,7 @@ body div::after {
     cover: true,
     title: "Daily target, Nov 1 2024",
     tone: "teal-bold",
-    slug: "abejNNx",
+    target: "qDnn5lLE6fVaXW37g0Tc",
     css: `body {
   height: 100vh;
   display: flex;
@@ -97,7 +97,7 @@ body div:before {
     cover: true,
     title: "Battle #188",
     tone: "lilac-bold",
-    slug: "ExqMRLN",
+    target: "188",
     css: `body {
   height: 100vh;
   display: flex;
@@ -153,7 +153,7 @@ body::before {
     cover: true,
     title: "Battle #15",
     tone: "sky-bold",
-    slug: "ZEgPbaa",
+    target: "15",
     css: `body {
   height: 100vh;
   background: white;
@@ -190,7 +190,7 @@ body div::after {
     key: "daily-2024-11-11",
     title: "Daily target, Nov 11 2024",
     tone: "coral-bold",
-    slug: "VwoqxXW",
+    target: "uW5AdLWTjGniqNWjsfOP",
     html: "<div class='frame'></div>",
     css: `body {
   height: 100vh;
@@ -223,7 +223,7 @@ body div::before {
     key: "battle-9",
     title: "Battle #9",
     tone: "marigold-bold",
-    slug: "zYgLZgm",
+    target: "9",
     css: `body {
   height: 100vh;
   display: flex;
@@ -280,7 +280,7 @@ body div::after {
     key: "battle-7",
     title: "Battle #7",
     tone: "emerald-bold",
-    slug: "GRVBrPw",
+    target: "7",
     html: "<div class='frame'></div>",
     css: `body{
   height:100vh;
@@ -321,7 +321,7 @@ body div::after {
     key: "battle-6",
     title: "Battle #6",
     tone: "red-bold",
-    slug: "ZEgjLeY",
+    target: "6",
     css: `body {
   height: 100vh;
   display: flex;
@@ -351,7 +351,7 @@ body div::before {
     key: "battle-5",
     title: "Battle #5",
     tone: "orange-bold",
-    slug: "gOVjLrw",
+    target: "5",
     css: `body {
   height: 100vh;
   display: flex;
@@ -389,7 +389,7 @@ body div::after {
     key: "battle-3",
     title: "Battle #3",
     tone: "blue-bold",
-    slug: "dyxjGBx",
+    target: "3",
     css: `body {
   margin: 0;
   height: 100vh;
@@ -418,7 +418,7 @@ body div::after {
     key: "battle-2",
     title: "Battle #2",
     tone: "cherry-bold",
-    slug: "BaXVeNR",
+    target: "2",
     css: `body {
   margin: 0;
   height: 100vh;
@@ -456,4 +456,22 @@ export function scopeCss({ key, css }: Challenge): string {
 
 export function divClass({ html }: Challenge): string | undefined {
   return html?.match(/class=['"]([^'"]+)['"]/)?.[1];
+}
+
+export function stageBackground({ css }: Challenge): string | undefined {
+  return css.match(/(?:body div|\.frame)\s*\{[^}]*?background(?:-color)?:\s*(#[0-9a-f]{3,6})/i)?.[1];
+}
+
+const TECHNIQUES: [string, RegExp][] = [
+  ["box-shadow", /box-shadow/],
+  ["border-radius", /border-radius/],
+  ["linear-gradient", /linear-gradient/],
+  ["radial-gradient", /radial-gradient/],
+  ["conic-gradient", /conic-gradient/],
+  ["transform", /transform/],
+];
+
+/** The notable CSS a solution uses, read from its code. Every one uses ::before/::after. */
+export function techniques({ css }: Challenge): string[] {
+  return TECHNIQUES.filter(([, pattern]) => pattern.test(css)).map(([name]) => name);
 }
