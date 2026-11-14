@@ -26,10 +26,18 @@ export default function DrawingWithCodePage() {
     <main className="dwc-page">
       <PostLayout
         descriptionTitle="CSS Art"
-        description="An introduction to drawing with code—using HTML elements and CSS properties to turn simple shapes into illustrations in the browser."
+        description="Every knick-knack on my homepage started as a lil div. A beginner’s toolkit, a step-by-step tutorial, and lessons learned through fiddling and failing."
         shortDescription="How I draw little illustrations with nothing but HTML and CSS."
         eyebrow="Creative Coding"
         title="Drawing with Code"
+        lede={
+          <>
+            A little HTML, a lot of CSS,{" "}
+            <span className="post-header-lede-muted">
+              and the satisfying business of turning a bunch of divs into something recognizable.
+            </span>
+          </>
+        }
         next={{ href: "/css-shapes", label: "CSS Shapes" }}
         publishedDate="Updated Oct 2026"
         readingTime="12 min read"
@@ -146,8 +154,10 @@ export default function DrawingWithCodePage() {
               Styled child divs, which are nested within parent elements, give
               your composition structure and substance. Nesting elements is
               useful because you can position a child div relative to its
-              parent. As your CSS skills improve, you&rsquo;ll be able to
-              create elaborate pieces with a single div. For now, break your
+              parent. As your CSS skills grow, you&rsquo;ll be surprised how much
+              you can{" "}
+              <TextLink href="/css-battle">make with a single div</TextLink>.
+              For now, break your
               vision down into simple parts and create a child div for every
               shape.
             </p>
@@ -593,6 +603,8 @@ export default function DrawingWithCodePage() {
               <li>
                 <TextLink href="https://cssbattle.dev">CSS Battle</TextLink>, daily
                 puzzles where you can practice recreating a target image with CSS.
+                Here are <TextLink href="/css-battle">some of my solutions</TextLink>,
+                each made with a single div.
               </li>
               <li>
                 <TextLink href="https://developer.mozilla.org/en-US/docs/Web/CSS">

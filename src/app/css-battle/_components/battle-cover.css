@@ -1,0 +1,21 @@
+.battle-cover {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding: var(--space-7) var(--space-5) 0;
+}
+
+.battle-tile {
+  display: block;
+}
+
+@media (max-width: 1023px) {
+  .battle-cover {
+    padding: var(--space-6) var(--space-4) 0;
+  }
+}
+
+@media (max-width: 639px) {
+  .battle-cover {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

@@ -1,5 +1,6 @@
 import type { LucideIcon } from "lucide-react";
 import {
+  CirclePlus,
   Palette,
   SquareCode,
   PanelTop,
@@ -83,6 +84,12 @@ export const SECTIONS: NavSection[] = [
     id: "buttons",
     title: "Buttons",
     icon: SquareMousePointer,
+    group: "Components",
+  },
+  {
+    id: "disclosure",
+    title: "Disclosure",
+    icon: CirclePlus,
     group: "Components",
   },
   { id: "links", title: "Links", icon: Link2, group: "Components" },

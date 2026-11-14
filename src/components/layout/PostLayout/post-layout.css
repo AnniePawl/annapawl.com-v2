@@ -17,8 +17,12 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: var(--space-5);
-  min-height: 4.5rem;
-  margin-top: 1rem;
+  /* Fits a two-line description, so titles start at the same height. */
+  min-height: calc(
+    var(--space-4) * 2 + 0.75rem * 1.3 + 2px +
+      var(--type-note-size) * var(--type-note-leading) * 2
+  );
+  margin-top: 0.5rem;
   padding: var(--space-4) var(--space-5);
   text-align: left;
 }
@@ -57,7 +61,7 @@
      title sits close to the top and more of the page shows above the
      fold. Phones set their own spacing below. */
   min-height: 0;
-  padding: var(--space-2) var(--space-5) var(--space-4);
+  padding: var(--space-1) var(--space-5) var(--space-4);
   align-items: flex-start;
   flex-direction: column;
   justify-content: flex-end;
@@ -69,7 +73,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  margin-bottom: var(--space-4);
+  margin-bottom: 0.875rem;
   font-size: 0.75rem;
   line-height: 1.3;
 }
@@ -81,7 +85,7 @@
 }
 
 .post-header-title {
-  max-width: 8ch;
+  max-width: none;
   margin: 0;
   /* Optical alignment: big letters carry built-in space on their left
      (about 0.06–0.09em for B, C, F), so the title looked indented next
@@ -108,7 +112,7 @@
 .post-header-lede {
   max-width: 55rem;
   /* Bottom margin matches the title-to-rule gap on pages without a lede. */
-  margin: var(--space-5) 0 0.75rem;
+  margin: 1.25rem 0 0.75rem;
   color: var(--charcoal);
   font-size: var(--type-lede-size);
   line-height: var(--type-lede-leading);
@@ -339,7 +343,7 @@
   }
 
   .post-header-lede {
-    margin-block: var(--space-4) var(--space-1);
+    margin-block: var(--space-4) 0;
     font-size: 1.25rem;
     line-height: 1.18;
   }

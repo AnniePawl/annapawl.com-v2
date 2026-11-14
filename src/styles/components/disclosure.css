@@ -1,0 +1,82 @@
+/* Disclosure: outlined at rest, fills with ink on hover (like primary Button). */
+.disclosure {
+  --disclosure-bg: transparent;
+  --disclosure-plus: var(--text-primary);
+}
+
+.disclosure-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 1.5rem;
+  padding: var(--space-1) 0;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: var(--font-medium);
+  list-style: none;
+}
+
+.disclosure-summary::-webkit-details-marker {
+  display: none;
+}
+
+.disclosure-summary:hover,
+.disclosure[data-state="hover"] .disclosure-summary {
+  --disclosure-bg: var(--text-primary);
+  --disclosure-plus: var(--bg-default);
+}
+
+.disclosure-icon {
+  position: relative;
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 1px solid var(--text-primary);
+  border-radius: 50%;
+  background: var(--disclosure-bg);
+  transition:
+    transform var(--motion-duration-base) var(--motion-ease-standard),
+    background-color var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+.disclosure-icon::before,
+.disclosure-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.5rem;
+  height: 1.5px;
+  border-radius: 2px;
+  background: var(--disclosure-plus);
+  transform: translate(-50%, -50%);
+  transition:
+    transform var(--motion-duration-base) var(--motion-ease-standard),
+    background-color var(--motion-hover-duration) var(--motion-hover-ease);
+}
+
+.disclosure-icon::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.disclosure:not([open]) .disclosure-summary:hover .disclosure-icon,
+.disclosure[data-state="hover"]:not([open]) .disclosure-icon {
+  transform: rotate(90deg);
+}
+
+.disclosure[open] .disclosure-icon::after {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.disclosure-label-open,
+.disclosure[open] .disclosure-label {
+  display: none;
+}
+
+.disclosure[open] .disclosure-label-open {
+  display: inline;
+}
+
+.disclosure-panel {
+  margin-top: var(--space-2);
+}

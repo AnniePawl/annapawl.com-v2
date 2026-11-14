@@ -66,14 +66,18 @@ export default async function BooksPage() {
             />
           }
           descriptionTitle="Reading archive"
-          description="Book club picks, Little Library finds, and the occasional summer indulgence."
-          eyebrow="Digital garden"
+          description="A running archive of book club picks, Little Library finds, and rabbit holes. Keeping track, because finishing a book doesn’t mean I’ll remember it."
+          shortDescription="Keeping track, because finishing a book doesn’t mean I’ll remember it."
+          eyebrow="General nerdery"
           title="Bookshelf"
           accent="var(--blue-bold)"
           lede={
             <>
-              A running list of everything I’ve read lately — the good, the great and the “why did I finish that.” 
-              {/* <span className="post-header-lede-muted">Pull up a chair.</span> */}
+              The good, the great and the “why did I finish that.”{" "}
+              <br />
+              <span className="post-header-lede-muted">
+                I have thoughts. Some of them are even about the books.
+              </span>
             </>
           }
           detailsStart="Ongoing collection · Since Jan 2026"
