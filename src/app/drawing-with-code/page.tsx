@@ -154,8 +154,10 @@ export default function DrawingWithCodePage() {
               Styled child divs, which are nested within parent elements, give
               your composition structure and substance. Nesting elements is
               useful because you can position a child div relative to its
-              parent. As your CSS skills improve, you&rsquo;ll be able to
-              create elaborate pieces with a single div. For now, break your
+              parent. As your CSS skills grow, you&rsquo;ll be surprised how much
+              you can{" "}
+              <TextLink href="/css-battle">make with a single div</TextLink>.
+              For now, break your
               vision down into simple parts and create a child div for every
               shape.
             </p>
@@ -601,6 +603,8 @@ export default function DrawingWithCodePage() {
               <li>
                 <TextLink href="https://cssbattle.dev">CSS Battle</TextLink>, daily
                 puzzles where you can practice recreating a target image with CSS.
+                Here are <TextLink href="/css-battle">some of my solutions</TextLink>,
+                each made with a single div.
               </li>
               <li>
                 <TextLink href="https://developer.mozilla.org/en-US/docs/Web/CSS">

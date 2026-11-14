@@ -12,8 +12,9 @@ export const booksByYear: Record<number, BookLookup[]> = {
     { title: "Klara and the Sun", author: "Kazuo Ishiguro", volumeId: "S7jrDwAAQBAJ", tags: ["Science Fiction", "Literary Fiction"], firstPublished: 2021 },
     { title: "Piranesi", volumeId: "MUMIEAAAQBAJ", author: "Susanna Clarke", tags: ["Fantasy", "Literary Fiction", "Favorites", "Book Club"], firstPublished: 2020 },
     { title: "Ready Player One", author: "Ernest Cline", tags: ["Science Fiction", "Dystopian", "Adventure"], firstPublished: 2011 },
-    { title: "The Lost City of Z", author: "David Grann", volumeId: "QPih33JBeMwC", tags: ["Nonfiction", "Adventure"], firstPublished: 2009 },
-      {
+    { title: "Endurance", author: "Alfred Lansing", volumeId: "WOEZAwAAQBAJ", tags: ["Nonfiction", "Adventure", "Survival"], firstPublished: 1959 },
+
+    {
       title: "The Tipping Point",
       author: "Malcolm Gladwell",
       volumeId: "yBDBEGBIUmgC",
@@ -29,11 +30,9 @@ export const booksByYear: Record<number, BookLookup[]> = {
         "https://play.google.com/books/content/images/frontcover/WT1nA87biBoC?fife=w240-h345",
       tags: ["Literary Fiction", "Dystopian", "Survival", "Book Club"], firstPublished: 1995,
     },
-    { title: "Endurance", author: "Alfred Lansing", volumeId: "WOEZAwAAQBAJ", tags: ["Nonfiction", "Adventure", "Survival"], firstPublished: 1959 },
-    { title: "The Fifth Season", author: "N. K. Jemisin", volumeId: "J0tIAgAAQBAJ", tags: ["Fantasy", "Dystopian", "Favorites"], firstPublished: 2015 },
-    { title: "The Obelisk Gate", author: "N. K. Jemisin", volumeId: "2PQlCwAAQBAJ", tags: ["Fantasy", "Dystopian"], firstPublished: 2016 },
-    { title: "The Stone Sky", author: "N. K. Jemisin", volumeId: "cmWnDQAAQBAJ", tags: ["Fantasy", "Dystopian"], firstPublished: 2017 },
-    { title: "The Great Believers", author: "Rebecca Makkai", tags: ["Historical Fiction", "LGBTQ+", "Favorites", "Made Me Cry"], firstPublished: 2018 },
+    { title: "The Man Who Mistook His Wife for a Hat", author: "Oliver Sacks", volumeId: "CuwmEAAAQBAJ", tags: ["Nonfiction", "Popular Science"], firstPublished: 1985 },
+    { title: "The Lost City of Z", author: "David Grann", volumeId: "QPih33JBeMwC", tags: ["Nonfiction", "Adventure"], firstPublished: 2009 },
+    { title: "The Great Believers", author: "Rebecca Makkai", tags: ["Historical Fiction", "LGBTQ+", "Made Me Cry", "Favorites"], firstPublished: 2018 },
     {
       title: "Project Hail Mary",
       author: "Andy Weir",
@@ -50,6 +49,9 @@ export const booksByYear: Record<number, BookLookup[]> = {
         "https://play.google.com/books/content/images/frontcover/gt7EQgH8-b4C?fife=w480-h690",
       tags: ["Nonfiction", "Adventure", "Survival"], firstPublished: 1997,
     },
+    { title: "The Fifth Season", author: "N. K. Jemisin", volumeId: "J0tIAgAAQBAJ", tags: ["Fantasy", "Dystopian", "Favorites"], firstPublished: 2015 },
+    { title: "The Obelisk Gate", author: "N. K. Jemisin", volumeId: "2PQlCwAAQBAJ", tags: ["Fantasy", "Dystopian"], firstPublished: 2016 },
+    { title: "The Stone Sky", author: "N. K. Jemisin", volumeId: "cmWnDQAAQBAJ", tags: ["Fantasy", "Dystopian"], firstPublished: 2017 },
     { title: "Fourth Wing", author: "Rebecca Yarros", volumeId: "E-OLEAAAQBAJ", tags: ["Fantasy", "Romance", "Adventure"], firstPublished: 2023 },
     { title: "Iron Flame", author: "Rebecca Yarros", volumeId: "xIS9EAAAQBAJ", tags: ["Fantasy", "Romance", "Adventure"], firstPublished: 2023 },
     { title: "Perfection", author: "Vincenzo Latronico", volumeId: "x6YyEQAAQBAJ", tags: ["Literary Fiction"], firstPublished: 2022 },

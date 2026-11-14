@@ -41,6 +41,7 @@ export default function CssBattle() {
           </>
         }
         accent="var(--moss-bold)"
+        next={{ href: "/drawing-with-code", label: "Drawing with Code" }}
         cover={<BattleCover challenges={CHALLENGES.filter((c) => c.cover)} />}
         contents={[
           { id: "intro", label: "Intro", tone: "moss-bold" },
