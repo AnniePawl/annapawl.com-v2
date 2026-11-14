@@ -14,8 +14,8 @@ const SCALE: {
   {
     role: "Page title",
     className: "type-title",
-    spec: "64–140px · 400 · −0.065em · 0.82",
-    usedIn: "Bookshelf, Drawing with Code headers",
+    spec: "64–112px · 400 · −0.065em · 0.82",
+    usedIn: "Every page header",
     sample: "Squirrel",
     mark: true,
   },
@@ -30,8 +30,8 @@ const SCALE: {
   {
     role: "Lede",
     className: "type-lede",
-    spec: "22–32px · 400 · −0.03em · 1.12",
-    usedIn: "Header + section intros",
+    spec: "22–28px · 400 · −0.03em · 1.2",
+    usedIn: "Page header + section intros (same size as Heading)",
     sample: "One seriously saucy squirrel, last seen fleeing the bird feeder.",
   },
   {

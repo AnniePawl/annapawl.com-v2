@@ -38,16 +38,17 @@ export default function FiberArtsPage() {
             />
           }
           descriptionTitle="Made by hand"
-          description="Ornaments, hoops, and small gifts."
-          eyebrow="Digital garden"
+          description="Embroidery, needlepoint, and cross-stitch. Putting my thread hoard to use so I can justify buying more."
+          shortDescription="Putting my thread hoard to use so I can justify buying more."
+          eyebrow="General nerdery"
           title="Fiber arts"
           accent="var(--page-accent)"
           lede={
             <>
-              Embroidery, needlepoint, and cross stitch: ornaments, hoops, and
-              small gifts made by hand.{" "}
+              Many happy hours making little things slowly, fussing over tiny details.
+              <br />
               <span className="post-header-lede-muted">
-                A few favorites up top, and the rest of the pile below.
+                A soothing pastime, punctuated by occasional swearing.
               </span>
             </>
           }

@@ -1,0 +1,114 @@
+/* Section head: title, hairline, then tags and the target link. */
+.cb-section {
+  position: relative;
+}
+
+.post-section.cb-section h2 {
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid color-mix(in srgb, var(--charcoal) 20%, transparent);
+  margin-bottom: var(--space-4);
+}
+
+.cb-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.cb-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cb-tags li {
+  padding: 0.3rem 0.5rem;
+  border-radius: var(--radius-xs);
+  background: color-mix(in srgb, var(--post-section-tone) 14%, var(--cream));
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+
+/* Desktop: the link sits on the title row, above the hairline. */
+@media (width >= 40rem) {
+  .post-section.cb-section h2 {
+    padding-right: 9rem;
+  }
+
+  .cb-target {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+/* The drawing at true size, on a band of its own background color. */
+.cb-frame {
+  display: flex;
+  justify-content: center;
+  background: var(--cb-bg);
+}
+
+/* Stands in for the battle's body; isolation keeps negative z-index inside. */
+.cb-stage {
+  position: relative;
+  isolation: isolate;
+  width: 400px;
+  height: 300px;
+  overflow: hidden;
+}
+
+/* --cb-scale is set by BattleArt. The tan(atan2()) fallback (100cqw ÷ 400px) covers
+   the moment before it runs; some Safari versions get it wrong. */
+.cb-tile {
+  position: relative;
+  container-type: inline-size;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.cb-tile .cb-stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  transform: scale(var(--cb-scale, tan(atan2(100cqw, 400px))));
+}
+
+.cb-code {
+  margin-top: var(--space-3);
+}
+
+@media (width < 40rem) {
+  /* Phones: the drawing fills the column, scaled to fit. */
+  .cb-frame {
+    display: block;
+    position: relative;
+    container-type: inline-size;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+
+  .cb-frame .cb-stage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: 0 0;
+    transform: scale(var(--cb-scale, tan(atan2(100cqw, 400px))));
+  }
+
+  .cb-meta {
+    flex-wrap: wrap;
+  }
+
+  .css-battle-page .post-header-lede br {
+    display: none;
+  }
+}

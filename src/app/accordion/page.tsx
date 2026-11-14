@@ -284,10 +284,18 @@ export default function AccordionTutorial() {
     <main>
       <PostLayout
         descriptionTitle="Frontend fundamentals"
-        description="How to build an accordion that works with a mouse, keyboard or screen reader, first in vanilla JavaScript, then in React with my design system component as the example."
-        shortDescription="Building an accordion that works with a keyboard and screen reader."
+        description="Build an accordion in vanilla JavaScript, then React, with keyboard controls, accessible states, and a closer look at how the pieces work together."
+        shortDescription="Build an accordion in vanilla JavaScript, then React."
         eyebrow="Building Blocks"
         title="Accordion"
+        lede={
+          <>
+            A familiar little component with more going on than meets the eye.{" "}
+            <span className="post-header-lede-muted">
+              Here’s what happens behind the click.
+            </span>
+          </>
+        }
         publishedDate="Updated Oct 2026"
         readingTime="12 min read"
         postTags="Components, JavaScript, React, Accessibility"

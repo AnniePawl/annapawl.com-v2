@@ -108,6 +108,17 @@
   transform: translateX(0.25rem);
 }
 
+/* External links: the arrow icon has built-in padding, so pull it closer. */
+.btn--external {
+  gap: var(--space-1);
+}
+
+/* External links: the arrow nudges the way it points. */
+.btn--external:hover .btn-end-icon,
+.btn--external[data-state="hover"] .btn-end-icon {
+  transform: translate(0.15rem, -0.15rem);
+}
+
 /* On hover the icon takes the label's hover color. Each role names that
    color directly instead of using `inherit`: inheriting a color that is
    itself mid-transition makes the icon restart its own transition every
@@ -150,6 +161,11 @@
   border-radius: 50%;
   background: var(--btn-icon, var(--page-accent));
   transition: background-color var(--btn-transition);
+}
+
+/* External links show an arrow instead of the dot. */
+.btn--primary.btn--external::before {
+  content: none;
 }
 
 .btn--primary:hover,

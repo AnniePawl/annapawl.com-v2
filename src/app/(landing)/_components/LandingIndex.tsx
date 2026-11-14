@@ -44,6 +44,12 @@ const CREATIVE_CODING: GroupItem[] = [
     description: "How to make basic shapes using CSS",
     accent: "var(--marigold-bold)",
   },
+  {
+    href: "/css-battle",
+    title: "CSS Battle",
+    description: "CSS Battle targets, each rebuilt with a single div",
+    accent: "var(--moss-bold)",
+  },
 ];
 
 const BUILDING_BLOCKS: GroupItem[] = [

@@ -27,10 +27,19 @@ export default function CssShapesPage() {
     <main className="shapes-page">
       <PostLayout
         descriptionTitle="CSS Art"
-        description="Every CSS illustration starts with a few basic shapes. Here’s how to build a dozen of them, one property at a time."
+        description="A few boxes, some weird borders, and suddenly there’s a heart. These are the little building blocks behind my CSS illustrations."
+        shortDescription="These are the little building blocks behind my CSS illustrations."
         eyebrow="Creative Coding"
         title="CSS Shapes"
-        next={{ href: "/drawing-with-code", label: "Drawing with Code" }}
+        lede={
+          <>
+            Twelve shapes made with HTML and CSS, from squares and circles to stars and hearts.{" "}
+            <span className="post-header-lede-muted">
+              A small toolkit for drawing bigger things.
+            </span>
+          </>
+        }
+        next={{ href: "/css-battle", label: "CSS Battle" }}
         publishedDate="Updated Oct 2026"
         readingTime="8 min read"
         postTags="CSS, Illustration"
@@ -128,6 +137,7 @@ export default function CssShapesPage() {
         <PostSection id="keep-going" title="Keep going">
           <p>That’s the whole set! Twelve shapes built from a surprisingly small CSS toolkit. Most come down to the same few ideas: <code>width</code> and <code>height</code>, <code>border-radius</code>, borders that turn into triangles, and <code>::before</code> and <code>::after</code> for adding extra pieces. Once those patterns feel familiar, you can draw all kinds of things by stacking, rotating, and nudging them into place.</p>
           <p>Ready to turn those shapes into an illustration? In <TextLink href="/drawing-with-code">Drawing with Code</TextLink>, I use the same techniques to build a cute little teacup from a single <code>div</code>.</p>
+          <p>Want a challenge? My <TextLink href="/css-battle">CSS Battle solutions</TextLink> use these same tricks to recreate whole images, each from a single <code>div</code>.</p>
         </PostSection>
       </PostLayout>
     </main>
