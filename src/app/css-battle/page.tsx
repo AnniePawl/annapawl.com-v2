@@ -1,5 +1,7 @@
 import PostLayout, { PostSection } from "../../components/layout/PostLayout/PostLayout";
+import { ButtonLink } from "../../components/ui/Button";
 import CodeBlock from "../../components/ui/CodeBlock";
+import Disclosure from "../../components/ui/Disclosure";
 import HomeLogo from "../../components/ui/HomeLogo";
 import TextLink from "../../components/ui/TextLink";
 import BattleArt from "./_components/BattleArt";
@@ -69,24 +71,20 @@ export default function CssBattle() {
                   <li key={t}>{t}</li>
                 ))}
               </ul>
-              <a
-                className="cb-target focus-ring"
+              <ButtonLink
                 href={`https://cssbattle.dev/play/${c.target}`}
-                target="_blank"
-                rel="noopener noreferrer"
+                shape="pill"
+                size="sm"
+                tone={c.tone}
+                className="cb-target"
               >
-                View target <span aria-hidden="true">↗</span>
-                <span className="sr-only"> (opens in a new tab)</span>
-              </a>
+                View target
+              </ButtonLink>
             </div>
             <BattleArt challenge={c} />
-            <details className="cb-code">
-              <summary className="focus-ring">
-                <span className="cb-code-show">Show the CSS</span>
-                <span className="cb-code-hide">Hide the CSS</span>
-              </summary>
+            <Disclosure label="Show the CSS" openLabel="Hide the CSS" className="cb-code">
               <CodeBlock code={`${c.html ?? "<div></div>"}\n\n${c.css}`} />
-            </details>
+            </Disclosure>
           </PostSection>
         ))}
       </PostLayout>

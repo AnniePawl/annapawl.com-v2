@@ -15,7 +15,7 @@ export const CHALLENGES: Challenge[] = [
     key: "battle-4",
     cover: true,
     title: "Battle #4",
-    tone: "pink-bold",
+    tone: "plum-bold",
     target: "4",
     css: `body {
   height: 100vh;
@@ -54,7 +54,7 @@ body div::after {
     key: "daily-2024-11-01",
     cover: true,
     title: "Daily target, Nov 1 2024",
-    tone: "teal-bold",
+    tone: "clay-bold",
     target: "qDnn5lLE6fVaXW37g0Tc",
     css: `body {
   height: 100vh;
@@ -96,7 +96,7 @@ body div:before {
     key: "battle-188",
     cover: true,
     title: "Battle #188",
-    tone: "lilac-bold",
+    tone: "moss-bold",
     target: "188",
     css: `body {
   height: 100vh;
@@ -152,7 +152,7 @@ body::before {
     key: "battle-15",
     cover: true,
     title: "Battle #15",
-    tone: "sky-bold",
+    tone: "plum-bold",
     target: "15",
     css: `body {
   height: 100vh;
@@ -189,7 +189,7 @@ body div::after {
   {
     key: "daily-2024-11-11",
     title: "Daily target, Nov 11 2024",
-    tone: "coral-bold",
+    tone: "sky-bold",
     target: "uW5AdLWTjGniqNWjsfOP",
     html: "<div class='frame'></div>",
     css: `body {
@@ -222,7 +222,7 @@ body div::before {
   {
     key: "battle-9",
     title: "Battle #9",
-    tone: "marigold-bold",
+    tone: "teal-bold",
     target: "9",
     css: `body {
   height: 100vh;
@@ -279,7 +279,7 @@ body div::after {
   {
     key: "battle-7",
     title: "Battle #7",
-    tone: "emerald-bold",
+    tone: "marigold-bold",
     target: "7",
     html: "<div class='frame'></div>",
     css: `body{
@@ -350,7 +350,7 @@ body div::before {
   {
     key: "battle-5",
     title: "Battle #5",
-    tone: "orange-bold",
+    tone: "marigold-bold",
     target: "5",
     css: `body {
   height: 100vh;

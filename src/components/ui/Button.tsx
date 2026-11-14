@@ -1,9 +1,12 @@
 import {
+  AnchorHTMLAttributes,
   ButtonHTMLAttributes,
   CSSProperties,
   ReactNode,
   forwardRef,
 } from "react";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { cx } from "../../lib/cx";
 import { markerColor, type PaletteColor, type PaletteHue } from "./colorTokens";
 
@@ -153,3 +156,78 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
 });
 
 export default Button;
+
+export interface ButtonLinkProps
+  extends AnchorHTMLAttributes<HTMLAnchorElement>,
+    Pick<ButtonProps, "variant" | "shape" | "size" | "tone" | "startIcon" | "endIcon"> {
+  href: string;
+}
+
+/**
+ * A link that looks like a Button. Internal links keep primary's dot;
+ * external (http) links get an arrow, open in a new tab, and say so to
+ * screen readers.
+ */
+export function ButtonLink({
+  href,
+  variant = "primary",
+  shape = "soft",
+  size = "md",
+  tone,
+  startIcon,
+  endIcon,
+  className,
+  children,
+  style,
+  ...rest
+}: ButtonLinkProps) {
+  const external = /^https?:\/\//.test(href);
+  const toneStyle = !tone
+    ? undefined
+    : typeof tone === "string"
+      ? resolveTone(tone)
+      : toneObjectStyle(tone);
+  const end = endIcon ?? (external ? <ArrowUpRight /> : null);
+  const classes = cx(
+    "btn",
+    `btn--${variant}`,
+    `btn--${size}`,
+    shape === "pill" && "btn--pill",
+    external && "btn--external",
+    "focus-ring",
+    className
+  );
+  const content = (
+    <>
+      {startIcon ? (
+        <span className="btn-start-icon" aria-hidden="true">
+          {startIcon}
+        </span>
+      ) : null}
+      <span className="btn-label">{children}</span>
+      {end ? (
+        <span className="btn-end-icon" aria-hidden="true">
+          {end}
+        </span>
+      ) : null}
+      {external ? <span className="sr-only"> (opens in a new tab)</span> : null}
+    </>
+  );
+
+  return external ? (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={classes}
+      style={{ ...toneStyle, ...style }}
+      {...rest}
+    >
+      {content}
+    </a>
+  ) : (
+    <Link href={href} className={classes} style={{ ...toneStyle, ...style }} {...rest}>
+      {content}
+    </Link>
+  );
+}

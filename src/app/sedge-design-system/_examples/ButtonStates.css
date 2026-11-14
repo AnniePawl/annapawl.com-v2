@@ -1,24 +1,30 @@
-/* Buttons section — roles table, shape plates, page colors, sizes. */
+/* Buttons section: primary grid first, then smaller options. */
 
-.btn-doc-table {
-  margin-top: calc(var(--space-6) * -1);
-  border-bottom: 1px solid color-mix(in srgb, var(--text-primary) 20%, transparent);
+.btn-doc-lede {
+  max-width: 36rem;
+  margin: 0 0 var(--space-5);
+}
+
+.btn-doc-grid {
   overflow-x: auto;
+  border-top: 1px solid color-mix(in srgb, var(--text-primary) 20%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--text-primary) 20%, transparent);
 }
 
-.btn-doc-row {
+.btn-doc-grid-row {
   display: grid;
-  grid-template-columns: 13rem repeat(4, minmax(9.5rem, 1fr));
+  grid-template-columns: 11rem repeat(3, minmax(9rem, 1fr));
   align-items: center;
-  min-width: 46rem;
+  min-width: 38rem;
+  padding: var(--space-4) 0;
 }
 
-.btn-doc-row + .btn-doc-row {
+.btn-doc-grid-row:first-child {
+  padding: var(--space-3) 0 0;
+}
+
+.btn-doc-grid-row + .btn-doc-grid-row:not(:nth-child(2)) {
   border-top: 1px solid color-mix(in srgb, var(--text-primary) 12%, transparent);
-}
-
-.btn-doc-row--head {
-  padding: var(--space-3) 0 var(--space-2);
 }
 
 .btn-doc-head {
@@ -30,15 +36,10 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: var(--space-5) var(--space-5) var(--space-5) 0;
-}
-
-.btn-doc-cell {
-  padding: var(--space-5) var(--space-3) var(--space-5) 0;
+  padding-right: var(--space-4);
 }
 
 .btn-doc-label {
-  display: block;
   color: var(--text-primary);
   font-size: 0.9375rem;
   font-weight: var(--font-medium);
@@ -51,78 +52,61 @@
   line-height: 1.45;
 }
 
-/* Shape */
-.btn-doc-shapes {
+.btn-doc-pairs {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-5);
+  margin-top: var(--space-5);
 }
 
-.btn-doc-figure {
+.btn-doc-pair {
   margin: 0;
 }
 
-.btn-doc-figure figcaption {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  margin-top: var(--space-3);
-}
-
-.btn-doc-plate {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 8rem;
-  border: 1px solid color-mix(in srgb, var(--text-primary) 20%, transparent);
-}
-
-/* Page colors */
-.btn-doc-pages {
-  margin-top: var(--space-5);
-  border-top: 1px solid color-mix(in srgb, var(--text-primary) 20%, transparent);
-}
-
-.btn-doc-page {
-  display: grid;
-  grid-template-columns: 13rem minmax(0, 1fr);
-  align-items: center;
-  gap: var(--space-4);
-  padding: var(--space-4) 0;
-  border-bottom: 1px solid color-mix(in srgb, var(--text-primary) 12%, transparent);
-}
-
-.btn-doc-page-buttons {
+.btn-doc-pair-buttons {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-3);
+  margin-bottom: var(--space-2);
 }
 
-/* Sizes */
-.btn-doc-sizes {
+/* More options: compact rows. */
+.btn-doc-more {
+  margin: 0;
+}
+
+.btn-doc-more > div {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--text-primary) 12%, transparent);
+}
+
+.btn-doc-more dt {
+  font-size: 0.875rem;
+  font-weight: var(--font-medium);
+}
+
+.btn-doc-more dd {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-end;
-  gap: var(--space-7);
+  align-items: center;
+  gap: var(--space-3);
+  margin: 0;
 }
 
-.btn-doc-size {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-2);
+.btn-doc-more dd .btn-doc-note {
+  flex-basis: 100%;
 }
 
 @media (width < 40rem) {
-  .btn-doc-table {
-    margin-top: calc(var(--space-5) * -1);
-  }
-
-  .btn-doc-shapes {
+  .btn-doc-pairs {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .btn-doc-page {
+  .btn-doc-more > div {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--space-2);
   }

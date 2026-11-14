@@ -12,6 +12,7 @@ import PageShell from "../../components/layout/PageShell";
 
 // Sections
 import AccordionSection from "./_sections/accordion";
+import DisclosureSection from "./_sections/disclosure";
 import ApproachSection from "./_sections/approach";
 import LogoSection from "./_sections/logo";
 import ColorsSection from "./_sections/colors";
@@ -301,6 +302,7 @@ export default function DesignSystemOverview() {
 
             {/* Components */}
             <ButtonsSection />
+            <DisclosureSection />
             <LinksSection />
             <CodeBlocksSection />
             <CalloutsSection />
