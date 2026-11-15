@@ -65,7 +65,8 @@
   overflow: hidden;
 }
 
-/* tan(atan2(a, b)) = a ÷ b, so this scales 400px to the box's width. */
+/* --cb-scale is set by BattleArt. The tan(atan2()) fallback (100cqw ÷ 400px) covers
+   the moment before it runs; some Safari versions get it wrong. */
 .cb-tile {
   position: relative;
   container-type: inline-size;
@@ -78,7 +79,7 @@
   top: 0;
   left: 0;
   transform-origin: 0 0;
-  transform: scale(tan(atan2(100cqw, 400px)));
+  transform: scale(var(--cb-scale, tan(atan2(100cqw, 400px))));
 }
 
 .cb-code {
@@ -100,7 +101,7 @@
     top: 0;
     left: 0;
     transform-origin: 0 0;
-    transform: scale(tan(atan2(100cqw, 400px)));
+    transform: scale(var(--cb-scale, tan(atan2(100cqw, 400px))));
   }
 
   .cb-meta {

@@ -1,0 +1,433 @@
+/* =========================================================
+   Field Notes page. Header: the shared PageHeader
+   (post-layout.css). Everything below is .field-notes.
+========================================================= */
+
+.field-notes-page.page-shell {
+  --page-accent: var(--sage-bold);
+  --fn-line: color-mix(in srgb, var(--charcoal) 25%, transparent);
+
+  padding: 0;
+  color: var(--charcoal);
+  background: var(--cream);
+}
+
+
+.field-notes-page .post-header-title {
+  max-width: none;
+}
+
+.field-notes-page .post-header-stage {
+  min-height: 0;
+}
+
+.field-notes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: var(--space-6) var(--space-5) var(--space-7);
+}
+
+/* ---- Search, topic tabs, Jump to ----
+   Desktop: tabs on the left, search at the end of the same row, one
+   rule under both. Phones: search on top, then the tab row, which
+   sticks to the top of the screen as you scroll. */
+.fn-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-5);
+  border-bottom: 1px solid color-mix(in srgb, var(--charcoal) 20%, transparent);
+}
+
+.fn-controls .fn-search {
+  grid-area: 1 / 2;
+}
+
+.fn-nav {
+  grid-area: 1 / 1;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.fn-nav .filter-tabs {
+  flex: 1;
+  min-width: 0;
+  border-bottom: 0;
+}
+
+.fn-sentinel,
+.fn-search-jump {
+  display: none;
+}
+
+.fn-search {
+  position: relative;
+  width: 17.5rem;
+}
+
+.fn-search-icon {
+  position: absolute;
+  top: 50%;
+  left: 0.75rem;
+  width: 15px;
+  height: 15px;
+  translate: 0 -50%;
+  pointer-events: none;
+}
+
+.fn-search input {
+  width: 100%;
+  min-height: 40px;
+  padding: 0 var(--space-3) 0 2.25rem;
+  border: 1px solid color-mix(in srgb, var(--charcoal) 35%, transparent);
+  border-radius: var(--radius-xs);
+  background: #ffffff;
+  color: var(--charcoal);
+  font: inherit;
+  font-size: 14px;
+}
+
+.fn-jump {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-5);
+  margin-top: calc(var(--space-3) - var(--space-5));
+  font-size: 13.5px;
+}
+
+.fn-jump-label {
+  flex: none;
+  font-size: 11px;
+  font-weight: var(--font-semibold);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.fn-jump ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fn-jump a {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.fn-jump a:hover {
+  color: var(--charcoal);
+  text-decoration: underline;
+  text-decoration-color: var(--fn-marker);
+  text-underline-offset: 0.35em;
+}
+
+.fn-group-title {
+  scroll-margin-top: var(--space-5);
+}
+
+.fn-sections {
+  margin-top: var(--space-3);
+}
+
+@media (width < 40rem) {
+  .fn-controls {
+    display: contents;
+  }
+
+  .fn-search {
+    width: 100%;
+  }
+
+  .fn-search input {
+    min-height: 44px;
+  }
+
+  .fn-sentinel {
+    display: block;
+    margin-top: calc(-1 * var(--space-5));
+  }
+
+  .fn-nav {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    margin-top: calc(var(--space-2) - var(--space-5));
+    margin-inline: calc(-1 * var(--space-4));
+    padding-left: var(--space-4);
+    border-bottom: 1px solid color-mix(in srgb, var(--charcoal) 20%, transparent);
+    background: var(--cream);
+  }
+
+  .fn-nav[data-stuck] {
+    box-shadow: 0 6px 14px -10px color-mix(in srgb, var(--charcoal) 45%, transparent);
+  }
+
+  .fn-search-jump {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    border-left: 1px solid color-mix(in srgb, var(--charcoal) 20%, transparent);
+    background: none;
+    color: var(--charcoal);
+    cursor: pointer;
+  }
+
+  .fn-nav:not([data-stuck]) .fn-search-jump {
+    display: none;
+  }
+
+  .fn-search-jump svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Groups scroll sideways, like the tabs. */
+  .fn-jump {
+    margin-inline: calc(-1 * var(--space-4));
+    padding-left: var(--space-4);
+    overflow-x: auto;
+    scrollbar-width: none;
+    mask-image: linear-gradient(90deg, #000 calc(100% - 3rem), transparent);
+    font-size: 13px;
+  }
+
+  .fn-jump ul {
+    flex-wrap: nowrap;
+    padding-right: var(--space-6);
+    white-space: nowrap;
+  }
+
+  .fn-group-title {
+    scroll-margin-top: calc(44px + var(--space-4));
+  }
+}
+
+.fn-empty {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.fn-empty {
+  font-size: var(--text-md);
+}
+
+/* ---- Where I learn (bottom of the page) ---- */
+.fn-sources {
+  scroll-margin-top: var(--space-6);
+  max-width: 40rem;
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--fn-line);
+}
+
+.fn-sources-label {
+  margin: 0 0 var(--space-2);
+  font-size: 11.5px;
+  font-weight: var(--font-semibold);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.fn-sources p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+/* ---- Topic sections and groups ---- */
+.fn-sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.fn-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* Topic heading on the left, its note count on the right, one rule
+   under both. */
+.fn-section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid color-mix(in srgb, var(--charcoal) 58%, transparent);
+}
+
+.fn-section-count {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* Matches the post section headings: title plus a square marker. */
+.fn-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.28em;
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--type-heading-size);
+  font-weight: var(--type-heading-weight);
+  line-height: var(--type-heading-leading);
+  letter-spacing: var(--type-heading-tracking);
+}
+
+.fn-section-mark {
+  display: inline-block;
+  width: 0.55em;
+  height: 0.8em;
+  background: var(--fn-marker);
+}
+
+.fn-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* Matches the post subheadings: marker plus the subheading type. */
+.fn-group-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5625rem;
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--type-subheading-size);
+  font-weight: var(--type-subheading-weight);
+  line-height: var(--type-subheading-leading);
+  letter-spacing: var(--type-subheading-tracking);
+}
+
+.fn-group-title::before {
+  content: "";
+  flex: none;
+  width: 7px;
+  height: 13px;
+  background: var(--fn-marker);
+}
+
+/* ---- Cards ----
+   grid-auto-rows: 1fr makes every row as tall as the tallest card, so
+   cards in a group share one height. The note sits at the bottom (margin-top:
+   auto) so cards line up even when their text is different lengths. */
+.fn-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+  grid-auto-rows: 1fr;
+  gap: var(--space-5);
+}
+
+.fn-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+  padding: 1.375rem;
+  border: 1px solid var(--fn-line);
+  border-radius: var(--radius-xs);
+  background: #ffffff;
+  scroll-margin-top: var(--space-6);
+}
+
+.fn-topic {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 12px;
+  font-weight: var(--font-semibold);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.fn-topic::before {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 10px;
+  background: var(--fn-marker);
+}
+
+.fn-name {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: var(--font-semibold);
+  line-height: 1.3;
+}
+
+.fn-model {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* Cards space their parts with gap, so drop the code block's own
+   spacing (code.css adds space around it after text). */
+.fn-card .code-block {
+  margin: 0;
+}
+
+/* Caps the code at 4 lines (the pre's own padding is var(--space-4),
+   line-height 1.6), so a long example scrolls inside its card instead
+   of making every card in the group taller. */
+.fn-card .code-block pre {
+  max-height: calc(4 * 1.6em + 2 * var(--space-4));
+  overflow: auto;
+  font-size: 12px;
+}
+
+.fn-note {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-top: auto;
+  padding: var(--space-3) 0.875rem;
+  border-radius: var(--radius-xs);
+  background: color-mix(in srgb, var(--fn-soft) 40%, transparent);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.fn-note strong {
+  font-size: 11px;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.fn-note p {
+  margin: 0;
+}
+
+@media (width < 40rem) {
+  .field-notes {
+    padding: var(--space-6) var(--space-4) var(--space-7);
+  }
+
+  .fn-details-collection {
+    display: none;
+  }
+}
+
+@media (width < 40rem) {
+  .field-notes-page .post-header-lede br {
+    display: none;
+  }
+}

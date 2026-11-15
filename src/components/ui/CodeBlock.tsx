@@ -80,8 +80,24 @@ export default function CodeBlock({
   className,
 }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
+  const [scrolls, setScrolls] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const preRef = useRef<HTMLPreElement>(null);
   const text = code.trim();
+
+  // When the code overflows (wide lines, or a height cap like the Field
+  // Notes cards), make the block focusable so keyboard users can scroll
+  // it with the arrow keys. Safari won't do that on its own.
+  useEffect(() => {
+    const pre = preRef.current;
+    if (!pre) return;
+    const check = () =>
+      setScrolls(pre.scrollHeight > pre.clientHeight || pre.scrollWidth > pre.clientWidth);
+    check();
+    const observer = new ResizeObserver(check);
+    observer.observe(pre);
+    return () => observer.disconnect();
+  }, [text]);
 
   useEffect(() => () => {
     if (timer.current) clearTimeout(timer.current);
@@ -135,7 +151,12 @@ export default function CodeBlock({
       ) : null}
       {/* data-lenis-prevent: on Sedge, sideways code scrolling stays
           independent of the smooth-scrolled page. */}
-      <pre data-lenis-prevent>
+      <pre
+        ref={preRef}
+        data-lenis-prevent
+        className={scrolls ? "focus-ring" : undefined}
+        {...(scrolls ? { tabIndex: 0, role: "region", "aria-label": "Code example" } : {})}
+      >
         <code>{markComments(text, highlight)}</code>
       </pre>
     </div>
