@@ -126,7 +126,7 @@ export default function SiteFooter({ accent }: { accent?: string }) {
           <Link href="/field-notes" className="site-footer-link focus-ring">
             Field Notes
           </Link>
-          <span className="site-footer-muted">A running list of my little notes from the frontend trenches</span>
+          <span className="site-footer-muted">A collection of my wee notes from the frontend trenches</span>
         </div>
 
         <div className="site-footer-bottom">

@@ -106,6 +106,11 @@
     display: none;
   }
 
+  .site-footer-weave i {
+    height: auto;
+    aspect-ratio: 1;
+  }
+
   .site-footer-colophon {
     grid-template-columns: 1fr 1fr;
     gap: var(--space-7) var(--space-5);
@@ -117,5 +122,16 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+  }
+}
+
+/* Phones: fewer, desktop-sized squares. */
+@media (max-width: 479px) {
+  .site-footer-weave {
+    grid-template-columns: repeat(16, minmax(0, 1fr));
+  }
+
+  .site-footer-weave i:nth-child(n + 17) {
+    display: none;
   }
 }

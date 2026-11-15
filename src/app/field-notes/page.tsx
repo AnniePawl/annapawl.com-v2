@@ -1,3 +1,4 @@
+import TextLink from "../../components/ui/TextLink";
 import PageShell from "../../components/layout/PageShell";
 import PageHeader from "../../components/layout/PageHeader";
 import SiteFooter from "../../components/layout/SiteFooter/SiteFooter";
@@ -29,16 +30,36 @@ export default function FieldNotesPage() {
             />
           }
           descriptionTitle="My Tiny Web Reference"
-          description="A log of helpful frontend bits for those moments my brain blanks on syntax mid-keystroke. Organized my way: Quick examples, plus little notes to self from the mistakes that made things stick."
-          shortDescription="Wee notes for when my brain blanks on syntax."
+          description="A personal reference for when I know what I’m trying to do but the syntax has other plans. With the occasional cheese reference."
+          shortDescription="For when I know what I’m trying to do but the syntax has other plans."
           eyebrow="Frontend"
           title="Field Notes"
           accent="var(--pink-bold)"
+          detailsStart={
+            <>
+              <span className="fn-details-collection">Ongoing collection · </span>
+              Updated Nov 2026
+            </>
+          }
+          postTags={
+            <TextLink href="#where-i-learn" tone="pink-bold">
+              Where I learn ↓
+            </TextLink>
+          }
+          lede={
+            <>
+              Wee notes to self from the frontend trenches.{" "}
+              <br />
+              <span className="post-header-lede-muted">
+                Useful patterns, quick examples, and lessons from trial and error.
+              </span>
+            </>
+          }
         />
 
         <FieldNotes />
       </PageShell>
-      <SiteFooter accent="var(--sage-bold)" />
+      <SiteFooter accent="var(--pink-bold)" />
     </>
   );
 }

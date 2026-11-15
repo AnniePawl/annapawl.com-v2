@@ -171,13 +171,14 @@ export default function FieldNotes() {
 
       {/* General references for the whole page. Cards don't cite
           individually: they're my own notes, in my own words. */}
-      <footer className="fn-sources">
+      <footer id="where-i-learn" className="fn-sources">
         <h2 className="fn-sources-label">Where I learn</h2>
         <p>
-          These are my own notes, written my way, but the knowledge comes
-          from lots of generous places. The ones I lean on most are the
-          official <TextLink href="https://react.dev">React docs</TextLink>{" "}
-          and <TextLink href="https://developer.mozilla.org">MDN Web Docs</TextLink>.
+          These wee notes bring together what I learn from building, experimenting, and reading
+          the docs—a quick reference I come back to often. The knowledge comes from lots of
+          generous places, with frequent visits to{" "}
+          <TextLink tone="pink-bold" href="https://developer.mozilla.org">MDN Web Docs</TextLink> and the
+          official <TextLink tone="pink-bold" href="https://react.dev">React docs</TextLink>.
         </p>
       </footer>
     </div>
