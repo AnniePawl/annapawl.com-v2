@@ -1,7 +1,9 @@
 "use client";
 
-import { useId, useState, type CSSProperties } from "react";
+import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
+import { Search } from "lucide-react";
 import CodeBlock from "../../../components/ui/CodeBlock";
+import FilterTabs from "../../../components/ui/FilterTabs";
 import TextLink from "../../../components/ui/TextLink";
 import { GROUP_CARD_LABELS, NOTES, TOPICS, noteId, type FieldNote, type Topic } from "../_data/notes";
 
@@ -24,9 +26,8 @@ type Group = { name: string | null; notes: FieldNote[] };
 type Section = { topic: Topic; groups: Group[] };
 
 /**
- * Sorts notes into topics (in TOPICS order) and, inside each topic, into
- * groups: the ones TOPICS lists first, in that order, then any others in
- * the order they appear. Notes without a group come first.
+ * Sorts notes into topics and inside each topic, 
+ * into sub-groups
  */
 function organize(notes: FieldNote[]): Section[] {
   return TOPICS.map(({ name: topic, groups: order = [] }) => {
@@ -54,6 +55,10 @@ function countLabel(count: number) {
 
 function slug(text: string) {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
+function groupId(topic: Topic, group: string) {
+  return `${slug(topic)}-${slug(group)}`;
 }
 
 function NoteCard({ note }: { note: FieldNote }) {
@@ -94,40 +99,108 @@ export default function FieldNotes() {
   );
   const sections = organize(visible);
 
-  const filters: Filter[] = ["All", ...TOPICS.map((t) => t.name)];
+  const tabs = [
+    { value: "All" as Filter, label: "All" },
+    ...TOPICS.map((t) => ({ value: t.name as Filter, label: t.name, marker: `var(--${t.hue}-bold)` })),
+  ];
+
+  // On phones the tab row sticks to the top. Once it has, a search
+  // button takes you back up to the search field.
+  const sentinel = useRef<HTMLDivElement>(null);
+  const searchInput = useRef<HTMLInputElement>(null);
+  const [stuck, setStuck] = useState(false);
+
+  useEffect(() => {
+    const el = sentinel.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([entry]) =>
+      setStuck(!entry.isIntersecting && entry.boundingClientRect.top < 0)
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  // Switching topics while the bar is stuck starts the new topic at
+  // the top, right under the bar.
+  const jumpOnChange = useRef(false);
+
+  function changeFilter(next: Filter) {
+    jumpOnChange.current = stuck;
+    setFilter(next);
+  }
+
+  useEffect(() => {
+    if (!jumpOnChange.current || !sentinel.current) return;
+    jumpOnChange.current = false;
+    const top = sentinel.current.getBoundingClientRect().top + window.scrollY + 1;
+    window.scrollTo({ top, behavior: "instant" });
+  }, [filter]);
+
+  function goToSearch() {
+    searchInput.current?.scrollIntoView({ block: "center", behavior: "instant" });
+    searchInput.current?.focus({ preventScroll: true });
+  }
+
+  const current = filter === "All" ? null : sections.find((s) => s.topic === filter);
+  const jumpGroups = current?.groups.filter((g) => g.name) ?? [];
+
+  const search = (
+    <div className="fn-search">
+      <label htmlFor={searchId} className="sr-only">
+        Search notes
+      </label>
+      <Search aria-hidden="true" className="fn-search-icon" />
+      <input
+        ref={searchInput}
+        id={searchId}
+        type="search"
+        value={query}
+        onChange={(event) => setQuery(event.target.value)}
+        placeholder="Search notes"
+        className="focus-ring"
+      />
+    </div>
+  );
 
   return (
     <div className="field-notes">
-      <div className="fn-toolbar">
-        <div className="fn-search">
-          <label htmlFor={searchId}>Search notes</label>
-          <input
-            id={searchId}
-            type="search"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="closest, strings, :has…"
-            className="focus-ring"
-          />
-        </div>
-        <div role="group" aria-label="Filter by topic" className="fn-filters">
-          {filters.map((name) => (
-            <button
-              key={name}
-              type="button"
-              className="fn-chip focus-ring"
-              aria-pressed={filter === name}
-              onClick={() => setFilter(name)}
-              style={name === "All" ? undefined : topicStyle(name)}
-            >
-              {name}
-            </button>
-          ))}
+      <div className="fn-controls">
+        {search}
+        <div ref={sentinel} className="fn-sentinel" aria-hidden="true" />
+        <div className="fn-nav" data-stuck={stuck || undefined}>
+          <FilterTabs items={tabs} value={filter} onChange={changeFilter} label="Filter by topic" />
+          <button
+            type="button"
+            className="fn-search-jump focus-ring"
+            onClick={goToSearch}
+            tabIndex={stuck ? 0 : -1}
+            aria-hidden={!stuck}
+          >
+            <Search aria-hidden="true" />
+            <span className="sr-only">Search notes</span>
+          </button>
         </div>
       </div>
 
-      {/* The visible counts sit beside each topic heading; this one is
-          only for screen readers, announcing results as filters change. */}
+      {current && jumpGroups.length > 1 && (
+        <nav aria-label={`${current.topic} groups`} className="fn-jump" style={topicStyle(current.topic)}>
+          <span className="fn-jump-label" aria-hidden="true">
+            Jump to
+          </span>
+          <ul>
+            {jumpGroups.map((g) => (
+              <li key={g.name}>
+                <a href={`#${groupId(current.topic, g.name!)}`} className="focus-ring">
+                  {g.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
+
+      {/* The visible counts sit beside each topic heading. 
+          For screen readers, results announced as filters change. */}
       <p className="sr-only" aria-live="polite">
         {countLabel(visible.length)}
       </p>
@@ -152,7 +225,11 @@ export default function FieldNotes() {
               </div>
               {section.groups.map((group) => (
                 <div key={group.name ?? "ungrouped"} className="fn-group">
-                  {group.name && <h3 className="fn-group-title">{group.name}</h3>}
+                  {group.name && (
+                    <h3 id={groupId(section.topic, group.name)} className="fn-group-title">
+                      {group.name}
+                    </h3>
+                  )}
                   <div className="fn-grid">
                     {group.notes.map((note) => (
                       <NoteCard key={note.name} note={note} />
@@ -170,7 +247,7 @@ export default function FieldNotes() {
       )}
 
       {/* General references for the whole page. Cards don't cite
-          individually: they're my own notes, in my own words. */}
+          individually b/c its general knowledge and they're my own version. */}
       <footer id="where-i-learn" className="fn-sources">
         <h2 className="fn-sources-label">Where I learn</h2>
         <p>
