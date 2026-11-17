@@ -4,6 +4,7 @@ import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
 import { Search } from "lucide-react";
 import CodeBlock from "../../../components/ui/CodeBlock";
 import FilterTabs from "../../../components/ui/FilterTabs";
+import Input from "../../../components/ui/Input";
 import TextLink from "../../../components/ui/TextLink";
 import { GROUP_CARD_LABELS, NOTES, TOPICS, noteId, type FieldNote, type Topic } from "../_data/notes";
 
@@ -149,15 +150,13 @@ export default function FieldNotes() {
       <label htmlFor={searchId} className="sr-only">
         Search notes
       </label>
-      <Search aria-hidden="true" className="fn-search-icon" />
-      <input
+      <Input
         ref={searchInput}
         id={searchId}
-        type="search"
+        variant="search"
         value={query}
         onChange={(event) => setQuery(event.target.value)}
         placeholder="Search notes"
-        className="focus-ring"
       />
     </div>
   );

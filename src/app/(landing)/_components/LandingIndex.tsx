@@ -60,6 +60,12 @@ const BUILDING_BLOCKS: GroupItem[] = [
     accent: "var(--teal-bold)",
   },
   {
+    href: "/live-search",
+    title: "Live Search",
+    description: "A barebones filter-as-you-type search to build on",
+    accent: "var(--sky-bold)",
+  },
+  {
     title: "Tabs",
     description: "Keyboard-friendly tabs and a clean component API",
     accent: "var(--coral-bold)",
