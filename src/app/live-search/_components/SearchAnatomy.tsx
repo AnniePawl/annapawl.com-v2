@@ -24,6 +24,7 @@ const PARTS: AnatomyPart[] = [
 ];
 
 const EMPTY = 5;
+const PLACEHOLDER = ["deeppink", "hotpink"];
 
 function Example({ query, matches }: { query: string; matches: string[] }) {
   return (
@@ -33,18 +34,21 @@ function Example({ query, matches }: { query: string; matches: string[] }) {
       <FieldHint className="ls-count">
         {matches.length} {matches.length === 1 ? "color" : "colors"}
       </FieldHint>
-      {matches.length > 0 ? (
-        <ul className="ls-list">
-          {matches.map((color) => (
+      {/* The list stays in place (hidden when empty) so the picture keeps
+          the same height and the parts list below doesn't jump. */}
+      <div className="ls-results">
+        <ul className="ls-list" style={{ visibility: matches.length ? undefined : "hidden" }}>
+          {(matches.length ? matches : PLACEHOLDER).map((color) => (
             <li key={color} className="ls-item">
               <span className="ls-swatch" style={{ background: color }} />
               {color}
             </li>
           ))}
         </ul>
-      ) : (
-        <FieldHint className="ls-empty">No colors called “{query}”… yet.</FieldHint>
-      )}
+        {matches.length === 0 && (
+          <FieldHint className="ls-empty">No colors called “{query}”… yet.</FieldHint>
+        )}
+      </div>
     </div>
   );
 }
@@ -60,7 +64,7 @@ export default function SearchAnatomy() {
         active === EMPTY ? (
           <Example query="blurple" matches={[]} />
         ) : (
-          <Example query="pink" matches={["deeppink", "hotpink"]} />
+          <Example query="pink" matches={PLACEHOLDER} />
         )
       }
     />

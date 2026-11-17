@@ -59,8 +59,21 @@
   font-style: italic;
 }
 
+.search-anatomy {
+  --anatomy-outline: var(--sky-bold);
+}
+
 .search-anatomy .ls-demo {
   margin-block: 0;
+}
+
+/* List and empty message share one spot, so swapping them keeps the height. */
+.ls-results {
+  display: grid;
+}
+
+.ls-results > * {
+  grid-area: 1 / 1;
 }
 
 /* .post-section p would otherwise make the hints body-sized. */
