@@ -612,6 +612,16 @@ export default function DrawingWithCodePage() {
                 </TextLink>
                 , for looking up any property when you get stuck.
               </li>
+              <li>
+                My <TextLink href="/field-notes">Field Notes</TextLink>, for quick
+                refreshers on the CSS from this post:{" "}
+                <TextLink href="/field-notes#positioning">positioning</TextLink>,{" "}
+                <TextLink href="/field-notes#transform">transform</TextLink>,{" "}
+                <TextLink href="/field-notes#z-index">z-index</TextLink>,{" "}
+                <TextLink href="/field-notes#before-after">::before / ::after</TextLink>,{" "}
+                <TextLink href="/field-notes#box-sizing">box-sizing</TextLink> and{" "}
+                <TextLink href="/field-notes#keyframes">@keyframes</TextLink>.
+              </li>
             </ul>
           </PostSubsection>
         </PostSection>

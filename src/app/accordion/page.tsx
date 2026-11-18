@@ -335,7 +335,7 @@ export default function AccordionTutorial() {
 
         <PostSection id="anatomy" title="The anatomy">
           <p>
-            Each accordion item pairs a question with the panel it opens. The heading gives the question a place in the page’s outline and the real <code>button</code> inside it does a lot quiet work for us. You can Tab to it and press Enter or Space to open the panel.
+            Each accordion item pairs a question with the panel it opens. The <TextLink href="/field-notes#headings">heading</TextLink> gives the question a place in the page’s outline and the real <code>button</code> inside it does a lot quiet work for us. You can Tab to it and press Enter or Space to open the panel.
           </p>
           <p>
             Try highlighting <b>Button</b> and then <b>Panel</b> below. You can see which pieces go together. In the code, an ID and an ARIA attribute connect them. In the Behind the Buttons section, we’ll look at how the button points to its panel and tells a screen reader whether it’s open.
@@ -369,7 +369,9 @@ export default function AccordionTutorial() {
               like &ldquo;Are squirrels secretly tiny gardeners? Button,
               expanded.&rdquo; When we close the panel, JavaScript changes the
               value to <code>false</code>. The plus and minus give you a visual
-              clue, and <code>aria-expanded</code> makes that same information
+              clue, and{" "}
+              <TextLink href="/field-notes#aria-expanded"><code>aria-expanded</code></TextLink>{" "}
+              makes that same information
               available to a screen reader.
             </p>
           </PostSubsection>
@@ -514,7 +516,7 @@ export default function AccordionTutorial() {
 
           <PostSubsection title="Make focus visible">
             <p>
-              When you Tab to a question, can you tell which one you’re on? That’s what the focus ring is for. I’m using <code>:focus-visible</code> to give the button a clear outline when the browser decides focus should be visible, like when you Tab to it.
+              When you Tab to a question, can you tell which one you’re on? That’s what the focus ring is for. I’m using <TextLink href="/field-notes#focus-vs-focus-visible"><code>:focus-visible</code></TextLink> to give the button a clear outline when the browser decides focus should be visible, like when you Tab to it.
             </p>
             <CodeBlock code={FOCUS_CSS} highlight={[":focus-visible"]} />
           </PostSubsection>
@@ -540,7 +542,8 @@ export default function AccordionTutorial() {
               somewhere nobody can see.
             </p>
             <p>
-              The fix is <code>inert</code>. It keeps a closed panel out of the
+              The fix is{" "}
+              <TextLink href="/field-notes#hidden-vs-inert"><code>inert</code></TextLink>. It keeps a closed panel out of the
               Tab order and away from screen readers, while CSS handles the
               animation. Like <code>hidden</code>, it also keeps a closed
               panel&rsquo;s text out of the browser&rsquo;s find-in-page
@@ -663,7 +666,7 @@ export default function AccordionTutorial() {
               Ids like <code>panel-gardeners</code> work until two accordions
               share a page and both use the same item ids. Then{" "}
               <code>aria-controls</code> points at the wrong panel. React&rsquo;s{" "}
-              <code>useId</code> gives each accordion its own prefix, so every
+              <TextLink href="/field-notes#useid"><code>useId</code></TextLink> gives each accordion its own prefix, so every
               id is unique.
             </p>
             <CodeBlock code={REACT_IDS} highlight={["useId()"]} />

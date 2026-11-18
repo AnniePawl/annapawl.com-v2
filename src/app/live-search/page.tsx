@@ -155,10 +155,15 @@ export default function LiveSearchTutorial() {
         description="How a simple live search in React works, from filtering as you type to the small touches that make it accessible."
         shortDescription="How a simple live search in React works."
         eyebrow="Building Blocks"
-        title="Live Search"
+        title={
+          <>
+            Live <br className="ls-phone-break" />
+            Search
+          </>
+        }
         lede={
           <>
-            One input, one list.{" "}
+            One input, one list. <br className="ls-phone-break" />
             <span className="post-header-lede-muted">
               A little search to build on.
             </span>

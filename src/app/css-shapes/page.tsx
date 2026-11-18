@@ -93,7 +93,7 @@ export default function CssShapesPage() {
         </PostSection>
 
         <PostSection id="parallelogram" title="Parallelogram">
-          <p>Draw a rectangle, then lean it over with <code>transform: skew()</code>. The top and bottom stay level while the sides tilt.</p>
+          <p>Draw a rectangle, then lean it over with <TextLink href="/field-notes#transform"><code>transform: skew()</code></TextLink>. The top and bottom stay level while the sides tilt.</p>
           <ShapeLesson shape="parallelogram" />
         </PostSection>
 
@@ -108,7 +108,7 @@ export default function CssShapesPage() {
         </PostSection>
 
         <PostSection id="pentagon" title="Pentagon">
-          <p>A pentagon combines two border-built shapes. The <code>div</code> forms a trapezoid with a thick top border and transparent sides. Its <code>::before</code> pseudo-element reuses the triangle trick from above to create the pointed roof, and absolute positioning stacks the two pieces together.</p>
+          <p>A pentagon combines two border-built shapes. The <code>div</code> forms a trapezoid with a thick top border and transparent sides. Its <TextLink href="/field-notes#before-after"><code>::before</code></TextLink> pseudo-element reuses the triangle trick from above to create the pointed roof, and absolute positioning stacks the two pieces together.</p>
           <ShapeLesson shape="pentagon" />
         </PostSection>
 

@@ -10,6 +10,12 @@
   background: var(--surface);
 }
 
+@media (width < 40rem) {
+  .ls-demo {
+    padding: var(--space-4);
+  }
+}
+
 .ls-demo .field-label {
   justify-self: start;
 }
@@ -81,4 +87,12 @@
   font-size: 13px;
   line-height: 1.4;
   color: var(--text-muted);
+}
+
+/* Line breaks that only happen on phones: the title (so the marker stays
+   with "Search") and the lede (so its muted half gets its own line). */
+@media (width >= 40rem) {
+  .ls-phone-break {
+    display: none;
+  }
 }
