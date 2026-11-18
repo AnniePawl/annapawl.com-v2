@@ -547,6 +547,18 @@ order.getAll("toppings"); // ["honey", "fig jam"]`,
   },
   {
     topic: "Accessibility",
+    name: "sr-only",
+    group: "Hiding content",
+    model:
+      "Tucks text out of sight but keeps it for screen readers. Handy for my search label, a bookshelf heart button, or a hidden “(opens in a new tab)”.",
+    example: `<label htmlFor="search" className="sr-only">Search colors</label>
+<button type="button">
+  <HeartIcon aria-hidden="true" /><span className="sr-only">Favorite</span>
+</button>`,
+    note: "display: none and visibility: hidden hide it from screen readers too. Tailwind has sr-only built in; otherwise I write the class myself.",
+  },
+  {
+    topic: "Accessibility",
     name: "aria-expanded",
     group: "ARIA",
     model:

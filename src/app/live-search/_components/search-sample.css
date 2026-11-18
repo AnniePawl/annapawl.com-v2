@@ -1,0 +1,98 @@
+/* Live search demo, shared by the working demo and the anatomy picture.
+   The field, label and hints come from the design system. */
+.ls-demo {
+  display: grid;
+  gap: var(--space-3);
+  margin-block: var(--space-5);
+  padding: var(--space-5);
+  border: 1px solid color-mix(in srgb, var(--text-primary) 20%, transparent);
+  border-radius: var(--radius-xs);
+  background: var(--surface);
+}
+
+@media (width < 40rem) {
+  .ls-demo {
+    padding: var(--space-4);
+  }
+}
+
+.ls-demo .field-label {
+  justify-self: start;
+}
+
+.ls-count,
+.ls-empty {
+  justify-self: start;
+}
+
+.ls-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2) var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (width >= 40rem) {
+  .ls-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.ls-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 2rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+/* The name is a real CSS color, so it paints its own swatch. A faint
+   border keeps the light ones visible. */
+.ls-swatch {
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--text-primary) 18%, transparent);
+  border-radius: var(--radius-xs);
+}
+
+.ls-hint {
+  margin-top: calc(var(--space-2) - var(--space-5));
+  font-size: var(--type-note-size);
+  font-style: italic;
+}
+
+.search-anatomy {
+  --anatomy-outline: var(--sky-bold);
+}
+
+.search-anatomy .ls-demo {
+  margin-block: 0;
+}
+
+/* List and empty message share one spot, so swapping them keeps the height. */
+.ls-results {
+  display: grid;
+}
+
+.ls-results > * {
+  grid-area: 1 / 1;
+}
+
+/* .post-section p would otherwise make the hints body-sized. */
+.ls-demo .field-hint {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+/* Line breaks that only happen on phones: the title (so the marker stays
+   with "Search") and the lede (so its muted half gets its own line). */
+@media (width >= 40rem) {
+  .ls-phone-break {
+    display: none;
+  }
+}

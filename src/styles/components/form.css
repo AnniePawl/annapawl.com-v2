@@ -107,6 +107,42 @@
   box-shadow: 0 1px 0 0 var(--field-accent);
 }
 
+/* Search: a box instead of a line, with a search icon, so it reads as
+   "type here" at a glance. Focus thickens the border to 2px in the accent. */
+.input-search {
+  position: relative;
+  display: block;
+}
+
+.input-search-icon {
+  position: absolute;
+  top: 50%;
+  left: 0.75rem;
+  width: 16px;
+  height: 16px;
+  color: var(--text-primary);
+  translate: 0 -50%;
+  pointer-events: none;
+}
+
+.input.input--search {
+  padding: 0 var(--space-3) 0 2.375rem;
+  border: 1px solid color-mix(in srgb, var(--text-primary) 35%, transparent);
+  border-radius: var(--radius-xs);
+  background: var(--surface);
+}
+
+.input.input--search:hover:not(:disabled) {
+  border-color: var(--text-primary);
+}
+
+.input.input--search:focus,
+.input.input--search.focus-ring:focus-visible {
+  border-color: var(--field-accent);
+  border-radius: var(--radius-xs);
+  box-shadow: 0 0 0 1px var(--field-accent);
+}
+
 .input:disabled {
   opacity: var(--opacity-disabled);
   cursor: not-allowed;

@@ -5,7 +5,7 @@ import "./landing-index.css";
 // Site menu below the fold. Numbered index of pages, then rows that
 // open to list their posts (GroupRow.tsx).
 const PAGES = [
-    {
+  {
     href: "/sedge-design-system",
     title: "Design System",
     description: "The design system I built for my digital garden",
@@ -54,10 +54,16 @@ const CREATIVE_CODING: GroupItem[] = [
 
 const BUILDING_BLOCKS: GroupItem[] = [
   {
+    href: "/live-search",
+    title: "Live Search",
+    description: "A barebones filter-as-you-type search to build on",
+    accent: "var(--sky-bold)",
+  },
+  {
     href: "/accordion",
     title: "Accordion",
     description: "An accessible accordion, in vanilla JS and React",
-    accent: "var(--teal-bold)",
+    accent: "var(--green-bold)",
   },
   {
     title: "Tabs",

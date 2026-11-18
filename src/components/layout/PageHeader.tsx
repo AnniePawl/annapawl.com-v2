@@ -10,7 +10,7 @@ export type PageHeaderProps = {
   descriptionTitle?: string;
   backLabel?: string;
   eyebrow?: ReactNode;
-  title: string;
+  title: ReactNode;
   description?: string;
   /** Optional shorter description, shown instead on phones. */
   shortDescription?: string;

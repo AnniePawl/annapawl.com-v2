@@ -57,10 +57,10 @@ export default function CssBattle() {
             everything CSS can draw by itself.
           </p>
           <p>
-            <code>::before</code> and <code>::after</code> turned one div into three shapes.{" "}
+            <TextLink href="/field-notes#before-after"><code>::before</code> and <code>::after</code></TextLink> turned one div into three shapes.{" "}
             <code>box-shadow</code> became a copy machine, stamping out repeats of a shape wherever I
             needed them. Gradients drew stripes and rings without extra elements, and{" "}
-            <code>border-radius</code> and <code>transform</code> bent plain squares into petals,
+            <code>border-radius</code> and <TextLink href="/field-notes#transform"><code>transform</code></TextLink> bent plain squares into petals,
             leaves and arches.
           </p>
         </PostSection>
