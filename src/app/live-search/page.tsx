@@ -78,6 +78,69 @@ export default function ColorSearch() {
   );
 }`;
 
+const LABEL_SIMPLE = `<label htmlFor="color-search">Search colors</label>
+<input id="color-search" type="search" />`;
+
+const LABEL = `const searchId = useId();
+
+<label htmlFor={searchId}>Search colors</label>
+<input
+  id={searchId}
+  type="search"
+  value={searchTerm}
+  onChange={(e) => setSearchTerm(e.target.value)}
+/>`;
+
+const ANNOUNCE = `const count = filteredColors.length;
+
+<p aria-live="polite">
+  {count} {count === 1 ? "color" : "colors"}
+</p>`;
+
+const EMPTY_STATE = `{count > 0 ? (
+  <ul>{/* the list from before */}</ul>
+) : (
+  <p>No colors called “{searchTerm}”… yet.</p>
+)}`;
+
+const ACCESSIBLE = `import { useId, useState } from "react";
+
+export default function ColorSearch() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const searchId = useId();
+
+  const query = searchTerm.trim().toLowerCase();
+  const filteredColors = COLORS.filter((color) => color.includes(query));
+  const count = filteredColors.length;
+
+  return (
+    <>
+      <label htmlFor={searchId}>Search colors</label>
+      <input
+        id={searchId}
+        type="search"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+      <p aria-live="polite">
+        {count} {count === 1 ? "color" : "colors"}
+      </p>
+      {count > 0 ? (
+        <ul>
+          {filteredColors.map((color) => (
+            <li key={color}>
+              <span className="swatch" style={{ background: color }} />
+              {color}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No colors called “{searchTerm}”… yet.</p>
+      )}
+    </>
+  );
+}`;
+
 export const metadata = {
   title: "Building a live search in React — Anna Pawl",
   description:
@@ -190,6 +253,17 @@ export default function LiveSearchTutorial() {
               <code>searchTerm</code> on every render with <code>filter()</code>.
             </p>
             <CodeBlock code={RESULTS} highlight={["color.includes(searchTerm)"]} />
+            <p>
+              <code>filter()</code> goes through the list and keeps only the
+              colors where the check returns true. Here, the check is{" "}
+              <code>includes()</code>, which asks: does this color name contain
+              what was typed?
+            </p>
+            <p>
+              New to these? My Field Notes have quick refreshers on{" "}
+              <TextLink href="/field-notes#map-filter-find">map / filter / find</TextLink>{" "}
+              and <TextLink href="/field-notes#includes">includes()</TextLink>.
+            </p>
             <Callout eyebrow="Good to know" tone="marigold" className="my-6 max-w-none">
               When the input is empty, <code>includes(&quot;&quot;)</code> is
               true for every color! So clearing the input brings the whole list
@@ -199,7 +273,15 @@ export default function LiveSearchTutorial() {
 
           <PostSubsection title="Match loosely">
             <p>
-              Right now, “Blue” finds nothing. Neither does “ blue” because of the sneaky space in front. As someone whose typing could use a little grace, let’s return the favor. Trim the spaces from either end and convert the query to lowercase to make the search more forgiving.
+              Right now, “Blue” finds nothing. Neither does “ blue” because of
+              the sneaky space in front. That’s because <code>includes()</code>{" "}
+              matches characters exactly: a capital “B” isn’t the same as a
+              lowercase “b”, and no color name has a space in it.
+            </p>
+            <p>
+              As someone whose typing could use a little grace, let’s return the
+              favor. Trimming the spaces from either end and converting the
+              query to lowercase makes the search more forgiving.
             </p>
             <p>
               My color names are already lowercase, so I only need to tidy up
@@ -240,45 +322,195 @@ export default function LiveSearchTutorial() {
         </PostSection>
 
         <PostSection id="make-it-accessible" title="Make it accessible">
-          <PostSubsection title="Give it a real label">
-            <p>TODO: label + htmlFor (useId), and why a placeholder isn’t enough.</p>
+          <p>
+            Our search works! Let’s fill in a few gaps to make sure it’s more
+            accessible: give the input a label, announce the results, and show
+            a helpful message when nothing matches. None of these take much code, but each makes it easier to
+            understand what to search, what changed, and what to try next.
+          </p>
+
+          <PostSubsection title="Give it a label">
+            <p>
+              Let’s tell people what they’re searching. A proper{" "}
+              <code>&lt;label&gt;</code> stays put while you type, and it gives
+              the input a name that screen readers can announce. A placeholder
+              can offer a hint, but it disappears as soon as you start typing,
+              so it can’t do the label’s job.
+            </p>
+            <p>
+              The label and input need to be connected, so the browser knows
+              they belong together. The label’s <code>htmlFor</code> points to
+              the input’s <code>id</code>:
+            </p>
+            <CodeBlock code={LABEL_SIMPLE} highlight={['htmlFor="color-search"', 'id="color-search"']} />
+            <p>
+              Now screen readers announce “Search colors” when the input is
+              focused, and clicking the label focuses the input too.{" "}
+              <code>htmlFor</code> is React’s name for HTML’s <code>for</code>{" "}
+              attribute, since <code>for</code> already means something in
+              JavaScript.
+            </p>
+            <p>
+              One catch: an <code>id</code> has to be unique on the page. If
+              this search ever shows up twice, both inputs would get{" "}
+              <code>color-search</code>, and each label could end up pointing
+              at the wrong one. React’s <code>useId()</code> fixes that by
+              making a unique ID for every copy of the component:
+            </p>
+            <CodeBlock code={LABEL} highlight={["useId()", "htmlFor={searchId}", "id={searchId}"]} />
+            <p>
+              Just remember to import <code>useId</code> from{" "}
+              <code>&quot;react&quot;</code>, like <code>useState</code>. More
+              on it in my{" "}
+              <TextLink href="/field-notes#useid">useId field note</TextLink>.
+            </p>
+            <p>
+              A visible label is usually best, but if you want to tuck it away,
+              an{" "}
+              <TextLink href="/field-notes#sr-only"><code>sr-only</code></TextLink>{" "}
+              (screen reader only) class hides it
+              visually while keeping it available to screen readers. That’s
+              what my demo at the top does; the anatomy example leaves it
+              visible.
+            </p>
           </PostSubsection>
 
           <PostSubsection title='Use type="search"'>
-            <p>TODO: the clear button, Escape to clear, and the search key on phones.</p>
+            <p>
+              You may have noticed <code>type=&quot;search&quot;</code> in the
+              input from the start. It’s a tiny change that comes with a few
+              freebies: some browsers add a clear button, Escape clears the
+              field, and phones show a search key on the keyboard. Screen
+              readers also announce it as a search field.
+            </p>
           </PostSubsection>
 
           <PostSubsection title="Announce the results">
-            <p>TODO: a polite live region with the results count.</p>
+            <p>
+              When you type, the list shrinks right away. That’s obvious if you
+              can see it, but a screen reader user hears nothing. A{" "}
+              <b>live region</b> gives them a little heads-up: as the number of
+              matches changes, screen readers can announce the updated count.
+            </p>
+            <CodeBlock code={ANNOUNCE} highlight={['aria-live="polite"']} />
+            <p>
+              <code>polite</code> tells the screen reader to wait its turn. As
+              you type, it’s already reading back each letter, so it finishes
+              that first and then announces the count. The count helps everyone
+              else too, as a quick “how many are left?”
+            </p>
           </PostSubsection>
 
           <PostSubsection title="Say when nothing matches">
-            <p>TODO: a friendly empty state.</p>
+            <p>
+              Search for “blurple” and the list just disappears. Is it broken?
+              Still loading? An empty state answers that, and nudges people to
+              try something else.
+            </p>
+            <CodeBlock code={EMPTY_STATE} highlight={["count > 0"]} />
+            <p>
+              Screen reader users already hear “0 colors” from the live region,
+              so this one is mostly for sighted users. Using their search term
+              in the message shows the search worked, there just wasn’t a match.
+            </p>
           </PostSubsection>
 
-          <PostSubsection title="Leave focus alone">
-            <p>TODO: focus stays in the input while the list updates.</p>
+          <PostSubsection title="Put it all together">
+            <p>
+              Here’s the finished search: a label, a live count, and an empty
+              state, on top of the search we built before. It’s the same one
+              as the demo at the top, minus my styling.
+            </p>
+            <CodeBlock code={ACCESSIBLE} />
           </PostSubsection>
         </PostSection>
 
         <PostSection id="test-it" title="Test it">
-          <p>TODO: try it with a keyboard and a screen reader.</p>
+          <p>
+            Let’s check how our search behaves beyond the mouse. The exact
+            wording you hear will vary by browser and screen reader, but the
+            gist should match.
+          </p>
+
+          <PostSubsection title="With a keyboard">
+            <ol className="my-4 grid list-decimal gap-3 pl-5 text-[length:var(--text-md)] leading-[var(--leading-relaxed)]">
+              <li>
+                Press <kbd>Tab</kbd> to move into the search.
+              </li>
+              <li>
+                Type a search. The results should update while the cursor stays
+                put.
+              </li>
+              <li>
+                Press <kbd>Esc</kbd> to clear it, and the whole list comes back.
+              </li>
+            </ol>
+          </PostSubsection>
+
+          <PostSubsection title="With a screen reader">
+            <p>
+              On a Mac, turn on VoiceOver with <kbd>⌘</kbd> + <kbd>F5</kbd> (you
+              may also need <kbd>Fn</kbd>).
+            </p>
+            <ol className="my-4 grid list-decimal gap-3 pl-5 text-[length:var(--text-md)] leading-[var(--leading-relaxed)]">
+              <li>
+                <kbd>Tab</kbd> to the search. You should hear its label,
+                “Search colors”.
+              </li>
+              <li>
+                Type <code>blue</code>. Listen for the updated count.
+              </li>
+              <li>
+                Try <code>blurple</code>. You should hear zero results, and see
+                the empty message on screen.
+              </li>
+            </ol>
+          </PostSubsection>
         </PostSection>
 
         <PostSection id="keep-going" title="Keep going">
           <p>
-            TODO: ideas to build on. Highlight the matching text, wait until
-            typing pauses (debounce), save the query in the URL, or turn it into
-            a suggestions dropdown (combobox).
+            One input, one bit of state, and a list that follows along. Add a label, a results count, and a helpful empty message, and we’ve got a little search to build on.
           </p>
-          <ul>
+          <p>A few ideas to build on next (some of these are coming in a follow-up post):</p>
+          <ul className="my-4 grid list-disc gap-2 pl-5 text-[length:var(--text-md)] leading-[var(--leading-relaxed)]">
+            <li>
+              <b>Highlight the match.</b> Wrap the matching part of each name in
+              a <code>&lt;mark&gt;</code> so it’s easy to spot.
+            </li>
+            <li>
+              <b>Search more fields.</b> Try a list of products and match against names, categories, or tags.
+            </li>
+            <li>
+              <b>Keyboard-friendly suggestions.</b> A dropdown of suggestions
+              under the input, with arrow keys to move through them. That’s a
+              combobox, and it’s a bigger build.
+            </li>
+          </ul>
+          <p>Want to go deeper? These are the references I lean on:</p>
+          <ul className="my-4 grid list-disc gap-2 pl-5 text-[length:var(--text-md)] leading-[var(--leading-relaxed)]">
             <li>
               <TextLink href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Guides/Live_regions">
                 ARIA live regions on MDN
               </TextLink>
-              , TODO: one-line note.
+              , for how and when screen readers announce changes.
+            </li>
+            <li>
+              <TextLink href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/search">
+                input type=&quot;search&quot; on MDN
+              </TextLink>
+              , for everything the search field gives you for free.
+            </li>
+            <li>
+              <TextLink href="https://react.dev/reference/react/useId">useId in the React docs</TextLink>
+              , for connecting labels and inputs.
             </li>
           </ul>
+          <p>
+           Check out the Forms
+            section of my{" "}
+            <TextLink href="/sedge-design-system#forms">Sedge design system</TextLink>.
+          </p>
           <p>More Building Blocks are on the way. 🌱</p>
         </PostSection>
       </PostLayout>

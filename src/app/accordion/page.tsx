@@ -302,16 +302,16 @@ export default function AccordionTutorial() {
         utilityStart={
           <HomeLogo
             colors={{
-              northeast: "var(--coral-bold)",
-              southeast: "var(--teal-bold)",
-              southwest: "var(--teal-bold)",
-              northwest: "var(--teal-bold)",
-              hoverAccent: "var(--teal-bold)",
+              northeast: "var(--pink-bold)",
+              southeast: "var(--green-bold)",
+              southwest: "var(--green-bold)",
+              northwest: "var(--green-bold)",
+              hoverAccent: "var(--green-bold)",
             }}
             size="1.75rem"
           />
         }
-        accent="var(--teal-bold)"
+        accent="var(--green-bold)"
         contents={[
           { id: "what-is-an-accordion", label: "What is an accordion?", tone: "pink-bold" },
           { id: "anatomy", label: "The anatomy", tone: "coral-bold" },

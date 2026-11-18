@@ -230,6 +230,13 @@
   margin-top: 1.75rem;
 }
 
+/* Text ends with some invisible line spacing; boxes (code, callouts,
+   demos) end on a hard edge. A little extra room after a box makes the
+   gap above the next heading look the same. */
+.post-subsection:has(> :last-child:not(p, ul, ol)) + .post-subsection {
+  margin-top: calc(1.75rem + var(--space-2));
+}
+
 .post-subsection h3 {
   margin: 0 0 var(--space-2);
 }
@@ -570,4 +577,18 @@
   .mobile-contents {
     transition: none;
   }
+}
+
+/* Keyboard keys in post text, e.g. <kbd>Tab</kbd>. */
+.post-section kbd {
+  display: inline-block;
+  padding: 0.05em 0.4em;
+  border: 1px solid color-mix(in srgb, var(--charcoal) 28%, transparent);
+  border-bottom-width: 2px;
+  border-radius: var(--radius-xs);
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  line-height: 1.3;
+  white-space: nowrap;
 }
