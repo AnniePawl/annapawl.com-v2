@@ -41,8 +41,14 @@ const CREATIVE_CODING: GroupItem[] = [
   {
     href: "/css-shapes",
     title: "CSS Shapes",
-    description: "How to make basic shapes using CSS",
+    description: "Learn how to make basic shapes using CSS",
     accent: "var(--marigold-bold)",
+  },
+   {
+    href: "/rejected-vanity-plates",
+    title: "Rejected Vanity Plates",
+    description: "A cheeky data viz of plates the DMV said no to",
+    accent: "var(--blue-bold)",
   },
   {
     href: "/css-battle",
