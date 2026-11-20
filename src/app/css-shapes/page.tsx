@@ -39,7 +39,7 @@ export default function CssShapesPage() {
             </span>
           </>
         }
-        next={{ href: "/css-battle", label: "CSS Battle" }}
+        next={{ href: "/rejected-vanity-plates", label: "Rejected Plates" }}
         publishedDate="Updated Oct 2026"
         readingTime="8 min read"
         postTags="CSS, Illustration"

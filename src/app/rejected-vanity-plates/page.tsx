@@ -11,8 +11,6 @@ const IMPORT_DATA = `import plates from "./_data/rejected-plates.json";
 // [{ date: "2010-10-02", plate: "00DADDY" }, …]`;
 
 const PLATE_GRADIENT = `.plate {
-  height: 250px;
-  width: 500px;
   background-image: linear-gradient(
     to bottom,
     var(--plate-color2) 0 25%,
@@ -23,13 +21,9 @@ const PLATE_GRADIENT = `.plate {
     var(--plate-color) 94% 96%,
     var(--plate-color2) 96%
   );
-  border-radius: 10px;
 }`;
 
 const PLATE_EMBOSS = `#plate-num {
-  font-size: 90px;
-  font-family: "Dosis", sans-serif;
-  color: var(--plate-color2);
   text-shadow:
     3px 2px 2px rgb(138, 89, 12),
     -3px -2px 2px rgba(255, 255, 255, 0.7);
@@ -46,7 +40,7 @@ const PLATE_BOLTS = `h2::before {
   transform: translateY(0.6em) translateX(-1em);
 }`;
 
-const PLATE_SCALE = `/* In my CodePen */
+const PLATE_SCALE = `/* Original */
 #plate-num {
   font-size: 90px;
 }
@@ -90,8 +84,8 @@ export default function RejectedVanityPlates() {
     <main>
       <PostLayout
         descriptionTitle="Creative coding"
-        description="A collection of vanity plates the New York DMV said no to, served up on a little license plate drawn in CSS."
-        shortDescription="A cheeky data viz of plates the DMV said no to."
+        description="A cheeky little data visualization of vanity plates the New York DMV said no to, served up on a plate drawn in CSS."
+        shortDescription="A cheeky little data visualization of plates the DMV said no to."
         eyebrow="Creative Coding"
         title="Rejected Plates"
         lede={
@@ -101,12 +95,12 @@ export default function RejectedVanityPlates() {
           </>
         }
         publishedDate="Updated Nov 2026"
-        readingTime="TODO min read"
-        postTags="Data viz, CSS art, React"
+        readingTime="5 min read"
+        postTags="Data visualization, CSS art "
         utilityStart={
           <HomeLogo
             colors={{
-              northeast: "var(--sky-bold)",
+              northeast: "var(--blue-bold)",
               southeast: "var(--marigold-bold)",
               southwest: "var(--marigold-bold)",
               northwest: "var(--marigold-bold)",
@@ -116,12 +110,14 @@ export default function RejectedVanityPlates() {
           />
         }
         accent="var(--marigold-bold)"
+        next={{ href: "/css-battle", label: "CSS Battle" }}
         contents={[
-          { id: "intro", label: "Intro", tone: "marigold-bold" },
-          { id: "the-data", label: "The data", tone: "blue-bold" },
-          { id: "the-plate", label: "Drawing the plate", tone: "marigold-bold" },
-          { id: "random-plate", label: "Picking a plate", tone: "blue-bold" },
-          { id: "patterns", label: "Patterns in the data", tone: "marigold-bold" },
+          { id: "intro", label: "Intro", tone: "blue-bold" },
+          { id: "the-data", label: "The data", tone: "marigold-bold" },
+          { id: "the-plate", label: "Drawing the plate", tone: "blue-bold" },
+          { id: "random-plate", label: "Picking a plate", tone: "marigold-bold" },
+          { id: "patterns", label: "Patterns in the data", tone: "blue-bold" },
+          { id: "red-guide", label: "The Red Guide", tone: "marigold-bold" },
           { id: "keep-going", label: "Keep going", tone: "blue-bold" },
         ]}
       >
@@ -129,33 +125,25 @@ export default function RejectedVanityPlates() {
         <PlateStage plates = {plates}/>
 
         <PostSection id="intro" title="Intro">
-          <p>One person’s dream plate, the DMV’s hard pass!</p>
           <p>
-            My camera roll has a growing collection of license plates I’ve
-            snapped because they made me chuckle. So stumbling onto a dataset
-            of vanity plates rejected by the New York DMV felt a bit like
-            finding the archives of a very niche hobby. As a New Yorker, I
-            couldn’t leave this one alone, so I rebuilt the plate in pure CSS
-            and gave the rejects their moment.
+            One person’s dream plate, the DMV’s hard pass! Stumbling across
+            this dataset of vanity plates rejected by the New York DMV felt
+            like finding the archives of a very niche hobby. As a New Yorker
+            with an ever-growing collection of ridiculous plates in my camera
+            roll, I couldn’t leave this one alone. I recreated a New York plate
+            in pure CSS and gave the rejects their moment.
           </p>
           <p>
             Some are clever, some are a stretch, and some… well, I’m with the
-            DMV on those. I’m a little in awe of the creativity, and of the
-            lengths people will go to squeeze something questionable into eight
-            characters.
-          </p>
-          <p>
-            Hit the button to meet another hopeful. Below, I’ll walk through how
-            I built it, and where the DMV draws the line.
+            DMV on those. You have to admire the commitment to squeezing
+            something questionable into eight characters. Below, I’ll walk
+            through how I built it and where the DMV draws the line.
           </p>
         </PostSection>
 
         <PostSection id="the-data" title="The data">
           <p>
-            The plates come from WNYC’s Data News team. In 2014 they filed a
-            Freedom of Information (FOIL) request with the New York DMV and got
-            back every personalized plate application from October 2010 to
-            September 2014. They published it on GitHub as{" "}
+            The plates come courtesy of WNYC’s Data News team. My favorite radio station, enabling my niche interests yet again. In July 2014, they filed a Freedom of Information Law (FOIL) request with the New York DMV and obtained plate application data covering October 2010 through September 2014. They published it on GitHub as{" "}
             <TextLink href="https://github.com/datanews/license-plates">
               datanews/license-plates
             </TextLink>
@@ -173,40 +161,32 @@ export default function RejectedVanityPlates() {
           </p>
           <PostSubsection title="Getting it into my site">
             <p>
-              The data is a CSV with two columns, <code>date</code> and{" "}
-              <code>plate</code>. I saved a copy in my project, so the page
-              doesn’t depend on someone else’s repo, and converted it to JSON
-              once with a tiny Node script. Now the page imports it like any
+              The data is a CSV with just two columns, <code>date</code> and{" "}
+              <code>plate</code>. I used a tiny Node script to turn it into JSON, then tucked a copy into my project. Now the page imports it like any
               other file:
             </p>
             <CodeBlock code={IMPORT_DATA} />
           </PostSubsection>
-          <Callout eyebrow="Heads-up" tone="blue" className="my-6 max-w-none">
+          {/* <Callout eyebrow="Heads-up" tone="blue" className="my-6 max-w-none">
             These are real rejected applications, so some contain explicit or
             offensive language.
-          </Callout>
+          </Callout> */}
         </PostSection>
 
         <PostSection id="the-plate" title="Drawing the plate">
           <p>
-            The plate is one <code>div</code> with three lines of text inside:
-            the state, the plate number, and the motto. Everything else is CSS.
+            The plate is just one <code>div</code> with three lines of text and some creative CSS.
+            
           </p>
           <PostSubsection title="Stripes from one gradient">
             <p>
-              My plate is 500 by 250 pixels, the same 2:1 shape as a real 12 by
-              6 inch plate. The navy bands and thin pinstripes aren’t separate
-              elements. They’re one <code>linear-gradient</code> with hard
-              stops, where each color starts exactly where the last one ends.
+              The navy bands and thin pinstripes are one linear-gradient. Giving adjacent colors the same stop position creates a sharp stripe instead of a gradual blend. No extra elements needed.
             </p>
             <CodeBlock code={PLATE_GRADIENT} />
           </PostSubsection>
           <PostSubsection title="Pressed-in letters">
             <p>
-              Real plate letters are stamped into the metal. Two text shadows
-              fake it: a dark one down and to the right, and a light one up and
-              to the left. Together they read as a raised edge catching the
-              light.
+            Two text-shadows give the plate number a little dimension. A dark shadow below and a light one above fake the edges of stamped metal catching the light.
             </p>
             <CodeBlock code={PLATE_EMBOSS} />
           </PostSubsection>
@@ -224,8 +204,7 @@ export default function RejectedVanityPlates() {
           </PostSubsection>
           <PostSubsection title="One plate, any size">
             <p>
-              In my CodePen, the plate is a fixed 500 by 250 pixels. On this
-              page, I wanted it to fill the column instead, which meant the
+              My original plate is a fixed 500 by 250 pixels. Here, I wanted it to fill the column instead, which meant the
               pixel sizes inside it had to grow and shrink with it. So for this
               page, I swapped them for <code>cqi</code> units, a percentage of
               the plate’s width, and made the plate a{" "}
@@ -239,27 +218,20 @@ export default function RejectedVanityPlates() {
         <PostSection id="random-plate" title="Picking a plate">
           <PostSubsection title="Remember the current plate">
             <p>
-              The plate on screen lives in state. It starts as LILB00TY instead
-              of a random plate, so the server and the browser agree on what to
-              show first.
+              State keeps track of which plate is on screen. I started with{" "}
+              <code>LILB00TY</code> because it’s one of my faves, and a fixed
+              first plate means the server and the browser agree on what to show.
+              The questionable choices are random after that.
             </p>
             <CodeBlock code={PICK_STATE} />
           </PostSubsection>
           <PostSubsection title="Pick a new one">
             <p>
               <code>Math.random()</code> gives a decimal between 0 and 1.
-              Multiplying by the number of plates and rounding down turns it
-              into a spot in the list. The loop keeps picking until it lands on
-              a different plate, so the button always shows something new.
+              Multiplying by the number of plates and rounding down with <code>Math.floor()</code> gives us an index into the list. The loop keeps picking until it lands on
+              a different plate, so every tap shows something new.
             </p>
             <CodeBlock code={PICK_RANDOM} highlight={["plates.length"]} />
-            <p>
-              Fun fact: I first wrote <code>PlateStage.length</code> instead of{" "}
-              <code>plates.length</code>. Functions have a length too (how many
-              arguments they take), so it was always 1, the button only ever
-              picked the first plate, and the loop never ended. One word, one
-              frozen page.
-            </p>
           </PostSubsection>
           <PostSubsection title="Announce it">
             <p>
@@ -274,28 +246,40 @@ export default function RejectedVanityPlates() {
 
         <PostSection id="patterns" title="Patterns in the data">
           <p>
-            Once the plates were in a list, I couldn’t resist poking around.
-            A few things stood out:
+            A few things stood out in this little collection of rejects:
           </p>
           <ul className="my-4 grid list-disc gap-2 pl-5 text-[length:var(--text-md)] leading-[var(--leading-relaxed)]">
             <li>
-              <b>Spring is rejection season.</b> March and April each saw about
-              200 rejections, twice as many as December.
+              <b>Spring is rejection season.</b> Across the dataset, March and April each had about 200 rejections, roughly twice as many as December.
             </li>
             <li>
-              <b>Numbers do a lot of sneaking.</b> 58% of rejected plates
-              include a number, often standing in for a letter: 0 for O, 3 for
-              E, 8 for B.
+              <b>Numbers get creative.</b> About 58% of rejected plates include a number. Some do a little disguise work, with 0 standing in for O, 3 for E, or 8 for B.
             </li>
             <li>
-              <b>Six is the sweet spot.</b> Six characters is the most common
-              length, but 453 people used all eight.
+              <b>A recurring theme.</b> “69” appears in 30 plates, including LUVN69, RATEDR69, and the very committed I696969I. The DMV was not amused.
             </li>
             <li>
-              <b>Some people don’t give up.</b> BAD2SS was rejected three times.
+              <b>Some people don’t give up.</b> A55 appears in 15 plates, like WISEA55, SMRTA55 and UDUMBA55. BAD2SS was rejected three times... 
             </li>
           </ul>
           <p>TODO: a chart of rejections by month.</p>
+        </PostSection>
+
+        <PostSection id="red-guide" title="A closer look at the Red Guide">
+          <p>
+            Before a human ever sees your plate, it gets checked against the{" "}
+            <TextLink href="https://github.com/datanews/license-plates/blob/master/red-guide.csv">
+              Red Guide
+            </TextLink>
+            , the DMV’s list of about 1,800 automatic no’s. Most of it is exactly
+            what you’d expect (33 ways to spell F***). But some
+            entries are surprising.
+          </p>
+          <p>
+            JAYLENO is banned, no explanation. So is DMV, which feels personal.
+            NONE and NOPLATES are out, could make for some confusing paperwork. IMDRUNK is a no, which, fair. And FART,
+            OLDFART and FARTMAN are all off the table.
+          </p>
         </PostSection>
 
         <PostSection id="keep-going" title="Keep going">
@@ -324,12 +308,14 @@ export default function RejectedVanityPlates() {
               </TextLink>
               , the New York data from WNYC.
             </li>
+            {/* Hidden for now:
             <li>
               <TextLink href="https://github.com/veltman/ca-license-plates">
                 veltman/ca-license-plates
               </TextLink>
               , California applications flagged for review, 2015 to 2016.
             </li>
+            */}
           </ul>
         </PostSection>
       </PostLayout>

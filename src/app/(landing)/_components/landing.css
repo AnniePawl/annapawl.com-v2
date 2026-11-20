@@ -85,13 +85,11 @@
 .landing-desktop-about {
   display: flex;
   align-items: center;
-  --landing-about-pad: calc(var(--space-7) + var(--space-2));
   position: relative;
   width: 27vw;
   min-width: 340px;
   height: 100vh;
-  padding: var(--space-8) calc(var(--space-6) + var(--space-2)) var(--space-8)
-    var(--landing-about-pad);
+  padding: var(--space-8) var(--space-7) var(--space-8) var(--space-8);
   overflow: hidden;
   border-right: 1px solid color-mix(in srgb, var(--charcoal) 18%, transparent);
   background-color: var(--landing-wall);
@@ -101,14 +99,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-}
-
-/* Mirrors the info button on the other side: its 28px icon sits 33px
-   from the right edge, centered 42px from the top. */
-.landing-desktop-logo {
-  position: absolute;
-  top: 28px;
-  left: 33px;
 }
 
 .landing-eyebrow {
@@ -126,7 +116,7 @@
   width: 0.42em;
   height: 0.72em;
   margin-left: 0.12em;
-  background: var(--cherry-bold);
+  background: var(--periwinkle-bold);
 }
 
 .landing-name-mark-mobile {
@@ -160,7 +150,7 @@
   line-height: 1;
   letter-spacing: var(--tracking-wider);
   text-transform: uppercase;
-  color: var(--periwinkle-bold);
+  color: var(--coral-bold);
 }
 
 .landing-role-mobile {
@@ -173,15 +163,12 @@
   color: var(--coral-bold);
 }
 
+/* Desktop only: 28px above, and 28px below with the link's own 24px. */
 .landing-lede-desktop {
-  margin: var(--space-6) 0 0;
+  margin: calc(var(--space-5) + var(--space-1)) 0 var(--space-1);
   font-size: 1rem;
-  line-height: 1.75;
+  line-height: 2;
   letter-spacing: -0.01em;
-}
-
-.landing-lede-desktop + .landing-lede-desktop {
-  margin-top: var(--space-5);
 }
 
 .landing-lede-mobile {
@@ -266,7 +253,7 @@
 }
 
 .landing-cta-desktop::before {
-  background: var(--cherry-bold);
+  background: var(--landing-accent);
 }
 
 .landing-cta-mobile::before {
@@ -276,6 +263,13 @@
 .landing-cta-arrow {
   display: inline-block;
   font-size: 0.875rem;
+}
+
+.landing-cta-desktop .landing-cta-arrow {
+  color: var(--landing-accent);
+}
+
+.landing-cta-mobile .landing-cta-arrow {
   color: var(--landing-accent);
 }
 

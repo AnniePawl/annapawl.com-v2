@@ -6,6 +6,7 @@ import type { BookLookup } from "../../lib/googleBooks";
 
 export const booksByYear: Record<number, BookLookup[]> = {
   2026: [
+    
     { title: "Open Throat", volumeId: "SZyDEAAAQBAJ", author: "Henry Hoke", tags: ["Literary Fiction", "LGBTQ+", "Book Club"], firstPublished: 2023 },
     { title: "Martyr", volumeId: "uRC7EAAAQBAJ", author: "Kaveh Akbar", tags: ["Literary Fiction", "LGBTQ+", "Book Club"], firstPublished: 2024 },
     { title: "Betty", author: "Tiffany McDaniel", volumeId: "hOO3DwAAQBAJ", tags: ["Historical Fiction", "Favorites", "Made Me Cry", "Book Club"], firstPublished: 2020 },
@@ -30,7 +31,7 @@ export const booksByYear: Record<number, BookLookup[]> = {
         "https://play.google.com/books/content/images/frontcover/WT1nA87biBoC?fife=w240-h345",
       tags: ["Literary Fiction", "Dystopian", "Survival", "Book Club"], firstPublished: 1995,
     },
-    { title: "The Man Who Mistook His Wife for a Hat", author: "Oliver Sacks", volumeId: "CuwmEAAAQBAJ", tags: ["Nonfiction", "Popular Science"], firstPublished: 1985 },
+    { title: "The Man Who Mistook His Wife for a Hat", author: "Oliver Sacks", volumeId: "CuwmEAAAQBAJ", tags: ["Nonfiction", "Popular Science", "Short Stories"], firstPublished: 1985 },
     { title: "The Lost City of Z", author: "David Grann", volumeId: "QPih33JBeMwC", tags: ["Nonfiction", "Adventure"], firstPublished: 2009 },
     { title: "The Great Believers", author: "Rebecca Makkai", tags: ["Historical Fiction", "LGBTQ+", "Made Me Cry", "Favorites"], firstPublished: 2018 },
     {
@@ -40,6 +41,14 @@ export const booksByYear: Record<number, BookLookup[]> = {
       coverUrl:
         "https://play.google.com/books/content/images/frontcover/nxyOEAAAQBAJ?fife=w480-h690",
       tags: ["Science Fiction", "Adventure", "Survival", "Favorites"], firstPublished: 2021,
+    },
+    {
+      title: "Interpreter of Maladies",
+      author: "Jhumpa Lahiri",
+      volumeId: "77zjnZnigdsC",
+      coverUrl:
+        "https://play.google.com/books/content/images/frontcover/77zjnZnigdsC?fife=w480-h690",
+      tags: ["Short Stories", "Literary Fiction"], firstPublished: 1999,
     },
     {
       title: "Into Thin Air",

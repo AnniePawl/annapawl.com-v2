@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react';
 import { Dosis, Playfair_Display } from "next/font/google";
-import Button from "../../../components/ui/Button";
 import "./plate-stage.css";
 
 const dosis = Dosis({ subsets: ["latin"], weight: "700", variable: "--font-plate-number" });
@@ -26,14 +25,20 @@ export default function PlateStage({ plates }: { plates: Plate[] }) {
 
   return (
     <div className={`plate-stage ${dosis.variable} ${playfair.variable}`}>
-      <div className="plate" role="img" aria-label={`New York license plate reading ${currentPlate.plate}`}>
-        <span className="plate-state" aria-hidden="true">New York</span>
-        <span className="plate-number" aria-hidden="true">{currentPlate.plate}</span>
-        <span className="plate-motto" aria-hidden="true">Empire State</span>
-      </div>
-      <Button onClick={pickNewPlate} className="plate-button">
-        Generate new plate
-      </Button>
+      {/* The plate is the button: tap it for another one. */}
+      <button
+        type="button"
+        className="plate-button focus-ring"
+        onClick={pickNewPlate}
+        aria-label={`New York license plate reading ${currentPlate.plate}. Show another rejected plate`}
+      >
+        <span className="plate" aria-hidden="true">
+          <span className="plate-state">New York</span>
+          <span className="plate-number">{currentPlate.plate}</span>
+          <span className="plate-motto">Empire State</span>
+        </span>
+      </button>
+      <p className="plate-hint">Tap the plate for another hard no.</p>
       {/* Live Region for screen readers */}
       <p className="sr-only" aria-live="polite">
         {currentPlate.date && `Rejected plate: ${currentPlate.plate}`}
