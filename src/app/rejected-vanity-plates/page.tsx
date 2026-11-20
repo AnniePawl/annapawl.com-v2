@@ -2,6 +2,7 @@ import PostLayout, { PostSection } from "../../components/layout/PostLayout/Post
 import HomeLogo from "../../components/ui/HomeLogo";
 import TextLink from "../../components/ui/TextLink";
 import PlateStage from "./_components/PlateStage";
+import plates from "./_data/rejected-plates.json";
 
 export const metadata = {
   title: "Rejected Vanity Plates — Anna Pawl",
@@ -17,12 +18,11 @@ export default function RejectedVanityPlates() {
         description="A collection of vanity plates the New York DMV said no to, served up on a little license plate drawn in CSS."
         shortDescription="A cheeky data viz of plates the DMV said no to."
         eyebrow="Creative Coding"
-        title="Rejected Vanity Plates"
+        title="Rejected Plates"
         lede={
           <>
-            One person’s dream plate.
-            {" "}
-            <span className="post-header-lede-muted">The DMV’s hard pass.</span>
+            They didn’t make it onto the road,{" "}
+            <span className="post-header-lede-muted">but they made it here.</span>
           </>
         }
         publishedDate="Updated Nov 2026"
@@ -50,10 +50,29 @@ export default function RejectedVanityPlates() {
           { id: "keep-going", label: "Keep going", tone: "red-bold" },
         ]}
       >
-        <PlateStage />
+        {/* NY LICENSE PLATE */}
+        <PlateStage plates = {plates}/>
 
         <PostSection id="intro" title="Intro">
-          <p>TODO: what this is, and a content warning (the data has explicit language).</p>
+          <p>One person’s dream plate, the DMV’s hard pass!</p>
+          <p>
+            My camera roll has a growing collection of license plates I’ve
+            snapped because they made me chuckle. So stumbling onto a dataset
+            of vanity plates rejected by the New York DMV felt a bit like
+            finding the archives of a very niche hobby. As a New Yorker, I
+            couldn’t leave this one alone, so I rebuilt the plate in pure CSS
+            and gave the rejects their moment.
+          </p>
+          <p>
+            Some are clever, some are a stretch, and some… well, I’m with the
+            DMV on those. I’m a little in awe of the creativity, and of the
+            lengths people will go to squeeze something questionable into eight
+            characters.
+          </p>
+          <p>
+            Hit the button to meet another hopeful. Below, I’ll walk through how
+            I built it, and where the DMV draws the line.
+          </p>
         </PostSection>
 
         <PostSection id="the-data" title="The data">

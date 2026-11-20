@@ -75,7 +75,9 @@
 .landing-desktop-content {
   display: flex;
   flex-direction: column;
-  width: 73vw;
+  /* Starts where the About column ends, even when its 340px minimum
+     kicks in (below ~1260px wide). */
+  width: calc(100vw - max(27vw, 340px));
   position: absolute;
   right: 0;
 }
@@ -83,10 +85,13 @@
 .landing-desktop-about {
   display: flex;
   align-items: center;
+  --landing-about-pad: calc(var(--space-7) + var(--space-2));
+  position: relative;
   width: 27vw;
   min-width: 340px;
   height: 100vh;
-  padding: var(--space-8) var(--space-7) var(--space-8) var(--space-8);
+  padding: var(--space-8) calc(var(--space-6) + var(--space-2)) var(--space-8)
+    var(--landing-about-pad);
   overflow: hidden;
   border-right: 1px solid color-mix(in srgb, var(--charcoal) 18%, transparent);
   background-color: var(--landing-wall);
@@ -98,6 +103,14 @@
   width: 100%;
 }
 
+/* Mirrors the info button on the other side: its 28px icon sits 33px
+   from the right edge, centered 42px from the top. */
+.landing-desktop-logo {
+  position: absolute;
+  top: 28px;
+  left: 33px;
+}
+
 .landing-eyebrow {
   display: inline-flex;
   align-items: center;
@@ -107,38 +120,76 @@
   line-height: 1.3;
 }
 
-.landing-name {
-  margin: 0;
-  color: var(--charcoal);
-  font-size: clamp(2.75rem, 3vw, 1.5rem);
-  font-weight: var(--font-regular);
-  letter-spacing: -0.045em;
-  margin-bottom: -20px;
-}
-
-.landing-name-mark {
+/* My name, its mark, role and description. Desktop and mobile each have their own. */
+.landing-name-mark-desktop {
   display: inline-block;
   width: 0.42em;
   height: 0.72em;
   margin-left: 0.12em;
-  background: var(--landing-accent);
+  background: var(--cherry-bold);
 }
 
-.landing-lede {
-  margin: var(--space-4) 0 0;
-  font-size: 1rem;
-  line-height: 2;
-  letter-spacing: -0.01em;
+.landing-name-mark-mobile {
+  display: inline-block;
+  width: 0.42em;
+  height: 0.72em;
+  margin-left: 0.12em;
+  background: var(--periwinkle-bold);
 }
 
-.landing-role {
+.landing-name-desktop {
+  margin: 0 0 -20px;
+  color: var(--charcoal);
+  font-size: clamp(2.75rem, 3vw, 1.5rem);
+  font-weight: var(--font-regular);
+  letter-spacing: -0.045em;
+}
+
+.landing-name-mobile {
+  margin: 0 0 -20px;
+  color: var(--charcoal);
+  font-size: 2.25rem;
+  font-weight: var(--font-regular);
+  letter-spacing: -0.045em;
+}
+
+.landing-role-desktop {
   margin: var(--space-5) 0 0;
   font-size: 11.5px;
   font-weight: var(--font-semibold);
-  line-height: 1.5;
+  line-height: 1;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--periwinkle-bold);
+}
+
+.landing-role-mobile {
+  margin: var(--space-6) 0 0;
+  font-size: 11.5px;
+  font-weight: var(--font-semibold);
+  line-height: 1;
   letter-spacing: var(--tracking-wider);
   text-transform: uppercase;
   color: var(--coral-bold);
+}
+
+.landing-lede-desktop {
+  margin: var(--space-6) 0 0;
+  font-size: 1rem;
+  line-height: 1.75;
+  letter-spacing: -0.01em;
+}
+
+.landing-lede-desktop + .landing-lede-desktop {
+  margin-top: var(--space-5);
+}
+
+.landing-lede-mobile {
+  margin: var(--space-6) 0;
+  font-size: 1rem;
+  line-height: 2;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
 }
 
 .landing-desktop-shelves-container {
@@ -182,14 +233,6 @@
   padding: var(--space-9) 2.5rem var(--space-5);
 }
 
-.landing-mobile-about .landing-name {
-  font-size: 2.25rem;
-}
-
-.landing-mobile-about .landing-lede {
-  margin: var(--space-6) 0;
-}
-
 .landing-mobile-about .landing-cta {
   margin-top: 0;
 }
@@ -220,6 +263,13 @@
   content: "";
   width: 7px;
   height: 11px;
+}
+
+.landing-cta-desktop::before {
+  background: var(--cherry-bold);
+}
+
+.landing-cta-mobile::before {
   background: var(--landing-accent);
 }
 

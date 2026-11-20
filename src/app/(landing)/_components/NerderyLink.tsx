@@ -2,7 +2,7 @@
 
 // "General nerdery ↓" link scrolls down to menu
 // Smooth unless  visitor prefers reduced motion. 
-export function NerderyLink() {
+export function NerderyLink({ variant }: { variant: "desktop" | "mobile" }) {
   function handleClick(e: React.MouseEvent<HTMLAnchorElement>) {
     const menu = document.getElementById("landing-index");
     if (!menu) return;
@@ -15,7 +15,7 @@ export function NerderyLink() {
   }
 
   return (
-    <a href="#landing-index" className="landing-cta focus-ring" onClick={handleClick}>
+    <a href="#landing-index" className={`landing-cta landing-cta-${variant} focus-ring`} onClick={handleClick}>
       <span className="landing-cta-label">
         General nerdery
         <span className="landing-cta-arrow" aria-hidden="true">↓</span>

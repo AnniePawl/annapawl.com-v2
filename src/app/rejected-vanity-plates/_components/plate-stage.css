@@ -16,7 +16,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  /* Fills the column, but shrinks on short screens so the plate and its
+     button fit above the fold: everything above the plate takes about
+     30rem, and the plate is twice as wide as it is tall. */
+  width: min(100%, max(22rem, (100svh - 30rem) * 2));
   aspect-ratio: 2 / 1;
   container-type: inline-size;
   border-radius: 10px;
@@ -103,18 +106,4 @@
 
 .plate-button {
   margin-top: var(--space-6);
-  padding: 0.5em 1.5em;
-  border: 1px solid var(--plate-color2);
-  border-radius: 5px;
-  background-color: transparent;
-  color: var(--plate-color2);
-  font: inherit;
-  box-shadow:
-    rgba(0, 0, 0, 0.1) 0 4px 6px -1px,
-    rgba(0, 0, 0, 0.06) 0 2px 4px -1px;
-  cursor: pointer;
-}
-
-.plate-button:hover {
-  scale: 0.98;
 }
