@@ -14,6 +14,7 @@ export const TAG_TONES: Record<string, PaletteColor> = {
   Romance: "iris-bold",
   Nonfiction: "coral-bold",
   "Popular Science": "mint-bold",
+  "Short Stories": "orange-bold",
   // Theme
   Dystopian: "lime-bold",
   Adventure: "blue-bold",

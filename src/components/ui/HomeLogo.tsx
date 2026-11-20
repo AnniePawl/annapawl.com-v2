@@ -28,7 +28,8 @@ export default function HomeLogo({
   previewState,
   className,
 }: {
-  href?: string;
+  /** null renders the mark on its own, not as a link (e.g. on the home page). */
+  href?: string | null;
   label?: string;
   colors?: HomeLogoColors;
   size?: string;
@@ -47,6 +48,30 @@ export default function HomeLogo({
     ...(colors.northwest ? { "--home-logo-nw": colors.northwest } : {}),
   } as CSSProperties;
 
+  const mark = (
+    <svg
+      viewBox="0 0 200 200"
+      className="home-logo-mark"
+      aria-hidden="true"
+    >
+      {(["NE", "SE", "SW", "NW"] as const).map((leaf) => (
+        <path
+          key={leaf}
+          className={`home-logo-leaf home-logo-leaf--${leaf.toLowerCase()}`}
+          d={CLOVER_LEAF_PATHS[leaf]}
+        />
+      ))}
+    </svg>
+  );
+
+  if (href === null) {
+    return (
+      <span className={cx("home-logo", className)} style={style} aria-hidden="true">
+        {mark}
+      </span>
+    );
+  }
+
   return (
     <Link
       href={href}
@@ -55,19 +80,7 @@ export default function HomeLogo({
       data-state={previewState}
       style={style}
     >
-      <svg
-        viewBox="0 0 200 200"
-        className="home-logo-mark"
-        aria-hidden="true"
-      >
-        {(["NE", "SE", "SW", "NW"] as const).map((leaf) => (
-          <path
-            key={leaf}
-            className={`home-logo-leaf home-logo-leaf--${leaf.toLowerCase()}`}
-            d={CLOVER_LEAF_PATHS[leaf]}
-          />
-        ))}
-      </svg>
+      {mark}
     </Link>
   );
 }
