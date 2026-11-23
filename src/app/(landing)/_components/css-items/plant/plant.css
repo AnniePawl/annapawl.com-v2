@@ -1,0 +1,132 @@
+.plant-container {
+  /* Sits above the shelf, so the vines drape over its edge */
+  position: relative;
+  z-index: 1;
+  transform: translateY(-60px); /* lift the pot so it sits on the shelf, like the teacup */
+
+  --stems: var(--emerald-bold);
+  --leaves1: var(--moss-soft);
+  --leaves2: var(--moss-bold);
+  --dead-leaf1: var(--marigold-soft);
+  --dead-leaf2: var(--marigold-bold);
+  --pot-top: var(--clay-bold);
+  --pot-left: rgb(214, 124, 72);   /* darker half */
+  --pot-right: rgb(234, 151, 100); /* lighter half */
+  --pot-shadow: rgb(189, 94, 39);  /* band under the rim */
+}
+
+.plant {
+  position: relative;
+  width: 75px;
+  height: 60px;
+
+  /* Pot body: tapers toward the bottom */
+&::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(var(--pot-shadow) 0 8px, transparent 0), /* top layer: band under the rim */
+      linear-gradient(to right, var(--pot-left) 0 50%, var(--pot-right) 50%); /* bottom layer: two halves */
+    clip-path: polygon(0 0, 100% 0, 88% 100%, 12% 100%);
+}
+
+  /* Pot Rim*/
+  &::after {
+    content: "";
+    position: absolute;
+    top: -14px;
+    left: -5px;
+    width: 85px;
+    height: 15px;
+    border-radius: 4px;
+    background: var(--pot-top);
+  }
+}
+
+/* ---- Leaves ----
+   One shape for every leaf: a square with two rounded corners.
+   The two sharp corners are the tip and the stem end. */
+.leaf {
+  position: absolute;
+  width: var(--size, 18px);
+  aspect-ratio: 1;
+  border-radius: 0 100% 0 100%;
+  background: var(--leaves2);
+
+  &:nth-child(odd) {
+    background: var(--leaves1);
+  }
+}
+
+/* ---- Bushy top ----
+   A zero-width point at the center of the rim. Each leaf fans out from it. */
+.plant-top {
+  position: absolute;
+  bottom: calc(100% + 10px); /* just above the rim */
+  left: 50%;
+
+  .leaf {
+    --size: 22px;
+    left: calc(var(--size) / -2);
+    bottom: 0;
+    transform-origin: 50% 100%;
+    /* --fan tilts each leaf out; +45deg stands the leaf shape upright */
+    transform: rotate(calc(var(--fan) + 45deg)) translateY(-6px);
+  }
+
+  .leaf:nth-child(1) { --fan: -70deg; --size: 18px; }
+  .leaf:nth-child(2) { --fan: -45deg; }
+  .leaf:nth-child(3) { --fan: -20deg; --size: 24px; }
+  .leaf:nth-child(4) { --fan: 0deg;   --size: 26px; }
+  .leaf:nth-child(5) { --fan: 20deg;  --size: 24px; }
+  .leaf:nth-child(6) { --fan: 45deg; }
+  .leaf:nth-child(7) { --fan: 70deg;  --size: 18px; }
+}
+
+/* ---- Vines ----
+   Each vine is a curved stem (::before) with leaves down it.
+   Leaves alternate sides and shrink toward the tip. */
+.vine {
+  position: absolute;
+  top: -8px; /* starts at the rim */
+  width: 20px;
+
+  /* The stem: a tall box with only a left border, curved by border-radius */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-left: 2px solid var(--stems);
+    border-radius: 60% 0 0 40%;
+  }
+
+  .leaf {
+    --size: calc(18px - var(--i) * 0.8px);
+    top: calc(var(--i) * 16px);
+    left: -2px;
+    transform: rotate(-10deg);
+  }
+
+  /* Every other leaf flips to the other side of the stem */
+  .leaf:nth-child(even) {
+    left: calc(var(--size) * -1);
+    transform: scaleX(-1) rotate(-10deg);
+  }
+}
+
+.vine--long {
+  left: -10px;
+  height: 150px;
+
+  /* One yellowing leaf, because real plants are never perfect */
+  .leaf:nth-child(6) {
+    background: var(--dead-leaf1);
+  }
+}
+
+.vine--short {
+  right: -10px;
+  height: 85px;
+  transform: scaleX(-1); /* mirror it so it curves out to the right */
+}

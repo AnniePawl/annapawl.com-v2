@@ -8,6 +8,7 @@ import { Radio } from "../radio/Radio";
 import { Sewing } from "../sewing/Sewing";
 import { TeaCup } from "../teacup/TeaCup";
 import { Pens } from "../writing/Pens";
+import {Plant} from "../plant/Plant";
 import { Shelf } from "./Shelf";
 import "./shelves.css";
 
@@ -23,6 +24,7 @@ export function DesktopShelves() {
             <NewtonsCradle key="1" cn="desktop-newtonsCradle-container" />,
             <Dessert key="2" cn="desktop-dessert-container" />,
             <Books2 key="3" cn="desktop-books2-container" />,
+            <Plant key="4"/>
           ]}
         />
         <Shelf
