@@ -6,7 +6,7 @@
 }
 
 #landing-shelves-bg{
-  background-color: mintcream;
+  /* background-color: mintcream; */
   /* background-color: #9bb6ff21; */
 }
 
@@ -102,5 +102,26 @@
 
   .mobile-shelf-container:nth-child(3) {
     margin-top: 24px;
+  }
+}
+
+.desktop-shelves .shelf-contents {
+  .desktop-newtonsCradle-container {
+    margin-left: -30px;
+    margin-right: -36px;
+  }
+
+  .desktop-dessert-container {
+    margin-inline: 22px;
+  }
+
+  .desktop-books2-container {
+    margin-left: 41px;
+    margin-right: 18px;
+  }
+
+  .desktop-plant-container {
+    margin-left: 27px;
+    margin-right: 26px;
   }
 }

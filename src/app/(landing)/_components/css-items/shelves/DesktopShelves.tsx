@@ -24,7 +24,7 @@ export function DesktopShelves() {
             <NewtonsCradle key="1" cn="desktop-newtonsCradle-container" />,
             <Dessert key="2" cn="desktop-dessert-container" />,
             <Books2 key="3" cn="desktop-books2-container" />,
-            <Plant key="4"/>
+            <Plant key="4" cn="desktop-plant-container" />
           ]}
         />
         <Shelf

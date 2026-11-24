@@ -3,7 +3,10 @@ import "./sewing-machine.css";
 export function SewingMachine() {
   return (
     <div className="sewing-machine">
-      <div className="sewing-machine__thread" />
+      <div className="sewing-machine__thread">
+        <span className="sewing-machine__spool-end" />
+        <span className="sewing-machine__spool-end" />
+      </div>
       <div className="sewing-machine__needle" />
       <div className="sewing-machine__body">
         <div className="sewing-machine__top" />

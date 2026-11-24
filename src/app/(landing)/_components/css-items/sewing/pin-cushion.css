@@ -9,11 +9,11 @@
   --pin-needle-shine: color-mix(in srgb, var(--charcoal) 25%, var(--cream));
   /* Each pin head has its own color */
   --pin-head-1: var(--coral-bold);
-  --pin-head-2: var(--marigold-bold);
+  --pin-head-2: var(--blue-bold);
   --pin-head-3: var(--teal-bold);
   --pin-head-4: var(--pink-bold);
-  --pin-head-5: var(--periwinkle-bold);
-  --pin-head-6: var(--lime-bold);
+  --pin-head-5: var(--marigold-bold);
+  --pin-head-6: var(--green-bold);
 }
 
 .pin-cushion-container {
@@ -57,8 +57,6 @@
     width: 4px;
     border-radius: 50%;
     background-color: var(--pin-head);
-    /* A slightly darker ring of the same color */
-    border: 0.1em solid color-mix(in srgb, var(--pin-head) 70%, var(--charcoal));
     transform: translateX(-1.4px) translateY(-4px);
   }
 }

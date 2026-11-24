@@ -2,7 +2,7 @@
   /* Sits above the shelf, so the vines drape over its edge */
   position: relative;
   z-index: 1;
-  transform: translateY(-60px); /* lift the pot so it sits on the shelf, like the teacup */
+  transform: translateY(-50px); /* lift the pot so it sits on the shelf, like the teacup */
 
   --stems: var(--emerald-bold);
   --leaves1: var(--moss-soft);
@@ -18,7 +18,7 @@
 .plant {
   position: relative;
   width: 75px;
-  height: 60px;
+  height: 50px;
 
   /* Pot body: tapers toward the bottom */
 &::before {
@@ -116,8 +116,9 @@
 }
 
 .vine--long {
-  left: -10px;
-  height: 150px;
+  right: -10px;
+  height: 200px;
+  transform: scaleX(-1);
 
   /* One yellowing leaf, because real plants are never perfect */
   .leaf:nth-child(6) {
@@ -126,7 +127,13 @@
 }
 
 .vine--short {
-  right: -10px;
-  height: 85px;
-  transform: scaleX(-1); /* mirror it so it curves out to the right */
+  left: -10px;
+  height: 130px;
+}
+
+.vine--middle {
+  right: 16px;
+  z-index: 1;
+  height: 165px;
+  transform: scaleX(-1);
 }

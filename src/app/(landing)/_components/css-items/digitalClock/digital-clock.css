@@ -36,7 +36,7 @@
 }
 
 .clock:hover {
-  animation: alarm 0.1s infinite;
+  animation: alarm-gentle 2.4s ease-in-out infinite;
 }
 
 /* Tablet and mobile: no hover, so the alarm goes off on its own. Short
@@ -122,15 +122,17 @@
   16% { transform: translateY(-61px) rotate(-4deg); }
 }
 
-@keyframes alarm {
-  35% {
-    transform: translateY(-61px) rotate(10deg);
-  }
-
-  65% {
-    transform: translateY(-61px) rotate(-10deg);
-  }
+@keyframes alarm-gentle {
+  0%, 28%, 100% { transform: translateY(-61px) rotate(0deg); }
+  3.5%  { transform: translateY(-61px) rotate(6deg); }
+  7%    { transform: translateY(-61px) rotate(-6deg); }
+  10.5% { transform: translateY(-61px) rotate(6deg); }
+  14%   { transform: translateY(-61px) rotate(-6deg); }
+  17.5% { transform: translateY(-61px) rotate(5deg); }
+  21%   { transform: translateY(-61px) rotate(-4deg); }
+  24.5% { transform: translateY(-61px) rotate(2deg); }
 }
+
 /* Reduced motion -- no alarm shake, on hover or on its own. */
 @media (prefers-reduced-motion: reduce) {
   .clock:hover,
