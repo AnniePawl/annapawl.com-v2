@@ -71,6 +71,16 @@
   font-weight: var(--font-medium);
 }
 
+@media (min-width: 1000px) {
+  .landing-info-modal {
+    --page-accent: var(--cherry-soft);
+  }
+
+  .landing-float-word {
+    color: var(--cherry-soft);
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .landing-float-word {
     animation: landing-info-float 1.4s ease-in-out infinite;

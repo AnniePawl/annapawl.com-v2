@@ -150,7 +150,10 @@
   background-image: linear-gradient(to right, var(--radio-body) 0 80%, var(--radio-ink) 80%);
 }
 
-.desktop-radio-container,
+.desktop-radio-container {
+  transform: translateY(-87.5px) scale(1.1);
+}
+
 .tablet-radio-container {
   transform: translateY(-89px) scale(1.1);
 }
@@ -173,6 +176,9 @@
 .mobile-radio-container .radio__top::before {
   background-color: var(--radio-body-mobile);
   box-shadow: 0px 1px var(--radio-display);
+}
+.desktop-radio-container .radio__top::before {
+  box-shadow: 0px 1px var(--charcoal);
 }
 .desktop-radio-container .radio__top::after,
 .tablet-radio-container .radio__top::after,

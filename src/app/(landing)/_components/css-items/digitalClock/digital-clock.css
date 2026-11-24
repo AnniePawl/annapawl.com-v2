@@ -124,13 +124,13 @@
 
 @keyframes alarm-gentle {
   0%, 28%, 100% { transform: translateY(-61px) rotate(0deg); }
-  3.5%  { transform: translateY(-61px) rotate(6deg); }
-  7%    { transform: translateY(-61px) rotate(-6deg); }
-  10.5% { transform: translateY(-61px) rotate(6deg); }
-  14%   { transform: translateY(-61px) rotate(-6deg); }
-  17.5% { transform: translateY(-61px) rotate(5deg); }
-  21%   { transform: translateY(-61px) rotate(-4deg); }
-  24.5% { transform: translateY(-61px) rotate(2deg); }
+  3.5%  { transform: translateY(-61px) rotate(7deg); }
+  7%    { transform: translateY(-61px) rotate(-7deg); }
+  10.5% { transform: translateY(-61px) rotate(7deg); }
+  14%   { transform: translateY(-61px) rotate(-7deg); }
+  17.5% { transform: translateY(-61px) rotate(6deg); }
+  21%   { transform: translateY(-61px) rotate(-5deg); }
+  24.5% { transform: translateY(-61px) rotate(3deg); }
 }
 
 /* Reduced motion -- no alarm shake, on hover or on its own. */

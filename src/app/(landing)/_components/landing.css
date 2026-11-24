@@ -150,7 +150,7 @@
   line-height: 1;
   letter-spacing: var(--tracking-wider);
   text-transform: uppercase;
-  color: var(--coral-bold);
+  color: var(--cherry-soft);
 }
 
 .landing-role-mobile {
@@ -253,7 +253,7 @@
 }
 
 .landing-cta-desktop::before {
-  background: var(--landing-accent);
+  background: var(--cherry-soft);
 }
 
 .landing-cta-mobile::before {
@@ -266,7 +266,7 @@
 }
 
 .landing-cta-desktop .landing-cta-arrow {
-  color: var(--landing-accent);
+  color: var(--cherry-soft);
 }
 
 .landing-cta-mobile .landing-cta-arrow {

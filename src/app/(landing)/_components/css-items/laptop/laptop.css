@@ -10,7 +10,7 @@
   --laptop-glow: transparent;
   --laptop-base: var(--periwinkle-soft);
   --laptop-base-shadow: var(--slate-soft);
-  --laptop-notch: var(--taupe-soft);
+  --laptop-notch: var(--clay-soft);
   --laptop-screen: var(--iris-bold);
   --laptop-screen-shine: var(--iris-soft);
   --laptop-cam-lens: var(--cream);
@@ -20,9 +20,9 @@
   --laptop-terminal-bar: var(--teal-soft);
   --laptop-terminal-text: var(--charcoal);
   --laptop-prompt-text: var(--cream);
-  --laptop-dot-close: var(--red-bold);
+  --laptop-dot-close: var(--red-soft);
   --laptop-dot-min: var(--orange-bold);
-  --laptop-dot-max: var(--green-bold);
+  --laptop-dot-max: var(--emerald-soft);
 }
 
 .laptop-container {
@@ -126,7 +126,7 @@
     border-top: 10px solid var(--laptop-terminal-bar);
 
     &::before {
-      content: "~/code/css-stuff";
+      content: "~/anna/code/css-stuff";
       position: absolute;
       top: -10px;
       left: 0;
