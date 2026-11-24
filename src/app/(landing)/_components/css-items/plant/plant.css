@@ -169,3 +169,73 @@
 }
 
 
+
+.desktop-plant-container .vine {
+  transform-origin: top;
+}
+
+.plant-top .leaf:nth-child(-n + 3) {
+  --dir: -1;
+}
+
+.plant-top .leaf:nth-child(4) {
+  --dir: 0;
+}
+
+.plant-top .leaf:nth-child(n + 5) {
+  --dir: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .desktop-plant-container .vine {
+    animation: plant-sway 3.4s ease-in-out infinite paused;
+  }
+
+  .desktop-plant-container .vine--middle {
+    animation-duration: 3s;
+    animation-delay: 0.3s;
+  }
+
+  .desktop-plant-container .vine--short {
+    animation-duration: 3.8s;
+    animation-delay: 0.6s;
+  }
+
+  .desktop-plant-container:hover .vine {
+    animation-play-state: running;
+  }
+
+  .desktop-plant-container:hover .plant-top .leaf {
+    animation: plant-rustle 1.6s ease-in-out;
+  }
+}
+
+@keyframes plant-sway {
+  0%,
+  100% {
+    rotate: 0deg;
+  }
+
+  25% {
+    rotate: 4deg;
+  }
+
+  75% {
+    rotate: -4deg;
+  }
+}
+
+@keyframes plant-rustle {
+  0%,
+  100% {
+    rotate: 0deg;
+  }
+
+  35% {
+    rotate: calc(var(--dir) * 7deg);
+  }
+
+  65% {
+    rotate: calc(var(--dir) * -2deg);
+  }
+}
