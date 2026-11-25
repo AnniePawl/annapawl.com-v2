@@ -1,0 +1,261 @@
+.plant-container {
+  position: relative;
+  z-index: 1;
+  transform: translateY(-50px); 
+
+  --stems: var(--emerald-bold);
+  --leaf-light: var(--moss-soft);
+  --leaf-dark: var(--moss-bold);
+  --dead-leaf1: var(--marigold-soft);
+  --dead-leaf2: var(--marigold-bold);
+  --pot-top: var(--clay-bold);
+  --pot-left: var(--clay-bold);   
+  --pot-right: rgb(236, 156, 107); 
+  --pot-shadow: rgb(168, 85, 38);  /* band under the rim */
+}
+
+.plant {
+  position: relative;
+  width: 75px;
+  height: 50px;
+
+  /* Pot body: tapers toward the bottom */
+&::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(var(--pot-shadow) 0 8px, transparent 0), /* top layer: band under the rim */
+      linear-gradient(to right, var(--pot-left) 0 50%, var(--pot-right) 50%); /* bottom layer: two halves */
+    clip-path: polygon(0 0, 100% 0, 88% 100%, 12% 100%);
+}
+
+  /* Pot Rim*/
+  &::after {
+    content: "";
+    position: absolute;
+    top: -14px;
+    left: -5px;
+    width: 85px;
+    height: 15px;
+    border-radius: 3px;
+    background: var(--pot-top);
+  }
+}
+
+/* ---- Leaves ----
+  Identical 2-toned leaves */
+.leaf {
+  position: absolute;
+  width: var(--size, 18px);
+  aspect-ratio: 1;
+  border-radius: 0 100% 0 100%;
+  background: linear-gradient(45deg, var(--leaf-light) 50%, var(--leaf-dark) 50%);
+}
+
+/* ---- Emerald leaves ----
+   nth-child(n) = the nth leaf down from top */
+.plant-top .leaf:nth-child(0),     /* bushy top */
+.plant-top .leaf:nth-child(3),     /* bushy top */
+.plant-top .leaf:nth-child(5),     /* bushy top */
+
+.vine--long .leaf:nth-child(1),    /* long vine (right) */
+.vine--long .leaf:nth-child(4),
+.vine--long .leaf:nth-child(7),
+.vine--long .leaf:nth-child(12),
+
+.vine--middle .leaf:nth-child(3),  /* middle vine (front) */
+.vine--middle .leaf:nth-child(9),
+
+.vine--short .leaf:nth-child(1),   /* short vine (left) */
+.vine--short .leaf:nth-child(4),
+.vine--short .leaf:nth-child(7) {
+  --leaf-light: var(--emerald-soft);
+  --leaf-dark: var(--emerald-bold);
+}
+
+/* ---- Yellow leaves ----
+   A few yellowing leaves bc that's real life :)
+   */
+.plant-top .leaf:nth-child(0),     /* bushy top */
+
+.vine--long .leaf:nth-child(6),    /* long vine (right) */
+
+.vine--middle .leaf:nth-child(8),  /* middle vine (front) */
+
+.vine--short .leaf:nth-child(2) {  /* short vine (left) */
+  --leaf-light: var(--dead-leaf1);
+  --leaf-dark: var(--dead-leaf2);
+}
+
+/* ---- Bushy top ---- */
+.plant-top {
+  position: absolute;
+  bottom: calc(119%);
+  left: 50%;
+
+  .leaf {
+    --size: 24px;
+    top: calc(var(--size) * -1);
+    left: calc(var(--size) * -1);
+    transform-origin: 100% 100%;
+    transform: rotate(calc(var(--fan) + 50deg));
+  }
+
+  .leaf:nth-child(1) { --fan: -84deg; }
+  .leaf:nth-child(2) { --fan: -56deg; }
+  .leaf:nth-child(3) { --fan: -28deg; }
+  .leaf:nth-child(4) { --fan: 0deg; }
+  .leaf:nth-child(5) { --fan: 28deg; }
+  .leaf:nth-child(6) { --fan: 56deg; }
+  .leaf:nth-child(7) { --fan: 84deg; }
+}
+
+/* ---- Vines ----
+   curved stem (::before) w/ leaves 
+   on alternate sides and shrink toward the tip. */
+.vine {
+  position: absolute;
+  z-index: 1;
+  top: -15px;
+  width: 12px;
+  height: calc(var(--h) * 1px);
+
+  /* The stem: a tall box with a left and top border, curved by border-radius */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-left: 2px solid var(--stems);
+    border-top: 2px solid var(--stems);
+    border-radius: 100% 0 0 66.67% / 60% 0 0 40%;
+  }
+
+  /* Proved v difficult to get leaves in the right place on curved stem - got help figuring out how to calculate offsets */
+  .leaf {
+    --size: calc(18px - var(--i) * 0.8px);
+    --y: calc(14 + var(--i) * 16);
+    --t1: clamp(0, (0.6 * var(--h) - var(--y)) / (0.6 * var(--h)), 1);
+    --t2: clamp(0, (var(--y) - 0.6 * var(--h)) / (0.4 * var(--h)), 1);
+    --x: calc(12px * (1 - sqrt(1 - pow(var(--t1), 2))) + 8px * (1 - sqrt(1 - pow(var(--t2), 2))));
+    top: calc(var(--y) * 1px);
+    left: calc(var(--x) + 1px);
+    transform-origin: 0 0;
+    transform: rotate(-10deg);
+  }
+
+  /* Every other leaf flips to the other side of the stem */
+  .leaf:nth-child(even) {
+    transform: scaleX(-1) rotate(-0deg);
+  }
+}
+
+/* Vine positioning */
+.vine--long {
+  --h: 210;
+  right: -10px;
+  transform: scaleX(-1);  /*flips vine the other way */
+}
+
+.vine--middle {
+  --h: 170;
+  right: 25px;
+  transform: scaleX(-1);
+}
+
+.vine--short {
+  --h: 150;
+  left: -10px;
+}
+
+
+
+.desktop-plant-container .vine,
+.mobile-plant-container .vine {
+  transform-origin: top;
+}
+
+.mobile-plant-container {
+  --sway: 2.5deg;
+}
+
+.plant-top .leaf:nth-child(-n + 3) {
+  --dir: -1;
+}
+
+.plant-top .leaf:nth-child(4) {
+  --dir: 0;
+}
+
+.plant-top .leaf:nth-child(n + 5) {
+  --dir: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .desktop-plant-container .vine {
+    animation: plant-sway 3.4s ease-in-out infinite paused;
+  }
+
+  .mobile-plant-container .vine {
+    animation: plant-sway 3.4s ease-in-out infinite;
+  }
+
+  .desktop-plant-container .vine--middle,
+  .mobile-plant-container .vine--middle {
+    animation-duration: 3s;
+    animation-delay: 0.3s;
+  }
+
+  .desktop-plant-container .vine--short,
+  .mobile-plant-container .vine--short {
+    animation-duration: 3.8s;
+    animation-delay: 0.6s;
+  }
+
+  .desktop-plant-container:hover .vine {
+    animation-play-state: running;
+  }
+
+  .desktop-plant-container .plant-top .leaf {
+    animation: plant-rustle 3.2s ease-in-out infinite paused;
+  }
+
+  .desktop-plant-container:hover .plant-top .leaf {
+    animation-play-state: running;
+  }
+
+  .mobile-plant-container .plant-top .leaf {
+    animation: plant-rustle 3.2s ease-in-out infinite;
+  }
+}
+
+@keyframes plant-sway {
+  0%,
+  100% {
+    rotate: 0deg;
+  }
+
+  25% {
+    rotate: var(--sway, 4deg);
+  }
+
+  75% {
+    rotate: calc(var(--sway, 4deg) * -1);
+  }
+}
+
+@keyframes plant-rustle {
+  0%,
+  50%,
+  100% {
+    rotate: 0deg;
+  }
+
+  17.5% {
+    rotate: calc(var(--dir) * 7deg);
+  }
+
+  32.5% {
+    rotate: calc(var(--dir) * -2deg);
+  }
+}

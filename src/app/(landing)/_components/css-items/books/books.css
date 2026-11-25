@@ -36,13 +36,8 @@
   flex-direction: column;
 }
 
-.tablet-books-container,
-.desktop-books-container {
+.tablet-books-container {
   transform: translateY(-139px);
-}
-
-.mobile-books-container {
-  transform: scale(0.9) translateY(-126px);
 }
 
 .book {
@@ -179,19 +174,29 @@
   }
 }
 .books-container:hover .book--1 {
-  animation: books-animation 1s 0s forwards;
+  animation:
+    books-rise 0.4s 0s ease-out forwards,
+    books-plop 0.45s 0.9s forwards;
 }
 .books-container:hover .book--2 {
-  animation: books-animation 1s 0.2s forwards;
+  animation:
+    books-rise 0.4s 0.12s ease-out forwards,
+    books-plop 0.45s 0.9s forwards;
 }
 .books-container:hover .book--3 {
-  animation: books-animation 1s 0.4s forwards;
+  animation:
+    books-rise 0.4s 0.24s ease-out forwards,
+    books-plop 0.45s 0.9s forwards;
 }
 .books-container:hover .book--4 {
-  animation: books-animation 1s 0.6s forwards;
+  animation:
+    books-rise 0.4s 0.36s ease-out forwards,
+    books-plop 0.45s 0.9s forwards;
 }
 .books-container:hover .book--5 {
-  animation: books-animation 1s 0.8s forwards;
+  animation:
+    books-rise 0.4s 0.48s ease-out forwards,
+    books-plop 0.45s 0.9s forwards;
 }
 
 .tablet-books-container .book--1,
@@ -215,9 +220,27 @@
   animation: books-animation2 6s 0.8s infinite;
 }
 
-@keyframes books-animation {
+@keyframes books-rise {
   100% {
     transform: translateY(-20px);
+  }
+}
+
+@keyframes books-plop {
+  0% {
+    transform: translateY(-20px);
+    animation-timing-function: ease-in;
+  }
+  70% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+  }
+  85% {
+    transform: translateY(-3px);
+    animation-timing-function: ease-in;
+  }
+  100% {
+    transform: translateY(0);
   }
 }
 

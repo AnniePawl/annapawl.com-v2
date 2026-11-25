@@ -44,7 +44,7 @@ export default function Hero({ onExplore }: { onExplore: () => void }) {
       <div className="my-auto grid grid-cols-1 items-start gap-12 lg:grid-cols-[3fr_2.6fr]">
         <div className="">
           <h1 className="pt-2 h-display sedge-hero-title">
-            Sedge
+            Pothos
           </h1>
 
           <p className="mt-8 max-w-xl text-[22px] leading-snug text-[var(--text-primary)] md:text-2xl">

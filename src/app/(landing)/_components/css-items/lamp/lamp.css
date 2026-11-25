@@ -1,0 +1,143 @@
+.landing {
+  --lamp-shade-light: var(--cherry-soft);
+  --lamp-shade-dark: var(--cherry-bold);
+  --lamp-gold-light: var(--marigold-bold);
+  --lamp-gold-dark: color-mix(in srgb, var(--marigold-bold) 70%, var(--cocoa-bold));
+  --lamp-bulb: var(--lemon-soft);
+  --lamp-inside: var(--marigold-bold);
+  --lamp-base-light: var(--lamp-shade-light);
+  --lamp-base-dark: var(--lamp-shade-dark);
+  --lamp-base-shine: var(--cocoa-soft);
+  --lamp-beam: color-mix(in srgb, var(--lemon-soft) 55%, transparent);
+  --lamp-room-dark: color-mix(in srgb, var(--charcoal) 88%, var(--cocoa-bold));
+}
+
+.lamp-container {
+  --shade-width: 76px;
+  --shade-height: calc(var(--shade-width) / 2);
+  height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > * {
+    flex-shrink: 0;
+  }
+}
+
+.lamp__knob {
+  z-index: 100;
+  width: 9px;
+  height: 9px;
+  /* margin-bottom: -2px; */
+  border-radius: 50%;
+  background: linear-gradient(to right, var(--lamp-gold-dark) 50%, var(--lamp-gold-light) 50%);
+}
+
+.lamp__shade {
+  position: relative;
+  z-index: 2;
+  width: var(--shade-width);
+  height: var(--shade-height);
+  border-radius: 999px 999px 0 0;
+  background: linear-gradient(to right, var(--lamp-shade-dark) 50%, var(--lamp-shade-light) 50%);
+
+  /* soft glow (only visible on hover) */
+  &::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: calc(var(--shade-width) * 2.2);
+    height: 115px;
+    translate: -50% 0;
+    clip-path: polygon(27.3% 0, 72.7% 0, 100% 100%, 0 100%);
+    background: linear-gradient(to bottom, var(--lamp-beam), transparent);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+  }
+}
+
+.lamp__bulb {
+  position: relative;
+  width: 26px;
+  height: 20px;
+  margin-top: -11px;
+  border-radius: 50%;
+  background: var(--lamp-bulb);
+
+  /* inner lamp */
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 11px;
+    left: 50%;
+    width: var(--shade-width);
+    height: 8px;
+    translate: -50% -50%;
+    border-radius: 50%;
+    background: var(--lamp-inside);
+  }
+}
+
+.lamp__collar {
+  width: 16px;
+  height: 8px;
+  margin-top: -3px;
+  border-radius: 1px;
+  background: linear-gradient(to right, var(--lamp-gold-dark) 50%, var(--lamp-gold-light) 50%);
+}
+
+.lamp__collar--bottom {
+  margin-top: 0;
+}
+
+.lamp__stem {
+  width: 7px;
+  height: 70px;
+  background: linear-gradient(to right, var(--lamp-shade-dark) 50%, var(--lamp-shade-light) 50%);
+}
+
+.lamp__base {
+  position: relative;
+  width: 50px;
+  height: 19px;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  background: linear-gradient(to right, var(--lamp-base-dark) 50%, var(--lamp-base-light) 50%);
+
+  &::before {
+    content:"";
+
+  }
+}
+
+/* shelf area bg goes dark on hover */
+#landing-shelves-bg {
+  transition: background-color 0.6s ease;
+}
+
+#landing-shelves-bg:has(.desktop-lamp-container:hover) {
+  background-color: var(--lamp-room-dark);
+}
+
+#landing-shelves-bg .shelf {
+  transition: box-shadow 0.6s ease;
+}
+
+#landing-shelves-bg:has(.desktop-lamp-container:hover) .shelf {
+  box-shadow: 0 10px 15px -2px color-mix(in srgb, var(--charcoal) 60%, transparent);
+}
+
+.desktop-lamp-container:hover .lamp__shade::after {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #landing-shelves-bg,
+  #landing-shelves-bg .shelf,
+  .lamp__shade::after {
+    transition: none;
+  }
+}

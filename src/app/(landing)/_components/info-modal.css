@@ -58,10 +58,33 @@
   --page-accent: var(--coral-bold);
 }
 
+@media (max-width: 599px) {
+  .landing-info-modal .modal-card {
+    padding-inline: 18px;
+  }
+
+  .landing-info-modal .modal-actions {
+    justify-content: space-between;
+    column-gap: 12px;
+    font-size: 0.875rem;
+  }
+
+  .landing-info-modal .modal-actions > * {
+    white-space: nowrap;
+  }
+}
+
 /* reduced motion note */
 .landing-modal-note {
+  display: none;
   color: var(--text-muted);
   font-size: 0.8125rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-modal-note {
+    display: block;
+  }
 }
 
 /* "Hover" color+float */
@@ -69,6 +92,20 @@
   display: inline-block;
   color: var(--coral-bold);
   font-weight: var(--font-medium);
+}
+
+@media (min-width: 1000px) {
+  .landing-info-modal {
+    --page-accent: var(--cherry-soft);
+  }
+
+  .landing-float-word {
+    color: var(--cherry-soft);
+  }
+
+  .landing-heart {
+    color: var(--cherry-soft);
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

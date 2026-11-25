@@ -1,0 +1,92 @@
+/* ============================================================
+   Mobile shelf placements
+   Where each knick-knack sits on the mobile shelves, all in one place.
+   Each shelf spreads its items evenly side to side; adjust from there:
+   - transform: size (scale) and position (translateX / translateY).
+     More negative translateY moves an item up.
+   - After changing scale, nudge translateY so the item still sits on the shelf.
+   The clock sets --clock-y instead, so its alarm animation keeps it in place.
+   Each shelf's first rule sets the extra space above it (margin-top)
+   and nudges the whole shelf (translate: 0 -5px moves it up 5px).
+   ============================================================ */
+
+/* ---- Shelf 1: radio, pens ---- */
+.mobile-shelves .mobile-shelf-container:nth-child(1) {
+  margin-top: 0px;
+  translate: 0 0;
+}
+
+.mobile-shelves .mobile-radio-container {
+  transform: translateX(-5px) scale(.99) translateY(-87px);
+}
+
+.mobile-shelves .mobile-pens-container {
+  transform: translateX(-3px) translateY(-153px) scale(0.95);
+}
+
+/* ---- Shelf 2: laptop, book stack ---- */
+.mobile-shelves .mobile-shelf-container:nth-child(2) {
+  margin-top: 10px;
+  translate: 0 0;
+}
+
+.mobile-shelves .mobile-laptop-container {
+  transform: translateX(8px) scale(0.8) translateY(-159px);
+}
+
+.mobile-shelves .mobile-books-container {
+  transform: scale(0.9) translateX(5px) translateY(-126px);
+}
+
+/* ---- Shelf 3: Newton's cradle, plant ---- */
+.mobile-shelves .mobile-shelf-container:nth-child(3) {
+  margin-top: -25px;
+  translate: 0 0;
+}
+
+.mobile-shelves .mobile-newtonsCradle-container {
+  transform: scale(0.7) translateY(-139px) translateX(-25px);
+}
+
+.mobile-shelves .mobile-plant-container {
+  transform: translateX(-20px) translateY(-50px);
+}
+
+/* ---- Shelf 4: cake, teacup ---- */
+.mobile-shelves .mobile-shelf-container:nth-child(4) {
+  margin-top: 15px;
+  translate: 0 0;
+}
+
+.mobile-shelves .mobile-dessert-container {
+  transform: scale(1.14) translateY(-106.9px);
+}
+
+.mobile-shelves .mobile-teacup-container {
+  transform: scale(0.9) translateY(-65.6px);
+}
+
+/* ---- Shelf 5: sewing machine ---- */
+.mobile-shelves .mobile-shelf-container:nth-child(5) {
+  margin-top: 5px;
+  translate: 0 0;
+}
+
+.mobile-shelves .mobile-sewing-container {
+  transform: scale(0.88) translateY(-179px);
+}
+
+/* ---- Shelf 6: alarm clock, upright books ---- */
+.mobile-shelves .mobile-shelf-container:nth-child(6) {
+  margin-top: 0px;
+  translate: 0 0;
+}
+
+.mobile-shelves .mobile-books2-container {
+  transform: translateX(0px) translateY(-100px) scale(1.1);
+}
+
+.mobile-shelves .mobile-digitalClock-container {
+  --clock-y: -61px;
+  translate: -15px 0;
+}

@@ -2,14 +2,17 @@ import { Books } from "../books/Books";
 import { Books2 } from "../books/Books2";
 import { Dessert } from "../dessert/Dessert";
 import { DigitalClock } from "../digitalClock/DigitalClock";
+import { Lamp } from "../lamp/Lamp";
 import { Laptop } from "../laptop/Laptop";
 import { NewtonsCradle } from "../newtonsCradle/NewtonsCradle";
 import { Radio } from "../radio/Radio";
 import { Sewing } from "../sewing/Sewing";
 import { TeaCup } from "../teacup/TeaCup";
 import { Pens } from "../writing/Pens";
+import {Plant} from "../plant/Plant";
 import { Shelf } from "./Shelf";
 import "./shelves.css";
+import "./desktop-placement.css";
 
 export function DesktopShelves() {
   return (
@@ -23,6 +26,7 @@ export function DesktopShelves() {
             <NewtonsCradle key="1" cn="desktop-newtonsCradle-container" />,
             <Dessert key="2" cn="desktop-dessert-container" />,
             <Books2 key="3" cn="desktop-books2-container" />,
+            <Plant key="4" cn="desktop-plant-container" />
           ]}
         />
         <Shelf
@@ -30,14 +34,15 @@ export function DesktopShelves() {
             <Radio key="1" cn="desktop-radio-container" />,
             <Pens key="2" cn="desktop-pens-container" />,
             <Laptop key="3" cn="desktop-laptop-container" />,
-            <TeaCup key="4" />,
+            <TeaCup key="4" cn="desktop-teacup-container" />,
           ]}
         />
         <Shelf
           items={[
             <Sewing key="1" cn="desktop-sewing-container" />,
             <Books key="2" cn="desktop-books-container" />,
-            <DigitalClock key="3" />,
+            <DigitalClock key="3" cn="desktop-digitalClock-container" />,
+            <Lamp key="4" cn="desktop-lamp-container" />,
           ]}
         />
       </div>

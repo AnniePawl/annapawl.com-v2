@@ -1,0 +1,69 @@
+/* ============================================================
+   Desktop shelf placements
+   Where each knick-knack sits on the desktop shelves, all in one place.
+   - transform: size (scale) and position (translateX / translateY).
+     More negative translateY moves an item up.
+   - margin: the space each item takes up on its shelf, so the
+     knick-knacks look evenly spaced. Negative margins tighten.
+   The clock sets --clock-y instead, so its alarm animation keeps it in place.
+   ============================================================ */
+
+/* ---- Shelf 1: Newton's cradle, cake, upright books, plant ---- */
+.desktop-shelves .desktop-newtonsCradle-container {
+  transform: scale(0.7) translateY(-140px);
+  margin-left: -30px;
+  margin-right: -36px;
+}
+
+.desktop-shelves .desktop-dessert-container {
+  transform: scale(1.15) translateY(-113px);
+  margin-inline: 22px;
+}
+
+.desktop-shelves .desktop-books2-container {
+  transform: translateY(-121px) scale(1.1);
+  margin-left: 41px;
+  margin-right: 18px;
+}
+
+.desktop-shelves .desktop-plant-container {
+  transform: translateY(-50px);
+  margin-left: 27px;
+  margin-right: 26px;
+}
+
+/* ---- Shelf 2: radio, pens, laptop, teacup ---- */
+.desktop-shelves .desktop-radio-container {
+  transform: translateY(-87.5px) scale(1.1);
+}
+
+.desktop-shelves .desktop-pens-container {
+  transform: translateY(-155px) scale(0.98);
+}
+
+.desktop-shelves .desktop-laptop-container {
+  transform: scale(0.97) translateY(-145px);
+}
+
+.desktop-shelves .desktop-teacup-container {
+  transform: scale(0.95) translateY(-64px);
+}
+
+/* ---- Shelf 3: sewing machine, book stack, alarm clock, lamp ---- */
+.desktop-shelves .desktop-sewing-container {
+  transform: translateX(-20px) scale(1) translateY(-168px);
+}
+
+.desktop-shelves .desktop-books-container {
+  transform: translateX(-25px) translateY(-139px);
+}
+
+.desktop-shelves .desktop-digitalClock-container {
+  --clock-y: -61px;
+  translate: -10px 0;
+  
+}
+
+.desktop-shelves .desktop-lamp-container {
+  transform: translateX(6px) translateY(-153px);
+}
