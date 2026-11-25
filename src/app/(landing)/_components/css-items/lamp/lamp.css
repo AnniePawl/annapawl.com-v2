@@ -1,19 +1,19 @@
 .landing {
-  --lamp-shade-light: var(--red-soft);
-  --lamp-shade-dark: var(--red-bold);
+  --lamp-shade-light: var(--cherry-soft);
+  --lamp-shade-dark: var(--cherry-bold);
   --lamp-gold-light: var(--marigold-bold);
   --lamp-gold-dark: color-mix(in srgb, var(--marigold-bold) 70%, var(--cocoa-bold));
-  --lamp-bulb-light: var(--lemon-soft);
-  --lamp-bulb-dark: var(--marigold-bold);
-  --lamp-inside-light: var(--lemon-soft);
-  --lamp-inside-dark: var(--marigold-soft);
+  --lamp-bulb: var(--lemon-soft);
+  --lamp-inside: var(--marigold-bold);
   --lamp-base-light: var(--lamp-shade-light);
   --lamp-base-dark: var(--lamp-shade-dark);
   --lamp-base-shine: var(--cocoa-soft);
+  --lamp-beam: color-mix(in srgb, var(--lemon-soft) 55%, transparent);
+  --lamp-room-dark: color-mix(in srgb, var(--charcoal) 88%, var(--cocoa-bold));
 }
 
 .lamp-container {
-  --shade-width: 92px;
+  --shade-width: 76px;
   --shade-height: calc(var(--shade-width) / 2);
   height: 0;
   display: flex;
@@ -41,27 +41,44 @@
   height: var(--shade-height);
   border-radius: 999px 999px 0 0;
   background: linear-gradient(to right, var(--lamp-shade-dark) 50%, var(--lamp-shade-light) 50%);
+
+  /* soft glow (only visible on hover) */
+  &::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: calc(var(--shade-width) * 2.2);
+    height: 115px;
+    translate: -50% 0;
+    clip-path: polygon(27.3% 0, 72.7% 0, 100% 100%, 0 100%);
+    background: linear-gradient(to bottom, var(--lamp-beam), transparent);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+  }
 }
 
 .lamp__bulb {
   position: relative;
-  width: 32px;
-  height: 24px;
-  margin-top: -10px;
+  width: 26px;
+  height: 20px;
+  margin-top: -11px;
   border-radius: 50%;
-  background: linear-gradient(to right, var(--lamp-bulb-dark) 50%, var(--lamp-bulb-light) 50%);
+  background: var(--lamp-bulb);
 
+  /* inner lamp */
   &::before {
     content: "";
     position: absolute;
     z-index: -1;
-    top: 10px;
+    top: 11px;
     left: 50%;
     width: var(--shade-width);
     height: 8px;
     translate: -50% -50%;
     border-radius: 50%;
-    background: linear-gradient(to right, var(--lamp-inside-dark) 50%, var(--lamp-inside-light) 50%);
+    background: var(--lamp-inside);
   }
 }
 
@@ -78,27 +95,49 @@
 }
 
 .lamp__stem {
-  width: 8px;
-  height: 74px;
+  width: 7px;
+  height: 70px;
   background: linear-gradient(to right, var(--lamp-shade-dark) 50%, var(--lamp-shade-light) 50%);
 }
 
 .lamp__base {
   position: relative;
-  width: 62px;
-  height: 24px;
+  width: 50px;
+  height: 19px;
   border-radius: 50% 50% 0 0 / 100% 100% 0 0;
   background: linear-gradient(to right, var(--lamp-base-dark) 50%, var(--lamp-base-light) 50%);
 
   &::before {
-    /* content: "";
-    position: absolute;
-    top: 9px;
-    left: 18px;
-    width: 18px;
-    height: 14px;
-    border-top: 3px solid var(--lamp-base-shine);
-    border-left: 3px solid var(--lamp-base-shine);
-    border-radius: 100% 0 0 0; */
+    content:"";
+
+  }
+}
+
+/* shelf area bg goes dark on hover */
+#landing-shelves-bg {
+  transition: background-color 0.6s ease;
+}
+
+#landing-shelves-bg:has(.desktop-lamp-container:hover) {
+  background-color: var(--lamp-room-dark);
+}
+
+#landing-shelves-bg .shelf {
+  transition: box-shadow 0.6s ease;
+}
+
+#landing-shelves-bg:has(.desktop-lamp-container:hover) .shelf {
+  box-shadow: 0 10px 15px -2px color-mix(in srgb, var(--charcoal) 60%, transparent);
+}
+
+.desktop-lamp-container:hover .lamp__shade::after {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #landing-shelves-bg,
+  #landing-shelves-bg .shelf,
+  .lamp__shade::after {
+    transition: none;
   }
 }

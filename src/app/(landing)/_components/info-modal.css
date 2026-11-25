@@ -58,6 +58,22 @@
   --page-accent: var(--coral-bold);
 }
 
+@media (max-width: 599px) {
+  .landing-info-modal .modal-card {
+    padding-inline: 18px;
+  }
+
+  .landing-info-modal .modal-actions {
+    justify-content: space-between;
+    column-gap: 12px;
+    font-size: 0.875rem;
+  }
+
+  .landing-info-modal .modal-actions > * {
+    white-space: nowrap;
+  }
+}
+
 /* reduced motion note */
 .landing-modal-note {
   display: none;

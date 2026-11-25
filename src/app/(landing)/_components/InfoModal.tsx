@@ -49,7 +49,7 @@ export function InfoModal({
               rel="noopener noreferrer"
               className="text-link text-link--quiet focus-ring"
             >
-              See them on CodePen <span aria-hidden="true">↗</span>
+              CodePen demos <span aria-hidden="true">↗</span>
             </a>
             <a
               href="/drawing-with-code"
