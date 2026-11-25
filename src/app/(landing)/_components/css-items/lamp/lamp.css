@@ -1,0 +1,104 @@
+.landing {
+  --lamp-shade-light: var(--red-soft);
+  --lamp-shade-dark: var(--red-bold);
+  --lamp-gold-light: var(--marigold-bold);
+  --lamp-gold-dark: color-mix(in srgb, var(--marigold-bold) 70%, var(--cocoa-bold));
+  --lamp-bulb-light: var(--lemon-soft);
+  --lamp-bulb-dark: var(--marigold-bold);
+  --lamp-inside-light: var(--lemon-soft);
+  --lamp-inside-dark: var(--marigold-soft);
+  --lamp-base-light: var(--lamp-shade-light);
+  --lamp-base-dark: var(--lamp-shade-dark);
+  --lamp-base-shine: var(--cocoa-soft);
+}
+
+.lamp-container {
+  --shade-width: 92px;
+  --shade-height: calc(var(--shade-width) / 2);
+  height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > * {
+    flex-shrink: 0;
+  }
+}
+
+.lamp__knob {
+  z-index: 100;
+  width: 9px;
+  height: 9px;
+  /* margin-bottom: -2px; */
+  border-radius: 50%;
+  background: linear-gradient(to right, var(--lamp-gold-dark) 50%, var(--lamp-gold-light) 50%);
+}
+
+.lamp__shade {
+  position: relative;
+  z-index: 2;
+  width: var(--shade-width);
+  height: var(--shade-height);
+  border-radius: 999px 999px 0 0;
+  background: linear-gradient(to right, var(--lamp-shade-dark) 50%, var(--lamp-shade-light) 50%);
+}
+
+.lamp__bulb {
+  position: relative;
+  width: 32px;
+  height: 24px;
+  margin-top: -10px;
+  border-radius: 50%;
+  background: linear-gradient(to right, var(--lamp-bulb-dark) 50%, var(--lamp-bulb-light) 50%);
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 10px;
+    left: 50%;
+    width: var(--shade-width);
+    height: 8px;
+    translate: -50% -50%;
+    border-radius: 50%;
+    background: linear-gradient(to right, var(--lamp-inside-dark) 50%, var(--lamp-inside-light) 50%);
+  }
+}
+
+.lamp__collar {
+  width: 16px;
+  height: 8px;
+  margin-top: -3px;
+  border-radius: 1px;
+  background: linear-gradient(to right, var(--lamp-gold-dark) 50%, var(--lamp-gold-light) 50%);
+}
+
+.lamp__collar--bottom {
+  margin-top: 0;
+}
+
+.lamp__stem {
+  width: 8px;
+  height: 74px;
+  background: linear-gradient(to right, var(--lamp-shade-dark) 50%, var(--lamp-shade-light) 50%);
+}
+
+.lamp__base {
+  position: relative;
+  width: 62px;
+  height: 24px;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  background: linear-gradient(to right, var(--lamp-base-dark) 50%, var(--lamp-base-light) 50%);
+
+  &::before {
+    /* content: "";
+    position: absolute;
+    top: 9px;
+    left: 18px;
+    width: 18px;
+    height: 14px;
+    border-top: 3px solid var(--lamp-base-shine);
+    border-left: 3px solid var(--lamp-base-shine);
+    border-radius: 100% 0 0 0; */
+  }
+}

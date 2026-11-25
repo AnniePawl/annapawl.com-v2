@@ -49,7 +49,7 @@
   transform: scale(0.95) translateY(-64px);
 }
 
-/* ---- Shelf 3: sewing machine, book stack, alarm clock ---- */
+/* ---- Shelf 3: sewing machine, book stack, alarm clock, lamp ---- */
 .desktop-shelves .desktop-sewing-container {
   transform: scale(1) translateY(-168px);
 }
@@ -60,4 +60,8 @@
 
 .desktop-shelves .desktop-digitalClock-container {
   --clock-y: -61px;
+}
+
+.desktop-shelves .desktop-lamp-container {
+  transform: translateY(-175px);
 }

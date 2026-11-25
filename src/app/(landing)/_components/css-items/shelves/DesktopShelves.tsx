@@ -2,6 +2,7 @@ import { Books } from "../books/Books";
 import { Books2 } from "../books/Books2";
 import { Dessert } from "../dessert/Dessert";
 import { DigitalClock } from "../digitalClock/DigitalClock";
+import { Lamp } from "../lamp/Lamp";
 import { Laptop } from "../laptop/Laptop";
 import { NewtonsCradle } from "../newtonsCradle/NewtonsCradle";
 import { Radio } from "../radio/Radio";
@@ -41,6 +42,7 @@ export function DesktopShelves() {
             <Sewing key="1" cn="desktop-sewing-container" />,
             <Books key="2" cn="desktop-books-container" />,
             <DigitalClock key="3" cn="desktop-digitalClock-container" />,
+            <Lamp key="4" cn="desktop-lamp-container" />,
           ]}
         />
       </div>
