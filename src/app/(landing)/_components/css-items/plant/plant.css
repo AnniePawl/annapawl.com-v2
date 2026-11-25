@@ -170,8 +170,13 @@
 
 
 
-.desktop-plant-container .vine {
+.desktop-plant-container .vine,
+.mobile-plant-container .vine {
   transform-origin: top;
+}
+
+.mobile-plant-container {
+  --sway: 2.5deg;
 }
 
 .plant-top .leaf:nth-child(-n + 3) {
@@ -191,12 +196,18 @@
     animation: plant-sway 3.4s ease-in-out infinite paused;
   }
 
-  .desktop-plant-container .vine--middle {
+  .mobile-plant-container .vine {
+    animation: plant-sway 3.4s ease-in-out infinite;
+  }
+
+  .desktop-plant-container .vine--middle,
+  .mobile-plant-container .vine--middle {
     animation-duration: 3s;
     animation-delay: 0.3s;
   }
 
-  .desktop-plant-container .vine--short {
+  .desktop-plant-container .vine--short,
+  .mobile-plant-container .vine--short {
     animation-duration: 3.8s;
     animation-delay: 0.6s;
   }
@@ -205,8 +216,16 @@
     animation-play-state: running;
   }
 
+  .desktop-plant-container .plant-top .leaf {
+    animation: plant-rustle 3.2s ease-in-out infinite paused;
+  }
+
   .desktop-plant-container:hover .plant-top .leaf {
-    animation: plant-rustle 1.6s ease-in-out;
+    animation-play-state: running;
+  }
+
+  .mobile-plant-container .plant-top .leaf {
+    animation: plant-rustle 3.2s ease-in-out infinite;
   }
 }
 
@@ -217,25 +236,26 @@
   }
 
   25% {
-    rotate: 4deg;
+    rotate: var(--sway, 4deg);
   }
 
   75% {
-    rotate: -4deg;
+    rotate: calc(var(--sway, 4deg) * -1);
   }
 }
 
 @keyframes plant-rustle {
   0%,
+  50%,
   100% {
     rotate: 0deg;
   }
 
-  35% {
+  17.5% {
     rotate: calc(var(--dir) * 7deg);
   }
 
-  65% {
+  32.5% {
     rotate: calc(var(--dir) * -2deg);
   }
 }

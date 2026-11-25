@@ -74,8 +74,8 @@
   position: relative;
   z-index: 0;
   transform: scale(0.96);
-  /* extra room for shelves 2+3 with taller items*/
-  height: 1264px;
+  /* total height, shared evenly between the shelf gaps */
+  height: 1600px;
   margin-bottom: -112px;
   display: flex;
   align-items: center;
@@ -93,35 +93,5 @@
     display: flex;
     justify-content: space-evenly;
   }
-
-  /* Shelves 2 (sewing machine) + 3 (laptop + books) hold taller items,
-     so they get extra room above them. */
-  .mobile-shelf-container:nth-child(2) {
-    margin-top: 40px;
-  }
-
-  .mobile-shelf-container:nth-child(3) {
-    margin-top: 24px;
-  }
 }
 
-.desktop-shelves .shelf-contents {
-  .desktop-newtonsCradle-container {
-    margin-left: -30px;
-    margin-right: -36px;
-  }
-
-  .desktop-dessert-container {
-    margin-inline: 22px;
-  }
-
-  .desktop-books2-container {
-    margin-left: 41px;
-    margin-right: 18px;
-  }
-
-  .desktop-plant-container {
-    margin-left: 27px;
-    margin-right: 26px;
-  }
-}

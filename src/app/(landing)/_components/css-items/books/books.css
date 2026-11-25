@@ -36,13 +36,8 @@
   flex-direction: column;
 }
 
-.tablet-books-container,
-.desktop-books-container {
+.tablet-books-container {
   transform: translateY(-139px);
-}
-
-.mobile-books-container {
-  transform: scale(0.9) translateY(-126px);
 }
 
 .book {

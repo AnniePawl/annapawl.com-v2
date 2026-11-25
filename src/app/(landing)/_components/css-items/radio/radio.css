@@ -150,17 +150,11 @@
   background-image: linear-gradient(to right, var(--radio-body) 0 80%, var(--radio-ink) 80%);
 }
 
-.desktop-radio-container {
-  transform: translateY(-87.5px) scale(1.1);
-}
 
 .tablet-radio-container {
   transform: translateY(-89px) scale(1.1);
 }
 
-.mobile-radio-container {
-  transform: scale(0.95) translateY(-91px);
-}
 
 .desktop-radio-container .radio__top,
 .tablet-radio-container .radio__top,

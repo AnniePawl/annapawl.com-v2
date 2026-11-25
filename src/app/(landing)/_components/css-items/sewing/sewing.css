@@ -11,11 +11,6 @@
   justify-content: space-between;
 }
 
-.mobile-sewing-container {
-  transform: scale(0.88) translateY(-179px);
-}
-
-.desktop-sewing-container,
 .tablet-sewing-container {
   transform: scale(1) translateY(-168px);
 }

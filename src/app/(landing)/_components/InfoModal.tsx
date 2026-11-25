@@ -49,13 +49,13 @@ export function InfoModal({
               rel="noopener noreferrer"
               className="text-link text-link--quiet focus-ring"
             >
-              Source code
+              See them on CodePen <span aria-hidden="true">↗</span>
             </a>
             <a
               href="/drawing-with-code"
               className="btn btn--primary btn--sm focus-ring"
             >
-              <span className="btn-label">More on CSS art</span>
+              <span className="btn-label">Drawing with Code</span>
             </a>
           </>
         }
@@ -64,13 +64,14 @@ export function InfoModal({
           I’ve fallen for CSS, and I love seeing how far I can push it with tiny illustrations and animations.
         </p>
         {autoplay ? (
-          <p>I made everything on the shelf with pure CSS ♥</p>
+          <p>I made everything on the shelf with pure CSS <span className="landing-heart" aria-hidden="true">♥</span></p>
         ) : (
           <p>
             <span className="landing-float-word">Hover</span> over the knick-knacks for some mini surprises. I made
-            everything with pure CSS ♥
+            everything with pure CSS <span className="landing-heart" aria-hidden="true">♥</span>
           </p>
         )}
+        <p>Curious how they’re made? I wrote a beginner-friendly intro to drawing with code.</p>
         <p className="landing-modal-note type-note">
           Prefer less motion? If reduced motion is turned on in your device
           settings, everything on the shelf stays still.

@@ -33,14 +33,10 @@
 }
 
 
-.desktop-pens-container,
 .tablet-pens-container {
   transform: translateY(-155px) scale(0.98);
 }
 
-.mobile-pens-container {
-  transform: translateY(-151px) scale(0.93);
-}
 
 .pens__contents {
   display: flex;

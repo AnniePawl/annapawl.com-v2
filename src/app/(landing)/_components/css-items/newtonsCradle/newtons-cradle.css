@@ -25,12 +25,11 @@
   transform: scale(0.7) translateY(-165px);
 }
 
-.desktop-newtonsCradle-container {
-  transform: scale(0.7) translateY(-140px);
-}
 
 .desktop-newtonsCradle-container .newtons-cradle__frame>div:first-child,
-.desktop-newtonsCradle-container .newtons-cradle__frame>div:last-child {
+.desktop-newtonsCradle-container .newtons-cradle__frame>div:last-child,
+.mobile-newtonsCradle-container .newtons-cradle__frame>div:first-child,
+.mobile-newtonsCradle-container .newtons-cradle__frame>div:last-child {
   transform-origin: 50% calc(var(--frame-height) * -0.65);
 }
 
@@ -43,19 +42,22 @@
 }
 
 /* Tablet and mobile: nothing to hover, so it swings on its own. */
-.tablet-newtonsCradle-container .newtons-cradle__frame>div:first-child,
-.mobile-newtonsCradle-container .newtons-cradle__frame>div:first-child {
+.tablet-newtonsCradle-container .newtons-cradle__frame>div:first-child {
   animation: swing1 2s linear infinite;
 }
 
-.tablet-newtonsCradle-container .newtons-cradle__frame>div:last-child,
-.mobile-newtonsCradle-container .newtons-cradle__frame>div:last-child {
+.tablet-newtonsCradle-container .newtons-cradle__frame>div:last-child {
   animation: swing2 2s linear infinite;
 }
 
-.mobile-newtonsCradle-container {
-  transform: scale(0.65) translateY(-146px) translateX(-20px);
+.mobile-newtonsCradle-container .newtons-cradle__frame>div:first-child {
+  animation: cradle-swing-left 1.6s infinite;
 }
+
+.mobile-newtonsCradle-container .newtons-cradle__frame>div:last-child {
+  animation: cradle-swing-right 1.6s infinite;
+}
+
 
 .newtons-cradle__frame {
   display: flex;

@@ -11,6 +11,7 @@ import { Pens } from "../writing/Pens";
 import {Plant} from "../plant/Plant";
 import { Shelf } from "./Shelf";
 import "./shelves.css";
+import "./desktop-placement.css";
 
 export function DesktopShelves() {
   return (
@@ -32,14 +33,14 @@ export function DesktopShelves() {
             <Radio key="1" cn="desktop-radio-container" />,
             <Pens key="2" cn="desktop-pens-container" />,
             <Laptop key="3" cn="desktop-laptop-container" />,
-            <TeaCup key="4" />,
+            <TeaCup key="4" cn="desktop-teacup-container" />,
           ]}
         />
         <Shelf
           items={[
             <Sewing key="1" cn="desktop-sewing-container" />,
             <Books key="2" cn="desktop-books-container" />,
-            <DigitalClock key="3" />,
+            <DigitalClock key="3" cn="desktop-digitalClock-container" />,
           ]}
         />
       </div>

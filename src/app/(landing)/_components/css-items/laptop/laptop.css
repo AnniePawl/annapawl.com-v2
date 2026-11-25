@@ -32,17 +32,11 @@
   --terminal-width: 145px;
 }
 
-.desktop-laptop-container {
-  transform: scale(0.97) translateY(-145px);
-}
 
 .desktop-laptop-container:hover .laptop__terminal p {
   animation: typing-animation 5s steps(15) forwards, blink 1s infinite;
 }
 
-.mobile-laptop-container {
-  transform: scale(0.78) translateY(-160px);
-}
 
 .mobile-laptop-container .laptop__terminal p {
   animation: typing-animation 4s steps(15) infinite, blink 1s infinite;

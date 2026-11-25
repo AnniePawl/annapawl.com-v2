@@ -59,6 +59,12 @@
   padding: var(--space-6) var(--space-5) var(--space-5);
 }
 
+/* No action row: a little more room under the last line so the bottom
+   matches the top. */
+.modal-card:not(:has(.modal-actions)) {
+  padding-bottom: calc(var(--space-6) + var(--space-1));
+}
+
 .modal-close {
   position: absolute;
   top: var(--space-3);

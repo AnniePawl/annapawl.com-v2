@@ -32,10 +32,6 @@
   transform: translateY(-121px) scale(1.1);
 }
 
-.mobile-books2-container {
-  transform: translateY(-95px);
-}
-
 .tablet-books2-container {
   transform: translateY(-158px) scale(1.1);
 }

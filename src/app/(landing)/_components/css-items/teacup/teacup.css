@@ -18,9 +18,6 @@
   transform: scale(0.95) translateY(-64px);
 }
 
-.mobile-teacup-container {
-  transform: scale(0.95) translateY(-63px);
-}
 
 .teacup__cup {
   height: 60px;

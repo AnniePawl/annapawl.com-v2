@@ -19,7 +19,7 @@
 }
 
 .clock {
-  transform: translateY(-61px);
+  transform: translateY(var(--clock-y, -61px));
   height: 55px;
   width: 110px;
   border: 2.5px solid var(--clock-frame);
@@ -111,26 +111,26 @@
 }
 
 @keyframes alarm-spurt {
-  0%, 18%, 100% { transform: translateY(-61px) rotate(0deg); }
-  2%  { transform: translateY(-61px) rotate(8deg); }
-  4%  { transform: translateY(-61px) rotate(-8deg); }
-  6%  { transform: translateY(-61px) rotate(8deg); }
-  8%  { transform: translateY(-61px) rotate(-8deg); }
-  10% { transform: translateY(-61px) rotate(8deg); }
-  12% { transform: translateY(-61px) rotate(-8deg); }
-  14% { transform: translateY(-61px) rotate(6deg); }
-  16% { transform: translateY(-61px) rotate(-4deg); }
+  0%, 18%, 100% { transform: translateY(var(--clock-y, -61px)) rotate(0deg); }
+  2%  { transform: translateY(var(--clock-y, -61px)) rotate(8deg); }
+  4%  { transform: translateY(var(--clock-y, -61px)) rotate(-8deg); }
+  6%  { transform: translateY(var(--clock-y, -61px)) rotate(8deg); }
+  8%  { transform: translateY(var(--clock-y, -61px)) rotate(-8deg); }
+  10% { transform: translateY(var(--clock-y, -61px)) rotate(8deg); }
+  12% { transform: translateY(var(--clock-y, -61px)) rotate(-8deg); }
+  14% { transform: translateY(var(--clock-y, -61px)) rotate(6deg); }
+  16% { transform: translateY(var(--clock-y, -61px)) rotate(-4deg); }
 }
 
 @keyframes alarm-gentle {
-  0%, 28%, 100% { transform: translateY(-61px) rotate(0deg); }
-  3.5%  { transform: translateY(-61px) rotate(7deg); }
-  7%    { transform: translateY(-61px) rotate(-7deg); }
-  10.5% { transform: translateY(-61px) rotate(7deg); }
-  14%   { transform: translateY(-61px) rotate(-7deg); }
-  17.5% { transform: translateY(-61px) rotate(6deg); }
-  21%   { transform: translateY(-61px) rotate(-5deg); }
-  24.5% { transform: translateY(-61px) rotate(3deg); }
+  0%, 28%, 100% { transform: translateY(var(--clock-y, -61px)) rotate(0deg); }
+  3.5%  { transform: translate(2px, calc(var(--clock-y, -61px) - 4px)) rotate(11deg); }
+  7%    { transform: translate(-2px, calc(var(--clock-y, -61px) - 3px)) rotate(-11deg); }
+  10.5% { transform: translate(2px, calc(var(--clock-y, -61px) - 4px)) rotate(11deg); }
+  14%   { transform: translate(-2px, calc(var(--clock-y, -61px) - 3px)) rotate(-10deg); }
+  17.5% { transform: translate(1px, calc(var(--clock-y, -61px) - 2px)) rotate(8deg); }
+  21%   { transform: translate(-1px, calc(var(--clock-y, -61px) - 1px)) rotate(-6deg); }
+  24.5% { transform: translateY(var(--clock-y, -61px)) rotate(3deg); }
 }
 
 /* Reduced motion -- no alarm shake, on hover or on its own. */

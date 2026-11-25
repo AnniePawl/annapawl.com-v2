@@ -34,7 +34,8 @@
   transform: scale(1.15) translateY(-116px);
 }
 
-.tablet-dessert-container .dessert__spiral {
+.tablet-dessert-container .dessert__spiral,
+.mobile-dessert-container .dessert__spiral {
   visibility: visible;
 }
 
